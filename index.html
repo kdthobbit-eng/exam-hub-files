@@ -318,8 +318,8 @@ function renderTest(){
   <div class="layout"><div class="card" style="display:flex;flex-direction:column;gap:14px">
     <div class="prog"><i style="width:${(r.cur+1)/qs.length*100}%"></i></div>
     <div class="row"><b style="flex:1">प्रश्न ${r.cur+1} / ${qs.length}</b>${r.it.negative?`<span class="chip">+1 / −${r.it.negative}</span>`:""}</div>
-    <p class="q">${esc(q.q_hi||q.q)}</p>
-    <div class="list">${(q.options_hi&&q.options_hi.length?q.options_hi:q.options).map((o,i)=>`<button class="opt ${r.ans[r.cur]===i?"sel":""}" data-opt="${i}"><span class="k">${"ABCD"[i]}</span>${esc(o)}</button>`).join("")}</div>
+    <p class="q" style="white-space:pre-line">${esc(q.q_hi||q.q)}</p>
+    <div class="list">${(q.options_hi&&q.options_hi.length?q.options_hi:q.options).map((o,i)=>`<button class="opt ${r.ans[r.cur]===i?"sel":""}" data-opt="${i}"><span class="k">${"ABCDE"[i]}</span>${esc(o)}</button>`).join("")}</div>
     <div class="row"><button class="btn ghost" data-prev ${r.cur?"":"disabled"}>← पिछला</button><button class="btn" data-next>${r.cur<qs.length-1?"अगला →":"Submit"}</button></div>
   </div>
   <aside class="card"><b>Question palette</b><div class="pal" style="margin:10px 0">${qs.map((_,i)=>`<button class="${r.ans[i]!==undefined?"a":""} ${i===r.cur?"c":""}" data-q="${i}">${i+1}</button>`).join("")}</div>
@@ -351,7 +351,7 @@ function renderResult(){
   <div class="card"><span style="color:var(--muted);font-weight:700">AAPKI RANK</span><div class="big">${r.rank?`#${r.rank.rank} <small style="font-size:16px;color:var(--muted)">/ ${r.rank.total}</small>`:"…"}</div>${r.rank?`<small>${(100*(r.rank.total-r.rank.rank)/Math.max(1,r.rank.total)).toFixed(1)} percentile</small>`:""}</div>
   <h2>Uttar aur vyakhya</h2>
   <div class="list">${qs.map((q,i)=>{ const a=r.ans[i], O=q.options_hi&&q.options_hi.length?q.options_hi:q.options;
-    return `<div class="card"><b>Q${i+1}. ${esc(q.q_hi||q.q)}</b><p style="margin:6px 0 0">${a===undefined?`<span style="color:var(--acc)">Chhoda</span> · `:a===q.answer?"✅ ":`<span style="color:var(--bad)">❌ Aapka: ${"ABCD"[a]}. ${esc(O[a])}</span><br>`}<span style="color:var(--ok)">Sahi: ${"ABCD"[q.answer]}. ${esc(O[q.answer])}</span></p>${q.explain_hi||q.explain?`<p style="margin:6px 0 0;color:var(--muted)">${esc(q.explain_hi||q.explain)}</p>`:""}</div>`; }).join("")}</div>
+    return `<div class="card"><b>Q${i+1}. ${esc(q.q_hi||q.q)}</b><p style="margin:6px 0 0">${a===undefined?`<span style="color:var(--acc)">Chhoda</span> · `:a===q.answer?"✅ ":`<span style="color:var(--bad)">❌ Aapka: ${"ABCDE"[a]}. ${esc(O[a])}</span><br>`}<span style="color:var(--ok)">Sahi: ${"ABCDE"[q.answer]}. ${esc(O[q.answer])}</span></p>${q.explain_hi||q.explain?`<p style="margin:6px 0 0;color:var(--muted);white-space:pre-line">${esc(q.explain_hi||q.explain)}</p>`:""}</div>`; }).join("")}</div>
   <div class="row"><button class="btn" data-retake>Dobara dein</button><button class="btn ghost" data-back>Wapas</button></div>`;
 }
 
@@ -363,9 +363,9 @@ function renderQuiz(){
   $("#main").innerHTML=`<div class="tbar"><button class="back" data-back>✕</button><h2 style="flex:1">${esc(title(z.it))}</h2><span class="chip g">✅ ${z.score}</span></div>
   <div class="card" style="display:flex;flex-direction:column;gap:14px;max-width:760px">
     <div class="prog"><i style="width:${(z.i+1)/qs.length*100}%"></i></div><b>प्रश्न ${z.i+1} / ${qs.length}</b>
-    <p class="q">${esc(q.q_hi||q.q)}</p>
-    <div class="list">${O.map((o,i)=>`<button class="opt ${done&&i===q.answer?"right":""} ${done&&i===z.pick&&i!==q.answer?"wrong":""}" data-qz="${i}"><span class="k">${"ABCD"[i]}</span>${esc(o)}</button>`).join("")}</div>
-    ${done?`<div class="expl"><b>${z.pick===q.answer?"Sahi jawab! 🎉":`Galat. Sahi uttar: ${"ABCD"[q.answer]}. ${esc(O[q.answer])}`}</b>${q.explain_hi||q.explain?`<br>${esc(q.explain_hi||q.explain)}`:""}</div><button class="btn" data-qnext>${z.i<qs.length-1?"Agla prashn →":"Result dekhein"}</button>`:""}
+    <p class="q" style="white-space:pre-line">${esc(q.q_hi||q.q)}</p>
+    <div class="list">${O.map((o,i)=>`<button class="opt ${done&&i===q.answer?"right":""} ${done&&i===z.pick&&i!==q.answer?"wrong":""}" data-qz="${i}"><span class="k">${"ABCDE"[i]}</span>${esc(o)}</button>`).join("")}</div>
+    ${done?`<div class="expl" style="white-space:pre-line"><b>${z.pick===q.answer?"Sahi jawab! 🎉":`Galat. Sahi uttar: ${"ABCDE"[q.answer]}. ${esc(O[q.answer])}`}</b>${q.explain_hi||q.explain?`<br>${esc(q.explain_hi||q.explain)}`:""}</div><button class="btn" data-qnext>${z.i<qs.length-1?"Agla prashn →":"Result dekhein"}</button>`:""}
   </div>`;
 }
 

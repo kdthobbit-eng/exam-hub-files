@@ -50,11 +50,11 @@ def now_ms() -> int:
 # ------------------------------------------------------------------ question parser
 # Same rules as the app's QuestionParser.kt.
 
-_OPT = re.compile(r"^\s*\*?\s*\(?([A-Da-dकखगघ])[\)\.:]\s*(.+)$")
-_ANS = re.compile(r"^\s*(?:उत्तर|सही उत्तर|Ans(?:wer)?|Correct)\s*[:\-–]\s*\(?([A-Da-d1-4कखगघ])", re.I)
+_OPT = re.compile(r"^\s*\*?\s*\(?([A-Ea-eकखगघङ])[\)\.:]\s*(.+)$")
+_ANS = re.compile(r"^\s*(?:उत्तर|सही उत्तर|Ans(?:wer)?|Correct)\s*[:\-–]\s*\(?([A-Ea-e1-5कखगघङ])", re.I)
 _EXP = re.compile(r"^\s*(?:व्याख्या|Explanation|Exp|Hint)\s*[:\-–]\s*(.*)$", re.I)
 _NUM = re.compile(r"^\s*(?:Q\.?\s*)?\d+\s*[\.\)\:]\s*", re.I)
-_IDX = {"a": 0, "1": 0, "क": 0, "b": 1, "2": 1, "ख": 1, "c": 2, "3": 2, "ग": 2, "d": 3, "4": 3, "घ": 3}
+_IDX = {"a": 0, "1": 0, "क": 0, "b": 1, "2": 1, "ख": 1, "c": 2, "3": 2, "ग": 2, "d": 3, "4": 3, "घ": 3, "e": 4, "5": 4, "ङ": 4}
 
 
 def parse_questions(text: str):
@@ -70,7 +70,7 @@ def parse_questions(text: str):
                 ans = _IDX.get(a.group(1).lower(), -1)
             elif e:
                 exp = e.group(1).strip()
-            elif o and len(opts) < 4 and q:
+            elif o and len(opts) < 5 and q:
                 if line.lstrip().startswith("*"):
                     star = len(opts)
                 opts.append(o.group(2).strip())
@@ -186,7 +186,7 @@ def add_content(item: dict) -> str:
     }
     extra = ""
     if kind in ("quiz", "test"):
-        qs = parse_questions(item.get("text", ""))
+        qs = item.get("questions") or parse_questions(item.get("text", ""))
         if not qs:
             raise ValueError("Ek bhi prashn samajh nahi aaya. Format: 1. प्रश्न / A) … D) … / उत्तर: B")
         fields["questions"] = qs
