@@ -39,4 +39,8 @@ def main(path, chat, start=0):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 0)
+    try:
+        main(sys.argv[1], sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 0)
+    except Exception as e:
+        print(f"::error::{str(e)[:500]}")
+        sys.exit(1)
