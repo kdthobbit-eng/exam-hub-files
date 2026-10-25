@@ -28,7 +28,9 @@ def main(path, chat, start=0):
     for i, it in enumerate(items):
         if i < start or it["type"] == "end":
             continue
-        if it["type"] == "msg":
+        if it["type"] == "photo":
+            call("sendPhoto", chat_id=chat, photo=it["url"], caption=it.get("caption", ""), parse_mode="HTML")
+        elif it["type"] == "msg":
             call("sendMessage", chat_id=chat, text=it["text"], parse_mode="HTML", disable_web_page_preview=True)
         else:
             call("sendPoll", chat_id=chat, question=it["q"], options=[{"text": o} for o in it["options"]],
