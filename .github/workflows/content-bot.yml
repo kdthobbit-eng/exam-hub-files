@@ -1,0 +1,41 @@
+name: Exam Hub content bot
+
+# Telegram messages are picked up every 10 minutes; inbox files as soon as they are pushed.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  push:
+    paths: ["inbox/**", "files/**"]
+  workflow_dispatch:
+
+concurrency:
+  group: content-bot
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      HAS_TELEGRAM: ${{ secrets.TELEGRAM_BOT_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q firebase-admin==6.6.0
+      - name: Publish inbox (Claude)
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: python bot/inbox.py
+      - name: Read Telegram
+        if: env.HAS_TELEGRAM == 'true'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ADMIN_TELEGRAM_IDS: ${{ secrets.ADMIN_TELEGRAM_IDS }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          git pull -q --rebase || true
+          python bot/telegram_bot.py
