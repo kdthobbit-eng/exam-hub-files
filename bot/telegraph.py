@@ -14,7 +14,9 @@ d = json.load(open(path, encoding="utf-8"))
 tok = api("createAccount", short_name="ExamHub", author_name=d["author"], author_url=d["author_url"])["access_token"]
 if "sections" in d:
     lines = []
+    import time
     for sec in d["sections"]:
+        time.sleep(4)
         r = api("createPage", access_token=tok, title=f"{d['title']} — {sec['name']}", author_name=d["author"],
                 author_url=d["author_url"], content=sec["content"])
         lines.append(f"{sec['name']}\t{r['url']}")
