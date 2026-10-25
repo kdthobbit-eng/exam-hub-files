@@ -1,0 +1,15 @@
+name: Telegraph page
+on:
+  workflow_dispatch:
+    inputs:
+      file: {description: "telegraph/*.json", required: true}
+permissions:
+  contents: write
+jobs:
+  pub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 bot/telegraph.py "${{ inputs.file }}"
+      - run: |
+          git add telegraph && git -c user.name="Exam Hub Bot" -c user.email=bot@users.noreply.github.com commit -qm "Telegraph URLs" && git push -q || true
