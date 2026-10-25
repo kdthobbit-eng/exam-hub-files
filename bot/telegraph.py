@@ -12,6 +12,15 @@ def api(method, **p):
 path = sys.argv[1]
 d = json.load(open(path, encoding="utf-8"))
 tok = api("createAccount", short_name="ExamHub", author_name=d["author"], author_url=d["author_url"])["access_token"]
+if "sections" in d:
+    lines = []
+    for sec in d["sections"]:
+        r = api("createPage", access_token=tok, title=f"{d['title']} — {sec['name']}", author_name=d["author"],
+                author_url=d["author_url"], content=sec["content"])
+        lines.append(f"{sec['name']}\t{r['url']}")
+        print(f"::notice::{sec['name']} {r['url']}")
+    open(path.replace(".json", ".urls.txt"), "w").write("\n".join(lines) + "\n")
+    sys.exit(0)
 pages, n, urls, nxt = d["pages"], len(d["pages"]), [], None
 for i in range(n - 1, -1, -1):
     content = list(pages[i])
