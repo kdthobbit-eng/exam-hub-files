@@ -102,15 +102,30 @@ def parse_caption(text):
     return kind, exam, title, remaining, meta
 
 
-def handle(group):
+def handle(group, state):
     """group = list of messages (one message, or one Telegram album)."""
     first = group[0]
     chat_id = first["chat"]["id"]
     sender = str((first.get("from") or {}).get("id", first["chat"]["id"]))
-    if ADMINS and sender not in ADMINS and str(chat_id) not in ADMINS:
+    text = next((m.get("caption") or m.get("text") or "" for m in group if m.get("caption") or m.get("text")), "")
+    admins = set(ADMINS) | set(state.get("admins", []))
+    if not admins:
+        # First person to talk to the bot becomes its owner (saved in Firestore settings/bot).
+        state["admins"] = [sender]
+        admins = {sender}
+        reply(chat_id, f"✅ Aap is bot ke admin ban gaye (ID {sender}). Ab sirf aap content daal sakte hain.\n"
+                       "Doosre admin jodne ke liye: /addadmin <ID>")
+    if sender not in admins and str(chat_id) not in admins:
         reply(chat_id, f"Aap admin nahi hain. Apna ID admin ko bhejein: {sender}")
         return
-    text = next((m.get("caption") or m.get("text") or "" for m in group if m.get("caption") or m.get("text")), "")
+    if text.strip().startswith("/addadmin"):
+        new = text.split()[1:] if len(text.split()) > 1 else []
+        if not new or not new[0].lstrip("-").isdigit():
+            reply(chat_id, "Aise likhein: /addadmin 123456789")
+            return
+        state["admins"] = sorted(set(state.get("admins", [])) | {new[0]})
+        reply(chat_id, f"✅ {new[0]} ab admin hai")
+        return
     if text.strip() in ("/start", "/help", "/id"):
         reply(chat_id, f"Aapka Telegram ID: {sender}\n\n" + __doc__.split("How to send")[1])
         return
@@ -174,11 +189,12 @@ def main():
         groups[key].append(m)
     for key in order:
         try:
-            handle(groups[key])
+            handle(groups[key], state)
         except Exception as e:
             print("failed:", e, file=sys.stderr)
             reply(groups[key][0]["chat"]["id"], f"❌ Nahi jud paya: {e}")
-    state_ref.set({"offset": updates[-1]["update_id"] + 1, "at": examhub.now_ms()}, merge=True)
+    state_ref.set({"offset": updates[-1]["update_id"] + 1, "at": examhub.now_ms(),
+                   "admins": state.get("admins", [])}, merge=True)
 
 
 if __name__ == "__main__":
