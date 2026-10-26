@@ -68,5 +68,6 @@ try:
                     "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "/tmp/final.mp4"], check=True)
     r = subprocess.run(["curl", "-s", "-F", f"chat_id={chat}", "-F", "video=@/tmp/final.mp4", "-F", "supports_streaming=true",
         "-F", "caption=DI — समझकर हल करें (आपकी आवाज़ + चेहरा)", f"{API}/sendVideo"], capture_output=True, text=True); print(r.stdout[:300])
+    if '"ok":true' not in r.stdout: say("SEND FAIL size=%d %s" % (os.path.getsize("/tmp/final.mp4"), r.stdout[:500]))
 except Exception:
     say("AVATAR ERR\n" + traceback.format_exc()[-3000:]); raise
