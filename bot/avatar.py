@@ -66,15 +66,20 @@ try:
     subprocess.run([FF, "-y", "-loglevel", "error", "-i", "/tmp/voice0.mp4", "-i", "/tmp/avatar.mp4", "-i", "/tmp/music.wav", "-filter_complex", fc,
                     "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p",
                     "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "/tmp/final.mp4"], check=True)
-    import time
-    for att in range(4):
-        kind = "video" if att < 3 else "document"
-        r = subprocess.run(["curl", "-s", "-F", f"chat_id={chat}", "-F", f"{kind}=@/tmp/final.mp4", "-F", "supports_streaming=true",
-            "-F", "caption=DI — समझकर हल करें (आपकी आवाज़ + चेहरा)", f"{API}/send{kind.capitalize()}"], capture_output=True, text=True)
+    import shutil, time
+    os.makedirs("video/out", exist_ok=True); shutil.copy("/tmp/final.mp4", "video/out/avatar-sample.mp4")
+    subprocess.run("git config user.name bot && git config user.email bot@users.noreply.github.com && git add video/out && "
+                   "git commit -qm 'avatar sample video' && git pull -q --rebase && git push -q", shell=True, check=True)
+    time.sleep(8)
+    sha = subprocess.check_output(["git", "rev-parse", "HEAD"]).decode().strip()
+    url = f"https://raw.githubusercontent.com/kdthobbit-eng/exam-hub-files/{sha}/video/out/avatar-sample.mp4"
+    for att in range(3):
+        r = subprocess.run(["curl", "-s", "-F", f"chat_id={chat}", "-F", f"video={url}", "-F", "supports_streaming=true",
+            "-F", "caption=DI — समझकर हल करें (आपकी आवाज़ + चेहरा)", f"{API}/sendVideo"], capture_output=True, text=True)
         print(r.stdout[:300])
         if '"ok":true' in r.stdout: break
         time.sleep(10)
     else:
-        say("SEND FAIL size=%d %s" % (os.path.getsize("/tmp/final.mp4"), r.stdout[:500]))
+        say("SEND FAIL " + r.stdout[:500])
 except Exception:
     say("AVATAR ERR\n" + traceback.format_exc()[-3000:]); raise

@@ -4,6 +4,8 @@ on:
     inputs:
       dir: {required: true}
       chat: {required: true}
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
