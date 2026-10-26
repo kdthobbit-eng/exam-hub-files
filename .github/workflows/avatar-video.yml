@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
-      - run: pip install -q imageio-ffmpeg numpy opencv-python-headless
+      - run: pip install -q imageio-ffmpeg numpy "opencv-python-headless==4.10.0.84"
       - env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           KEEP: "1"
