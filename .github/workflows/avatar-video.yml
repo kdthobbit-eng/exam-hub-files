@@ -1,0 +1,20 @@
+name: Avatar video
+on:
+  workflow_dispatch:
+    inputs:
+      dir: {required: true}
+      chat: {required: true}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q imageio-ffmpeg numpy opencv-python-headless
+      - env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          KEEP: "1"
+        run: python3 bot/voice_video.py "${{ inputs.dir }}" "${{ inputs.chat }}"
+      - env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: python3 bot/avatar.py "${{ inputs.chat }}"

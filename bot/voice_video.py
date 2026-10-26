@@ -93,6 +93,8 @@ def run():
     subprocess.run([FF, "-y", "-loglevel", "error", "-i", out0, "-i", "/tmp/music.wav", "-filter_complex",
         "[1:a]aecho=0.8:0.7:60:0.3,volume=0.10[m];[0:a][m]amix=inputs=2:duration=first:normalize=0[a]",
         "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out], check=True)
+    if os.environ.get("KEEP"):
+        return
     r = subprocess.run(["curl", "-s", "-F", f"chat_id={chat}", "-F", f"video=@{out}", "-F", "supports_streaming=true",
         "-F", "caption=DI — समझकर हल करें (आपकी आवाज़ में)", f"{API}/sendVideo"], capture_output=True, text=True); print(r.stdout[:300])
 
