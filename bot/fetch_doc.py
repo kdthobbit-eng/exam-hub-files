@@ -11,5 +11,5 @@ else: raise SystemExit("no document")
 p = get(f"{API}/getFile?file_id={d['file_id']}")["result"]["file_path"]
 os.makedirs("inbox_files", exist_ok=True); out = "inbox_files/" + d.get("file_name", "file.bin")
 urllib.request.urlretrieve(f"https://api.telegram.org/file/bot{tok}/{p}", out)
-subprocess.run(f"git config user.name bot && git config user.email bot@users.noreply.github.com && git add inbox_files && git commit -qm 'fetch doc' && git pull -q --rebase && git push -q", shell=True, check=True)
+subprocess.run("git config user.name bot && git config user.email bot@users.noreply.github.com && git add inbox_files && git commit -qm 'fetch doc' && git pull -q --rebase && git push -q", shell=True, check=True)
 print(out)
