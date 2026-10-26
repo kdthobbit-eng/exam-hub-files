@@ -4,6 +4,7 @@ on:
     inputs:
       dir: {required: true}
       chat: {required: true}
+      mode: {required: false, default: photo}
 permissions:
   contents: write
 jobs:
@@ -19,4 +20,4 @@ jobs:
         run: python3 bot/voice_video.py "${{ inputs.dir }}" "${{ inputs.chat }}"
       - env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        run: python3 bot/avatar.py "${{ inputs.chat }}"
+        run: if [ "${{ inputs.mode }}" = loop ]; then python3 bot/avatar_loop.py "${{ inputs.chat }}"; else python3 bot/avatar.py "${{ inputs.chat }}"; fi
