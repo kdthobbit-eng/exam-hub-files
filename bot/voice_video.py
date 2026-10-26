@@ -38,20 +38,24 @@ def run():
             cur = b
         if T - cur > 0.3: parts.append((cur, T))
         return parts, sil
-    best = None
-    for noise in (-35, -30, -40, -45, -25):
-        for dur in (2.0, 1.6, 1.3, 1.0, 0.8, 2.5):
-            p, sil = speech(noise, dur)
-            print(noise, dur, len(p))
-            if len(p) == N: best = p; break
-            if len(p) > N and (best is None or len(best) != N):
-                # merge parts separated by the shortest gaps until N remain
-                q = p[:]
-                while len(q) > N:
-                    gaps = [q[i+1][0] - q[i][1] for i in range(len(q)-1)]; i = gaps.index(min(gaps))
-                    q[i:i+2] = [(q[i][0], q[i+1][1])]
-                best = q
-        if best and len(best) == N: break
+    import numpy as np, wave
+    w=wave.open("/tmp/in.wav"); sr=w.getframerate(); x=np.frombuffer(w.readframes(w.getnframes()),dtype=np.int16).astype(np.float32)
+    hop=int(sr*0.05); n=len(x)//hop; e=np.sqrt((x[:n*hop].reshape(n,hop)**2).mean(1))+1e-6; db=20*np.log10(e)
+    thr=np.percentile(db,20)+6; quiet=db<thr
+    gaps=[];i=0
+    while i<n:
+        if quiet[i]:
+            j=i
+            while j<n and quiet[j]: j+=1
+            if i>0 and j<n: gaps.append((j-i,i,j))
+            i=j
+        else: i+=1
+    gaps.sort(reverse=True); cut=sorted(gaps[:N-1],key=lambda g:g[1])
+    print("T",round(T,1),"thr",round(float(thr),1),"gaps",len(gaps),"chosen",[round(g[0]*0.05,2) for g in cut])
+    # speech start/end
+    loud=np.where(~quiet)[0]; s0=loud[0]*0.05; s1=(loud[-1]+1)*0.05
+    edges=[s0]+[x for g in cut for x in (g[1]*0.05,g[2]*0.05)]+[s1]
+    best=[(edges[k],edges[k+1]) for k in range(0,len(edges),2)]
     assert best and len(best) == N, f"could not split into {N}"
     print("parts", [(round(a,1), round(b,1)) for a, b in best])
     clips = []
