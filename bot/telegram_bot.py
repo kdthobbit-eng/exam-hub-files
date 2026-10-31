@@ -105,6 +105,8 @@ def parse_caption(text):
 def handle(group, state):
     """group = list of messages (one message, or one Telegram album)."""
     first = group[0]
+    if first["chat"].get("type") != "private":
+        return  # groups/channels: bot only posts quizzes there, never replies to members
     chat_id = first["chat"]["id"]
     sender = str((first.get("from") or {}).get("id", first["chat"]["id"]))
     text = next((m.get("caption") or m.get("text") or "" for m in group if m.get("caption") or m.get("text")), "")
