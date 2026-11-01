@@ -116,3 +116,10 @@ Doosri shift ke liye "पहली पाली" ki jagah **"दूसरी प
 - Bot group me kisi member ko jawab nahi deta. Wo sirf quiz post karta hai.
 - Galti se kahin galat post ho jaye to turant delete karke sahi jagah dobara bhejo.
 - Mujhse baat Hinglish me karo, chhota aur seedha.
+
+## Paper source shortcuts (1 Nov 2026)
+User bole "alert se karo" ya "pdf hub se karo" → turant usi channel se paper lekar poora flow chalu karo:
+- **alert** = UPSSSC ALERT, @upssscalertt, `-1001810324762` (account atul)
+- **pdf hub** = PDF HUB, @PIN_PDF, `-1002466262469` (account atul)
+- (pdf studio = @pdf_studio, `-1002191364726`)
+Doosre channel ki branding wali file forward nahi — download_media se naya naam ("2nd Shift UP PET 01 Nov.pdf") dekar nayi upload.
