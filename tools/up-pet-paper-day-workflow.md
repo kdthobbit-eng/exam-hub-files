@@ -123,3 +123,9 @@ User bole "alert se karo" ya "pdf hub se karo" → turant usi channel se paper l
 - **pdf hub** = PDF HUB, @PIN_PDF, `-1002466262469` (account atul)
 - (pdf studio = @pdf_studio, `-1002191364726`)
 Doosre channel ki branding wali file forward nahi — download_media se naya naam ("2nd Shift UP PET 01 Nov.pdf") dekar nayi upload.
+
+## Quiz posting order (user rule, 3 Nov 2026)
+Koi bhi quiz @uppetexamhub (UP Super TET 2026 group) me bhejne se PEHLE:
+1. Simple announcement message main channel @examhub26 (`-1003945960130`, account atul) me daalo — wahan se @examhub2026 group me apne aap aa jata hai.
+2. Uske baad hi `send-quiz` workflow chalao.
+Quiz chalte waqt us group me koi message mat daalo, warna wo quiz ke beech me aa jata hai.
