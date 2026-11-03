@@ -129,3 +129,7 @@ Koi bhi quiz @uppetexamhub (UP Super TET 2026 group) me bhejne se PEHLE:
 1. Simple announcement message main channel @examhub26 (`-1003945960130`, account atul) me daalo — wahan se @examhub2026 group me apne aap aa jata hai.
 2. Uske baad hi `send-quiz` workflow chalao.
 Quiz chalte waqt us group me koi message mat daalo, warna wo quiz ke beech me aa jata hai.
+
+## Caption rule (3 Nov 2026)
+- `send_file` caption me `<b>` tag parse NAHI hota, raw dikh jata hai. File bhejne ke baad turant `edit_message` (parse_mode=html) se poora caption `<b>...</b>` me bold karo.
+- Caption pura bold, chhota; brackets "(...)" aur extra heading mat lagao.
