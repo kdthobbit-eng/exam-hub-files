@@ -131,5 +131,6 @@ Koi bhi quiz @uppetexamhub (UP Super TET 2026 group) me bhejne se PEHLE:
 Quiz chalte waqt us group me koi message mat daalo, warna wo quiz ke beech me aa jata hai.
 
 ## Caption rule (3 Nov 2026)
-- `send_file` caption me `<b>` tag parse NAHI hota, raw dikh jata hai. File bhejne ke baad turant `edit_message` (parse_mode=html) se poora caption `<b>...</b>` me bold karo.
+- `send_file` caption markdown parse karta hai: poora caption `**...**` me likho, ek hi step me bold aata hai. `<b>` tag mat likho, wo raw dikh jata hai. Link chahiye to bhejne ke baad `edit_message` (parse_mode=html) se `<a href>` lagao.
+- Kabhi bhi placeholder caption (jaise "platoon") se file mat bhejo, seedha final caption ke saath bhejo.
 - Caption pura bold, chhota; brackets "(...)" aur extra heading mat lagao.
