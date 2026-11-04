@@ -134,3 +134,6 @@ Quiz chalte waqt us group me koi message mat daalo, warna wo quiz ke beech me aa
 - `send_file` caption markdown parse karta hai: poora caption `**...**` me likho, ek hi step me bold aata hai. `<b>` tag mat likho, wo raw dikh jata hai. Link chahiye to bhejne ke baad `edit_message` (parse_mode=html) se `<a href>` lagao.
 - Kabhi bhi placeholder caption (jaise "platoon") se file mat bhejo, seedha final caption ke saath bhejo.
 - Caption pura bold, chhota; brackets "(...)" aur extra heading mat lagao.
+
+## Quiz wording rule (user, 4 Nov 2026)
+Quiz ke sawal kathin (hard) banao, par channel message, quiz heading ya kahin bhi "hard / हार्ड / कठिन लेवल" mat likho. Message simple aur bold (HTML <b>) rakho.
