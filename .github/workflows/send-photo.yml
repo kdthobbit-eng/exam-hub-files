@@ -1,0 +1,22 @@
+name: Send photo via bot
+
+# Sends a repo image to a Telegram chat as a real photo (not a document) with the Exam Hub bot (used by Claude).
+on:
+  workflow_dispatch:
+    inputs:
+      path: {description: "Image in this repo", required: true}
+      chat: {description: "Telegram chat id", required: true}
+      caption: {description: "Caption", required: false, default: ""}
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          P: ${{ inputs.path }}
+          C: ${{ inputs.chat }}
+          CAP: ${{ inputs.caption }}
+        run: |
+          curl -sS -F "chat_id=$C" -F "caption=$CAP" -F "photo=@$P" "https://api.telegram.org/bot$TOKEN/sendPhoto" | head -c 300
