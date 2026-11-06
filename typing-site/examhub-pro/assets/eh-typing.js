@@ -14,7 +14,7 @@
   var exam = CFG.exam;
   var isHindi = exam.lang === 'hi';
   var LAYOUTS = isHindi
-    ? [['krutidev', 'Hindi - Krutidev', 'Remington', 'Hindi - Krutidev Regular'], ['inscript', 'Hindi - Inscript', 'Inscript', 'Hindi - Mangal'], ['remington', 'Hindi - Remington Gail', 'Remington Gail', 'Hindi - Mangal']]
+    ? [['krutidev', 'Hindi - Krutidev', 'Remington', 'Hindi - Krutidev Regular'], ['inscript', 'Hindi - Inscript', 'Inscript', 'Hindi - Mangal'], ['remington', 'Hindi - Remington Gail', 'Remington Gail', 'Hindi - Mangal'], ['external', 'Hindi - Inscript (अपना कीबोर्ड)', 'Inscript', 'Hindi - Mangal']]
     : [['english', 'English', 'QWERTY', 'English']];
   var KD_FONT = '';
   function hasFont(name) {
@@ -28,6 +28,7 @@
     ['EHKruti', 'Kruti Dev 010', 'KrutiDev010', 'Kruti Dev 010 Regular', 'KRDV010'].some(function (n) { if (hasFont(n)) { KD_FONT = n; return true; } return false; });
   }
   if (document.fonts && document.fonts.load) document.fonts.load('20px EHKruti').then(detectKD, detectKD); else detectKD();
+  function native() { return S.layout === 'english' || S.layout === 'external'; }
   function kdMode() { return S.layout === 'krutidev' && !!KD_FONT; }
 
   var S = {
@@ -47,22 +48,52 @@
     var last = store.get('layout', '');
     if (LAYOUTS.some(function (l) { return l[0] === last; })) $('#eh-opt-layout').value = last;
     var ps = $('#eh-opt-passage');
-    ps.innerHTML = '<option value="">Random Passage</option>' + pool.map(function (p) { return '<option value="' + esc(p.id) + '">' + esc(p.title) + '</option>'; }).join('');
-    if (CFG.fixedPassage) { ps.value = CFG.fixedPassage; ps.disabled = true; }
-    var mi = $('#eh-opt-min'); mi.value = exam.minutes; if (CFG.lockTime) mi.disabled = true;
+    var pick = function () { var r = setup.querySelector('input[name="eh-psg"]:checked'); ps.value = r ? r.value : ''; };
+    setup.querySelectorAll('input[name="eh-psg"]').forEach(function (r) { r.addEventListener('change', function () {
+      setup.querySelectorAll('input[name="eh-psg"]').forEach(function (o) { if (o !== r && o.value === r.value) o.checked = true; });
+      pick(); var m = $('#eh-sp-modal'); if (m && r.closest('#eh-sp-modal')) m.hidden = true;
+    }); });
+    pick();
+    if (CFG.fixedPassage) ps.value = CFG.fixedPassage;
+    var mi = $('#eh-opt-min'); mi.value = String(exam.minutes); if (CFG.lockTime) mi.disabled = true;
+    var un = $('#eh-opt-unit'); if (un) un.value = exam.unit === 'keys' ? 'keys' : 'words';
     var nm = $('#eh-guest-name'); if (nm) nm.value = store.get('name', '');
+    /* steps */
+    var agree = $('#eh-agree'), next = $('#eh-next'), akey = 'agree_' + exam.slug;
+    function go(n) {
+      $('#eh-step1').hidden = n !== 1; $('#eh-step2').hidden = n !== 2;
+      setup.querySelectorAll('.eh-steps-nav li').forEach(function (li) { li.classList.toggle('on', li.getAttribute('data-go') === String(n)); });
+      if (n === 2) store.set(akey, 1);
+      window.scrollTo({ top: setup.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
+    }
+    agree.checked = !!store.get(akey, 0); next.disabled = !agree.checked;
+    agree.addEventListener('change', function () { next.disabled = !agree.checked; });
+    next.addEventListener('click', function () { if (agree.checked) go(2); });
+    setup.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { var n = +b.getAttribute('data-go'); if (n === 2 && !agree.checked) return; go(n); }); });
+    S.goStep = go;
+    var so = $('#eh-sp-open'), sm = $('#eh-sp-modal');
+    if (so && sm) {
+      so.addEventListener('click', function () { sm.hidden = false; });
+      sm.addEventListener('click', function (e) { if (e.target === sm || e.target.hasAttribute('data-x')) sm.hidden = true; });
+    }
   })();
 
   function buildText(firstId) {
     var need = exam.unit === 'keys' ? Math.ceil(exam.target * 1.3) : Math.ceil(exam.target * 1.3 * 6.2);
     need = Math.max(need, S.minutes * 60 * 6);
+    if (S.limit > 0) need = S.limitUnit === 'words' ? S.limit * 8 : S.limit + 10;
     var order = pool.slice();
     if (firstId) order.sort(function (a, b) { return (a.id === firstId ? -1 : 0) - (b.id === firstId ? -1 : 0); });
     else for (var i = order.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = order[i]; order[i] = order[j]; order[j] = t; }
     var parts = [], len = 0, k = 0;
     while (len < need && order.length && k < 40) { var p = order[k % order.length]; parts.push(p.text); len += p.chars + 1; k++; }
     S.passageId = order[0] ? order[0].id : ''; S.title = order[0] ? order[0].title : '';
-    return H.norm(parts.join(' '));
+    var txt = H.norm(parts.join(' '));
+    if (S.limit > 0) {
+      if (S.limitUnit === 'words') txt = txt.split(/\s+/).slice(0, S.limit).join(' ');
+      else if (txt.length > S.limit) { var cut = txt.lastIndexOf(' ', S.limit); txt = txt.slice(0, cut > 0 ? cut : S.limit); }
+    }
+    return txt;
   }
 
   /* ---------- settings ---------- */
@@ -120,6 +151,8 @@
     S.layout = $('#eh-opt-layout').value; store.set('layout', S.layout);
     var mi = $('#eh-opt-min'); if (!mi.disabled) S.minutes = Math.max(1, Math.min(60, parseInt(mi.value, 10) || exam.minutes));
     var nm = $('#eh-guest-name'); if (nm) store.set('name', nm.value.trim());
+    var lim = $('#eh-opt-limit'); S.limit = lim ? Math.max(0, parseInt(lim.value, 10) || 0) : 0;
+    S.limitUnit = $('#eh-opt-unit') ? $('#eh-opt-unit').value : 'keys';
     S.text = buildText(CFG.fixedPassage || $('#eh-opt-passage').value);
     S.words = S.text.split(/\s+/);
     S.show = kdMode() ? S.words.map(function (w) { return H.unicodeToKD(w); }) : S.words;
@@ -174,7 +207,7 @@
     if (S.layout === 'krutidev' || S.layout === 'remington') return H.kdToUnicode(S.buf);
     return S.layout === 'inscript' ? H.norm(S.buf) : ta.value;
   }
-  function rawText() { return S.layout === 'english' ? ta.value : S.buf; }
+  function rawText() { return native() ? ta.value : S.buf; }
 
   /* ---------- highlight + scroll ---------- */
   var lastIdx = -1;
@@ -242,7 +275,7 @@
       if (!S.set.bks || !raw.length) { e.preventDefault(); return; }
       if (S.set.lbks && /\s$/.test(raw)) { e.preventDefault(); return; }
       S.bks++; click();
-      if (S.layout !== 'english') { e.preventDefault(); S.buf = Array.from(S.buf).slice(0, -1).join(''); render(); }
+      if (!native()) { e.preventDefault(); S.buf = Array.from(S.buf).slice(0, -1).join(''); render(); }
       setTimeout(after, 0);
       return;
     }
@@ -250,7 +283,7 @@
     if (e.key === ' ' || e.code === 'Space') {
       if (!raw.length || (!S.set.xs && /\s$/.test(raw))) { e.preventDefault(); return; }
     }
-    if (S.layout === 'english') {
+    if (native()) {
       if (e.key.length === 1) { begin(); S.keys++; click(); setTimeout(after, 0); }
       return;
     }
@@ -369,13 +402,13 @@
   $('#eh-start').addEventListener('click', startTest);
   twoStep($('#eh-submit'), 'Submit', finish);
   twoStep($('#eh-cancel'), 'Cancel', function () { S.done = true; clearInterval(S.timer); closeExam(); setup.hidden = false; });
-  $('#eh-again').addEventListener('click', function () { result.hidden = true; setup.hidden = false; window.scrollTo({ top: setup.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }); });
+  $('#eh-again').addEventListener('click', function () { result.hidden = true; setup.hidden = false; if (S.goStep) S.goStep(2); });
   ta.addEventListener('keydown', onKey);
   ta.addEventListener('paste', function (e) { e.preventDefault(); });
   ta.addEventListener('drop', function (e) { e.preventDefault(); });
   ta.addEventListener('contextmenu', function (e) { e.preventDefault(); });
-  ta.addEventListener('input', function () { if (S.layout !== 'english') render(); });
-  ta.addEventListener('mousedown', function (e) { if (S.layout !== 'english') { e.preventDefault(); ta.focus(); } });
+  ta.addEventListener('input', function () { if (!native()) render(); else after(); });
+  ta.addEventListener('mousedown', function (e) { if (!native()) { e.preventDefault(); ta.focus(); } });
   pv.addEventListener('copy', function (e) { e.preventDefault(); });
   window.addEventListener('beforeunload', function (e) { if (S.started && !S.done) { e.preventDefault(); e.returnValue = ''; } });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !drawer.hidden) drawer.hidden = true; });
