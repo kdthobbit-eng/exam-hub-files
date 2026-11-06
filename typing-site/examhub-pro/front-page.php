@@ -6,7 +6,7 @@ $recent = eh_recent(8); ?>
   <div class="wrap eh-hero-in">
     <div>
       <span class="eh-kicker">100% Free · Hindi + English Typing</span>
-      <h1>Government Exam की<br><em>Typing Test</em> तैयारी यहीं से</h1>
+      <h1>Government Exam की <em>Typing Test</em> तैयारी, अब यहीं से</h1>
       <p class="lead">SSC, High Court, Railway, UPSSSC, DSSSB, KVS जैसे <?php echo count($exams); ?>+ एग्ज़ाम का टाइपिंग टेस्ट एक ही जगह। हिंदी में Krutidev और Mangal दोनों से प्रैक्टिस करें, टेस्ट खत्म होते ही रिज़ल्ट देखें।</p>
       <div class="eh-hero-btns">
         <a class="btn dark lg" href="<?php echo esc_url(home_url('/exams/')); ?>">All Exams देखें →</a>
@@ -15,7 +15,7 @@ $recent = eh_recent(8); ?>
       <div class="eh-stats">
         <div><b><?php echo count($exams); ?>+</b><span>Exams</span></div>
         <div><b><?php echo count(eh_passages()); ?>+</b><span>Passages</span></div>
-        <div><b><?php echo number_format_i18n(max($total, 1)); ?></b><span>Tests Taken</span></div>
+        <?php if ($total >= 100): ?><div><b><?php echo number_format_i18n($total); ?></b><span>Tests Taken</span></div><?php else: ?><div><b>100%</b><span>Free</span></div><?php endif; ?>
       </div>
     </div>
     <div class="eh-hero-art">
