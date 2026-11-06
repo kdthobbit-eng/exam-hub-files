@@ -39,6 +39,63 @@ function eh_settings_page() {
     ?>
     <tr><th>Extra / edited exams (JSON)</th><td><textarea name="eh_exams_extra" rows="6" class="large-text code"><?php echo esc_textarea(get_option('eh_exams_extra', '[]')); ?></textarea>
     <p class="description">Example: [{"slug":"up-court-clerk-hindi","name":"UP Civil Court Clerk Hindi Typing","lang":"hi","unit":"words","target":300,"minutes":10,"cat":"court"}]</p></td></tr>
-    </table><?php submit_button(); ?></form></div>
+    </table><?php submit_button(); ?></form>
+    <?php do_action('eh_settings_after'); ?></div>
     <?php
 }
+
+/* ---------- One-click theme update from GitHub (admin only) ---------- */
+function eh_rrmdir($d) {
+    if (!is_dir($d)) return;
+    $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($d, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
+    foreach ($it as $f) { $f->isDir() ? @rmdir($f->getPathname()) : @unlink($f->getPathname()); }
+    @rmdir($d);
+}
+
+function eh_self_update($sha = '') {
+    $repo = 'kdthobbit-eng/exam-hub-files';
+    if (!preg_match('/^[0-9a-f]{40}$/', $sha)) {
+        $api = wp_remote_get("https://api.github.com/repos/$repo/commits/main", ['timeout' => 20, 'headers' => ['User-Agent' => 'exam-hub-updater', 'Accept' => 'application/vnd.github+json']]);
+        $j = json_decode(wp_remote_retrieve_body($api), true);
+        $sha = is_array($j) && isset($j['sha']) ? $j['sha'] : '';
+    }
+    if (!preg_match('/^[0-9a-f]{40}$/', $sha)) return 'GitHub से commit नहीं मिला';
+    require_once ABSPATH . 'wp-admin/includes/file.php';
+    $zip = download_url("https://raw.githubusercontent.com/$repo/$sha/typing-site/examhub-pro.zip", 90);
+    if (is_wp_error($zip)) return 'Download fail: ' . $zip->get_error_message();
+    $tmp = WP_CONTENT_DIR . '/upgrade/ehp-' . time();
+    wp_mkdir_p($tmp);
+    $z = new ZipArchive();
+    if ($z->open($zip) !== true) { @unlink($zip); return 'Zip नहीं खुला'; }
+    $z->extractTo($tmp); $z->close(); @unlink($zip);
+    if (!file_exists("$tmp/examhub-pro/style.css") || !file_exists("$tmp/examhub-pro/functions.php")) { eh_rrmdir($tmp); return 'Zip में theme नहीं मिली'; }
+    $T = get_theme_root();
+    eh_rrmdir("$T/examhub-pro.old");
+    if (!@rename("$T/examhub-pro", "$T/examhub-pro.old")) { eh_rrmdir($tmp); return 'Theme folder rename नहीं हुआ (permission)'; }
+    if (!@rename("$tmp/examhub-pro", "$T/examhub-pro")) { @rename("$T/examhub-pro.old", "$T/examhub-pro"); eh_rrmdir($tmp); return 'नई theme move नहीं हुई'; }
+    eh_rrmdir($tmp);
+    update_option('eh_deployed_sha', $sha, false);
+    delete_option('eh_rewrite_ver');
+    if (function_exists('opcache_reset')) @opcache_reset();
+    return 'OK ' . substr($sha, 0, 7);
+}
+
+add_action('admin_post_eh_selfupdate', function () {
+    if (!current_user_can('manage_options')) wp_die('Not allowed');
+    check_admin_referer('eh_selfupdate');
+    $r = eh_self_update(isset($_POST['sha']) ? sanitize_text_field(wp_unslash($_POST['sha'])) : '');
+    wp_safe_redirect(admin_url('admin.php?page=eh-settings&ehu=' . rawurlencode($r)));
+    exit;
+});
+
+add_action('eh_settings_after', function () {
+    $msg = isset($_GET['ehu']) ? sanitize_text_field(wp_unslash($_GET['ehu'])) : '';
+    echo '<hr><h2>Theme Update (GitHub)</h2>';
+    if ($msg) echo '<div class="notice ' . (strpos($msg, 'OK') === 0 ? 'notice-success' : 'notice-error') . '"><p id="eh-upd-msg">' . esc_html($msg) . '</p></div>';
+    echo '<p>अभी लगी version: <code id="eh-cur-sha">' . esc_html(substr((string) get_option('eh_deployed_sha', '-'), 0, 7)) . '</code></p>';
+    echo '<form method="post" action="' . esc_url(admin_url('admin-post.php')) . '"><input type="hidden" name="action" value="eh_selfupdate">';
+    wp_nonce_field('eh_selfupdate');
+    echo '<input name="sha" id="eh-sha" class="regular-text code" placeholder="commit SHA (खाली = latest)"> ';
+    submit_button('Update theme now', 'primary', 'submit', false, ['id' => 'eh-upd-btn']);
+    echo '</form>';
+});
