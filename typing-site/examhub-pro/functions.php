@@ -163,7 +163,7 @@ add_filter('registration_redirect', function () { return wp_login_url(home_url('
 
 /* login page branding */
 add_action('login_enqueue_scripts', function () {
-    echo '<style>body.login{background:#f6f3ec;font-family:Inter,sans-serif}.login h1 a{background:none!important;text-indent:0!important;width:auto!important;height:auto!important;font-size:24px;font-weight:800;color:#14161a}.login #nav a,.login #backtoblog a{color:#14161a}.wp-core-ui .button-primary{background:#4f46e5;border-color:#4f46e5;border-radius:10px}</style>';
+    echo '<style>body.login{background:#f6f3ec;font-family:Inter,sans-serif}.login h1 a{background:none!important;text-indent:0!important;width:auto!important;height:auto!important;font-size:24px;font-weight:800;color:#14161a}.login #nav a,.login #backtoblog a{color:#14161a}.wp-core-ui .button-primary{background:#111;border-color:#111;border-radius:10px}</style>';
 });
 add_filter('login_headerurl', function () { return home_url('/'); });
 add_filter('login_headertext', function () { return eh_opt('brand'); });
