@@ -85,7 +85,7 @@ function eh_doc_title($t) {
     switch ($view) {
         case 'exams': return 'All Typing Exams — ' . $b;
         case 'exam': $e = eh_exam($slug); return ($e ? $e['name'] : 'Exam') . ' — ' . $b;
-        case 'typing': $e = $slug === 'demo' ? null : eh_exam($slug); return ($e ? $e['name'] . ' Test' : 'Demo Typing Test') . ' — ' . $b;
+        case 'typing': $e = $slug === 'demo' ? null : eh_exam($slug); return ($e ? $e['name'] . (stripos($e['name'], 'test') === false ? ' Test' : '') : 'Demo Typing Test') . ' — ' . $b;
         case 'live': return 'Daily Live Typing — ' . $b;
         case 'results': return 'Exam Based Result & Leaderboard — ' . $b;
         case 'dashboard': return 'My Dashboard — ' . $b;

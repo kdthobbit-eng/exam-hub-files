@@ -164,7 +164,7 @@
   function stripP(w) { return w.replace(/[.,;:!?'"‘’“”()\-।|/]/g, ''); }
   function compare(src, typ) {
     var n = src.length, m = typ.length;
-    var lim = Math.min(n, m + 30); n = lim;
+    var lim = Math.min(n, m + Math.max(5, Math.ceil(m * 0.1))); n = lim;
     var W = n + 1, D = new Uint32Array((n + 1) * (m + 1));
     for (var i = 0; i <= n; i++) D[i * (m + 1)] = i;
     for (var j = 0; j <= m; j++) D[j] = j;
@@ -209,7 +209,7 @@
     var full = 0, half = 0, ok = 0;
     ops.forEach(function (o) { if (o.t === 'ok') ok++; else if (o.t === 'half') half++; else full++; });
     var words = tw.length, errs = full + half / 2;
-    var errPct = words ? (errs / words) * 100 : 100;
+    var errPct = words ? Math.min(100, (errs / words) * 100) : 100;
     var gross = Math.round(words / mins);
     var net = Math.max(0, Math.round((words - errs) / mins));
     var acc = words ? Math.max(0, 100 - errPct) : 0;

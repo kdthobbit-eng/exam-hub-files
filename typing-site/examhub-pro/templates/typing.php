@@ -7,7 +7,7 @@ if ($slug === 'demo') {
 $eh_cfg = [];
 ?>
 <section class="eh-page-head slim"><div class="wrap">
-  <h1><?php echo esc_html($eh_exam['name']); ?><?php echo $slug === 'demo' ? '' : ' — Typing Test'; ?></h1>
+  <h1><?php echo esc_html($eh_exam['name']); ?><?php echo ($slug === 'demo' || stripos($eh_exam['name'], 'test') !== false) ? '' : ' — Typing Test'; ?></h1>
   <?php if ($slug === 'demo'): ?><p class="eh-switch"><a class="<?php echo $eh_exam['lang'] === 'en' ? 'on' : ''; ?>" href="<?php echo esc_url(home_url('/demo-typing/')); ?>">English</a><a class="<?php echo $eh_exam['lang'] === 'hi' ? 'on' : ''; ?>" href="<?php echo esc_url(home_url('/demo-typing/?lang=hi')); ?>">Hindi</a></p><?php endif; ?>
 </div></section>
 <section class="wrap eh-section"><?php include __DIR__ . '/_test-ui.php'; ?></section>
