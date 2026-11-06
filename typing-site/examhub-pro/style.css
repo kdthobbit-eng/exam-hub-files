@@ -435,3 +435,10 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .ex-dr-close{margin-top:auto;align-self:flex-end}
 .eh-exam:fullscreen{overflow:auto}
 @media(max-width:900px){.ex-body{grid-template-columns:1fr;padding:0 2vw}.ex-stats{margin-top:0}.ex-foot{padding:20px 4vw}.eh-setup{grid-template-columns:1fr}}
+.ex-head{padding:8px 1.5vw 14px 4vw}
+.ex-cand{margin-right:180px}
+.ex-stats{margin-top:-62px}
+.ex-box{max-width:1010px}
+.ex-foot{max-width:1060px;padding:24px 0 30px 0;margin-left:2vw;justify-content:space-around}
+.ex-photo b{font-size:12px;letter-spacing:.3px}
+@media(max-width:900px){.ex-cand{margin-right:0}.ex-stats{margin-top:0}}
