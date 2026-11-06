@@ -14,7 +14,8 @@ $cfg = array_merge([
     'avatar' => is_user_logged_in() ? (string) get_user_meta($u->ID, 'eh_avatar', true) : '',
 ], $eh_cfg ?? []);
 wp_enqueue_script('eh-hindi', EH_URI . '/assets/eh-hindi.js', [], EH_VER, true);
-wp_enqueue_script('eh-typing', EH_URI . '/assets/eh-typing.js', ['eh-hindi'], EH_VER, true);
+wp_enqueue_script('eh-eval', EH_URI . '/assets/eh-eval.js', [], EH_VER, true);
+wp_enqueue_script('eh-typing', EH_URI . '/assets/eh-typing.js', ['eh-hindi', 'eh-eval'], EH_VER, true);
 wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_UNESCAPED_UNICODE) . ';', 'before');
 ?>
 <div class="eh-testbox">
@@ -169,13 +170,9 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
   </div>
 
   <!-- Result -->
-  <div id="eh-result" class="eh-panel" hidden>
-    <div id="eh-res-head"></div>
-    <div id="eh-res-grid" class="eh-res-grid"></div>
+  <div id="eh-result" class="eh-panel eh-dash" hidden>
+    <div id="eh-res-dash"></div>
     <p id="eh-res-saved" class="muted small"></p>
-    <h3>आपकी गलतियाँ</h3>
-    <p class="eh-legend"><span class="d-ok">सही</span> <span class="d-sub">Full mistake <s>मूल</s></span> <span class="d-half">Half mistake</span> <span class="d-om">छूटा शब्द</span> <span class="d-add">फालतू शब्द</span></p>
-    <div id="eh-res-diff" class="eh-diff <?php echo $lang === 'hi' ? 'hi' : ''; ?>"></div>
-    <div class="eh-res-actions"><button id="eh-again" class="btn dark">दोबारा टेस्ट दें</button><a class="btn ghost" href="<?php echo esc_url(home_url('/results/')); ?>">Leaderboard</a><?php echo eh_tg_buttons('inline'); ?></div>
+    <div class="eh-res-actions"><button id="eh-again" class="btn dark">दोबारा टेस्ट दें</button><button id="eh-retype" class="btn ghost" type="button">यही पैसेज फिर से</button><a id="eh-res-link" class="btn ghost" hidden href="#">🔗 रिज़ल्ट का लिंक</a><a class="btn ghost" href="<?php echo esc_url(home_url('/results/')); ?>">Leaderboard</a><?php echo eh_tg_buttons('inline'); ?></div>
   </div>
 </div>

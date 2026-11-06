@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-define('EH_DB_VER', '1');
+define('EH_DB_VER', '2');
 
 function eh_table() { global $wpdb; return $wpdb->prefix . 'eh_results'; }
 
@@ -31,6 +31,12 @@ add_action('init', function () {
         pass tinyint(1) NOT NULL DEFAULT 0,
         live_date date NULL,
         ip_hash char(16) NOT NULL DEFAULT '',
+        kerr int(11) NOT NULL DEFAULT 0,
+        title varchar(190) NOT NULL DEFAULT '',
+        rkey char(8) NOT NULL DEFAULT '',
+        typed mediumtext NULL,
+        src mediumtext NULL,
+        mist text NULL,
         created datetime NOT NULL,
         PRIMARY KEY  (id),
         KEY exam (exam),
@@ -72,4 +78,15 @@ function eh_recent($limit = 12) {
 function eh_display_name($row) {
     if (!empty($row['user_id'])) { $u = get_userdata($row['user_id']); if ($u) return $u->display_name; }
     return $row['name'] !== '' ? $row['name'] : 'Guest';
+}
+
+function eh_result_url($id, $key) { return home_url('/result/' . (int) $id . '-' . $key . '/'); }
+
+function eh_get_result($id, $key) {
+    global $wpdb;
+    $r = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . eh_table() . ' WHERE id = %d', $id), ARRAY_A);
+    if (!$r) return null;
+    $own = $r['user_id'] && (int) $r['user_id'] === get_current_user_id();
+    if (!$own && !hash_equals((string) $r['rkey'], (string) $key)) return null;
+    return $r;
 }

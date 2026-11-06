@@ -297,42 +297,7 @@
   }
 
   /* ---------- evaluation ---------- */
-  function stripP(w) { return w.replace(/[.,;:!?'"‘’“”()\-।|/]/g, ''); }
-  function compare(src, typ) {
-    var m = typ.length;
-    var n = Math.min(src.length, m + Math.max(5, Math.ceil(m * 0.1)));
-    var D = new Uint32Array((n + 1) * (m + 1)), i, j;
-    var cost = function (x, y) { return x === y ? 0 : (x.toLowerCase() === y.toLowerCase() || (stripP(x) && stripP(x) === stripP(y))) ? 1 : 3; };
-    for (i = 0; i <= n; i++) D[i * (m + 1)] = i * 2;
-    for (j = 0; j <= m; j++) D[j] = j * 2;
-    for (i = 1; i <= n; i++) for (j = 1; j <= m; j++) {
-      var a = D[(i - 1) * (m + 1) + j - 1] + cost(src[i - 1], typ[j - 1]), b = D[(i - 1) * (m + 1) + j] + 2, d = D[i * (m + 1) + j - 1] + 2;
-      D[i * (m + 1) + j] = a < b ? (a < d ? a : d) : (b < d ? b : d);
-    }
-    var best = 0;
-    for (i = 0; i <= n; i++) if (D[i * (m + 1) + m] < D[best * (m + 1) + m]) best = i;
-    var ops = []; i = best; j = m;
-    while (i > 0 || j > 0) {
-      if (i > 0 && j > 0 && D[i * (m + 1) + j] === D[(i - 1) * (m + 1) + j - 1] + cost(src[i - 1], typ[j - 1])) { ops.push({ t: src[i - 1] === typ[j - 1] ? 'ok' : 'sub', s: src[i - 1], w: typ[j - 1] }); i--; j--; }
-      else if (i > 0 && D[i * (m + 1) + j] === D[(i - 1) * (m + 1) + j] + 2) { ops.push({ t: 'om', s: src[i - 1] }); i--; }
-      else { ops.push({ t: 'add', w: typ[j - 1] }); j--; }
-    }
-    ops.reverse();
-    var out = [];
-    for (var k = 0; k < ops.length; k++) {
-      var o = ops[k], nx = ops[k + 1];
-      if (o.t === 'om' && nx && nx.t === 'sub' && nx.w === o.s + nx.s) { out.push({ t: 'half', s: o.s + ' ' + nx.s, w: nx.w, why: 'space' }); k++; continue; }
-      if (o.t === 'sub' && nx && nx.t === 'om' && o.w === o.s + nx.s) { out.push({ t: 'half', s: o.s + ' ' + nx.s, w: o.w, why: 'space' }); k++; continue; }
-      if (o.t === 'sub' && nx && nx.t === 'add' && o.w + nx.w === o.s) { out.push({ t: 'half', s: o.s, w: o.w + ' ' + nx.w, why: 'space' }); k++; continue; }
-      if (o.t === 'add' && nx && nx.t === 'sub' && o.w + nx.w === nx.s) { out.push({ t: 'half', s: nx.s, w: o.w + ' ' + nx.w, why: 'space' }); k++; continue; }
-      if (o.t === 'sub') {
-        if (o.s.toLowerCase() === o.w.toLowerCase()) { out.push({ t: 'half', s: o.s, w: o.w, why: 'case' }); continue; }
-        if (stripP(o.s) && stripP(o.s) === stripP(o.w)) { out.push({ t: 'half', s: o.s, w: o.w, why: 'punct' }); continue; }
-      }
-      out.push(o);
-    }
-    return out;
-  }
+  var compare = window.EHEval.compare;
 
   function finish() {
     if (S.done) return;
@@ -358,28 +323,19 @@
     };
     closeExam();
     showResult(R, ops);
+    var srcUpto = 0; ops.forEach(function (o) { if (o.t !== 'add') srcUpto += o.s.split(' ').length; });
+    R.typed = typed.slice(0, 20000); R.src = S.words.slice(0, srcUpto + 15).join(' ').slice(0, 25000);
+    R.mist = window.EHEval.mistakes(ops); R.title = S.title;
     save(R);
   }
 
   function showResult(R, ops) {
     result.hidden = false; setup.hidden = true;
-    var tgt = exam.unit === 'keys' ? exam.target + ' keys' : exam.target + ' words';
-    $('#eh-res-head').innerHTML =
-      '<div class="eh-verdict ' + (R.pass ? 'ok' : 'no') + '">' + (R.pass ? '✔ Qualified' : '✘ Not Qualified') + '</div>' +
-      '<p class="muted">Target: ' + tgt + ' in ' + exam.minutes + ' min · Allowed error ' + (exam.allowed || 5) + '%</p>';
-    var cells = [
-      ['Net Speed', R.net + ' WPM'], ['Gross Speed', R.gross + ' WPM'], ['Accuracy', R.acc + '%'], ['Error', R.err + '%'],
-      ['Keystrokes Typed', R.keys], ['Keystrokes Error', R.kerr], ['Words Typed', R.words], ['Full Mistakes', R.full],
-      ['Half Mistakes', R.half], ['Backspace', R.backspaces], ['Time', Math.floor(R.minutes) + 'm ' + Math.round((R.minutes % 1) * 60) + 's'], ['Pending Words', Math.max(0, S.words.length - R.words)]
-    ];
-    $('#eh-res-grid').innerHTML = cells.map(function (c) { return '<div class="eh-stat"><span>' + c[0] + '</span><b>' + c[1] + '</b></div>'; }).join('');
-    $('#eh-res-diff').innerHTML = ops.map(function (o) {
-      if (o.t === 'ok') return '<span class="d-ok">' + esc(o.s) + '</span>';
-      if (o.t === 'om') return '<span class="d-om" title="छूटा शब्द">' + esc(o.s) + '</span>';
-      if (o.t === 'add') return '<span class="d-add" title="फालतू शब्द">' + esc(o.w) + '</span>';
-      if (o.t === 'half') return '<span class="d-half" title="Half mistake: ' + o.why + '">' + esc(o.w) + ' <s>' + esc(o.s) + '</s></span>';
-      return '<span class="d-sub" title="Full mistake">' + esc(o.w) + ' <s>' + esc(o.s) + '</s></span>';
-    }).join(' ');
+    R.pending = Math.max(0, S.words.length - R.words);
+    R.title = S.title; R.date = new Date().toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    $('#eh-res-dash').innerHTML = window.EHEval.dashboard(R, exam, ops);
+    window.EHEval.bindDash($('#eh-res-dash'));
+    $('#eh-res-link').hidden = true;
     window.scrollTo({ top: result.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
   }
 
@@ -387,7 +343,11 @@
     if (!CFG.loggedIn) R.name = store.get('name', '');
     fetch(CFG.rest + 'result', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': CFG.nonce }, body: JSON.stringify(R) })
       .then(function (r) { return r.json(); })
-      .then(function (j) { var s = $('#eh-res-saved'); if (s) s.textContent = j && j.ok ? (j.rank ? 'रिज़ल्ट सेव हो गया · आज आपकी रैंक #' + j.rank : 'रिज़ल्ट सेव हो गया') : ''; document.dispatchEvent(new Event('eh:saved')); })
+      .then(function (j) {
+        var s = $('#eh-res-saved'); if (s) s.textContent = j && j.ok ? (j.rank ? 'रिज़ल्ट सेव हो गया · आज आपकी रैंक #' + j.rank : 'रिज़ल्ट सेव हो गया') : '';
+        if (j && j.url) { var l = $('#eh-res-link'); l.href = j.url; l.hidden = false; }
+        document.dispatchEvent(new Event('eh:saved'));
+      })
       .catch(function () {});
   }
 
@@ -402,6 +362,17 @@
   $('#eh-start').addEventListener('click', startTest);
   twoStep($('#eh-submit'), 'Submit', finish);
   twoStep($('#eh-cancel'), 'Cancel', function () { S.done = true; clearInterval(S.timer); closeExam(); setup.hidden = false; });
+  $('#eh-retype').addEventListener('click', function () { if (S.passageId) $('#eh-opt-passage').value = S.passageId; result.hidden = true; startTest(); });
+  (function () {
+    var q = new URLSearchParams(location.search), rp = q.get('passage');
+    if (rp && !CFG.fixedPassage) {
+      var r = setup.querySelector('input[name="eh-psg"][value="' + rp.replace(/[^a-z0-9]/gi, '') + '"]');
+      if (r) { r.checked = true; r.dispatchEvent(new Event('change')); }
+      else $('#eh-opt-passage').value = rp.replace(/[^a-z0-9]/gi, '');
+      var lim = q.get('limit'); if (lim && $('#eh-opt-limit')) $('#eh-opt-limit').value = parseInt(lim, 10) || '';
+      if ($('#eh-agree').checked) S.goStep(2);
+    }
+  })();
   $('#eh-again').addEventListener('click', function () { result.hidden = true; setup.hidden = false; if (S.goStep) S.goStep(2); });
   ta.addEventListener('keydown', onKey);
   ta.addEventListener('paste', function (e) { e.preventDefault(); });

@@ -56,7 +56,14 @@ add_action('init', function () {
     add_rewrite_rule('^live-typing/?$', 'index.php?eh_view=live', 'top');
     add_rewrite_rule('^results/?$', 'index.php?eh_view=results', 'top');
     add_rewrite_rule('^my-dashboard/?$', 'index.php?eh_view=dashboard', 'top');
-    if (get_option('eh_rewrite_ver') !== '2') { flush_rewrite_rules(false); update_option('eh_rewrite_ver', '2'); }
+    add_rewrite_rule('^typing-history/?$', 'index.php?eh_view=dashboard', 'top');
+    add_rewrite_rule('^result/([0-9]+-[a-z0-9]+)/?$', 'index.php?eh_view=result&eh_slug=$matches[1]', 'top');
+    add_rewrite_rule('^exam-hall-typing/?$', 'index.php?eh_view=examhall', 'top');
+    add_rewrite_rule('^download-passages/?$', 'index.php?eh_view=download', 'top');
+    add_rewrite_rule('^typing-insight/?$', 'index.php?eh_view=insight', 'top');
+    add_rewrite_rule('^exam-based-result/?$', 'index.php?eh_view=results', 'top');
+    add_rewrite_rule('^(faqs|about-us|declaration|terms-of-service|privacy-policy|contact-us)/?$', 'index.php?eh_view=info&eh_slug=$matches[1]', 'top');
+    if (get_option('eh_rewrite_ver') !== '3') { flush_rewrite_rules(false); update_option('eh_rewrite_ver', '3'); }
 });
 add_filter('query_vars', function ($v) { $v[] = 'eh_view'; $v[] = 'eh_slug'; return $v; });
 
@@ -90,7 +97,12 @@ function eh_doc_title($t) {
         case 'typing': $e = $slug === 'demo' ? null : eh_exam($slug); return ($e ? $e['name'] . (stripos($e['name'], 'test') === false ? ' Test' : '') : 'Demo Typing Test') . ' — ' . $b;
         case 'live': return 'Daily Live Typing — ' . $b;
         case 'results': return 'Exam Based Result & Leaderboard — ' . $b;
-        case 'dashboard': return 'My Dashboard — ' . $b;
+        case 'dashboard': return 'Typing History — ' . $b;
+        case 'result': return 'Performance Dashboard — ' . $b;
+        case 'examhall': return 'Exam Hall Typing — ' . $b;
+        case 'download': return 'Free Typing Passage PDF Download — ' . $b;
+        case 'insight': return 'Typing Insight — ' . $b;
+        case 'info': $I = eh_info_pages(); return ($I[$slug]['title'] ?? 'Info') . ' — ' . $b;
     }
     return $t;
 }
@@ -108,7 +120,7 @@ function eh_view_url() { return home_url(strtok($_SERVER['REQUEST_URI'] ?? '/', 
 add_filter('rank_math/frontend/description', function ($d) { return get_query_var('eh_view') ? eh_view_desc() : $d; }, 9999);
 add_filter('rank_math/frontend/canonical', function ($c) { return get_query_var('eh_view') ? eh_view_url() : $c; }, 9999);
 add_filter('rank_math/opengraph/url', function ($c) { return get_query_var('eh_view') ? eh_view_url() : $c; }, 9999);
-add_filter('rank_math/frontend/robots', function ($r) { if (in_array(get_query_var('eh_view'), ['dashboard'], true)) { $r['index'] = 'noindex'; } return $r; }, 9999);
+add_filter('rank_math/frontend/robots', function ($r) { if (in_array(get_query_var('eh_view'), ['dashboard', 'result', 'insight'], true)) { $r['index'] = 'noindex'; } return $r; }, 9999);
 add_action('wp_head', function () {
     if (defined('RANK_MATH_VERSION')) return;
     if (get_query_var('eh_view') || is_front_page()) echo '<meta name="description" content="' . esc_attr(eh_view_desc()) . '">' . "\n";

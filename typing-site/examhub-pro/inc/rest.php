@@ -41,11 +41,20 @@ function eh_rest_save(WP_REST_Request $r) {
         'gross' => max(0, min(300, (int) ($p['gross'] ?? 0))), 'net' => $net,
         'acc' => max(0, min(100, (float) ($p['acc'] ?? 0))), 'err' => max(0, min(100, (float) ($p['err'] ?? 0))),
         'pass' => !empty($p['pass']) ? 1 : 0, 'live_date' => $live, 'ip_hash' => $ip, 'created' => current_time('mysql'),
+        'kerr' => max(0, min(30000, (int) ($p['kerr'] ?? 0))),
+        'title' => mb_substr(sanitize_text_field($p['title'] ?? ''), 0, 180),
+        'rkey' => $rkey = strtolower(wp_generate_password(8, false, false)),
+        'typed' => mb_substr(sanitize_textarea_field($p['typed'] ?? ''), 0, 20000),
+        'src' => mb_substr(sanitize_textarea_field($p['src'] ?? ''), 0, 25000),
+        'mist' => wp_json_encode(array_slice(array_values(array_filter(array_map(function ($x) {
+            return is_array($x) && count($x) === 2 ? [mb_substr(sanitize_text_field($x[0]), 0, 40), mb_substr(sanitize_text_field($x[1]), 0, 40)] : null;
+        }, (array) ($p['mist'] ?? [])))), 0, 60), JSON_UNESCAPED_UNICODE),
     ]);
+    $rid = (int) $wpdb->insert_id;
     delete_transient('eh_attempts');
     $rank = 0;
     if ($live) {
         $rank = 1 + (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_table() . ' WHERE live_date = %s AND net > %d', $live, $net));
     }
-    return ['ok' => true, 'rank' => $rank];
+    return ['ok' => true, 'rank' => $rank, 'id' => $rid, 'url' => $rid ? eh_result_url($rid, $rkey) : ''];
 }
