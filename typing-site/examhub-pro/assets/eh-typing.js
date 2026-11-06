@@ -14,8 +14,21 @@
   var exam = CFG.exam;
   var isHindi = exam.lang === 'hi';
   var LAYOUTS = isHindi
-    ? [['krutidev', 'Hindi - Krutidev', 'Krutidev 010'], ['inscript', 'Hindi - Inscript', 'Inscript (Mangal)'], ['remington', 'Hindi - Remington Gail', 'Remington Gail (Mangal)']]
-    : [['english', 'English', 'QWERTY']];
+    ? [['krutidev', 'Hindi - Krutidev', 'Remington', 'Hindi - Krutidev Regular'], ['inscript', 'Hindi - Inscript', 'Inscript', 'Hindi - Mangal'], ['remington', 'Hindi - Remington Gail', 'Remington Gail', 'Hindi - Mangal']]
+    : [['english', 'English', 'QWERTY', 'English']];
+  var KD_FONT = '';
+  function hasFont(name) {
+    try {
+      var c = document.createElement('canvas').getContext('2d'), t = 'abcdefghijklmnopqrstuvwxyzABCDEF0123456789';
+      c.font = '40px monospace'; var a = c.measureText(t).width;
+      c.font = '40px "' + name + '", monospace'; return c.measureText(t).width !== a;
+    } catch (e) { return false; }
+  }
+  function detectKD() {
+    ['EHKruti', 'Kruti Dev 010', 'KrutiDev010', 'Kruti Dev 010 Regular', 'KRDV010'].some(function (n) { if (hasFont(n)) { KD_FONT = n; return true; } return false; });
+  }
+  if (document.fonts && document.fonts.load) document.fonts.load('20px EHKruti').then(detectKD, detectKD); else detectKD();
+  function kdMode() { return S.layout === 'krutidev' && !!KD_FONT; }
 
   var S = {
     layout: LAYOUTS[0][0], minutes: exam.minutes,
@@ -56,9 +69,9 @@
   function applySettings() {
     var st = S.set;
     test.classList.toggle('tcs', !!st.tcs);
-    var base = isHindi ? 20 : 18, px = base + st.fs * 2;
-    pv.style.fontSize = px + 'px'; ta.style.fontSize = px + 'px';
-    $('#set-fs-v').textContent = Math.round(px * 0.75);
+    var pbase = isHindi ? 22 : 20, tbase = 24;
+    pv.style.fontSize = (pbase + st.fs * 2) + 'px'; ta.style.fontSize = (tbase + st.fs * 2) + 'px';
+    $('#set-fs-v').textContent = Math.round((pbase + st.fs * 2) * 0.75);
     pv.style.visibility = st.scr ? '' : 'hidden';
     if (!st.hl) clearMark(); else mark(true);
     store.set('set', st);
@@ -97,25 +110,29 @@
     var nm = $('#eh-guest-name'); if (nm) store.set('name', nm.value.trim());
     S.text = buildText(CFG.fixedPassage || $('#eh-opt-passage').value);
     S.words = S.text.split(/\s+/);
+    S.show = kdMode() ? S.words.map(function (w) { return H.unicodeToKD(w); }) : S.words;
     S.left = S.minutes * 60; S.buf = ''; S.keys = 0; S.bks = 0; S.started = false; S.done = false; lastIdx = -1;
 
     var L = LAYOUTS.filter(function (l) { return l[0] === S.layout; })[0];
-    $('#eh-layout-name').textContent = isHindi ? 'Hindi' : 'English';
+    $('#eh-layout-name').textContent = L[3];
     $('#eh-kb').textContent = L[2];
-    $('#eh-ex-title').textContent = 'Typing Test – ' + (S.title || exam.name);
+    var pidx = 1; pool.forEach(function (p, i) { if (p.id === S.passageId) pidx = i + 1; });
+    $('#eh-ex-title').textContent = 'Typing Test Id ' + pidx + ' - ' + (S.title || exam.name);
     var nmv = CFG.userName || (nm && nm.value.trim()) || 'Candidate';
     $('#eh-cand-name').textContent = nmv.toUpperCase();
     $('#eh-cand-av').innerHTML = CFG.avatar ? '<img src="' + esc(CFG.avatar) + '" alt="">' : esc(nmv.charAt(0).toUpperCase());
 
-    pv.className = 'eh-passage' + (isHindi ? ' hi' : '');
-    ta.className = 'eh-input' + (isHindi ? ' hi' : '');
-    pv.innerHTML = S.words.map(function (w, i) { return '<span data-i="' + i + '">' + esc(w) + '</span>'; }).join(' ');
+    var kd = kdMode();
+    pv.className = 'eh-passage' + (isHindi ? ' hi' : '') + (kd ? ' kd' : '');
+    ta.className = 'eh-input' + (isHindi ? ' hi' : '') + (kd ? ' kd' : '');
+    if (kd) { pv.style.fontFamily = ta.style.fontFamily = '"' + KD_FONT + '"'; } else { pv.style.fontFamily = ta.style.fontFamily = ''; }
+    pv.innerHTML = S.show.map(function (w, i) { return '<span data-i="' + i + '">' + esc(w) + '</span>'; }).join(' ');
     pv.scrollTop = 0;
     ta.value = ''; ta.disabled = false;
     setup.hidden = true; result.hidden = true; test.hidden = false;
     document.documentElement.classList.add('eh-exam-on');
     applySettings(); drawTime(); stats(true);
-    $('#st-kc').textContent = S.text.length; $('#st-wc').textContent = S.words.length;
+    $('#st-kc').textContent = S.show.join(' ').length; $('#st-wc').textContent = S.words.length;
     setTimeout(function () { ta.focus(); }, 50);
   }
 
@@ -201,7 +218,7 @@
     if (now) run(); else stT = setTimeout(run, 180);
   }
 
-  function render() { ta.value = current(); ta.scrollTop = ta.scrollHeight; ta.setSelectionRange(ta.value.length, ta.value.length); }
+  function render() { ta.value = kdMode() ? S.buf : current(); ta.scrollTop = ta.scrollHeight; ta.setSelectionRange(ta.value.length, ta.value.length); }
   function after() { mark(); stats(); }
 
   /* ---------- keyboard ---------- */

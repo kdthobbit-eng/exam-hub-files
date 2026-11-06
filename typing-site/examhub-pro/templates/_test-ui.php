@@ -43,11 +43,8 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
     <div class="ex-top" id="eh-ex-title">Typing Test</div>
     <div class="ex-strip"><?php echo esc_html($eh_exam['name']); ?></div>
     <div class="ex-head">
-      <div class="ex-brand"><?php echo esc_html(eh_opt('brand')); ?></div>
-      <div class="ex-cand">
-        <div class="ex-time">Time left:- <b id="eh-timer">00:00</b></div>
-        <div class="ex-photo"><span id="eh-cand-av"></span><b id="eh-cand-name">CANDIDATE</b></div>
-      </div>
+      <div class="ex-time">Time left:- <b id="eh-timer">00:00</b></div>
+      <div class="ex-photo"><span id="eh-cand-av"></span><b id="eh-cand-name">CANDIDATE</b></div>
     </div>
     <div class="ex-body">
       <div class="ex-main">

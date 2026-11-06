@@ -442,3 +442,41 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .ex-foot{max-width:1060px;padding:24px 0 30px 0;margin-left:2vw;justify-content:space-around}
 .ex-photo b{font-size:12px;letter-spacing:.3px}
 @media(max-width:900px){.ex-cand{margin-right:0}.ex-stats{margin-top:0}}
+
+/* ===== Exam window — AR/TCS dimensions (base 1920px) ===== */
+@font-face{font-family:"EHKruti";src:local("Kruti Dev 010"),local("KrutiDev010"),local("Kruti Dev 010 Regular"),url("assets/fonts/krutidev010.ttf") format("truetype");font-display:swap}
+.eh-exam{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans Devanagari",sans-serif;color:#1a202c;background:#fff;display:block}
+.eh-exam .ex-top{background:#007bff;height:47px;box-sizing:border-box;padding:10px 12px;font-size:18px;font-weight:500;line-height:27px;text-align:center;color:#fff}
+.eh-exam .ex-strip{background:#000;height:24px;box-sizing:border-box;padding:3px 4px;font-size:12px;font-weight:500;line-height:18px;color:#fff}
+.eh-exam .ex-head{position:relative;height:105px;padding:0;margin:0;display:block}
+.eh-exam .ex-time{position:absolute;left:84.74vw;top:43px;font-size:16px;font-weight:700;line-height:24px;white-space:nowrap}
+.eh-exam .ex-time b{font-weight:700}
+.eh-exam .ex-photo{position:absolute;left:91.98vw;top:1px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.eh-exam .ex-photo span{width:57px;height:60px;box-sizing:border-box;padding:4px;border:1px solid #a0aec0;background:linear-gradient(#f2f2f2,#cfd4da);display:grid;place-items:center;font-size:26px;font-weight:700;color:#4a5568}
+.eh-exam .ex-photo b{font-size:14px;font-weight:700;line-height:26px}
+.eh-exam .ex-body{position:relative;display:block;padding:0;grid-template-columns:none}
+.eh-exam .ex-main{margin-left:1.98vw;width:80vw}
+.eh-exam .ex-bar{background:#007bff;height:32px;box-sizing:border-box;padding:0 0 0 32px;display:flex;gap:41px;align-items:center;font-size:16px;line-height:29.92px;color:#fff}
+.eh-exam .ex-bar b{font-weight:400}
+.eh-exam .ex-box{width:75%;max-width:none;box-sizing:border-box;padding:16px;border:1px solid #e2e8f0;border-radius:6px}
+.eh-exam .eh-passage{height:187px;box-sizing:border-box;border:1px solid #000;border-radius:0;padding:0 10px;font-size:20px;line-height:30px;text-align:justify;overflow-y:auto;color:#000;background:#fff;font-family:inherit}
+.eh-exam .eh-passage.hi{font-size:22px;line-height:1.2044}
+.eh-exam .eh-input{display:block;width:100%;height:140px;box-sizing:border-box;margin-top:32px;border:1px solid #3182ce;border-radius:6px;padding:8px 16px;font:500 24px/33px -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,"Noto Sans Devanagari",sans-serif;color:#000;resize:none}
+.eh-exam .eh-input.hi{font-family:"Noto Sans Devanagari",Mangal,Arial,sans-serif}
+.eh-exam .eh-passage span.cur{background:#ffe08a}
+.eh-exam .ex-stats{position:absolute;right:0;top:32px;width:10.9vw;min-width:190px;box-sizing:border-box;margin:0;padding:0 8px;border:1px solid #e2e8f0;background:#fff;font-size:16px}
+.eh-exam .ex-st-h{font-size:14px;padding-top:12px;margin:0 0 16px;line-height:26px}
+.eh-exam .ex-stats p{margin:0 0 16px;font-size:16px;font-weight:700;line-height:29.92px}
+.eh-exam .ex-stats p b{font-size:14px;font-weight:400}
+.eh-exam .ex-foot{position:relative;height:40px;margin:69px 0 40px;padding:0;max-width:none;display:block}
+.eh-exam .ex-btn{position:absolute;top:0;height:40px;padding:0 16px;border-radius:6px;font-size:16px;font-weight:600;min-width:0}
+.eh-exam .ex-btn.red{left:23.7vw;background:#e53e3e}
+.eh-exam .ex-btn.blue{left:71.82vw;background:#3182ce}
+.eh-exam .ex-gear{right:20px;bottom:20px;width:40px;height:40px;background:#805ad5;font-size:20px}
+.eh-exam .ex-drawer .ex-btn{position:static}
+@media(max-width:1100px){
+  .eh-exam .ex-time{left:auto;right:90px}.eh-exam .ex-photo{left:auto;right:16px}
+  .eh-exam .ex-main{width:auto;margin:0 2vw}.eh-exam .ex-box{width:100%}
+  .eh-exam .ex-stats{position:static;width:auto;margin:12px 2vw}
+  .eh-exam .ex-foot{display:flex;justify-content:space-around}.eh-exam .ex-btn{position:static}
+}

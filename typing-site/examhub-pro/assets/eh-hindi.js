@@ -37,12 +37,12 @@
     'A': '।', 'S': 'ै', 'D': 'क्', 'F': 'थ्', 'G': 'ळ', 'H': 'भ्', 'J': 'श्र', 'K': 'ज्ञ', 'L': 'स्', ':': 'रू', '"': 'ष्',
     'Z': REPH, 'X': 'ग्', 'C': 'ब्', 'V': 'ट', 'B': 'ठ', 'N': 'छ', 'M': 'ड', '<': 'ढ', '>': 'झ', '?': 'घ्',
     '`': 'ृ', '~': '्', '!': '!', '@': '/', '#': 'रु', '$': '+', '%': 'ः', '^': '‘', '&': '-', '*': '’', '(': ';',
-    ')': 'द्ध', '-': '.', '_': 'ऋ', '=': 'त्र', '+': '़',
+    ')': 'द्ध', '-': '.', '_': 'ऋ', '=': 'त्र', '+': '़', 'Å': 'ऊ', '¡': 'ँ', '¼': '(', '½': ')',
     '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '0': '0'
   };
 
   var CONS = '[\\u0915-\\u0939\\u0958-\\u095F]\\u093C?';
-  var RE_I = new RegExp('\\u093F((?:' + CONS + '\\u094D)*' + CONS + ')', 'g');
+  var RE_I = new RegExp('\\u093F((?:' + CONS + '\\u094D)*' + CONS + '(?:\\u094D\\u0930)?)', 'g');
   var RE_REPH = new RegExp('((?:' + CONS + '\\u094D)*' + CONS + '[\\u093E-\\u094C\\u0962\\u0963]*[\\u0901\\u0902]?)' + REPH, 'g');
   var RE_REPH_V = new RegExp('([\\u0905-\\u0914][\\u0901\\u0902]?)' + REPH, 'g');
 
@@ -56,7 +56,7 @@
       .replace(/अा/g, 'आ').replace(/आे/g, 'ओ').replace(/आै/g, 'औ')
       .replace(/एे/g, 'ऐ').replace(/ाे/g, 'ो').replace(/ाै/g, 'ौ')
       .replace(new RegExp('इ' + REPH, 'g'), 'ई')
-      .replace(/उु/g, 'ऊ');
+      .replace(/उु/g, 'ऊ').replace(/उू/g, 'ऊ').replace(/ाॅ/g, 'ॉ');
     o = o.replace(RE_I, '$1ि');
     o = o.replace(RE_REPH, 'र्$1').replace(RE_REPH_V, 'र्$1');
     o = o.split(REPH).join('');
@@ -79,4 +79,50 @@
   }
 
   root.EHHindi = { US: US, INSCRIPT: INSCRIPT, KD: KD, kdToUnicode: kdToUnicode, norm: norm, label: label };
+})(typeof window !== 'undefined' ? window : globalThis);
+
+/* Unicode -> Krutidev 010 (keyboard-typable codes) */
+(function (root) {
+  'use strict';
+  var H = root.EHHindi;
+  var R = '';
+  // longest first
+  var MAP = [
+    ['ड़', 'M+'], ['ढ़', '<+'], ['क्ष्', '{'], ['क्ष', '{k'], ['त्र्', '=~'], ['त्र', '='], ['ज्ञ', 'K'], ['श्र', 'J'],
+    ['द्ध', ')'], ['द्व', '}'], ['द्य', '|'], ['रु', '#'], ['रू', ':'],
+    ['क्', 'D'], ['ख्', '['], ['ग्', 'X'], ['घ्', '?'], ['च्', 'P'], ['ज्', 'T'], ['ण्', '.'], ['त्', 'R'], ['थ्', 'F'],
+    ['ध्', '/'], ['न्', 'U'], ['प्', 'I'], ['ब्', 'C'], ['भ्', 'H'], ['म्', 'E'], ['ल्', 'Y'], ['व्', 'O'], ['श्', "'"],
+    ['ष्', '"'], ['स्', 'L'], ['य्', ';~'],
+    ['्र', 'z'],
+    ['क', 'd'], ['ख', '[k'], ['ग', 'x'], ['घ', '?k'], ['ङ', 'M+'], ['च', 'p'], ['छ', 'N'], ['ज', 't'], ['झ', '>'], ['ञ', '¥'],
+    ['ट', 'V'], ['ठ', 'B'], ['ड', 'M'], ['ढ', '<'], ['ण', '.k'], ['त', 'r'], ['थ', 'Fk'], ['द', 'n'], ['ध', '/k'], ['न', 'u'],
+    ['प', 'i'], ['फ', 'Q'], ['ब', 'c'], ['भ', 'Hk'], ['म', 'e'], ['य', ';'], ['र', 'j'], ['ल', 'y'], ['व', 'o'], ['श', "'k"],
+    ['ष', '"k'], ['स', 'l'], ['ह', 'g'], ['ळ', 'G'],
+    ['औ', 'vkS'], ['ओ', 'vks'], ['आ', 'vk'], ['अ', 'v'], ['ई', 'bZ'], ['इ', 'b'], ['ऊ', 'Å'], ['उ', 'm'], ['ऐ', ',s'], ['ए', ','], ['ऋ', '_'],
+    ['ॉ', 'kW'], ['ो', 'ks'], ['ौ', 'kS'], ['ा', 'k'], ['ी', 'h'], ['ु', 'q'], ['ू', 'w'], ['ृ', '`'], ['े', 's'], ['ै', 'S'],
+    ['ं', 'a'], ['ँ', '¡'], ['ः', '%'], ['ॅ', 'W'], ['़', '+'], ['्', '~'], ['।', 'A'],
+    [',', ']'], ['.', '-'], ['-', '&'], ['?', '\\'], ['(', '¼'], [')', '½'], [';', '('], ['/', '@'], ['‘', '^'], ['’', '*'], ['+', '$']
+  ];
+  var CONS = '[\\u0915-\\u0939]\\u093C?\\uE002?';
+  var CL = '(?:' + CONS + '\\u094D)*' + CONS;
+  var RE_REPH = new RegExp('\\u0930\\u094D(' + CL + '[\\u093E-\\u094C\\u0962\\u0963]*)', 'g');
+  var RE_I = new RegExp('(' + CL + ')\\u093F', 'g');
+  function unicodeToKD(s) {
+    s = H.norm(s).replace(/([\u0915-\u0939])\u093C/g, function (m, c) { return (c === '\u0921' || c === '\u0922') ? m : c; });
+    s = s.replace(/([\u0915-\u0939]\u093C?)\u094D\u0930/g, '$1\uE002');
+    s = s.replace(RE_REPH, '$1' + R);
+    s = s.replace(RE_I, 'ि$1');
+    var out = '', i = 0;
+    while (i < s.length) {
+      var hit = null;
+      for (var k = 0; k < MAP.length; k++) { var u = MAP[k][0]; if (s.substr(i, u.length) === u) { hit = MAP[k]; break; } }
+      if (s.charAt(i) === 'ि') { out += 'f'; i++; continue; }
+      if (s.charAt(i) === R) { out += 'Z'; i++; continue; }
+      if (s.charAt(i) === '\uE002') { out += 'z'; i++; continue; }
+      if (hit) { out += hit[1]; i += hit[0].length; } else { out += s.charAt(i); i++; }
+    }
+    // reph must sit before anusvara: ...Za not ...aZ
+    return out.replace(/([a¡])Z/g, 'Z$1');
+  }
+  H.unicodeToKD = unicodeToKD;
 })(typeof window !== 'undefined' ? window : globalThis);
