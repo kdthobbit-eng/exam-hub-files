@@ -173,7 +173,9 @@
       var a = D[(i - 1) * (m + 1) + j - 1] + c, b = D[(i - 1) * (m + 1) + j] + 1, d = D[i * (m + 1) + j - 1] + 1;
       D[i * (m + 1) + j] = a < b ? (a < d ? a : d) : (b < d ? b : d);
     }
-    var ops = []; i = n; j = m;
+    var best = 0;
+    for (i = 0; i <= n; i++) if (D[i * (m + 1) + m] < D[best * (m + 1) + m]) best = i;
+    var ops = []; i = best; j = m;
     while (i > 0 || j > 0) {
       if (i > 0 && j > 0 && D[i * (m + 1) + j] === D[(i - 1) * (m + 1) + j - 1] + (src[i - 1] === typ[j - 1] ? 0 : 1)) {
         ops.push({ t: src[i - 1] === typ[j - 1] ? 'ok' : 'sub', s: src[i - 1], w: typ[j - 1] }); i--; j--;
