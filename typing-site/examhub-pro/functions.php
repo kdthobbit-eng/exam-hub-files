@@ -10,6 +10,8 @@ define('EH_URI', get_template_directory_uri());
 
 require EH_DIR . '/inc/data.php';
 require EH_DIR . '/inc/windows.php';
+require EH_DIR . '/inc/info.php';
+require EH_DIR . '/inc/blog.php';
 require EH_DIR . '/inc/db.php';
 require EH_DIR . '/inc/rest.php';
 require EH_DIR . '/inc/admin.php';
@@ -61,6 +63,7 @@ add_action('init', function () {
     add_rewrite_rule('^exam-hall-typing/?$', 'index.php?eh_view=examhall', 'top');
     add_rewrite_rule('^download-passages/?$', 'index.php?eh_view=download', 'top');
     add_rewrite_rule('^typing-insight/?$', 'index.php?eh_view=insight', 'top');
+    add_rewrite_rule('^blog/?$', 'index.php?eh_view=blog', 'top');
     add_rewrite_rule('^exam-based-result/?$', 'index.php?eh_view=results', 'top');
     add_rewrite_rule('^(faqs|about-us|declaration|terms-of-service|privacy-policy|contact-us)/?$', 'index.php?eh_view=info&eh_slug=$matches[1]', 'top');
     if (get_option('eh_rewrite_ver') !== '3') { flush_rewrite_rules(false); update_option('eh_rewrite_ver', '3'); }
@@ -102,6 +105,7 @@ function eh_doc_title($t) {
         case 'examhall': return 'Exam Hall Typing — ' . $b;
         case 'download': return 'Free Typing Passage PDF Download — ' . $b;
         case 'insight': return 'Typing Insight — ' . $b;
+        case 'blog': return 'Exam Typing Tips और Rules — ' . $b;
         case 'info': $I = eh_info_pages(); return ($I[$slug]['title'] ?? 'Info') . ' — ' . $b;
     }
     return $t;
@@ -158,11 +162,21 @@ function eh_tg_buttons($class = '') {
 }
 
 /* default menu if none set */
-function eh_default_menu() {
-    $items = [
-        ['/', 'Home'], ['/exams/', 'Exams'], ['/demo-typing/', 'Demo Typing'], ['/live-typing/', 'Live Typing'],
-        ['/results/', 'Result'], ['/category/typing-tips/', 'Typing Tips'],
+function eh_member_links() {
+    return [
+        'live' => ['/live-typing/', '⚡ Live Typing'], 'exams' => ['/exams/', 'All Exams Typing'], 'history' => ['/my-dashboard/', 'Typing History'],
+        'hall' => ['/exam-hall-typing/', 'Exam Hall Typing'], 'download' => ['/download-passages/', 'Download Passages'], 'insight' => ['/typing-insight/', '📈 Typing Insight'],
     ];
+}
+function eh_member_nav($active = '') {
+    $h = '<nav class="eh-mnav"><div class="wrap">';
+    foreach (eh_member_links() as $k => $l) $h .= '<a class="' . ($k === $active ? 'on' : '') . ($k === 'insight' ? ' ins' : '') . '" href="' . esc_url(home_url($l[0])) . '">' . esc_html($l[1]) . '</a>';
+    return $h . '</div></nav>';
+}
+function eh_default_menu() {
+    $items = is_user_logged_in()
+        ? array_values(eh_member_links())
+        : [['/', 'Home'], ['/exams/', 'Exams'], ['/demo-typing/', 'Demo Typing'], ['/live-typing/', 'Live Typing'], ['/exam-based-result/', 'Result'], ['/blog/', 'Typing Tips']];
     echo '<ul class="eh-menu">';
     foreach ($items as $i) echo '<li><a href="' . esc_url(home_url($i[0])) . '">' . esc_html($i[1]) . '</a></li>';
     echo '</ul>';
@@ -181,3 +195,32 @@ add_action('login_enqueue_scripts', function () {
 });
 add_filter('login_headerurl', function () { return home_url('/'); });
 add_filter('login_headertext', function () { return eh_opt('brand'); });
+
+function eh_initials($name) {
+    $parts = preg_split('/\s+/u', trim((string) $name));
+    $i = mb_strtoupper(mb_substr($parts[0] ?? '?', 0, 1));
+    if (count($parts) > 1) $i .= mb_strtoupper(mb_substr(end($parts), 0, 1));
+    return $i;
+}
+
+/* Top ticker: notice + latest typing-tips posts */
+function eh_ticker_items() {
+    $items = [];
+    $n = eh_opt('notice'); if ($n) $items[] = [$n, home_url('/live-typing/'), 'Live Typing →'];
+    $ps = get_posts(['numberposts' => 10, 'category_name' => 'typing-tips', 'post_status' => 'publish']);
+    foreach ($ps as $p) $items[] = [strtok(get_the_title($p), ':') . ' — Typing Rules', get_permalink($p), 'Read Blog'];
+    return $items;
+}
+
+/* Upcoming exams popup data (option eh_upcoming JSON: {"confirmed":[...],"next":[...]}) */
+function eh_upcoming() {
+    $j = json_decode((string) get_option('eh_upcoming', ''), true);
+    $j = is_array($j) ? $j : [];
+    $j += ['confirmed' => [], 'next' => [
+        ['tag' => 'LIVE', 'name' => 'Daily Live Typing', 'sub' => 'रोज़ कई एग्ज़ाम के Live टेस्ट और ranking', 'status' => 'Live Typing Active', 'url' => '/live-typing/'],
+        ['tag' => 'HALL', 'name' => 'Exam Hall Typing', 'sub' => 'सुबह, दोपहर, शाम — तय समय पर नया पैसेज', 'status' => 'रोज़ 3 बार', 'url' => '/exam-hall-typing/'],
+        ['tag' => 'PDF', 'name' => 'Passage PDF Download', 'sub' => 'तारीख के हिसाब से English/Hindi पैसेज', 'status' => 'Free', 'url' => '/download-passages/'],
+        ['tag' => 'COURT', 'name' => 'Special Passages', 'sub' => 'कोर्ट आदेश, जमानत, ऑफ़िस ऑर्डर जैसे पैसेज', 'status' => 'Ready for Practice', 'url' => '/exams/?q=Court'],
+    ]];
+    return $j;
+}

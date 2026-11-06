@@ -173,6 +173,6 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
   <div id="eh-result" class="eh-panel eh-dash" hidden>
     <div id="eh-res-dash"></div>
     <p id="eh-res-saved" class="muted small"></p>
-    <div class="eh-res-actions"><button id="eh-again" class="btn dark">दोबारा टेस्ट दें</button><button id="eh-retype" class="btn ghost" type="button">यही पैसेज फिर से</button><a id="eh-res-link" class="btn ghost" hidden href="#">🔗 रिज़ल्ट का लिंक</a><a class="btn ghost" href="<?php echo esc_url(home_url('/results/')); ?>">Leaderboard</a><?php echo eh_tg_buttons('inline'); ?></div>
+    <div class="eh-res-actions"><button id="eh-again" class="btn dark">दोबारा टेस्ट दें</button><button id="eh-retype" class="btn ghost" type="button">यही पैसेज फिर से</button><a id="eh-res-link" class="btn ghost" hidden href="#">🔗 रिज़ल्ट का लिंक</a><a class="btn ghost" href="<?php echo esc_url(home_url('/exam-based-result/')); ?>">Leaderboard</a><?php echo eh_tg_buttons('inline'); ?></div>
   </div>
 </div>

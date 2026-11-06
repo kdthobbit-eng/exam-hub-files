@@ -6,8 +6,9 @@ add_action('admin_menu', function () {
 });
 
 add_action('admin_init', function () {
-    foreach (['brand', 'tagline', 'notice', 'tg_group', 'tg_channel', 'allowed_error', 'live_lang', 'exams_hidden', 'exams_extra', 'google_client_id'] as $k) {
+    foreach (['brand', 'tagline', 'notice', 'tg_group', 'tg_channel', 'allowed_error', 'live_lang', 'exams_hidden', 'exams_extra', 'google_client_id', 'live_schedule', 'upcoming', 'window_map'] as $k) {
         register_setting('eh_settings', 'eh_' . $k, ['sanitize_callback' => function ($v) use ($k) {
+            if (in_array($k, ['live_schedule', 'upcoming', 'window_map'], true)) { $j = json_decode(wp_unslash($v), true); return is_array($j) ? wp_json_encode($j, JSON_UNESCAPED_UNICODE) : ''; }
             if ($k === 'exams_extra') { $j = json_decode(wp_unslash($v), true); return is_array($j) ? wp_json_encode($j, JSON_UNESCAPED_UNICODE) : '[]'; }
             if (in_array($k, ['tg_group', 'tg_channel'], true)) return esc_url_raw($v);
             return sanitize_text_field($v);
@@ -39,6 +40,9 @@ function eh_settings_page() {
     ?>
     <tr><th>Extra / edited exams (JSON)</th><td><textarea name="eh_exams_extra" rows="6" class="large-text code"><?php echo esc_textarea(get_option('eh_exams_extra', '[]')); ?></textarea>
     <p class="description">Example: [{"slug":"up-court-clerk-hindi","name":"UP Civil Court Clerk Hindi Typing","lang":"hi","unit":"words","target":300,"minutes":10,"cat":"court"}]</p></td></tr>
+    <tr><th>Live Typing schedule (JSON)</th><td><textarea name="eh_live_schedule" rows="5" class="large-text code" placeholder='[{"exam":"ssc-chsl-jsa-ldc-english-typing-test","start":"07:00","end":"10:40"}]'><?php echo esc_textarea(get_option('eh_live_schedule', '')); ?></textarea><p class="description">खाली = default schedule</p></td></tr>
+    <tr><th>Upcoming Exams popup (JSON)</th><td><textarea name="eh_upcoming" rows="5" class="large-text code" placeholder='{"confirmed":[{"tag":"UPSSSC","name":"Junior Assistant","sub":"Hindi Mangal","date":"2026-11-13","slug":"upsssc-assistants-hindi-typing-test"}],"next":[]}'><?php echo esc_textarea(get_option('eh_upcoming', '')); ?></textarea></td></tr>
+    <tr><th>Exam window override (JSON)</th><td><textarea name="eh_window_map" rows="3" class="large-text code" placeholder='{"exam-slug":"family"}'><?php echo esc_textarea(get_option('eh_window_map', '')); ?></textarea></td></tr>
     </table><?php submit_button(); ?></form>
     <?php do_action('eh_settings_after'); ?></div>
     <?php

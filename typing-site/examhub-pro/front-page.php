@@ -57,7 +57,7 @@ $recent = eh_recent(8); ?>
 
 <section class="wrap eh-section eh-two">
   <div>
-    <div class="eh-sec-head"><h2>Recent Results</h2><a href="<?php echo esc_url(home_url('/results/')); ?>">सब देखें →</a></div>
+    <div class="eh-sec-head"><h2>Recent Results</h2><a href="<?php echo esc_url(home_url('/exam-based-result/')); ?>">सब देखें →</a></div>
     <div class="eh-table-wrap"><table class="eh-table">
       <thead><tr><th>Name</th><th>Exam</th><th>Net</th><th>Acc.</th></tr></thead><tbody>
       <?php if (!$recent): ?><tr><td colspan="4" class="muted">अभी कोई रिज़ल्ट नहीं है — पहला टेस्ट आप ही दे दीजिए!</td></tr><?php endif; ?>

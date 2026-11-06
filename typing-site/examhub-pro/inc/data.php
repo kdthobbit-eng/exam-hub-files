@@ -110,3 +110,29 @@ function eh_slot_passage($lang, $slot) {
     $rot = array_slice($items, -3);
     return $rot[$slot] ?? $items[0];
 }
+
+/* Live typing schedule: option eh_live_schedule = JSON [{"exam":"slug","start":"07:00","end":"10:40"}] */
+function eh_live_schedule() {
+    $j = json_decode((string) get_option('eh_live_schedule', ''), true);
+    if (!is_array($j) || !$j) $j = [
+        ['exam' => 'ssc-chsl-jsa-ldc-english-typing-test', 'start' => '07:00', 'end' => '10:40'],
+        ['exam' => 'upsssc-assistants-hindi-typing-test', 'start' => '07:00', 'end' => '10:40'],
+        ['exam' => 'delhi-police-hcm-english-typing-skill-test', 'start' => '10:00', 'end' => '13:00'],
+        ['exam' => 'kvs-hindi-typing-skill-test', 'start' => '12:00', 'end' => '15:00'],
+        ['exam' => 'rrb-ntpc-english-typing-skill-test', 'start' => '14:00', 'end' => '17:00'],
+        ['exam' => 'allahabad-high-court-hindi-typing-ahc', 'start' => '16:00', 'end' => '19:00'],
+        ['exam' => 'rssb-ldc-jr-asst-hindi-typing-rajasthan', 'start' => '18:00', 'end' => '21:00'],
+        ['exam' => 'bsf-all-forces-hcm-english-typing-test', 'start' => '19:00', 'end' => '22:00'],
+    ];
+    $out = [];
+    foreach ($j as $r) {
+        $e = eh_exam($r['exam'] ?? ''); if (!$e) continue;
+        $lang = $e['lang'] === 'hi' ? 'hi' : 'en';
+        $pool = array_values(array_filter(eh_passages($lang), function ($p) { return empty($p['special']); }));
+        $date = wp_date('Y-m-d');
+        $p = $pool ? $pool[abs(crc32($date . $e['slug'])) % count($pool)] : null;
+        $toMin = function ($t) { $x = explode(':', (string) $t); return ((int) $x[0]) * 60 + (int) ($x[1] ?? 0); };
+        $out[] = ['exam' => $e, 'lang' => $lang, 'passage' => $p, 'start' => $r['start'], 'end' => $r['end'], 's' => $toMin($r['start']), 'e' => $toMin($r['end']), 'date' => $date];
+    }
+    return $out;
+}
