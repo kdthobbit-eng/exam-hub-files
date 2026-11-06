@@ -6,7 +6,7 @@ add_action('admin_menu', function () {
 });
 
 add_action('admin_init', function () {
-    foreach (['brand', 'tagline', 'notice', 'tg_group', 'tg_channel', 'allowed_error', 'live_lang', 'exams_hidden', 'exams_extra'] as $k) {
+    foreach (['brand', 'tagline', 'notice', 'tg_group', 'tg_channel', 'allowed_error', 'live_lang', 'exams_hidden', 'exams_extra', 'google_client_id'] as $k) {
         register_setting('eh_settings', 'eh_' . $k, ['sanitize_callback' => function ($v) use ($k) {
             if ($k === 'exams_extra') { $j = json_decode(wp_unslash($v), true); return is_array($j) ? wp_json_encode($j, JSON_UNESCAPED_UNICODE) : '[]'; }
             if (in_array($k, ['tg_group', 'tg_channel'], true)) return esc_url_raw($v);
@@ -35,6 +35,7 @@ function eh_settings_page() {
     $f('allowed_error', 'Allowed error %', 'Default 5');
     $f('live_lang', 'Live typing language', 'en / hi — खाली = दिन के हिसाब से बदलता रहेगा');
     $f('exams_hidden', 'Hidden exam slugs', 'comma से अलग');
+    $f('google_client_id', 'Google Client ID', 'Google login के लिए — xxxx.apps.googleusercontent.com');
     ?>
     <tr><th>Extra / edited exams (JSON)</th><td><textarea name="eh_exams_extra" rows="6" class="large-text code"><?php echo esc_textarea(get_option('eh_exams_extra', '[]')); ?></textarea>
     <p class="description">Example: [{"slug":"up-court-clerk-hindi","name":"UP Civil Court Clerk Hindi Typing","lang":"hi","unit":"words","target":300,"minutes":10,"cat":"court"}]</p></td></tr>

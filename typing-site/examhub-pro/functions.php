@@ -12,6 +12,7 @@ require EH_DIR . '/inc/data.php';
 require EH_DIR . '/inc/db.php';
 require EH_DIR . '/inc/rest.php';
 require EH_DIR . '/inc/admin.php';
+require EH_DIR . '/inc/auth.php';
 
 /* ---------- setup ---------- */
 add_action('after_setup_theme', function () {
@@ -23,7 +24,7 @@ add_action('after_setup_theme', function () {
 });
 
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('eh-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap', [], null);
+    wp_enqueue_style('eh-fonts', 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap', [], null);
     wp_enqueue_style('eh-style', get_stylesheet_uri(), [], EH_VER);
     wp_enqueue_script('eh-site', EH_URI . '/assets/eh-site.js', [], EH_VER, true);
 });

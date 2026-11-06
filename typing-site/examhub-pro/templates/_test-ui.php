@@ -39,6 +39,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
     <div class="eh-testbar">
       <div><b><?php echo esc_html($eh_exam['name']); ?></b> <span class="muted">· <span id="eh-layout-name"></span></span></div>
       <div id="eh-live" class="muted"></div>
+      <div class="eh-tools"><button type="button" id="eh-fs-minus" title="Font छोटा">A−</button><button type="button" id="eh-fs-plus" title="Font बड़ा">A+</button><button type="button" id="eh-full" title="Full screen">⛶</button></div>
       <div id="eh-timer" class="eh-timer">00:00</div>
     </div>
     <div id="eh-passage" class="eh-passage"></div>

@@ -258,9 +258,28 @@
     try { localStorage.setItem('eh_name', R.name || ''); } catch (e) {}
     fetch(CFG.rest + 'result', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': CFG.nonce }, body: JSON.stringify(R) })
       .then(function (r) { return r.json(); })
-      .then(function (j) { var s = $('#eh-res-saved'); if (s) s.textContent = j && j.ok ? (j.rank ? 'रिज़ल्ट सेव हो गया · आज आपकी रैंक #' + j.rank : 'रिज़ल्ट सेव हो गया') : ''; })
+      .then(function (j) { var s = $('#eh-res-saved'); if (s) s.textContent = j && j.ok ? (j.rank ? 'रिज़ल्ट सेव हो गया · आज आपकी रैंक #' + j.rank : 'रिज़ल्ट सेव हो गया') : ''; document.dispatchEvent(new Event('eh:saved')); })
       .catch(function () {});
   }
+
+  /* ---------- font size + fullscreen ---------- */
+  var fs = 0;
+  try { fs = parseInt(localStorage.getItem('eh_fs') || '0', 10) || 0; } catch (e) {}
+  function applyFs() {
+    var base = isHindi ? 23 : 21, v = base + fs * 2;
+    ['#eh-passage', '#eh-input'].forEach(function (id) { var el = $(id); if (el) el.style.fontSize = v + 'px'; });
+    try { localStorage.setItem('eh_fs', fs); } catch (e) {}
+  }
+  applyFs();
+  $('#eh-fs-plus').addEventListener('click', function () { fs = Math.min(6, fs + 1); applyFs(); $('#eh-input').focus(); });
+  $('#eh-fs-minus').addEventListener('click', function () { fs = Math.max(-3, fs - 1); applyFs(); $('#eh-input').focus(); });
+  $('#eh-full').addEventListener('click', function () {
+    var el = test;
+    if (!document.fullscreenElement) { (el.requestFullscreen || el.webkitRequestFullscreen || function () {}).call(el); test.classList.add('is-full'); }
+    else { document.exitFullscreen(); }
+    $('#eh-input').focus();
+  });
+  document.addEventListener('fullscreenchange', function () { if (!document.fullscreenElement) test.classList.remove('is-full'); });
 
   /* ---------- wire up ---------- */
   fillSetup();

@@ -18,13 +18,20 @@ $recent = eh_recent(8); ?>
         <div><b><?php echo number_format_i18n(max($total, 1)); ?></b><span>Tests Taken</span></div>
       </div>
     </div>
-    <div class="eh-hero-card">
-      <div class="eh-mock-top"><span></span><span></span><span></span><b>09:42</b></div>
-      <p class="eh-mock-text">The <i>e-Courts</i> project has connected thousands of district courts, and the daily <u>cause</u> list is now available online...</p>
-      <div class="eh-mock-input">The e-Courts project has connected thousands of district courts, and the daily ca<span class="caret"></span></div>
-      <div class="eh-mock-res"><span>Net <b>38 WPM</b></span><span>Accuracy <b>97.4%</b></span><span class="ok">Qualified</span></div>
+    <div class="eh-hero-art">
+      <img src="<?php echo esc_url(EH_URI . '/assets/hero.svg'); ?>" alt="टाइपिंग टेस्ट की प्रैक्टिस करता छात्र" width="560" height="480" fetchpriority="high">
     </div>
   </div>
+</section>
+
+<div class="eh-marquee" aria-hidden="true"><div class="eh-marquee-in">
+  <?php $names = array_slice(array_map(function ($e) { return preg_replace('/\s*\(.*?\)/', '', $e['name']); }, $exams), 0, 30); for ($k = 0; $k < 2; $k++) foreach ($names as $n) echo '<span>' . esc_html($n) . '</span>'; ?>
+</div></div>
+
+<section class="wrap eh-section eh-steps">
+  <div class="eh-step"><b>01</b><h3>Exam चुनें</h3><p>129+ एग्ज़ाम में से अपना एग्ज़ाम चुनिए — टाइम और टारगेट अपने-आप सेट हो जाएगा।</p></div>
+  <div class="eh-step"><b>02</b><h3>टाइप करें</h3><p>English, Krutidev या Mangal — जिसमें एग्ज़ाम है, उसी में बिल्कुल एग्ज़ाम जैसी स्क्रीन पर टाइप कीजिए।</p></div>
+  <div class="eh-step"><b>03</b><h3>रिज़ल्ट देखें</h3><p>Net speed, accuracy, full-half mistake — टेस्ट खत्म होते ही पूरी डिटेल सामने।</p></div>
 </section>
 
 <section class="wrap eh-section">

@@ -23,8 +23,8 @@
           <a class="btn ghost sm" href="<?php echo esc_url(home_url('/my-dashboard/')); ?>">👤 <?php echo esc_html($u->display_name); ?></a>
           <a class="btn dark sm" href="<?php echo esc_url(wp_logout_url(home_url('/'))); ?>">Logout</a>
         <?php else: ?>
-          <a class="btn ghost sm" href="<?php echo esc_url(wp_login_url(home_url('/my-dashboard/'))); ?>">Login</a>
-          <a class="btn dark sm" href="<?php echo esc_url(wp_registration_url()); ?>">New User</a>
+          <a class="btn ghost sm" href="<?php echo esc_url(eh_login_page_url()); ?>">Login</a>
+          <a class="btn dark sm" href="<?php echo esc_url(eh_signup_page_url()); ?>">New User</a>
         <?php endif; ?>
       </div>
     </nav>
