@@ -166,20 +166,21 @@
     var n = src.length, m = typ.length;
     var lim = Math.min(n, m + Math.max(5, Math.ceil(m * 0.1))); n = lim;
     var W = n + 1, D = new Uint32Array((n + 1) * (m + 1));
-    for (var i = 0; i <= n; i++) D[i * (m + 1)] = i;
-    for (var j = 0; j <= m; j++) D[j] = j;
+    var cost = function (x, y) { return x === y ? 0 : (x.toLowerCase() === y.toLowerCase() || (stripP(x) && stripP(x) === stripP(y))) ? 1 : 3; };
+    for (var i = 0; i <= n; i++) D[i * (m + 1)] = i * 2;
+    for (var j = 0; j <= m; j++) D[j] = j * 2;
     for (i = 1; i <= n; i++) for (j = 1; j <= m; j++) {
-      var c = src[i - 1] === typ[j - 1] ? 0 : 1;
-      var a = D[(i - 1) * (m + 1) + j - 1] + c, b = D[(i - 1) * (m + 1) + j] + 1, d = D[i * (m + 1) + j - 1] + 1;
+      var c = cost(src[i - 1], typ[j - 1]);
+      var a = D[(i - 1) * (m + 1) + j - 1] + c, b = D[(i - 1) * (m + 1) + j] + 2, d = D[i * (m + 1) + j - 1] + 2;
       D[i * (m + 1) + j] = a < b ? (a < d ? a : d) : (b < d ? b : d);
     }
     var best = 0;
     for (i = 0; i <= n; i++) if (D[i * (m + 1) + m] < D[best * (m + 1) + m]) best = i;
     var ops = []; i = best; j = m;
     while (i > 0 || j > 0) {
-      if (i > 0 && j > 0 && D[i * (m + 1) + j] === D[(i - 1) * (m + 1) + j - 1] + (src[i - 1] === typ[j - 1] ? 0 : 1)) {
+      if (i > 0 && j > 0 && D[i * (m + 1) + j] === D[(i - 1) * (m + 1) + j - 1] + cost(src[i - 1], typ[j - 1])) {
         ops.push({ t: src[i - 1] === typ[j - 1] ? 'ok' : 'sub', s: src[i - 1], w: typ[j - 1] }); i--; j--;
-      } else if (i > 0 && D[i * (m + 1) + j] === D[(i - 1) * (m + 1) + j] + 1) { ops.push({ t: 'om', s: src[i - 1] }); i--; }
+      } else if (i > 0 && D[i * (m + 1) + j] === D[(i - 1) * (m + 1) + j] + 2) { ops.push({ t: 'om', s: src[i - 1] }); i--; }
       else { ops.push({ t: 'add', w: typ[j - 1] }); j--; }
     }
     ops.reverse();
@@ -188,6 +189,7 @@
     var out = [];
     for (var k = 0; k < ops.length; k++) {
       var o = ops[k], nx = ops[k + 1];
+      if (o.t === 'om' && nx && nx.t === 'sub' && nx.w === o.s + nx.s) { out.push({ t: 'half', s: o.s + ' ' + nx.s, w: nx.w, why: 'space' }); k++; continue; }
       if (o.t === 'sub' && nx && nx.t === 'om' && o.w === o.s + nx.s) { out.push({ t: 'half', s: o.s + ' ' + nx.s, w: o.w, why: 'space' }); k++; continue; }
       if (o.t === 'sub' && nx && nx.t === 'add' && o.w + nx.w === o.s) { out.push({ t: 'half', s: o.s, w: o.w + ' ' + nx.w, why: 'space' }); k++; continue; }
       if (o.t === 'add' && nx && nx.t === 'sub' && o.w + nx.w === nx.s) { out.push({ t: 'half', s: nx.s, w: o.w + ' ' + nx.w, why: 'space' }); k++; continue; }
