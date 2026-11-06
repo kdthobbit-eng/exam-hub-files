@@ -3,8 +3,8 @@ $exam = sanitize_title($_GET['exam'] ?? '');
 $board = eh_leaderboard($exam, '', 50, $exam ? 0 : 30);
 $recent = eh_recent(20); ?>
 <section class="eh-page-head slim"><div class="wrap">
-  <h1>Exam Based Result</h1><p class="muted">परीक्षा चुनें और टॉप रिज़ल्ट देखें। बिना परीक्षा चुने पिछले 30 दिन के टॉप रिज़ल्ट दिखते हैं।</p>
-  <form class="eh-filters" method="get"><select name="exam" onchange="this.form.submit()"><option value="">सभी परीक्षाएं</option>
+  <h1>Exam Based Result</h1><p class="muted">एग्ज़ाम चुनिए और उसके टॉप रिज़ल्ट देखिए। अभी पिछले 30 दिन के टॉप रिज़ल्ट दिख रहे हैं।</p>
+  <form class="eh-filters" method="get"><select name="exam" onchange="this.form.submit()"><option value="">All Exams</option>
   <?php foreach (eh_exams() as $e) echo '<option value="' . esc_attr($e['slug']) . '"' . selected($exam, $e['slug'], false) . '>' . esc_html($e['name']) . '</option>'; ?>
   </select></form>
 </div></section>

@@ -37,8 +37,8 @@ function eh_opt($key) {
         'tg_group'   => 'https://t.me/examhub2026',
         'tg_channel' => 'https://t.me/examhub26',
         'brand'      => 'Exam Hub Typing',
-        'tagline'    => 'सरकारी परीक्षाओं के लिए फ्री टाइपिंग टेस्ट — असली परीक्षा जैसा इंटरफेस',
-        'notice'     => 'नया: रोज़ की लाइव टाइपिंग — हर दिन नया पैसेज, आज की रैंक देखें',
+        'tagline'    => 'सरकारी एग्ज़ाम की टाइपिंग की तैयारी — बिल्कुल असली टेस्ट जैसी, और पूरी तरह फ्री',
+        'notice'     => 'Daily Live Typing शुरू — रोज़ नया पैसेज, देखिए आज आपकी रैंक क्या है',
         'allowed_error' => 5,
     ];
     $v = get_option('eh_' . $key, null);
@@ -58,18 +58,26 @@ add_action('init', function () {
 });
 add_filter('query_vars', function ($v) { $v[] = 'eh_view'; $v[] = 'eh_slug'; return $v; });
 
-add_filter('template_include', function ($tpl) {
-    $view = get_query_var('eh_view');
-    if (!$view) return $tpl;
-    if (in_array($view, ['exam', 'typing'], true) && get_query_var('eh_slug') !== 'demo' && !eh_exam(get_query_var('eh_slug'))) {
-        global $wp_query; $wp_query->set_404(); status_header(404); return get_404_template();
-    }
-    $file = EH_DIR . '/templates/' . sanitize_file_name($view) . '.php';
-    if (file_exists($file)) { status_header(200); global $wp_query; $wp_query->is_404 = false; $wp_query->is_home = false; return $file; }
-    return $tpl;
-});
+add_filter('pre_handle_404', function ($pre) { return get_query_var('eh_view') ? true : $pre; });
 
-add_filter('pre_get_document_title', function ($t) {
+add_action('template_redirect', function () {
+    $view = get_query_var('eh_view');
+    if (!$view) return;
+    global $wp_query;
+    $slug = get_query_var('eh_slug');
+    $file = EH_DIR . '/templates/' . sanitize_file_name($view) . '.php';
+    $bad = !file_exists($file) || (in_array($view, ['exam', 'typing'], true) && $slug !== 'demo' && !eh_exam($slug));
+    if ($bad) { $wp_query->set_404(); status_header(404); nocache_headers(); include get_404_template(); exit; }
+    $wp_query->is_404 = false; $wp_query->is_home = false; $wp_query->is_page = false; $wp_query->is_singular = false;
+    $wp_query->queried_object = null; $wp_query->queried_object_id = 0;
+    status_header(200);
+    include $file;
+    exit;
+}, 1);
+
+add_filter('pre_get_document_title', 'eh_doc_title', 9999);
+add_filter('rank_math/frontend/title', 'eh_doc_title', 9999);
+function eh_doc_title($t) {
     $view = get_query_var('eh_view');
     if (!$view) return $t;
     $b = eh_opt('brand');
@@ -83,16 +91,25 @@ add_filter('pre_get_document_title', function ($t) {
         case 'dashboard': return 'My Dashboard — ' . $b;
     }
     return $t;
-});
+}
 
-add_action('wp_head', function () {
+function eh_view_desc() {
     $view = get_query_var('eh_view');
     $desc = eh_opt('tagline');
     if ($view === 'exam' || $view === 'typing') {
         $e = eh_exam(get_query_var('eh_slug'));
-        if ($e) $desc = $e['name'] . ' — ' . eh_target_label($e) . ' in ' . $e['minutes'] . ' minutes. असली परीक्षा जैसा फ्री ऑनलाइन टाइपिंग टेस्ट, ऑटो रिज़ल्ट और गलती का हिसाब।';
-    }
-    if ($view || is_front_page()) echo '<meta name="description" content="' . esc_attr($desc) . '">' . "\n";
+        if ($e) $desc = $e['name'] . ' — ' . eh_target_label($e) . ' in ' . $e['minutes'] . ' minutes. फ्री ऑनलाइन टाइपिंग टेस्ट, असली एग्ज़ाम जैसा — टेस्ट के बाद तुरंत रिज़ल्ट और गलतियों की पूरी डिटेल।';
+    } elseif ($view === 'exams') $desc = 'SSC, High Court, UPSSSC, DSSSB, KVS, RRB समेत ' . count(eh_exams()) . '+ सरकारी परीक्षाओं की टाइपिंग फ्री में प्रैक्टिस करें — English, Krutidev और Mangal में।';
+    return $desc;
+}
+function eh_view_url() { return home_url(strtok($_SERVER['REQUEST_URI'] ?? '/', '?')); }
+add_filter('rank_math/frontend/description', function ($d) { return get_query_var('eh_view') ? eh_view_desc() : $d; }, 9999);
+add_filter('rank_math/frontend/canonical', function ($c) { return get_query_var('eh_view') ? eh_view_url() : $c; }, 9999);
+add_filter('rank_math/opengraph/url', function ($c) { return get_query_var('eh_view') ? eh_view_url() : $c; }, 9999);
+add_filter('rank_math/frontend/robots', function ($r) { if (in_array(get_query_var('eh_view'), ['dashboard'], true)) { $r['index'] = 'noindex'; } return $r; }, 9999);
+add_action('wp_head', function () {
+    if (defined('RANK_MATH_VERSION')) return;
+    if (get_query_var('eh_view') || is_front_page()) echo '<meta name="description" content="' . esc_attr(eh_view_desc()) . '">' . "\n";
 }, 1);
 
 /* ---------- helpers for templates ---------- */
@@ -146,7 +163,7 @@ add_filter('registration_redirect', function () { return wp_login_url(home_url('
 
 /* login page branding */
 add_action('login_enqueue_scripts', function () {
-    echo '<style>body.login{background:#f6f3ec;font-family:Inter,sans-serif}.login h1 a{background:none!important;text-indent:0!important;width:auto!important;height:auto!important;font-size:24px;font-weight:800;color:#14161a}.login #nav a,.login #backtoblog a{color:#14161a}.wp-core-ui .button-primary{background:#14161a;border-color:#14161a;border-radius:10px}</style>';
+    echo '<style>body.login{background:#f6f3ec;font-family:Inter,sans-serif}.login h1 a{background:none!important;text-indent:0!important;width:auto!important;height:auto!important;font-size:24px;font-weight:800;color:#14161a}.login #nav a,.login #backtoblog a{color:#14161a}.wp-core-ui .button-primary{background:#4f46e5;border-color:#4f46e5;border-radius:10px}</style>';
 });
 add_filter('login_headerurl', function () { return home_url('/'); });
 add_filter('login_headertext', function () { return eh_opt('brand'); });

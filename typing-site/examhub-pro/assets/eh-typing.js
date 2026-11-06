@@ -34,7 +34,7 @@
     }
     var ps = $('#eh-opt-passage');
     if (ps) {
-      ps.innerHTML = '<option value="">रैंडम पैसेज</option>' + pool.map(function (p) {
+      ps.innerHTML = '<option value="">Random Passage</option>' + pool.map(function (p) {
         return '<option value="' + esc(p.id) + '">' + esc(p.title) + '</option>';
       }).join('');
       if (CFG.fixedPassage) { ps.value = CFG.fixedPassage; ps.disabled = true; }
@@ -231,7 +231,7 @@
     var tgt = exam.unit === 'keys' ? exam.target + ' keys' : exam.target + ' words';
     $('#eh-res-head').innerHTML =
       '<div class="eh-verdict ' + (R.pass ? 'ok' : 'no') + '">' + (R.pass ? '✔ Qualified' : '✘ Not Qualified') + '</div>' +
-      '<p class="muted">लक्ष्य: ' + tgt + ' in ' + exam.minutes + ' min · Allowed error ' + (exam.allowed || 5) + '%</p>';
+      '<p class="muted">Target: ' + tgt + ' in ' + exam.minutes + ' min · Allowed error ' + (exam.allowed || 5) + '%</p>';
     var cells = [
       ['Net Speed', R.net + ' WPM'], ['Gross Speed', R.gross + ' WPM'], ['Accuracy', R.acc + '%'], ['Error', R.err + '%'],
       ['Key Depressions', R.keys], ['Words Typed', R.words], ['Full Mistakes', R.full], ['Half Mistakes', R.half],
@@ -240,8 +240,8 @@
     $('#eh-res-grid').innerHTML = cells.map(function (c) { return '<div class="eh-stat"><span>' + c[0] + '</span><b>' + c[1] + '</b></div>'; }).join('');
     $('#eh-res-diff').innerHTML = ops.map(function (o) {
       if (o.t === 'ok') return '<span class="d-ok">' + esc(o.s) + '</span>';
-      if (o.t === 'om') return '<span class="d-om" title="छूटा हुआ शब्द">' + esc(o.s) + '</span>';
-      if (o.t === 'add') return '<span class="d-add" title="अतिरिक्त शब्द">' + esc(o.w) + '</span>';
+      if (o.t === 'om') return '<span class="d-om" title="छूटा शब्द">' + esc(o.s) + '</span>';
+      if (o.t === 'add') return '<span class="d-add" title="फालतू शब्द">' + esc(o.w) + '</span>';
       if (o.t === 'half') return '<span class="d-half" title="Half mistake: ' + o.why + '">' + esc(o.w) + ' <s>' + esc(o.s) + '</s></span>';
       return '<span class="d-sub" title="Full mistake">' + esc(o.w) + ' <s>' + esc(o.s) + '</s></span>';
     }).join(' ');
@@ -254,7 +254,7 @@
     try { localStorage.setItem('eh_name', R.name || ''); } catch (e) {}
     fetch(CFG.rest + 'result', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': CFG.nonce }, body: JSON.stringify(R) })
       .then(function (r) { return r.json(); })
-      .then(function (j) { var s = $('#eh-res-saved'); if (s) s.textContent = j && j.ok ? (j.rank ? 'Result सेव हो गया · आज की रैंक #' + j.rank : 'Result सेव हो गया') : ''; })
+      .then(function (j) { var s = $('#eh-res-saved'); if (s) s.textContent = j && j.ok ? (j.rank ? 'रिज़ल्ट सेव हो गया · आज आपकी रैंक #' + j.rank : 'रिज़ल्ट सेव हो गया') : ''; })
       .catch(function () {});
   }
 

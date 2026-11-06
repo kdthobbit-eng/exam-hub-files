@@ -6,14 +6,14 @@ $board = eh_leaderboard('', $L['date'], 25);
 ?>
 <section class="eh-page-head slim"><div class="wrap">
   <h1>🏆 Daily Live Typing</h1>
-  <p class="muted">आज का पैसेज (<?php echo $L['lang'] === 'hi' ? 'Hindi' : 'English'; ?>, <?php echo (int) $L['minutes']; ?> मिनट) सबके लिए एक जैसा है। टेस्ट दें और आज की रैंक देखें — हर रात 12 बजे नया पैसेज।</p>
+  <p class="muted">आज का पैसेज (<?php echo $L['lang'] === 'hi' ? 'Hindi' : 'English'; ?>, <?php echo (int) $L['minutes']; ?> मिनट) सबके लिए एक ही है। टेस्ट दीजिए और आज की रैंक देखिए — रात 12 बजे नया पैसेज आ जाता है।</p>
 </div></section>
 <section class="wrap eh-section eh-live">
   <div><?php include __DIR__ . '/_test-ui.php'; ?></div>
   <aside class="eh-panel">
-    <h2>आज की रैंकिंग</h2>
+    <h2>आज की Ranking</h2>
     <table class="eh-table"><thead><tr><th>#</th><th>Name</th><th>Net</th><th>Acc.</th></tr></thead><tbody>
-    <?php if (!$board): ?><tr><td colspan="4" class="muted">आज की पहली रैंक आपकी हो सकती है!</td></tr><?php endif; ?>
+    <?php if (!$board): ?><tr><td colspan="4" class="muted">आज अभी किसी ने टेस्ट नहीं दिया — पहली रैंक आपकी हो सकती है!</td></tr><?php endif; ?>
     <?php foreach ($board as $i => $r): ?><tr><td><?php echo $i + 1; ?></td><td><?php echo esc_html(eh_display_name($r)); ?></td><td><b><?php echo (int) $r['net']; ?></b></td><td><?php echo esc_html($r['acc']); ?>%</td></tr><?php endforeach; ?>
     </tbody></table>
   </aside>

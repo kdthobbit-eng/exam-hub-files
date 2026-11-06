@@ -1,12 +1,12 @@
 <?php get_header(); $exams = eh_exams(); $att = eh_attempt_counts(); ?>
 <section class="eh-page-head"><div class="wrap">
-  <h1>All Typing Exams</h1><p class="muted"><?php echo count($exams); ?> परीक्षाओं का टाइपिंग पैटर्न — अपनी परीक्षा चुनें और टेस्ट शुरू करें।</p>
+  <h1>All Typing Exams</h1><p class="muted"><?php echo count($exams); ?> एग्ज़ाम की लिस्ट — अपना एग्ज़ाम चुनिए और टेस्ट शुरू कीजिए।</p>
 </div></section>
 <section class="wrap eh-section">
   <div class="eh-filters">
-    <input id="eh-exam-search" type="search" placeholder="परीक्षा खोजें… जैसे SSC, High Court, UPSSSC" autocomplete="off">
-    <select id="eh-f-cat"><option value="">सभी कैटेगरी</option><?php foreach (['court', 'central', 'central-org', 'state'] as $c) echo '<option value="' . $c . '">' . esc_html(eh_cat_label($c)) . '</option>'; ?></select>
-    <select id="eh-f-lang"><option value="">सभी भाषा</option><option value="en">English</option><option value="hi">Hindi</option><option value="mr">Marathi</option><option value="or">Odia</option></select>
+    <input id="eh-exam-search" type="search" placeholder="एग्ज़ाम सर्च करें… जैसे SSC, High Court, UPSSSC" autocomplete="off">
+    <select id="eh-f-cat"><option value="">All Category</option><?php foreach (['court', 'central', 'central-org', 'state'] as $c) echo '<option value="' . $c . '">' . esc_html(eh_cat_label($c)) . '</option>'; ?></select>
+    <select id="eh-f-lang"><option value="">All Language</option><option value="en">English</option><option value="hi">Hindi</option><option value="mr">Marathi</option><option value="or">Odia</option></select>
     <span class="muted"><b id="eh-count"><?php echo count($exams); ?></b> exams</span>
   </div>
   <div class="eh-quick">
