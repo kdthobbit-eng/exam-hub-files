@@ -4,7 +4,7 @@
  */
 if (!defined('ABSPATH')) exit;
 
-define('EH_VER', '1.0.0');
+define('EH_VER', '1.0.' . (int) @filemtime(__DIR__ . '/style.css'));
 define('EH_DIR', get_template_directory());
 define('EH_URI', get_template_directory_uri());
 
@@ -54,7 +54,7 @@ add_action('init', function () {
     add_rewrite_rule('^live-typing/?$', 'index.php?eh_view=live', 'top');
     add_rewrite_rule('^results/?$', 'index.php?eh_view=results', 'top');
     add_rewrite_rule('^my-dashboard/?$', 'index.php?eh_view=dashboard', 'top');
-    if (get_option('eh_rewrite_ver') !== EH_VER) { flush_rewrite_rules(false); update_option('eh_rewrite_ver', EH_VER); }
+    if (get_option('eh_rewrite_ver') !== '2') { flush_rewrite_rules(false); update_option('eh_rewrite_ver', '2'); }
 });
 add_filter('query_vars', function ($v) { $v[] = 'eh_view'; $v[] = 'eh_slug'; return $v; });
 
