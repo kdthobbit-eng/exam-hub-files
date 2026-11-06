@@ -480,3 +480,44 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
   .eh-exam .ex-stats{position:static;width:auto;margin:12px 2vw}
   .eh-exam .ex-foot{display:flex;justify-content:space-around}.eh-exam .ex-btn{position:static}
 }
+
+/* ===== Exam-specific windows (families measured from real exam screens, base 1366px) ===== */
+.eh-exam{--ph:187px;--th:140px}
+.eh-exam .eh-passage{height:var(--ph)}
+.eh-exam .eh-input{height:var(--th)}
+.eh-exam .ex-main{margin-left:1.98vw;width:79.14vw}
+.eh-exam:not(.ew-stats) .ex-stats{display:none}
+.eh-exam .ex-tool{display:none}
+.eh-exam.ew-tool .ex-tool{display:flex;position:absolute;left:4.98vw;top:30px;height:44px;align-items:center;gap:6px;padding:0 14px;border:1px solid #e2e8f0;border-radius:24px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.eh-exam .ex-tool button{all:unset;cursor:pointer;min-width:30px;height:30px;display:grid;place-items:center;border-radius:6px;font:500 14px/1 Arial,sans-serif;color:#2d3748}
+.eh-exam .ex-tool button:hover{background:#edf2f7}
+.eh-exam .ex-tool .a0{color:#a0aec0;text-decoration:underline}
+.eh-exam .ex-tool .snd-on{display:none}.eh-exam.snd-on .ex-tool .snd-on{display:inline}.eh-exam.snd-on .ex-tool .snd-x{display:none}
+.eh-exam.ew-serif .eh-passage,.eh-exam.ew-serif .eh-input{font-family:"Times New Roman",Times,"Noto Sans Devanagari",serif}
+.eh-exam.ew-pbg .eh-passage{background:#fafafa}
+.eh-exam.ew-lime .eh-input{background:#ccff66}
+/* widths */
+.eh-exam.ew-awide .ex-box,.eh-exam.ew-rssb .ex-box,.eh-exam.ew-b .ex-box,.eh-exam.ew-nokbb .ex-box,.eh-exam.ew-sidea .ex-box,.eh-exam.ew-ntpc .ex-box{width:100%}
+.eh-exam.ew-jssc .ex-main{width:84.04vw}.eh-exam.ew-jssc .ex-box{width:95.7%}
+.eh-exam.ew-rssb .ex-main{margin-left:7.9vw}
+.eh-exam.ew-b .ex-main,.eh-exam.ew-nokbb .ex-main{width:93.92vw}
+.eh-exam.ew-c .ex-main,.eh-exam.ew-sidec .ex-main,.eh-exam.ew-nopass .ex-main,.eh-exam.ew-nokbc .ex-main{margin-left:0;width:100%}
+.eh-exam.ew-c .ex-box,.eh-exam.ew-sidec .ex-box,.eh-exam.ew-nopass .ex-box,.eh-exam.ew-nokbc .ex-box{width:100%;padding:8px}
+.eh-exam.ew-ntpc .ex-main{width:59.37vw}
+.eh-exam.ew-ntpc .eh-input{width:75%;margin-left:auto}
+/* side by side */
+.eh-exam.ew-sidea .ex-box,.eh-exam.ew-sidec .ex-box{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.eh-exam.ew-sidea .eh-input,.eh-exam.ew-sidec .eh-input{margin-top:0}
+.eh-exam.ew-sidec .ex-box{gap:23px}
+/* no passage on screen / no keyboard bar */
+.eh-exam.ew-nopass .eh-passage{display:none}
+.eh-exam.ew-nopass .eh-input{margin-top:0}
+.eh-exam.ew-nokbc .ex-bar,.eh-exam.ew-nokbb .ex-bar{display:none}
+.eh-exam.ew-nokbb .ex-main{margin-left:1.98vw}
+@media(max-width:1100px){
+  .eh-exam .ex-main,.eh-exam.ew-jssc .ex-main,.eh-exam.ew-b .ex-main,.eh-exam.ew-ntpc .ex-main,.eh-exam.ew-rssb .ex-main{width:auto;margin:0 2vw}
+  .eh-exam .ex-box,.eh-exam.ew-jssc .ex-box{width:100%}
+  .eh-exam.ew-sidea .ex-box,.eh-exam.ew-sidec .ex-box{grid-template-columns:1fr}
+  .eh-exam.ew-ntpc .eh-input{width:100%}
+  .eh-exam.ew-tool .ex-tool{left:8px;top:8px;transform:scale(.9);transform-origin:left top}
+}

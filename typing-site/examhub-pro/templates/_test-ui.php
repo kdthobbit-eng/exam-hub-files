@@ -2,6 +2,7 @@
 /** @var array $eh_exam  @var array $eh_cfg */
 $lang = $eh_exam['lang'] === 'hi' ? 'hi' : 'en';
 $u = wp_get_current_user();
+$eh_win = eh_window($eh_exam['slug']);
 $cfg = array_merge([
     'exam' => $eh_exam,
     'passages' => eh_passages($lang),
@@ -9,6 +10,7 @@ $cfg = array_merge([
     'nonce' => wp_create_nonce('wp_rest'),
     'loggedIn' => is_user_logged_in(),
     'userName' => is_user_logged_in() ? $u->display_name : '',
+    'win' => $eh_win,
     'avatar' => is_user_logged_in() ? (string) get_user_meta($u->ID, 'eh_avatar', true) : '',
 ], $eh_cfg ?? []);
 wp_enqueue_script('eh-hindi', EH_URI . '/assets/eh-hindi.js', [], EH_VER, true);
@@ -39,10 +41,17 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
   </div>
 
   <!-- Exam window (full screen) -->
-  <div id="eh-test" class="eh-exam" hidden>
+  <div id="eh-test" class="eh-exam <?php echo esc_attr(eh_window_classes($eh_win)); ?>" data-family="<?php echo esc_attr($eh_win['family']); ?>" style="--ph:<?php echo (int) $eh_win['ph']; ?>px;--th:<?php echo (int) $eh_win['th']; ?>px" hidden>
     <div class="ex-top" id="eh-ex-title">Typing Test</div>
     <div class="ex-strip"><?php echo esc_html($eh_exam['name']); ?></div>
     <div class="ex-head">
+      <div class="ex-tool" role="toolbar" aria-label="Typing tools">
+        <button type="button" data-act="mute" title="Sound on/off"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path class="snd-x" d="m23 9-6 6M17 9l6 6"/><path class="snd-on" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></button>
+        <button type="button" data-act="full" title="Full screen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg></button>
+        <button type="button" data-act="minus" title="Font size कम करें">A-</button>
+        <button type="button" data-act="reset" title="Normal font size" class="a0">A</button>
+        <button type="button" data-act="plus" title="Font size बढ़ाएँ">A+</button>
+      </div>
       <div class="ex-time">Time left:- <b id="eh-timer">00:00</b></div>
       <div class="ex-photo"><span id="eh-cand-av"></span><b id="eh-cand-name">CANDIDATE</b></div>
     </div>

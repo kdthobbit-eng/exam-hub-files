@@ -73,6 +73,7 @@
     pv.style.fontSize = (pbase + st.fs * 2) + 'px'; ta.style.fontSize = (tbase + st.fs * 2) + 'px';
     $('#set-fs-v').textContent = Math.round((pbase + st.fs * 2) * 0.75);
     pv.style.visibility = st.scr ? '' : 'hidden';
+    test.classList.toggle('snd-on', !!st.snd);
     if (!st.hl) clearMark(); else mark(true);
     store.set('set', st);
   }
@@ -88,6 +89,17 @@
   $('#eh-full').addEventListener('click', function () {
     if (!document.fullscreenElement) (test.requestFullscreen || test.webkitRequestFullscreen || function () {}).call(test);
     else document.exitFullscreen();
+  });
+  test.querySelectorAll('.ex-tool [data-act]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var a = b.getAttribute('data-act');
+      if (a === 'mute') { S.set.snd = !S.set.snd; $('#set-snd').checked = S.set.snd; }
+      else if (a === 'full') { $('#eh-full').click(); }
+      else if (a === 'minus') S.set.fs = Math.max(-4, S.set.fs - 1);
+      else if (a === 'plus') S.set.fs = Math.min(8, S.set.fs + 1);
+      else if (a === 'reset') S.set.fs = 0;
+      applySettings(); ta.focus();
+    });
   });
   $('#eh-st-on').addEventListener('change', function () { $('#eh-stats').classList.toggle('off', !this.checked); });
 

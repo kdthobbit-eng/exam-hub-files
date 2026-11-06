@@ -9,6 +9,7 @@ define('EH_DIR', get_template_directory());
 define('EH_URI', get_template_directory_uri());
 
 require EH_DIR . '/inc/data.php';
+require EH_DIR . '/inc/windows.php';
 require EH_DIR . '/inc/db.php';
 require EH_DIR . '/inc/rest.php';
 require EH_DIR . '/inc/admin.php';
