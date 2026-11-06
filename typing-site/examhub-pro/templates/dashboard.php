@@ -14,8 +14,8 @@ get_header(); ?>
 <section class="wrap eh-section">
   <div class="eh-hist-stats">
     <div><b><?php echo number_format_i18n($n); ?><?php echo $n ? ' +' : ''; ?></b><span>कुल टेस्ट दिए</span></div>
-    <div><b><?php echo (int) round($agg['g']); ?> wpm</b><span>Avg. Gross Speed</span></div>
-    <div><b><?php echo (int) round($agg['nt']); ?> wpm</b><span>Avg. Net Speed</span></div>
+    <div><b><?php echo (int) round((float) $agg['g']); ?> wpm</b><span>Avg. Gross Speed</span></div>
+    <div><b><?php echo (int) round((float) $agg['nt']); ?> wpm</b><span>Avg. Net Speed</span></div>
     <div><b><?php echo (int) $agg['b']; ?> wpm</b><span>Best Net Speed</span></div>
   </div>
   <div class="eh-hist-box">
