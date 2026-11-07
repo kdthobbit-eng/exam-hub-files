@@ -776,3 +776,12 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .eh-exam.ew-hl-y .eh-passage span.cur{background:#fffb05;color:#1e40af}
 .eh-exam.ew-hl-b .eh-passage span.cur{color:#1e40af}
 #eh-test .eh-passage:not(.kd),#eh-test .eh-input:not(.kd){font-family:var(--pff)}
+/* instructions info cards (like exam screen) */
+.eh-ins-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:20px}
+.eh-ins-cards div{border:1px solid #555;border-radius:8px;padding:14px 18px;background:#fff;box-shadow:0 4px 10px rgba(0,0,0,.12);min-height:70px}
+.eh-ins-cards small{display:block;font-size:12px;color:#444;margin-bottom:4px}
+.eh-ins-cards b{font-size:18px;font-weight:600;line-height:1.35}
+@media(max-width:760px){.eh-ins-cards{grid-template-columns:1fr}}
+/* side-by-side gaps like the exam screen */
+.eh-exam.ew-sidea .ex-box{gap:11px;padding-right:0}
+.eh-exam.ew-sidec .ex-box{gap:13px}

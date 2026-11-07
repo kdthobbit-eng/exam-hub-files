@@ -96,7 +96,7 @@ function eh_passage_days($lang, $days = 7) {
     for ($d = 0; $d < $days; $d++) {
         $day = $today - $d; $date = gmdate('Y-m-d', $day * 86400); $items = [];
         foreach ($all as $p) if (strpos($p['id'], 'p') === 0 && empty($p['special']) && $p['date'] === $date) $items[] = $p;
-        for ($k = 0; $k < 3 && $n; $k++) $items[] = $pool[(($day * 3 + $k) % $n + $n) % $n];
+        for ($k = 0; $k < 6 && $n; $k++) $items[] = $pool[(($day * 6 + $k) % $n + $n) % $n];
         $out[] = ['date' => $date, 'items' => $items];
     }
     return $out;

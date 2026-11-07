@@ -32,9 +32,14 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
   };
   ?>
   <div id="eh-setup" class="eh-setup2">
-    <ol class="eh-steps-nav"><li class="on" data-go="1">1. निर्देश (Instructions)</li><li data-go="2">2. पैसेज चुनें</li></ol>
+    <ol class="eh-steps-nav"><li class="on" data-go="2">1. पैसेज चुनें</li><li data-go="1">2. निर्देश (Instructions)</li></ol>
 
-    <div id="eh-step1" class="eh-panel eh-stp">
+    <div id="eh-step1" class="eh-panel eh-stp" hidden>
+      <div class="eh-ins-cards">
+        <div><small>Personal Information</small><b id="eh-ic-name"><?php echo esc_html(is_user_logged_in() ? wp_get_current_user()->display_name : 'Guest'); ?></b></div>
+        <div><small>Exam Description</small><b><?php echo esc_html($eh_exam['name']); ?></b></div>
+        <div><small>Passage Detail</small><b id="eh-ic-psg">—</b></div>
+      </div>
       <div class="eh-ins-head">
         <div><h2><?php echo esc_html($eh_exam['name']); ?></h2>
         <p class="eh-rules">
@@ -64,11 +69,12 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
         <label>Keyboard / Language<select id="eh-opt-layout"></select></label>
         <?php if ($lang === 'hi'): ?><p class="eh-tip">💡 <b>Krutidev / Remington</b>: कंप्यूटर का कीबोर्ड English पर ही रखें, हिंदी हम खुद बना देंगे। <b>Inscript (अपना कीबोर्ड)</b>: अगर आपके कंप्यूटर में Windows का Hindi Inscript कीबोर्ड चालू है तो ये चुनें।</p><?php endif; ?>
         <label class="eh-agree"><input type="checkbox" id="eh-agree"> मैंने ऊपर दिए सभी निर्देश पढ़ लिए हैं</label>
-        <button type="button" id="eh-next" class="btn dark lg" disabled>आगे बढ़ें →</button>
+        <button type="button" id="eh-start" class="btn dark lg" disabled>Start Typing →</button>
+        <button type="button" class="btn ghost" data-go="2">← पैसेज बदलें</button>
       </div>
     </div>
 
-    <div id="eh-step2" class="eh-panel eh-stp" hidden>
+    <div id="eh-step2" class="eh-panel eh-stp">
       <div class="eh-psel">
         <div class="eh-psel-l">
           <?php if (!empty($cfg['fixedPassage'])):
@@ -76,7 +82,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
           <?php else: ?>
           <div class="eh-psel-top"><h3>पैसेज चुनें</h3>
             <?php if ($eh_special): ?><button type="button" class="btn ghost sm" id="eh-sp-open">★ Special Passages</button><?php endif; ?></div>
-          <p class="eh-lvl-legend">B - Basic · E - Easy · M - Moderate · H - Hard · <span class="muted">रोज़ 3 नए पैसेज (सुबह, दोपहर, शाम)</span></p>
+          <p class="eh-lvl-legend">B - Basic · E - Easy · M - Moderate · H - Hard · <span class="muted">रोज़ 6 नए पैसेज</span></p>
           <label class="eh-prow rnd"><input type="radio" name="eh-psg" value="" checked><span class="lv">?</span><span class="t">कोई भी (Random Passage)</span><span class="n"></span></label>
           <?php foreach ($eh_days as $i => $day): ?>
             <details class="eh-day" <?php echo $i < 2 ? 'open' : ''; ?>><summary><?php echo esc_html($i === 0 ? 'आज — ' : ($i === 1 ? 'कल — ' : '')); echo esc_html(wp_date('d M Y, l', strtotime($day['date'] . ' 12:00'))); ?> <span class="muted">(<?php echo count($day['items']); ?>)</span></summary>
@@ -90,8 +96,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
           <label>Time (minutes)<select id="eh-opt-min"><?php foreach (array_unique([5, 10, 15, 20, 25, 30, (int) $eh_exam['minutes']]) as $m) echo '<option value="' . $m . '">' . $m . ' min' . ($m === (int) $eh_exam['minutes'] ? ' (Exam)' : '') . '</option>'; ?></select></label>
           <label>Input limit<span class="eh-lim"><input id="eh-opt-limit" type="number" min="0" step="50" placeholder="पूरा"><select id="eh-opt-unit"><option value="keys">Characters</option><option value="words">Words</option></select></span><small class="muted">पहले से एग्ज़ाम का target भरा है। खाली छोड़ें तो समय के हिसाब से लंबा पैसेज मिलेगा।</small></label>
           <?php if (!is_user_logged_in()): ?><label>आपका नाम<input id="eh-guest-name" type="text" maxlength="40" placeholder="जैसे: Rahul"></label><?php endif; ?>
-          <button id="eh-start" class="btn dark lg block">Start Typing →</button>
-          <button type="button" class="btn ghost block" data-go="1">← निर्देश दोबारा देखें</button>
+          <button type="button" id="eh-next" class="btn dark lg block">आगे बढ़ें (Next) →</button>
           <?php if (!is_user_logged_in()): ?><p class="muted small center">रिज़ल्ट सेव रखने के लिए <a href="<?php echo esc_url(eh_login_page_url(home_url($_SERVER['REQUEST_URI'] ?? '/'))); ?>">Login</a> करें।</p><?php endif; ?>
         </div>
       </div>

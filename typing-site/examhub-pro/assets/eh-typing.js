@@ -59,18 +59,23 @@
     var un = $('#eh-opt-unit'); if (un) un.value = exam.unit === 'keys' ? 'keys' : 'words';
     var li = $('#eh-opt-limit'); if (li && !li.value && +exam.target > 0) li.value = exam.target;
     var nm = $('#eh-guest-name'); if (nm) nm.value = store.get('name', '');
-    /* steps */
-    var agree = $('#eh-agree'), next = $('#eh-next'), akey = 'agree_' + exam.slug;
+    /* steps: 2 = passage select (first), 1 = instructions (then start) */
+    var agree = $('#eh-agree'), next = $('#eh-next'), startBtn = $('#eh-start'), akey = 'agree_' + exam.slug;
+    function psgTitle() {
+      var id = CFG.fixedPassage || ps.value, t = 'Random Passage';
+      pool.forEach(function (p, i) { if (p.id === id) t = 'Id- ' + (i + 1) + ' - ' + p.title; });
+      return t;
+    }
     function go(n) {
       $('#eh-step1').hidden = n !== 1; $('#eh-step2').hidden = n !== 2;
       setup.querySelectorAll('.eh-steps-nav li').forEach(function (li) { li.classList.toggle('on', li.getAttribute('data-go') === String(n)); });
-      if (n === 2) store.set(akey, 1);
+      if (n === 1) { $('#eh-ic-psg').textContent = psgTitle(); var g = $('#eh-guest-name'); if (g && g.value.trim()) $('#eh-ic-name').textContent = g.value.trim(); }
       window.scrollTo({ top: setup.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
     }
-    agree.checked = !!store.get(akey, 0); next.disabled = !agree.checked;
-    agree.addEventListener('change', function () { next.disabled = !agree.checked; });
-    next.addEventListener('click', function () { if (agree.checked) go(2); });
-    setup.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { var n = +b.getAttribute('data-go'); if (n === 2 && !agree.checked) return; go(n); }); });
+    agree.checked = !!store.get(akey, 0); startBtn.disabled = !agree.checked;
+    agree.addEventListener('change', function () { startBtn.disabled = !agree.checked; if (agree.checked) store.set(akey, 1); });
+    next.addEventListener('click', function () { go(1); });
+    setup.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-go')); }); });
     S.goStep = go;
     var so = $('#eh-sp-open'), sm = $('#eh-sp-modal');
     if (so && sm) {
@@ -378,7 +383,7 @@
       if (r) { r.checked = true; r.dispatchEvent(new Event('change')); }
       else $('#eh-opt-passage').value = rp.replace(/[^a-z0-9]/gi, '');
       var lim = q.get('limit'); if (lim && $('#eh-opt-limit')) $('#eh-opt-limit').value = parseInt(lim, 10) || '';
-      if ($('#eh-agree').checked) S.goStep(2);
+      S.goStep(1);
     }
   })();
   $('#eh-again').addEventListener('click', function () { result.hidden = true; setup.hidden = false; if (S.goStep) S.goStep(2); });
