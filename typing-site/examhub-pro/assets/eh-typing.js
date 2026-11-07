@@ -33,7 +33,7 @@
 
   var S = {
     layout: LAYOUTS[0][0], minutes: exam.minutes,
-    set: store.get('set', { tcs: true, bks: true, lbks: false, hl: false, as: false, xs: true, scr: true, snd: false, fs: 0 }),
+    set: Object.assign({ tcs: true, bks: true, lbks: false, whl: true, hl: true, lc: true, as: true, xs: false, scr: true, snd: false, fs: 0 }, store.get('set2', {})),
     started: false, done: false, t0: 0, left: 0, timer: null,
     buf: '', keys: 0, bks: 0, words: [], text: '', passageId: '', title: ''
   };
@@ -120,13 +120,17 @@
     $('#set-fs-v').textContent = Math.round(pf * 0.75);
     pv.style.visibility = st.scr ? '' : 'hidden';
     test.classList.toggle('snd-on', !!st.snd);
-    if (!st.hl) clearMark(); else mark(true);
-    store.set('set', st);
+    if (S.words) mark(true);
+    store.set('set2', st);
+    var sb = $('#eh-snd-btn'); if (sb) sb.textContent = st.snd ? '❚❚ Stop Typing Sound' : '▷ Play Typing Sound';
+    var fb = $('#eh-full'); if (fb) fb.textContent = document.fullscreenElement ? '⤢ Exit Fullscreen' : '⛶ Fullscreen';
   }
-  [['set-tcs', 'tcs'], ['set-bks', 'bks'], ['set-lbks', 'lbks'], ['set-hl', 'hl'], ['set-as', 'as'], ['set-xs', 'xs'], ['set-scr', 'scr'], ['set-snd', 'snd']].forEach(function (p) {
+  [['set-tcs', 'tcs'], ['set-bks', 'bks'], ['set-lbks', 'lbks'], ['set-whl', 'whl'], ['set-hl', 'hl'], ['set-lc', 'lc'], ['set-as', 'as'], ['set-xs', 'xs'], ['set-scr', 'scr'], ['set-snd', 'snd']].forEach(function (p) {
     var el = $('#' + p[0]); el.checked = !!S.set[p[1]];
     el.addEventListener('change', function () { S.set[p[1]] = el.checked; applySettings(); });
   });
+  $('#eh-snd-btn').addEventListener('click', function () { S.set.snd = !S.set.snd; $('#set-snd').checked = S.set.snd; applySettings(); });
+  document.addEventListener('fullscreenchange', function () { applySettings(); });
   $('#eh-fs-plus').addEventListener('click', function () { S.set.fs = Math.min(8, S.set.fs + 1); applySettings(); });
   $('#eh-fs-minus').addEventListener('click', function () { S.set.fs = Math.max(-4, S.set.fs - 1); applySettings(); });
   var drawer = $('#eh-drawer');
@@ -171,7 +175,7 @@
     S.text = buildText(CFG.fixedPassage || $('#eh-opt-passage').value);
     S.words = S.text.split(/\s+/);
     S.show = kdMode() ? S.words.map(function (w) { return H.unicodeToKD(w); }) : S.words;
-    S.left = S.minutes * 60; S.buf = ''; S.keys = 0; S.bks = 0; S.started = false; S.done = false; lastIdx = -1;
+    S.left = S.minutes * 60; S.buf = ''; S.keys = 0; S.bks = 0; S.started = false; S.done = false; lastIdx = -1; wsDone = -1;
 
     var L = LAYOUTS.filter(function (l) { return l[0] === S.layout; })[0];
     $('#eh-layout-name').textContent = L[3];
@@ -234,13 +238,27 @@
     if (typed.length && !/\s$/.test(typed)) n--;
     return Math.max(0, n);
   }
+  var wsDone = -1;
+  function wordStatus(n) {
+    /* typed words before the current one: grey if same as passage, red if not (like the exam screen) */
+    var typedW = current().trim() ? current().trim().split(/\s+/) : [];
+    var from = Math.max(0, Math.min(n, wsDone) - 3), to = Math.max(n, wsDone + 1), i, el;
+    for (i = from; i < to; i++) {
+      el = pv.querySelector('[data-i="' + i + '"]'); if (!el) continue;
+      el.classList.remove('wok', 'wbad');
+      if (S.set.whl && i < n) el.classList.add(typedW[i] === S.words[i] ? 'wok' : 'wbad');
+    }
+    wsDone = n - 1;
+  }
   function mark(force) {
     var n = curIndex();
     if (n === lastIdx && !force) return;
     clearMark();
+    if (force) { pv.querySelectorAll('.wok,.wbad').forEach(function (e) { e.classList.remove('wok', 'wbad'); }); wsDone = S.words ? S.words.length : 0; }
+    wordStatus(n);
     var b = pv.querySelector('[data-i="' + n + '"]');
     if (b && S.set.hl) b.classList.add('cur');
-    if (b && (S.set.as || S.set.hl)) {
+    if (b) {
       var top = b.offsetTop - pv.offsetTop;
       if (top > pv.scrollTop + pv.clientHeight - 50 || top < pv.scrollTop) pv.scrollTop = top - 30;
     }
@@ -379,7 +397,15 @@
   }
   $('#eh-start').addEventListener('click', startTest);
   twoStep($('#eh-submit'), 'Submit', finish);
-  twoStep($('#eh-cancel'), 'Cancel', function () { S.done = true; clearInterval(S.timer); closeExam(); setup.hidden = false; });
+  (function () {
+    var cb = $('#eh-cancel'), doCancel = function () { S.done = true; clearInterval(S.timer); closeExam(); setup.hidden = false; };
+    cb.addEventListener('click', function () {
+      if (!S.set.lc) { doCancel(); return; }
+      if (cb.dataset.arm === '1') { cb.dataset.arm = ''; cb.textContent = 'Cancel'; doCancel(); return; }
+      cb.dataset.arm = '1'; cb.textContent = 'पक्का? फिर दबाएं';
+      setTimeout(function () { cb.dataset.arm = ''; cb.textContent = 'Cancel'; }, 3000);
+    });
+  })();
   $('#eh-retype').addEventListener('click', function () { if (S.passageId) $('#eh-opt-passage').value = S.passageId; result.hidden = true; startTest(); });
   (function () {
     var q = new URLSearchParams(location.search), rp = q.get('passage');

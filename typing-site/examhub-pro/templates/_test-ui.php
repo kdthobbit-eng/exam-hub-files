@@ -153,23 +153,24 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
     <div id="eh-drawer" class="ex-drawer" hidden>
       <div class="ex-dr-h"><b>Typing Settings</b><button type="button" data-close>✕</button></div>
       <details open><summary>▦ Appearance &amp; Layout</summary>
-        <div class="ex-row"><label class="tg">TCS Layout <input type="checkbox" id="set-tcs" checked><i></i></label>
-          <span class="ex-fs">Font Size (<b id="set-fs-v">16</b> pt) <button type="button" id="eh-fs-minus">A-</button><button type="button" id="eh-fs-plus">A+</button></span></div>
+        <div class="ex-row"><span class="ex-fs">Font Size (<b id="set-fs-v">16</b> pt) <button type="button" id="eh-fs-minus">A-</button><button type="button" id="eh-fs-plus">A+</button></span>
+          <input type="checkbox" id="set-tcs" checked hidden></div>
       </details>
       <details><summary>✎ Typing Behavior</summary>
         <div class="ex-grid">
           <label class="tg">BackSpace <input type="checkbox" id="set-bks" checked><i></i></label>
           <label class="tg">Limited Backspace <input type="checkbox" id="set-lbks"><i></i></label>
-          <label class="tg">Word Highlight <input type="checkbox" id="set-hl"><i></i></label>
-          <label class="tg">Auto Scroll <input type="checkbox" id="set-as"><i></i></label>
-          <label class="tg">Extra Space <input type="checkbox" id="set-xs" checked><i></i></label>
+          <label class="tg">Word Highlight <input type="checkbox" id="set-whl" checked><i></i></label>
+          <label class="tg">Current Word Highlight <input type="checkbox" id="set-hl" checked><i></i></label>
+          <label class="tg">Limit Cancel <input type="checkbox" id="set-lc" checked><i></i></label>
+          <label class="tg">Passage on Screen <input type="checkbox" id="set-scr" checked><i></i></label>
+          <input type="checkbox" id="set-as" checked hidden><input type="checkbox" id="set-xs" hidden>
         </div>
       </details>
-      <details><summary>👁 Online Typing Passage</summary>
-        <div class="ex-row"><label class="tg">Screen Typing (Passage दिखे) <input type="checkbox" id="set-scr" checked><i></i></label></div>
-      </details>
       <details><summary>🖥 Sound &amp; View</summary>
-        <div class="ex-row"><label class="tg">Typing Sound <input type="checkbox" id="set-snd"><i></i></label><button type="button" id="eh-full" class="ex-mini">⛶ Fullscreen</button></div>
+        <div class="ex-row ex-col"><input type="checkbox" id="set-snd" hidden>
+          <button type="button" id="eh-snd-btn" class="ex-mini ex-teal">▷ Play Typing Sound</button>
+          <button type="button" id="eh-full" class="ex-mini">⛶ Fullscreen</button></div>
       </details>
       <button type="button" class="ex-btn blue ex-dr-close" data-close>Close</button>
     </div>
