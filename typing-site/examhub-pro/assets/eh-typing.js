@@ -95,6 +95,11 @@
     while (len < need && order.length && k < 40) { var p = order[k % order.length]; parts.push(p.text); len += p.chars + 1; k++; }
     S.passageId = order[0] ? order[0].id : ''; S.title = order[0] ? order[0].title : '';
     var txt = H.norm(parts.join(' '));
+    /* Krutidev / Remington cannot type nukta letters (क़ ख़ ग़ ज़ फ़): use the plain letter, as the exam passages do */
+    if (S.layout === 'krutidev' || S.layout === 'remington') {
+      txt = txt.replace(/[\u0958-\u095B\u095E]/g, function (c) { return { '\u0958': '\u0915', '\u0959': '\u0916', '\u095A': '\u0917', '\u095B': '\u091C', '\u095E': '\u092B' }[c]; })
+        .replace(/([\u0915\u0916\u0917\u091C\u092B])\u093C/g, '$1');
+    }
     if (S.limit > 0) {
       if (S.limitUnit === 'words') txt = txt.split(/\s+/).slice(0, S.limit).join(' ');
       else if (txt.length > S.limit) { var cut = txt.lastIndexOf(' ', S.limit); txt = txt.slice(0, cut > 0 ? cut : S.limit); }
