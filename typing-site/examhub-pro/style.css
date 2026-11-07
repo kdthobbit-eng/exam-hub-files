@@ -785,3 +785,38 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 /* side-by-side gaps like the exam screen */
 .eh-exam.ew-sidea .ex-box{gap:11px;padding-right:0}
 .eh-exam.ew-sidec .ex-box{gap:13px}
+
+/* ===== Login / Sign up: simple and clear ===== */
+.eh-auth2{max-width:520px;margin:40px auto 60px;padding:0 16px}
+.eh-auth2-card{background:#fff;border:1px solid #d6d3cc;border-radius:16px;padding:28px 30px 26px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.eh-auth2-tabs{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid #111;border-radius:12px;overflow:hidden;margin-bottom:22px}
+.eh-auth2-tabs a{text-align:center;padding:11px;font:700 16px Inter,sans-serif;text-decoration:none;color:#111;background:#fff}
+.eh-auth2-tabs a.on{background:#111;color:#fff}
+.eh-auth2 h1{font:800 28px/1.2 Inter,"Noto Sans Devanagari",sans-serif;margin:0 0 6px;color:#111}
+.eh-auth2-sub{margin:0 0 18px;color:#444;font-size:15.5px}
+.eh-auth2-form{display:flex;flex-direction:column}
+.eh-auth2-form label{font:700 15px Inter,"Noto Sans Devanagari",sans-serif;color:#111;margin:12px 0 6px}
+.eh-auth2-form label small{font-weight:500;color:#666}
+.eh-auth2-form input[type=text],.eh-auth2-form input[type=email],.eh-auth2-form input[type=tel],.eh-auth2-form input[type=password],.eh-auth2-form input:not([type]){font:500 16px Inter,"Noto Sans Devanagari",sans-serif;height:50px;padding:0 14px;border:1.5px solid #8a8a8a;border-radius:10px;background:#fff;width:100%;box-sizing:border-box;color:#111}
+.eh-auth2-form input::placeholder{color:#9a9a9a}
+.eh-auth2-form input:focus{outline:none;border-color:#111;box-shadow:0 0 0 3px #e7e5e0}
+.eh-pw2{position:relative;display:block}
+.eh-pw2 input{padding-right:84px!important}
+.eh-pw2 button{position:absolute;right:6px;top:7px;height:36px;padding:0 12px;border:0;border-radius:8px;background:#f1f1ef;font:600 13px Inter,"Noto Sans Devanagari",sans-serif;cursor:pointer}
+.eh-auth2-forgot{align-self:flex-end;margin-top:8px;font-size:14.5px;font-weight:600;color:#1d4ed8}
+.eh-auth2-btn{margin-top:18px;height:52px;border:0;border-radius:10px;background:#111;color:#fff;font:700 17px Inter,"Noto Sans Devanagari",sans-serif;cursor:pointer}
+.eh-auth2-btn:hover{background:#333}
+.eh-auth2-or{display:flex;align-items:center;gap:12px;margin:20px 0 14px;color:#777;font-size:14px}
+.eh-auth2-or:before,.eh-auth2-or:after{content:"";flex:1;height:1px;background:#ddd}
+.eh-auth2-google{display:flex;justify-content:center}
+.eh-auth2-google>*{width:100%;display:flex;justify-content:center}
+.eh-auth2-chk{flex-direction:row!important;display:flex!important;align-items:center;gap:8px;font-weight:500!important;font-size:14.5px!important;margin-top:16px!important}
+.eh-auth2-chk input{width:18px;height:18px;accent-color:#111}
+.eh-auth2-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.eh-auth2-two>div{display:flex;flex-direction:column}
+.eh-auth2-switch{text-align:center;margin:20px 0 0;font-size:15px}
+.eh-auth2-switch a{font-weight:700;color:#1d4ed8}
+.eh-auth2-perks{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;color:#333;font-size:14.5px}
+.eh-auth2 .eh-alert{margin:0 0 6px}
+@media(max-width:520px){.eh-auth2-card{padding:22px 18px}.eh-auth2-two{grid-template-columns:1fr}}
+.eh-g-msg{color:#b91c1c;font-size:14px;text-align:center;margin:8px 0 0}

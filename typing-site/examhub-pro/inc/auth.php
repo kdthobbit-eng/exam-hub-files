@@ -118,9 +118,9 @@ function eh_google_button() {
     ob_start(); ?>
     <div class="eh-google">
       <div id="g_id_onload" data-client_id="<?php echo esc_attr($cid); ?>" data-callback="ehGoogle" data-auto_prompt="false"></div>
-      <div class="g_id_signin" data-type="standard" data-size="large" data-shape="pill" data-text="continue_with" data-logo_alignment="left" data-width="320"></div>
+      <div class="g_id_signin" data-type="standard" data-size="large" data-shape="rectangular" data-text="continue_with" data-logo_alignment="center" data-width="400"></div>
+      <p class="eh-g-msg" id="eh-g-msg" hidden></p>
     </div>
-    <script>function ehGoogle(r){fetch('<?php echo $rest; ?>?redirect_to=<?php echo rawurlencode($redir); ?>',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({credential:r.credential})}).then(function(x){return x.json()}).then(function(j){if(j.ok){location.href=j.redirect}else{alert(j.msg||'Google login nahi ho paya')}})}</script>
-    <div class="eh-or"><span>या</span></div>
+    <script>function ehGoogle(r){fetch('<?php echo $rest; ?>?redirect_to=<?php echo rawurlencode($redir); ?>',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({credential:r.credential})}).then(function(x){return x.json()}).then(function(j){if(j.ok){location.href=j.redirect}else{var m=document.getElementById('eh-g-msg');m.textContent=j.msg||'Google login नहीं हो पाया, दोबारा कोशिश करें।';m.hidden=false}})}</script>
     <?php return ob_get_clean();
 }
