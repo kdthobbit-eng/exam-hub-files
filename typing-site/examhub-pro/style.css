@@ -914,4 +914,4 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .eh-foot-grid>*{min-width:0}
 @media(max-width:480px){.eh-foot-grid{grid-template-columns:1fr}}
 .eh-dl-form label,.eh-dl-form select,.eh-dl-form input{min-width:0;max-width:100%}
-html,body{overflow-x:hidden}
+html,body{overflow-x:clip}
