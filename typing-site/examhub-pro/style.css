@@ -528,7 +528,7 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .eh-steps-nav li{flex:1;text-align:center;padding:12px 10px;font-weight:700;cursor:pointer;color:var(--mute);border-right:1.5px solid var(--ink)}
 .eh-steps-nav li:last-child{border-right:0}
 .eh-steps-nav li.on{background:var(--ink);color:#fff}
-.eh-step{padding:26px}
+.eh-stp{padding:26px}
 .eh-ins-head h2{margin:0 0 8px;font-size:26px}
 .eh-ins{margin:18px 0;padding-left:24px;display:grid;gap:9px;font-size:16.5px;color:var(--ink2)}
 .eh-ins li::marker{font-weight:700;color:var(--ink)}
@@ -758,3 +758,10 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .eh-upc-card em{font-style:normal;color:#dc2626;font:600 13px ui-monospace,monospace}.eh-upc-card em.st{color:#0f766e}
 .eh-upc-card a{justify-self:end;font-size:13px;font-weight:700;text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:3px 8px;color:var(--ink)}
 .eh-upc-tg{display:block;margin:0 10px 12px;text-align:center;background:#0284c7;color:#fff;border-radius:10px;padding:10px;text-decoration:none;font-weight:700;font-size:14px}
+.eh-psel-r select,.eh-psel-r input{width:100%;box-sizing:border-box;min-width:0}
+.eh-lim select{width:auto!important;flex:0 0 auto}
+.eh-ins-method{max-width:none;grid-template-columns:1fr 1fr;align-items:end}
+.eh-ins-method .eh-tip,.eh-ins-method .eh-agree,.eh-ins-method #eh-next{grid-column:1/-1}
+.eh-ins-method #eh-next{justify-self:start;min-width:260px}
+.eh-stp b,.eh-tip b{font:inherit;font-weight:700;color:inherit;display:inline}
+@media(max-width:700px){.eh-ins-method{grid-template-columns:1fr}}

@@ -34,7 +34,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
   <div id="eh-setup" class="eh-setup2">
     <ol class="eh-steps-nav"><li class="on" data-go="1">1. निर्देश (Instructions)</li><li data-go="2">2. पैसेज चुनें</li></ol>
 
-    <div id="eh-step1" class="eh-panel eh-step">
+    <div id="eh-step1" class="eh-panel eh-stp">
       <div class="eh-ins-head">
         <div><h2><?php echo esc_html($eh_exam['name']); ?></h2>
         <p class="eh-rules">
@@ -67,7 +67,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
       </div>
     </div>
 
-    <div id="eh-step2" class="eh-panel eh-step" hidden>
+    <div id="eh-step2" class="eh-panel eh-stp" hidden>
       <div class="eh-psel">
         <div class="eh-psel-l">
           <?php if (!empty($cfg['fixedPassage'])):
