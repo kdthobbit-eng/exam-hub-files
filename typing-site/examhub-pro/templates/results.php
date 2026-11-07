@@ -6,7 +6,7 @@ $sort = ($_GET['sort'] ?? '') === 'top' ? 'top' : 'latest';
 $pg = max(1, (int) ($_GET['pg'] ?? 1));
 $where = 'words > 0' . ($exam ? $wpdb->prepare(' AND exam = %s', $exam) : '') . ($sort === 'top' ? $wpdb->prepare(' AND created >= %s', gmdate('Y-m-d H:i:s', time() - 30 * DAY_IN_SECONDS)) : '');
 $total = (int) $wpdb->get_var("SELECT COUNT(*) FROM $t WHERE $where");
-$rows = $wpdb->get_results("SELECT id, user_id, name, exam, passage, title, minutes, keys_count, words, gross, net, acc, pass, created FROM $t WHERE $where ORDER BY " . ($sort === 'top' ? 'net DESC, acc DESC' : 'id DESC') . " LIMIT $size OFFSET " . (($pg - 1) * $size), ARRAY_A);
+$rows = $wpdb->get_results("SELECT id, user_id, name, exam, passage, title, minutes, keys_count, words, full_m, half_m, gross, net, acc, pass, created FROM $t WHERE $where ORDER BY " . ($sort === 'top' ? 'net DESC, acc DESC' : 'id DESC') . " LIMIT $size OFFSET " . (($pg - 1) * $size), ARRAY_A);
 $ps = []; foreach (eh_passages() as $p) $ps[$p['id']] = $p;
 get_header(); ?>
 <section class="wrap eh-section">
@@ -20,8 +20,8 @@ get_header(); ?>
   <?php if (!$rows): ?><tr><td colspan="10" class="muted">अभी कोई रिज़ल्ट नहीं — <a href="<?php echo esc_url(home_url('/exams/')); ?>">पहला टेस्ट आप दीजिए</a>।</td></tr><?php endif; ?>
   <?php foreach ($rows as $i => $r):
       $e = eh_exam($r['exam']); $p = $ps[$r['passage']] ?? null;
-      $tgtSpeed = $e ? ($e['unit'] === 'keys' ? (int) round($e['target'] / 5 / max(1, $e['minutes'])) : (int) round($e['target'] / max(1, $e['minutes']))) : 0;
-      $cg = !$tgtSpeed || $r['gross'] >= $tgtSpeed ? 'g' : 'r'; $cn = !$tgtSpeed || $r['net'] >= $tgtSpeed ? 'g' : 'r'; ?>
+      $tgtSpeed = eh_target_wpm($e); list($gw, $nw) = eh_row_speeds($r);
+      $cg = !$tgtSpeed || $gw >= $tgtSpeed ? 'g' : 'r'; $cn = !$tgtSpeed || $nw >= $tgtSpeed ? 'g' : 'r'; ?>
     <tr>
       <td><?php echo ($pg - 1) * $size + $i + 1; ?></td>
       <td><b><?php echo esc_html(eh_display_name($r)); ?></b></td>
@@ -31,8 +31,8 @@ get_header(); ?>
       <td class="small"><?php echo esc_html(gmdate('i:s', (int) round($r['minutes'] * 60))); ?> min.</td>
       <td><?php echo (int) $r['keys_count']; ?></td>
       <td><b><?php echo $tgtSpeed ?: '—'; ?></b></td>
-      <td class="<?php echo $cg; ?>"><b><?php echo (int) $r['gross']; ?></b></td>
-      <td class="<?php echo $cn; ?>"><b><?php echo (int) $r['net']; ?></b></td>
+      <td class="<?php echo $cg; ?>"><b><?php echo esc_html($gw); ?></b></td>
+      <td class="<?php echo $cn; ?>"><b><?php echo esc_html($nw); ?></b></td>
     </tr>
   <?php endforeach; ?>
   </tbody></table></div>

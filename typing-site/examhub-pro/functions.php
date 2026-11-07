@@ -135,6 +135,17 @@ function eh_cat_label($c) {
     return ['court' => 'High Court / Court', 'central' => 'SSC / Railway / Forces', 'central-org' => 'Central Govt. Org', 'state' => 'State Exams', 'other' => 'Other'][$c] ?? $c;
 }
 function eh_lang_label($l) { return ['en' => 'English', 'hi' => 'Hindi', 'mr' => 'Marathi', 'or' => 'Odia'][$l] ?? $l; }
+/* target speed in WPM as shown on exam sites (key based: keys ÷ minutes ÷ 10) */
+function eh_target_wpm($e) {
+    if (!$e) return 0;
+    $m = max(1, (int) $e['minutes']);
+    return $e['unit'] === 'keys' ? (int) round($e['target'] / $m / 10) : (int) round($e['target'] / $m);
+}
+function eh_row_speeds($r) {
+    $min = max(1 / 60, (float) $r['minutes']);
+    $g = (int) $r['words'] / $min; $n = max(0, (int) $r['words'] - ((int) $r['full_m'] + (int) $r['half_m'] / 2)) / $min;
+    return [number_format($g, 2, '.', ''), number_format($n, 2, '.', '')];
+}
 function eh_target_label($e) { return number_format_i18n($e['target']) . ($e['unit'] === 'keys' ? ' keys' : ' words'); }
 
 function eh_exam_card($e, $attempts = 0) {

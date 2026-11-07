@@ -29,26 +29,24 @@ get_header(); ?>
       <details class="eh-cols"><summary>Columns ▾</summary><div id="eh-cols"></div></details>
     </div>
     <div class="eh-table-wrap"><table class="eh-table eh-hist" id="eh-hist"><thead><tr>
-      <th>#</th><th>Exam &amp; Duration</th><th>Passage</th><th>Date &amp; Time</th><th>Keys Typed</th><th>Target</th><th>Gross</th><th>Net</th><th>Accuracy</th><th>Full/Half</th><th>Result</th><th>Action</th>
+      <th>#</th><th>Exam &amp; Duration</th><th>Passage &amp; Given Keys</th><th>Date &amp; Time Used</th><th>Keys Typed</th><th>Target (WPM)</th><th>Gross (WPM)</th><th>Net (WPM)</th><th>Accuracy</th><th>Full/Half</th><th>Actions</th>
     </tr></thead><tbody>
-    <?php if (!$rows): ?><tr><td colspan="12" class="muted">अभी यहां कुछ नहीं है। <a href="<?php echo esc_url(home_url('/exams/')); ?>">पहला टेस्ट दें →</a></td></tr><?php endif; ?>
+    <?php if (!$rows): ?><tr><td colspan="11" class="muted">अभी यहां कुछ नहीं है। <a href="<?php echo esc_url(home_url('/exams/')); ?>">पहला टेस्ट दें →</a></td></tr><?php endif; ?>
     <?php foreach ($rows as $i => $r):
-        $e = eh_exam($r['exam']); $p = $ps[$r['passage']] ?? null;
-        $tgt = $e ? (int) $e['target'] : 0; $hit = $e && $e['unit'] === 'keys' ? (int) $r['keys_count'] >= $tgt : (int) $r['words'] >= $tgt;
+        $e = eh_exam($r['exam']); $p = $ps[$r['passage']] ?? null; $tw = eh_target_wpm($e); list($gw, $nw) = eh_row_speeds($r);
         $retype = $r['exam'] === 'demo' ? home_url('/demo-typing/') : home_url('/typing/' . $r['exam'] . '/');
         if ($r['passage']) $retype = add_query_arg('passage', $r['passage'], $retype); ?>
       <tr>
         <td><?php echo ($pg - 1) * $per + $i + 1; ?></td>
-        <td><b><?php echo esc_html($e ? $e['name'] : ($r['exam'] === 'demo' ? 'Demo Typing' : $r['exam'])); ?></b><br><span class="muted small"><?php echo esc_html(gmdate('i:s', (int) round($r['minutes'] * 60))); ?> min<?php echo $r['live_date'] ? ' · Live' : ''; ?></span></td>
-        <td class="small"><?php echo esc_html($r['title'] ?: ($p['title'] ?? '—')); ?><?php if ($p): ?><br><span class="muted"><?php echo number_format_i18n($p['chars']); ?> keys</span><?php endif; ?></td>
-        <td class="small"><?php echo esc_html(mysql2date('d M Y', $r['created'])); ?><br><span class="muted"><?php echo esc_html(mysql2date('h:i A', $r['created'])); ?></span></td>
+        <td><b><?php echo esc_html($e ? $e['name'] : ($r['exam'] === 'demo' ? 'Demo Typing' : $r['exam'])); ?></b><br><span class="muted small"><?php echo $e ? (int) $e['minutes'] . ':00 min' : ''; ?><?php echo $r['live_date'] ? ' · Live' : ''; ?></span> <?php echo $r['pass'] ? '<span class="pill ok">Qualified</span>' : '<span class="pill no">Unqualified</span>'; ?></td>
+        <td class="small"><?php echo esc_html($r['title'] ?: ($p['title'] ?? '—')); ?><br><span class="muted"><?php echo $e && $e['unit'] === 'keys' ? number_format_i18n($e['target']) . ' keystrokes given' : ($p ? number_format_i18n($p['chars']) . ' keystrokes' : ''); ?></span></td>
+        <td class="small"><?php echo esc_html(mysql2date('d/m/Y', $r['created'])); ?><br><span class="muted">Used: <?php echo esc_html(gmdate('i:s', (int) round($r['minutes'] * 60))); ?> min</span></td>
         <td><?php echo (int) $r['keys_count']; ?></td>
-        <td><?php echo $e ? esc_html(eh_target_label($e)) : '—'; ?></td>
-        <td class="<?php echo $hit ? 'g' : 'r'; ?>"><b><?php echo (int) $r['gross']; ?></b></td>
-        <td class="<?php echo $r['pass'] ? 'g' : 'r'; ?>"><b><?php echo (int) $r['net']; ?></b></td>
+        <td><b><?php echo $tw ?: '—'; ?></b></td>
+        <td class="<?php echo $tw && $gw >= $tw ? 'g' : 'r'; ?>"><b><?php echo esc_html($gw); ?></b></td>
+        <td class="<?php echo $tw && $nw >= $tw ? 'g' : 'r'; ?>"><b><?php echo esc_html($nw); ?></b></td>
         <td><?php echo esc_html($r['acc']); ?>%</td>
         <td><?php echo (int) $r['full_m'] . '/' . (int) $r['half_m']; ?></td>
-        <td><?php echo $r['pass'] ? '<span class="pill ok">Qualified</span>' : '<span class="pill no">Not Qualified</span>'; ?></td>
         <td class="eh-act"><?php if ($r['rkey']): ?><a class="btn ghost sm" href="<?php echo esc_url(eh_result_url($r['id'], $r['rkey'])); ?>">View</a><?php endif; ?><a class="btn dark sm" href="<?php echo esc_url($retype); ?>">Retype</a></td>
       </tr>
     <?php endforeach; ?>
@@ -58,8 +56,8 @@ get_header(); ?>
 </section>
 <script>
 (function(){var t=document.getElementById('eh-hist'),box=document.getElementById('eh-cols');if(!t||!box)return;
-var hs=[].slice.call(t.tHead.rows[0].cells),off={};try{off=JSON.parse(localStorage.getItem('eh_cols')||'{}')}catch(e){}
+var hs=[].slice.call(t.tHead.rows[0].cells),off={8:true,9:true};try{var sv=localStorage.getItem('eh_cols2');if(sv)off=JSON.parse(sv)}catch(e){}
 function apply(){[].slice.call(t.rows).forEach(function(r){[].slice.call(r.cells).forEach(function(c,i){if(r.cells.length===hs.length)c.style.display=off[i]?'none':''})})}
-hs.forEach(function(h,i){if(i===0)return;var l=document.createElement('label');l.innerHTML='<input type="checkbox"'+(off[i]?'':' checked')+'> '+h.textContent;l.firstChild.onchange=function(){off[i]=!this.checked;try{localStorage.setItem('eh_cols',JSON.stringify(off))}catch(e){}apply()};box.appendChild(l)});apply();})();
+hs.forEach(function(h,i){if(i===0)return;var l=document.createElement('label');l.innerHTML='<input type="checkbox"'+(off[i]?'':' checked')+'> '+h.textContent;l.firstChild.onchange=function(){off[i]=!this.checked;try{localStorage.setItem('eh_cols2',JSON.stringify(off))}catch(e){}apply()};box.appendChild(l)});apply();})();
 </script>
 <?php get_footer();
