@@ -840,3 +840,4 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .eh-ins-method{grid-template-columns:1fr!important}
 .eh-exam-head-r{display:flex;flex-direction:column;align-items:flex-end;gap:10px}.eh-explore{font-weight:600;text-decoration:none;color:#111}
 .eh-dash-info{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:6px 24px;margin:14px 0 18px;padding:14px 16px;border:1px solid #e5e2da;border-radius:10px;background:#fff}.eh-dash-info span{color:#666}
+.eh-dash-info{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:700px){.eh-dash-info{grid-template-columns:1fr}}
