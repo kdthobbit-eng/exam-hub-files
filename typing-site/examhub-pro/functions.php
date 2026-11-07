@@ -169,6 +169,7 @@ function eh_member_links() {
     ];
 }
 function eh_member_nav($active = '') {
+    if (is_user_logged_in()) return ''; /* logged-in users already have these links in the header, like the exam site */
     $h = '<nav class="eh-mnav"><div class="wrap">';
     foreach (eh_member_links() as $k => $l) $h .= '<a class="' . ($k === $active ? 'on' : '') . ($k === 'insight' ? ' ins' : '') . '" href="' . esc_url(home_url($l[0])) . '">' . esc_html($l[1]) . '</a>';
     return $h . '</div></nav>';

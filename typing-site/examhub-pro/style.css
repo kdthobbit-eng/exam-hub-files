@@ -820,3 +820,9 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .eh-auth2 .eh-alert{margin:0 0 6px}
 @media(max-width:520px){.eh-auth2-card{padding:22px 18px}.eh-auth2-two{grid-template-columns:1fr}}
 .eh-g-msg{color:#b91c1c;font-size:14px;text-align:center;margin:8px 0 0}
+/* member header: one line like the exam site */
+.eh-menu a{white-space:nowrap}
+.eh-header.eh-member .eh-menu{gap:0}
+.eh-header.eh-member .eh-menu a{font-size:15px;padding:8px 10px}
+.eh-header.eh-member .eh-menu li:last-child a{background:linear-gradient(90deg,#0ea5e9,#2563eb);color:#fff;border-radius:999px;padding:7px 14px;margin-left:6px;text-decoration:none}
+@media(max-width:1240px){.eh-header.eh-member .eh-menu a{font-size:14px;padding:8px 7px}.eh-header.eh-member .eh-logo-txt{font-size:17px}}

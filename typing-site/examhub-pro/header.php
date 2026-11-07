@@ -15,7 +15,7 @@
   </div>
 </div>
 <?php endif; ?>
-<header class="eh-header">
+<header class="eh-header<?php echo is_user_logged_in() ? ' eh-member' : ''; ?>">
   <div class="wrap eh-header-in">
     <a class="eh-logo" href="<?php echo esc_url(home_url('/')); ?>">
       <span class="eh-logo-mark">EH</span><span class="eh-logo-txt"><?php echo esc_html(eh_opt('brand')); ?></span>
