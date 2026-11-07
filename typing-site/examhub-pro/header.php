@@ -10,7 +10,7 @@
 <?php $tick = eh_ticker_items(); if ($tick): ?>
 <div class="eh-ticker" data-n="<?php echo count($tick); ?>">
   <div class="wrap eh-ticker-in">
-    <button type="button" class="tk-prev" aria-label="पिछला">‹</button><button type="button" class="tk-next" aria-label="अगला">›</button>
+    <button type="button" class="tk-prev" aria-label="Previous">‹</button><button type="button" class="tk-next" aria-label="Next">›</button>
     <div class="tk-items"><?php foreach ($tick as $i => $t): ?><a class="tk<?php echo $i ? '' : ' on'; ?>" href="<?php echo esc_url($t[1]); ?>"><span class="tk-n"><?php echo ($i + 1) . '/' . count($tick); ?>.</span> <?php echo esc_html($t[0]); ?> <b><?php echo esc_html($t[2]); ?></b></a><?php endforeach; ?></div>
   </div>
 </div>
@@ -40,10 +40,10 @@
     <div class="eh-drawer-h"><b><?php echo esc_html(eh_opt('brand')); ?></b><button type="button" data-close aria-label="Close">✕</button></div>
     <div class="eh-drawer-card">
       <span class="eh-av-big"><?php echo esc_html(eh_initials($u->display_name)); ?></span>
-      <p>नमस्ते, <b><?php echo esc_html($u->display_name); ?></b></p>
+      <p>Hello, <b><?php echo esc_html($u->display_name); ?></b></p>
       <div class="eh-drawer-btns"><a class="btn ghost sm" href="<?php echo esc_url(admin_url('profile.php')); ?>">✎ Edit Profile</a><a class="btn sm eh-out" href="<?php echo esc_url(wp_logout_url(home_url('/'))); ?>">⎋ Logout</a></div>
       <ul class="eh-drawer-links"><?php foreach (eh_member_links() as $l) echo '<li><a href="' . esc_url(home_url($l[0])) . '">' . esc_html($l[1]) . '</a></li>'; ?></ul>
-      <p class="muted small">मदद चाहिए? Telegram पर पूछें</p>
+      <p class="muted small">Need help? Ask on Telegram</p>
       <?php echo eh_tg_buttons('inline'); ?>
     </div>
   </div>
