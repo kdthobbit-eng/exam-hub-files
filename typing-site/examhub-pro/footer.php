@@ -1,7 +1,7 @@
 </main>
 <section class="eh-cta-strip">
   <div class="wrap">
-    <div><h3>Typing Updates सबसे पहले पाएं</h3><p>Telegram से जुड़िए — एग्ज़ाम नोटिस, नए पैसेज और टाइपिंग टिप्स वहीं मिलेंगे।</p></div>
+    <div><h3>Get typing updates first</h3><p>Join us on Telegram for exam notices, new passages and typing tips.</p></div>
     <?php echo eh_tg_buttons(); ?>
   </div>
 </section>

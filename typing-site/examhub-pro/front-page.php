@@ -104,7 +104,7 @@ $np = count(eh_passages()); ?>
 
 <section class="wrap hx-cta">
   <h2>Any typing doubt in mind?<br>Let’s connect.</h2>
-  <?php echo eh_tg_buttons(); ?>
+  <a class="hx-arrow" href="<?php echo esc_url(eh_opt('tg_group')); ?>" target="_blank" rel="noopener" aria-label="Ask on Telegram"><svg viewBox="0 0 24 24"><path d="M6 18L18 6M9 6h9v9"/></svg></a>
 </section>
 
 <script>(function(){var t=document.getElementById('hx-recent'),pg=document.querySelector('.hx-pg');if(!t||!pg)return;var rows=[].slice.call(t.tBodies[0].rows),p=0,n=Math.ceil(rows.length/5),b=pg.querySelectorAll('button');

@@ -899,3 +899,12 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .hx-cta h2{font-size:clamp(28px,3.4vw,44px);line-height:1.2;margin:0;font-weight:500}
 @media(max-width:900px){.hx-hero-in{grid-template-columns:1fr}.hx-feat{grid-template-columns:1fr}.hx-grid{grid-template-columns:1fr 1fr}.hx-cards{grid-template-columns:1fr}.hx-c.y{grid-column:auto}.hx-cta{flex-direction:column;align-items:flex-start}}
 @media(max-width:560px){.hx-hero{padding:36px 0 44px}.hx-grid{grid-template-columns:1fr}.hx-badge.b2{left:0}.hx-hero-art{padding:44px 6px 50px}.hx-tbl{overflow-x:auto}}
+.hx-hero-art{padding:48px 56px 56px}
+.hx-badge.b1{top:0;right:0}.hx-badge.b2{top:auto;bottom:22%;left:0}.hx-badge.b3{bottom:0;right:16%}
+.hx-win-bar span{display:inline-block}
+.hx-acc summary::after{content:'';width:9px;height:9px;border-right:2px solid #111;border-bottom:2px solid #111;transform:rotate(45deg);margin:4px 6px 0 12px;flex:none}
+.hx-acc details[open] summary::after{transform:rotate(-135deg);margin-top:10px}
+.hx-arrow{flex:none;width:72px;height:72px;background:#111;border-radius:0 0 0 36px;display:grid;place-items:center;transition:transform .2s}
+.hx-arrow:hover{transform:translate(3px,-3px)}
+.hx-arrow svg{width:34px;height:34px;fill:none;stroke:#fff;stroke-width:1.6}
+@media(max-width:560px){.hx-hero-art{padding:48px 8px 56px}}
