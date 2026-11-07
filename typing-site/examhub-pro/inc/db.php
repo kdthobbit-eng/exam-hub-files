@@ -72,7 +72,7 @@ function eh_leaderboard($exam = '', $live_date = '', $limit = 20, $since_days = 
 
 function eh_recent($limit = 12) {
     global $wpdb;
-    return $wpdb->get_results('SELECT name, exam, net, acc, pass, created FROM ' . eh_table() . ' WHERE words > 0 ORDER BY id DESC LIMIT ' . (int) $limit, ARRAY_A);
+    return $wpdb->get_results('SELECT name, user_id, exam, gross, net, acc, pass, created FROM ' . eh_table() . ' WHERE words >= 10 AND net > 0 ORDER BY id DESC LIMIT ' . (int) $limit, ARRAY_A);
 }
 
 function eh_display_name($row) {

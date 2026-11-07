@@ -1,91 +1,112 @@
 <?php get_header();
 $exams = eh_exams(); $att = eh_attempt_counts(); $total = array_sum($att);
 $popular = $exams; usort($popular, function ($a, $b) use ($att) { return ($att[$b['slug']] ?? 0) <=> ($att[$a['slug']] ?? 0); });
-$recent = eh_recent(8); ?>
-<section class="eh-hero">
-  <div class="wrap eh-hero-in">
-    <div>
-      <span class="eh-kicker">100% Free · Hindi + English Typing</span>
-      <h1>Government Exam की <em>Typing Test</em> तैयारी, अब यहीं से</h1>
-      <p class="lead">SSC, High Court, Railway, UPSSSC, DSSSB, KVS जैसे <?php echo count($exams); ?>+ एग्ज़ाम का टाइपिंग टेस्ट एक ही जगह। हिंदी में Krutidev और Mangal दोनों से प्रैक्टिस करें, टेस्ट खत्म होते ही रिज़ल्ट देखें।</p>
-      <div class="eh-hero-btns">
-        <a class="btn dark lg" href="<?php echo esc_url(home_url('/exams/')); ?>">All Exams देखें →</a>
-        <a class="btn ghost lg" href="<?php echo esc_url(home_url('/demo-typing/')); ?>">Demo Typing</a>
-      </div>
-      <div class="eh-stats">
-        <div><b><?php echo count($exams); ?>+</b><span>Exams</span></div>
-        <div><b><?php echo count(eh_passages()); ?>+</b><span>Passages</span></div>
-        <?php if ($total >= 100): ?><div><b><?php echo number_format_i18n($total); ?></b><span>Tests Taken</span></div><?php else: ?><div><b>100%</b><span>Free</span></div><?php endif; ?>
-      </div>
+$recent = eh_recent(100);
+$np = count(eh_passages()); ?>
+
+<section class="hx-hero">
+  <div class="wrap hx-hero-in">
+    <div class="hx-hero-txt">
+      <h1>Free typing tests for every government exam.</h1>
+      <p>Practice English and Hindi (Krutidev, Mangal, Remington) on the same screen you will see in the exam hall. Time, target and error rules are set for each exam. Your result comes the moment you submit.</p>
+      <a class="hx-btn3d" href="<?php echo esc_url(home_url('/exams/')); ?>">Explore all exams <span>⟶</span></a>
+      <a class="hx-link" href="<?php echo esc_url(home_url('/demo-typing/')); ?>">Demo Typing</a>
     </div>
-    <div class="eh-hero-art">
-      <img src="<?php echo esc_url(EH_URI . '/assets/hero.svg'); ?>" alt="टाइपिंग टेस्ट की प्रैक्टिस करता छात्र" width="560" height="480" fetchpriority="high">
+    <div class="hx-hero-art" aria-hidden="true">
+      <div class="hx-win">
+        <div class="hx-win-bar">SSC CHSL English Typing <span>09:42</span></div>
+        <div class="hx-win-psg"><i class="ok">The government has</i> <i class="cur">launched</i> a new scheme for farmers in all districts of the state...</div>
+        <div class="hx-win-box">The government has launc<b>|</b></div>
+      </div>
+      <div class="hx-badge b1"><b><?php echo count($exams); ?>+</b><span>Exams</span></div>
+      <div class="hx-badge b2"><b><?php echo number_format_i18n($np); ?>+</b><span>Passages</span></div>
+      <div class="hx-badge b3"><b><?php echo $total >= 100 ? number_format_i18n($total) : '100%'; ?></b><span><?php echo $total >= 100 ? 'Tests taken' : 'Free'; ?></span></div>
     </div>
   </div>
 </section>
 
-<div class="eh-marquee" aria-hidden="true"><div class="eh-marquee-in">
-  <?php $names = array_slice(array_map(function ($e) { return preg_replace('/\s*\(.*?\)/', '', $e['name']); }, $exams), 0, 30); for ($k = 0; $k < 2; $k++) foreach ($names as $n) echo '<span>' . esc_html($n) . '</span>'; ?>
-</div></div>
-
-<section class="wrap eh-section eh-steps">
-  <div class="eh-step"><b>01</b><h3>Exam चुनें</h3><p>129+ एग्ज़ाम में से अपना एग्ज़ाम चुनिए — टाइम और टारगेट अपने-आप सेट हो जाएगा।</p></div>
-  <div class="eh-step"><b>02</b><h3>टाइप करें</h3><p>English, Krutidev या Mangal — जिसमें एग्ज़ाम है, उसी में बिल्कुल एग्ज़ाम जैसी स्क्रीन पर टाइप कीजिए।</p></div>
-  <div class="eh-step"><b>03</b><h3>रिज़ल्ट देखें</h3><p>Net speed, accuracy, full-half mistake — टेस्ट खत्म होते ही पूरी डिटेल सामने।</p></div>
-</section>
-
-<section class="wrap eh-section">
-  <div class="eh-sec-head"><h2>Popular Exams</h2><a href="<?php echo esc_url(home_url('/exams/')); ?>">Explore all exams →</a></div>
-  <div class="eh-quick">
-    <?php foreach (['SSC CHSL', 'SSC CGL', 'High Court', 'UPSSSC', 'DSSSB', 'KVS', 'RRB NTPC', 'UP Police', 'Bihar', 'Rajasthan', 'Delhi Police', 'AIIMS'] as $k): ?>
-      <a href="<?php echo esc_url(home_url('/exams/?q=' . rawurlencode($k))); ?>"><?php echo esc_html($k); ?></a>
-    <?php endforeach; ?>
-  </div>
-  <div class="eh-grid">
-    <?php foreach (array_slice($popular, 0, 8) as $e) echo eh_exam_card($e, $att[$e['slug']] ?? 0); ?>
+<section class="hx-dark">
+  <div class="wrap hx-feat">
+    <div><span class="hx-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg></span>
+      <h3>Exam-pattern passages</h3><p>English and Hindi passages written the way real exams set them.</p></div>
+    <div><span class="hx-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+      <h3>Daily Live Typing</h3><p>One new passage every day for everyone. See where you rank.</p></div>
+    <div><span class="hx-ic"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5 2 7.5L12 16.5 5.5 21l2-7.5L2 9h7z"/></svg></span>
+      <h3>Rule-based checking</h3><p>Full mistakes, half mistakes and key depressions counted as per exam rules.</p></div>
   </div>
 </section>
 
-<section class="eh-band">
-  <div class="wrap eh-feat">
-    <div class="eh-f"><span>⌨️</span><h3>Real Exam Screen</h3><p>हर एग्ज़ाम का अपना टाइम और टारगेट। ऊपर पैसेज, नीचे टाइपिंग बॉक्स — जैसा एग्ज़ाम सेंटर में मिलता है।</p></div>
-    <div class="eh-f"><span>🧮</span><h3>सही Error Calculation</h3><p>Full mistake, half mistake, key depression और net speed — सब कुछ एग्ज़ाम के नियम से गिना जाता है।</p></div>
-    <div class="eh-f"><span>🇮🇳</span><h3>Krutidev + Mangal</h3><p>Remington (Krutidev) हो या Inscript (Mangal) — जिसमें आपका एग्ज़ाम है, उसी में प्रैक्टिस करें।</p></div>
-    <div class="eh-f"><span>🏆</span><h3>Daily Live Typing</h3><p>रोज़ एक नया पैसेज, सबके लिए एक ही। टेस्ट दीजिए और देखिए बाकी लोगों में आपकी रैंक क्या है।</p></div>
-  </div>
-</section>
-
-<section class="wrap eh-section eh-two">
-  <div>
-    <div class="eh-sec-head"><h2>Recent Results</h2><a href="<?php echo esc_url(home_url('/exam-based-result/')); ?>">सब देखें →</a></div>
-    <div class="eh-table-wrap"><table class="eh-table">
-      <thead><tr><th>Name</th><th>Exam</th><th>Net</th><th>Acc.</th></tr></thead><tbody>
-      <?php if (!$recent): ?><tr><td colspan="4" class="muted">अभी कोई रिज़ल्ट नहीं है — पहला टेस्ट आप ही दे दीजिए!</td></tr><?php endif; ?>
-      <?php foreach ($recent as $r): $e = eh_exam($r['exam']); ?>
-        <tr><td><?php echo esc_html(eh_display_name($r)); ?></td><td><?php echo esc_html($e ? $e['name'] : 'Demo Typing'); ?></td><td><b><?php echo (int) $r['net']; ?></b></td><td><?php echo esc_html($r['acc']); ?>%</td></tr>
+<section class="hx-exams">
+  <div class="wrap">
+    <p class="hx-kick">Our exams</p>
+    <h2 class="hx-h2 c">Pick your exam and start typing</h2>
+    <div class="hx-chips">
+      <?php foreach (['SSC', 'High Court', 'UPSSSC', 'DSSSB', 'KVS', 'RRB NTPC', 'UP Police', 'Bihar', 'Rajasthan', 'Delhi Police', 'AIIMS', 'MP'] as $k): ?>
+        <a href="<?php echo esc_url(home_url('/exams/?q=' . rawurlencode($k))); ?>"><?php echo esc_html($k); ?></a>
       <?php endforeach; ?>
-      </tbody></table></div>
-  </div>
-  <div class="eh-why">
-    <h2>Exam Hub Typing ही क्यों?</h2>
-    <ul>
-      <li><b>पूरी तरह Free</b> — न कोई फीस, न कोई प्लान।</li>
-      <li><b>एक अकाउंट, सारे एग्ज़ाम</b> — अलग-अलग जगह जाने की ज़रूरत नहीं।</li>
-      <li><b>Exam Pattern</b> — हर एग्ज़ाम का टाइम और टारगेट उसके नियम के हिसाब से।</li>
-      <li><b>अपनी Progress देखें</b> — लॉगिन करें, आपके सारे रिज़ल्ट सेव रहेंगे।</li>
-      <li><b>Telegram पर मदद</b> — कोई दिक्कत हो तो सीधे ग्रुप में पूछिए।</li>
-    </ul>
-    <?php echo eh_tg_buttons(); ?>
+    </div>
+    <div class="hx-grid">
+      <?php foreach (array_slice($popular, 0, 8) as $e) echo eh_exam_card($e, $att[$e['slug']] ?? 0); ?>
+      <a class="hx-more" href="<?php echo esc_url(home_url('/exams/')); ?>"><b>Explore</b><span>All <?php echo count($exams); ?> exams</span><i>⟶</i></a>
+    </div>
   </div>
 </section>
 
-<section class="wrap eh-section">
-  <h2>FAQs</h2>
-  <div class="eh-faq">
-    <details><summary>क्या ये टाइपिंग टेस्ट फ्री है?</summary><p>हाँ, सारे टेस्ट, लाइव टाइपिंग और रिज़ल्ट बिल्कुल फ्री हैं।</p></details>
-    <details><summary>Krutidev में टाइप कैसे करें?</summary><p>टेस्ट शुरू करने से पहले Layout में "Krutidev / Remington GAIL" चुन लीजिए। कीबोर्ड English पर ही रहने दें, आप जो टाइप करेंगे वो अपने-आप हिंदी में दिखेगा।</p></details>
-    <details><summary>Full और Half mistake में क्या फर्क है?</summary><p>गलत शब्द, छूटा शब्द या फालतू शब्द — ये Full mistake हैं। स्पेस, कैपिटल लेटर या कॉमा-फुलस्टॉप की गलती Half mistake गिनी जाती है।</p></details>
-    <details><summary>मोबाइल पर टेस्ट दे सकते हैं?</summary><p>English टेस्ट मोबाइल पर चल जाता है, लेकिन असली प्रैक्टिस के लिए कंप्यूटर या लैपटॉप ही ठीक रहता है।</p></details>
+<section class="wrap hx-sec hx-perf">
+  <p class="hx-kick">Students practising now</p>
+  <h2 class="hx-h2">Check your typing performance.</h2>
+  <div class="hx-acc">
+    <details open><summary>Recent tests</summary><p>The latest tests taken on the site. Practise daily and compare your speed with others.</p></details>
+    <details><summary>How errors are counted</summary><p>A wrong, missing or extra word is a full mistake. Spacing, capital letter or punctuation slips are half mistakes. Error % = (full + half ÷ 2) ÷ words typed × 100.</p></details>
+    <details><summary>Performance dashboard</summary><p>After every test you get gross speed, net speed, accuracy, key depressions, backspace count and a word-by-word comparison with the original passage.</p></details>
+  </div>
+  <a class="btn dark" href="<?php echo esc_url(home_url('/exam-based-result/')); ?>">Exam Based Typing Result</a>
+  <div class="hx-tbl">
+    <table class="eh-table" id="hx-recent">
+      <thead><tr><th>#</th><th>Name</th><th>Exam</th><th>Gross</th><th>Net</th></tr></thead>
+      <tbody>
+      <?php if (!$recent): ?><tr><td colspan="5" class="muted">No results yet. Be the first to take a test.</td></tr><?php endif; ?>
+      <?php foreach ($recent as $i => $r): $e = eh_exam($r['exam']); ?>
+        <tr<?php echo $i >= 5 ? ' hidden' : ''; ?>><td><?php echo $i + 1; ?></td><td><?php echo esc_html(eh_display_name($r)); ?></td><td><?php echo esc_html($e ? $e['name'] : 'Demo Typing'); ?></td><td><?php echo (int) $r['gross']; ?></td><td><b><?php echo (int) $r['net']; ?></b></td></tr>
+      <?php endforeach; ?>
+      </tbody>
+    </table>
+    <?php if (count($recent) > 5): ?>
+    <div class="hx-pg"><button type="button" class="btn ghost" data-d="-1" disabled>Previous</button><button type="button" class="btn dark" data-d="1">Next</button><span>Page <b>1</b> of <?php echo (int) ceil(count($recent) / 5); ?></span></div>
+    <?php endif; ?>
   </div>
 </section>
+
+<section class="wrap hx-sec">
+  <p class="hx-kick">Why Exam Hub</p>
+  <h2 class="hx-h2">What makes us useful.</h2>
+  <div class="hx-acc soft">
+    <details open><summary>Free, fully</summary><p>No fee, no plan, no locked tests. Every exam, passage and result is free.</p></details>
+    <details><summary>New passages every day</summary><p>Six new passages are added every day, plus a daily live passage for everyone.</p></details>
+    <details><summary>One site, all exams</summary><p>SSC, High Courts, railway, state boards and more. One login keeps all your results.</p></details>
+  </div>
+  <div class="hx-cards">
+    <div class="hx-c y"><h3>Exam interface</h3><p>Each exam opens in its own window size, font and layout, just like the real test.</p></div>
+    <div class="hx-c p"><h3>Error formulas</h3><p>Half mistakes, full mistakes, backspace and key depressions are calculated as per each exam.</p></div>
+    <div class="hx-c b"><h3>Feedback</h3><p>Found a problem or need help? Message us on Telegram.</p></div>
+  </div>
+</section>
+
+<section class="wrap hx-sec">
+  <h2 class="hx-h2">FAQs</h2>
+  <div class="hx-acc soft">
+    <details><summary>Is it really free?</summary><p>Yes. All tests, live typing and results are free.</p></details>
+    <details><summary>How do I type in Krutidev?</summary><p>Choose "Hindi - Krutidev" before starting. Keep your keyboard in English; the text appears in Hindi as you type.</p></details>
+    <details><summary>What is the difference between full and half mistakes?</summary><p>A wrong, missing or extra word is a full mistake. Spacing, capitals and punctuation errors are half mistakes.</p></details>
+    <details><summary>Can I practise on mobile?</summary><p>English tests work on mobile, but use a computer for real exam practice.</p></details>
+  </div>
+</section>
+
+<section class="wrap hx-cta">
+  <h2>Any typing doubt in mind?<br>Let’s connect.</h2>
+  <?php echo eh_tg_buttons(); ?>
+</section>
+
+<script>(function(){var t=document.getElementById('hx-recent'),pg=document.querySelector('.hx-pg');if(!t||!pg)return;var rows=[].slice.call(t.tBodies[0].rows),p=0,n=Math.ceil(rows.length/5),b=pg.querySelectorAll('button');
+pg.addEventListener('click',function(e){var d=e.target.getAttribute('data-d');if(!d)return;p=Math.max(0,Math.min(n-1,p+(+d)));rows.forEach(function(r,i){r.hidden=Math.floor(i/5)!==p;});pg.querySelector('b').textContent=p+1;b[0].disabled=p===0;b[1].disabled=p===n-1;});})();</script>
 <?php get_footer();
