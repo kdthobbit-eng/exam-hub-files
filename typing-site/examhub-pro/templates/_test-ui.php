@@ -2,7 +2,7 @@
 /** @var array $eh_exam  @var array $eh_cfg */
 $lang = $eh_exam['lang'] === 'hi' ? 'hi' : 'en';
 $u = wp_get_current_user();
-$eh_win = eh_window($eh_exam['slug']);
+$eh_win = eh_window($eh_exam['slug'], $eh_exam['lang'] === 'en' ? 'en' : 'hi');
 $cfg = array_merge([
     'exam' => $eh_exam,
     'passages' => eh_passages($lang),
@@ -106,7 +106,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
   </div>
 
   <!-- Exam window (full screen) -->
-  <div id="eh-test" class="eh-exam <?php echo esc_attr(eh_window_classes($eh_win)); ?>" data-family="<?php echo esc_attr($eh_win['family']); ?>" style="--ph:<?php echo (int) $eh_win['ph']; ?>px;--th:<?php echo (int) $eh_win['th']; ?>px" hidden>
+  <div id="eh-test" class="eh-exam <?php echo esc_attr(eh_window_classes($eh_win)); ?>" data-family="<?php echo esc_attr($eh_win['family']); ?>" style="<?php echo esc_attr(eh_window_style($eh_win)); ?>" hidden>
     <div class="ex-top" id="eh-ex-title">Typing Test</div>
     <div class="ex-strip"><?php echo esc_html($eh_exam['name']); ?></div>
     <div class="ex-head">

@@ -101,9 +101,13 @@
   function applySettings() {
     var st = S.set;
     test.classList.toggle('tcs', !!st.tcs);
-    var pbase = isHindi ? 22 : 20, tbase = 24;
-    pv.style.fontSize = (pbase + st.fs * 2) + 'px'; ta.style.fontSize = (tbase + st.fs * 2) + 'px';
-    $('#set-fs-v').textContent = Math.round((pbase + st.fs * 2) * 0.75);
+    var W = CFG.win || {}, kd = kdMode();
+    var pbase = kd ? 22 : (+W.pfs || (isHindi ? 16 : 19)), tbase = kd ? 24 : (+W.tfs || 21);
+    var plh = kd ? 26.5 : (+W.plh || pbase * 1.5), tlh = kd ? 33 : (+W.tlh || tbase * 1.3);
+    var pf = pbase + st.fs, tf = tbase + st.fs;
+    pv.style.fontSize = pf + 'px'; pv.style.lineHeight = (plh * pf / pbase).toFixed(2) + 'px';
+    ta.style.fontSize = tf + 'px'; ta.style.lineHeight = (tlh * tf / tbase).toFixed(2) + 'px';
+    $('#set-fs-v').textContent = Math.round(pf * 0.75);
     pv.style.visibility = st.scr ? '' : 'hidden';
     test.classList.toggle('snd-on', !!st.snd);
     if (!st.hl) clearMark(); else mark(true);

@@ -41,8 +41,8 @@ function eh_blog_screen_text($w) {
     }
     if (!empty($w['stats'])) $t[] = 'दाईं ओर Typing Stats में Keystrokes, Backspace, Word Error जैसी गिनती चलती रहती है।';
     if (!empty($w['tool'])) $t[] = 'ऊपर बाएं टूलबार से आवाज़ बंद-चालू, Full screen और font छोटा-बड़ा कर सकते हैं।';
-    if (!empty($w['serif'])) $t[] = 'पैसेज Times जैसे serif font में दिखता है।';
-    if (!empty($w['lime'])) $t[] = 'टाइपिंग बॉक्स हल्के हरे रंग का होता है।';
+    if (strpos($w['ff'], 'Times') === 0 || strpos($w['ff'], '"Times') === 0) $t[] = 'पैसेज Times जैसे serif font में दिखता है।';
+    if (!empty($w['tbg'])) $t[] = 'टाइपिंग बॉक्स हल्के हरे रंग का होता है।';
     return implode(' ', $t);
 }
 
