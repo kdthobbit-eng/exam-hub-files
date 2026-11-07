@@ -66,8 +66,14 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
         <?php if (!empty($eh_exam['retype'])): ?><li>ये Retyping वाला एग्ज़ाम है — स्क्रीन पर दिया पैसेज ही हूबहू टाइप करना होता है।</li><?php endif; ?>
       </ol>
       <div class="eh-ins-method">
-        <label>Keyboard / Language<select id="eh-opt-layout"></select></label>
-        <?php if ($lang === 'hi'): ?><p class="eh-tip">💡 <b>Krutidev / Remington</b>: कंप्यूटर का कीबोर्ड English पर ही रखें, हिंदी हम खुद बना देंगे। <b>Inscript (अपना कीबोर्ड)</b>: अगर आपके कंप्यूटर में Windows का Hindi Inscript कीबोर्ड चालू है तो ये चुनें।</p><?php endif; ?>
+        <?php if ($lang === 'hi'): ?>
+        <div id="eh-im" class="eh-im" hidden>
+          <p><b>Hindi - Mangal Inscript</b> Keyboard Input Method चुनें:</p>
+          <label><input type="radio" name="eh-im" value="inscript" checked> <b>Built-in Keyboard Engine</b> — ✓ कोई software नहीं चाहिए, कीबोर्ड English पर रखकर Inscript में टाइप करें।</label>
+          <label><input type="radio" name="eh-im" value="external"> <b>External InScript Keyboard</b> — Windows की Language Settings वाला Hindi Inscript कीबोर्ड इस्तेमाल करें।</label>
+          <label class="eh-im-chk" hidden><input type="checkbox" id="eh-im-ok"> मैंने अपने सिस्टम पर Hindi - Mangal InScript Keyboard चालू कर लिया है।</label>
+        </div>
+        <?php endif; ?>
         <label class="eh-agree"><input type="checkbox" id="eh-agree"> मैंने ऊपर दिए सभी निर्देश पढ़ लिए हैं</label>
         <button type="button" id="eh-start" class="btn dark lg" disabled>Start Typing →</button>
         <button type="button" class="btn ghost" data-go="2">← पैसेज बदलें</button>
@@ -93,6 +99,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
           <input type="hidden" id="eh-opt-passage" value="">
         </div>
         <div class="eh-psel-r">
+          <label>Language / Keyboard<select id="eh-opt-layout"></select></label>
           <label>Time (minutes)<select id="eh-opt-min"><?php foreach (array_unique([5, 10, 15, 20, 25, 30, (int) $eh_exam['minutes']]) as $m) echo '<option value="' . $m . '">' . $m . ' min' . ($m === (int) $eh_exam['minutes'] ? ' (Exam)' : '') . '</option>'; ?></select></label>
           <label>Input limit<span class="eh-lim"><input id="eh-opt-limit" type="number" min="0" step="50" placeholder="पूरा"><select id="eh-opt-unit"><option value="keys">Characters</option><option value="words">Words</option></select></span><small class="muted">पहले से एग्ज़ाम का target भरा है। खाली छोड़ें तो समय के हिसाब से लंबा पैसेज मिलेगा।</small></label>
           <?php if (!is_user_logged_in()): ?><label>आपका नाम<input id="eh-guest-name" type="text" maxlength="40" placeholder="जैसे: Rahul"></label><?php endif; ?>

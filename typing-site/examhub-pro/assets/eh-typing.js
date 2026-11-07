@@ -44,8 +44,9 @@
 
   /* ---------- setup ---------- */
   (function fillSetup() {
-    $('#eh-opt-layout').innerHTML = LAYOUTS.map(function (l) { return '<option value="' + l[0] + '">' + l[1] + '</option>'; }).join('');
+    $('#eh-opt-layout').innerHTML = LAYOUTS.filter(function (l) { return l[0] !== 'external'; }).map(function (l) { return '<option value="' + l[0] + '">' + (l[0] === 'inscript' ? 'Hindi - Mangal Inscript' : l[1]) + '</option>'; }).join('');
     var last = store.get('layout', '');
+    if (last === 'external') last = 'inscript';
     if (LAYOUTS.some(function (l) { return l[0] === last; })) $('#eh-opt-layout').value = last;
     var ps = $('#eh-opt-passage');
     var pick = function () { var r = setup.querySelector('input[name="eh-psg"]:checked'); ps.value = r ? r.value : ''; };
@@ -69,11 +70,19 @@
     function go(n) {
       $('#eh-step1').hidden = n !== 1; $('#eh-step2').hidden = n !== 2;
       setup.querySelectorAll('.eh-steps-nav li').forEach(function (li) { li.classList.toggle('on', li.getAttribute('data-go') === String(n)); });
-      if (n === 1) { $('#eh-ic-psg').textContent = psgTitle(); var g = $('#eh-guest-name'); if (g && g.value.trim()) $('#eh-ic-name').textContent = g.value.trim(); }
+      if (n === 1) { var im = $('#eh-im'); if (im) im.hidden = $('#eh-opt-layout').value !== 'inscript'; syncStart();
+        $('#eh-ic-psg').textContent = psgTitle(); var g = $('#eh-guest-name'); if (g && g.value.trim()) $('#eh-ic-name').textContent = g.value.trim(); }
       window.scrollTo({ top: setup.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
     }
-    agree.checked = !!store.get(akey, 0); startBtn.disabled = !agree.checked;
-    agree.addEventListener('change', function () { startBtn.disabled = !agree.checked; if (agree.checked) store.set(akey, 1); });
+    function imExternal() { var r = setup.querySelector('input[name="eh-im"]:checked'); var im = $('#eh-im'); return !!(im && !im.hidden && r && r.value === 'external'); }
+    function syncStart() {
+      var chk = setup.querySelector('.eh-im-chk'); if (chk) chk.hidden = !imExternal();
+      startBtn.disabled = !agree.checked || (imExternal() && !($('#eh-im-ok') || {}).checked);
+    }
+    S.imExternal = imExternal;
+    agree.checked = !!store.get(akey, 0); syncStart();
+    agree.addEventListener('change', function () { if (agree.checked) store.set(akey, 1); syncStart(); });
+    setup.querySelectorAll('input[name="eh-im"], #eh-im-ok').forEach(function (r) { r.addEventListener('change', syncStart); });
     next.addEventListener('click', function () { go(1); });
     setup.querySelectorAll('[data-go]').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-go')); }); });
     S.goStep = go;
@@ -168,6 +177,7 @@
   /* ---------- start ---------- */
   function startTest() {
     S.layout = $('#eh-opt-layout').value; store.set('layout', S.layout);
+    if (S.layout === 'inscript' && S.imExternal && S.imExternal()) S.layout = 'external';
     var mi = $('#eh-opt-min'); if (!mi.disabled) S.minutes = Math.max(1, Math.min(60, parseInt(mi.value, 10) || exam.minutes));
     var nm = $('#eh-guest-name'); if (nm) store.set('name', nm.value.trim());
     var lim = $('#eh-opt-limit'); S.limit = lim ? Math.max(0, parseInt(lim.value, 10) || 0) : 0;
