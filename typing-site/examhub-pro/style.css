@@ -838,3 +838,4 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .eh-im label{display:flex!important;flex-direction:row!important;gap:8px;align-items:flex-start;font-weight:500!important}
 .eh-im input{margin-top:4px;accent-color:#111}
 .eh-ins-method{grid-template-columns:1fr!important}
+.eh-exam-head-r{display:flex;flex-direction:column;align-items:flex-end;gap:10px}.eh-explore{font-weight:600;text-decoration:none;color:#111}
