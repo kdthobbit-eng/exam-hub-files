@@ -908,3 +908,6 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .hx-arrow:hover{transform:translate(3px,-3px)}
 .hx-arrow svg{width:34px;height:34px;fill:none;stroke:#fff;stroke-width:1.6}
 @media(max-width:560px){.hx-hero-art{padding:48px 8px 56px}}
+.hx-hero-art{padding:56px 40px 60px}
+.hx-badge.b1{top:-4px;right:-6px}.hx-badge.b2{bottom:6%;left:-10px}.hx-badge.b3{bottom:-4px;right:34%}
+@media(max-width:560px){.hx-hero-art{padding:60px 0 64px}.hx-badge.b1{right:0}.hx-badge.b2{left:0}}
