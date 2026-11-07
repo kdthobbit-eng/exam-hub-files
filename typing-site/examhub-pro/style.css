@@ -768,7 +768,6 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 /* time + photo: anchored from the right like the exam screen */
 .eh-exam .ex-photo{left:auto;right:4.9vw}
 .eh-exam .ex-time{left:auto;right:calc(4.9vw + 57px + 16px);text-align:right}
-.eh-exam .eh-passage{scrollbar-width:none}.eh-exam .eh-passage::-webkit-scrollbar{display:none}
 /* exact per-exam fonts/sizes (CSS vars from the window table) */
 .eh-exam .eh-passage{font-family:var(--pff);background:var(--pbg,#fff);text-align:justify;padding:0 10px}
 .eh-exam .eh-input{font-family:var(--pff);background:var(--tbg,#fff)}
@@ -776,3 +775,4 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .eh-exam .eh-passage span.cur{background:none;box-shadow:none;border-radius:0;color:inherit}
 .eh-exam.ew-hl-y .eh-passage span.cur{background:#fffb05;color:#1e40af}
 .eh-exam.ew-hl-b .eh-passage span.cur{color:#1e40af}
+#eh-test .eh-passage:not(.kd),#eh-test .eh-input:not(.kd){font-family:var(--pff)}

@@ -14,7 +14,7 @@
   var exam = CFG.exam;
   var isHindi = exam.lang === 'hi';
   var LAYOUTS = isHindi
-    ? [['krutidev', 'Hindi - Krutidev', 'Remington', 'Hindi - Krutidev Regular'], ['inscript', 'Hindi - Inscript', 'Inscript', 'Hindi - Mangal'], ['remington', 'Hindi - Remington Gail', 'Remington Gail', 'Hindi - Mangal'], ['external', 'Hindi - Inscript (अपना कीबोर्ड)', 'Inscript', 'Hindi - Mangal']]
+    ? [['krutidev', 'Hindi - Krutidev', 'Remington', 'Hindi - Krutidev Regular'], ['inscript', 'Hindi - Inscript', 'Inscript', 'Hindi - Mangal Font'], ['remington', 'Hindi - Remington Gail', 'Remington Gail', 'Hindi - Mangal Font'], ['external', 'Hindi - Inscript (अपना कीबोर्ड)', 'Inscript', 'Hindi - Mangal Font']]
     : [['english', 'English', 'QWERTY', 'English']];
   var KD_FONT = '';
   function hasFont(name) {
