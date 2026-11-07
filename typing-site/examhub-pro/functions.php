@@ -42,7 +42,7 @@ function eh_opt($key) {
         'tg_channel' => 'https://t.me/examhub26',
         'brand'      => 'Exam Hub Typing',
         'tagline'    => 'सरकारी एग्ज़ाम की टाइपिंग की तैयारी — बिल्कुल असली टेस्ट जैसी, और पूरी तरह फ्री',
-        'notice'     => 'Daily Live Typing शुरू — रोज़ नया पैसेज, देखिए आज आपकी रैंक क्या है',
+        'notice'     => 'Daily Live Typing is on: a new passage every day, check your rank',
         'allowed_error' => 5,
     ];
     $v = get_option('eh_' . $key, null);
@@ -229,10 +229,10 @@ function eh_upcoming() {
     $j = json_decode((string) get_option('eh_upcoming', ''), true);
     $j = is_array($j) ? $j : [];
     $j += ['confirmed' => [], 'next' => [
-        ['tag' => 'LIVE', 'name' => 'Daily Live Typing', 'sub' => 'रोज़ कई एग्ज़ाम के Live टेस्ट और ranking', 'status' => 'Live Typing Active', 'url' => '/live-typing/'],
-        ['tag' => 'HALL', 'name' => 'Exam Hall Typing', 'sub' => 'सुबह, दोपहर, शाम — तय समय पर नया पैसेज', 'status' => 'रोज़ 3 बार', 'url' => '/exam-hall-typing/'],
-        ['tag' => 'PDF', 'name' => 'Passage PDF Download', 'sub' => 'तारीख के हिसाब से English/Hindi पैसेज', 'status' => 'Free', 'url' => '/download-passages/'],
-        ['tag' => 'COURT', 'name' => 'Special Passages', 'sub' => 'कोर्ट आदेश, जमानत, ऑफ़िस ऑर्डर जैसे पैसेज', 'status' => 'Ready for Practice', 'url' => '/exams/?q=Court'],
+        ['tag' => 'LIVE', 'name' => 'Daily Live Typing', 'sub' => 'Live tests for many exams every day, with ranking', 'status' => 'Live Typing Active', 'url' => '/live-typing/'],
+        ['tag' => 'HALL', 'name' => 'Exam Hall Typing', 'sub' => 'Morning, afternoon and evening: a new passage at a fixed time', 'status' => '3 times a day', 'url' => '/exam-hall-typing/'],
+        ['tag' => 'PDF', 'name' => 'Passage PDF Download', 'sub' => 'English and Hindi passages by date', 'status' => 'Free', 'url' => '/download-passages/'],
+        ['tag' => 'COURT', 'name' => 'Special Passages', 'sub' => 'Court orders, bail orders, office orders and more', 'status' => 'Ready for Practice', 'url' => '/exams/?q=Court'],
     ]];
     return $j;
 }
