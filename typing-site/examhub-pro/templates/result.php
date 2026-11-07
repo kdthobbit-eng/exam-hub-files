@@ -7,8 +7,9 @@ $R = [
     'net' => (int) $row['net'], 'gross' => (int) $row['gross'], 'acc' => (float) $row['acc'], 'err' => (float) $row['err'],
     'keys' => (int) $row['keys_count'], 'kerr' => (int) $row['kerr'], 'words' => (int) $row['words'], 'full' => (int) $row['full_m'],
     'half' => (int) $row['half_m'], 'backspaces' => (int) $row['backspaces'], 'minutes' => (float) $row['minutes'], 'pass' => (int) $row['pass'],
-    'title' => $row['title'], 'date' => wp_date('d M Y, h:i A', strtotime($row['created'])), 'name' => eh_display_name($row),
+    'title' => $row['title'], 'date' => wp_date('d M Y, h:i A', strtotime($row['created'])), 'name' => eh_display_name($row), 'dur' => (int) $X['minutes'],
 ];
+foreach (eh_passages() as $pp) { if ($pp['id'] === $row['passage']) { $R['total'] = mb_strlen(trim(preg_replace('/\s+/u', ' ', $pp['text']))); break; } }
 wp_enqueue_script('eh-eval', EH_URI . '/assets/eh-eval.js', [], EH_VER, true);
 wp_add_inline_script('eh-eval', 'window.EH_RES=' . wp_json_encode(['R' => $R, 'X' => $X, 'src' => (string) $row['src'], 'typed' => (string) $row['typed']], JSON_UNESCAPED_UNICODE) . ';', 'before');
 wp_add_inline_script('eh-eval', <<<JS

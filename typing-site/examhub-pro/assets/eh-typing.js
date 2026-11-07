@@ -377,7 +377,7 @@
 
   function showResult(R, ops) {
     result.hidden = false; setup.hidden = true;
-    R.pending = Math.max(0, S.words.length - R.words);
+    R.pending = Math.max(0, S.words.length - R.words); R.total = S.words.join(' ').length; R.dur = exam.minutes;
     R.title = S.title; R.date = new Date().toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
     $('#eh-res-dash').innerHTML = window.EHEval.dashboard(R, exam, ops);
     window.EHEval.bindDash($('#eh-res-dash'));

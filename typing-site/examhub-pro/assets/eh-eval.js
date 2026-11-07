@@ -105,6 +105,10 @@
     var head = '<div class="eh-dash-head"><div><p class="eh-kicker">Performance Dashboard</p><h2>' + esc(X.name) + '</h2>' +
       '<p class="muted">' + (R.title ? 'Passage: <b>' + esc(R.title) + '</b> · ' : '') + (R.date ? esc(R.date) + ' · ' : '') + 'Target ' + tgt + ' in ' + X.minutes + ' min · Allowed error ' + allowed + '%</p></div>' +
       '<div class="eh-verdict ' + (R.pass ? 'ok' : 'no') + '">' + (R.pass ? '✔ Qualified' : '✘ Not Qualified') + '</div></div>';
+    var mm = function (m) { m = Math.round((+m || 0) * 60); return ('0' + Math.floor(m / 60)).slice(-2) + ':' + ('0' + m % 60).slice(-2) + ' min.'; };
+    var info = '<div class="eh-dash-info">' + [['Exam Title', esc(X.name)], ['Passage Title', esc(R.title || '—')], ['Total Key Depression', R.total ? R.total : '—'], ['Time Duration', mm(R.dur || X.minutes)], ['Typing Date', esc(R.date || '—')], ['Time Taken', mm(R.minutes)]]
+      .map(function (k) { return '<div><span>' + k[0] + ':</span> <b>' + k[1] + '</b></div>'; }).join('') + '</div>';
+    head += info;
     var cards = [
       ['Net Speed', R.net, 'WPM', 'c1'], ['Gross Speed', R.gross, 'WPM', 'c2'], ['Accuracy', R.acc, '%', 'c3'], ['Error', R.err, '%', R.err > allowed ? 'bad' : 'c4'],
       ['Key Depressions', R.keys, keysMode ? '/ ' + X.target : '', keysMode && R.keys < X.target ? 'bad' : 'c5'], ['Full Mistakes', R.full, '', 'c6'], ['Half Mistakes', R.half, '', 'c7'], ['Time Taken', fmtMin(R.minutes), '', 'c8']
