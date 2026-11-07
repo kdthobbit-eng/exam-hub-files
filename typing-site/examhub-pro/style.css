@@ -765,3 +765,7 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .eh-ins-method #eh-next{justify-self:start;min-width:260px}
 .eh-stp b,.eh-tip b{font:inherit;font-weight:700;color:inherit;display:inline}
 @media(max-width:700px){.eh-ins-method{grid-template-columns:1fr}}
+/* time + photo: anchored from the right like the exam screen */
+.eh-exam .ex-photo{left:auto;right:4.9vw}
+.eh-exam .ex-time{left:auto;right:calc(4.9vw + 57px + 16px);text-align:right}
+.eh-exam .eh-passage{scrollbar-width:none}.eh-exam .eh-passage::-webkit-scrollbar{display:none}

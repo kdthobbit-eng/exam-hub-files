@@ -57,6 +57,7 @@
     if (CFG.fixedPassage) ps.value = CFG.fixedPassage;
     var mi = $('#eh-opt-min'); mi.value = String(exam.minutes); if (CFG.lockTime) mi.disabled = true;
     var un = $('#eh-opt-unit'); if (un) un.value = exam.unit === 'keys' ? 'keys' : 'words';
+    var li = $('#eh-opt-limit'); if (li && !li.value && +exam.target > 0) li.value = exam.target;
     var nm = $('#eh-guest-name'); if (nm) nm.value = store.get('name', '');
     /* steps */
     var agree = $('#eh-agree'), next = $('#eh-next'), akey = 'agree_' + exam.slug;
@@ -179,6 +180,7 @@
     applySettings(); drawTime(); stats(true);
     $('#st-kc').textContent = S.show.join(' ').length; $('#st-wc').textContent = S.words.length;
     setTimeout(function () { ta.focus(); }, 50);
+    begin(); /* timer runs from the moment the window opens, like the exam */
   }
 
   function closeExam() {
@@ -282,6 +284,8 @@
     if (/^(ArrowLeft|ArrowRight|ArrowUp|ArrowDown|Home|End|PageUp|PageDown|Delete|Tab|Enter)$/.test(e.key)) { e.preventDefault(); return; }
     if (e.key === ' ' || e.code === 'Space') {
       if (!raw.length || (!S.set.xs && /\s$/.test(raw))) { e.preventDefault(); return; }
+      /* like the real exam: after the passage's word count, space bar stops adding words */
+      if (raw.trim().split(/\s+/).length >= S.words.length) { e.preventDefault(); return; }
     }
     if (native()) {
       if (e.key.length === 1) { begin(); S.keys++; click(); setTimeout(after, 0); }

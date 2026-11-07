@@ -45,7 +45,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
         </p></div>
       </div>
       <ol class="eh-ins">
-        <li>टेस्ट <b><?php echo (int) $eh_exam['minutes']; ?> मिनट</b> का है। टाइमर तब चलेगा जब आप पहला अक्षर दबाएंगे, उससे पहले आराम से पैसेज देख लें।</li>
+        <li>टेस्ट <b><?php echo (int) $eh_exam['minutes']; ?> मिनट</b> का है। असली एग्ज़ाम की तरह टाइमर स्क्रीन खुलते ही चालू हो जाएगा — ऊपर दाईं ओर बचा समय दिखेगा।</li>
         <li><?php echo $eh_win['layout'] === 'nopass' ? 'इस एग्ज़ाम में स्क्रीन पर पैसेज नहीं दिखता, असली एग्ज़ाम की तरह छपे पैसेज से देखकर टाइप करना होता है। प्रैक्टिस के लिए ⚙ Settings में "Screen Typing" चालू करके पैसेज देख सकते हैं।' : 'ऊपर वाले बॉक्स में पैसेज दिखेगा, उसे देखकर नीचे वाले बॉक्स में टाइप करें।'; ?></li>
         <li>Copy-paste, right click और drag बंद हैं — जो टाइप करेंगे वही गिना जाएगा।</li>
         <li>Backspace चालू है। असली एग्ज़ाम की तरह बंद या सीमित करना हो तो ⚙ Settings से बदल लें।</li>
@@ -56,6 +56,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
         <li>समय पूरा होते ही टेस्ट अपने आप सबमिट हो जाएगा। पहले खत्म करना हो तो <b>Submit</b> दो बार दबाएं।</li>
         <li><b>Cancel</b> दबाने पर टेस्ट रद्द हो जाएगा और रिज़ल्ट सेव नहीं होगा।</li>
         <li>Font छोटा-बड़ा, आवाज़ और Full screen ऊपर के टूलबार या ⚙ Settings से कर सकते हैं।</li>
+        <li>पैसेज जितने शब्दों का है, उतने शब्द पूरे होने के बाद स्पेस बार आगे शब्द नहीं जोड़ेगा। पैसेज पूरा हो जाए तो दोबारा टाइप करने की ज़रूरत नहीं — बचे समय में गलतियां सुधार सकते हैं।</li>
         <li>Login करके दिया गया हर टेस्ट आपकी <b>Typing History</b> में सेव रहता है, वहीं से दोबारा भी दे सकते हैं।</li>
         <?php if (!empty($eh_exam['retype'])): ?><li>ये Retyping वाला एग्ज़ाम है — स्क्रीन पर दिया पैसेज ही हूबहू टाइप करना होता है।</li><?php endif; ?>
       </ol>
@@ -87,7 +88,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
         </div>
         <div class="eh-psel-r">
           <label>Time (minutes)<select id="eh-opt-min"><?php foreach (array_unique([5, 10, 15, 20, 25, 30, (int) $eh_exam['minutes']]) as $m) echo '<option value="' . $m . '">' . $m . ' min' . ($m === (int) $eh_exam['minutes'] ? ' (Exam)' : '') . '</option>'; ?></select></label>
-          <label>Input limit<span class="eh-lim"><input id="eh-opt-limit" type="number" min="0" step="50" placeholder="पूरा"><select id="eh-opt-unit"><option value="keys">Characters</option><option value="words">Words</option></select></span><small class="muted">खाली = समय के हिसाब से पूरा पैसेज</small></label>
+          <label>Input limit<span class="eh-lim"><input id="eh-opt-limit" type="number" min="0" step="50" placeholder="पूरा"><select id="eh-opt-unit"><option value="keys">Characters</option><option value="words">Words</option></select></span><small class="muted">पहले से एग्ज़ाम का target भरा है। खाली छोड़ें तो समय के हिसाब से लंबा पैसेज मिलेगा।</small></label>
           <?php if (!is_user_logged_in()): ?><label>आपका नाम<input id="eh-guest-name" type="text" maxlength="40" placeholder="जैसे: Rahul"></label><?php endif; ?>
           <button id="eh-start" class="btn dark lg block">Start Typing →</button>
           <button type="button" class="btn ghost block" data-go="1">← निर्देश दोबारा देखें</button>
