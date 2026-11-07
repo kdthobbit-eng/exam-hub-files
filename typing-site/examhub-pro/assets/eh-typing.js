@@ -14,7 +14,7 @@
   var exam = CFG.exam;
   var isHindi = exam.lang === 'hi';
   var LAYOUTS = isHindi
-    ? [['krutidev', 'Hindi - Krutidev', 'Remington', 'Hindi - Krutidev Regular'], ['inscript', 'Hindi - Inscript', 'Inscript', 'Hindi - Mangal Font'], ['remington', 'Hindi - Remington Gail', 'Remington Gail', 'Hindi - Mangal Font'], ['external', 'Hindi - Inscript (अपना कीबोर्ड)', 'Inscript', 'Hindi - Mangal Font']]
+    ? [['krutidev', 'Hindi - Krutidev', 'Remington', 'Hindi - Krutidev Regular'], ['inscript', 'Hindi - Inscript', 'Inscript', 'Hindi - Mangal Font'], ['remington', 'Hindi - Remington Gail', 'Remington Gail', 'Hindi - Mangal Font'], ['external', 'Hindi - Inscript (own keyboard)', 'Inscript', 'Hindi - Mangal Font']]
     : [['english', 'English', 'QWERTY', 'English']];
   var KD_FONT = '';
   function hasFont(name) {
@@ -390,7 +390,7 @@
     fetch(CFG.rest + 'result', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': CFG.nonce }, body: JSON.stringify(R) })
       .then(function (r) { return r.json(); })
       .then(function (j) {
-        var s = $('#eh-res-saved'); if (s) s.textContent = j && j.ok ? (j.rank ? 'रिज़ल्ट सेव हो गया · आज आपकी रैंक #' + j.rank : 'रिज़ल्ट सेव हो गया') : '';
+        var s = $('#eh-res-saved'); if (s) s.textContent = j && j.ok ? (j.rank ? 'Result saved · your rank today #' + j.rank : 'Result saved') : '';
         if (j && j.url) { var l = $('#eh-res-link'); l.href = j.url; l.hidden = false; }
         document.dispatchEvent(new Event('eh:saved'));
       })
@@ -401,7 +401,7 @@
   function twoStep(btn, label, fn) {
     btn.addEventListener('click', function () {
       if (btn.dataset.arm === '1') { btn.dataset.arm = ''; btn.textContent = label; fn(); return; }
-      btn.dataset.arm = '1'; btn.textContent = 'पक्का? फिर दबाएं';
+      btn.dataset.arm = '1'; btn.textContent = 'Sure? Press again';
       setTimeout(function () { btn.dataset.arm = ''; btn.textContent = label; }, 3000);
     });
   }
@@ -412,7 +412,7 @@
     cb.addEventListener('click', function () {
       if (!S.set.lc) { doCancel(); return; }
       if (cb.dataset.arm === '1') { cb.dataset.arm = ''; cb.textContent = 'Cancel'; doCancel(); return; }
-      cb.dataset.arm = '1'; cb.textContent = 'पक्का? फिर दबाएं';
+      cb.dataset.arm = '1'; cb.textContent = 'Sure? Press again';
       setTimeout(function () { cb.dataset.arm = ''; cb.textContent = 'Cancel'; }, 3000);
     });
   })();

@@ -50,33 +50,33 @@ get_header(); ?>
 <section class="eh-insight">
   <div class="wrap">
     <div class="eh-ins-top"><h1>Typing Progress Insight</h1>
-      <form method="get"><select name="d" onchange="this.form.submit()"><option value="">— समय चुनें —</option><?php foreach ([1 => 'आज (1 दिन)', 7 => 'पिछले 7 दिन', 15 => 'पिछले 15 दिन', 30 => 'पिछले 30 दिन'] as $k => $l) echo '<option value="' . $k . '"' . selected($days, $k, false) . '>' . esc_html($l) . '</option>'; ?></select></form></div>
+      <form method="get"><select name="d" onchange="this.form.submit()"><option value="">— Pick a time range —</option><?php foreach ([1 => 'Today', 7 => 'Last 7 days', 15 => 'Last 15 days', 30 => 'Last 30 days'] as $k => $l) echo '<option value="' . $k . '"' . selected($days, $k, false) . '>' . esc_html($l) . '</option>'; ?></select></form></div>
     <?php if (!$days): ?>
-      <div class="eh-ins-empty">🕒<p>अपनी टाइपिंग की प्रोग्रेस देखने के लिए ऊपर से समय चुनें।</p></div>
+      <div class="eh-ins-empty">🕒<p>Pick a time range above to see your progress.</p></div>
     <?php elseif (!$n): ?>
-      <div class="eh-ins-empty">📭<p>इस समय में कोई टेस्ट नहीं मिला। <a href="<?php echo esc_url(home_url('/exams/')); ?>">टेस्ट दें →</a></p></div>
+      <div class="eh-ins-empty">📭<p>No tests in this period. <a href="<?php echo esc_url(home_url('/exams/')); ?>">Take a test →</a></p></div>
     <?php else: ?>
       <div class="eh-ins-cards">
         <div><span>Typed Passages</span><b class="c1"><?php echo $n; ?></b></div>
-        <div><span>Target पूरा हुआ</span><b class="c2"><?php echo $hits; ?></b></div>
+        <div><span>Target met</span><b class="c2"><?php echo $hits; ?></b></div>
         <div><span>Avg Gross Speed</span><b class="c3"><?php echo round($sumG / $n, 2); ?> wpm</b></div>
         <div><span>Avg Net Speed</span><b class="c4"><?php echo round($sumN / $n, 2); ?> wpm</b></div>
         <div class="w"><span>Best Gross Speed</span><b class="c5"><?php echo $bestG; ?> wpm</b></div>
         <div class="w"><span>Best Net Speed</span><b class="c5"><?php echo $bestN; ?> wpm</b><small>Gross: <?php echo $bestNG; ?> wpm</small></div>
       </div>
       <div class="eh-ins-charts">
-        <div><h3>रोज़ की Best Gross Speed</h3><?php echo eh_spark(wp_list_pluck($series, 'g'), '#22b8cf'); ?></div>
-        <div><h3>रोज़ की Best Net Speed</h3><?php echo eh_spark(wp_list_pluck($series, 'n'), '#40c057'); ?></div>
-        <div><h3>रोज़ Target पूरा (गिनती)</h3><?php echo eh_spark(wp_list_pluck($series, 'h'), '#fd7e14'); ?></div>
+        <div><h3>Best gross speed per day</h3><?php echo eh_spark(wp_list_pluck($series, 'g'), '#22b8cf'); ?></div>
+        <div><h3>Best net speed per day</h3><?php echo eh_spark(wp_list_pluck($series, 'n'), '#40c057'); ?></div>
+        <div><h3>Targets met per day</h3><?php echo eh_spark(wp_list_pluck($series, 'h'), '#fd7e14'); ?></div>
       </div>
-      <h3 class="eh-ins-sub">आपने इन एग्ज़ाम की प्रैक्टिस की</h3>
+      <h3 class="eh-ins-sub">Exams you practised</h3>
       <div class="eh-ins-exams">
         <?php $ci = 0; foreach ($exams as $slug => $x): ?><a href="<?php echo esc_url(home_url('/typing/' . $slug . '/')); ?>"><span><?php echo esc_html($x['e'] ? $x['e']['name'] : 'Demo Typing'); ?></span><b class="c<?php echo 1 + ($ci++ % 5); ?>"><?php echo esc_html(mysql2date('D d M Y', $x['last'])); ?></b><small>🎯 <?php echo $x['e'] ? esc_html(eh_target_label($x['e'])) : '—'; ?> · ⏱ <?php echo $x['e'] ? (int) $x['e']['minutes'] : 5; ?> min</small></a><?php endforeach; ?>
       </div>
       <div class="eh-ins-lists">
-        <div><h3 class="g">⊕ ज़्यादा जोड़े गए अक्षर</h3><ul><?php foreach (array_slice($added, 0, 30, true) as $k => $v) echo '<li>' . esc_html($k) . ': ' . (int) $v . '</li>'; if (!$added) echo '<li class="muted">कुछ नहीं</li>'; ?></ul></div>
-        <div><h3 class="r">⊖ ज़्यादा छूटे अक्षर</h3><ul><?php foreach (array_slice($deleted, 0, 30, true) as $k => $v) echo '<li>' . esc_html($k) . ': ' . (int) $v . '</li>'; if (!$deleted) echo '<li class="muted">कुछ नहीं</li>'; ?></ul></div>
-        <div><h3 class="y">✎ गलत लिखे शब्द</h3><ul><?php foreach (array_slice($miss, 0, 40, true) as $k => $v) echo '<li>' . esc_html($k) . ' (' . (int) $v . 'x)</li>'; if (!$miss) echo '<li class="muted">कुछ नहीं</li>'; ?></ul></div>
+        <div><h3 class="g">⊕ Most added letters</h3><ul><?php foreach (array_slice($added, 0, 30, true) as $k => $v) echo '<li>' . esc_html($k) . ': ' . (int) $v . '</li>'; if (!$added) echo '<li class="muted">Nothing</li>'; ?></ul></div>
+        <div><h3 class="r">⊖ Most missed letters</h3><ul><?php foreach (array_slice($deleted, 0, 30, true) as $k => $v) echo '<li>' . esc_html($k) . ': ' . (int) $v . '</li>'; if (!$deleted) echo '<li class="muted">Nothing</li>'; ?></ul></div>
+        <div><h3 class="y">✎ Misspelt words</h3><ul><?php foreach (array_slice($miss, 0, 40, true) as $k => $v) echo '<li>' . esc_html($k) . ' (' . (int) $v . 'x)</li>'; if (!$miss) echo '<li class="muted">Nothing</li>'; ?></ul></div>
       </div>
     <?php endif; ?>
   </div>

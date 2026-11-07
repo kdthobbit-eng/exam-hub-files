@@ -22,9 +22,9 @@ get_header(); ?>
 <section class="wrap eh-section">
   <p class="muted small"><a href="<?php echo esc_url(home_url('/my-dashboard/')); ?>">← Typing History</a> · Candidate: <b><?php echo esc_html($R['name']); ?></b></p>
   <div class="eh-panel eh-dash"><div id="eh-res-dash"></div>
-  <?php if (!$row['typed']): ?><p class="eh-tip">इस पुराने टेस्ट की टाइप की गई कॉपी सेव नहीं है, इसलिए शब्द-दर-शब्द तुलना नहीं दिख रही।</p><?php endif; ?>
+  <?php if (!$row['typed']): ?><p class="eh-tip">The typed copy of this older test was not saved, so the word-by-word comparison is not available.</p><?php endif; ?>
   <div class="eh-res-actions">
-    <a class="btn dark" href="<?php echo esc_url(add_query_arg(array_filter(['passage' => $row['passage']]), $X['slug'] === 'demo' ? home_url('/demo-typing/') : home_url('/typing/' . $X['slug'] . '/'))); ?>">यही पैसेज फिर से टाइप करें</a>
+    <a class="btn dark" href="<?php echo esc_url(add_query_arg(array_filter(['passage' => $row['passage']]), $X['slug'] === 'demo' ? home_url('/demo-typing/') : home_url('/typing/' . $X['slug'] . '/'))); ?>">Retype this passage</a>
     <a class="btn ghost" href="<?php echo esc_url(home_url('/exam/' . $X['slug'] . '/')); ?>">Exam page</a>
     <?php echo eh_tg_buttons('inline'); ?>
   </div></div>

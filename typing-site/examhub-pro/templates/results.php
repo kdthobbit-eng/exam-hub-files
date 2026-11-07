@@ -14,10 +14,10 @@ get_header(); ?>
   <form class="eh-res-filters" method="get">
     <label>Page Size <select name="size" onchange="this.form.submit()"><?php foreach ([10, 25, 50, 100] as $z) echo '<option' . selected($size, $z, false) . '>' . $z . '</option>'; ?></select></label>
     <label>Exam <select name="exam" onchange="this.form.submit()"><option value="">All</option><?php foreach (eh_exams() as $e) echo '<option value="' . esc_attr($e['slug']) . '"' . selected($exam, $e['slug'], false) . '>' . esc_html($e['name']) . '</option>'; ?></select></label>
-    <label>Sort <select name="sort" onchange="this.form.submit()"><option value="latest">Latest</option><option value="top" <?php selected($sort, 'top'); ?>>Top Net Speed (30 दिन)</option></select></label>
+    <label>Sort <select name="sort" onchange="this.form.submit()"><option value="latest">Latest</option><option value="top" <?php selected($sort, 'top'); ?>>Top net speed (30 days)</option></select></label>
   </form>
   <div class="eh-table-wrap"><table class="eh-table eh-ebr"><thead><tr><th>Sl.</th><th>Name</th><th>Exam Taken</th><th>Passage Used</th><th>Typing Date</th><th>Time Taken</th><th>Key Strokes</th><th>Target</th><th>Gross</th><th>Net</th></tr></thead><tbody>
-  <?php if (!$rows): ?><tr><td colspan="10" class="muted">अभी कोई रिज़ल्ट नहीं — <a href="<?php echo esc_url(home_url('/exams/')); ?>">पहला टेस्ट आप दीजिए</a>।</td></tr><?php endif; ?>
+  <?php if (!$rows): ?><tr><td colspan="10" class="muted">No results yet. <a href="<?php echo esc_url(home_url('/exams/')); ?>">take the first test</a>.</td></tr><?php endif; ?>
   <?php foreach ($rows as $i => $r):
       $e = eh_exam($r['exam']); $p = $ps[$r['passage']] ?? null;
       $tgtSpeed = eh_target_wpm($e); list($gw, $nw) = eh_row_speeds($r);
@@ -37,6 +37,6 @@ get_header(); ?>
   <?php endforeach; ?>
   </tbody></table></div>
   <?php if ($total > $size): ?><div class="eh-pager"><?php $pages = (int) ceil($total / $size); for ($k = max(1, $pg - 4); $k <= min($pages, $pg + 4); $k++) echo '<a class="' . ($k === $pg ? 'on' : '') . '" href="' . esc_url(add_query_arg('pg', $k)) . '">' . $k . '</a>'; ?></div><?php endif; ?>
-  <p class="muted small">Target = उस एग्ज़ाम में qualify होने के लिए ज़रूरी speed (WPM)। हरा = target से ऊपर, लाल = target से नीचे।</p>
+  <p class="muted small">Target = speed (WPM) needed to qualify. Green = above target, red = below target.</p>
 </section>
 <?php get_footer();

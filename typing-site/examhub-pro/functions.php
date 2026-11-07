@@ -41,7 +41,7 @@ function eh_opt($key) {
         'tg_group'   => 'https://t.me/examhub2026',
         'tg_channel' => 'https://t.me/examhub26',
         'brand'      => 'Exam Hub Typing',
-        'tagline'    => 'सरकारी एग्ज़ाम की टाइपिंग की तैयारी — बिल्कुल असली टेस्ट जैसी, और पूरी तरह फ्री',
+        'tagline'    => 'Typing practice for government exams — real exam format, fully free',
         'notice'     => 'Daily Live Typing is on: a new passage every day, check your rank',
         'allowed_error' => 5,
     ];
@@ -105,7 +105,7 @@ function eh_doc_title($t) {
         case 'examhall': return 'Exam Hall Typing — ' . $b;
         case 'download': return 'Free Typing Passage PDF Download — ' . $b;
         case 'insight': return 'Typing Insight — ' . $b;
-        case 'blog': return 'Exam Typing Tips और Rules — ' . $b;
+        case 'blog': return 'Exam Typing Tips and Rules — ' . $b;
         case 'info': $I = eh_info_pages(); return ($I[$slug]['title'] ?? 'Info') . ' — ' . $b;
     }
     return $t;
@@ -116,8 +116,8 @@ function eh_view_desc() {
     $desc = eh_opt('tagline');
     if ($view === 'exam' || $view === 'typing') {
         $e = eh_exam(get_query_var('eh_slug'));
-        if ($e) $desc = $e['name'] . ' — ' . eh_target_label($e) . ' in ' . $e['minutes'] . ' minutes. फ्री ऑनलाइन टाइपिंग टेस्ट, असली एग्ज़ाम जैसा — टेस्ट के बाद तुरंत रिज़ल्ट और गलतियों की पूरी डिटेल।';
-    } elseif ($view === 'exams') $desc = 'SSC, High Court, UPSSSC, DSSSB, KVS, RRB समेत ' . count(eh_exams()) . '+ सरकारी परीक्षाओं की टाइपिंग फ्री में प्रैक्टिस करें — English, Krutidev और Mangal में।';
+        if ($e) $desc = $e['name'] . ' — ' . eh_target_label($e) . ' in ' . $e['minutes'] . ' minutes. Free online typing test in real exam format, with an instant result and full error details.';
+    } elseif ($view === 'exams') $desc = 'SSC, High Court, UPSSSC, DSSSB, KVS, RRB and ' . count(eh_exams()) . '+ government exams. Free typing practice in English, Krutidev and Mangal.';
     return $desc;
 }
 function eh_view_url() { return home_url(strtok($_SERVER['REQUEST_URI'] ?? '/', '?')); }

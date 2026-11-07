@@ -63,12 +63,12 @@
   }
 
 
-  var WHY = { space: 'स्पेस की गलती', case: 'कैपिटल/छोटे अक्षर की गलती', punct: 'विराम चिह्न की गलती' };
+  var WHY = { space: 'Spacing error', case: 'Capital/small letter error', punct: 'Punctuation error' };
   function inline(ops) {
     return ops.map(function (o) {
       if (o.t === 'ok') return '<span class="d-ok">' + esc(o.s) + '</span>';
-      if (o.t === 'om') return '<span class="d-om" title="छूटा शब्द">' + esc(o.s) + '</span>';
-      if (o.t === 'add') return '<span class="d-add" title="फालतू शब्द">' + esc(o.w) + '</span>';
+      if (o.t === 'om') return '<span class="d-om" title="Missed word">' + esc(o.s) + '</span>';
+      if (o.t === 'add') return '<span class="d-add" title="Added words">' + esc(o.w) + '</span>';
       if (o.t === 'half') return '<span class="d-half" title="Half mistake: ' + (WHY[o.why] || '') + '">' + esc(o.w) + ' <s>' + esc(o.s) + '</s></span>';
       return '<span class="d-sub" title="Full mistake">' + esc(o.w) + ' <s>' + esc(o.s) + '</s></span>';
     }).join(' ');
@@ -80,7 +80,7 @@
       if (o.t !== 'add') L.push('<span class="' + cls + '">' + esc(o.s) + '</span>');
       if (o.t !== 'om') R.push('<span class="' + cls + '">' + esc(o.w) + '</span>');
     });
-    return '<div class="eh-cmp"><div><h4>Original Passage</h4><div class="eh-cmp-t">' + L.join(' ') + '</div></div><div><h4>आपने जो टाइप किया</h4><div class="eh-cmp-t">' + R.join(' ') + '</div></div></div>';
+    return '<div class="eh-cmp"><div><h4>Original Passage</h4><div class="eh-cmp-t">' + L.join(' ') + '</div></div><div><h4>What you typed</h4><div class="eh-cmp-t">' + R.join(' ') + '</div></div></div>';
   }
   function counts(ops) {
     var c = { full: 0, half: 0, om: 0, add: 0, sub: 0, space: 0, case: 0, punct: 0 };
@@ -113,18 +113,18 @@
       ['Net Speed', R.net, 'WPM', 'c1'], ['Gross Speed', R.gross, 'WPM', 'c2'], ['Accuracy', R.acc, '%', 'c3'], ['Error', R.err, '%', R.err > allowed ? 'bad' : 'c4'],
       ['Key Depressions', R.keys, keysMode ? '/ ' + X.target : '', keysMode && R.keys < X.target ? 'bad' : 'c5'], ['Full Mistakes', R.full, '', 'c6'], ['Half Mistakes', R.half, '', 'c7'], ['Time Taken', fmtMin(R.minutes), '', 'c8']
     ].map(function (k) { return '<div class="eh-dcard ' + k[3] + '"><span>' + k[0] + '</span><b>' + k[1] + ' <small>' + k[2] + '</small></b></div>'; }).join('');
-    var mini = [['Words Typed', R.words], ['Keystroke Errors', R.kerr], ['Backspace', R.backspaces], ['छूटे शब्द', c.om], ['फालतू शब्द', c.add], ['गलत शब्द', c.sub], ['Space/Case/Punct', c.space + '/' + c.case + '/' + c.punct], ['Pending Words', R.pending || 0]]
+    var mini = [['Words Typed', R.words], ['Keystroke Errors', R.kerr], ['Backspace', R.backspaces], ['Missed words', c.om], ['Added words', c.add], ['Wrong words', c.sub], ['Space/Case/Punct', c.space + '/' + c.case + '/' + c.punct], ['Pending Words', R.pending || 0]]
       .map(function (k) { return '<div><span>' + k[0] + '</span><b>' + k[1] + '</b></div>'; }).join('');
     var amount = keysMode ? R.keys : R.words;
-    var f = '<div class="eh-formula"><h3>इस एग्ज़ाम का नियम और आपका हिसाब</h3><ol>' +
-      '<li><b>Gross Speed</b> = टाइप किए शब्द ÷ मिनट = ' + R.words + ' ÷ ' + mins.toFixed(2) + ' = <b>' + R.gross + ' WPM</b></li>' +
+    var f = '<div class="eh-formula"><h3>How your result was worked out</h3><ol>' +
+      '<li><b>Gross Speed</b> = words typed ÷ minutes = ' + R.words + ' ÷ ' + mins.toFixed(2) + ' = <b>' + R.gross + ' WPM</b></li>' +
       '<li><b>Mistakes</b> = Full ' + R.full + ' + Half ' + R.half + ' ÷ 2 = <b>' + errs + '</b></li>' +
-      '<li><b>Net Speed</b> = (शब्द − Mistakes) ÷ मिनट = (' + R.words + ' − ' + errs + ') ÷ ' + mins.toFixed(2) + ' = <b>' + R.net + ' WPM</b></li>' +
-      '<li><b>Error %</b> = Mistakes ÷ शब्द × 100 = ' + errs + ' ÷ ' + (R.words || 0) + ' × 100 = <b>' + R.err + '%</b> (अनुमति ' + allowed + '%)</li>' +
-      '<li><b>' + (keysMode ? 'Key depressions' : 'Words') + '</b>: आपके ' + amount + ', ज़रूरी ' + X.target + ' → ' + (amount >= X.target ? '✔ पूरा' : '✘ कम') + '</li>' +
-      '</ol><p class="eh-verdict-line">नतीजा: ' + (R.pass ? '<b class="ok">Qualified</b> — target भी पूरा और error भी सीमा में।' : '<b class="no">Not Qualified</b> — ' + (amount < X.target ? 'target पूरा नहीं हुआ' : '') + (amount < X.target && R.err > allowed ? ' और ' : '') + (R.err > allowed ? 'error ' + allowed + '% से ज़्यादा है' : '') + '।') + '</p></div>';
-    var legend = '<p class="eh-legend"><span class="d-ok">सही</span> <span class="d-sub">गलत शब्द (Full)</span> <span class="d-om">छूटा शब्द (Full)</span> <span class="d-add">फालतू शब्द (Full)</span> <span class="d-half">Half mistake</span></p>';
-    var cmp = '<div class="eh-cmp-wrap"><div class="eh-cmp-tabs"><button type="button" class="on" data-v="two">साथ-साथ देखें</button><button type="button" data-v="one">एक लाइन में</button></div>' + legend +
+      '<li><b>Net Speed</b> = (words − mistakes) ÷ minutes = (' + R.words + ' − ' + errs + ') ÷ ' + mins.toFixed(2) + ' = <b>' + R.net + ' WPM</b></li>' +
+      '<li><b>Error %</b> = mistakes ÷ words × 100 = ' + errs + ' ÷ ' + (R.words || 0) + ' × 100 = <b>' + R.err + '%</b> (allowed ' + allowed + '%)</li>' +
+      '<li><b>' + (keysMode ? 'Key depressions' : 'Words') + '</b>: you typed ' + amount + ', needed ' + X.target + ' → ' + (amount >= X.target ? '✔ done' : '✘ short') + '</li>' +
+      '</ol><p class="eh-verdict-line">Result: ' + (R.pass ? '<b class="ok">Qualified</b> — target met and errors within the limit.' : '<b class="no">Not Qualified</b> — ' + (amount < X.target ? 'target not met' : '') + (amount < X.target && R.err > allowed ? ' and ' : '') + (R.err > allowed ? 'error ' + allowed + '% limit crossed' : '') + '.') + '</p></div>';
+    var legend = '<p class="eh-legend"><span class="d-ok">Correct</span> <span class="d-sub">Wrong word (Full)</span> <span class="d-om">Missed word (Full)</span> <span class="d-add">Added word (Full)</span> <span class="d-half">Half mistake</span></p>';
+    var cmp = '<div class="eh-cmp-wrap"><div class="eh-cmp-tabs"><button type="button" class="on" data-v="two">Side by side</button><button type="button" data-v="one">Inline</button></div>' + legend +
       '<div class="eh-cmp-v" data-v="two">' + twoCol(ops) + '</div><div class="eh-cmp-v eh-diff" data-v="one" hidden>' + inline(ops) + '</div></div>';
     return head + '<div class="eh-dash-grid">' + cards + '</div><div class="eh-dash-mini">' + mini + '</div>' + f + '<h3 class="eh-cmp-title">Detailed Comparison</h3>' + cmp;
   }

@@ -32,7 +32,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
   };
   ?>
   <div id="eh-setup" class="eh-setup2">
-    <ol class="eh-steps-nav"><li class="on" data-go="2">1. पैसेज चुनें</li><li data-go="1">2. निर्देश (Instructions)</li></ol>
+    <ol class="eh-steps-nav"><li class="on" data-go="2">1. Choose Passage</li><li data-go="1">2. Instructions</li></ol>
 
     <div id="eh-step1" class="eh-panel eh-stp" hidden>
       <div class="eh-ins-cards">
@@ -50,33 +50,33 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
         </p></div>
       </div>
       <ol class="eh-ins">
-        <li>टेस्ट <b><?php echo (int) $eh_exam['minutes']; ?> मिनट</b> का है। असली एग्ज़ाम की तरह टाइमर स्क्रीन खुलते ही चालू हो जाएगा — ऊपर दाईं ओर बचा समय दिखेगा।</li>
-        <li><?php echo $eh_win['layout'] === 'nopass' ? 'इस एग्ज़ाम में स्क्रीन पर पैसेज नहीं दिखता, असली एग्ज़ाम की तरह छपे पैसेज से देखकर टाइप करना होता है। प्रैक्टिस के लिए ⚙ Settings में "Screen Typing" चालू करके पैसेज देख सकते हैं।' : 'ऊपर वाले बॉक्स में पैसेज दिखेगा, उसे देखकर नीचे वाले बॉक्स में टाइप करें।'; ?></li>
-        <li>Copy-paste, right click और drag बंद हैं — जो टाइप करेंगे वही गिना जाएगा।</li>
-        <li>Backspace चालू है। असली एग्ज़ाम की तरह बंद या सीमित करना हो तो ⚙ Settings से बदल लें।</li>
-        <li>हर शब्द के बीच एक ही स्पेस दें। दो-दो स्पेस, गलत कैपिटल या छूटा कॉमा-फुलस्टॉप <b>Half mistake</b> गिना जाता है।</li>
-        <li>गलत शब्द, छूटा हुआ शब्द और अपनी तरफ़ से जोड़ा गया फालतू शब्द <b>Full mistake</b> गिना जाता है।</li>
-        <li>Error % = (Full mistake + Half mistake ÷ 2) ÷ कुल टाइप किए शब्द × 100</li>
-        <li>Qualify होने के लिए <?php echo $eh_unit === 'keys' ? 'कम से कम <b>' . number_format_i18n($eh_exam['target']) . ' key depressions</b>' : 'करीब <b>' . number_format_i18n($eh_exam['target']) . ' शब्द</b>'; ?> और error <b><?php echo esc_html($eh_exam['allowed']); ?>%</b> के अंदर होना चाहिए।</li>
-        <li>समय पूरा होते ही टेस्ट अपने आप सबमिट हो जाएगा। पहले खत्म करना हो तो <b>Submit</b> दो बार दबाएं।</li>
-        <li><b>Cancel</b> दबाने पर टेस्ट रद्द हो जाएगा और रिज़ल्ट सेव नहीं होगा।</li>
-        <li>Font छोटा-बड़ा, आवाज़ और Full screen ऊपर के टूलबार या ⚙ Settings से कर सकते हैं।</li>
-        <li>पैसेज जितने शब्दों का है, उतने शब्द पूरे होने के बाद स्पेस बार आगे शब्द नहीं जोड़ेगा। पैसेज पूरा हो जाए तो दोबारा टाइप करने की ज़रूरत नहीं — बचे समय में गलतियां सुधार सकते हैं।</li>
-        <li>Login करके दिया गया हर टेस्ट आपकी <b>Typing History</b> में सेव रहता है, वहीं से दोबारा भी दे सकते हैं।</li>
-        <?php if (!empty($eh_exam['retype'])): ?><li>ये Retyping वाला एग्ज़ाम है — स्क्रीन पर दिया पैसेज ही हूबहू टाइप करना होता है।</li><?php endif; ?>
+        <li>The test is <b><?php echo (int) $eh_exam['minutes']; ?> minutes</b> long. The timer starts as soon as the typing screen opens; time left is shown at the top right.</li>
+        <li><?php echo $eh_win['layout'] === 'nopass' ? 'In this exam the passage is not shown on screen; you type from a printed copy. For practice, turn on "Passage on Screen" in ⚙ Settings.' : 'The passage is shown in the top box. Type it in the box below.'; ?></li>
+        <li>Copy, paste, right-click and drag are disabled. Only what you type is counted.</li>
+        <li>Backspace is on. You can turn it off or limit it in ⚙ Settings.</li>
+        <li>Use one space between words. Extra spaces, wrong capitals or missing punctuation count as a <b>half mistake</b>.</li>
+        <li>A wrong word, a missed word or an added word counts as a <b>full mistake</b>.</li>
+        <li>Error % = (Full mistake + Half mistake ÷ 2) ÷ words typed × 100</li>
+        <li>To qualify you need <?php echo $eh_unit === 'keys' ? 'at least <b>' . number_format_i18n($eh_exam['target']) . ' key depressions</b>' : 'about <b>' . number_format_i18n($eh_exam['target']) . ' words</b>'; ?> with errors within <b><?php echo esc_html($eh_exam['allowed']); ?>%</b>.</li>
+        <li>The test submits on its own when time is up. To finish early, press <b>Submit</b> twice.</li>
+        <li><b>Cancel</b> ends the test without saving a result.</li>
+        <li>Font size, sound and full screen can be changed from the toolbar or ⚙ Settings.</li>
+        <li>Once you reach the passage's word count, the space bar stops adding words. Use any time left to fix mistakes.</li>
+        <li>When logged in, every test is saved in your <b>Typing History</b>, where you can retake it.</li>
+        <?php if (!empty($eh_exam['retype'])): ?><li>This is a retyping exam: type the passage on screen exactly as given.</li><?php endif; ?>
       </ol>
       <div class="eh-ins-method">
         <?php if ($lang === 'hi'): ?>
         <div id="eh-im" class="eh-im" hidden>
-          <p><b>Hindi - Mangal Inscript</b> Keyboard Input Method चुनें:</p>
-          <label><input type="radio" name="eh-im" value="inscript" checked> <b>Built-in Keyboard Engine</b> — ✓ कोई software नहीं चाहिए, कीबोर्ड English पर रखकर Inscript में टाइप करें।</label>
-          <label><input type="radio" name="eh-im" value="external"> <b>External InScript Keyboard</b> — Windows की Language Settings वाला Hindi Inscript कीबोर्ड इस्तेमाल करें।</label>
-          <label class="eh-im-chk" hidden><input type="checkbox" id="eh-im-ok"> मैंने अपने सिस्टम पर Hindi - Mangal InScript Keyboard चालू कर लिया है।</label>
+          <p><b>Hindi - Mangal Inscript</b> - choose keyboard input method:</p>
+          <label><input type="radio" name="eh-im" value="inscript" checked> <b>Built-in Keyboard Engine</b> — no software needed. Keep your keyboard in English and type Inscript.</label>
+          <label><input type="radio" name="eh-im" value="external"> <b>External InScript Keyboard</b> — use the Hindi Inscript keyboard from your Windows language settings.</label>
+          <label class="eh-im-chk" hidden><input type="checkbox" id="eh-im-ok"> I have turned on the Hindi - Mangal InScript keyboard on my system.</label>
         </div>
         <?php endif; ?>
-        <label class="eh-agree"><input type="checkbox" id="eh-agree"> मैंने ऊपर दिए सभी निर्देश पढ़ लिए हैं</label>
+        <label class="eh-agree"><input type="checkbox" id="eh-agree"> I have read all the instructions above</label>
         <button type="button" id="eh-start" class="btn dark lg" disabled>Start Typing →</button>
-        <button type="button" class="btn ghost" data-go="2">← पैसेज बदलें</button>
+        <button type="button" class="btn ghost" data-go="2">← Change passage</button>
       </div>
     </div>
 
@@ -84,14 +84,14 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
       <div class="eh-psel">
         <div class="eh-psel-l">
           <?php if (!empty($cfg['fixedPassage'])):
-              foreach ($cfg['passages'] as $p) if ($p['id'] === $cfg['fixedPassage']) { echo '<h3>आज का पैसेज</h3>' . $eh_row($p, true); } ?>
+              foreach ($cfg['passages'] as $p) if ($p['id'] === $cfg['fixedPassage']) { echo '<h3>Today’s passage</h3>' . $eh_row($p, true); } ?>
           <?php else: ?>
-          <div class="eh-psel-top"><h3>पैसेज चुनें</h3>
+          <div class="eh-psel-top"><h3>Choose a passage</h3>
             <?php if ($eh_special): ?><button type="button" class="btn ghost sm" id="eh-sp-open">★ Special Passages</button><?php endif; ?></div>
-          <p class="eh-lvl-legend">B - Basic · E - Easy · M - Moderate · H - Hard · <span class="muted">रोज़ 6 नए पैसेज</span></p>
-          <label class="eh-prow rnd"><input type="radio" name="eh-psg" value="" checked><span class="lv">?</span><span class="t">कोई भी (Random Passage)</span><span class="n"></span></label>
+          <p class="eh-lvl-legend">B - Basic · E - Easy · M - Moderate · H - Hard · <span class="muted">6 new passages daily</span></p>
+          <label class="eh-prow rnd"><input type="radio" name="eh-psg" value="" checked><span class="lv">?</span><span class="t">Random passage</span><span class="n"></span></label>
           <?php foreach ($eh_days as $i => $day): ?>
-            <details class="eh-day" <?php echo $i < 2 ? 'open' : ''; ?>><summary><?php echo esc_html($i === 0 ? 'आज — ' : ($i === 1 ? 'कल — ' : '')); echo esc_html(wp_date('d M Y, l', strtotime($day['date'] . ' 12:00'))); ?> <span class="muted">(<?php echo count($day['items']); ?>)</span></summary>
+            <details class="eh-day" <?php echo $i < 2 ? 'open' : ''; ?>><summary><?php echo esc_html($i === 0 ? 'Today — ' : ($i === 1 ? 'Yesterday — ' : '')); echo esc_html(wp_date('d M Y, l', strtotime($day['date'] . ' 12:00'))); ?> <span class="muted">(<?php echo count($day['items']); ?>)</span></summary>
               <?php foreach ($day['items'] as $p) echo $eh_row($p); ?>
             </details>
           <?php endforeach; ?>
@@ -101,17 +101,17 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
         <div class="eh-psel-r">
           <label>Language / Keyboard<select id="eh-opt-layout"></select></label>
           <label>Time (minutes)<select id="eh-opt-min"><?php foreach (array_unique([5, 10, 15, 20, 25, 30, (int) $eh_exam['minutes']]) as $m) echo '<option value="' . $m . '">' . $m . ' min' . ($m === (int) $eh_exam['minutes'] ? ' (Exam)' : '') . '</option>'; ?></select></label>
-          <label>Input limit<span class="eh-lim"><input id="eh-opt-limit" type="number" min="0" step="50" placeholder="पूरा"><select id="eh-opt-unit"><option value="keys">Characters</option><option value="words">Words</option></select></span><small class="muted">पहले से एग्ज़ाम का target भरा है। खाली छोड़ें तो समय के हिसाब से लंबा पैसेज मिलेगा।</small></label>
-          <?php if (!is_user_logged_in()): ?><label>आपका नाम<input id="eh-guest-name" type="text" maxlength="40" placeholder="जैसे: Rahul"></label><?php endif; ?>
-          <button type="button" id="eh-next" class="btn dark lg block">आगे बढ़ें (Next) →</button>
-          <?php if (!is_user_logged_in()): ?><p class="muted small center">रिज़ल्ट सेव रखने के लिए <a href="<?php echo esc_url(eh_login_page_url(home_url($_SERVER['REQUEST_URI'] ?? '/'))); ?>">Login</a> करें।</p><?php endif; ?>
+          <label>Input limit<span class="eh-lim"><input id="eh-opt-limit" type="number" min="0" step="50" placeholder="Full"><select id="eh-opt-unit"><option value="keys">Characters</option><option value="words">Words</option></select></span><small class="muted">Set to the exam target. Leave empty for a full-length passage.</small></label>
+          <?php if (!is_user_logged_in()): ?><label>Your name<input id="eh-guest-name" type="text" maxlength="40" placeholder="e.g. Rahul"></label><?php endif; ?>
+          <button type="button" id="eh-next" class="btn dark lg block">Next →</button>
+          <?php if (!is_user_logged_in()): ?><p class="muted small center"><a href="<?php echo esc_url(eh_login_page_url(home_url($_SERVER['REQUEST_URI'] ?? '/'))); ?>">Log in</a> to save your results.</p><?php endif; ?>
         </div>
       </div>
     </div>
 
     <?php if ($eh_special): ?>
     <div id="eh-sp-modal" class="eh-modal" hidden><div class="eh-modal-box">
-      <div class="eh-modal-h"><b>★ Special Passages</b> <span class="muted small">कोर्ट आदेश, ऑफ़िस ऑर्डर जैसे पैसेज</span><button type="button" data-x>✕</button></div>
+      <div class="eh-modal-h"><b>★ Special Passages</b> <span class="muted small">Court orders, office orders and more</span><button type="button" data-x>✕</button></div>
       <?php foreach ($eh_special as $p) echo $eh_row($p); ?>
     </div></div>
     <?php endif; ?>
@@ -125,9 +125,9 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
       <div class="ex-tool" role="toolbar" aria-label="Typing tools">
         <button type="button" data-act="mute" title="Sound on/off"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path class="snd-x" d="m23 9-6 6M17 9l6 6"/><path class="snd-on" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></button>
         <button type="button" data-act="full" title="Full screen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg></button>
-        <button type="button" data-act="minus" title="Font size कम करें">A-</button>
+        <button type="button" data-act="minus" title="Decrease font size">A-</button>
         <button type="button" data-act="reset" title="Normal font size" class="a0">A</button>
-        <button type="button" data-act="plus" title="Font size बढ़ाएँ">A+</button>
+        <button type="button" data-act="plus" title="Increase font size">A+</button>
       </div>
       <div class="ex-time">Time left:- <b id="eh-timer">00:00</b></div>
       <div class="ex-photo"><span id="eh-cand-av"></span><b id="eh-cand-name">CANDIDATE</b></div>
@@ -187,6 +187,6 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
   <div id="eh-result" class="eh-panel eh-dash" hidden>
     <div id="eh-res-dash"></div>
     <p id="eh-res-saved" class="muted small"></p>
-    <div class="eh-res-actions"><button id="eh-again" class="btn dark">दोबारा टेस्ट दें</button><button id="eh-retype" class="btn ghost" type="button">यही पैसेज फिर से</button><a id="eh-res-link" class="btn ghost" hidden href="#">🔗 रिज़ल्ट का लिंक</a><a class="btn ghost" href="<?php echo esc_url(home_url('/exam-based-result/')); ?>">Leaderboard</a><?php echo eh_tg_buttons('inline'); ?></div>
+    <div class="eh-res-actions"><button id="eh-again" class="btn dark">Take test again</button><button id="eh-retype" class="btn ghost" type="button">Retype same passage</button><a id="eh-res-link" class="btn ghost" hidden href="#">🔗 Result link</a><a class="btn ghost" href="<?php echo esc_url(home_url('/exam-based-result/')); ?>">Leaderboard</a><?php echo eh_tg_buttons('inline'); ?></div>
   </div>
 </div>

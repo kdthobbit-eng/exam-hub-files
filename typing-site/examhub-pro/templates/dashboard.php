@@ -13,7 +13,7 @@ get_header(); ?>
 <?php echo eh_member_nav('history'); ?>
 <section class="wrap eh-section">
   <div class="eh-hist-stats">
-    <div><b><?php echo number_format_i18n($n); ?><?php echo $n ? ' +' : ''; ?></b><span>कुल टेस्ट दिए</span></div>
+    <div><b><?php echo number_format_i18n($n); ?><?php echo $n ? ' +' : ''; ?></b><span>Tests taken</span></div>
     <div><b><?php echo (int) round((float) $agg['g']); ?> wpm</b><span>Avg. Gross Speed</span></div>
     <div><b><?php echo (int) round((float) $agg['nt']); ?> wpm</b><span>Avg. Net Speed</span></div>
     <div><b><?php echo (int) $agg['b']; ?> wpm</b><span>Best Net Speed</span></div>
@@ -31,7 +31,7 @@ get_header(); ?>
     <div class="eh-table-wrap"><table class="eh-table eh-hist" id="eh-hist"><thead><tr>
       <th>#</th><th>Exam &amp; Duration</th><th>Passage &amp; Given Keys</th><th>Date &amp; Time Used</th><th>Keys Typed</th><th>Target (WPM)</th><th>Gross (WPM)</th><th>Net (WPM)</th><th>Accuracy</th><th>Full/Half</th><th>Actions</th>
     </tr></thead><tbody>
-    <?php if (!$rows): ?><tr><td colspan="11" class="muted">अभी यहां कुछ नहीं है। <a href="<?php echo esc_url(home_url('/exams/')); ?>">पहला टेस्ट दें →</a></td></tr><?php endif; ?>
+    <?php if (!$rows): ?><tr><td colspan="11" class="muted">Nothing here yet. <a href="<?php echo esc_url(home_url('/exams/')); ?>">Take your first test →</a></td></tr><?php endif; ?>
     <?php foreach ($rows as $i => $r):
         $e = eh_exam($r['exam']); $p = $ps[$r['passage']] ?? null; $tw = eh_target_wpm($e); list($gw, $nw) = eh_row_speeds($r);
         $retype = $r['exam'] === 'demo' ? home_url('/demo-typing/') : home_url('/typing/' . $r['exam'] . '/');

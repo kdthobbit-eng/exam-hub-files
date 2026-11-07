@@ -29,11 +29,11 @@ add_action('template_redirect', function () {
     if (!in_array($view, ['login', 'signup'], true)) return;
     if (is_user_logged_in()) { wp_safe_redirect(home_url('/my-dashboard/')); exit; }
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
-    if (!wp_verify_nonce($_POST['_eh'] ?? '', 'eh_auth')) { $GLOBALS['eh_auth_error'] = 'पेज पुराना हो गया, दोबारा कोशिश करें।'; return; }
+    if (!wp_verify_nonce($_POST['_eh'] ?? '', 'eh_auth')) { $GLOBALS['eh_auth_error'] = 'Page expired. Please try again.'; return; }
 
     $ip = substr(hash('sha256', ($_SERVER['REMOTE_ADDR'] ?? '') . 'auth'), 0, 16);
     $n = (int) get_transient('eh_auth_' . $ip);
-    if ($n > 20) { $GLOBALS['eh_auth_error'] = 'बहुत ज़्यादा कोशिश हो गई, थोड़ी देर बाद आएं।'; return; }
+    if ($n > 20) { $GLOBALS['eh_auth_error'] = 'Too many attempts. Please try later.'; return; }
     set_transient('eh_auth_' . $ip, $n + 1, 15 * MINUTE_IN_SECONDS);
 
     if ($view === 'login') {
@@ -44,7 +44,7 @@ add_action('template_redirect', function () {
             if ($u) $id = $u[0]->user_login;
         }
         $user = wp_signon(['user_login' => $id, 'user_password' => $pw, 'remember' => true], is_ssl());
-        if (is_wp_error($user)) { $GLOBALS['eh_auth_error'] = 'ईमेल/मोबाइल या पासवर्ड गलत है।'; return; }
+        if (is_wp_error($user)) { $GLOBALS['eh_auth_error'] = 'Wrong email/mobile or password.'; return; }
         wp_safe_redirect(eh_safe_redirect_target()); exit;
     }
 
@@ -55,20 +55,20 @@ add_action('template_redirect', function () {
     $mo = preg_replace('/\D/', '', $_POST['mo'] ?? '');
     $pw = (string) wp_unslash($_POST['pw'] ?? '');
     $err = '';
-    if ($fn === '') $err = 'अपना नाम लिखें।';
-    elseif (!is_email($em)) $err = 'सही ईमेल लिखें।';
-    elseif ($mo !== '' && !preg_match('/^[6-9]\d{9}$/', $mo)) $err = 'मोबाइल नंबर 10 अंक का होना चाहिए।';
-    elseif (strlen($pw) < 6) $err = 'पासवर्ड कम से कम 6 अक्षर का रखें।';
-    elseif (empty($_POST['agree'])) $err = 'Terms और Privacy Policy पर टिक करें।';
-    elseif (email_exists($em)) $err = 'इस ईमेल से पहले ही अकाउंट बना है — Login करें।';
-    elseif ($mo && get_users(['meta_key' => 'eh_mobile', 'meta_value' => $mo, 'number' => 1])) $err = 'ये मोबाइल नंबर पहले से जुड़ा है।';
+    if ($fn === '') $err = 'Enter your name.';
+    elseif (!is_email($em)) $err = 'Enter a valid email.';
+    elseif ($mo !== '' && !preg_match('/^[6-9]\d{9}$/', $mo)) $err = 'Mobile number must be 10 digits.';
+    elseif (strlen($pw) < 6) $err = 'Password must be at least 6 characters.';
+    elseif (empty($_POST['agree'])) $err = 'Please accept the Terms and Privacy Policy.';
+    elseif (email_exists($em)) $err = 'This email already has an account. log in.';
+    elseif ($mo && get_users(['meta_key' => 'eh_mobile', 'meta_value' => $mo, 'number' => 1])) $err = 'This mobile number is already registered.';
     if ($err) { $GLOBALS['eh_auth_error'] = $err; return; }
 
     $uid = wp_insert_user([
         'user_login' => eh_unique_login($em), 'user_email' => $em, 'user_pass' => $pw,
         'first_name' => $fn, 'last_name' => $ln, 'display_name' => trim($fn . ' ' . $ln), 'role' => 'subscriber',
     ]);
-    if (is_wp_error($uid)) { $GLOBALS['eh_auth_error'] = 'अकाउंट नहीं बन पाया, दोबारा कोशिश करें।'; return; }
+    if (is_wp_error($uid)) { $GLOBALS['eh_auth_error'] = 'Could not create the account. Please try again.'; return; }
     if ($mo) update_user_meta($uid, 'eh_mobile', $mo);
     wp_set_current_user($uid); wp_set_auth_cookie($uid, true, is_ssl());
     wp_safe_redirect(home_url('/my-dashboard/?welcome=1')); exit;
@@ -121,6 +121,6 @@ function eh_google_button() {
       <div class="g_id_signin" data-type="standard" data-size="large" data-shape="rectangular" data-text="continue_with" data-logo_alignment="center" data-width="400"></div>
       <p class="eh-g-msg" id="eh-g-msg" hidden></p>
     </div>
-    <script>function ehGoogle(r){fetch('<?php echo $rest; ?>?redirect_to=<?php echo rawurlencode($redir); ?>',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({credential:r.credential})}).then(function(x){return x.json()}).then(function(j){if(j.ok){location.href=j.redirect}else{var m=document.getElementById('eh-g-msg');m.textContent=j.msg||'Google login नहीं हो पाया, दोबारा कोशिश करें।';m.hidden=false}})}</script>
+    <script>function ehGoogle(r){fetch('<?php echo $rest; ?>?redirect_to=<?php echo rawurlencode($redir); ?>',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({credential:r.credential})}).then(function(x){return x.json()}).then(function(j){if(j.ok){location.href=j.redirect}else{var m=document.getElementById('eh-g-msg');m.textContent=j.msg||'Google login failed. Please try again.';m.hidden=false}})}</script>
     <?php return ob_get_clean();
 }

@@ -15,14 +15,14 @@ if ($row):
 <section class="eh-live-hero"><div class="wrap eh-live-hero-in">
   <div>
     <p class="muted small"><a href="<?php echo esc_url(home_url('/live-typing/')); ?>">← Live Typing schedule</a></p>
-    <span class="eh-live-dot"><?php echo $open ? 'LIVE' : ($now < $L['s'] ? 'जल्द' : 'खत्म'); ?></span>
+    <span class="eh-live-dot"><?php echo $open ? 'LIVE' : ($now < $L['s'] ? 'Soon' : 'Closed'); ?></span>
     <h1><?php echo esc_html($L['exam']['name']); ?></h1>
-    <p class="lead">आज का पैसेज सबके लिए एक ही है। <?php echo esc_html($L['start'] . ' से ' . $L['end']); ?> के बीच टेस्ट दीजिए, Net Speed से ranking बनेगी।</p>
+    <p class="lead">Today’s passage is the same for everyone. Open from <?php echo esc_html($L['start'] . ' to ' . $L['end']); ?>. Take the test in this window; ranking is by net speed.</p>
   </div>
   <div class="eh-live-cards">
-    <div class="eh-lc"><span>आज का पैसेज</span><b><?php echo esc_html($L['passage']['title'] ?? '—'); ?></b><em><?php echo $L['lang'] === 'hi' ? 'Hindi' : 'English'; ?> · <?php echo esc_html(eh_target_label($L['exam'])); ?></em></div>
-    <div class="eh-lc"><span>आज टेस्ट दिया</span><b><?php echo number_format_i18n($players); ?></b><em>लोगों ने</em></div>
-    <div class="eh-lc dark"><span><?php echo $open ? 'टेस्ट बंद होने में' : ($now < $L['s'] ? 'टेस्ट खुलने में' : 'कल फिर'); ?></span><b id="eh-cd" data-s="<?php echo $open ? ($L['e'] - $now) * 60 : ($now < $L['s'] ? ($L['s'] - $now) * 60 : 0); ?>">--:--:--</b><em><?php echo esc_html($L['start'] . ' – ' . $L['end']); ?></em></div>
+    <div class="eh-lc"><span>Today’s passage</span><b><?php echo esc_html($L['passage']['title'] ?? '—'); ?></b><em><?php echo $L['lang'] === 'hi' ? 'Hindi' : 'English'; ?> · <?php echo esc_html(eh_target_label($L['exam'])); ?></em></div>
+    <div class="eh-lc"><span>Tests today</span><b><?php echo number_format_i18n($players); ?></b><em>people</em></div>
+    <div class="eh-lc dark"><span><?php echo $open ? 'Closes in' : ($now < $L['s'] ? 'Opens in' : 'Back tomorrow'); ?></span><b id="eh-cd" data-s="<?php echo $open ? ($L['e'] - $now) * 60 : ($now < $L['s'] ? ($L['s'] - $now) * 60 : 0); ?>">--:--:--</b><em><?php echo esc_html($L['start'] . ' – ' . $L['end']); ?></em></div>
   </div>
 </div></section>
 <section class="wrap eh-section eh-live">
@@ -31,22 +31,22 @@ if ($row):
       $eh_cfg = ['fixedPassage' => $L['passage']['id'], 'lockTime' => true, 'live' => $L['date']];
       include __DIR__ . '/_test-ui.php';
     else: ?>
-      <div class="eh-panel eh-live-closed"><h2><?php echo $now < $L['s'] ? 'टेस्ट ' . esc_html($L['start']) . ' बजे खुलेगा' : 'आज का Live टेस्ट खत्म हो गया'; ?></h2>
-      <p class="muted">तब तक इसी एग्ज़ाम की प्रैक्टिस कर लीजिए।</p>
+      <div class="eh-panel eh-live-closed"><h2><?php echo $now < $L['s'] ? 'Test opens at ' . esc_html($L['start']) : 'Today’s live test is over'; ?></h2>
+      <p class="muted">Meanwhile, practise this exam.</p>
       <a class="btn dark" href="<?php echo esc_url(home_url('/typing/' . $L['exam']['slug'] . '/')); ?>">Practice Test →</a></div>
     <?php endif; ?></div>
   <aside>
     <div class="eh-panel eh-rank">
-      <div class="eh-rank-head"><h2>आज की Ranking</h2><span class="muted small" id="eh-rk-time">अपने-आप अपडेट</span></div>
+      <div class="eh-rank-head"><h2>Today’s ranking</h2><span class="muted small" id="eh-rk-time">Auto-updates</span></div>
       <div class="eh-podium" id="eh-podium">
         <?php for ($i = 0; $i < 3; $i++): $r = $board[$i] ?? null; ?>
-          <div class="p p<?php echo $i + 1; ?>"><i><?php echo $medal[$i]; ?></i><b><?php echo $r ? esc_html(eh_display_name($r)) : '—'; ?></b><span><?php echo $r ? (int) $r['net'] . ' WPM' : 'खाली'; ?></span></div>
+          <div class="p p<?php echo $i + 1; ?>"><i><?php echo $medal[$i]; ?></i><b><?php echo $r ? esc_html(eh_display_name($r)) : '—'; ?></b><span><?php echo $r ? (int) $r['net'] . ' WPM' : 'Empty'; ?></span></div>
         <?php endfor; ?>
       </div>
       <ol class="eh-rk-list" id="eh-rk-list" start="4">
         <?php foreach (array_slice($board, 3) as $r): ?><li><span><?php echo esc_html(eh_display_name($r)); ?></span><b><?php echo (int) $r['net']; ?></b><em><?php echo esc_html($r['acc']); ?>%</em></li><?php endforeach; ?>
       </ol>
-      <?php if (!$board): ?><p class="muted small" id="eh-rk-empty">अभी किसी ने टेस्ट नहीं दिया — पहली रैंक आपकी हो सकती है!</p><?php endif; ?>
+      <?php if (!$board): ?><p class="muted small" id="eh-rk-empty">No one has taken the test yet. The first rank can be yours.</p><?php endif; ?>
     </div>
   </aside>
 </section>
@@ -59,10 +59,10 @@ if ($row):
   function esc(v){return String(v).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function load(){fetch(api,{credentials:'same-origin'}).then(function(r){return r.json()}).then(function(rows){
     if(!Array.isArray(rows))return;
-    document.getElementById('eh-podium').innerHTML=[0,1,2].map(function(i){var r=rows[i];return '<div class="p p'+(i+1)+'"><i>'+md[i]+'</i><b>'+(r?esc(r.name):'—')+'</b><span>'+(r?r.net+' WPM':'खाली')+'</span></div>'}).join('');
+    document.getElementById('eh-podium').innerHTML=[0,1,2].map(function(i){var r=rows[i];return '<div class="p p'+(i+1)+'"><i>'+md[i]+'</i><b>'+(r?esc(r.name):'—')+'</b><span>'+(r?r.net+' WPM':'Empty')+'</span></div>'}).join('');
     document.getElementById('eh-rk-list').innerHTML=rows.slice(3,25).map(function(r){return '<li><span>'+esc(r.name)+'</span><b>'+r.net+'</b><em>'+r.acc+'%</em></li>'}).join('');
     var e=document.getElementById('eh-rk-empty');if(e&&rows.length)e.remove();
-    document.getElementById('eh-rk-time').textContent='अपडेट: '+new Date().toLocaleTimeString('hi-IN',{hour:'2-digit',minute:'2-digit'});
+    document.getElementById('eh-rk-time').textContent='Updated: '+new Date().toLocaleTimeString('hi-IN',{hour:'2-digit',minute:'2-digit'});
   }).catch(function(){})}
   setInterval(load,30000);document.addEventListener('eh:saved',load);
 })();
@@ -70,8 +70,8 @@ if ($row):
 <?php else: ?>
 <section class="wrap eh-section">
   <p class="muted small"><?php echo esc_html(wp_date('d/m/Y')); ?> · <?php echo esc_html(eh_opt('brand')); ?></p>
-  <h1 class="eh-live-h">Live Typing — सबके साथ, एक ही समय पर</h1>
-  <p class="muted">हर एग्ज़ाम का रोज़ एक तय समय पर Live टेस्ट होता है। सबको एक ही पैसेज मिलता है और Net Speed से उस दिन की ranking बनती है।</p>
+  <h1 class="eh-live-h">Live Typing — same passage, same time, for everyone</h1>
+  <p class="muted">Each exam has a live test at a fixed time every day. Everyone gets the same passage and the day's ranking is by net speed.</p>
   <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button>
     <?php $seen = []; foreach ($S as $r) { $k = strtoupper(strtok(preg_replace('/^(rrb|nta|bihar|army|air|delhi|uttarakhand|andhra|punjab|jharkhand|chhattisgarh|rajasthan|telangana|bombay|allahabad|mp)-/', '$1 ', $r['exam']['slug']), '-')); if (isset($seen[$k])) continue; $seen[$k] = 1; echo '<button type="button" data-f="' . esc_attr($k) . '">' . esc_html($k) . '</button>'; } ?>
   </div>
@@ -87,8 +87,8 @@ if ($row):
       <td><?php echo $r['lang'] === 'hi' ? 'Hindi' : 'English'; ?></td>
       <td><?php echo esc_html(gmdate('h:i A', $r['s'] * 60)); ?></td>
       <td><?php echo esc_html(gmdate('h:i A', $r['e'] * 60)); ?></td>
-      <td><?php echo $st === 'live' ? '<span class="pill ok">● Live</span>' : ($st === 'soon' ? '<span class="pill">जल्द</span>' : '<span class="pill no">खत्म</span>'); ?></td>
-      <td><a class="btn <?php echo $st === 'live' ? 'dark' : 'ghost'; ?> sm" href="<?php echo esc_url($url); ?>"><?php echo $st === 'live' ? 'Start →' : ($st === 'done' ? 'Result' : 'देखें'); ?></a></td>
+      <td><?php echo $st === 'live' ? '<span class="pill ok">● Live</span>' : ($st === 'soon' ? '<span class="pill">Soon</span>' : '<span class="pill no">Closed</span>'); ?></td>
+      <td><a class="btn <?php echo $st === 'live' ? 'dark' : 'ghost'; ?> sm" href="<?php echo esc_url($url); ?>"><?php echo $st === 'live' ? 'Start →' : ($st === 'done' ? 'Result' : 'View'); ?></a></td>
     </tr>
   <?php endforeach; ?>
   </tbody></table></div>
