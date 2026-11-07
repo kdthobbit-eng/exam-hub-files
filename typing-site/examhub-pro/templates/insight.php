@@ -1,7 +1,7 @@
 <?php
 if (!is_user_logged_in()) { wp_safe_redirect(eh_login_page_url(home_url('/typing-insight/'))); exit; }
 global $wpdb; $uid = get_current_user_id(); $t = eh_table();
-$days = in_array((int) ($_GET['d'] ?? 0), [1, 7, 15, 30], true) ? (int) $_GET['d'] : 0;
+$days = in_array((int) ($_GET['d'] ?? 0), [1, 2, 7, 15, 30], true) ? (int) $_GET['d'] : 0;
 $rows = [];
 if ($days) {
     $since = wp_date('Y-m-d 00:00:00', current_time('timestamp') - ($days - 1) * DAY_IN_SECONDS);
@@ -50,7 +50,7 @@ get_header(); ?>
 <section class="eh-insight">
   <div class="wrap">
     <div class="eh-ins-top"><h1>Typing Progress Insight</h1>
-      <form method="get"><select name="d" onchange="this.form.submit()"><option value="">— Pick a time range —</option><?php foreach ([1 => 'Today', 7 => 'Last 7 days', 15 => 'Last 15 days', 30 => 'Last 30 days'] as $k => $l) echo '<option value="' . $k . '"' . selected($days, $k, false) . '>' . esc_html($l) . '</option>'; ?></select></form></div>
+      <form method="get"><select name="d" onchange="this.form.submit()"><option value="">— Pick a time range —</option><?php foreach ([1 => 'Last 1 day', 2 => 'Last 2 days', 7 => 'Last 7 days', 15 => 'Last 15 days', 30 => 'Last 30 days'] as $k => $l) echo '<option value="' . $k . '"' . selected($days, $k, false) . '>' . esc_html($l) . '</option>'; ?></select></form></div>
     <?php if (!$days): ?>
       <div class="eh-ins-empty">🕒<p>Pick a time range above to see your progress.</p></div>
     <?php elseif (!$n): ?>

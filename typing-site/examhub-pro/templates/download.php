@@ -1,5 +1,6 @@
 <?php
 $lang = (($_GET['lang'] ?? 'en') === 'hi') ? 'hi' : 'en';
+$font = in_array($_GET['font'] ?? '', ['kd', 'in', 'rg'], true) ? $_GET['font'] : 'in';
 $all = eh_passages();
 /* Print view: /download-passages/?print=ID&limit=N&unit=keys|words */
 if (!empty($_GET['print'])) {
@@ -17,8 +18,13 @@ if (!empty($_GET['print'])) {
 <style>body{font:17px/1.9 "Times New Roman","Noto Sans Devanagari",serif;color:#000;max-width:780px;margin:30px auto;padding:0 20px}h1{font-size:22px;margin:0 0 4px}.m{font:13px Arial,sans-serif;color:#444;border-bottom:2px solid #000;padding-bottom:8px;margin-bottom:18px;display:flex;justify-content:space-between}p.t{text-align:justify}.f{font:12px Arial,sans-serif;color:#555;border-top:1px solid #999;margin-top:24px;padding-top:8px}@media print{.np{display:none}}.np{font:15px Arial;background:#111;color:#fff;border:0;padding:10px 18px;border-radius:8px;cursor:pointer}</style></head>
 <body><button class="np" onclick="window.print()">⬇ Save PDF / Print</button>
 <h1><?php echo esc_html($p['title']); ?></h1>
-<div class="m"><span><?php echo $p['lang'] === 'hi' ? 'Hindi' : 'English'; ?> · <?php echo number_format_i18n(mb_strlen($txt)); ?> characters · <?php echo $words; ?> words · Level <?php echo esc_html($p['level']); ?></span><span><?php echo esc_html(wp_parse_url(home_url(), PHP_URL_HOST)); ?></span></div>
-<p class="t"><?php echo esc_html($txt); ?></p>
+<div class="m"><span><?php echo $p['lang'] === 'hi' ? ['kd' => 'Hindi - Krutidev', 'rg' => 'Hindi - Remington Gail', 'in' => 'Hindi - Mangal Inscript'][$font] : 'English'; ?> · <?php echo number_format_i18n(mb_strlen($txt)); ?> characters · <?php echo $words; ?> words · Level <?php echo esc_html($p['level']); ?></span><span><?php echo esc_html(wp_parse_url(home_url(), PHP_URL_HOST)); ?></span></div>
+<p class="t<?php echo ($p['lang'] === 'hi' && $font !== 'in') ? ' kd' : ''; ?>" id="t"><?php echo esc_html($txt); ?></p>
+<?php if ($p['lang'] === 'hi' && $font !== 'in'): ?>
+<style>@font-face{font-family:EHKruti;src:local("Kruti Dev 010"),url("<?php echo esc_url(EH_URI . '/assets/fonts/krutidev010.ttf'); ?>") format("truetype")}p.kd{font:21px/1.8 EHKruti,serif}</style>
+<script src="<?php echo esc_url(EH_URI . '/assets/eh-hindi.js?v=' . EH_VER); ?>"></script>
+<script>(function(){var t=document.getElementById('t'),x=t.textContent.replace(/[\u0958-\u095B\u095E]/g,function(c){return{'\u0958':'\u0915','\u0959':'\u0916','\u095A':'\u0917','\u095B':'\u091C','\u095E':'\u092B'}[c]}).replace(/([\u0915\u0916\u0917\u091C\u092B])\u093C/g,'$1');t.textContent=EHHindi.unicodeToKD(x);})();</script>
+<?php endif; ?>
 <div class="f">Free typing practice passage — <?php echo esc_html(home_url('/')); ?> · Telegram: <?php echo esc_html(eh_opt('tg_channel')); ?></div>
 <script>setTimeout(function(){window.print()},700)</script></body></html>
 <?php exit; }
@@ -34,10 +40,10 @@ get_header(); ?>
   <div class="eh-panel eh-dl">
     <p>Download special passages (court orders, office orders) or English and Hindi passages by date. <b>B</b> - Basic, <b>E</b> - Easy, <b>M</b> - Moderate, <b>H</b> - Hard</p>
     <?php if ($special): ?><details class="eh-day"><summary>★ Special Passages (<?php echo count($special); ?>)</summary>
-      <?php foreach ($special as $p): ?><div class="eh-prow"><span></span><span class="lv lv-<?php echo esc_attr($p['level']); ?>"><?php echo esc_html($p['level']); ?></span><span class="t"><?php echo esc_html($p['title']); ?></span><a class="btn ghost sm" target="_blank" href="<?php echo esc_url(add_query_arg('print', $p['id'], home_url('/download-passages/'))); ?>">PDF ⬇</a></div><?php endforeach; ?>
+      <?php foreach ($special as $p): ?><div class="eh-prow"><span></span><span class="lv lv-<?php echo esc_attr($p['level']); ?>"><?php echo esc_html($p['level']); ?></span><span class="t"><?php echo esc_html($p['title']); ?></span><a class="btn ghost sm" target="_blank" href="<?php echo esc_url(add_query_arg(['print' => $p['id'], 'font' => $font], home_url('/download-passages/'))); ?>">PDF ⬇</a></div><?php endforeach; ?>
     </details><p class="center muted">— or —</p><?php endif; ?>
     <form class="eh-dl-form" target="_blank" action="<?php echo esc_url(home_url('/download-passages/')); ?>">
-      <label>Language<select id="dl-lang" onchange="location.href='?lang='+this.value"><option value="en">English</option><option value="hi" <?php selected($lang, 'hi'); ?>>Hindi</option></select></label>
+      <label>Language<select id="dl-lang" onchange="location.href='?lang='+this.value.split('-')[0]+(this.value.indexOf('-')>0?'&font='+this.value.split('-')[1]:'')"><option value="en">English</option><option value="hi-kd" <?php selected($lang . '-' . $font, 'hi-kd'); ?>>Hindi - Krutidev</option><option value="hi-in" <?php selected($lang . '-' . $font, 'hi-in'); ?>>Hindi - Inscript</option><option value="hi-rg" <?php selected($lang . '-' . $font, 'hi-rg'); ?>>Hindi - Remington Gail</option></select></label><input type="hidden" name="font" value="<?php echo esc_attr($font); ?>">
       <label>Date<select id="dl-date"><?php foreach ($days as $i => $d) echo '<option value="' . esc_attr($d['date']) . '">' . esc_html(wp_date('d M Y', strtotime($d['date'] . ' 12:00'))) . ($i === 0 ? ' (today)' : '') . '</option>'; ?></select></label>
       <label>Passage<select id="dl-p" name="print"></select></label>
       <label>Download limit<span class="eh-lim"><input name="limit" type="number" min="0" step="50" placeholder="Full passage"><select name="unit"><option value="keys">Characters</option><option value="words">Words</option></select></span></label>
