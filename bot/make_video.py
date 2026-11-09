@@ -14,7 +14,14 @@ FPS=str(META.get("fps",25))
 for i,s in enumerate(segs):
     a=f"/tmp/a{i}.mp3"; asyncio.run(tts(s["text"],a))
     t=dur(a)+0.6+float(s.get("pause",0)); c=f"/tmp/c{i}.mp4"
-    if s.get("intro"):
+    if s.get("intro") and s.get("loop"):
+        # animated intro clip (1.2 s) followed by a seamless moving-mechanism loop, trimmed to the narration
+        t=max(dur(a)+0.35+float(s.get("pause",0)),1.3); rem=t-1.2
+        subprocess.run([FF,"-y","-loglevel","error","-i",f"{d}/{s['intro']}","-stream_loop","-1","-i",f"{d}/{s['loop']}","-i",a,
+            "-filter_complex",f"[0:v]format=yuv420p,setsar=1[i];[1:v]trim=duration={rem:.2f},setpts=PTS-STARTPTS,format=yuv420p,setsar=1[s];[i][s]concat=n=2:v=1:a=0[v];[2:a]apad[a]",
+            "-map","[v]","-map","[a]","-t",f"{t:.2f}","-c:v","libx264","-preset","veryfast","-pix_fmt","yuv420p","-r",FPS,
+            "-c:a","aac","-b:a","128k","-ar","44100","-ac","2",c],check=True)
+    elif s.get("intro"):
         # animated intro clip (1.2 s) followed by the held final frame, narration from t=0
         t=max(dur(a)+0.35+float(s.get("pause",0)),1.3); rem=t-1.2
         subprocess.run([FF,"-y","-loglevel","error","-i",f"{d}/{s['intro']}","-loop","1","-framerate",FPS,"-t",f"{rem:.2f}","-i",f"{d}/{s['img']}","-i",a,
