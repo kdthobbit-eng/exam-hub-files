@@ -1,0 +1,246 @@
+[
+{
+"id": "00_00_00",
+"text": "नमस्ते दोस्तों! आज Unit 8, fluid mechanics और hydraulic machines।"
+},
+{
+"id": "00_00_01",
+"text": "दस नंबर का topic है, और यहाँ के सवाल ज़्यादातर सीधे होते हैं, बस concept clear होना चाहिए।"
+},
+{
+"id": "00_00_02",
+"text": "चार parts, fluid statics, pressure measurement, water turbines, और centrifugal pump।"
+},
+{
+"id": "01_00_00",
+"text": "पहला part, fluid statics, यानी रुके हुए पानी की physics।"
+},
+{
+"id": "01_01_00",
+"text": "Left side tank देखो। पानी में जितना नीचे जाओ, pressure उतना ज़्यादा, p बराबर rho g h।"
+},
+{
+"id": "01_01_01",
+"text": "इसीलिए दीवार पर pressure triangle जैसा है, नीचे सबसे ज़्यादा। बाँध की दीवार नीचे मोटी इसीलिए बनाते हैं।"
+},
+{
+"id": "01_01_02",
+"text": "Right side, पानी में डूबी plate पर total force, rho g A x bar, जहाँ x bar है centroid की गहराई।"
+},
+{
+"id": "01_01_03",
+"text": "और ये force जिस point पर लगता है, centre of pressure, वो हमेशा centroid से नीचे होता है।"
+},
+{
+"id": "01_02_00",
+"text": "Newton का viscosity law, shear stress बराबर mu गुणा velocity gradient।"
+},
+{
+"id": "01_02_01",
+"text": "Kinematic viscosity, mu बटा rho, unit stoke।"
+},
+{
+"id": "01_02_02",
+"text": "Temperature बढ़ाओ, तो liquid की viscosity घटती है, जैसे गर्म तेल पतला हो जाता है। पर gas की viscosity बढ़ती है।"
+},
+{
+"id": "01_02_03",
+"text": "Soap bubble में अंदर extra pressure, आठ sigma बटा d, क्योंकि उसकी दो surfaces होती हैं।"
+},
+{
+"id": "01_02_04",
+"text": "और तैरती चीज़ stable तब, जब metacentre, centre of gravity से ऊपर हो।"
+},
+{
+"id": "01_03_00",
+"text": "सवाल, gas की viscosity temperature बढ़ने पर?"
+},
+{
+"id": "01_03_01",
+"text": "Liquid से उल्टा याद रखो।"
+},
+{
+"id": "01_03_02",
+"text": "Answer, बढ़ती है।"
+},
+{
+"id": "02_00_00",
+"text": "दूसरा part, pressure कैसे नापते हैं।"
+},
+{
+"id": "02_01_00",
+"text": "Left side U tube manometer। Pipe का pressure पारे को धक्का देता है, और दोनों तरफ़ level का फ़र्क बन जाता है।"
+},
+{
+"id": "02_01_01",
+"text": "Rule simple है, नीचे जाओ तो rho g h जोड़ो, ऊपर जाओ तो घटाओ।"
+},
+{
+"id": "02_01_02",
+"text": "Right side Bourdon tube gauge। अंदर एक मुड़ी हुई tube है, pressure से सीधी होने की कोशिश करती है, और सुई घूम जाती है। ये gauge pressure दिखाता है।"
+},
+{
+"id": "02_01_03",
+"text": "और absolute pressure, atmospheric plus gauge।"
+},
+{
+"id": "02_02_00",
+"text": "Piezometer सबसे simple है, पर gas या negative pressure नहीं नाप सकता।"
+},
+{
+"id": "02_02_01",
+"text": "दो points का difference नापना हो, तो differential manometer।"
+},
+{
+"id": "02_02_02",
+"text": "बहुत छोटा difference, तो inverted U tube।"
+},
+{
+"id": "02_02_03",
+"text": "और atmospheric pressure, barometer से। एक atmosphere, यानी 760 mm पारा, या 10.33 meter पानी।"
+},
+{
+"id": "02_03_00",
+"text": "सवाल, negative pressure कौन नहीं नाप सकता?"
+},
+{
+"id": "02_03_01",
+"text": "अभी list में था।"
+},
+{
+"id": "02_03_02",
+"text": "Answer, piezometer।"
+},
+{
+"id": "03_00_00",
+"text": "तीसरा part, water turbines, जिनसे hydro power बनती है।"
+},
+{
+"id": "03_01_00",
+"text": "ये Pelton wheel है। Nozzle से तेज़ पानी का jet निकल रहा है।"
+},
+{
+"id": "03_01_01",
+"text": "Jet पहिए की buckets से टकराता है, और पहिया घूमने लगता है।"
+},
+{
+"id": "03_01_02",
+"text": "Bucket पानी को लगभग पूरा पीछे मोड़ देती है, एक सौ पैंसठ degree।"
+},
+{
+"id": "03_01_03",
+"text": "और maximum efficiency तब मिलती है, जब bucket की speed, jet की speed की आधी हो।"
+},
+{
+"id": "03_02_00",
+"text": "अब कौन सी turbine कब? ऊँचे पहाड़ से कम पानी आए, यानी high head, तो Pelton। ये impulse turbine है।"
+},
+{
+"id": "03_02_01",
+"text": "Medium head के लिए Francis, इसमें flow mixed होता है।"
+},
+{
+"id": "03_02_02",
+"text": "नदी पर कम ऊँचाई पर ज़्यादा पानी, low head, तो Kaplan। इसकी blades adjust हो जाती हैं।"
+},
+{
+"id": "03_02_03",
+"text": "और turbine चुनने का आधार, specific speed, N root P बटा H to the power five by four।"
+},
+{
+"id": "03_03_00",
+"text": "सवाल, Pelton wheel कहाँ उपयुक्त?"
+},
+{
+"id": "03_03_01",
+"text": "Head याद करो।"
+},
+{
+"id": "03_03_02",
+"text": "Answer, high head।"
+},
+{
+"id": "04_00_00",
+"text": "Last part, centrifugal pump, यानी घर की मोटर।"
+},
+{
+"id": "04_01_00",
+"text": "ये centrifugal pump चल रहा है, नीले dots पानी हैं। पानी बीच से, जिसे eye कहते हैं, अंदर आता है।"
+},
+{
+"id": "04_01_01",
+"text": "Impeller घूमता है और पानी को बाहर की तरफ़ फेंकता है, बिल्कुल जैसे घूमते umbrella से पानी उड़ता है।"
+},
+{
+"id": "04_01_02",
+"text": "बाहर का spiral casing, volute, पानी की speed को pressure में बदल देता है।"
+},
+{
+"id": "04_01_03",
+"text": "और फिर पानी high pressure पर delivery pipe से बाहर।"
+},
+{
+"id": "04_02_00",
+"text": "Pump की specific speed, N root Q बटा H to the power three by four। Turbine से अलग है, ध्यान रखना।"
+},
+{
+"id": "04_02_01",
+"text": "Speed दोगुनी, तो discharge भी दोगुना।"
+},
+{
+"id": "04_02_02",
+"text": "Head चार गुना।"
+},
+{
+"id": "04_02_03",
+"text": "और power आठ गुना।"
+},
+{
+"id": "04_02_04",
+"text": "और pump चलाने से पहले priming ज़रूरी है, यानी अंदर पानी भरना। हवा में impeller pressure बना ही नहीं पाता।"
+},
+{
+"id": "04_03_00",
+"text": "Numerical, pump की speed दोगुनी कर दी।"
+},
+{
+"id": "04_03_01",
+"text": "Discharge दोगुना।"
+},
+{
+"id": "04_03_02",
+"text": "Head चार गुना।"
+},
+{
+"id": "04_03_03",
+"text": "और power, आठ गुना। बिजली का bill भी आठ गुना!"
+},
+{
+"id": "04_04_00",
+"text": "आख़िरी सवाल, centrifugal pump चालू करने से पहले क्या करते हैं?"
+},
+{
+"id": "04_04_01",
+"text": "अभी बताया।"
+},
+{
+"id": "04_04_02",
+"text": "Answer, priming।"
+},
+{
+"id": "04_05_00",
+"text": "Revision, p बराबर rho g h, और total force।"
+},
+{
+"id": "04_05_01",
+"text": "Pressure नापने के instruments।"
+},
+{
+"id": "04_05_02",
+"text": "Turbines head के हिसाब से।"
+},
+{
+"id": "04_05_03",
+"text": "और pump के affinity laws। तो दोस्तों, आठों units पूरे! PDF पढ़ो, quiz लगाओ, और exam में धमाका करो। All the best!"
+}
+]
