@@ -1,0 +1,21 @@
+name: TTS lines (Gemini)
+on:
+  workflow_dispatch:
+    inputs:
+      dir: {description: "video/<dir> containing tts.json", required: true}
+      voice: {description: "Gemini voice name", required: false, default: "Charon"}
+      style: {description: "style instruction", required: false, default: "Read the following like a friendly, energetic Indian teacher explaining to students in natural Hinglish, at a lively but clear pace:"}
+permissions:
+  contents: write
+jobs:
+  tts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get install -y -qq ffmpeg >/dev/null && pip install -q mutagen
+      - run: python3 bot/tts_gemini.py "${{ inputs.dir }}" "${{ inputs.voice }}" "${{ inputs.style }}"
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - run: |
+          git config user.name "Exam Hub Bot" && git config user.email bot@users.noreply.github.com && git add "${{ inputs.dir }}" && git commit -qm "Gemini TTS audio" && for i in 1 2 3 4 5; do git pull -q --rebase && git push -q && break; sleep 5; done

@@ -1,0 +1,10 @@
+[
+{
+"id": "s1",
+"text": "नमस्ते दोस्तों! आज हम Air Compressor पढ़ेंगे। Simple भाषा में समझो — जैसे साइकिल में पंप से हवा भरते हो, बिल्कुल वही काम एक compressor करता है, बस बड़े level पर।"
+},
+{
+"id": "s2",
+"text": "अब ध्यान से देखो, exam में ये सवाल बार-बार आता है — multi-stage compression में intermediate pressure कितना होगा? Answer है root of p1 into p3, यानी geometric mean। ये याद रखना, पक्का एक नंबर मिलेगा!"
+}
+]
