@@ -2,6 +2,8 @@
 usage: tts_gemini.py <dir> <voice> <style>   (env GEMINI_API_KEY)"""
 import json, sys, os, time, base64, subprocess, urllib.request, urllib.error
 from mutagen.mp3 import MP3
+import imageio_ffmpeg
+FF = imageio_ffmpeg.get_ffmpeg_exe()
 
 d, voice, style = sys.argv[1], sys.argv[2], sys.argv[3]
 KEY = os.environ["GEMINI_API_KEY"]
@@ -40,7 +42,7 @@ for it in items:
         if pcm: break
     if not pcm:
         print("stopping: could not synthesize", it["id"]); break
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-f", "s16le", "-ar", "24000", "-ac", "1", "-i", "-", "-b:a", "96k", f],
+    subprocess.run([FF, "-loglevel", "error", "-y", "-f", "s16le", "-ar", "24000", "-ac", "1", "-i", "-", "-b:a", "96k", f],
                    input=pcm, check=True)
     print("ok", it["id"], model)
 

@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get install -y -qq ffmpeg >/dev/null && pip install -q mutagen
+      - run: pip install -q mutagen imageio-ffmpeg
       - run: python3 bot/tts_gemini.py "${{ inputs.dir }}" "${{ inputs.voice }}" "${{ inputs.style }}"
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
