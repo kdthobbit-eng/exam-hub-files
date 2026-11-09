@@ -21,4 +21,4 @@ jobs:
           CAP: ${{ inputs.caption }}
           PM: ${{ inputs.parse_mode }}
         run: |
-          EXTRA=(); [ -n "$PM" ] && EXTRA=(-F "parse_mode=$PM"); curl -sS -F "chat_id=$C" -F "caption=$CAP" "${EXTRA[@]}" -F "photo=@$P" "https://api.telegram.org/bot$TOKEN/sendPhoto" | head -c 300
+          EXTRA=(); [ -n "$PM" ] && EXTRA=(-F "parse_mode=$PM"); curl -sS -F "chat_id=$C" --form-string "caption=$CAP" "${EXTRA[@]}" -F "photo=@$P" "https://api.telegram.org/bot$TOKEN/sendPhoto" | head -c 300
