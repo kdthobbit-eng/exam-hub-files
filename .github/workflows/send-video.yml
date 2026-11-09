@@ -1,0 +1,19 @@
+name: Send video via bot
+on:
+  workflow_dispatch:
+    inputs:
+      path: {description: "Video in this repo", required: true}
+      chat: {description: "Telegram chat id", required: true}
+      caption: {description: "Caption", required: false, default: ""}
+      width: {required: false, default: "1280"}
+      height: {required: false, default: "720"}
+      duration: {required: false, default: "0"}
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: |
+          curl -sS -F "chat_id=${{ inputs.chat }}" -F "caption=${{ inputs.caption }}" -F "width=${{ inputs.width }}" -F "height=${{ inputs.height }}" -F "duration=${{ inputs.duration }}" -F "supports_streaming=true" -F "video=@${{ inputs.path }}" "https://api.telegram.org/bot$TOKEN/sendVideo" | head -c 400

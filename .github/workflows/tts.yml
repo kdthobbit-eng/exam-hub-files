@@ -1,0 +1,19 @@
+name: TTS lines
+on:
+  workflow_dispatch:
+    inputs:
+      dir: {description: "video/<dir> containing tts.json", required: true}
+      voice: {description: "edge-tts voice", required: false, default: "hi-IN-MadhurNeural"}
+      rate: {description: "rate", required: false, default: "+100%"}
+permissions:
+  contents: write
+jobs:
+  tts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q edge-tts mutagen
+      - run: python3 bot/tts_only.py "${{ inputs.dir }}" "${{ inputs.voice }}" "${{ inputs.rate }}"
+      - run: |
+          git add "${{ inputs.dir }}" && git -c user.name="Exam Hub Bot" -c user.email=bot@users.noreply.github.com commit -qm "TTS audio" && git pull -q --rebase && git push -q
