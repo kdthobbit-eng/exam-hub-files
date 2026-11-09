@@ -1,0 +1,786 @@
+[
+{
+"id": "00_00_00",
+"text": "नमस्ते दोस्तों! UPSSSC ALERT की class में आपका स्वागत है।"
+},
+{
+"id": "00_00_01",
+"text": "आज हम पढ़ने वाले हैं Theory of Machines और Machine Design… और सच बताऊँ, ये वही subject है जहाँ से पूरे पंद्रह नंबर आते हैं।"
+},
+{
+"id": "00_00_02",
+"text": "तो notebook खोल लो, आराम से बैठो, आज रटना नहीं है… आज मशीनों को चलते हुए देखकर समझेंगे।"
+},
+{
+"id": "00_01_00",
+"text": "देखो, आज का पूरा plan ये रहा।"
+},
+{
+"id": "00_01_01",
+"text": "Simple machines से start करेंगे,"
+},
+{
+"id": "00_01_02",
+"text": "फिर four bar linkage,"
+},
+{
+"id": "00_01_03",
+"text": "फिर flywheel,"
+},
+{
+"id": "00_01_04",
+"text": "belt drive,"
+},
+{
+"id": "00_01_05",
+"text": "clutch,"
+},
+{
+"id": "00_01_06",
+"text": "gears,"
+},
+{
+"id": "00_01_07",
+"text": "governor,"
+},
+{
+"id": "00_01_08",
+"text": "cam और follower,"
+},
+{
+"id": "00_01_09",
+"text": "और last में bearings।"
+},
+{
+"id": "00_01_10",
+"text": "हर topic में पहले machine को चलते देखेंगे, फिर formula निकालेंगे, और फिर exam वाला सवाल solve करेंगे। ठीक है? चलो शुरू करते हैं।"
+},
+{
+"id": "01_00_00",
+"text": "तो सबसे पहला topic है, simple machines।"
+},
+{
+"id": "01_00_01",
+"text": "और ये topic हल्का मत समझना, हर साल यहाँ से कम से कम एक सवाल तो पक्का आता है।"
+},
+{
+"id": "01_01_00",
+"text": "अच्छा, screen पर देखो… ये है एक lever, बिल्कुल वैसा जैसा बचपन में see-saw होता था।"
+},
+{
+"id": "01_01_01",
+"text": "Left side में ये लाल arrow है ना? ये है effort, यानी जितना ज़ोर हम लगा रहे हैं।"
+},
+{
+"id": "01_01_02",
+"text": "Right side में ये काला box, ये load है, जिसे हमें उठाना है।"
+},
+{
+"id": "01_01_03",
+"text": "और नीचे ये हरा triangle, इसे बोलते हैं fulcrum, पूरा lever इसी पर टिका है।"
+},
+{
+"id": "01_01_04",
+"text": "अब ध्यान से देखो… हल्का सा दबाया, और भारी box ऊपर उठ गया! बस, यही तो machine का काम है, कम force में ज़्यादा load उठाना।"
+},
+{
+"id": "01_02_00",
+"text": "अब इसको numbers में समझते हैं। Load को effort से divide करो, तो मिलता है mechanical advantage, यानी MA।"
+},
+{
+"id": "01_02_01",
+"text": "दूसरा है velocity ratio। Effort वाला सिरा कितना चला, उसे load की दूरी से divide करो। और याद रखना, ये सिर्फ़ machine की design पर depend करता है, friction पर नहीं।"
+},
+{
+"id": "01_02_02",
+"text": "तीसरा, efficiency… सीधा सा formula, MA बटा VR।"
+},
+{
+"id": "01_02_03",
+"text": "अब सोचो, अगर friction बिल्कुल zero हो जाए तो? तब MA और VR बराबर हो जाएँगे, और efficiency पूरी सौ प्रतिशत। इसी को ideal machine कहते हैं।"
+},
+{
+"id": "01_03_00",
+"text": "अब एक बहुत मज़ेदार concept आता है। Machines दो तरह की होती हैं।"
+},
+{
+"id": "01_03_01",
+"text": "अगर efficiency पचास percent से ज़्यादा है, तो machine reversible है। और पचास से कम, तो self-locking।"
+},
+{
+"id": "01_03_02",
+"text": "Practically मतलब क्या? Reversible machine में हाथ हटाया, और load वापस नीचे सरक जाएगा। Self-locking में load जहाँ है, वहीं अटका रहेगा।"
+},
+{
+"id": "01_03_03",
+"text": "Screw के लिए condition याद कर लो, friction angle phi, helix angle alpha से बड़ा हो, तो self-locking।"
+},
+{
+"id": "01_03_04",
+"text": "इसीलिए तो गाड़ी का screw jack self-locking बनाते हैं… गाड़ी उठाओ, हाथ छोड़ दो, गाड़ी नीचे नहीं गिरेगी। Safety का पूरा खेल यही है।"
+},
+{
+"id": "01_04_00",
+"text": "चलो अब एक सवाल लगाते हैं। Law of machine दिया है, P बराबर 0.04 W प्लस 20, और velocity ratio है चालीस।"
+},
+{
+"id": "01_04_01",
+"text": "Law of machine में W के साथ जो number लगा है, वही m होता है। तो m हुआ 0.04।"
+},
+{
+"id": "01_04_02",
+"text": "Maximum efficiency का formula है, एक बटा, m गुणा VR।"
+},
+{
+"id": "01_04_03",
+"text": "Values रखो, एक बटा 0.04 गुणा 40, यानी एक बटा 1.6।"
+},
+{
+"id": "01_04_04",
+"text": "Answer आया साढ़े बासठ percent। और ये पचास से ज़्यादा है, तो ये machine reversible है। देखा, एक सवाल में दो concepts!"
+},
+{
+"id": "01_05_00",
+"text": "अब देखो 2016 के paper का असली सवाल। Differential wheel and axle का velocity ratio क्या होगा?"
+},
+{
+"id": "01_05_01",
+"text": "Options ध्यान से पढ़ना, ज़्यादातर बच्चे यहीं plus और minus में confuse हो जाते हैं।"
+},
+{
+"id": "01_05_02",
+"text": "सही answer है, दो D बटा, d one minus d two। नीचे diameters का difference आता है, sum नहीं। ये गलती exam में मत करना।"
+},
+{
+"id": "02_00_00",
+"text": "अब दूसरा topic, four bar linkage।"
+},
+{
+"id": "02_00_01",
+"text": "SSC वाले भी इस topic को बहुत पसंद करते हैं, तो ध्यान से।"
+},
+{
+"id": "02_01_00",
+"text": "ये machine देखो, इसमें कुल चार links हैं।"
+},
+{
+"id": "02_01_01",
+"text": "नीचे ये grey वाली dotted link हिलती ही नहीं है, इसे frame कहते हैं।"
+},
+{
+"id": "02_01_02",
+"text": "ये छोटी लाल link पूरा गोल चक्कर लगा रही है, इसका नाम है crank।"
+},
+{
+"id": "02_01_03",
+"text": "अब हरी link को देखो… ये पूरा नहीं घूम रही, बस आगे-पीछे झूल रही है। इसे rocker कहते हैं।"
+},
+{
+"id": "02_01_04",
+"text": "और बीच वाली नीली link, जो crank और rocker को जोड़ रही है, उसे coupler कहते हैं। बस, चार नाम याद हो गए।"
+},
+{
+"id": "02_02_00",
+"text": "अब सवाल ये है कि कौन सी link पूरा घूमेगी, ये पता कैसे करें? इसके लिए है Grashof का law।"
+},
+{
+"id": "02_02_01",
+"text": "s मतलब सबसे छोटी link,"
+},
+{
+"id": "02_02_02",
+"text": "l मतलब सबसे लंबी link,"
+},
+{
+"id": "02_02_03",
+"text": "और p, q बाकी की दो links।"
+},
+{
+"id": "02_02_04",
+"text": "Rule simple है, छोटी और लंबी को जोड़ो। अगर ये बाकी दोनों के जोड़ से कम या बराबर है, तो कम से कम एक link पूरा चक्कर लगा सकती है।"
+},
+{
+"id": "02_03_00",
+"text": "अब असली जादू देखो। Chain वही है, बस कौन सी link fix करते हो, उससे पूरी machine बदल जाती है। इसे inversion कहते हैं।"
+},
+{
+"id": "02_03_01",
+"text": "सबसे छोटी link fix करो, तो double crank बनता है।"
+},
+{
+"id": "02_03_02",
+"text": "उसके बगल वाली fix करो, तो crank rocker, जो अभी हमने screen पर चलती देखी।"
+},
+{
+"id": "02_03_03",
+"text": "और सामने वाली fix करो, तो double rocker।"
+},
+{
+"id": "02_03_04",
+"text": "और SSC का favourite, Oldham coupling, Scotch yoke और elliptical trammel… तीनों double slider crank chain के inversion हैं। ये तीनों नाम एक साथ रट लो।"
+},
+{
+"id": "02_04_00",
+"text": "अब degree of freedom की बात करते हैं। इसके लिए Kutzbach का equation है।"
+},
+{
+"id": "02_04_01",
+"text": "l मतलब links की संख्या,"
+},
+{
+"id": "02_04_02",
+"text": "j मतलब lower pair वाले joints,"
+},
+{
+"id": "02_04_03",
+"text": "और h मतलब higher pairs।"
+},
+{
+"id": "02_04_04",
+"text": "Answer एक आया, तो machine बढ़िया चलेगी। Zero आया, तो वो structure है, हिलेगी ही नहीं। जैसे एक triangle frame।"
+},
+{
+"id": "02_05_00",
+"text": "अब SSC 2018 का सवाल। Oldham coupling किसका inversion है?"
+},
+{
+"id": "02_05_01",
+"text": "अभी तो पढ़ा हमने… वो तीन नाम याद करो।"
+},
+{
+"id": "02_05_02",
+"text": "बिल्कुल सही, double slider crank chain।"
+},
+{
+"id": "03_00_00",
+"text": "Topic नंबर तीन, flywheel।"
+},
+{
+"id": "03_00_01",
+"text": "इसको एक line में याद रखना, flywheel मतलब energy का bank।"
+},
+{
+"id": "03_01_00",
+"text": "Left side में ये भारी पहिया देखो। इसका ज़्यादातर वज़न किनारे पर, यानी rim में रखा जाता है।"
+},
+{
+"id": "03_01_01",
+"text": "अब right side में engine का torque graph देखो। जब graph average line से ऊपर है, ये लाल हिस्सा, तब energy ज़्यादा मिल रही है। Flywheel उसे जमा कर लेता है, और थोड़ा तेज़ घूमने लगता है।"
+},
+{
+"id": "03_01_02",
+"text": "और जब graph नीचे चला जाता है, ये नीला हिस्सा, तब energy कम है। तो flywheel अपनी जमा energy वापस दे देता है।"
+},
+{
+"id": "03_01_03",
+"text": "Result क्या हुआ? पूरे cycle में speed लगभग एक जैसी बनी रही। जैसे bank में पैसे जमा करो और ज़रूरत पड़ने पर निकाल लो।"
+},
+{
+"id": "03_02_00",
+"text": "अब सबसे important formula। Energy में maximum fluctuation, delta E बराबर, I omega square Cs।"
+},
+{
+"id": "03_02_01",
+"text": "Cs मतलब coefficient of fluctuation of speed, यानी N1 minus N2, बटा average speed।"
+},
+{
+"id": "03_02_02",
+"text": "इसका उल्टा है coefficient of steadiness। ये 2016 में direct पूछा गया था।"
+},
+{
+"id": "03_02_03",
+"text": "Delta E को ऐसे भी लिख सकते हो, दो गुणा E गुणा Cs।"
+},
+{
+"id": "03_02_04",
+"text": "और rim में hoop stress, rho v square। मज़े की बात, ये cross section पर depend ही नहीं करता।"
+},
+{
+"id": "03_03_00",
+"text": "चलो सवाल लगाते हैं। Mass आठ सौ kg, radius of gyration 0.8 meter, speed ढाई सौ rpm, और Cs 0.02।"
+},
+{
+"id": "03_03_01",
+"text": "पहले omega निकालो, दो pi N बटा साठ, तो आया 26.18।"
+},
+{
+"id": "03_03_02",
+"text": "इसका square, 685.4।"
+},
+{
+"id": "03_03_03",
+"text": "अब सब कुछ m k square omega square Cs में रख दो।"
+},
+{
+"id": "03_03_04",
+"text": "Answer आया लगभग सात kilo joule। Calculator पर एक बार खुद करके देखना।"
+},
+{
+"id": "03_04_00",
+"text": "अब ये गलती बहुत बच्चे करते हैं, flywheel और governor को एक समझ लेते हैं।"
+},
+{
+"id": "03_04_01",
+"text": "Flywheel सिर्फ़ एक cycle के अंदर का उतार-चढ़ाव कम करता है। Governor तब काम आता है जब load बदलता है, वो average speed संभालता है।"
+},
+{
+"id": "03_04_02",
+"text": "Flywheel fuel को छूता भी नहीं, governor fuel कम-ज़्यादा करता है।"
+},
+{
+"id": "03_04_03",
+"text": "Flywheel एक cycle में काम करता है, governor कई cycles में।"
+},
+{
+"id": "03_04_04",
+"text": "एक energy का bank है, दूसरा controller। बस इतना फ़र्क याद रखो।"
+},
+{
+"id": "03_05_00",
+"text": "2016 का सवाल। Coefficient of steadiness क्या होगा?"
+},
+{
+"id": "03_05_01",
+"text": "Hint, steadiness Cs का उल्टा होता है।"
+},
+{
+"id": "03_05_02",
+"text": "तो answer, N1 plus N2, बटा, दो गुणा N1 minus N2।"
+},
+{
+"id": "04_00_00",
+"text": "अब चौथा topic, belt drive।"
+},
+{
+"id": "04_00_01",
+"text": "यहाँ से theory भी आती है और numerical भी, दोनों।"
+},
+{
+"id": "04_01_00",
+"text": "ऊपर वाला belt देखो, ये open belt है। दोनों pulley एक ही direction में घूम रही हैं।"
+},
+{
+"id": "04_01_01",
+"text": "नीचे वाला belt cross है, तो दूसरी pulley उल्टी direction में घूम रही है।"
+},
+{
+"id": "04_01_02",
+"text": "Open belt में ये लाल side खिंची हुई है, इसे tight side कहते हैं, tension T1।"
+},
+{
+"id": "04_01_03",
+"text": "और ये काली ढीली side, slack side, tension T2। और ध्यान दिया? छोटी pulley बड़ी वाली से कितनी तेज़ घूम रही है।"
+},
+{
+"id": "04_02_00",
+"text": "अब flat belt का tension ratio। T1 बटा T2 बराबर e की power mu theta। और हाँ, theta हमेशा radian में लेना।"
+},
+{
+"id": "04_02_01",
+"text": "V-belt में cosec beta और जुड़ जाता है, इसलिए उसकी grip ज़्यादा होती है, फिसलती कम है।"
+},
+{
+"id": "04_02_02",
+"text": "Power, दोनों tensions का difference गुणा belt की speed।"
+},
+{
+"id": "04_02_03",
+"text": "Centrifugal tension, m v square। और ये power पर कोई असर नहीं डालता, ये SSC में बार-बार पूछते हैं।"
+},
+{
+"id": "04_02_04",
+"text": "और maximum power कब? जब maximum tension, centrifugal tension का तीन गुना हो। ये 2016 का सवाल था।"
+},
+{
+"id": "04_03_00",
+"text": "चलो सवाल। बड़ी pulley छह सौ mm की, तीन सौ rpm पर। छोटी pulley तीन सौ mm की। Slip दो percent।"
+},
+{
+"id": "04_03_01",
+"text": "पहले बिना slip के सोचो, speed diameter के उल्टे ratio में, तो छह सौ rpm।"
+},
+{
+"id": "04_03_02",
+"text": "अब slip दो percent है, तो एक minus 0.02 से multiply करो।"
+},
+{
+"id": "04_03_03",
+"text": "छह सौ गुणा 0.98,"
+},
+{
+"id": "04_03_04",
+"text": "Answer, पाँच सौ अट्ठासी rpm। Slip से speed थोड़ी कम हो गई, logical है ना?"
+},
+{
+"id": "04_04_00",
+"text": "अब 2016 का सवाल। Belt की power maximum कब होगी?"
+},
+{
+"id": "04_04_01",
+"text": "अभी formula में देखा था, सोचो।"
+},
+{
+"id": "04_04_02",
+"text": "Answer, तीन गुना।"
+},
+{
+"id": "05_00_00",
+"text": "पाँचवाँ topic, clutch।"
+},
+{
+"id": "05_00_01",
+"text": "Bike चलाते हो तो clutch दबाना तो आता ही होगा। आज देखेंगे अंदर होता क्या है।"
+},
+{
+"id": "05_01_00",
+"text": "ये देखो, left side में engine का flywheel है, ये हमेशा घूमता रहता है।"
+},
+{
+"id": "05_01_01",
+"text": "बीच में ये लाल वाली friction plate है, जो gearbox की shaft से जुड़ी है।"
+},
+{
+"id": "05_01_02",
+"text": "ये हरी springs plates को आपस में दबाकर रखती हैं। Friction की वजह से output भी घूमने लगता है। इसे engaged कहते हैं।"
+},
+{
+"id": "05_01_03",
+"text": "और जैसे ही clutch दबाया, pressure plate पीछे हटी, plates अलग, और output रुक गया। नीचे screen पर लिखा भी आ रहा है, देखो।"
+},
+{
+"id": "05_02_00",
+"text": "अब clutch कितना torque देगा? Formula है, T बराबर n mu W R।"
+},
+{
+"id": "05_02_01",
+"text": "n मतलब कितनी surfaces रगड़ रही हैं। Single plate के दोनों तरफ़ lining होती है, तो n बराबर दो।"
+},
+{
+"id": "05_02_02",
+"text": "Multi plate में, driving और driven plates जोड़ो, और एक घटा दो।"
+},
+{
+"id": "05_02_03",
+"text": "और clutch हमेशा uniform wear पर design होता है, उसमें mean radius बस दोनों radius का average।"
+},
+{
+"id": "05_02_04",
+"text": "Cone clutch में cosec alpha और जुड़ जाता है, इसलिए वो ज़्यादा torque देता है।"
+},
+{
+"id": "05_03_00",
+"text": "सवाल। चार driving, तीन driven plates, mu 0.3, axial load दो kilo newton, mean radius साठ mm।"
+},
+{
+"id": "05_03_01",
+"text": "पहले n निकालो, चार plus तीन minus एक, यानी छह।"
+},
+{
+"id": "05_03_02",
+"text": "अब formula लगाओ, n mu W R।"
+},
+{
+"id": "05_03_03",
+"text": "छह गुणा 0.3 गुणा दो हज़ार गुणा 0.06,"
+},
+{
+"id": "05_03_04",
+"text": "Answer, दो सौ सोलह newton meter।"
+},
+{
+"id": "05_04_00",
+"text": "एक trick वाला सवाल। Uniform wear में maximum pressure कहाँ होगा?"
+},
+{
+"id": "05_04_01",
+"text": "Uniform wear की condition है, p गुणा r constant। तो जहाँ r छोटा, वहाँ p बड़ा।"
+},
+{
+"id": "05_04_02",
+"text": "Answer, inner radius पर। Outer नहीं, ये trap है।"
+},
+{
+"id": "06_00_00",
+"text": "छठा topic, gears। और सच बताऊँ, सबसे ज़्यादा सवाल यहीं से आते हैं।"
+},
+{
+"id": "06_01_00",
+"text": "देखो, right side में ये छोटा लाल gear, इसे pinion कहते हैं। ये तेज़ घूम रहा है।"
+},
+{
+"id": "06_01_01",
+"text": "Left side में बड़ा नीला gear, ये धीरे घूम रहा है। दाँत ज़्यादा, तो speed कम।"
+},
+{
+"id": "06_01_02",
+"text": "ये orange dotted circles हैं pitch circles। और जहाँ दोनों छूते हैं, उसे pitch point कहते हैं। SSC में पूछा जा चुका है।"
+},
+{
+"id": "06_01_03",
+"text": "और notice किया? दोनों gears आपस में उल्टी direction में घूम रहे हैं। हमेशा याद रखना।"
+},
+{
+"id": "06_02_00",
+"text": "Module का मतलब, pitch circle diameter बटा teeth की संख्या।"
+},
+{
+"id": "06_02_01",
+"text": "Gear ratio, बड़े gear के teeth बटा छोटे के teeth। और यही speed का उल्टा ratio भी है।"
+},
+{
+"id": "06_02_02",
+"text": "Circular pitch, pi गुणा m।"
+},
+{
+"id": "06_02_03",
+"text": "बीस degree full depth system में addendum एक m, dedendum 1.25 m, और clearance 0.25 m।"
+},
+{
+"id": "06_02_04",
+"text": "और interference से बचना है, तो pinion पर कम से कम अठारह teeth होने चाहिए।"
+},
+{
+"id": "06_03_00",
+"text": "अब कौन सा gear कहाँ use होता है।"
+},
+{
+"id": "06_03_01",
+"text": "Shafts parallel हैं, तो spur, helical या herringbone। Herringbone axial thrust को ख़त्म कर देता है।"
+},
+{
+"id": "06_03_02",
+"text": "Shafts आपस में काटती हैं, तो bevel gear।"
+},
+{
+"id": "06_03_03",
+"text": "न parallel, न काटती हैं, तो worm और worm wheel। ये 2016 में पूछा था।"
+},
+{
+"id": "06_03_04",
+"text": "और gear train में gears की संख्या even हो, तो पहला और आख़िरी उल्टी direction में घूमेंगे। ये भी 2016 का सवाल।"
+},
+{
+"id": "06_04_00",
+"text": "एक compound train का सवाल। A के बीस teeth, B के साठ, C के पच्चीस, D के पचहत्तर। A की speed अठारह सौ rpm।"
+},
+{
+"id": "06_04_01",
+"text": "Speed ratio, driven gears के teeth का product, बटा driver gears का product।"
+},
+{
+"id": "06_04_02",
+"text": "साठ गुणा पचहत्तर, बटा बीस गुणा पच्चीस, यानी नौ।"
+},
+{
+"id": "06_04_03",
+"text": "तो D की speed, अठारह सौ बटा नौ,"
+},
+{
+"id": "06_04_04",
+"text": "Answer, दो सौ rpm।"
+},
+{
+"id": "06_05_00",
+"text": "2016 का सवाल। Involute का normal किस circle को छूता है?"
+},
+{
+"id": "06_05_01",
+"text": "Hint, involute बनता ही base circle से है।"
+},
+{
+"id": "06_05_02",
+"text": "Answer, base circle।"
+},
+{
+"id": "07_00_00",
+"text": "सातवाँ topic, governor। 2016 में यहाँ से पूरे तीन सवाल आए थे, तो ध्यान से।"
+},
+{
+"id": "07_01_00",
+"text": "ये देखो governor। बीच वाली rod engine के साथ घूमती है।"
+},
+{
+"id": "07_01_01",
+"text": "जैसे ही engine की speed बढ़ती है, centrifugal force से ये लाल balls बाहर फैल जाती हैं।"
+},
+{
+"id": "07_01_02",
+"text": "Balls बाहर गईं, तो नीचे वाली नीली sleeve ऊपर खिसक गई।"
+},
+{
+"id": "07_01_03",
+"text": "और sleeve से जुड़ा lever fuel कम कर देता है। Speed कम हुई, तो उल्टा, fuel बढ़ गया। कितना smart system है ना!"
+},
+{
+"id": "07_02_00",
+"text": "Watt governor की height, 895 बटा N square meter। ये 2016 में direct आया था।"
+},
+{
+"id": "07_02_01",
+"text": "मतलब height speed के square के उल्टे ratio में। Speed दोगुनी, तो height एक चौथाई।"
+},
+{
+"id": "07_02_02",
+"text": "Porter governor में बीच में एक भारी load M लगा होता है, तो height, m plus M बटा m गुना हो जाती है।"
+},
+{
+"id": "07_02_03",
+"text": "अगर speed बढ़ने पर balls की radius भी बढ़े, तो governor stable है। घटे, तो unstable।"
+},
+{
+"id": "07_02_04",
+"text": "और जो governor हर radius पर एक ही speed पर रहे, वो isochronous। उसमें hunting होती है, speed ऊपर-नीचे होती रहती है।"
+},
+{
+"id": "07_03_00",
+"text": "अब चार governors, एक-एक line में।"
+},
+{
+"id": "07_03_01",
+"text": "Watt, सबसे simple, pendulum type, सिर्फ़ कम speed के लिए।"
+},
+{
+"id": "07_03_02",
+"text": "Porter, dead weight वाला।"
+},
+{
+"id": "07_03_03",
+"text": "Proell, Porter से ज़्यादा sensitive।"
+},
+{
+"id": "07_03_04",
+"text": "और Hartnell, spring वाला, जिसे किसी भी position में लगा सकते हो।"
+},
+{
+"id": "07_04_00",
+"text": "2016 का सवाल। Hartnell में spring को और stiff कर दिया, तो क्या होगा?"
+},
+{
+"id": "07_04_01",
+"text": "सोचो, कड़ी spring को दबाने के लिए speed ज़्यादा बदलनी पड़ेगी, है ना?"
+},
+{
+"id": "07_04_02",
+"text": "तो answer, less sensitive।"
+},
+{
+"id": "08_00_00",
+"text": "आठवाँ topic, cam और follower।"
+},
+{
+"id": "08_01_00",
+"text": "ये अंडे जैसी disc देखो, यही cam है। ये लगातार घूम रही है।"
+},
+{
+"id": "08_01_01",
+"text": "और ऊपर वाली rod, ये follower है। Cam की shape के हिसाब से ऊपर-नीचे चल रही है।"
+},
+{
+"id": "08_01_02",
+"text": "ये नीली dotted circle, base circle। Throw हमेशा इसी से नापा जाता है, 2016 में पूछा था।"
+},
+{
+"id": "08_01_03",
+"text": "Right side graph देखो। Follower पहले ऊपर उठा, ये rise। फिर रुका, ये dwell। फिर नीचे आया, return। और फिर से dwell।"
+},
+{
+"id": "08_02_00",
+"text": "अब follower कैसे चले, इसके चार तरीके हैं।"
+},
+{
+"id": "08_02_01",
+"text": "Uniform velocity, इसमें ends पर acceleration infinite हो जाता है, यानी झटका।"
+},
+{
+"id": "08_02_02",
+"text": "SHM, इसमें बीच में velocity सबसे ज़्यादा।"
+},
+{
+"id": "08_02_03",
+"text": "Uniform acceleration और retardation।"
+},
+{
+"id": "08_02_04",
+"text": "और cycloidal, इसमें ends पर acceleration zero। इसलिए high speed engines में यही सबसे बढ़िया। ये भी 2016 का सवाल था।"
+},
+{
+"id": "08_03_00",
+"text": "तो सवाल, high speed engine में follower को कौन सी motion से चलना चाहिए?"
+},
+{
+"id": "08_03_01",
+"text": "अभी table में देखा था।"
+},
+{
+"id": "08_03_02",
+"text": "Answer, cycloidal motion।"
+},
+{
+"id": "09_00_00",
+"text": "और last topic, bearings।"
+},
+{
+"id": "09_01_00",
+"text": "ये ball bearing है। बाहर वाला ring, outer race, ये fix रहता है।"
+},
+{
+"id": "09_01_01",
+"text": "अंदर वाला ring shaft के साथ घूम रहा है।"
+},
+{
+"id": "09_01_02",
+"text": "और बीच की लाल balls देखो… ये फिसल नहीं रहीं, लुढ़क रही हैं, और धीरे-धीरे आगे भी बढ़ रही हैं।"
+},
+{
+"id": "09_01_03",
+"text": "लुढ़कने में friction बहुत कम होता है, इसीलिए इन्हें anti friction bearing कहते हैं।"
+},
+{
+"id": "09_02_00",
+"text": "Bearing की life का formula, C बटा P की power k, million revolutions में।"
+},
+{
+"id": "09_02_01",
+"text": "Ball bearing में k तीन।"
+},
+{
+"id": "09_02_02",
+"text": "Roller bearing में दस बटा तीन।"
+},
+{
+"id": "09_02_03",
+"text": "L ten का मतलब, नब्बे percent bearings कम से कम इतनी life पूरी करेंगी।"
+},
+{
+"id": "09_02_04",
+"text": "और bearing number के last दो digits को पाँच से multiply करो, तो bore का diameter मिलता है। जैसे 6205 का bore, पच्चीस mm।"
+},
+{
+"id": "09_03_00",
+"text": "Last सवाल। Ball bearing पर load दोगुना कर दिया, तो life?"
+},
+{
+"id": "09_03_01",
+"text": "Life, load के cube के उल्टे ratio में होती है। आधे का cube।"
+},
+{
+"id": "09_03_02",
+"text": "Answer, आठवाँ हिस्सा।"
+},
+{
+"id": "09_04_00",
+"text": "तो दोस्तों, आज हमने पूरे नौ topics, चलती machines के साथ समझे।"
+},
+{
+"id": "09_04_01",
+"text": "इसकी PDF Hindi और English दोनों में channel पर मिल जाएगी।"
+},
+{
+"id": "09_04_02",
+"text": "अब दस hard सवालों वाला quiz ज़रूर लगाना।"
+},
+{
+"id": "09_04_03",
+"text": "और flash cards से रोज़ revision करते रहना। मिलते हैं अगली class में। तब तक के लिए, पढ़ते रहो, आगे बढ़ते रहो!"
+}
+]
