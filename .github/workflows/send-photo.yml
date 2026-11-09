@@ -7,6 +7,7 @@ on:
       path: {description: "Image in this repo", required: true}
       chat: {description: "Telegram chat id", required: true}
       caption: {description: "Caption", required: false, default: ""}
+      parse_mode: {description: "HTML/MarkdownV2 or empty", required: false, default: ""}
 
 jobs:
   send:
@@ -18,5 +19,6 @@ jobs:
           P: ${{ inputs.path }}
           C: ${{ inputs.chat }}
           CAP: ${{ inputs.caption }}
+          PM: ${{ inputs.parse_mode }}
         run: |
-          curl -sS -F "chat_id=$C" -F "caption=$CAP" -F "photo=@$P" "https://api.telegram.org/bot$TOKEN/sendPhoto" | head -c 300
+          EXTRA=(); [ -n "$PM" ] && EXTRA=(-F "parse_mode=$PM"); curl -sS -F "chat_id=$C" -F "caption=$CAP" "${EXTRA[@]}" -F "photo=@$P" "https://api.telegram.org/bot$TOKEN/sendPhoto" | head -c 300
