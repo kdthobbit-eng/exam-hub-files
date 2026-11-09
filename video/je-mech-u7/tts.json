@@ -1,0 +1,170 @@
+[
+{
+"id": "00_00_00",
+"text": "नमस्ते दोस्तों! आज Unit 7, refrigeration और air compression।"
+},
+{
+"id": "00_00_01",
+"text": "Fridge, AC, petrol pump पर हवा भरने वाला compressor, ये सब आज के topic में हैं।"
+},
+{
+"id": "00_00_02",
+"text": "दो parts करेंगे, पहले air compressors, फिर refrigeration।"
+},
+{
+"id": "01_00_00",
+"text": "पहला part, air compressor।"
+},
+{
+"id": "01_01_00",
+"text": "ये reciprocating compressor चल रहा है। Piston पीछे गया, suction valve खुला, और ताज़ी हवा अंदर।"
+},
+{
+"id": "01_01_01",
+"text": "Piston आगे आया, दोनों valves बंद, हवा दबती गई, pressure और temperature दोनों बढ़े।"
+},
+{
+"id": "01_01_02",
+"text": "जब pressure काफ़ी हो गया, delivery valve खुला और high pressure हवा बाहर।"
+},
+{
+"id": "01_01_03",
+"text": "और cylinder में थोड़ी हवा हमेशा बची रहती है, clearance volume। ये volumetric efficiency घटाती है।"
+},
+{
+"id": "01_02_00",
+"text": "Isothermal compression में सबसे कम work लगता है, p one V one ln p two बटा p one।"
+},
+{
+"id": "01_02_01",
+"text": "Order याद रखो, isothermal में सबसे कम, फिर polytropic, और adiabatic में सबसे ज़्यादा work।"
+},
+{
+"id": "01_02_02",
+"text": "Isothermal efficiency, isothermal work बटा actual work।"
+},
+{
+"id": "01_02_03",
+"text": "Volumetric efficiency, pressure ratio बढ़ाने पर घटती है।"
+},
+{
+"id": "01_02_04",
+"text": "और two stage compressor में minimum work के लिए intermediate pressure, root of p one p three।"
+},
+{
+"id": "01_03_00",
+"text": "Two stage compressor, एक से सोलह bar।"
+},
+{
+"id": "01_03_01",
+"text": "Formula, root of p one p three।"
+},
+{
+"id": "01_03_02",
+"text": "Root सोलह,"
+},
+{
+"id": "01_03_03",
+"text": "Answer, चार bar।"
+},
+{
+"id": "01_04_00",
+"text": "सवाल, multi stage compression क्यों करते हैं?"
+},
+{
+"id": "01_04_01",
+"text": "Stages के बीच intercooler हवा ठंडी कर देता है।"
+},
+{
+"id": "01_04_02",
+"text": "Answer, work कम लगता है।"
+},
+{
+"id": "02_00_00",
+"text": "दूसरा part, refrigeration। अब fridge खोलकर देखते हैं।"
+},
+{
+"id": "02_01_00",
+"text": "ये vapour compression refrigeration का loop है, जो हर fridge और AC में होता है।"
+},
+{
+"id": "02_01_01",
+"text": "Compressor refrigerant vapour को दबाता है, pressure और temperature दोनों बढ़ जाते हैं।"
+},
+{
+"id": "02_01_02",
+"text": "Condenser में ये गर्मी बाहर फेंकता है, fridge के पीछे वाली जाली इसीलिए गर्म रहती है, और vapour liquid बन जाता है।"
+},
+{
+"id": "02_01_03",
+"text": "Expansion valve में pressure अचानक गिरता है, refrigerant बहुत ठंडा हो जाता है। यहाँ enthalpy constant रहती है।"
+},
+{
+"id": "02_01_04",
+"text": "और evaporator में ये ठंडा refrigerant अंदर की गर्मी सोख लेता है। यही ठंडक है।"
+},
+{
+"id": "02_02_00",
+"text": "COP, refrigerating effect बटा compressor work, यानी h one minus h four, बटा h two minus h one।"
+},
+{
+"id": "02_02_01",
+"text": "Capacity की unit, ton of refrigeration। एक TR, लगभग 211 kJ per minute, या साढ़े तीन kW।"
+},
+{
+"id": "02_02_02",
+"text": "Carnot refrigerator का COP, T low बटा T high minus T low, kelvin में।"
+},
+{
+"id": "02_02_03",
+"text": "Absorption system में compressor की जगह heat use होती है। Ammonia water system में ammonia refrigerant है और पानी absorbent।"
+},
+{
+"id": "02_02_04",
+"text": "घर के fridge में R-134a या R-600a। पुराना R-12 ozone layer को नुकसान करता था, इसलिए बंद।"
+},
+{
+"id": "02_03_00",
+"text": "Numerical, h one चार सौ, h two चार सौ चालीस, h four ढाई सौ।"
+},
+{
+"id": "02_03_01",
+"text": "Refrigerating effect, एक सौ पचास।"
+},
+{
+"id": "02_03_02",
+"text": "Work, चालीस।"
+},
+{
+"id": "02_03_03",
+"text": "COP, 3.75। देखा, COP एक से ज़्यादा हो सकता है।"
+},
+{
+"id": "02_04_00",
+"text": "आख़िरी सवाल, एक ton of refrigeration?"
+},
+{
+"id": "02_04_01",
+"text": "अभी formula में था।"
+},
+{
+"id": "02_04_02",
+"text": "Answer, लगभग दो सौ दस kJ per minute।"
+},
+{
+"id": "02_05_00",
+"text": "Revision, isothermal में minimum work, और two stage का root formula।"
+},
+{
+"id": "02_05_01",
+"text": "Pressure ratio बढ़े तो volumetric efficiency घटे।"
+},
+{
+"id": "02_05_02",
+"text": "VCR के चार parts का order।"
+},
+{
+"id": "02_05_03",
+"text": "और एक TR, साढ़े तीन kW। Quiz लगाना मत भूलना, मिलते हैं अगली class में!"
+}
+]
