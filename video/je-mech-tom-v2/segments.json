@@ -1,0 +1,410 @@
+[
+ {
+  "img": "s00_0.jpg",
+  "intro": "s00_0.mp4",
+  "text": "नमस्कार दोस्तों! UPSSSC JE Mechanical में Theory of Machines और Machine Design सबसे बड़ा विषय है, पूरे पंद्रह अंक का।",
+  "pause": 0.1
+ },
+ {
+  "img": "s00_1.jpg",
+  "intro": "s00_1.mp4",
+  "text": "आज हम इसके नौ टॉपिक detail में पढ़ेंगे, हर टॉपिक का एक numerical हल करेंगे, और 2016 के पेपर में आए सवाल भी देखेंगे।",
+  "pause": 0.1
+ },
+ {
+  "img": "s00_2.jpg",
+  "intro": "s00_2.mp4",
+  "text": "क्रम रहेगा: simple machines, four bar linkage, flywheel, belt, clutch, gears, governor, cam और आख़िर में bearings। चलिए शुरू करते हैं।",
+  "pause": 0.1
+ },
+ {
+  "img": "s01_0.jpg",
+  "intro": "s01_0.mp4",
+  "text": "सबसे पहले तीन बेसिक शब्द। Mechanical advantage मतलब load बटा effort। Velocity ratio मतलब effort की दूरी बटा load की दूरी। और efficiency बराबर MA बटा VR।",
+  "pause": 0.1
+ },
+ {
+  "img": "s01_1.jpg",
+  "intro": "s01_1.mp4",
+  "text": "ध्यान दीजिए, VR सिर्फ़ मशीन की बनावट पर depend करता है। Friction बढ़े तो VR नहीं बदलेगा, लेकिन MA और efficiency दोनों घट जाएँगे।",
+  "pause": 0.1
+ },
+ {
+  "img": "s01_2.jpg",
+  "intro": "s01_2.mp4",
+  "text": "Law of machine है P बराबर mW प्लस C। यहाँ C friction वाला effort है। Maximum MA एक बटा m, और maximum efficiency एक बटा m गुणा VR।",
+  "pause": 0.1
+ },
+ {
+  "img": "s01_3.jpg",
+  "intro": "s01_3.mp4",
+  "text": "अगर efficiency पचास प्रतिशत से ज़्यादा है तो machine reversible है, यानी effort हटाते ही load नीचे आ जाएगा। पचास से कम है तो self-locking, जैसे screw jack।",
+  "pause": 0.1
+ },
+ {
+  "img": "s01_4.jpg",
+  "intro": "s01_4.mp4",
+  "text": "Screw jack तब self-locking होता है जब friction angle phi, helix angle alpha से बड़ा हो। इसकी efficiency tan alpha बटा tan alpha प्लस phi होती है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s01_5.jpg",
+  "intro": "s01_5.mp4",
+  "text": "एक numerical देखिए। Law P बराबर 0.04 W प्लस 20 और VR चालीस है। तो maximum efficiency, एक बटा 0.04 गुणा 40, यानी साढ़े बासठ प्रतिशत। मशीन reversible है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s01_6.jpg",
+  "intro": "s01_6.mp4",
+  "text": "और 2016 का सवाल: differential wheel and axle का VR, दो D बटा d एक माइनस d दो। हर में अंतर आता है, योग नहीं।",
+  "pause": 0.1
+ },
+ {
+  "img": "s02_0.jpg",
+  "intro": "s02_0.mp4",
+  "text": "Kinematic pair दो तरह के होते हैं। Lower pair में सतह का संपर्क होता है, जैसे piston और cylinder। Higher pair में बिंदु या रेखा का संपर्क, जैसे cam follower, gears और ball bearing।",
+  "pause": 0.1
+ },
+ {
+  "img": "s02_1.jpg",
+  "intro": "s02_1.mp4",
+  "text": "Degree of freedom निकालने का Kutzbach सूत्र: तीन गुणा l माइनस एक, माइनस दो j, माइनस h। DOF एक हो तो constrained mechanism, शून्य हो तो structure।",
+  "pause": 0.1
+ },
+ {
+  "img": "s02_2.jpg",
+  "intro": "s02_2.mp4",
+  "text": "उदाहरण: छह links और सात lower pairs। तीन गुणा पाँच यानी पंद्रह, माइनस चौदह, बराबर एक। यानी mechanism constrained है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s02_3.jpg",
+  "intro": "s02_3.mp4",
+  "text": "अब सबसे ज़रूरी Grashof का नियम। सबसे छोटा और सबसे लंबा link जोड़िए। यह बाकी दोनों links के योग से कम या बराबर हो, तो कम से कम एक link पूरा चक्कर लगाएगा।",
+  "pause": 0.1
+ },
+ {
+  "img": "s02_4.jpg",
+  "intro": "s02_4.mp4",
+  "text": "सबसे छोटा link fix करें तो double crank। उसके बगल वाला fix करें तो crank rocker। और उसके ठीक सामने वाला fix करें तो double rocker।",
+  "pause": 0.1
+ },
+ {
+  "img": "s02_5.jpg",
+  "intro": "s02_5.mp4",
+  "text": "Single slider crank के चार inversions: reciprocating engine, Whitworth quick return जिसमें crank fixed है, shaper जिसमें connecting rod fixed है, और hand pump जिसमें slider fixed है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s02_6.jpg",
+  "intro": "s02_6.mp4",
+  "text": "Double slider crank के inversions हैं elliptical trammel, scotch yoke और Oldham coupling।",
+  "pause": 0.1
+ },
+ {
+  "img": "s02_7.jpg",
+  "intro": "s02_7.mp4",
+  "text": "Quick return ratio का numerical: crank radius डेढ़ सौ और centre distance तीन सौ। cos alpha by two बराबर 0.5, तो return angle एक सौ बीस डिग्री। Ratio दो सौ चालीस बटा एक सौ बीस, यानी दो।",
+  "pause": 0.1
+ },
+ {
+  "img": "s03_0.jpg",
+  "intro": "s03_0.mp4",
+  "text": "Flywheel एक भारी घूमने वाला पहिया है जो energy का भंडार है। Supply ज़्यादा हो तो energy जमा करता है, कम हो तो वापस दे देता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s03_1.jpg",
+  "intro": "s03_1.mp4",
+  "text": "Turning moment diagram में mean torque line से ऊपर वाला area extra energy है, तब speed बढ़ती है। नीचे वाला area energy की कमी है, तब speed घटती है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s03_2.jpg",
+  "intro": "s03_2.mp4",
+  "text": "Coefficient of fluctuation of speed, N एक माइनस N दो बटा mean speed N। Coefficient of steadiness इसका उल्टा है। यह 2016 में पूछा गया था।",
+  "pause": 0.1
+ },
+ {
+  "img": "s03_3.jpg",
+  "intro": "s03_3.mp4",
+  "text": "Maximum fluctuation of energy, I omega square Cs, यानी m k square omega square Cs, यानी दो E Cs।",
+  "pause": 0.1
+ },
+ {
+  "img": "s03_4.jpg",
+  "intro": "s03_4.mp4",
+  "text": "Numerical: mass आठ सौ किलो, k 0.8 मीटर, speed ढाई सौ rpm और Cs 0.02। Omega 26.18, तो delta E लगभग सात किलो joule।",
+  "pause": 0.1
+ },
+ {
+  "img": "s03_5.jpg",
+  "intro": "s03_5.mp4",
+  "text": "Confusion मत करना: flywheel एक cycle के अंदर fluctuation कम करता है। Load बदलने पर mean speed governor control करता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s03_6.jpg",
+  "intro": "s03_6.mp4",
+  "text": "Four stroke engine को two stroke से बड़ा flywheel चाहिए। Rim से करीब नब्बे प्रतिशत moment of inertia मिलता है, और rim में hoop stress rho v square होता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s04_0.jpg",
+  "intro": "s04_0.mp4",
+  "text": "Open belt में दोनों pulleys एक ही दिशा में घूमती हैं, और crossed belt में उल्टी दिशा में।",
+  "pause": 0.1
+ },
+ {
+  "img": "s04_1.jpg",
+  "intro": "s04_1.mp4",
+  "text": "Velocity ratio pulley diameters का उल्टा अनुपात है। Belt की मोटाई हो तो दोनों में t जोड़िए, और slip हो तो उतने प्रतिशत घटाइए।",
+  "pause": 0.1
+ },
+ {
+  "img": "s04_2.jpg",
+  "intro": "s04_2.mp4",
+  "text": "Tension ratio: flat belt में e की घात mu theta। V belt में wedge action की वजह से cosec beta और जुड़ जाता है, इसलिए V belt ज़्यादा power देता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s04_3.jpg",
+  "intro": "s04_3.mp4",
+  "text": "Numerical: T एक दो हज़ार newton, mu 0.3, angle 165 डिग्री। e की घात 0.864 है 2.373, तो T दो 843 newton। Power, अंतर गुणा 15, यानी लगभग 17.36 kilowatt।",
+  "pause": 0.1
+ },
+ {
+  "img": "s04_4.jpg",
+  "intro": "s04_4.mp4",
+  "text": "Centrifugal tension m v square होता है। Maximum power तब मिलती है जब maximum tension, centrifugal tension का तीन गुना हो। यह 2016 में पूछा गया था।",
+  "pause": 0.1
+ },
+ {
+  "img": "s04_5.jpg",
+  "intro": "s04_5.mp4",
+  "text": "और initial tension, T एक प्लस T दो बटा दो। यह भी 2016 के पेपर में आया था।",
+  "pause": 0.1
+ },
+ {
+  "img": "s04_6.jpg",
+  "intro": "s04_6.mp4",
+  "text": "Slip और creep में अंतर याद रखिए। Slip कम friction से होता है, creep belt की elasticity से।",
+  "pause": 0.1
+ },
+ {
+  "img": "s05_0.jpg",
+  "intro": "s05_0.mp4",
+  "text": "Clutch engine को gear box से जोड़ता और अलग करता है, और इसके लिए engine रोकना नहीं पड़ता।",
+  "pause": 0.1
+ },
+ {
+  "img": "s05_1.jpg",
+  "intro": "s05_1.mp4",
+  "text": "Torque बराबर n mu W R। Single plate में दोनों तरफ़ lining हो तो n दो। Multi plate में n एक प्लस n दो माइनस एक।",
+  "pause": 0.1
+ },
+ {
+  "img": "s05_2.jpg",
+  "intro": "s05_2.mp4",
+  "text": "नई clutch में uniform pressure theory लगती है। पुरानी, घिसी हुई clutch में uniform wear, जिसमें p गुणा r constant रहता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s05_3.jpg",
+  "intro": "s05_3.mp4",
+  "text": "Uniform wear में mean radius r एक प्लस r दो बटा दो। इससे torque कम आता है, इसलिए design इसी पर करते हैं, ताकि clutch safe रहे।",
+  "pause": 0.1
+ },
+ {
+  "img": "s05_4.jpg",
+  "intro": "s05_4.mp4",
+  "text": "Numerical: r एक 125, r दो 75 mm, mu 0.25, load तीन किलो newton। R 0.1 मीटर, तो torque दो गुणा 0.25 गुणा तीन हज़ार गुणा 0.1, यानी डेढ़ सौ newton meter।",
+  "pause": 0.1
+ },
+ {
+  "img": "s05_5.jpg",
+  "intro": "s05_5.mp4",
+  "text": "Cone clutch में cosec alpha से torque बढ़ता है, alpha लगभग साढ़े बारह डिग्री। Centrifugal clutch moped में लगती है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s06_0.jpg",
+  "intro": "s06_0.mp4",
+  "text": "Gear positive drive है, इसमें slip नहीं होता। Peripheral velocity तीन से पंद्रह मीटर प्रति सेकंड हो तो medium velocity gear कहते हैं।",
+  "pause": 0.1
+ },
+ {
+  "img": "s06_1.jpg",
+  "intro": "s06_1.mp4",
+  "text": "Parallel shafts के लिए spur और helical, intersecting के लिए bevel और mitre, और non parallel non intersecting के लिए worm gear।",
+  "pause": 0.1
+ },
+ {
+  "img": "s06_2.jpg",
+  "intro": "s06_2.mp4",
+  "text": "Module बराबर D बटा T। Circular pitch pi m। Addendum एक module और dedendum सवा module।",
+  "pause": 0.1
+ },
+ {
+  "img": "s06_3.jpg",
+  "intro": "s06_3.mp4",
+  "text": "Numerical: module पाँच, दाँत बीस और पचास। Centre distance, पाँच गुणा सत्तर बटा दो, यानी 175 mm।",
+  "pause": 0.1
+ },
+ {
+  "img": "s06_4.jpg",
+  "intro": "s06_4.mp4",
+  "text": "Involute का normal base circle पर tangent होता है, pitch circle पर नहीं। यह 2016 में पूछा गया था।",
+  "pause": 0.1
+ },
+ {
+  "img": "s06_5.jpg",
+  "intro": "s06_5.mp4",
+  "text": "Involute में pressure angle constant रहता है और centre distance थोड़ा बदले तब भी VR नहीं बदलता। Cycloidal में interference नहीं होता, इसलिए घड़ियों में लगता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s06_6.jpg",
+  "intro": "s06_6.mp4",
+  "text": "Compound gear train: driven दाँतों का गुणनफल बटा driver दाँतों का गुणनफल, यानी नौ। अठारह सौ rpm बटा नौ, यानी दो सौ rpm।",
+  "pause": 0.1
+ },
+ {
+  "img": "s06_7.jpg",
+  "intro": "s06_7.mp4",
+  "text": "Simple train में gears सम संख्या में हों, जैसे बारह, तो पहला और आख़िरी उल्टी दिशा में घूमेंगे। और एक ही material हो तो design pinion पर होता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s07_0.jpg",
+  "intro": "s07_0.mp4",
+  "text": "Governor load बदलने पर fuel supply को अपने-आप घटा बढ़ाकर engine की mean speed control करता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s07_1.jpg",
+  "intro": "s07_1.mp4",
+  "text": "Classification: Watt pendulum type है। Porter और Proell dead weight type हैं। Hartnell spring loaded है। एक inertia governor भी होता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s07_2.jpg",
+  "intro": "s07_2.mp4",
+  "text": "Watt governor की height 895 बटा N square मीटर होती है। Speed दोगुनी करो तो height एक चौथाई।",
+  "pause": 0.1
+ },
+ {
+  "img": "s07_3.jpg",
+  "intro": "s07_3.mp4",
+  "text": "Porter में m प्लस M बटा m का factor आता है। Numerical: m चार, M बीस, h 0.2 मीटर, तो N square बराबर छह गुणा 895 बटा 0.2, यानी N लगभग 164 rpm।",
+  "pause": 0.1
+ },
+ {
+  "img": "s07_4.jpg",
+  "intro": "s07_4.mp4",
+  "text": "Speed बढ़ने पर balls की radius बढ़े तो governor stable, और घटे तो unstable।",
+  "pause": 0.1
+ },
+ {
+  "img": "s07_5.jpg",
+  "intro": "s07_5.mp4",
+  "text": "Isochronous governor में हर radius पर speed एक ही रहती है। वह infinitely sensitive होता है, इसलिए hunting करता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s07_6.jpg",
+  "intro": "s07_6.mp4",
+  "text": "Sensitiveness, speed range बटा mean speed। Hartnell में spring stiff करोगे तो governor कम sensitive होगा।",
+  "pause": 0.1
+ },
+ {
+  "img": "s08_0.jpg",
+  "intro": "s08_0.mp4",
+  "text": "Cam और follower higher pair बनाते हैं, और spring से संपर्क बना रहता है, इसलिए force closed।",
+  "pause": 0.1
+ },
+ {
+  "img": "s08_1.jpg",
+  "intro": "s08_1.mp4",
+  "text": "Knife edge follower सबसे ज़्यादा घिसता है। Roller follower सबसे common है। और flat या mushroom follower IC engine के valves में लगता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s08_2.jpg",
+  "intro": "s08_2.mp4",
+  "text": "Base circle cam profile का सबसे छोटा circle है। Prime circle, base circle प्लस roller radius। और pressure angle तीस डिग्री से कम रखते हैं।",
+  "pause": 0.1
+ },
+ {
+  "img": "s08_3.jpg",
+  "intro": "s08_3.mp4",
+  "text": "Cam का throw base circle से follower की maximum दूरी है। यह 2016 में पूछा गया था।",
+  "pause": 0.1
+ },
+ {
+  "img": "s08_4.jpg",
+  "intro": "s08_4.mp4",
+  "text": "Uniform velocity में ends पर acceleration infinite। SHM में jerk infinite। और cycloidal में ends पर acceleration शून्य, इसलिए high speed के लिए सबसे अच्छा।",
+  "pause": 0.1
+ },
+ {
+  "img": "s08_5.jpg",
+  "intro": "s08_5.mp4",
+  "text": "SHM का numerical: lift तीस mm, outstroke 120 डिग्री, speed तीन सौ rpm। v max बराबर pi h omega बटा दो theta, यानी लगभग 0.707 मीटर प्रति सेकंड।",
+  "pause": 0.1
+ },
+ {
+  "img": "s08_6.jpg",
+  "intro": "s08_6.mp4",
+  "text": "और याद रखिए, four stroke engine में camshaft, crankshaft की आधी speed से घूमता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s09_0.jpg",
+  "intro": "s09_0.mp4",
+  "text": "Bearing load की दिशा से radial या thrust होती है। Friction के हिसाब से sliding यानी journal bearing, और rolling यानी ball और roller, जिन्हें anti friction कहते हैं।",
+  "pause": 0.1
+ },
+ {
+  "img": "s09_1.jpg",
+  "intro": "s09_1.mp4",
+  "text": "Hydrodynamic lubrication में shaft के घूमने से तेल का wedge बनता है। Hydrostatic में दबाव बाहर के pump से आता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s09_2.jpg",
+  "intro": "s09_2.mp4",
+  "text": "Bearing characteristic number mu N बटा p है, और Sommerfeld number dimensionless होता है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s09_3.jpg",
+  "intro": "s09_3.mp4",
+  "text": "Rating life L ten बराबर C बटा P की घात k। Ball bearing में k तीन, roller में दस बटा तीन।",
+  "pause": 0.1
+ },
+ {
+  "img": "s09_4.jpg",
+  "intro": "s09_4.mp4",
+  "text": "Numerical: C बीस किलो newton, P पाँच। L बराबर चार की घात तीन, यानी चौंसठ million revolutions। हज़ार rpm पर करीब 1067 घंटे।",
+  "pause": 0.1
+ },
+ {
+  "img": "s09_5.jpg",
+  "intro": "s09_5.mp4",
+  "text": "Bearing number 6205 का bore पच्चीस mm होता है। Taper roller bearing radial और axial दोनों load सहती है, इसलिए car के wheel hub में लगती है।",
+  "pause": 0.1
+ },
+ {
+  "img": "s10_0.jpg",
+  "intro": "s10_0.mp4",
+  "text": "तो दोस्तों, अब PDF पढ़िए, फिर दस hard quiz लगाइए, और हर सवाल का explanation ज़रूर देखिए।",
+  "pause": 0.1
+ },
+ {
+  "img": "s10_1.jpg",
+  "intro": "s10_1.mp4",
+  "text": "UPSSSC ALERT के साथ जुड़े रहिए। अगला विषय होगा Engineering Mechanics। धन्यवाद!",
+  "pause": 0.1
+ }
+]
