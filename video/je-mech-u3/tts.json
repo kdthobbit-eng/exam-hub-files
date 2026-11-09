@@ -1,0 +1,338 @@
+[
+{
+"id": "00_00_00",
+"text": "नमस्ते दोस्तों! आज Unit 3, Strength of Materials, यानी SOM।"
+},
+{
+"id": "00_00_01",
+"text": "दस नंबर का topic है, और SSC हो या UPSSSC, हर paper में इसके सवाल पक्के होते हैं।"
+},
+{
+"id": "00_00_02",
+"text": "आज छह चीज़ें करेंगे, stress strain, riveted joints, SF और BM diagram, composite bars, torsion और thin cylinders। चलो।"
+},
+{
+"id": "01_00_00",
+"text": "पहला topic, stress और strain।"
+},
+{
+"id": "01_01_00",
+"text": "देखो, ये एक rod छत से लटकी है।"
+},
+{
+"id": "01_01_01",
+"text": "नीचे load P लटकाया, तो rod के अंदर एक resisting force पैदा होती है। इसे area से divide करो, तो मिलता है stress, P बटा A।"
+},
+{
+"id": "01_01_02",
+"text": "Rod थोड़ी लंबी हो गई, ये बढ़ी हुई लंबाई delta L है। Delta L बटा original L, यही strain है, और इसकी कोई unit नहीं होती।"
+},
+{
+"id": "01_01_03",
+"text": "और ध्यान से देखो, लंबी होते समय rod थोड़ी पतली भी हो रही है। इसी side वाली strain के ratio को Poisson's ratio कहते हैं।"
+},
+{
+"id": "01_02_00",
+"text": "अब mild steel का stress strain graph। ये बहुत important है।"
+},
+{
+"id": "01_02_01",
+"text": "शुरुआत में सीधी line, यहाँ तक Hooke's law चलता है, stress बराबर E गुणा strain। इसे proportional limit कहते हैं।"
+},
+{
+"id": "01_02_02",
+"text": "फिर yield point, जहाँ बिना load बढ़ाए भी rod खिंचती जाती है।"
+},
+{
+"id": "01_02_03",
+"text": "फिर graph ऊपर जाता है, और सबसे ऊँचा point ultimate stress है।"
+},
+{
+"id": "01_02_04",
+"text": "उसके बाद rod में गर्दन जैसी पतली जगह बनती है, necking, और फिर rod टूट जाती है, fracture।"
+},
+{
+"id": "01_03_00",
+"text": "Elastic constants के relations, ये SSC का favourite है। पहला, E बराबर दो G, into one plus mu।"
+},
+{
+"id": "01_03_01",
+"text": "दूसरा, E बराबर तीन K, into one minus two mu।"
+},
+{
+"id": "01_03_02",
+"text": "Metals का Poisson's ratio आमतौर पर 0.25 से 0.33 के बीच रहता है।"
+},
+{
+"id": "01_03_03",
+"text": "और इसका maximum value 0.5 होता है, जैसे rubber, जिसका volume लगभग नहीं बदलता।"
+},
+{
+"id": "01_03_04",
+"text": "और rod का elongation, PL बटा AE। ये formula तो रोज़ use होगा।"
+},
+{
+"id": "01_04_00",
+"text": "सवाल, Poisson's ratio 0.25 है, तो E बटा G कितना?"
+},
+{
+"id": "01_04_01",
+"text": "बस formula लगाओ, दो into one plus 0.25।"
+},
+{
+"id": "01_04_02",
+"text": "Answer, 2.5।"
+},
+{
+"id": "02_00_00",
+"text": "दूसरा topic, riveted joints। Bridges, boilers और tanks की plates इसी से जुड़ती हैं।"
+},
+{
+"id": "02_01_00",
+"text": "ये lap joint है, दो plates एक के ऊपर एक, और बीच में rivet।"
+},
+{
+"id": "02_01_01",
+"text": "जब plates को उल्टी दिशा में खींचते हैं, rivet एक plane पर कटने की कोशिश करता है, इसे single shear कहते हैं।"
+},
+{
+"id": "02_01_02",
+"text": "Joint तीन तरह से fail हो सकता है, plate फट जाए, rivet कट जाए, या rivet और plate कुचल जाएँ।"
+},
+{
+"id": "02_01_03",
+"text": "और rivet का diameter निकालने का Unwin का formula, d बराबर छह root t। Exam में ये सीधा पूछा जाता है।"
+},
+{
+"id": "02_02_00",
+"text": "चलो efficiency निकालते हैं। Pitch साठ, diameter बीस, thickness दस mm।"
+},
+{
+"id": "02_02_01",
+"text": "Tearing, pitch minus d, गुणा t गुणा stress, चालीस हज़ार newton।"
+},
+{
+"id": "02_02_02",
+"text": "Shearing, pi बटा चार d square गुणा tau, लगभग पच्चीस हज़ार।"
+},
+{
+"id": "02_02_03",
+"text": "Crushing, d t sigma c, बत्तीस हज़ार। और solid plate, साठ हज़ार।"
+},
+{
+"id": "02_02_04",
+"text": "Efficiency, सबसे कम वाला बटा solid plate, यानी लगभग बयालीस percent। Joint हमेशा सबसे कमज़ोर तरीके से ही fail होता है।"
+},
+{
+"id": "02_03_00",
+"text": "सोलह mm की plate, rivet diameter कितना?"
+},
+{
+"id": "02_03_01",
+"text": "छह गुणा root सोलह।"
+},
+{
+"id": "02_03_02",
+"text": "Answer, चौबीस mm।"
+},
+{
+"id": "03_00_00",
+"text": "तीसरा topic, shear force और bending moment diagram।"
+},
+{
+"id": "03_01_00",
+"text": "Left side में cantilever है, एक सिरा दीवार में fix, दूसरे पर load W। सबसे ज़्यादा bending fixed end पर, W गुणा L।"
+},
+{
+"id": "03_01_01",
+"text": "Point load हो, तो shear force diagram एक rectangle जैसा, सीधी horizontal line।"
+},
+{
+"id": "03_01_02",
+"text": "Right side में simply supported beam, बीच में load। Maximum moment बीच में, W L बटा चार।"
+},
+{
+"id": "03_01_03",
+"text": "और golden rule, जहाँ shear force zero होता है, वहीं bending moment maximum होता है।"
+},
+{
+"id": "03_02_00",
+"text": "ये result पक्का याद रखो, simply supported beam पर पूरी लंबाई में UDL, तो maximum moment w L square बटा आठ।"
+},
+{
+"id": "03_02_01",
+"text": "Simply supported पर UDL, w L square बटा आठ।"
+},
+{
+"id": "03_02_02",
+"text": "Cantilever पर UDL, w L square बटा दो।"
+},
+{
+"id": "03_02_03",
+"text": "Bending moment का slope shear force के बराबर होता है।"
+},
+{
+"id": "03_02_04",
+"text": "और UDL पर BMD parabola जैसा बनता है।"
+},
+{
+"id": "03_03_00",
+"text": "सवाल, simply supported beam के बीच में W, maximum moment?"
+},
+{
+"id": "03_03_01",
+"text": "अभी screen पर देखा था।"
+},
+{
+"id": "03_03_02",
+"text": "Answer, W L बटा चार।"
+},
+{
+"id": "04_00_00",
+"text": "चौथा topic, composite bars और thermal stress।"
+},
+{
+"id": "04_01_00",
+"text": "Left side, steel और copper एक साथ जुड़े हैं। Load लगाने पर दोनों बराबर दबेंगे, यानी strain बराबर।"
+},
+{
+"id": "04_01_01",
+"text": "और total load, दोनों के load का sum, sigma one A one plus sigma two A two।"
+},
+{
+"id": "04_01_02",
+"text": "Right side, rod के दोनों सिरे बँधे हैं और उसे गर्म किया। फैलना चाहती है, पर फैल नहीं पाई, तो stress बना, E alpha delta T।"
+},
+{
+"id": "04_01_03",
+"text": "मज़े की बात, ये stress rod की लंबाई पर depend नहीं करता। इसीलिए rail पटरियों के बीच gap छोड़ा जाता है।"
+},
+{
+"id": "04_02_00",
+"text": "Numerical, steel rod दोनों तरफ़ fix, पचास degree गर्म की।"
+},
+{
+"id": "04_02_01",
+"text": "Formula, E alpha delta T।"
+},
+{
+"id": "04_02_02",
+"text": "Values रखो।"
+},
+{
+"id": "04_02_03",
+"text": "Answer, एक सौ बीस newton per mm square, और ये compressive है क्योंकि rod फैलना चाहती थी।"
+},
+{
+"id": "04_03_00",
+"text": "सवाल, fixed rod गर्म की, stress कैसा होगा?"
+},
+{
+"id": "04_03_01",
+"text": "सोचो, वो धक्का दे रही है या खिंच रही है?"
+},
+{
+"id": "04_03_02",
+"text": "Answer, compressive।"
+},
+{
+"id": "05_00_00",
+"text": "पाँचवाँ topic, torsion, यानी shaft को मरोड़ना।"
+},
+{
+"id": "05_01_00",
+"text": "देखो, shaft का एक सिरा fix है और दूसरे को torque से मरोड़ रहे हैं।"
+},
+{
+"id": "05_01_01",
+"text": "Surface पर खींची सीधी लाल lines तिरछी हो रही हैं, यही shear strain है।"
+},
+{
+"id": "05_01_02",
+"text": "सिरा जितना घूमा, वो angle of twist theta, T L बटा G J।"
+},
+{
+"id": "05_01_03",
+"text": "और shear stress centre पर zero होता है, और बाहर surface पर सबसे ज़्यादा।"
+},
+{
+"id": "05_02_00",
+"text": "पूरा chapter एक equation पर, T बटा J, बराबर tau बटा R, बराबर G theta बटा L।"
+},
+{
+"id": "05_02_01",
+"text": "Solid shaft का polar moment, pi d to the power four बटा बत्तीस।"
+},
+{
+"id": "05_02_02",
+"text": "Torque capacity, pi बटा सोलह, tau d cube।"
+},
+{
+"id": "05_02_03",
+"text": "Power, two pi N T बटा साठ।"
+},
+{
+"id": "05_02_04",
+"text": "और same weight पर hollow shaft solid से ज़्यादा strong होती है, क्योंकि centre का material वैसे भी कम काम करता है।"
+},
+{
+"id": "05_03_00",
+"text": "सवाल, maximum shear stress कहाँ?"
+},
+{
+"id": "05_03_01",
+"text": "Animation याद करो।"
+},
+{
+"id": "05_03_02",
+"text": "Answer, outer surface पर।"
+},
+{
+"id": "06_00_00",
+"text": "Last topic, thin cylinders, जैसे boiler drum या gas cylinder।"
+},
+{
+"id": "06_01_00",
+"text": "Cylinder के अंदर pressure p है। ये दीवार को लंबाई के साथ फाड़ना चाहता है, इसे hoop stress कहते हैं, p d बटा दो t।"
+},
+{
+"id": "06_01_01",
+"text": "और सिरों की तरफ़ धक्का देकर cylinder को दो टुकड़ों में अलग करना चाहता है, ये longitudinal stress, p d बटा चार t।"
+},
+{
+"id": "06_01_02",
+"text": "यानी hoop stress, longitudinal का दोगुना। इसीलिए cylinder हमेशा लंबाई की दिशा में फटता है।"
+},
+{
+"id": "06_01_03",
+"text": "और sphere में हर दिशा में stress p d बटा चार t। इसलिए gas storage के लिए गोल tanks बनाते हैं।"
+},
+{
+"id": "06_02_00",
+"text": "आख़िरी सवाल, hoop stress, longitudinal का कितना?"
+},
+{
+"id": "06_02_01",
+"text": "अभी तो देखा।"
+},
+{
+"id": "06_02_02",
+"text": "Answer, दोगुना।"
+},
+{
+"id": "06_03_00",
+"text": "तो जल्दी से revision। Stress, strain और PL बटा AE।"
+},
+{
+"id": "06_03_01",
+"text": "Rivet में छह root t, और efficiency सबसे कम वाली strength से।"
+},
+{
+"id": "06_03_02",
+"text": "Beams के तीन result, w L square बटा आठ, W L बटा चार, और cantilever में W L।"
+},
+{
+"id": "06_03_03",
+"text": "Torsion equation और hoop stress p d बटा दो t। PDF से numericals practice करना। मिलते हैं अगली class में!"
+}
+]
