@@ -1,0 +1,187 @@
+[
+ {
+  "img": "s00_0.jpg",
+  "text": "UPSSSC JE Mechanical में Theory of Machines और Machine Design सबसे बड़ा विषय है, पूरे पंद्रह अंक।",
+  "pause": 0.15
+ },
+ {
+  "img": "s00_1.jpg",
+  "text": "आज इसके नौ टॉपिक तेज़ी से, लेकिन पूरी गहराई से समझते हैं।",
+  "pause": 0.15
+ },
+ {
+  "img": "s01_0.jpg",
+  "text": "Mechanical advantage बराबर load बटा effort। Velocity ratio दूरी का अनुपात। और efficiency बराबर MA बटा VR।",
+  "pause": 0.15
+ },
+ {
+  "img": "s01_1.jpg",
+  "text": "Efficiency पचास प्रतिशत से ज़्यादा तो machine reversible, कम हो तो self-locking, जैसे screw jack।",
+  "pause": 0.15
+ },
+ {
+  "img": "s01_2.jpg",
+  "text": "Law of machine P बराबर mW प्लस C। Maximum MA एक बटा m, और maximum efficiency एक बटा m गुणा VR।",
+  "pause": 0.15
+ },
+ {
+  "img": "s01_3.jpg",
+  "text": "Differential wheel and axle का VR, दो D बटा d एक माइनस d दो। यह 2016 में पूछा गया था।",
+  "pause": 0.15
+ },
+ {
+  "img": "s02_0.jpg",
+  "text": "Grashof का नियम: सबसे छोटा और सबसे लंबा link जोड़ें, यह बाकी दोनों के योग से कम या बराबर हो।",
+  "pause": 0.15
+ },
+ {
+  "img": "s02_1.jpg",
+  "text": "सबसे छोटा link fix तो double crank, उसके बगल वाला fix तो crank rocker, और सामने वाला fix तो double rocker।",
+  "pause": 0.15
+ },
+ {
+  "img": "s02_2.jpg",
+  "text": "Whitworth quick return में crank fixed होता है, और shaper वाले slotted lever में connecting rod।",
+  "pause": 0.15
+ },
+ {
+  "img": "s02_3.jpg",
+  "text": "Degree of freedom का Kutzbach सूत्र, और instantaneous centres n गुणा n माइनस एक बटा दो।",
+  "pause": 0.15
+ },
+ {
+  "img": "s03_0.jpg",
+  "text": "Flywheel ऊर्जा का भंडार है। यह एक cycle के अंदर speed का उतार चढ़ाव कम करता है।",
+  "pause": 0.15
+ },
+ {
+  "img": "s03_1.jpg",
+  "text": "Coefficient of fluctuation of speed, N एक माइनस N दो बटा N। Steadiness इसका उल्टा है।",
+  "pause": 0.15
+ },
+ {
+  "img": "s03_2.jpg",
+  "text": "Maximum fluctuation of energy बराबर I omega square Cs, यानी दो E Cs।",
+  "pause": 0.15
+ },
+ {
+  "img": "s03_3.jpg",
+  "text": "याद रखें, mean speed को governor control करता है, flywheel नहीं।",
+  "pause": 0.15
+ },
+ {
+  "img": "s04_0.jpg",
+  "text": "Open belt में दोनों pulley एक दिशा में, crossed belt में विपरीत दिशा में घूमती हैं।",
+  "pause": 0.15
+ },
+ {
+  "img": "s04_1.jpg",
+  "text": "Flat belt में T एक बटा T दो बराबर e की घात mu theta। V belt में cosec beta और जुड़ जाता है।",
+  "pause": 0.15
+ },
+ {
+  "img": "s04_2.jpg",
+  "text": "Maximum power तब, जब maximum tension centrifugal tension का तीन गुना हो।",
+  "pause": 0.15
+ },
+ {
+  "img": "s04_3.jpg",
+  "text": "Initial tension, T एक प्लस T दो बटा दो। Centrifugal tension power पर असर नहीं डालता।",
+  "pause": 0.15
+ },
+ {
+  "img": "s05_0.jpg",
+  "text": "Clutch torque बराबर n mu W R। Single plate में दोनों सतहें काम करें तो n बराबर दो।",
+  "pause": 0.15
+ },
+ {
+  "img": "s05_1.jpg",
+  "text": "Uniform wear में mean radius r एक प्लस r दो बटा दो। Design इसी पर होता है क्योंकि यह safe है।",
+  "pause": 0.15
+ },
+ {
+  "img": "s05_2.jpg",
+  "text": "Multi plate में n एक प्लस n दो माइनस एक। Cone clutch में cosec alpha से torque बढ़ता है।",
+  "pause": 0.15
+ },
+ {
+  "img": "s06_0.jpg",
+  "text": "Parallel shafts के लिए spur और helical, intersecting के लिए bevel, और न parallel न intersecting के लिए worm gear।",
+  "pause": 0.15
+ },
+ {
+  "img": "s06_1.jpg",
+  "text": "Module बराबर D बटा T, circular pitch pi m, और centre distance m गुणा T एक प्लस T दो बटा दो।",
+  "pause": 0.15
+ },
+ {
+  "img": "s06_2.jpg",
+  "text": "Involute का normal base circle पर tangent होता है, pitch circle पर नहीं।",
+  "pause": 0.15
+ },
+ {
+  "img": "s06_3.jpg",
+  "text": "Simple train में gears की संख्या सम हो तो पहला और आख़िरी gear विपरीत दिशा में घूमते हैं।",
+  "pause": 0.15
+ },
+ {
+  "img": "s07_0.jpg",
+  "text": "Watt governor की height 895 बटा N square मीटर। Porter में m प्लस M बटा m से गुणा होता है।",
+  "pause": 0.15
+ },
+ {
+  "img": "s07_1.jpg",
+  "text": "Speed बढ़ने पर radius बढ़े तो stable, घटे तो unstable।",
+  "pause": 0.15
+ },
+ {
+  "img": "s07_2.jpg",
+  "text": "Isochronous governor infinitely sensitive होता है, इसलिए hunting करता है।",
+  "pause": 0.15
+ },
+ {
+  "img": "s07_3.jpg",
+  "text": "Hartnell में spring stiff करोगे तो governor कम sensitive होगा।",
+  "pause": 0.15
+ },
+ {
+  "img": "s08_0.jpg",
+  "text": "Knife edge follower सबसे ज़्यादा घिसता है, roller सबसे common है, और mushroom IC engine valve में लगता है।",
+  "pause": 0.15
+ },
+ {
+  "img": "s08_1.jpg",
+  "text": "Cam का throw base circle से follower की maximum दूरी है।",
+  "pause": 0.15
+ },
+ {
+  "img": "s08_2.jpg",
+  "text": "High speed के लिए cycloidal motion सबसे अच्छा है, क्योंकि शुरू और अंत में acceleration शून्य होता है।",
+  "pause": 0.15
+ },
+ {
+  "img": "s09_0.jpg",
+  "text": "Bearing दो तरह की: sliding यानी journal, और rolling यानी ball और roller, जिन्हें anti friction कहते हैं।",
+  "pause": 0.15
+ },
+ {
+  "img": "s09_1.jpg",
+  "text": "Rating life L ten बराबर C बटा P की घात k। Ball के लिए k तीन, roller के लिए दस बटा तीन।",
+  "pause": 0.15
+ },
+ {
+  "img": "s09_2.jpg",
+  "text": "6205 का bore पच्चीस mm। Taper roller bearing radial और axial दोनों load सहती है।",
+  "pause": 0.15
+ },
+ {
+  "img": "s10_0.jpg",
+  "text": "अब PDF पढ़िए, फिर दस hard quiz लगाइए और answer key से मिलाइए।",
+  "pause": 0.15
+ },
+ {
+  "img": "s10_1.jpg",
+  "text": "UPSSSC ALERT के साथ जुड़े रहिए। अगला विषय, Engineering Mechanics।",
+  "pause": 0.15
+ }
+]

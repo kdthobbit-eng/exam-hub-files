@@ -1,0 +1,136 @@
+[
+ {
+  "type": "msg",
+  "text": "<b>UPSSSC JE (MECHANICAL) 2026</b>\n\n<b>मशीनों का सिद्धांत और मशीन डिज़ाइन</b>\n\n<b>HARD QUIZ – 01 (10 प्रश्न)</b>"
+ },
+ {
+  "type": "quiz",
+  "q": "Q1. एक मशीन का नियम P = 0.05W + 20 (N) है और VR = 30 है। मशीन की अधिकतम दक्षता और प्रकृति क्या होगी? / Law of machine P = 0.05W + 20, VR = 30. Max efficiency & nature?",
+  "options": [
+   "66.7%, Reversible",
+   "66.7%, Self-locking",
+   "33.3%, Self-locking",
+   "50%, Reversible",
+   "उपर्युक्त में से कोई नहीं / None of the above"
+  ],
+  "answer": 0,
+  "explain": "ηmax = 1/(m·VR) = 1/(0.05×30) = 66.7%, जो 50% से अधिक है → Reversible."
+ },
+ {
+  "type": "quiz",
+  "q": "Q2. Four-bar chain के links 30, 70, 80 और 100 mm हैं। सबसे छोटे (30 mm) link के सामने वाला link fix करने पर mechanism होगा? / Link opposite the shortest is fixed.",
+  "options": [
+   "Double crank",
+   "Crank-rocker",
+   "Double rocker",
+   "Triple rocker (Non-Grashof)",
+   "उपर्युक्त में से कोई नहीं / None of the above"
+  ],
+  "answer": 2,
+  "explain": "s+l = 130 ≤ p+q = 150 → Grashof. Shortest के सामने वाला (coupler) fix → Double rocker."
+ },
+ {
+  "type": "quiz",
+  "q": "Q3. Flywheel: m = 500 kg, k = 1 m, mean speed 300 rpm, speed का उतार-चढ़ाव mean का ±1% है। Maximum fluctuation of energy (ΔE) लगभग? / Find ΔE.",
+  "options": [
+   "4.93 kJ",
+   "9.87 kJ",
+   "19.74 kJ",
+   "98.7 kJ",
+   "उपर्युक्त में से कोई नहीं / None of the above"
+  ],
+  "answer": 1,
+  "explain": "ω = 31.42 rad/s, Cs = 0.02 (±1%). ΔE = mk²ω²Cs = 500×1×987×0.02 ≈ 9.87 kJ."
+ },
+ {
+  "type": "quiz",
+  "q": "Q4. Belt की max permissible tension 1500 N और mass 1.5 kg/m है। Maximum power के लिए belt velocity होगी? / Belt velocity for max power?",
+  "options": [
+   "10.5 m/s",
+   "18.26 m/s",
+   "25.8 m/s",
+   "31.6 m/s",
+   "उपर्युक्त में से कोई नहीं / None of the above"
+  ],
+  "answer": 1,
+  "explain": "Max power पर Tmax = 3Tc → v = √(T/3m) = √(1500/4.5) = 18.26 m/s."
+ },
+ {
+  "type": "quiz",
+  "q": "Q5. V-belt: μ = 0.3, angle of contact = 180°, groove angle = 40°। Tension ratio T₁/T₂ लगभग? / Find T₁/T₂ for the V-belt.",
+  "options": [
+   "2.57",
+   "6.59",
+   "9.40",
+   "15.7",
+   "उपर्युक्त में से कोई नहीं / None of the above"
+  ],
+  "answer": 3,
+  "explain": "β = 20°. T₁/T₂ = e^(μθ cosec β) = e^(0.3×π×2.924) = e^2.756 ≈ 15.7 (flat belt होता तो 2.57)."
+ },
+ {
+  "type": "quiz",
+  "q": "Q6. Single plate clutch (दोनों सतहें effective): r₁ = 150 mm, r₂ = 100 mm, μ = 0.3, axial load 4 kN। Uniform wear theory से torque? / Torque by uniform wear?",
+  "options": [
+   "150 N·m",
+   "300 N·m",
+   "304 N·m",
+   "600 N·m",
+   "उपर्युक्त में से कोई नहीं / None of the above"
+  ],
+  "answer": 1,
+  "explain": "R = (r₁+r₂)/2 = 0.125 m. T = nμWR = 2×0.3×4000×0.125 = 300 N·m (304 = uniform pressure)."
+ },
+ {
+  "type": "quiz",
+  "q": "Q7. कथन: 1. Involute gears में pressure angle पूरे संपर्क में स्थिर रहता है। 2. Cycloidal gears में interference नहीं होता। 3. Involute का normal pitch circle पर tangent होता है। सही कथन चुनें।",
+  "options": [
+   "केवल 1 और 2 / Only 1 & 2",
+   "केवल 2 और 3 / Only 2 & 3",
+   "केवल 1 और 3 / Only 1 & 3",
+   "1, 2 और 3 / All three",
+   "उपर्युक्त में से कोई नहीं / None of the above"
+  ],
+  "answer": 0,
+  "explain": "कथन 3 गलत: involute का normal BASE circle पर tangent होता है (UPSSSC JE 2016)."
+ },
+ {
+  "type": "quiz",
+  "q": "Q8. Porter governor (equal arms): ball mass = 5 kg, central load = 25 kg, speed = 150 rpm। Governor height लगभग? / Height of Porter governor?",
+  "options": [
+   "3.98 cm",
+   "19.9 cm",
+   "23.9 cm",
+   "47.7 cm",
+   "उपर्युक्त में से कोई नहीं / None of the above"
+  ],
+  "answer": 2,
+  "explain": "h = (m+M)/m × 895/N² = (30/5) × 895/22500 = 0.2387 m ≈ 23.9 cm."
+ },
+ {
+  "type": "quiz",
+  "q": "Q9. Roller follower का lift 40 mm है, जो cam के 90° घूमने में SHM से पूरा होता है। Cam 240 rpm पर घूमता है। Outstroke में follower का max velocity? / Max follower velocity?",
+  "options": [
+   "0.50 m/s",
+   "1.005 m/s",
+   "1.28 m/s",
+   "2.01 m/s",
+   "उपर्युक्त में से कोई नहीं / None of the above"
+  ],
+  "answer": 1,
+  "explain": "ω = 25.13 rad/s, θo = π/2. SHM: vmax = πhω/(2θo) = π×0.04×25.13/π ≈ 1.005 m/s."
+ },
+ {
+  "type": "quiz",
+  "q": "Q10. Deep groove ball bearing 6208 (bore 40 mm) पर equivalent load दोगुना कर दिया जाए, तो उसकी rated life (L₁₀) कितनी रह जाएगी? / New L₁₀ life?",
+  "options": [
+   "आधी / 1/2",
+   "1/4",
+   "1/8",
+   "लगभग 1/10 / about 1/10",
+   "उपर्युक्त में से कोई नहीं / None of the above"
+  ],
+  "answer": 2,
+  "explain": "Ball bearing: L = (C/P)³ → load 2 गुना करने पर life (1/2)³ = 1/8 (roller में k = 10/3 → ≈1/10)."
+ }
+]

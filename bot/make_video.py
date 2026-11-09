@@ -5,8 +5,10 @@ from mutagen.mp3 import MP3
 FF=imageio_ffmpeg.get_ffmpeg_exe()
 d, chat, voice = sys.argv[1], sys.argv[2], (sys.argv[3] if len(sys.argv) > 3 else "hi-IN-SwaraNeural")
 segs = json.load(open(f"{d}/segments.json", encoding="utf-8"))
+META = json.load(open(f"{d}/meta.json", encoding="utf-8")) if os.path.exists(f"{d}/meta.json") else {}
+RATE = META.get("rate", "-5%")
 def dur(f): return MP3(f).info.length
-async def tts(t, f): await edge_tts.Communicate(t, voice, rate="-5%").save(f)
+async def tts(t, f): await edge_tts.Communicate(t, voice, rate=RATE).save(f)
 clips=[]
 for i,s in enumerate(segs):
     a=f"/tmp/a{i}.mp3"; asyncio.run(tts(s["text"],a))
@@ -19,5 +21,5 @@ out=f"/tmp/{os.path.basename(d)}.mp4"
 subprocess.run([FF,"-y","-loglevel","error","-f","concat","-safe","0","-i","/tmp/list.txt","-c","copy","-movflags","+faststart",out],check=True)
 print("size",os.path.getsize(out))
 tok=os.environ["TELEGRAM_BOT_TOKEN"]
-r=subprocess.run(["curl","-s","-F",f"chat_id={chat}","-F",f"video=@{out}","-F","supports_streaming=true","-F","caption=DI — समझकर हल करें (Sample)",
+r=subprocess.run(["curl","-s","-F",f"chat_id={chat}","-F",f"video=@{out}","-F","supports_streaming=true","-F","caption="+META.get("caption","DI — समझकर हल करें (Sample)"),
     f"https://api.telegram.org/bot{tok}/sendVideo"],capture_output=True,text=True); print(r.stdout[:300])
