@@ -6,6 +6,7 @@ import imageio_ffmpeg
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 
 d, voice, style = sys.argv[1], sys.argv[2], sys.argv[3]
+SPEED = sys.argv[4] if len(sys.argv) > 4 else "1.0"
 KEY = os.environ["GEMINI_API_KEY"]
 MODELS = ["gemini-3.1-flash-tts-preview", "gemini-2.5-flash-preview-tts"]
 items = json.load(open(f"{d}/tts.json", encoding="utf-8"))
@@ -42,7 +43,7 @@ for it in items:
         if pcm: break
     if not pcm:
         print("stopping: could not synthesize", it["id"]); break
-    subprocess.run([FF, "-loglevel", "error", "-y", "-f", "s16le", "-ar", "24000", "-ac", "1", "-i", "-", "-b:a", "96k", f],
+    subprocess.run([FF, "-loglevel", "error", "-y", "-f", "s16le", "-ar", "24000", "-ac", "1", "-i", "-", "-af", f"atempo={SPEED}", "-b:a", "96k", f],
                    input=pcm, check=True)
     print("ok", it["id"], model)
 

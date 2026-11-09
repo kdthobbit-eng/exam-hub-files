@@ -4,17 +4,18 @@ on:
     inputs:
       dir: {description: "video/<dir> containing tts.json", required: true}
       voice: {description: "Gemini voice name", required: false, default: "Charon"}
+      speed: {description: "tempo", required: false, default: "1.0"}
       style: {description: "style instruction", required: false, default: "Read the following like a friendly, energetic Indian teacher explaining to students in natural Hinglish, at a lively but clear pace:"}
 permissions:
   contents: write
 jobs:
   tts:
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 340
     steps:
       - uses: actions/checkout@v4
       - run: pip install -q mutagen imageio-ffmpeg
-      - run: python3 bot/tts_gemini.py "${{ inputs.dir }}" "${{ inputs.voice }}" "${{ inputs.style }}"
+      - run: python3 bot/tts_gemini.py "${{ inputs.dir }}" "${{ inputs.voice }}" "${{ inputs.style }}" "${{ inputs.speed }}"
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - run: |
