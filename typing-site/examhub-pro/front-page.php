@@ -52,13 +52,13 @@ $join = eh_opt('tg_join');
 $wa = function ($b) { return eh_wa_url('Hello, I want to join the ' . $b . ' batch.'); };
 $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 ?>
-<script>try{if(localStorage.getItem('eh_lang')==='hi')document.documentElement.setAttribute('data-lang','hi')}catch(e){}</script>
+<script>try{if(localStorage.getItem('eh_lang')==='en')document.documentElement.setAttribute('data-lang','en')}catch(e){}</script>
 <div class="uh">
 
 <section class="uh-hero">
   <img class="uh-hero-bg" src="<?php echo esc_url($ph($P['hero'], 2000)); ?>" alt="" fetchpriority="high">
   <div class="wrap uh-hero-in">
-    <div class="uh-lang" role="group" aria-label="Language"><button type="button" data-lang="en">English</button><button type="button" data-lang="hi">हिंदी</button></div>
+    <div class="uh-lang" role="group" aria-label="Language"><button type="button" data-lang="hi">हिंदी</button><button type="button" data-lang="en">English</button></div>
     <p class="uh-eyebrow"><?php echo eh_t('UPSSSC and UP exams · Courses · Mock tests · Typing', 'UPSSSC और UP की भर्तियाँ · कोर्स · मॉक टेस्ट · टाइपिंग'); ?></p>
     <h1 class="uh-h1"><?php echo eh_t('<span>Your home</span> <span><em>before the job.</em></span>', '<span>नौकरी लगने से</span> <span>पहले का <em>घर।</em></span>'); ?></h1>
     <p class="uh-lead"><?php echo eh_t('Notes, daily quiz, mock tests and exam-style typing practice for UPSSSC and other UP exams. All in one place.', 'UPSSSC और UP की बाकी भर्तियों के लिए नोट्स, रोज़ क्विज, मॉक टेस्ट और एग्जाम जैसी टाइपिंग प्रैक्टिस। सब एक जगह।'); ?></p>

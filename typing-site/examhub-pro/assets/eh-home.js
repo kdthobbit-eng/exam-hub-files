@@ -6,10 +6,10 @@
   /* language */
   var lb = document.querySelectorAll('.uh-lang button');
   function setLang(l) {
-    if (l === 'hi') root.setAttribute('data-lang', 'hi'); else root.removeAttribute('data-lang');
+    if (l === 'en') root.setAttribute('data-lang', 'en'); else root.removeAttribute('data-lang'); /* Hindi is the default */
     lb.forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-lang') === l); });
   }
-  setLang(root.getAttribute('data-lang') === 'hi' ? 'hi' : 'en');
+  setLang(root.getAttribute('data-lang') === 'en' ? 'en' : 'hi');
   lb.forEach(function (b) { b.addEventListener('click', function () { var l = b.getAttribute('data-lang'); setLang(l); store('eh_lang', l); }); });
 
   /* counters */
