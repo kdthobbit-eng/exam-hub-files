@@ -127,7 +127,7 @@ function eh_live_schedule() {
             $e = eh_exam($x[1]); if (!$e) continue;
             $e['name'] = 'UPSSSC Junior Assistant ' . $x[2] . ' Typing';
             $all = array_values(array_filter(eh_passages($x[0]), function ($p) { return empty($p['special']) && strpos($p['id'], 'p') !== 0; }));
-            $need = max((int) ceil($e['target'] * 1.3), (int) $e['minutes'] * 360);
+            $need = max((int) ceil($e['target'] * 1.3), (int) $e['minutes'] * 720); /* enough text for well over 100 WPM */
             $no = 0;
             foreach ($groups as $label => $lv) {
                 $pool = array_values(array_filter($all, function ($p) use ($lv) { return in_array($p['level'], $lv, true); }));

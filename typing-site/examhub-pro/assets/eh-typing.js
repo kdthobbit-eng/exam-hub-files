@@ -60,7 +60,8 @@
     if (CFG.fixedPassage) ps.value = CFG.fixedPassage;
     var mi = $('#eh-opt-min'); mi.value = String(exam.minutes); if (CFG.lockTime) mi.disabled = true;
     var un = $('#eh-opt-unit'); if (un) un.value = exam.unit === 'keys' ? 'keys' : 'words';
-    var li = $('#eh-opt-limit'); if (li && !li.value && +exam.target > 0) li.value = exam.target;
+    /* UPSSSC and live tests show the full passage: no cut at the target, so speed is never capped by a short text */
+    var li = $('#eh-opt-limit'); if (li && !li.value && +exam.target > 0 && exam.eval !== 'upsssc' && !CFG.live) li.value = exam.target;
     var nm = $('#eh-guest-name'); if (nm) nm.value = store.get('name', '');
     /* steps: 2 = passage select (first), 1 = instructions (then start) */
     var agree = $('#eh-agree'), next = $('#eh-next'), startBtn = $('#eh-start'), akey = 'agree_' + exam.slug;
@@ -97,7 +98,7 @@
 
   function buildText(firstId) {
     var need = exam.unit === 'keys' ? Math.ceil(exam.target * 1.3) : Math.ceil(exam.target * 1.3 * 6.2);
-    need = Math.max(need, S.minutes * 60 * 6);
+    need = Math.max(need, S.minutes * 60 * (exam.eval === 'upsssc' || CFG.live ? 12 : 6));
     if (S.limit > 0) need = S.limitUnit === 'words' ? S.limit * 8 : S.limit + 10;
     var order = pool.slice();
     if (firstId) order.sort(function (a, b) { return (a.id === firstId ? -1 : 0) - (b.id === firstId ? -1 : 0); });
