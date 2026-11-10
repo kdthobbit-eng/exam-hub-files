@@ -9,6 +9,7 @@ $R = [
     'half' => (int) $row['half_m'], 'backspaces' => (int) $row['backspaces'], 'minutes' => (float) $row['minutes'], 'pass' => (int) $row['pass'],
     'title' => $row['title'], 'date' => wp_date('d M Y, h:i A', strtotime($row['created'])), 'name' => eh_display_name($row), 'dur' => (int) $X['minutes'],
 ];
+if (!empty($X['target'])) $R['pass'] = ((($X['unit'] ?? '') === 'keys' ? $R['keys'] : $R['words']) >= (int) $X['target'] && $R['err'] <= (float) ($X['allowed'] ?? 5)) ? 1 : 0;
 foreach (eh_passages() as $pp) { if ($pp['id'] === $row['passage']) { $R['total'] = mb_strlen(trim(preg_replace('/\s+/u', ' ', $pp['text']))); break; } }
 wp_enqueue_script('eh-eval', EH_URI . '/assets/eh-eval.js', [], EH_VER, true);
 wp_add_inline_script('eh-eval', 'window.EH_RES=' . wp_json_encode(['R' => $R, 'X' => $X, 'src' => (string) $row['src'], 'typed' => (string) $row['typed']], JSON_UNESCAPED_UNICODE) . ';', 'before');

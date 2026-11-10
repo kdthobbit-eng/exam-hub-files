@@ -138,6 +138,23 @@ add_filter('rank_math/frontend/description', function ($d) { return get_query_va
 add_filter('rank_math/frontend/canonical', function ($c) { return get_query_var('eh_view') ? eh_view_url() : $c; }, 9999);
 add_filter('rank_math/opengraph/url', function ($c) { return get_query_var('eh_view') ? eh_view_url() : $c; }, 9999);
 add_filter('rank_math/frontend/robots', function ($r) { if (in_array(get_query_var('eh_view'), ['dashboard', 'result', 'insight'], true)) { $r['index'] = 'noindex'; } return $r; }, 9999);
+/* favicon (used until a Site Icon is set in WordPress) */
+add_action('wp_head', function () {
+    if (function_exists('has_site_icon') && has_site_icon()) return;
+    $u = esc_url(EH_URI . '/assets/favicon-');
+    echo '<link rel="icon" type="image/png" sizes="32x32" href="' . $u . '32.png"><link rel="icon" type="image/png" sizes="192x192" href="' . $u . '192.png"><link rel="apple-touch-icon" href="' . $u . '180.png">' . "\n";
+}, 2);
+add_action('login_head', function () { if (!has_site_icon()) echo '<link rel="icon" type="image/png" href="' . esc_url(EH_URI . '/assets/favicon-192.png') . '">'; });
+add_action('admin_head', function () { if (!has_site_icon()) echo '<link rel="icon" type="image/png" href="' . esc_url(EH_URI . '/assets/favicon-192.png') . '">'; });
+
+/* home page title and description for search engines and link previews (Rank Math reads these) */
+function eh_home_title() { return eh_opt('brand') . ' — Courses, Mock Tests and Free Typing Tests'; }
+function eh_home_desc() { return eh_opt('brand') . ': notes, daily quiz, mock tests and free exam-style typing practice for UPSSSC and other UP exams.'; }
+add_filter('rank_math/frontend/title', function ($t) { return is_front_page() ? eh_home_title() : $t; });
+foreach (['rank_math/frontend/description', 'rank_math/opengraph/facebook/og_description', 'rank_math/opengraph/twitter/twitter_description'] as $eh_f) add_filter($eh_f, function ($d) { return is_front_page() ? eh_home_desc() : $d; });
+foreach (['rank_math/opengraph/facebook/og_title', 'rank_math/opengraph/twitter/twitter_title'] as $eh_f) add_filter($eh_f, function ($t) { return is_front_page() ? eh_home_title() : $t; });
+add_filter('rank_math/opengraph/facebook/og_site_name', function () { return eh_opt('brand'); });
+
 add_action('wp_head', function () {
     if (defined('RANK_MATH_VERSION')) return;
     if (get_query_var('eh_view') || is_front_page()) echo '<meta name="description" content="' . esc_attr(eh_view_desc()) . '">' . "\n";
@@ -152,7 +169,8 @@ function eh_lang_label($l) { return ['en' => 'English', 'hi' => 'Hindi', 'mr' =>
 function eh_target_wpm($e) {
     if (!$e) return 0;
     $m = max(1, (int) $e['minutes']);
-    return $e['unit'] === 'keys' ? (int) round($e['target'] / $m / 10) : (int) round($e['target'] / $m);
+    /* official norm: 5 key depressions = 1 word */
+    return $e['unit'] === 'keys' ? (int) round($e['target'] / $m / 5) : (int) round($e['target'] / $m);
 }
 function eh_row_speeds($r) {
     $min = max(1 / 60, (float) $r['minutes']);
