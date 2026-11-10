@@ -1,6 +1,6 @@
 <?php
 /**
- * Exam Hub Pro — typing test theme for erojgarresult.com
+ * Exam Hub Pro — typing test theme for xlstudy.in
  */
 if (!defined('ABSPATH')) exit;
 
