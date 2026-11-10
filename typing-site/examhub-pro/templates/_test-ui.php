@@ -62,8 +62,10 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
         <?php endif; ?>
         <li>Use one space between words. Extra spaces, wrong capitals or missing punctuation count as a <b>half mistake</b>.</li>
         <li>A wrong word, a missed word or an added word counts as a <b>full mistake</b>.</li>
+        <?php if (($eh_exam['eval'] ?? '') !== 'upsssc'): ?>
         <li>Error % = (Full mistake + Half mistake ÷ 2) ÷ words typed × 100</li>
         <li>To qualify you need <?php echo $eh_unit === 'keys' ? 'at least <b>' . number_format_i18n($eh_exam['target']) . ' key depressions</b>' : 'about <b>' . number_format_i18n($eh_exam['target']) . ' words</b>'; ?> with errors within <b><?php echo esc_html($eh_exam['allowed']); ?>%</b>.</li>
+        <?php endif; ?>
         <li>The test submits on its own when time is up. To finish early, press <b>Submit</b> twice.</li>
         <li><b>Cancel</b> ends the test without saving a result.</li>
         <li>Font size, sound and full screen can be changed from the toolbar or ⚙ Settings.</li>
