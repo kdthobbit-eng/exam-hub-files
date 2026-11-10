@@ -119,15 +119,25 @@ function eh_live_schedule() {
     $j = json_decode((string) get_option('eh_live_schedule', ''), true);
     $out = [];
     if (!is_array($j) || !$j) {
+        /* 6 English + 6 Hindi a day: 2 Easy, 2 Moderate, 2 Hard in each language. Every test is a full-length text:
+           the day's passage first, then more passages of the same level, so nobody runs out of words. */
         $day = (int) floor(current_time('timestamp') / 86400);
+        $groups = ['Easy' => ['B', 'E'], 'Moderate' => ['M'], 'Hard' => ['H']];
         foreach ([['en', 'upsssc-assistants-english-typing-test', 'English'], ['hi', 'upsssc-assistants-hindi-typing-test', 'Hindi']] as $x) {
             $e = eh_exam($x[1]); if (!$e) continue;
             $e['name'] = 'UPSSSC Junior Assistant ' . $x[2] . ' Typing';
-            $pool = array_values(array_filter(eh_passages($x[0]), function ($p) { return empty($p['special']) && strpos($p['id'], 'p') !== 0; }));
-            $n = count($pool);
-            for ($k = 0; $k < 15 && $k < $n; $k++) {
-                $out[] = ['exam' => $e, 'lang' => $x[0], 'passage' => $pool[($day * 15 + $k) % $n], 'no' => $k + 1, 'allday' => true,
-                    'start' => '12:00 AM', 'end' => '11:59 PM', 's' => 0, 'e' => 1439, 'date' => $date];
+            $all = array_values(array_filter(eh_passages($x[0]), function ($p) { return empty($p['special']) && strpos($p['id'], 'p') !== 0; }));
+            $need = max((int) ceil($e['target'] * 1.3), (int) $e['minutes'] * 360);
+            $no = 0;
+            foreach ($groups as $label => $lv) {
+                $pool = array_values(array_filter($all, function ($p) use ($lv) { return in_array($p['level'], $lv, true); }));
+                $n = count($pool); if (!$n) continue;
+                for ($k = 0; $k < 2 && $k < $n; $k++) {
+                    $start = ($day * 2 + $k) % $n; $seq = []; $len = 0;
+                    for ($q = 0; $q < $n && $q < 8; $q++) { $seq[] = $pool[($start + $q) % $n]; $len += $seq[$q]['chars'] + 1; if ($len >= $need && $q >= 1) break; }
+                    $out[] = ['exam' => $e, 'lang' => $x[0], 'passage' => $seq[0], 'plist' => $seq, 'chars' => max(0, $len - 1), 'level' => $label, 'no' => ++$no, 'allday' => true,
+                        'start' => '12:00 AM', 'end' => '11:59 PM', 's' => 0, 'e' => 1439, 'date' => $date];
+                }
             }
         }
         return $out;
