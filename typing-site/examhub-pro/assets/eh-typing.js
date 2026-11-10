@@ -176,6 +176,8 @@
 
   /* ---------- start ---------- */
   function startTest() {
+    /* open the exam window in full screen (like F11) as soon as the test starts; Esc or the Fullscreen button leaves it */
+    try { if (!document.fullscreenElement) { var rf = test.requestFullscreen || test.webkitRequestFullscreen; if (rf) { var fp = rf.call(test); if (fp && fp.catch) fp.catch(function () {}); } } } catch (e) {}
     S.layout = $('#eh-opt-layout').value; store.set('layout', S.layout);
     if (S.layout === 'inscript' && S.imExternal && S.imExternal()) S.layout = 'external';
     var mi = $('#eh-opt-min'); if (!mi.disabled) S.minutes = Math.max(1, Math.min(60, parseInt(mi.value, 10) || exam.minutes));
