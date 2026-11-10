@@ -2,7 +2,7 @@
 if (!defined('ABSPATH')) exit;
 
 add_action('admin_menu', function () {
-    add_menu_page('Alert Typing', 'Alert Typing', 'manage_options', 'eh-settings', 'eh_settings_page', 'dashicons-keyboard', 3);
+    add_menu_page('UPSSSC Alert', 'UPSSSC Alert', 'manage_options', 'eh-settings', 'eh_settings_page', 'dashicons-keyboard', 3);
 });
 
 add_action('admin_init', function () {
@@ -23,7 +23,7 @@ function eh_settings_page() {
     global $wpdb;
     $total = (int) $wpdb->get_var('SELECT COUNT(*) FROM ' . eh_table());
     ?>
-    <div class="wrap"><h1>Alert Typing — Settings</h1>
+    <div class="wrap"><h1>UPSSSC Alert — Settings</h1>
     <p>कुल टेस्ट दिए गए: <b><?php echo number_format_i18n($total); ?></b> · Exams: <b><?php echo count(eh_exams()); ?></b> · Passages: <b><?php echo count(eh_passages()); ?></b> (नया पैसेज: <a href="<?php echo admin_url('post-new.php?post_type=eh_passage'); ?>">Typing Passages → Add</a>)</p>
     <form method="post" action="options.php"><?php settings_fields('eh_settings'); ?>
     <table class="form-table">

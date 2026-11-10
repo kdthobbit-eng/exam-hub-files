@@ -30,6 +30,11 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('eh-fonts', 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap', [], null);
     wp_enqueue_style('eh-style', get_stylesheet_uri(), [], EH_VER);
     wp_enqueue_script('eh-site', EH_URI . '/assets/eh-site.js', [], EH_VER, true);
+    if (is_front_page()) {
+        wp_enqueue_style('eh-home-fonts', 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Mukta:wght@400;500;600;700;800&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap', [], null);
+        wp_enqueue_style('eh-home', EH_URI . '/assets/eh-home.css', ['eh-style'], EH_VER);
+        wp_enqueue_script('eh-home', EH_URI . '/assets/eh-home.js', [], EH_VER, true);
+    }
 });
 
 /* hide admin bar for normal users */
@@ -39,8 +44,13 @@ add_filter('show_admin_bar', function ($show) { return current_user_can('edit_po
 function eh_opt($key) {
     $defaults = [
         'tg_group'   => 'https://t.me/examhub2026',
-        'tg_channel' => 'https://t.me/examhub26',
-        'brand'      => 'Alert Typing',
+        'tg_channel' => 'https://t.me/upssscalertt',
+        'tg_join'    => 'https://t.me/joinvijeta2025',
+        'youtube'    => 'https://youtube.com/@xlstudy',
+        'yt_uploads' => 'UUgYVqxSwVv2ddAzflWBJT1A',
+        'whatsapp'   => '919455015600',
+        'brand'      => 'UPSSSC Alert',
+        'brand_sub'  => 'by XL Study',
         'tagline'    => 'Typing practice for government exams — real exam format, fully free',
         'notice'     => 'Daily Live Typing is on: a new passage every day, check your rank',
         'allowed_error' => 5,
@@ -164,6 +174,13 @@ function eh_exam_card($e, $attempts = 0) {
       <div class="eh-card-foot"><span>👤 <?php echo esc_html(number_format_i18n($attempts)); ?></span><span class="go">Start →</span></div>
     </a>
     <?php return ob_get_clean();
+}
+
+/* two-language text: English + Hindi, switched by html[data-lang] */
+function eh_t($en, $hi) { return '<span class="l-en">' . $en . '</span><span class="l-hi" lang="hi">' . $hi . '</span>'; }
+function eh_wa_url($text = '') { return 'https://wa.me/' . preg_replace('/\D/', '', (string) eh_opt('whatsapp')) . ($text !== '' ? '?text=' . rawurlencode($text) : ''); }
+function eh_logo() {
+    return '<span class="eh-logo-mark">UA</span><span class="eh-logo-txt">' . esc_html(eh_opt('brand')) . (eh_opt('brand_sub') ? '<small>' . esc_html(eh_opt('brand_sub')) . '</small>' : '') . '</span>';
 }
 
 function eh_tg_buttons($class = '') {
