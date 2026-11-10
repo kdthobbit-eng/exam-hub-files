@@ -2,33 +2,36 @@
 $S = eh_live_schedule();
 $now = (int) wp_date('G') * 60 + (int) wp_date('i');
 $sel = sanitize_title($_GET['exam'] ?? '');
-$row = null; foreach ($S as $r) if ($r['exam']['slug'] === $sel) $row = $r;
+$pid = sanitize_key($_GET['p'] ?? ''); $kb = sanitize_key($_GET['kb'] ?? '');
+$row = null; foreach ($S as $r) if (!$row && $r['exam']['slug'] === $sel && ($pid === '' || ($r['passage']['id'] ?? '') === $pid)) $row = $r;
 $medal = ['🥇', '🥈', '🥉'];
 global $wpdb;
 get_header();
 echo eh_member_nav('live');
 if ($row):
     $L = $row; $open = $now >= $L['s'] && $now <= $L['e'];
-    $board = eh_leaderboard($L['exam']['slug'], $L['date'], 25);
-    $players = (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_table() . ' WHERE live_date = %s AND exam = %s', $L['date'], $L['exam']['slug']));
+    $allday = !empty($L['allday']); $lp = sanitize_key($L['passage']['id'] ?? '');
+    $board = eh_leaderboard($L['exam']['slug'], $L['date'], 25, 0, $lp);
+    $players = (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_table() . ' WHERE live_date = %s AND exam = %s AND passage = %s', $L['date'], $L['exam']['slug'], $lp));
 ?>
 <section class="eh-live-hero"><div class="wrap eh-live-hero-in">
   <div>
-    <p class="muted small"><a href="<?php echo esc_url(home_url('/live-typing/')); ?>">← Live Typing schedule</a></p>
+    <p class="muted small"><a href="<?php echo esc_url(home_url('/live-typing/')); ?>">← All Live Typing tests</a></p>
     <span class="eh-live-dot"><?php echo $open ? 'LIVE' : ($now < $L['s'] ? 'Soon' : 'Closed'); ?></span>
-    <h1><?php echo esc_html($L['exam']['name']); ?></h1>
-    <p class="lead">Today’s passage is the same for everyone. Open from <?php echo esc_html($L['start'] . ' to ' . $L['end']); ?>. Take the test in this window; ranking is by net speed.</p>
+    <h1><?php echo esc_html($L['exam']['name'] . (!empty($L['no']) ? ' · Passage ' . (int) $L['no'] : '')); ?></h1>
+    <p class="lead"><?php echo $allday ? 'This passage is the same for everyone today and is open all day. Ranking is by net speed.' : 'Today’s passage is the same for everyone. Open from ' . esc_html($L['start'] . ' to ' . $L['end']) . '. Take the test in this window; ranking is by net speed.'; ?></p>
   </div>
   <div class="eh-live-cards">
     <div class="eh-lc"><span>Today’s passage</span><b><?php echo esc_html($L['passage']['title'] ?? '—'); ?></b><em><?php echo $L['lang'] === 'hi' ? 'Hindi' : 'English'; ?> · <?php echo esc_html(eh_target_label($L['exam'])); ?></em></div>
     <div class="eh-lc"><span>Tests today</span><b><?php echo number_format_i18n($players); ?></b><em>people</em></div>
-    <div class="eh-lc dark"><span><?php echo $open ? 'Closes in' : ($now < $L['s'] ? 'Opens in' : 'Back tomorrow'); ?></span><b id="eh-cd" data-s="<?php echo $open ? ($L['e'] - $now) * 60 : ($now < $L['s'] ? ($L['s'] - $now) * 60 : 0); ?>">--:--:--</b><em><?php echo esc_html($L['start'] . ' – ' . $L['end']); ?></em></div>
+    <div class="eh-lc dark"><span><?php echo $open ? ($allday ? 'Time left today' : 'Closes in') : ($now < $L['s'] ? 'Opens in' : 'Back tomorrow'); ?></span><b id="eh-cd" data-s="<?php echo $open ? ($L['e'] - $now) * 60 : ($now < $L['s'] ? ($L['s'] - $now) * 60 : 0); ?>">--:--:--</b><em><?php echo $allday ? 'Open all day' : esc_html($L['start'] . ' – ' . $L['end']); ?></em></div>
   </div>
 </div></section>
 <section class="wrap eh-section eh-live">
   <div><?php if ($open && $L['passage']):
       $eh_exam = $L['exam']; if ($eh_exam['lang'] !== 'hi') $eh_exam['lang'] = 'en';
       $eh_cfg = ['fixedPassage' => $L['passage']['id'], 'lockTime' => true, 'live' => $L['date']];
+      if ($L['lang'] === 'hi' && in_array($kb, ['krutidev', 'inscript'], true)) $eh_cfg['layout'] = $kb;
       include __DIR__ . '/_test-ui.php';
     else: ?>
       <div class="eh-panel eh-live-closed"><h2><?php echo $now < $L['s'] ? 'Test opens at ' . esc_html($L['start']) : 'Today’s live test is over'; ?></h2>
@@ -55,7 +58,7 @@ if ($row):
   var cd=document.getElementById('eh-cd'),s=+cd.dataset.s;
   function t(){if(s<=0){cd.textContent='00:00:00';return}var h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;cd.textContent=[h,m,x].map(function(v){return(v<10?'0':'')+v}).join(':');s--;if(s===0)setTimeout(function(){location.reload()},1500)}
   t();setInterval(t,1000);
-  var api='<?php echo esc_url_raw(add_query_arg(['date' => $L['date'], 'exam' => $L['exam']['slug']], rest_url('eh/v1/leaderboard'))); ?>',md=['🥇','🥈','🥉'];
+  var api='<?php echo esc_url_raw(add_query_arg(['date' => $L['date'], 'exam' => $L['exam']['slug'], 'passage' => $lp], rest_url('eh/v1/leaderboard'))); ?>',md=['🥇','🥈','🥉'];
   function esc(v){return String(v).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function load(){fetch(api,{credentials:'same-origin'}).then(function(r){return r.json()}).then(function(rows){
     if(!Array.isArray(rows))return;
@@ -67,28 +70,37 @@ if ($row):
   setInterval(load,30000);document.addEventListener('eh:saved',load);
 })();
 </script>
-<?php else: ?>
+<?php else:
+  $allday = $S && !empty($S[0]['allday']); ?>
 <section class="wrap eh-section">
-  <p class="muted small"><?php echo esc_html(wp_date('d/m/Y')); ?> · <?php echo esc_html(eh_opt('brand')); ?></p>
+  <p class="muted small"><?php echo esc_html(wp_date('d/m/Y')); ?> · <?php echo esc_html(eh_opt('brand_typing') ?: eh_opt('brand')); ?></p>
+  <?php if ($allday): ?>
+  <h1 class="eh-live-h">UPSSSC Junior Assistant Live Typing</h1>
+  <p class="muted"><?php echo count($S); ?> passages today: English and Hindi (Krutidev or Mangal Inscript). All are open the whole day. Everyone gets the same passage, and each passage has its own ranking by net speed.</p>
+  <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
+  <?php else: ?>
   <h1 class="eh-live-h">Live Typing — same passage, same time, for everyone</h1>
   <p class="muted">Each exam has a live test at a fixed time every day. Everyone gets the same passage and the day's ranking is by net speed.</p>
-  <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button>
-    <?php $seen = []; foreach ($S as $r) { $k = strtoupper(strtok(preg_replace('/^(rrb|nta|bihar|army|air|delhi|uttarakhand|andhra|punjab|jharkhand|chhattisgarh|rajasthan|telangana|bombay|allahabad|mp)-/', '$1 ', $r['exam']['slug']), '-')); if (isset($seen[$k])) continue; $seen[$k] = 1; echo '<button type="button" data-f="' . esc_attr($k) . '">' . esc_html($k) . '</button>'; } ?>
-  </div>
-  <div class="eh-table-wrap"><table class="eh-table eh-live-table"><thead><tr><th>#</th><th>Exam</th><th>Passage</th><th>Language</th><th>Start</th><th>End</th><th>Status</th><th>Action</th></tr></thead><tbody>
+  <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
+  <?php endif; ?>
+  <div class="eh-table-wrap"><table class="eh-table eh-live-table"><thead><tr><th>#</th><th>Test</th><th>Passage</th><th>Language</th><th>Time</th><th>Status</th><th>Start</th></tr></thead><tbody>
   <?php foreach ($S as $i => $r):
-      $k = strtoupper(strtok(preg_replace('/^(rrb|nta|bihar|army|air|delhi|uttarakhand|andhra|punjab|jharkhand|chhattisgarh|rajasthan|telangana|bombay|allahabad|mp)-/', '$1 ', $r['exam']['slug']), '-'));
       $st = $now < $r['s'] ? 'soon' : ($now <= $r['e'] ? 'live' : 'done');
-      $url = add_query_arg('exam', $r['exam']['slug'], home_url('/live-typing/')); ?>
-    <tr data-f="<?php echo esc_attr($k); ?>">
+      $q = ['exam' => $r['exam']['slug']]; if (!empty($r['allday'])) $q['p'] = $r['passage']['id'];
+      $url = add_query_arg($q, home_url('/live-typing/')); ?>
+    <tr data-f="<?php echo esc_attr($r['lang']); ?>">
       <td><?php echo $i + 1; ?></td>
-      <td><b><?php echo esc_html($r['exam']['name']); ?></b></td>
+      <td><b><?php echo esc_html($r['exam']['name']); ?></b><?php if (!empty($r['no'])) echo '<br><span class="muted small">Passage ' . (int) $r['no'] . '</span>'; ?></td>
       <td class="small"><?php echo esc_html($r['passage']['title'] ?? '—'); ?><br><span class="muted"><?php echo $r['passage'] ? number_format_i18n($r['passage']['chars']) . ' key strokes' : ''; ?></span></td>
-      <td><?php echo $r['lang'] === 'hi' ? 'Hindi' : 'English'; ?></td>
-      <td><?php echo esc_html(gmdate('h:i A', $r['s'] * 60)); ?></td>
-      <td><?php echo esc_html(gmdate('h:i A', $r['e'] * 60)); ?></td>
-      <td><?php echo $st === 'live' ? '<span class="pill ok">● Live</span>' : ($st === 'soon' ? '<span class="pill">Soon</span>' : '<span class="pill no">Closed</span>'); ?></td>
-      <td><a class="btn <?php echo $st === 'live' ? 'dark' : 'ghost'; ?> sm" href="<?php echo esc_url($url); ?>"><?php echo $st === 'live' ? 'Start →' : ($st === 'done' ? 'Result' : 'View'); ?></a></td>
+      <td><?php echo $r['lang'] === 'hi' ? 'Hindi<br><span class="muted small">Krutidev / Mangal Inscript</span>' : 'English'; ?></td>
+      <td><?php echo !empty($r['allday']) ? 'All day' : esc_html(gmdate('h:i A', $r['s'] * 60) . ' – ' . gmdate('h:i A', $r['e'] * 60)); ?></td>
+      <td><?php echo $st === 'live' ? '<span class="pill ok">● Open</span>' : ($st === 'soon' ? '<span class="pill">Soon</span>' : '<span class="pill no">Closed</span>'); ?></td>
+      <td class="eh-live-act"><?php if ($st === 'live' && $r['lang'] === 'hi'): ?>
+          <a class="btn dark sm" href="<?php echo esc_url(add_query_arg('kb', 'krutidev', $url)); ?>">Krutidev →</a>
+          <a class="btn dark sm" href="<?php echo esc_url(add_query_arg('kb', 'inscript', $url)); ?>">Mangal →</a>
+        <?php else: ?>
+          <a class="btn <?php echo $st === 'live' ? 'dark' : 'ghost'; ?> sm" href="<?php echo esc_url($url); ?>"><?php echo $st === 'live' ? 'Start →' : ($st === 'done' ? 'Result' : 'View'); ?></a>
+        <?php endif; ?></td>
     </tr>
   <?php endforeach; ?>
   </tbody></table></div>

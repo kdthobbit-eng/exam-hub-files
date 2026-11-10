@@ -111,25 +111,31 @@ function eh_slot_passage($lang, $slot) {
     return $rot[$slot] ?? $items[0];
 }
 
-/* Live typing schedule: option eh_live_schedule = JSON [{"exam":"slug","start":"07:00","end":"10:40"}] */
+/* Live Typing. Default: 30 UPSSSC Junior Assistant tests a day (15 English + 15 Hindi), all open the whole day;
+   the set of passages moves on every day. Option eh_live_schedule (JSON [{"exam":"slug","start":"07:00","end":"10:40"}])
+   replaces this list with timed slots when it is filled in. */
 function eh_live_schedule() {
+    $date = wp_date('Y-m-d');
     $j = json_decode((string) get_option('eh_live_schedule', ''), true);
-    if (!is_array($j) || !$j) $j = [
-        ['exam' => 'ssc-chsl-jsa-ldc-english-typing-test', 'start' => '07:00', 'end' => '10:40'],
-        ['exam' => 'upsssc-assistants-hindi-typing-test', 'start' => '07:00', 'end' => '10:40'],
-        ['exam' => 'delhi-police-hcm-english-typing-skill-test', 'start' => '10:00', 'end' => '13:00'],
-        ['exam' => 'kvs-hindi-typing-skill-test', 'start' => '12:00', 'end' => '15:00'],
-        ['exam' => 'rrb-ntpc-english-typing-skill-test', 'start' => '14:00', 'end' => '17:00'],
-        ['exam' => 'allahabad-high-court-hindi-typing-ahc', 'start' => '16:00', 'end' => '19:00'],
-        ['exam' => 'rssb-ldc-jr-asst-hindi-typing-rajasthan', 'start' => '18:00', 'end' => '21:00'],
-        ['exam' => 'bsf-all-forces-hcm-english-typing-test', 'start' => '19:00', 'end' => '22:00'],
-    ];
     $out = [];
+    if (!is_array($j) || !$j) {
+        $day = (int) floor(current_time('timestamp') / 86400);
+        foreach ([['en', 'upsssc-assistants-english-typing-test', 'English'], ['hi', 'upsssc-assistants-hindi-typing-test', 'Hindi']] as $x) {
+            $e = eh_exam($x[1]); if (!$e) continue;
+            $e['name'] = 'UPSSSC Junior Assistant ' . $x[2] . ' Typing';
+            $pool = array_values(array_filter(eh_passages($x[0]), function ($p) { return empty($p['special']) && strpos($p['id'], 'p') !== 0; }));
+            $n = count($pool);
+            for ($k = 0; $k < 15 && $k < $n; $k++) {
+                $out[] = ['exam' => $e, 'lang' => $x[0], 'passage' => $pool[($day * 15 + $k) % $n], 'no' => $k + 1, 'allday' => true,
+                    'start' => '12:00 AM', 'end' => '11:59 PM', 's' => 0, 'e' => 1439, 'date' => $date];
+            }
+        }
+        return $out;
+    }
     foreach ($j as $r) {
         $e = eh_exam($r['exam'] ?? ''); if (!$e) continue;
         $lang = $e['lang'] === 'hi' ? 'hi' : 'en';
         $pool = array_values(array_filter(eh_passages($lang), function ($p) { return empty($p['special']); }));
-        $date = wp_date('Y-m-d');
         $p = $pool ? $pool[abs(crc32($date . $e['slug'])) % count($pool)] : null;
         $toMin = function ($t) { $x = explode(':', (string) $t); return ((int) $x[0]) * 60 + (int) ($x[1] ?? 0); };
         $out[] = ['exam' => $e, 'lang' => $lang, 'passage' => $p, 'start' => $r['start'], 'end' => $r['end'], 's' => $toMin($r['start']), 'e' => $toMin($r['end']), 'date' => $date];

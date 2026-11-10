@@ -45,7 +45,7 @@
   /* ---------- setup ---------- */
   (function fillSetup() {
     $('#eh-opt-layout').innerHTML = LAYOUTS.filter(function (l) { return l[0] !== 'external'; }).map(function (l) { return '<option value="' + l[0] + '">' + (l[0] === 'inscript' ? 'Hindi - Mangal Inscript' : l[1]) + '</option>'; }).join('');
-    var last = store.get('layout', '');
+    var last = (window.EH_TEST && window.EH_TEST.layout) || store.get('layout', '');
     if (last === 'external') last = 'inscript';
     if (LAYOUTS.some(function (l) { return l[0] === last; })) $('#eh-opt-layout').value = last;
     var ps = $('#eh-opt-passage');

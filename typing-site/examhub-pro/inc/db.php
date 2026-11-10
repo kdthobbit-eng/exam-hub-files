@@ -58,13 +58,14 @@ function eh_attempt_counts() {
     return $c;
 }
 
-function eh_leaderboard($exam = '', $live_date = '', $limit = 20, $since_days = 0) {
+function eh_leaderboard($exam = '', $live_date = '', $limit = 20, $since_days = 0, $passage = '') {
     global $wpdb;
     $t = eh_table();
     $w = ['words > 0'];
     $a = [];
     if ($exam) { $w[] = 'exam = %s'; $a[] = $exam; }
     if ($live_date) { $w[] = 'live_date = %s'; $a[] = $live_date; }
+    if ($passage) { $w[] = 'passage = %s'; $a[] = $passage; }
     if ($since_days) { $w[] = 'created >= %s'; $a[] = gmdate('Y-m-d H:i:s', time() - $since_days * DAY_IN_SECONDS); }
     $sql = "SELECT name, user_id, exam, net, gross, acc, err, keys_count, words, pass, created FROM $t WHERE " . implode(' AND ', $w) . " ORDER BY net DESC, acc DESC LIMIT " . (int) $limit;
     return $a ? $wpdb->get_results($wpdb->prepare($sql, $a), ARRAY_A) : $wpdb->get_results($sql, ARRAY_A);

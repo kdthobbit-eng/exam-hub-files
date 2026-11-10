@@ -977,3 +977,4 @@ html,body{overflow-x:clip}
   .eh-xl b{font:800 15px/1.1 "Bricolage Grotesque",Inter,sans-serif;color:var(--br2)}
   .eh-xl em{font:400 italic 18px/1 "Instrument Serif",Georgia,serif;color:var(--br1)}
 }
+.eh-live-act{white-space:nowrap}.eh-live-act .btn+.btn{margin-left:6px}

@@ -8,7 +8,7 @@ add_action('rest_api_init', function () {
     register_rest_route('eh/v1', '/leaderboard', [
         'methods' => 'GET', 'permission_callback' => '__return_true',
         'callback' => function (WP_REST_Request $r) {
-            $rows = eh_leaderboard(sanitize_title($r['exam'] ?? ''), preg_replace('/[^0-9-]/', '', $r['date'] ?? ''), 50);
+            $rows = eh_leaderboard(sanitize_title($r['exam'] ?? ''), preg_replace('/[^0-9-]/', '', $r['date'] ?? ''), 50, 0, sanitize_key($r['passage'] ?? ''));
             return array_map(function ($x) { return ['name' => eh_display_name($x), 'net' => (int) $x['net'], 'acc' => (float) $x['acc'], 'pass' => (int) $x['pass'], 'exam' => $x['exam']]; }, $rows);
         },
     ]);
@@ -54,7 +54,7 @@ function eh_rest_save(WP_REST_Request $r) {
     delete_transient('eh_attempts');
     $rank = 0;
     if ($live) {
-        $rank = 1 + (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_table() . ' WHERE live_date = %s AND net > %d', $live, $net));
+        $rank = 1 + (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_table() . ' WHERE live_date = %s AND exam = %s AND passage = %s AND net > %d', $live, $exam, sanitize_key($p['passage'] ?? ''), $net));
     }
     return ['ok' => true, 'rank' => $rank, 'id' => $rid, 'url' => $rid ? eh_result_url($rid, $rkey) : ''];
 }
