@@ -978,3 +978,5 @@ html,body{overflow-x:clip}
   .eh-xl em{font:400 italic 18px/1 "Instrument Serif",Georgia,serif;color:var(--br1)}
 }
 .eh-live-act{white-space:nowrap}.eh-live-act .btn+.btn{margin-left:6px}
+/* code blocks must never show as text, even inside flex wrappers */
+script,style,template{display:none!important}
