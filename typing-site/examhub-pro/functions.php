@@ -47,7 +47,7 @@ function eh_opt($key) {
         'tg_channel' => 'https://t.me/upssscalertt',
         'tg_join'    => 'https://t.me/joinvijeta2025',
         'youtube'    => 'https://youtube.com/@xlstudy',
-        'yt_uploads' => 'UUgYVqxSwVv2ddAzflWBJT1A',
+        'yt_uploads' => 'UULVgYVqxSwVv2ddAzflWBJT1A,UULFgYVqxSwVv2ddAzflWBJT1A,UUgYVqxSwVv2ddAzflWBJT1A', /* live classes, then videos, then all uploads */
         'whatsapp'   => '919455015600',
         'brand'      => 'UPSSSC Alert',
         'brand_sub'  => 'by XL Study',

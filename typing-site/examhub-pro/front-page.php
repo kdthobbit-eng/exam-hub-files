@@ -8,7 +8,7 @@ $ph = function ($id, $w = 1400) { return 'https://images.unsplash.com/photo-' . 
 $P = [
   'hero'   => '1567168539593-59673ababaae',
   'mech'   => '1567093322102-6bdd32fba67d',
-  'class'  => '1698993082050-19ca94c62fb8',
+  'class'  => '1514369118554-e20d93546b30',
   'keys'   => '1556505619-560ec2cb7c94',
   'books'  => '1517673132405-a56a62b18caf',
 ];

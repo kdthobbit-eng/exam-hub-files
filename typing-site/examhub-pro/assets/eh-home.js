@@ -65,12 +65,20 @@
   if (yt && yt.getAttribute('data-list')) {
     var closed = false; try { closed = sessionStorage.getItem('eh_yt') === 'x'; } catch (e) {}
     var loaded = false;
+    var lists = yt.getAttribute('data-list').split(','), li = 0, player = null;
+    function play() {
+      var box = yt.querySelector('.uh-yt-v'); box.innerHTML = '<div id="uh-yt-p"></div>';
+      player = new YT.Player('uh-yt-p', { width: '100%', height: '100%', host: 'https://www.youtube-nocookie.com',
+        playerVars: { listType: 'playlist', list: lists[li], autoplay: 1, mute: 1, playsinline: 1, rel: 0 },
+        events: { onReady: function (e) { e.target.mute(); e.target.playVideo(); },
+          onError: function () { if (++li < lists.length) play(); else yt.hidden = true; } } });
+    }
     function load() {
       if (loaded || closed) return; loaded = true; yt.hidden = false;
-      var f = document.createElement('iframe');
-      f.src = 'https://www.youtube-nocookie.com/embed/videoseries?list=' + encodeURIComponent(yt.getAttribute('data-list')) + '&autoplay=1&mute=1&playsinline=1&rel=0';
-      f.title = 'XL Study on YouTube'; f.allow = 'autoplay; encrypted-media; picture-in-picture'; f.allowFullscreen = true; f.loading = 'lazy';
-      yt.querySelector('.uh-yt-v').appendChild(f);
+      var prev = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = function () { if (prev) prev(); play(); };
+      if (window.YT && YT.Player) play();
+      else { var sc = document.createElement('script'); sc.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(sc); }
     }
     if (innerWidth > 700) setTimeout(load, 3500); /* on phones it waits for the first scroll so it does not cover the hero */
     addEventListener('scroll', load, { once: true, passive: true });
