@@ -982,3 +982,7 @@ html,body{overflow-x:clip}
 script,style,template{display:none!important}
 .eh-lvl{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.04em;padding:4px 12px;border-radius:999px;white-space:nowrap}
 .eh-lvl.easy{background:#dcfce7;color:#166534}.eh-lvl.moderate{background:#fef3c7;color:#92400e}.eh-lvl.hard{background:#fee2e2;color:#991b1b}
+/* exam window: a long candidate name must not push the photo over the timer */
+.eh-exam .ex-photo{align-items:flex-end}
+.eh-exam .ex-photo b{white-space:nowrap;max-width:46vw;overflow:hidden;text-overflow:ellipsis}
+.eh-exam .ex-time{top:30px}
