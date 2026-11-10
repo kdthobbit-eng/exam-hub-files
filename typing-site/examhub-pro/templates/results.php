@@ -16,11 +16,13 @@ get_header(); ?>
     <label>Exam <select name="exam" onchange="this.form.submit()"><option value="">All</option><?php foreach (eh_exams() as $e) echo '<option value="' . esc_attr($e['slug']) . '"' . selected($exam, $e['slug'], false) . '>' . esc_html($e['name']) . '</option>'; ?></select></label>
     <label>Sort <select name="sort" onchange="this.form.submit()"><option value="latest">Latest</option><option value="top" <?php selected($sort, 'top'); ?>>Top net speed (30 days)</option></select></label>
   </form>
-  <div class="eh-table-wrap"><table class="eh-table eh-ebr"><thead><tr><th>Sl.</th><th>Name</th><th>Exam Taken</th><th>Passage Used</th><th>Typing Date</th><th>Time Taken</th><th>Key Strokes</th><th>Target</th><th>Gross</th><th>Net</th></tr></thead><tbody>
-  <?php if (!$rows): ?><tr><td colspan="10" class="muted">No results yet. <a href="<?php echo esc_url(home_url('/exams/')); ?>">take the first test</a>.</td></tr><?php endif; ?>
+  <div class="eh-table-wrap"><table class="eh-table eh-ebr"><thead><tr><th>Sl.</th><th>Name</th><th>Exam Taken</th><th>Passage Used</th><th>Typing Date</th><th>Time Taken</th><th>Key Strokes</th><th>Target</th><th>Gross</th><th>Net</th><th>Result</th></tr></thead><tbody>
+  <?php if (!$rows): ?><tr><td colspan="11" class="muted">No results yet. <a href="<?php echo esc_url(home_url('/exams/')); ?>">take the first test</a>.</td></tr><?php endif; ?>
   <?php foreach ($rows as $i => $r):
       $e = eh_exam($r['exam']); $p = $ps[$r['passage']] ?? null;
       $tgtSpeed = eh_target_wpm($e); list($gw, $nw) = eh_row_speeds($r);
+      /* exams marked by a commission rule (UPSSSC): show the speed worked out by that rule */
+      if ($e && ($e['eval'] ?? '') === 'upsssc') { $gw = (int) $r['gross']; $nw = (int) $r['net']; }
       $cg = !$tgtSpeed || $gw >= $tgtSpeed ? 'g' : 'r'; $cn = !$tgtSpeed || $nw >= $tgtSpeed ? 'g' : 'r'; ?>
     <tr>
       <td><?php echo ($pg - 1) * $size + $i + 1; ?></td>
@@ -33,10 +35,11 @@ get_header(); ?>
       <td><b><?php echo $tgtSpeed ?: '—'; ?></b></td>
       <td class="<?php echo $cg; ?>"><b><?php echo esc_html($gw); ?></b></td>
       <td class="<?php echo $cn; ?>"><b><?php echo esc_html($nw); ?></b></td>
+      <td><?php echo (int) $r['pass'] ? '<span class="pill ok">Qualified</span>' : '<span class="pill no">Not qualified</span>'; ?></td>
     </tr>
   <?php endforeach; ?>
   </tbody></table></div>
   <?php if ($total > $size): ?><div class="eh-pager"><?php $pages = (int) ceil($total / $size); for ($k = max(1, $pg - 4); $k <= min($pages, $pg + 4); $k++) echo '<a class="' . ($k === $pg ? 'on' : '') . '" href="' . esc_url(add_query_arg('pg', $k)) . '">' . $k . '</a>'; ?></div><?php endif; ?>
-  <p class="muted small">Target = speed (WPM) needed to qualify. Green = above target, red = below target.</p>
+  <p class="muted small">Target = speed (WPM) needed to qualify. Green = above target, red = below target. UPSSSC Junior Assistant results are marked by the commission's rule: the first 5 mistakes are free, then 5 words are cut for each mistake.</p>
 </section>
 <?php get_footer();
