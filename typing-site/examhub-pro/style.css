@@ -946,3 +946,34 @@ html,body{overflow-x:clip}
   .eh-header-in{position:relative;justify-content:center}
   .eh-burger{position:absolute;right:16px;top:50%;transform:translateY(-50%)}
 }
+
+/* brand lockup, as in the UPSSSC Alert logo: icon, bar, two-line name in the logo browns */
+:root{--br1:#8a431f;--br2:#4b311d}
+.eh-logo-mark,.eh-footer .eh-logo-mark{background:none;box-shadow:none;border-radius:0;width:46px;height:46px}
+.eh-logo-mark img{width:100%;height:100%;object-fit:contain;display:block}
+.eh-logo{gap:11px}
+.eh-logo-txt{border-left:3px solid var(--br1);padding-left:11px}
+.eh-logo-name{display:flex;flex-direction:column;font:800 21px/.92 "Bricolage Grotesque",Inter,sans-serif;letter-spacing:-.01em;text-transform:uppercase;color:var(--br1)}
+.eh-logo-name em{font:inherit;font-style:normal;color:var(--br2);margin:0;letter-spacing:.02em}
+.eh-logo-txt small{color:var(--br2);margin-top:5px}
+.btn.dark{background:var(--br2);border-color:var(--br2)}
+.btn.dark:hover{background:#38230f}
+.eh-cta-strip .wrap{background:#fbf3e6;color:var(--ink);border:1px solid var(--line)}
+.eh-cta-strip p{color:var(--ink2)}
+.eh-cta-strip .btn.tg.alt{background:transparent;color:var(--br2);border-color:var(--br2)}
+@media(min-width:901px){
+  .eh-header .eh-logo{padding:9px 0}
+  .eh-header .eh-logo-name{font-size:24px}
+  .eh-header .eh-logo-name em{font-size:24px}
+  .eh-header .eh-logo-mark{width:52px;height:52px}
+  .eh-xl{border-left-color:var(--br1)}
+  .eh-xl b{color:var(--br2)}
+  .eh-xl em{color:var(--br1)}
+}
+@media(max-width:900px){
+  .eh-header .eh-logo-txt small{display:none}
+  .eh-xl{display:flex;flex-direction:column;position:absolute;left:16px;top:50%;transform:translateY(-50%);line-height:1}
+  .eh-xl small{font:700 9px Inter,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+  .eh-xl b{font:800 15px/1.1 "Bricolage Grotesque",Inter,sans-serif;color:var(--br2)}
+  .eh-xl em{font:400 italic 18px/1 "Instrument Serif",Georgia,serif;color:var(--br1)}
+}

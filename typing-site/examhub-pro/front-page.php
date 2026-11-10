@@ -214,6 +214,7 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
     <h2 class="uh-h2" data-rv><?php echo eh_t('Stay with us. <em>Every update, first.</em>', 'हमसे जुड़े रहिए। <em>हर अपडेट, सबसे पहले।</em>'); ?></h2>
     <div class="uh-jgrid">
       <a data-rv href="<?php echo esc_url(eh_opt('tg_channel')); ?>" target="_blank" rel="noopener"><small>Telegram</small><b><?php echo eh_t('Join the channel', 'चैनल से जुड़ें'); ?></b><span>@upssscalertt</span><?php echo $arrow; ?></a>
+      <a data-rv href="<?php echo esc_url(eh_opt('tg_group')); ?>" target="_blank" rel="noopener"><small>Telegram</small><b><?php echo eh_t('Join the group', 'ग्रुप से जुड़ें'); ?></b><span>@upssscalert</span><?php echo $arrow; ?></a>
       <a data-rv href="<?php echo esc_url($join); ?>" target="_blank" rel="noopener"><small>Telegram</small><b><?php echo eh_t('Join a batch', 'बैच में जुड़ें'); ?></b><span>@joinvijeta2025</span><?php echo $arrow; ?></a>
       <a data-rv href="<?php echo esc_url(eh_opt('youtube')); ?>" target="_blank" rel="noopener"><small>YouTube</small><b><?php echo eh_t('Subscribe', 'सब्सक्राइब करें'); ?></b><span>@xlstudy</span><?php echo $arrow; ?></a>
       <a data-rv href="<?php echo esc_url(eh_wa_url()); ?>" target="_blank" rel="noopener"><small>WhatsApp</small><b><?php echo eh_t('Message us', 'मैसेज करें'); ?></b><span>+<?php echo esc_html(preg_replace('/^(\d{2})(\d{5})(\d{5})$/', '$1 $2 $3', eh_opt('whatsapp'))); ?></span><?php echo $arrow; ?></a>

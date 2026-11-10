@@ -184,9 +184,8 @@ function eh_t($en, $hi) { return '<span class="l-en">' . $en . '</span><span cla
 function eh_wa_url($text = '') { return 'https://wa.me/' . preg_replace('/\D/', '', (string) eh_opt('whatsapp')) . ($text !== '' ? '?text=' . rawurlencode($text) : ''); }
 function eh_last_em($s) { $s = esc_html(trim((string) $s)); $p = strrpos($s, ' '); return $p === false ? $s : substr($s, 0, $p) . ' <em>' . substr($s, $p + 1) . '</em>'; }
 function eh_logo() {
-    $bell = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a1.4 1.4 0 0 1 1.4 1.4v.5a6 6 0 0 1 4.6 5.8v3.4l1.7 2.6a1 1 0 0 1-.8 1.6H5.1a1 1 0 0 1-.8-1.6L6 13.6v-3.4a6 6 0 0 1 4.6-5.8v-.5A1.4 1.4 0 0 1 12 2.5zM9.7 19.5h4.6a2.3 2.3 0 0 1-4.6 0z"/></svg>';
     $name = is_front_page() ? eh_opt('brand') : (eh_opt('brand_typing') ?: eh_opt('brand'));
-    return '<span class="eh-logo-mark">' . $bell . '</span><span class="eh-logo-txt"><span class="eh-logo-name">' . eh_last_em($name) . '</span>' . (eh_opt('brand_sub') ? '<small>' . esc_html(eh_opt('brand_sub')) . '</small>' : '') . '</span>';
+    return '<span class="eh-logo-mark"><img src="' . esc_url(EH_URI . '/assets/logo-mark.png') . '" alt="" width="64" height="64"></span><span class="eh-logo-txt"><span class="eh-logo-name">' . eh_last_em($name) . '</span>' . (eh_opt('brand_sub') ? '<small>' . esc_html(eh_opt('brand_sub')) . '</small>' : '') . '</span>';
 }
 /* UPSSSC Junior Assistant typing tests go first in every exam list */
 function eh_ja_first($exams) {
