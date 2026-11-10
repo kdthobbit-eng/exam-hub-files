@@ -363,7 +363,8 @@
     var gross = Math.round(words / mins), net = Math.max(0, Math.round((words - errs) / mins));
     var acc = words ? Math.max(0, 100 - errPct) : 0;
     var amount = exam.unit === 'keys' ? S.keys : words;
-    var pass = amount >= exam.target && errPct <= (exam.allowed || 5);
+    var V = window.EHEval.verdict({ keys: S.keys, words: words, full: full, half: half, err: errPct, minutes: secs / 60 }, exam), pass = V.pass;
+    if (V.rule === 'upsssc') { net = Math.floor(V.wpm); gross = Math.round(V.words / V.mins); }
     var R = {
       exam: exam.slug, layout: S.layout, passage: S.passageId, minutes: +(secs / 60).toFixed(2),
       keys: S.keys, chars: typed.length, words: words, full: full, half: half, backspaces: S.bks, kerr: e.ke,

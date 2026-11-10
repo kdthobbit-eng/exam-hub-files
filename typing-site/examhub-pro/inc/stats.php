@@ -114,6 +114,8 @@ function eh_stats_page() {
       $card($n($lang['en']), 'English tests', 'English टेस्ट');
       $card($n($lang['hi']), 'Hindi tests', 'हिंदी टेस्ट', $lang['other'] ? $n($lang['other']) . ' other languages' : '');
       $card($n($reg_total), 'Registered users', 'रजिस्टर्ड यूज़र', $n(max(0, $reg_total - $p_reg)) . ' have not taken a test');
+      $q_pass = $tests('pass = 1 AND words > 0'); $fx = (array) get_option('eh_rules_fixed', []);
+      $card($n($q_pass), 'Qualified results', 'पास हुए रिजल्ट', 'out of ' . $n($t_all) . ($fx ? ' · rules re-applied ' . ($fx['at'] ?? '') : ''));
     ?></div>
 
     <h2>Live Typing <i>लाइव टाइपिंग</i></h2>

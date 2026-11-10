@@ -166,8 +166,21 @@ function eh_cat_label($c) {
 }
 function eh_lang_label($l) { return ['en' => 'English', 'hi' => 'Hindi', 'mr' => 'Marathi', 'or' => 'Odia'][$l] ?? $l; }
 /* target speed in WPM as shown on exam sites (key based: keys ÷ minutes ÷ 10) */
+/* Pass or fail for a saved result row, by the exam's own rule (same as EHEval.verdict in eh-eval.js) */
+function eh_result_verdict($row, $e) {
+    if (!$e || empty($e['target'])) return ['pass' => (int) ($row['pass'] ?? 0)];
+    if (($e['eval'] ?? '') === 'upsssc' && !empty($e['wpm'])) {
+        $errs = (int) $row['full_m'] + (int) $row['half_m'] / 2;
+        $nw = max(0, (int) $row['keys_count'] / 5 - max(0, $errs - 5) * 5);
+        $sp = $nw / max((float) $row['minutes'], (float) $e['minutes'], 0.01);
+        return ['pass' => $sp >= (float) $e['wpm'] ? 1 : 0, 'wpm' => $sp];
+    }
+    $amount = $e['unit'] === 'keys' ? (int) $row['keys_count'] : (int) $row['words'];
+    return ['pass' => ($amount >= (int) $e['target'] && (float) $row['err'] <= (float) ($e['allowed'] ?? 5)) ? 1 : 0];
+}
 function eh_target_wpm($e) {
     if (!$e) return 0;
+    if (!empty($e['wpm'])) return (int) $e['wpm'];
     $m = max(1, (int) $e['minutes']);
     /* official norm: 5 key depressions = 1 word */
     return $e['unit'] === 'keys' ? (int) round($e['target'] / $m / 5) : (int) round($e['target'] / $m);

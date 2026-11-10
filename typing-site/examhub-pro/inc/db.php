@@ -91,3 +91,28 @@ function eh_get_result($id, $key) {
     if (!$own && !hash_equals((string) $r['rkey'], (string) $key)) return null;
     return $r;
 }
+
+/* Saved results follow the current exam rules: when a rule or target changes, pass/fail is worked out again once.
+   For UPSSSC-rule exams the net and gross speed are also re-worked with the commission's formula. Nothing is deleted. */
+add_action('init', function () {
+    if (!is_admin() || !current_user_can('manage_options')) return;
+    $exams = eh_exams(); $sig = [];
+    foreach ($exams as $e) $sig[] = $e['slug'] . '|' . $e['unit'] . '|' . $e['target'] . '|' . $e['minutes'] . '|' . ($e['allowed'] ?? '') . '|' . ($e['wpm'] ?? '') . '|' . ($e['eval'] ?? '');
+    $ver = md5('v1' . implode(';', $sig));
+    if (get_option('eh_rules_ver') === $ver) return;
+    global $wpdb; $t = eh_table(); $n = 0;
+    foreach ($exams as $e) {
+        if (empty($e['target'])) continue;
+        if (($e['eval'] ?? '') === 'upsssc' && !empty($e['wpm'])) {
+            $sp = '(GREATEST(0, keys_count / 5 - GREATEST(0, full_m + half_m / 2 - 5) * 5) / GREATEST(minutes, %f, 0.01))';
+            $n += (int) $wpdb->query($wpdb->prepare("UPDATE $t SET pass = IF($sp >= %f, 1, 0), net = FLOOR($sp), gross = ROUND(keys_count / 5 / GREATEST(minutes, %f, 0.01)) WHERE exam = %s AND words > 0",
+                (float) $e['minutes'], (float) $e['wpm'], (float) $e['minutes'], (float) $e['minutes'], $e['slug']));
+        } else {
+            $col = $e['unit'] === 'keys' ? 'keys_count' : 'words';
+            $n += (int) $wpdb->query($wpdb->prepare("UPDATE $t SET pass = IF($col >= %d AND err <= %f, 1, 0) WHERE exam = %s", (int) $e['target'], (float) ($e['allowed'] ?? 5), $e['slug']));
+        }
+    }
+    update_option('eh_rules_ver', $ver, false);
+    update_option('eh_rules_fixed', ['at' => current_time('mysql'), 'rows' => $n], false);
+    delete_transient('eh_attempts');
+}, 30);

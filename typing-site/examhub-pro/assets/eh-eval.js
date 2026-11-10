@@ -97,25 +97,48 @@
   }
 
   function fmtMin(m) { var s = Math.round(m * 60); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2) + ' min'; }
+  /* Pass or fail, by the exam's own rule.
+     UPSSSC (X.eval === 'upsssc'): words = key depressions ÷ 5; mistakes = full + half ÷ 2; the first 5 mistakes are free,
+     each mistake after that cuts 5 words; speed = net words ÷ minutes; needs X.wpm.
+     Others: key depressions (or words) must reach the target and error % must stay within the limit. */
+  function verdict(R, X) {
+    var allowed = X.allowed || 5;
+    if (X.eval === 'upsssc' && X.wpm) {
+      var errs = (+R.full || 0) + (+R.half || 0) / 2, kw = (+R.keys || 0) / 5, pen = Math.max(0, errs - 5) * 5, nw = Math.max(0, kw - pen);
+      var m = Math.max(+R.minutes || 0, +X.minutes || 5), sp = nw / m;
+      return { rule: 'upsssc', pass: sp >= X.wpm, wpm: sp, words: kw, errs: errs, pen: pen, netWords: nw, mins: m, need: +X.wpm };
+    }
+    var amount = X.unit === 'keys' ? R.keys : R.words;
+    return { rule: 'std', pass: amount >= X.target && R.err <= allowed, amount: amount };
+  }
+  function n2(v) { return (Math.round(v * 100) / 100).toString(); }
   /* R: net gross acc err keys kerr words full half backspaces minutes pass pending title date ; X: exam */
   function dashboard(R, X, ops) {
+    var V = verdict(R, X), up = V.rule === 'upsssc'; R.pass = V.pass ? 1 : 0;
     var c = counts(ops), allowed = X.allowed || 5, keysMode = X.unit === 'keys';
     var tgt = (+X.target).toLocaleString('en-IN') + (keysMode ? ' key depressions' : ' words');
     var errs = R.full + R.half / 2, mins = Math.max(R.minutes, 1 / 60);
     var head = '<div class="eh-dash-head"><div><p class="eh-kicker">Performance Dashboard</p><h2>' + esc(X.name) + '</h2>' +
-      '<p class="muted">' + (R.title ? 'Passage: <b>' + esc(R.title) + '</b> · ' : '') + (R.date ? esc(R.date) + ' · ' : '') + 'Target ' + tgt + ' in ' + X.minutes + ' min · Allowed error ' + allowed + '%</p></div>' +
+      '<p class="muted">' + (R.title ? 'Passage: <b>' + esc(R.title) + '</b> · ' : '') + (R.date ? esc(R.date) + ' · ' : '') + (up ? 'Needed ' + V.need + ' WPM in ' + X.minutes + ' min · first 5 mistakes free, then 5 words cut for each mistake' : 'Target ' + tgt + ' in ' + X.minutes + ' min · Allowed error ' + allowed + '%') + '</p></div>' +
       '<div class="eh-verdict ' + (R.pass ? 'ok' : 'no') + '">' + (R.pass ? '✔ Qualified' : '✘ Not Qualified') + '</div></div>';
     var mm = function (m) { m = Math.round((+m || 0) * 60); return ('0' + Math.floor(m / 60)).slice(-2) + ':' + ('0' + m % 60).slice(-2) + ' min.'; };
     var info = '<div class="eh-dash-info">' + [['Exam Title', esc(X.name)], ['Passage Title', esc(R.title || '—')], ['Total Key Depression', R.total ? R.total : '—'], ['Time Duration', mm(R.dur || X.minutes)], ['Typing Date', esc(R.date || '—')], ['Time Taken', mm(R.minutes)]]
       .map(function (k) { return '<div><span>' + k[0] + ':</span> <b>' + k[1] + '</b></div>'; }).join('') + '</div>';
     head += info;
     var cards = [
-      ['Net Speed', R.net, 'WPM', 'c1'], ['Gross Speed', R.gross, 'WPM', 'c2'], ['Accuracy', R.acc, '%', 'c3'], ['Error', R.err, '%', R.err > allowed ? 'bad' : 'c4'],
-      ['Key Depressions', R.keys, keysMode ? '/ ' + X.target : '', keysMode && R.keys < X.target ? 'bad' : 'c5'], ['Full Mistakes', R.full, '', 'c6'], ['Half Mistakes', R.half, '', 'c7'], ['Time Taken', fmtMin(R.minutes), '', 'c8']
+      ['Net Speed', up ? n2(V.wpm) : R.net, up ? 'WPM / ' + V.need : 'WPM', up && !V.pass ? 'bad' : 'c1'], ['Gross Speed', up ? n2(V.words / V.mins) : R.gross, 'WPM', 'c2'], ['Accuracy', R.acc, '%', 'c3'], up ? ['Mistakes', n2(V.errs), '/ 5 free', V.errs > 5 ? 'bad' : 'c4'] : ['Error', R.err, '%', R.err > allowed ? 'bad' : 'c4'],
+      ['Key Depressions', R.keys, keysMode && !up ? '/ ' + X.target : '', keysMode && !up && R.keys < X.target ? 'bad' : 'c5'], ['Full Mistakes', R.full, '', 'c6'], ['Half Mistakes', R.half, '', 'c7'], ['Time Taken', fmtMin(R.minutes), '', 'c8']
     ].map(function (k) { return '<div class="eh-dcard ' + k[3] + '"><span>' + k[0] + '</span><b>' + k[1] + ' <small>' + k[2] + '</small></b></div>'; }).join('');
     var mini = [['Words Typed', R.words], ['Keystroke Errors', R.kerr], ['Backspace', R.backspaces], ['Missed words', c.om], ['Added words', c.add], ['Wrong words', c.sub], ['Space/Case/Punct', c.space + '/' + c.case + '/' + c.punct], ['Pending Words', R.pending || 0]]
       .map(function (k) { return '<div><span>' + k[0] + '</span><b>' + k[1] + '</b></div>'; }).join('');
     var amount = keysMode ? R.keys : R.words;
+    var fu = up ? '<div class="eh-formula"><h3>How your result was worked out (UPSSSC rule)</h3><ol>' +
+      '<li><b>Words typed</b> = key depressions ÷ 5 = ' + R.keys + ' ÷ 5 = <b>' + n2(V.words) + '</b></li>' +
+      '<li><b>Mistakes</b> = Full ' + R.full + ' + Half ' + R.half + ' ÷ 2 = <b>' + n2(V.errs) + '</b> (the first 5 are free)</li>' +
+      '<li><b>Penalty</b> = ' + (V.errs > 5 ? '(' + n2(V.errs) + ' − 5) × 5 = <b>' + n2(V.pen) + ' words</b>' : '<b>0 words</b>, because mistakes are 5 or fewer') + '</li>' +
+      '<li><b>Net words</b> = ' + n2(V.words) + ' − ' + n2(V.pen) + ' = <b>' + n2(V.netWords) + '</b></li>' +
+      '<li><b>Speed</b> = net words ÷ minutes = ' + n2(V.netWords) + ' ÷ ' + n2(V.mins) + ' = <b>' + n2(V.wpm) + ' WPM</b>, needed ' + V.need + ' → ' + (V.pass ? '✔ done' : '✘ short') + '</li>' +
+      '</ol><p class="eh-verdict-line">Result: ' + (V.pass ? '<b class="ok">Qualified</b> — speed is ' + V.need + ' WPM or more after the penalty.' : '<b class="no">Not Qualified</b> — speed after the penalty is below ' + V.need + ' WPM.') + '</p></div>' : '';
     var f = '<div class="eh-formula"><h3>How your result was worked out</h3><ol>' +
       '<li><b>Gross Speed</b> = words typed ÷ minutes = ' + R.words + ' ÷ ' + mins.toFixed(2) + ' = <b>' + R.gross + ' WPM</b></li>' +
       '<li><b>Mistakes</b> = Full ' + R.full + ' + Half ' + R.half + ' ÷ 2 = <b>' + errs + '</b></li>' +
@@ -126,7 +149,7 @@
     var legend = '<p class="eh-legend"><span class="d-ok">Correct</span> <span class="d-sub">Wrong word (Full)</span> <span class="d-om">Missed word (Full)</span> <span class="d-add">Added word (Full)</span> <span class="d-half">Half mistake</span></p>';
     var cmp = '<div class="eh-cmp-wrap"><div class="eh-cmp-tabs"><button type="button" class="on" data-v="two">Side by side</button><button type="button" data-v="one">Inline</button></div>' + legend +
       '<div class="eh-cmp-v" data-v="two">' + twoCol(ops) + '</div><div class="eh-cmp-v eh-diff" data-v="one" hidden>' + inline(ops) + '</div></div>';
-    return head + '<div class="eh-dash-grid">' + cards + '</div><div class="eh-dash-mini">' + mini + '</div>' + f + '<h3 class="eh-cmp-title">Detailed Comparison</h3>' + cmp;
+    return head + '<div class="eh-dash-grid">' + cards + '</div><div class="eh-dash-mini">' + mini + '</div>' + (up ? fu : f) + '<h3 class="eh-cmp-title">Detailed Comparison</h3>' + cmp;
   }
   function bindDash(root) {
     root.querySelectorAll('.eh-cmp-tabs button').forEach(function (b) {
@@ -136,5 +159,5 @@
       });
     });
   }
-  window.EHEval = { dashboard: dashboard, bindDash: bindDash, lev: lev, compare: compare, stripP: stripP, inline: inline, twoCol: twoCol, counts: counts, mistakes: mistakes, esc: esc };
+  window.EHEval = { verdict: verdict, dashboard: dashboard, bindDash: bindDash, lev: lev, compare: compare, stripP: stripP, inline: inline, twoCol: twoCol, counts: counts, mistakes: mistakes, esc: esc };
 })();
