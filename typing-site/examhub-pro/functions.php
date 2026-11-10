@@ -4,7 +4,8 @@
  */
 if (!defined('ABSPATH')) exit;
 
-define('EH_VER', '1.0.' . (int) @filemtime(__DIR__ . '/style.css'));
+/* changes with every deploy, so browsers never keep an old script or stylesheet */
+define('EH_VER', '1.0.' . (int) @filemtime(__DIR__ . '/style.css') . '.' . substr(preg_replace('/[^a-f0-9]/', '', (string) get_option('eh_deployed_sha', '')), 0, 7));
 define('EH_DIR', get_template_directory());
 define('EH_URI', get_template_directory_uri());
 

@@ -38,7 +38,7 @@
     buf: '', keys: 0, bks: 0, words: [], text: '', passageId: '', title: ''
   };
   /* typing sound is on by default; switch it on once for people whose saved settings still had the old default (off) */
-  if (!store.get('snd_v2', 0)) { S.set.snd = true; store.set('snd_v2', 1); }
+  if (!store.get('snd_v3', 0)) { S.set.snd = true; store.set('set2', S.set); store.set('snd_v3', 1); }
 
   var setup = $('#eh-setup'), test = $('#eh-test'), result = $('#eh-result');
   var pv = $('#eh-passage'), ta = $('#eh-input'), tm = $('#eh-timer');
