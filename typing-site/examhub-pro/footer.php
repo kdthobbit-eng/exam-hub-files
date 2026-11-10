@@ -8,7 +8,7 @@
 <footer class="eh-footer">
   <div class="wrap eh-foot-grid">
     <div>
-      <a class="eh-logo" href="<?php echo esc_url(home_url('/')); ?>"><span class="eh-logo-mark">EH</span><span class="eh-logo-txt"><?php echo esc_html(eh_opt('brand')); ?></span></a>
+      <a class="eh-logo" href="<?php echo esc_url(home_url('/')); ?>"><span class="eh-logo-mark">AT</span><span class="eh-logo-txt"><?php echo esc_html(eh_opt('brand')); ?></span></a>
       <p class="muted">Practise. Qualify.</p>
       <img class="eh-qr" src="<?php echo esc_url(EH_URI . '/assets/qr-site.svg'); ?>" width="104" height="104" alt="QR code — <?php echo esc_attr(wp_parse_url(home_url(), PHP_URL_HOST)); ?>" loading="lazy">
     </div>

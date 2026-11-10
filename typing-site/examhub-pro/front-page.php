@@ -78,7 +78,7 @@ $np = count(eh_passages()); ?>
 </section>
 
 <section class="wrap hx-sec">
-  <p class="hx-kick">Why Exam Hub</p>
+  <p class="hx-kick">Why Alert Typing</p>
   <h2 class="hx-h2">What makes us useful.</h2>
   <div class="hx-acc soft">
     <details open><summary>Free, fully</summary><p>No fee, no plan, no locked tests. Every exam, passage and result is free.</p></details>

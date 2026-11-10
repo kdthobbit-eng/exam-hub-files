@@ -40,7 +40,7 @@ function eh_opt($key) {
     $defaults = [
         'tg_group'   => 'https://t.me/examhub2026',
         'tg_channel' => 'https://t.me/examhub26',
-        'brand'      => 'Exam Hub Typing',
+        'brand'      => 'Alert Typing',
         'tagline'    => 'Typing practice for government exams — real exam format, fully free',
         'notice'     => 'Daily Live Typing is on: a new passage every day, check your rank',
         'allowed_error' => 5,

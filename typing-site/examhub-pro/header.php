@@ -18,7 +18,7 @@
 <header class="eh-header<?php echo is_user_logged_in() ? ' eh-member' : ''; ?>">
   <div class="wrap eh-header-in">
     <a class="eh-logo" href="<?php echo esc_url(home_url('/')); ?>">
-      <span class="eh-logo-mark">EH</span><span class="eh-logo-txt"><?php echo esc_html(eh_opt('brand')); ?></span>
+      <span class="eh-logo-mark">AT</span><span class="eh-logo-txt"><?php echo esc_html(eh_opt('brand')); ?></span>
     </a>
     <button class="eh-burger" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">☰</button>
     <nav class="eh-nav">
