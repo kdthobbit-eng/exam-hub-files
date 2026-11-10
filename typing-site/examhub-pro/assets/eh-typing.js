@@ -140,6 +140,7 @@
     var el = $('#' + p[0]); el.checked = !!S.set[p[1]];
     el.addEventListener('change', function () { S.set[p[1]] = el.checked; applySettings(); });
   });
+  $('#eh-snd-btn').textContent = S.set.snd ? '❚❚ Stop Typing Sound' : '▷ Play Typing Sound';
   $('#eh-snd-btn').addEventListener('click', function () { S.set.snd = !S.set.snd; $('#set-snd').checked = S.set.snd; applySettings(); });
   document.addEventListener('fullscreenchange', function () { applySettings(); });
   $('#eh-fs-plus').addEventListener('click', function () { S.set.fs = Math.min(8, S.set.fs + 1); applySettings(); });
