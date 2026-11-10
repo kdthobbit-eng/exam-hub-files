@@ -39,6 +39,10 @@
     addEventListener('scroll', function () { if (tick) return; tick = true; requestAnimationFrame(function () { var y = scrollY; if (y < 1200) bg.style.translate = '0 ' + (y * 0.18) + 'px'; tick = false; }); }, { passive: true });
   }
 
+  /* header gets a little smaller once the page is scrolled */
+  var sc = false;
+  addEventListener('scroll', function () { var s = scrollY > 140; if (s !== sc) { sc = s; document.body.classList.toggle('uh-scrolled', s); } }, { passive: true });
+
   /* typing demo */
   var psg = document.getElementById('uh-psg'), out = document.getElementById('uh-typed');
   if (psg && out) {

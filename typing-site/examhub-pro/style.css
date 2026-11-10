@@ -920,3 +920,5 @@ html,body{overflow-x:clip}
 .eh-logo-txt{display:flex;flex-direction:column;line-height:1.1}
 .eh-logo-txt small{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:3px}
 .l-en{display:none}html[data-lang="en"] .l-en{display:inline}html[data-lang="en"] .l-hi{display:none}
+.eh-logo-name em{font-style:normal}
+.eh-xl{display:none}

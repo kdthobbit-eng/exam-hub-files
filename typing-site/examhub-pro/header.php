@@ -17,6 +17,7 @@
 <?php endif; ?>
 <header class="eh-header<?php echo is_user_logged_in() ? ' eh-member' : ''; ?>">
   <div class="wrap eh-header-in">
+    <?php echo eh_xl(); ?>
     <a class="eh-logo" href="<?php echo esc_url(home_url('/')); ?>">
       <?php echo eh_logo(); ?>
     </a>

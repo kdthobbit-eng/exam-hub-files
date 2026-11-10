@@ -180,8 +180,14 @@ function eh_exam_card($e, $attempts = 0) {
 /* two-language text: English + Hindi, switched by html[data-lang] */
 function eh_t($en, $hi) { return '<span class="l-en">' . $en . '</span><span class="l-hi" lang="hi">' . $hi . '</span>'; }
 function eh_wa_url($text = '') { return 'https://wa.me/' . preg_replace('/\D/', '', (string) eh_opt('whatsapp')) . ($text !== '' ? '?text=' . rawurlencode($text) : ''); }
+function eh_last_em($s) { $s = esc_html(trim((string) $s)); $p = strrpos($s, ' '); return $p === false ? $s : substr($s, 0, $p) . ' <em>' . substr($s, $p + 1) . '</em>'; }
 function eh_logo() {
-    return '<span class="eh-logo-mark">UA</span><span class="eh-logo-txt">' . esc_html(eh_opt('brand')) . (eh_opt('brand_sub') ? '<small>' . esc_html(eh_opt('brand_sub')) . '</small>' : '') . '</span>';
+    return '<span class="eh-logo-mark">UA</span><span class="eh-logo-txt"><span class="eh-logo-name">' . eh_last_em(eh_opt('brand')) . '</span>' . (eh_opt('brand_sub') ? '<small>' . esc_html(eh_opt('brand_sub')) . '</small>' : '') . '</span>';
+}
+/* the parent brand, shown at the side of the home page header */
+function eh_xl() {
+    $s = trim(preg_replace('/^by\s+/i', '', (string) eh_opt('brand_sub')));
+    return $s === '' ? '' : '<span class="eh-xl"><small>by</small><b>' . eh_last_em($s) . '</b></span>';
 }
 
 function eh_tg_buttons($class = '') {

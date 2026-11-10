@@ -33,7 +33,7 @@ function get_footer() { global $T; include $T . '/footer.php'; }
 
 /* real theme helpers, lifted from functions.php so the preview matches the site */
 $src = file_get_contents($T . '/functions.php') . file_get_contents($T . '/inc/data.php');
-foreach (['eh_opt', 'eh_exam_card', 'eh_tg_buttons', 'eh_member_links', 'eh_default_menu', 'eh_upcoming', 'eh_t', 'eh_wa_url', 'eh_logo', 'eh_lang_label'] as $fn) {
+foreach (['eh_opt', 'eh_exam_card', 'eh_tg_buttons', 'eh_member_links', 'eh_default_menu', 'eh_upcoming', 'eh_t', 'eh_wa_url', 'eh_last_em', 'eh_logo', 'eh_xl', 'eh_lang_label'] as $fn) {
     if (!preg_match('/^function ' . $fn . '\(.*?(?:\n\}|\}$)/ms', $src, $m)) { fwrite(STDERR, "missing $fn\n"); exit(1); }
     eval($m[0]);
 }

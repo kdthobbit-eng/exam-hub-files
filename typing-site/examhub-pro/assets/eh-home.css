@@ -271,3 +271,36 @@ body.home{animation:uhfade .6s ease both}
   .uh *,.uh-yt,body.home{animation:none!important;transition:none!important}
   .uh-marq-in{animation:none}
 }
+
+/* home header: brand in the centre, XL Study at the side, menu on its own row */
+body.home .eh-header .eh-logo-mark{width:46px;height:46px;border-radius:14px;font:800 16px "Bricolage Grotesque",sans-serif;letter-spacing:.02em}
+body.home .eh-header .eh-logo-name{font:800 30px/1 "Bricolage Grotesque","Mukta",sans-serif;letter-spacing:-.03em;color:#fff;white-space:nowrap}
+body.home .eh-header .eh-logo-name em{font:400 italic 36px/0.8 "Instrument Serif",Georgia,serif;letter-spacing:-.01em;color:#ffd9b8;margin-left:2px}
+body.home .eh-header .eh-logo{gap:14px;transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+body.home .eh-header .eh-logo:hover{transform:scale(1.03)}
+@media(min-width:901px){
+  body.home .eh-header-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:auto;gap:0 20px}
+  body.home .eh-nav{display:contents}
+  body.home .eh-header .eh-logo{grid-column:2;grid-row:1;padding:16px 0;transition:padding .35s,transform .4s}
+  body.home .eh-header .eh-logo-name{font-size:40px}
+  body.home .eh-header .eh-logo-name em{font-size:48px}
+  body.home .eh-header .eh-logo-mark{width:54px;height:54px;border-radius:16px;font-size:18px}
+  body.home .eh-header .eh-logo-txt small{display:none}
+  body.home .eh-xl{grid-column:1;grid-row:1;justify-self:start;display:flex;flex-direction:column;gap:3px;padding-left:16px;border-left:2px solid #f26b1d;color:#fff}
+  body.home .eh-xl small{font:600 11px "Mukta",sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#a9bdd1}
+  body.home .eh-xl b{font:700 24px/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em}
+  body.home .eh-xl em{font:400 italic 29px/0.8 "Instrument Serif",Georgia,serif;color:#ffd9b8}
+  body.home .eh-auth{grid-column:3;grid-row:1;justify-self:end}
+  body.home .eh-header .eh-menu{grid-column:1 / -1;grid-row:2;justify-content:center;gap:10px;border-top:1px solid rgba(255,255,255,.12);padding:5px 0}
+  body.home.uh-scrolled .eh-header .eh-logo{padding:8px 0}
+  body.home.uh-scrolled .eh-header .eh-logo-name{font-size:30px}
+  body.home.uh-scrolled .eh-header .eh-logo-name em{font-size:36px}
+  body.home.uh-scrolled .eh-header .eh-logo-mark{width:42px;height:42px;border-radius:13px;font-size:15px}
+  body.home .eh-header .eh-logo-name,body.home .eh-header .eh-logo-name em,body.home .eh-header .eh-logo-mark{transition:font-size .35s,width .35s,height .35s}
+}
+@media(max-width:900px){
+  body.home .eh-header-in{position:relative;justify-content:center}
+  body.home .eh-burger{position:absolute;right:16px;top:50%;transform:translateY(-50%)}
+  body.home .eh-header .eh-logo-txt{align-items:flex-start}
+}
+@media(max-width:400px){body.home .eh-header .eh-logo-name{font-size:25px}body.home .eh-header .eh-logo-name em{font-size:30px}body.home .eh-header .eh-logo-mark{width:40px;height:40px}}
