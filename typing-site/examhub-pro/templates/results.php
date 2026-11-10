@@ -1,7 +1,7 @@
 <?php
 global $wpdb; $t = eh_table();
 $exam = sanitize_title($_GET['exam'] ?? '');
-$size = in_array((int) ($_GET['size'] ?? 10), [10, 25, 50, 100], true) ? (int) $_GET['size'] : 25;
+$size = (int) ($_GET['size'] ?? 25); if (!in_array($size, [10, 25, 50, 100], true)) $size = 25;
 $sort = ($_GET['sort'] ?? '') === 'top' ? 'top' : 'latest';
 $pg = max(1, (int) ($_GET['pg'] ?? 1));
 $where = 'words > 0' . ($exam ? $wpdb->prepare(' AND exam = %s', $exam) : '') . ($sort === 'top' ? $wpdb->prepare(' AND created >= %s', gmdate('Y-m-d H:i:s', time() - 30 * DAY_IN_SECONDS)) : '');
