@@ -36,7 +36,7 @@
   var bg = document.querySelector('.uh-hero-bg');
   if (bg && !reduce) {
     var tick = false;
-    addEventListener('scroll', function () { if (tick) return; tick = true; requestAnimationFrame(function () { var y = scrollY; if (y < 1200) bg.style.translate = '0 ' + (y * 0.18) + 'px'; tick = false; }); }, { passive: true });
+    addEventListener('scroll', function () { if (tick) return; tick = true; requestAnimationFrame(function () { var y = scrollY; if (y < 1200) bg.style.translate = '0 ' + (y * 0.06) + 'px'; tick = false; }); }, { passive: true });
   }
 
   /* header gets a little smaller once the page is scrolled */

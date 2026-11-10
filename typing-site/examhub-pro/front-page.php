@@ -2,6 +2,7 @@
 $exams = eh_exams(); $att = eh_attempt_counts();
 $popular = $exams; usort($popular, function ($a, $b) use ($att) { return ($att[$b['slug']] ?? 0) <=> ($att[$a['slug']] ?? 0); });
 $recent = eh_recent(100);
+$popular = eh_ja_first($popular);
 
 /* photos: free Unsplash licence, loaded from Unsplash's image server */
 $ph = function ($id, $w = 1400) { return 'https://images.unsplash.com/photo-' . $id . '?auto=format&fit=crop&q=70&w=' . (int) $w; };
@@ -56,18 +57,18 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
 <div class="uh">
 
 <section class="uh-hero">
-  <img class="uh-hero-bg" src="<?php echo esc_url($ph($P['hero'], 2000)); ?>" alt="" fetchpriority="high">
   <div class="wrap uh-hero-in">
+    <img class="uh-hero-bg" src="<?php echo esc_url($ph($P['hero'], 1200)); ?>" alt="" fetchpriority="high">
     <div class="uh-lang" role="group" aria-label="Language"><button type="button" data-lang="hi">हिंदी</button><button type="button" data-lang="en">English</button></div>
     <p class="uh-eyebrow"><?php echo eh_t('UPSSSC and UP exams · Courses · Mock tests · Typing', 'UPSSSC और UP की भर्तियाँ · कोर्स · मॉक टेस्ट · टाइपिंग'); ?></p>
     <h1 class="uh-h1"><?php echo eh_t('<span>Your home</span> <span><em>before the job.</em></span>', '<span>नौकरी लगने से</span> <span>पहले का <em>घर।</em></span>'); ?></h1>
     <p class="uh-lead"><?php echo eh_t('Notes, daily quiz, mock tests and exam-style typing practice for UPSSSC and other UP exams. All in one place.', 'UPSSSC और UP की बाकी भर्तियों के लिए नोट्स, रोज़ क्विज, मॉक टेस्ट और एग्जाम जैसी टाइपिंग प्रैक्टिस। सब एक जगह।'); ?></p>
     <div class="uh-cta">
       <a class="uh-btn" href="#batches"><?php echo eh_t('See running batches', 'चल रहे बैच देखें'); ?><?php echo $arrow; ?></a>
-      <a class="uh-btn ghost" href="<?php echo esc_url(home_url('/exams/')); ?>"><?php echo eh_t('Free typing test', 'फ्री टाइपिंग टेस्ट'); ?><?php echo $arrow; ?></a>
+      <a class="uh-btn ghost" href="<?php echo esc_url(home_url('/live-typing/')); ?>"><?php echo eh_t('Junior Assistant Live Typing', 'जूनियर असिस्टेंट लाइव टाइपिंग'); ?><?php echo $arrow; ?></a>
     </div>
     <ul class="uh-stats">
-      <li><b data-count="7000" data-suffix="+">7,000+</b><span><?php echo eh_t('on our Telegram channel', 'हमारे टेलीग्राम चैनल पर'); ?></span></li>
+      <li><b data-count="60000" data-suffix="+">60,000+</b><span><?php echo eh_t('students with us', 'विद्यार्थी हमारे साथ'); ?></span></li>
       <li><b data-count="6000" data-suffix="+">6,000+</b><span><?php echo eh_t('students joined our batches', 'विद्यार्थी हमारे बैच से जुड़े'); ?></span></li>
       <li><b data-count="<?php echo count($exams); ?>"><?php echo count($exams); ?></b><span><?php echo eh_t('exam typing tests', 'एग्जाम टाइपिंग टेस्ट'); ?></span></li>
       <li><b>₹0</b><span><?php echo eh_t('for all typing practice', 'पूरी टाइपिंग प्रैक्टिस के लिए'); ?></span></li>
@@ -141,7 +142,7 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
   <div class="wrap">
     <div class="uh-type-top">
       <div data-rv>
-        <p class="uh-kick"><?php echo eh_t('Free typing tests', 'फ्री टाइपिंग टेस्ट'); ?></p>
+        <p class="uh-kick"><?php echo eh_t('Junior Assistant Live Typing', 'जूनियर असिस्टेंट लाइव टाइपिंग'); ?></p>
         <h2 class="uh-h2"><?php echo eh_t('The exam screen, <em>before the exam.</em>', 'एग्जाम वाली स्क्रीन, <em>एग्जाम से पहले।</em>'); ?></h2>
         <p class="uh-sub"><?php echo eh_t('English and Hindi (Krutidev, Mangal, Remington). Time, target and error rules are set for each exam. Your result comes the moment you submit.', 'English और हिंदी (Krutidev, Mangal, Remington)। हर एग्जाम का समय, टारगेट और गलती के नियम सेट हैं। सबमिट करते ही रिजल्ट।'); ?></p>
         <div class="uh-cta">

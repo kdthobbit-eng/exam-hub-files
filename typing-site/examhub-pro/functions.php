@@ -31,6 +31,7 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('eh-fonts', 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap', [], null);
     wp_enqueue_style('eh-style', get_stylesheet_uri(), [], EH_VER);
     wp_enqueue_script('eh-site', EH_URI . '/assets/eh-site.js', [], EH_VER, true);
+    wp_enqueue_style('eh-brand-fonts', 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Serif:ital@1&display=swap', [], null);
     if (is_front_page()) {
         wp_enqueue_style('eh-home-fonts', 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Mukta:wght@400;500;600;700;800&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap', [], null);
         wp_enqueue_style('eh-home', EH_URI . '/assets/eh-home.css', ['eh-style'], EH_VER);
@@ -44,7 +45,7 @@ add_filter('show_admin_bar', function ($show) { return current_user_can('edit_po
 /* ---------- options (chat/wp-cli se badal sakte hain) ---------- */
 function eh_opt($key) {
     $defaults = [
-        'tg_group'   => 'https://t.me/examhub2026',
+        'tg_group'   => 'https://t.me/upssscalert',
         'tg_channel' => 'https://t.me/upssscalertt',
         'tg_join'    => 'https://t.me/joinvijeta2025',
         'youtube'    => 'https://youtube.com/@xlstudy',
@@ -52,6 +53,7 @@ function eh_opt($key) {
         'whatsapp'   => '919455015600',
         'brand'      => 'UPSSSC Alert',
         'brand_sub'  => 'by XL Study',
+        'brand_typing' => 'Alert Typing', /* name shown in the header of the typing pages */
         'tagline'    => 'Typing practice for government exams — real exam format, fully free',
         'notice'     => 'Daily Live Typing is on: a new passage every day, check your rank',
         'allowed_error' => 5,
@@ -182,7 +184,15 @@ function eh_t($en, $hi) { return '<span class="l-en">' . $en . '</span><span cla
 function eh_wa_url($text = '') { return 'https://wa.me/' . preg_replace('/\D/', '', (string) eh_opt('whatsapp')) . ($text !== '' ? '?text=' . rawurlencode($text) : ''); }
 function eh_last_em($s) { $s = esc_html(trim((string) $s)); $p = strrpos($s, ' '); return $p === false ? $s : substr($s, 0, $p) . ' <em>' . substr($s, $p + 1) . '</em>'; }
 function eh_logo() {
-    return '<span class="eh-logo-mark">UA</span><span class="eh-logo-txt"><span class="eh-logo-name">' . eh_last_em(eh_opt('brand')) . '</span>' . (eh_opt('brand_sub') ? '<small>' . esc_html(eh_opt('brand_sub')) . '</small>' : '') . '</span>';
+    $bell = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a1.4 1.4 0 0 1 1.4 1.4v.5a6 6 0 0 1 4.6 5.8v3.4l1.7 2.6a1 1 0 0 1-.8 1.6H5.1a1 1 0 0 1-.8-1.6L6 13.6v-3.4a6 6 0 0 1 4.6-5.8v-.5A1.4 1.4 0 0 1 12 2.5zM9.7 19.5h4.6a2.3 2.3 0 0 1-4.6 0z"/></svg>';
+    $name = is_front_page() ? eh_opt('brand') : (eh_opt('brand_typing') ?: eh_opt('brand'));
+    return '<span class="eh-logo-mark">' . $bell . '</span><span class="eh-logo-txt"><span class="eh-logo-name">' . eh_last_em($name) . '</span>' . (eh_opt('brand_sub') ? '<small>' . esc_html(eh_opt('brand_sub')) . '</small>' : '') . '</span>';
+}
+/* UPSSSC Junior Assistant typing tests go first in every exam list */
+function eh_ja_first($exams) {
+    $a = []; $b = [];
+    foreach ($exams as $e) { if (strpos($e['slug'], 'upsssc-assistants') === 0) $a[] = $e; else $b[] = $e; }
+    return array_merge($a, $b);
 }
 /* the parent brand, shown at the side of the home page header */
 function eh_xl() {

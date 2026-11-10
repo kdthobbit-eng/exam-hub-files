@@ -1,4 +1,4 @@
-<?php get_header(); $exams = eh_exams(); $att = eh_attempt_counts(); ?>
+<?php get_header(); $exams = eh_ja_first(eh_exams()); $att = eh_attempt_counts(); ?>
 <section class="eh-page-head"><div class="wrap">
   <h1>All Typing Exams</h1><p class="muted"><?php echo count($exams); ?> exams. Pick yours and start a test.</p>
 </div></section>
