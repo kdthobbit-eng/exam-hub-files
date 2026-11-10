@@ -53,7 +53,13 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
         <li>The test is <b><?php echo (int) $eh_exam['minutes']; ?> minutes</b> long. The timer starts as soon as the typing screen opens; time left is shown at the top right.</li>
         <li><?php echo $eh_win['layout'] === 'nopass' ? 'In this exam the passage is not shown on screen; you type from a printed copy. For practice, turn on "Passage on Screen" in ⚙ Settings.' : 'The passage is shown in the top box. Type it in the box below.'; ?></li>
         <li>Copy, paste, right-click and drag are disabled. Only what you type is counted.</li>
+        <?php if (($eh_exam['eval'] ?? '') === 'upsssc'): ?>
+        <li>Backspace works only on the word you are typing and the <b>one word before it</b>, as in the real exam. Older words are locked.</li>
+        <li>Speed = (key depressions ÷ 5 − penalty) ÷ <?php echo (int) $eh_exam['minutes']; ?> minutes. The <b>first 5 mistakes are free</b>; every mistake after that cuts <b>5 words</b>. You need <b><?php echo (int) ($eh_exam['wpm'] ?? 0); ?> WPM</b> to qualify.</li>
+        <li>Two words typed in the wrong order count as a <b>half mistake</b>.</li>
+        <?php else: ?>
         <li>Backspace is on. You can turn it off or limit it in ⚙ Settings.</li>
+        <?php endif; ?>
         <li>Use one space between words. Extra spaces, wrong capitals or missing punctuation count as a <b>half mistake</b>.</li>
         <li>A wrong word, a missed word or an added word counts as a <b>full mistake</b>.</li>
         <li>Error % = (Full mistake + Half mistake ÷ 2) ÷ words typed × 100</li>

@@ -187,7 +187,7 @@
     S.text = buildText(CFG.fixedPassage || $('#eh-opt-passage').value);
     S.words = S.text.split(/\s+/);
     S.show = kdMode() ? S.words.map(function (w) { return H.unicodeToKD(w); }) : S.words;
-    S.left = S.minutes * 60; S.buf = ''; S.keys = 0; S.bks = 0; S.started = false; S.done = false; lastIdx = -1; wsDone = -1;
+    S.left = S.minutes * 60; S.buf = ''; S.keys = 0; S.bks = 0; S.lock = 0; S.started = false; S.done = false; lastIdx = -1; wsDone = -1;
 
     var L = LAYOUTS.filter(function (l) { return l[0] === S.layout; })[0];
     $('#eh-layout-name').textContent = L[3];
@@ -310,7 +310,13 @@
   }
 
   function render() { ta.value = kdMode() ? S.buf : current(); ta.scrollTop = ta.scrollHeight; ta.setSelectionRange(ta.value.length, ta.value.length); }
-  function after() { mark(); stats(); }
+  /* UPSSSC rule: Backspace works only on the word being typed and the one before it; older words are locked */
+  function updLock() {
+    if (exam.eval !== 'upsssc') return;
+    var m = /^([\s\S]*\s)?\S+\s+\S*$/.exec(rawText()), l = m ? (m[1] || '').length : 0;
+    if (l > S.lock) S.lock = l;
+  }
+  function after() { updLock(); mark(); stats(); }
 
   /* ---------- keyboard ---------- */
   function onKey(e) {
@@ -320,6 +326,7 @@
     if (e.key === 'Backspace') {
       if (!S.set.bks || !raw.length) { e.preventDefault(); return; }
       if (S.set.lbks && /\s$/.test(raw)) { e.preventDefault(); return; }
+      if (exam.eval === 'upsssc' && raw.length <= (S.lock || 0)) { e.preventDefault(); return; }
       S.bks++; click();
       if (!native()) { e.preventDefault(); S.buf = Array.from(S.buf).slice(0, -1).join(''); render(); }
       setTimeout(after, 0);

@@ -53,6 +53,11 @@
       if (o.t === 'sub' && nx && nx.t === 'om' && o.w === o.s + nx.s) { out.push({ t: 'half', s: o.s + ' ' + nx.s, w: o.w, why: 'space' }); k++; continue; }
       if (o.t === 'sub' && nx && nx.t === 'add' && o.w + nx.w === o.s) { out.push({ t: 'half', s: o.s, w: o.w + ' ' + nx.w, why: 'space' }); k++; continue; }
       if (o.t === 'add' && nx && nx.t === 'sub' && o.w + nx.w === nx.s) { out.push({ t: 'half', s: nx.s, w: o.w + ' ' + nx.w, why: 'space' }); k++; continue; }
+      /* transposition: two neighbouring words typed in the reverse order count as one half mistake */
+      if (o.t === 'sub' && nx && nx.t === 'sub' && o.s === nx.w && o.w === nx.s) { out.push({ t: 'half', s: o.s + ' ' + nx.s, w: o.w + ' ' + nx.w, why: 'trans' }); k++; continue; }
+      var n2x = ops[k + 2];
+      if (o.t === 'om' && nx && nx.t === 'ok' && n2x && n2x.t === 'add' && n2x.w === o.s) { out.push({ t: 'half', s: o.s + ' ' + nx.s, w: nx.s + ' ' + n2x.w, why: 'trans' }); k += 2; continue; }
+      if (o.t === 'add' && nx && nx.t === 'ok' && n2x && n2x.t === 'om' && n2x.s === o.w) { out.push({ t: 'half', s: nx.s + ' ' + n2x.s, w: o.w + ' ' + nx.s, why: 'trans' }); k += 2; continue; }
       if (o.t === 'sub') {
         if (o.s.toLowerCase() === o.w.toLowerCase()) { out.push({ t: 'half', s: o.s, w: o.w, why: 'case' }); continue; }
         if (stripP(o.s) && stripP(o.s) === stripP(o.w)) { out.push({ t: 'half', s: o.s, w: o.w, why: 'punct' }); continue; }
@@ -63,7 +68,7 @@
   }
 
 
-  var WHY = { space: 'Spacing error', case: 'Capital/small letter error', punct: 'Punctuation error' };
+  var WHY = { space: 'Spacing error', case: 'Capital/small letter error', punct: 'Punctuation error', trans: 'Words in the wrong order' };
   function inline(ops) {
     return ops.map(function (o) {
       if (o.t === 'ok') return '<span class="d-ok">' + esc(o.s) + '</span>';
@@ -83,7 +88,7 @@
     return '<div class="eh-cmp"><div><h4>Original Passage</h4><div class="eh-cmp-t">' + L.join(' ') + '</div></div><div><h4>What you typed</h4><div class="eh-cmp-t">' + R.join(' ') + '</div></div></div>';
   }
   function counts(ops) {
-    var c = { full: 0, half: 0, om: 0, add: 0, sub: 0, space: 0, case: 0, punct: 0 };
+    var c = { full: 0, half: 0, om: 0, add: 0, sub: 0, space: 0, case: 0, punct: 0, trans: 0 };
     ops.forEach(function (o) {
       if (o.t === 'half') { c.half++; c[o.why] = (c[o.why] || 0) + 1; }
       else if (o.t !== 'ok') { c.full++; c[o.t]++; }
@@ -129,7 +134,7 @@
       ['Net Speed', up ? n2(V.wpm) : R.net, up ? 'WPM / ' + V.need : 'WPM', up && !V.pass ? 'bad' : 'c1'], ['Gross Speed', up ? n2(V.words / V.mins) : R.gross, 'WPM', 'c2'], ['Accuracy', R.acc, '%', 'c3'], up ? ['Mistakes', n2(V.errs), '/ 5 free', V.errs > 5 ? 'bad' : 'c4'] : ['Error', R.err, '%', R.err > allowed ? 'bad' : 'c4'],
       ['Key Depressions', R.keys, keysMode && !up ? '/ ' + X.target : '', keysMode && !up && R.keys < X.target ? 'bad' : 'c5'], ['Full Mistakes', R.full, '', 'c6'], ['Half Mistakes', R.half, '', 'c7'], ['Time Taken', fmtMin(R.minutes), '', 'c8']
     ].map(function (k) { return '<div class="eh-dcard ' + k[3] + '"><span>' + k[0] + '</span><b>' + k[1] + ' <small>' + k[2] + '</small></b></div>'; }).join('');
-    var mini = [['Words Typed', R.words], ['Keystroke Errors', R.kerr], ['Backspace', R.backspaces], ['Missed words', c.om], ['Added words', c.add], ['Wrong words', c.sub], ['Space/Case/Punct', c.space + '/' + c.case + '/' + c.punct], ['Pending Words', R.pending || 0]]
+    var mini = [['Words Typed', R.words], ['Keystroke Errors', R.kerr], ['Backspace', R.backspaces], ['Missed words', c.om], ['Added words', c.add], ['Wrong words', c.sub], ['Space/Case/Punct/Order', c.space + '/' + c.case + '/' + c.punct + '/' + c.trans], ['Pending Words', R.pending || 0]]
       .map(function (k) { return '<div><span>' + k[0] + '</span><b>' + k[1] + '</b></div>'; }).join('');
     var amount = keysMode ? R.keys : R.words;
     var fu = up ? '<div class="eh-formula"><h3>How your result was worked out (UPSSSC rule)</h3><ol>' +
