@@ -33,10 +33,12 @@
 
   var S = {
     layout: LAYOUTS[0][0], minutes: exam.minutes,
-    set: Object.assign({ tcs: true, bks: true, lbks: false, whl: true, hl: true, lc: true, as: true, xs: false, scr: true, snd: false, fs: 0 }, store.get('set2', {})),
+    set: Object.assign({ tcs: true, bks: true, lbks: false, whl: true, hl: true, lc: true, as: true, xs: false, scr: true, snd: true, fs: 0 }, store.get('set2', {})),
     started: false, done: false, t0: 0, left: 0, timer: null,
     buf: '', keys: 0, bks: 0, words: [], text: '', passageId: '', title: ''
   };
+  /* typing sound is on by default; switch it on once for people whose saved settings still had the old default (off) */
+  if (!store.get('snd_v2', 0)) { S.set.snd = true; store.set('snd_v2', 1); }
 
   var setup = $('#eh-setup'), test = $('#eh-test'), result = $('#eh-result');
   var pv = $('#eh-passage'), ta = $('#eh-input'), tm = $('#eh-timer');
@@ -163,14 +165,27 @@
   $('#eh-st-on').addEventListener('change', function () { $('#eh-stats').classList.toggle('off', !this.checked); });
 
   var actx = null;
+  /* key click, like a real keyboard: a short burst of filtered noise plus a soft thud; space and backspace sound deeper */
+  var nbuf = null, kLow = false;
   function click() {
     if (!S.set.snd) return;
     try {
       actx = actx || new (window.AudioContext || window.webkitAudioContext)();
-      var o = actx.createOscillator(), g = actx.createGain();
-      o.type = 'square'; o.frequency.value = 1700 + Math.random() * 300;
-      g.gain.setValueAtTime(0.04, actx.currentTime); g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + 0.035);
-      o.connect(g); g.connect(actx.destination); o.start(); o.stop(actx.currentTime + 0.04);
+      if (actx.state === 'suspended') actx.resume();
+      if (!nbuf) {
+        nbuf = actx.createBuffer(1, Math.floor(actx.sampleRate * 0.05), actx.sampleRate);
+        var d = nbuf.getChannelData(0);
+        for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
+      }
+      var t = actx.currentTime, src = actx.createBufferSource(), bp = actx.createBiquadFilter(), g = actx.createGain();
+      src.buffer = nbuf; src.playbackRate.value = 0.9 + Math.random() * 0.25;
+      bp.type = 'bandpass'; bp.frequency.value = kLow ? 1300 : 2500 + Math.random() * 600; bp.Q.value = 0.9;
+      g.gain.setValueAtTime(0.55, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.045);
+      src.connect(bp); bp.connect(g); g.connect(actx.destination); src.start(t);
+      var o = actx.createOscillator(), g2 = actx.createGain();
+      o.type = 'sine'; o.frequency.setValueAtTime(kLow ? 110 : 170, t); o.frequency.exponentialRampToValueAtTime(60, t + 0.03);
+      g2.gain.setValueAtTime(kLow ? 0.24 : 0.16, t); g2.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
+      o.connect(g2); g2.connect(actx.destination); o.start(t); o.stop(t + 0.05);
     } catch (e) {}
   }
 
@@ -321,6 +336,7 @@
   /* ---------- keyboard ---------- */
   function onKey(e) {
     if (S.done) return;
+    kLow = e.key === ' ' || e.code === 'Space' || e.key === 'Backspace';
     if (e.ctrlKey || e.metaKey || e.altKey) { if (/^(KeyV|KeyA|KeyZ|KeyY|KeyX)$/.test(e.code)) e.preventDefault(); return; }
     var raw = rawText();
     if (e.key === 'Backspace') {
