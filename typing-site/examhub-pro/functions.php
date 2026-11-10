@@ -16,6 +16,7 @@ require EH_DIR . '/inc/db.php';
 require EH_DIR . '/inc/rest.php';
 require EH_DIR . '/inc/admin.php';
 require EH_DIR . '/inc/auth.php';
+require EH_DIR . '/inc/stats.php';
 
 /* ---------- setup ---------- */
 add_action('after_setup_theme', function () {

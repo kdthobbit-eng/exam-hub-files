@@ -6,11 +6,11 @@ add_action('admin_menu', function () {
 });
 
 add_action('admin_init', function () {
-    foreach (['brand', 'tagline', 'notice', 'tg_group', 'tg_channel', 'allowed_error', 'live_lang', 'exams_hidden', 'exams_extra', 'google_client_id', 'live_schedule', 'upcoming', 'window_map'] as $k) {
+    foreach (['brand', 'brand_sub', 'tg_join', 'youtube', 'yt_uploads', 'whatsapp', 'tagline', 'notice', 'tg_group', 'tg_channel', 'allowed_error', 'live_lang', 'exams_hidden', 'exams_extra', 'google_client_id', 'live_schedule', 'upcoming', 'window_map'] as $k) {
         register_setting('eh_settings', 'eh_' . $k, ['sanitize_callback' => function ($v) use ($k) {
             if (in_array($k, ['live_schedule', 'upcoming', 'window_map'], true)) { $j = json_decode(wp_unslash($v), true); return is_array($j) ? wp_json_encode($j, JSON_UNESCAPED_UNICODE) : ''; }
             if ($k === 'exams_extra') { $j = json_decode(wp_unslash($v), true); return is_array($j) ? wp_json_encode($j, JSON_UNESCAPED_UNICODE) : '[]'; }
-            if (in_array($k, ['tg_group', 'tg_channel'], true)) return esc_url_raw($v);
+            if (in_array($k, ['tg_group', 'tg_channel', 'tg_join', 'youtube'], true)) return esc_url_raw($v);
             return sanitize_text_field($v);
         }]);
     }
@@ -33,6 +33,11 @@ function eh_settings_page() {
     $f('notice', 'Top notice bar', 'खाली छोड़ें तो default दिखेगा');
     $f('tg_channel', 'Telegram Channel link');
     $f('tg_group', 'Telegram Group link');
+    $f('brand_sub', 'Small line beside the site name', 'Default: by XL Study');
+    $f('tg_join', 'Telegram link to join a batch');
+    $f('youtube', 'YouTube channel link');
+    $f('yt_uploads', 'YouTube playlist IDs for the corner player', 'comma से अलग; खाली = default');
+    $f('whatsapp', 'WhatsApp number', 'Country code ke saath, jaise 919455015600');
     $f('allowed_error', 'Allowed error %', 'Default 5');
     $f('live_lang', 'Live typing language', 'en / hi — खाली = दिन के हिसाब से बदलता रहेगा');
     $f('exams_hidden', 'Hidden exam slugs', 'comma से अलग');
