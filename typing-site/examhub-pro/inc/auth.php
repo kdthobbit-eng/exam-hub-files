@@ -71,7 +71,7 @@ add_action('template_redirect', function () {
     if (is_wp_error($uid)) { $GLOBALS['eh_auth_error'] = 'Could not create the account. Please try again.'; return; }
     if ($mo) update_user_meta($uid, 'eh_mobile', $mo);
     wp_set_current_user($uid); wp_set_auth_cookie($uid, true, is_ssl());
-    wp_safe_redirect(home_url('/my-dashboard/?welcome=1')); exit;
+    wp_safe_redirect(!empty($_REQUEST['redirect_to']) ? eh_safe_redirect_target() : home_url('/my-dashboard/?welcome=1')); exit;
 }, 0);
 
 function eh_unique_login($email) {

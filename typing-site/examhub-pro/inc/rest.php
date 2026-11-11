@@ -27,6 +27,7 @@ function eh_rest_save(WP_REST_Request $r) {
     if ($exam !== 'demo' && !eh_exam($exam)) return ['ok' => false];
     $uid = get_current_user_id();
     $name = $uid ? '' : mb_substr(sanitize_text_field($p['name'] ?? ''), 0, 40);
+    if (!empty($p['live']) && !$uid) return new WP_REST_Response(['ok' => false, 'msg' => 'Please log in to take Live Typing.'], 401);
     $live = !empty($p['live']) && $p['live'] === wp_date('Y-m-d') ? $p['live'] : null;
     $words = max(0, min(5000, (int) ($p['words'] ?? 0)));
     $mins = max(0.01, min(60, (float) ($p['minutes'] ?? 0)));

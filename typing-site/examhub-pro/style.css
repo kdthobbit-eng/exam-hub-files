@@ -1022,3 +1022,12 @@ script,style,template{display:none!important}
 .eh-ksw input:checked + .eh-ksw-t:after{left:21px}
 .eh-ksw small{color:#8a6f55;font-weight:600}
 .eh-ksw-note{margin:0 0 10px;padding:8px 12px;border-radius:10px;background:#fef3c7;color:#92400e;font-weight:600;font-size:14px}
+
+/* live typing: login wall / attempted */
+.eh-live-lock{text-align:center;padding:34px 22px}
+.eh-live-lock-ic{font-size:40px;display:block;margin-bottom:6px}
+.eh-live-lock h2{margin:4px 0 8px;color:#4b311d}
+.eh-live-lock-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.eh-live-lock.done{background:#f0fdf4;border-color:#bbf7d0}
+.pill.eh-att{background:#dcfce7;color:#166534;font-weight:800}
+.eh-live-table tr.eh-row-att td{background:#f7fdf9}

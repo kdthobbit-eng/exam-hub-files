@@ -10,6 +10,10 @@ $row = null; foreach ($S as $r) if (!$row && $r['exam']['slug'] === $sel && ($pi
 if (!$row && $pid !== '') foreach ($eh_days as $d) { foreach (eh_live_schedule($d) as $r) if (!$row && $r['exam']['slug'] === $sel && ($r['passage']['id'] ?? '') === $pid) $row = $r; if ($row) break; }
 $medal = ['🥇', '🥈', '🥉'];
 global $wpdb;
+/* passages this user has already typed in Live Typing: [passage id => best row] */
+$eh_uid = get_current_user_id(); $eh_done = [];
+if ($eh_uid) foreach ((array) $wpdb->get_results($wpdb->prepare('SELECT id, rkey, passage, exam, net, pass FROM ' . eh_table() . " WHERE user_id = %d AND live_date IS NOT NULL ORDER BY net ASC", $eh_uid), ARRAY_A) as $d) $eh_done[$d['exam'] . '|' . $d['passage']] = $d;
+$eh_back = home_url(add_query_arg([]));
 get_header();
 echo eh_member_nav('live');
 if ($row):
@@ -32,7 +36,22 @@ if ($row):
   </div>
 </div></section>
 <section class="wrap eh-section eh-live">
-  <div><?php if ($open && $L['passage']):
+  <div><?php $eh_mine = $eh_done[$L['exam']['slug'] . '|' . $lp] ?? null;
+    if ($open && $L['passage'] && !$eh_uid): ?>
+      <div class="eh-panel eh-live-lock"><span class="eh-live-lock-ic">🔒</span>
+        <h2>Log in to take Live Typing</h2>
+        <p class="muted">Live Typing has a ranking, so each test is saved to your account. It is free and takes one minute.</p>
+        <div class="eh-live-lock-btns"><a class="btn dark" href="<?php echo esc_url(eh_login_page_url($eh_back)); ?>">Log in →</a>
+        <a class="btn ghost" href="<?php echo esc_url(add_query_arg('redirect_to', rawurlencode($eh_back), eh_signup_page_url())); ?>">New user? Sign up</a></div>
+      </div>
+    <?php elseif ($open && $L['passage'] && $eh_mine): ?>
+      <div class="eh-panel eh-live-lock done"><span class="eh-live-lock-ic">✅</span>
+        <h2>Attempted</h2>
+        <p class="muted">You have already typed this passage. Your speed: <b><?php echo (int) $eh_mine['net']; ?> WPM</b> · <?php echo $eh_mine['pass'] ? 'Qualified' : 'Not qualified'; ?>. Each live passage can be typed once, so the ranking stays fair.</p>
+        <div class="eh-live-lock-btns"><a class="btn dark" href="<?php echo esc_url(eh_result_url($eh_mine['id'], $eh_mine['rkey'])); ?>">See my result →</a>
+        <a class="btn ghost" href="<?php echo esc_url(home_url('/live-typing/')); ?>">Other passages</a></div>
+      </div>
+    <?php elseif ($open && $L['passage']):
       $eh_exam = $L['exam']; if ($eh_exam['lang'] !== 'hi') $eh_exam['lang'] = 'en';
       $eh_cfg = ['fixedPassage' => $L['passage']['id'], 'lockTime' => true, 'live' => $L['date']];
       if (!empty($L['plist'])) $eh_cfg['passages'] = $L['plist'];
@@ -134,15 +153,20 @@ if ($row):
       $st = $now < $r['s'] ? 'soon' : ($now <= $r['e'] ? 'live' : 'done');
       $q = ['exam' => $r['exam']['slug']]; if (!empty($r['allday'])) $q['p'] = $r['passage']['id'];
       $url = add_query_arg($q, home_url('/live-typing/')); ?>
-    <tr data-f="<?php echo esc_attr($r['lang']); ?>">
+    <tr data-f="<?php echo esc_attr($r['lang']); ?>" class="<?php echo isset($eh_done[$r['exam']['slug'] . '|' . ($r['passage']['id'] ?? '')]) ? 'eh-row-att' : ''; ?>">
       <td><?php echo $i + 1; ?></td>
       <td><b><?php echo esc_html($r['exam']['name']); ?></b><?php if (!empty($r['no'])) echo '<br><span class="muted small">Passage ' . (int) $r['no'] . '</span>'; ?></td>
       <td><?php echo !empty($r['level']) ? '<span class="eh-lvl ' . esc_attr(strtolower($r['level'])) . '">' . esc_html($r['level']) . '</span>' : '—'; ?></td>
       <td class="small"><?php echo esc_html($r['passage']['title'] ?? '—'); ?><br><span class="muted"><?php echo $r['passage'] ? number_format_i18n($r['chars'] ?? $r['passage']['chars']) . ' key strokes' : ''; ?></span></td>
       <td><?php echo $r['lang'] === 'hi' ? 'Hindi<br><span class="muted small">Krutidev / Mangal Inscript</span>' : 'English'; ?></td>
       <td><?php echo !empty($r['allday']) ? 'All day' : esc_html(gmdate('h:i A', $r['s'] * 60) . ' – ' . gmdate('h:i A', $r['e'] * 60)); ?></td>
-      <td><?php echo $st === 'live' ? '<span class="pill ok">● Open</span>' : ($st === 'soon' ? '<span class="pill">Soon</span>' : '<span class="pill no">Closed</span>'); ?></td>
-      <td class="eh-live-act"><?php if ($st === 'live' && $r['lang'] === 'hi'): ?>
+      <?php $mine = $eh_done[$r['exam']['slug'] . '|' . ($r['passage']['id'] ?? '')] ?? null; ?>
+      <td><?php echo $mine ? '<span class="pill eh-att">✓ Attempted</span>' : ($st === 'live' ? '<span class="pill ok">● Open</span>' : ($st === 'soon' ? '<span class="pill">Soon</span>' : '<span class="pill no">Closed</span>')); ?></td>
+      <td class="eh-live-act"><?php if ($mine): ?>
+          <a class="btn ghost sm" href="<?php echo esc_url(eh_result_url($mine['id'], $mine['rkey'])); ?>"><?php echo (int) $mine['net']; ?> WPM · Result</a>
+        <?php elseif ($st === 'live' && !$eh_uid): ?>
+          <a class="btn dark sm" href="<?php echo esc_url(eh_login_page_url($url)); ?>">🔒 Log in to start</a>
+        <?php elseif ($st === 'live' && $r['lang'] === 'hi'): ?>
           <a class="btn dark sm" href="<?php echo esc_url(add_query_arg('kb', 'krutidev', $url)); ?>">Krutidev →</a>
           <a class="btn dark sm" href="<?php echo esc_url(add_query_arg('kb', 'inscript', $url)); ?>">Mangal →</a>
         <?php else: ?>
