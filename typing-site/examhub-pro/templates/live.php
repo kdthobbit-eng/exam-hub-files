@@ -83,14 +83,46 @@ if ($row):
   <h1 class="eh-live-h">UPSSSC Junior Assistant Live Typing</h1>
   <?php $eh_news = ''; foreach ($S as $x) if (!empty($x['news'])) $eh_news = $x['news'];
   $eh_fd = function ($d) { return date_i18n('j M Y', strtotime($d)); };
+  $eh_cur = $eh_news ?: wp_date('Y-m-d'); $eh_ix = array_search($eh_cur, $eh_days, true);
+  $eh_u = function ($d) use ($eh_days) { return $d === ($eh_days[0] ?? '') ? home_url('/live-typing/') : add_query_arg('day', $d, home_url('/live-typing/')); };
+  $eh_newer = $eh_ix !== false && $eh_ix > 0 ? $eh_days[$eh_ix - 1] : ''; $eh_older = $eh_ix !== false && isset($eh_days[$eh_ix + 1]) ? $eh_days[$eh_ix + 1] : '';
   if ($eh_days): ?>
-  <div class="eh-days"><span class="eh-days-l">Date:</span>
-    <?php foreach (array_slice($eh_days, 0, 14) as $k => $d): ?>
-      <a class="<?php echo $d === $eh_news ? 'on' : ''; ?>" href="<?php echo esc_url($k === 0 ? home_url('/live-typing/') : add_query_arg('day', $d, home_url('/live-typing/'))); ?>"><?php echo esc_html($eh_fd($d)); ?><?php if ($k === 0) echo ' <em>' . ($d === wp_date('Y-m-d') ? 'Today' : 'Latest') . '</em>'; ?></a>
-    <?php endforeach; ?>
+  <div class="eh-dp" id="eh-dp" data-days="<?php echo esc_attr(implode(',', $eh_days)); ?>" data-cur="<?php echo esc_attr($eh_cur); ?>" data-base="<?php echo esc_url(home_url('/live-typing/')); ?>">
+    <a class="eh-dp-nav<?php echo $eh_older ? '' : ' off'; ?>" <?php echo $eh_older ? 'href="' . esc_url($eh_u($eh_older)) . '"' : ''; ?> aria-label="Previous day">‹</a>
+    <button type="button" class="eh-dp-btn" id="eh-dp-btn" aria-haspopup="true">
+      <span class="eh-dp-ic">📅</span>
+      <span class="eh-dp-t"><b><?php echo esc_html(date_i18n('j M Y', strtotime($eh_cur))); ?></b><small><?php echo $eh_cur === wp_date('Y-m-d') ? 'Today' : esc_html(date_i18n('l', strtotime($eh_cur))); ?></small></span>
+      <span class="eh-dp-ar">▾</span>
+    </button>
+    <a class="eh-dp-nav<?php echo $eh_newer ? '' : ' off'; ?>" <?php echo $eh_newer ? 'href="' . esc_url($eh_u($eh_newer)) . '"' : ''; ?> aria-label="Next day">›</a>
+    <?php if ($eh_ix !== 0): ?><a class="eh-dp-today" href="<?php echo esc_url(home_url('/live-typing/')); ?>">Today</a><?php endif; ?>
+    <div class="eh-dp-pop" id="eh-dp-pop" hidden></div>
   </div>
   <?php endif; ?>
-  <p class="muted"><?php echo count($S); ?> passages<?php echo $eh_news ? ' of <b>' . esc_html(date_i18n('j F Y', strtotime($eh_news))) . '</b>' : ' today'; ?>: <?php echo $eh_news ? 'English and Hindi (Krutidev or Mangal Inscript), 10 Easy, 10 Moderate and 10 Hard in each language, written from that day\'s news. Older days stay open under their own date.' : '6 English and 6 Hindi (Krutidev or Mangal Inscript), with 2 Easy, 2 Moderate and 2 Hard in each language.'; ?> All are full length and open the whole day. Everyone gets the same passage, and each passage has its own ranking by net speed.</p>
+  <p class="eh-dp-sum"><b><?php echo count($S); ?></b> passages<?php if ($eh_news): ?> · <span class="eh-lvl easy">10 Easy</span> <span class="eh-lvl moderate">10 Moderate</span> <span class="eh-lvl hard">10 Hard</span> · English + Hindi · from the day's news<?php endif; ?></p>
+  <script>
+  (function () {
+    var box = document.getElementById('eh-dp'); if (!box) return;
+    var days = box.getAttribute('data-days').split(','), cur = box.getAttribute('data-cur'), base = box.getAttribute('data-base');
+    var pop = document.getElementById('eh-dp-pop'), btn = document.getElementById('eh-dp-btn');
+    var M = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var y = +cur.slice(0, 4), m = +cur.slice(5, 7) - 1;
+    function z(n) { return (n < 10 ? '0' : '') + n; }
+    function draw() {
+      var first = new Date(y, m, 1).getDay(), n = new Date(y, m + 1, 0).getDate(), h = '<div class="eh-dp-h"><button type="button" data-s="-1">‹</button><b>' + M[m] + ' ' + y + '</b><button type="button" data-s="1">›</button></div><div class="eh-dp-g">';
+      ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(function (d) { h += '<i>' + d + '</i>'; });
+      for (var k = 0; k < first; k++) h += '<span></span>';
+      for (var d = 1; d <= n; d++) {
+        var id = y + '-' + z(m + 1) + '-' + z(d);
+        h += days.indexOf(id) > -1 ? '<a class="' + (id === cur ? 'on' : '') + '" href="' + (id === days[0] ? base : base + '?day=' + id) + '">' + d + '</a>' : '<span class="na">' + d + '</span>';
+      }
+      pop.innerHTML = h + '</div><p>Dates in colour have passages.</p>';
+    }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); if (pop.hidden) draw(); pop.hidden = !pop.hidden; });
+    pop.addEventListener('click', function (e) { e.stopPropagation(); var s = e.target.getAttribute && e.target.getAttribute('data-s'); if (s) { m += +s; if (m < 0) { m = 11; y--; } if (m > 11) { m = 0; y++; } draw(); } });
+    document.addEventListener('click', function () { pop.hidden = true; });
+  })();
+  </script>
   <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
   <?php else: ?>
   <h1 class="eh-live-h">Live Typing — same passage, same time, for everyone</h1>
