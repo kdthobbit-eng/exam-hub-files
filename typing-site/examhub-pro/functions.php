@@ -247,12 +247,13 @@ function eh_member_links() {
 function eh_member_nav($active = '') {
     if (is_user_logged_in()) return ''; /* logged-in users already have these links in the header, like the exam site */
     $h = '<nav class="eh-mnav"><div class="wrap">';
+    $h .= '<a href="' . esc_url(home_url('/')) . '">🏠 Home</a>';
     foreach (eh_member_links() as $k => $l) $h .= '<a class="' . ($k === $active ? 'on' : '') . ($k === 'insight' ? ' ins' : '') . '" href="' . esc_url(home_url($l[0])) . '">' . esc_html($l[1]) . '</a>';
     return $h . '</div></nav>';
 }
 function eh_default_menu() {
     $items = is_user_logged_in()
-        ? array_values(eh_member_links())
+        ? array_merge([['/', '🏠 Home']], array_values(eh_member_links()))
         : [['/', 'Home'], ['/exams/', 'Exams'], ['/demo-typing/', 'Demo Typing'], ['/live-typing/', 'Live Typing'], ['/exam-based-result/', 'Result'], ['/blog/', 'Typing Tips']];
     echo '<ul class="eh-menu">';
     foreach ($items as $i) echo '<li><a href="' . esc_url(home_url($i[0])) . '">' . esc_html($i[1]) . '</a></li>';

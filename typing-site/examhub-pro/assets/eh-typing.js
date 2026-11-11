@@ -387,12 +387,14 @@
     var errPct = words ? Math.min(100, (errs / words) * 100) : 100;
     var gross = Math.round(words / mins), net = Math.max(0, Math.round((words - errs) / mins));
     var acc = words ? Math.max(0, 100 - errPct) : 0;
-    var amount = exam.unit === 'keys' ? S.keys : words;
-    var V = window.EHEval.verdict({ keys: S.keys, words: words, full: full, half: half, err: errPct, minutes: secs / 60 }, exam), pass = V.pass;
+    /* key depressions = what is left on screen at the end; deleted letters and extra presses are not counted */
+    var kd = exam.eval === 'upsssc' ? Math.min(S.keys, Array.from(rawText().replace(/\s+$/, '')).length) : S.keys;
+    var amount = exam.unit === 'keys' ? kd : words;
+    var V = window.EHEval.verdict({ keys: kd, words: words, full: full, half: half, err: errPct, minutes: secs / 60 }, exam), pass = V.pass;
     if (V.rule === 'upsssc') { net = Math.floor(V.wpm); gross = Math.round(V.words / V.mins); }
     var R = {
       exam: exam.slug, layout: S.layout, passage: S.passageId, minutes: +(secs / 60).toFixed(2),
-      keys: S.keys, chars: typed.length, words: words, full: full, half: half, backspaces: S.bks, kerr: e.ke,
+      keys: kd, chars: typed.length, words: words, full: full, half: half, backspaces: S.bks, kerr: e.ke,
       gross: gross, net: net, acc: +acc.toFixed(2), err: +errPct.toFixed(2), pass: pass ? 1 : 0, live: CFG.live || ''
     };
     closeExam();
