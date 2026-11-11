@@ -33,12 +33,12 @@
 
   var S = {
     layout: LAYOUTS[0][0], minutes: exam.minutes,
-    set: Object.assign({ tcs: true, bks: true, lbks: false, whl: true, hl: true, lc: true, as: true, xs: false, scr: true, snd: true, fs: 0 }, store.get('set2', {})),
+    set: Object.assign({ tcs: true, bks: true, lbks: false, whl: true, hl: true, lc: true, as: true, xs: false, scr: true, snd: false, fs: 0 }, store.get('set2', {})),
     started: false, done: false, t0: 0, left: 0, timer: null,
     buf: '', keys: 0, bks: 0, words: [], text: '', passageId: '', title: ''
   };
-  /* typing sound is on by default; switch it on once for people whose saved settings still had the old default (off) */
-  if (!store.get('snd_v3', 0)) { S.set.snd = true; store.set('set2', S.set); store.set('snd_v3', 1); }
+  /* typing sound is off by default (speaker button turns it on); switch it off once for everyone who had the old default */
+  if (!store.get('snd_v4', 0)) { S.set.snd = false; store.set('set2', S.set); store.set('snd_v4', 1); }
 
   var setup = $('#eh-setup'), test = $('#eh-test'), result = $('#eh-result');
   var pv = $('#eh-passage'), ta = $('#eh-input'), tm = $('#eh-timer');
@@ -131,6 +131,8 @@
     ta.style.fontSize = tf + 'px'; ta.style.lineHeight = (tlh * tf / tbase).toFixed(2) + 'px';
     $('#set-fs-v').textContent = Math.round(pf * 0.75);
     pv.style.visibility = st.scr ? '' : 'hidden';
+    test.classList.toggle('np-show', !!st.scr); /* exams with no passage on screen (BSF, HCM): show it when 'Passage on Screen' is on */
+    var pb = test.querySelector('[data-act="psg"]'); if (pb) pb.classList.toggle('on', !!st.scr);
     test.classList.toggle('snd-on', !!st.snd);
     if (S.words) mark(true);
     store.set('set2', st);
@@ -157,6 +159,7 @@
     b.addEventListener('click', function () {
       var a = b.getAttribute('data-act');
       if (a === 'mute') { S.set.snd = !S.set.snd; $('#set-snd').checked = S.set.snd; }
+      if (a === 'psg') { S.set.scr = !S.set.scr; $('#set-scr').checked = S.set.scr; }
       else if (a === 'full') { $('#eh-full').click(); }
       else if (a === 'minus') S.set.fs = Math.max(-4, S.set.fs - 1);
       else if (a === 'plus') S.set.fs = Math.min(8, S.set.fs + 1);

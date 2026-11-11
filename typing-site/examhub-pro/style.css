@@ -510,8 +510,8 @@ html.eh-exam-on,html.eh-exam-on body{overflow:hidden}
 .eh-exam.ew-sidea .eh-input,.eh-exam.ew-sidec .eh-input{margin-top:0}
 .eh-exam.ew-sidec .ex-box{gap:23px}
 /* no passage on screen / no keyboard bar */
-.eh-exam.ew-nopass .eh-passage{display:none}
-.eh-exam.ew-nopass .eh-input{margin-top:0}
+.eh-exam.ew-nopass:not(.np-show) .eh-passage{display:none}
+.eh-exam.ew-nopass:not(.np-show) .eh-input{margin-top:0}
 .eh-exam.ew-nokbc .ex-bar,.eh-exam.ew-nokbb .ex-bar{display:none}
 .eh-exam.ew-nokbb .ex-main{margin-left:1.98vw}
 @media(max-width:1100px){
@@ -1181,3 +1181,7 @@ script,style,template{display:none!important}
 .eh-dash .eh-calc thead th:nth-child(1){width:20%}.eh-dash .eh-calc thead th:nth-child(2){width:34%}.eh-dash .eh-calc thead th:nth-child(3){width:26%}.eh-dash .eh-calc thead th:nth-child(4){width:20%}
 .eh-dash .eh-calc tbody th{width:auto}
 @media(max-width:600px){.eh-dash .eh-calc thead th:nth-child(1){width:30%}.eh-dash .eh-calc thead th:nth-child(3){width:38%}.eh-dash .eh-calc thead th:nth-child(4){width:32%}.eh-dash .eh-calc tbody td:last-child{white-space:normal}}
+
+.ex-tool .eh-psg-btn{width:auto!important;padding:0 10px!important;font-weight:700;font-size:13px}
+.ex-tool .eh-psg-btn.on{background:#e8590c!important;color:#fff!important;border-color:#e8590c!important}
+.eh-exam:not(.ew-nopass) .eh-psg-btn{display:none!important}

@@ -51,7 +51,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
       </div>
       <ol class="eh-ins">
         <li>The test is <b><?php echo (int) $eh_exam['minutes']; ?> minutes</b> long. The timer starts as soon as the typing screen opens; time left is shown at the top right.</li>
-        <li><?php echo $eh_win['layout'] === 'nopass' ? 'In this exam the passage is not shown on screen; you type from a printed copy. For practice, turn on "Passage on Screen" in ⚙ Settings.' : 'The passage is shown in the top box. Type it in the box below.'; ?></li>
+        <li><?php echo $eh_win['layout'] === 'nopass' ? 'In this exam the passage is not shown on screen; you type from a printed copy. For practice the passage is shown on screen; press the "Passage" button at the top to hide or show it.' : 'The passage is shown in the top box. Type it in the box below.'; ?></li>
         <li>Copy, paste, right-click and drag are disabled. Only what you type is counted.</li>
         <?php if (($eh_exam['eval'] ?? '') === 'upsssc'): ?>
         <li>These rules are from the commission's typing test instructions (Advt. 12-Exam/2024 admit card).</li>
@@ -135,6 +135,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
       <div class="ex-tool" role="toolbar" aria-label="Typing tools">
         <button type="button" data-act="mute" title="Sound on/off"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path class="snd-x" d="m23 9-6 6M17 9l6 6"/><path class="snd-on" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></button>
         <button type="button" data-act="full" title="Full screen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg></button>
+        <button type="button" data-act="psg" class="eh-psg-btn" title="Show / hide the passage on screen">Passage</button>
         <button type="button" data-act="minus" title="Decrease font size">A-</button>
         <button type="button" data-act="reset" title="Normal font size" class="a0">A</button>
         <button type="button" data-act="plus" title="Increase font size">A+</button>
