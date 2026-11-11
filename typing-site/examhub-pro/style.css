@@ -1087,3 +1087,30 @@ script,style,template{display:none!important}
 @media(max-width:900px){.eh-dash .eh-dash-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){.eh-panel.eh-dash{padding:16px;border-radius:16px}.eh-dash .eh-dash-head h2{font-size:21px}.eh-dash .eh-dcard{padding:13px 14px;min-height:92px}.eh-dash .eh-dcard b{font-size:23px}.eh-dash .eh-dc-ic{width:30px;height:30px}
  .eh-dash .eh-dash-mini{grid-template-columns:repeat(2,1fr)}.eh-dash .eh-dash-mini div:nth-child(4n){border-right:1px solid var(--d-line)}.eh-dash .eh-dash-mini div:nth-child(2n){border-right:0}.eh-dash .eh-dash-mini div:nth-last-child(-n+4){border-bottom:1px solid var(--d-line)}.eh-dash .eh-dash-mini div:nth-last-child(-n+2){border-bottom:0}}
+/* result: bigger, uniformly bold text */
+.eh-panel.eh-dash{font-size:16px}
+.eh-dash .eh-ksw b{font-size:17px;font-weight:800}.eh-dash .eh-ksw small{font-size:14.5px;font-weight:700}
+.eh-dash .eh-kicker{font-size:13.5px;font-weight:800}
+.eh-dash .eh-dash-head h2{font-size:32px;font-weight:800}
+.eh-dash .eh-dash-head .muted{font-size:16px;font-weight:700;color:var(--d-txt)}
+.eh-dash .eh-verdict{font-size:20px;font-weight:800;padding:12px 22px}
+.eh-dash .eh-dash-info{font-size:16px}
+.eh-dash .eh-dash-info span{font-weight:700;color:var(--d-txt)}.eh-dash .eh-dash-info b{font-weight:800}
+.eh-dash .eh-dcard span{font-size:15.5px;font-weight:800;color:var(--d-ink)}
+.eh-dash .eh-dcard b{font-size:34px;font-weight:800}
+.eh-dash .eh-dcard b small{font-size:15px;font-weight:700;color:var(--d-txt)}
+.eh-dash .eh-dc-ic{width:38px;height:38px}.eh-dash .eh-dc-ic svg{width:21px;height:21px}
+.eh-dash .eh-dash-mini span{font-size:14.5px;font-weight:700;color:var(--d-txt)}
+.eh-dash .eh-dash-mini b{font-size:21px;font-weight:800}
+.eh-dash .eh-formula h3{font-size:21px;font-weight:800}
+.eh-dash .eh-formula li{font-size:16.5px;font-weight:600;padding-left:40px}
+.eh-dash .eh-formula li:before{width:27px;height:27px;font-size:14px;font-weight:800}
+.eh-dash .eh-formula b{font-weight:800}
+.eh-dash .eh-verdict-line{font-size:16.5px;font-weight:700}
+.eh-dash .eh-cmp-title{font-size:23px;font-weight:800}
+.eh-dash .eh-cmp-tabs button{font-size:15px;font-weight:700}
+.eh-dash .eh-legend span{font-size:14px;font-weight:700}
+.eh-dash .eh-cmp h4{font-size:17px;font-weight:800}
+.eh-dash .eh-cmp-t{font-size:18px;font-weight:500}
+.eh-dash .eh-ksw-note{font-size:15px;font-weight:700}
+@media(max-width:700px){.eh-dash .eh-dash-head h2{font-size:25px}.eh-dash .eh-dash-head .muted{font-size:15px}.eh-dash .eh-dcard span{font-size:14px}.eh-dash .eh-dcard b{font-size:27px}.eh-dash .eh-dash-mini b{font-size:19px}.eh-dash .eh-formula h3{font-size:19px}.eh-dash .eh-formula li{font-size:15.5px}.eh-dash .eh-cmp-title{font-size:21px}.eh-dash .eh-verdict{font-size:18px}}
