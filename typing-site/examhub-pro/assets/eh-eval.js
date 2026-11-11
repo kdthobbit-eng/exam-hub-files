@@ -16,7 +16,7 @@
   /* costs (x2): same 0 · case/punct 2 · close spelling 4 · different 6 · missing/extra word 4 · joined/split word 2 */
   function compare(src, typ) {
     var m = typ.length;
-    var n = Math.min(src.length, m + Math.max(5, Math.ceil(m * 0.1)));
+    var n = Math.min(src.length, m + Math.max(60, Math.ceil(m * 0.5))); /* room for skipped lines */
     var W = m + 1, D = new Uint32Array((n + 1) * W), i, j;
     var cost = function (x, y) {
       if (x === y) return 0;
