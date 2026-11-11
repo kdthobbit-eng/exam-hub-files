@@ -1213,3 +1213,8 @@ script,style,template{display:none!important}
 .eh-live-table .eh-live-act .btn{white-space:nowrap}
 .eh-live-table{min-width:1140px}
 .eh-live-table th:nth-child(4){width:260px}
+.eh-live-pg{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:16px 0 4px}
+.eh-live-pg button{min-width:42px;height:42px;padding:0 14px;border-radius:12px;border:1.5px solid #e6d9c6;background:#fffaf2;color:#4b311d;font-weight:800;font-size:15px;cursor:pointer}
+.eh-live-pg button.on{background:#4b311d;border-color:#4b311d;color:#fff}
+.eh-live-pg button:disabled{opacity:.4;cursor:default}
+.eh-live-pg span{margin-left:auto;font-weight:700;color:#6b5a48}

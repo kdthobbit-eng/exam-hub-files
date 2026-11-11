@@ -175,9 +175,16 @@ if ($row):
     </tr>
   <?php endforeach; ?>
   </tbody></table></div>
+  <div class="eh-live-pg" id="eh-live-pg"></div>
 </section>
 <script>
-(function(){var bs=document.querySelectorAll('.eh-live-chips button'),rows=document.querySelectorAll('.eh-live-table tbody tr');
-bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.classList.toggle('on',x===b)});var f=b.getAttribute('data-f');rows.forEach(function(r){r.style.display=!f||r.getAttribute('data-f')===f?'':'none'})})});})();
+(function(){var bs=document.querySelectorAll('.eh-live-chips button'),rows=[].slice.call(document.querySelectorAll('.eh-live-table tbody tr')),pg=document.getElementById('eh-live-pg'),per=20,f='',page=1;
+function draw(){var list=rows.filter(function(r){return !f||r.getAttribute('data-f')===f;}),n=Math.max(1,Math.ceil(list.length/per));if(page>n)page=n;
+rows.forEach(function(r){r.style.display='none';});list.forEach(function(r,i){if(i>=(page-1)*per&&i<page*per)r.style.display='';});
+if(!pg)return;if(n<2){pg.innerHTML='';return;}var h='<button type="button" data-p="'+(page-1)+'"'+(page<2?' disabled':'')+'>← Prev</button>';
+for(var k=1;k<=n;k++)h+='<button type="button" data-p="'+k+'" class="'+(k===page?'on':'')+'">'+k+'</button>';
+pg.innerHTML=h+'<button type="button" data-p="'+(page+1)+'"'+(page>=n?' disabled':'')+'>Next →</button><span>Page '+page+' of '+n+'</span>';}
+if(pg)pg.addEventListener('click',function(e){var p=e.target.getAttribute&&e.target.getAttribute('data-p');if(!p||e.target.disabled)return;page=+p;draw();var t=document.querySelector('.eh-live-chips');if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});
+bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.classList.toggle('on',x===b)});f=b.getAttribute('data-f');page=1;draw();});});draw();})();
 </script>
 <?php endif; get_footer();
