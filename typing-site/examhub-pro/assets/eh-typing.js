@@ -393,7 +393,7 @@
     /* key depressions = what is left on screen at the end; deleted letters and extra presses are not counted */
     var tl = Array.from(rawText().replace(/\s+$/, '')).length;
     /* phone keyboards do not report key presses, so when the count is 0 use the letters typed */
-    var kd = !S.keys ? tl : (exam.eval === 'upsssc' ? Math.min(S.keys, tl) : S.keys);
+    var kd = !S.keys ? tl : Math.min(S.keys, tl); /* same for every exam: deleted letters are not counted */
     var amount = exam.unit === 'keys' ? kd : words;
     var V = window.EHEval.verdict({ keys: kd, words: words, full: full, half: half, err: errPct, minutes: secs / 60 }, exam), pass = V.pass;
     if (V.rule === 'upsssc') { net = Math.floor(V.wpm); gross = Math.round(V.words / V.mins); }

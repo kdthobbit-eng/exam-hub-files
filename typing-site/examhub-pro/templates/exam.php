@@ -15,7 +15,11 @@ $rule = $e['unit'] === 'keys'
 <section class="wrap eh-section eh-two">
   <div>
     <h2>About</h2>
+    <?php if (($e['eval'] ?? '') === 'upsssc'): ?>
+    <p>UPSSSC rule (from the admit card): in <?php echo (int) $e['minutes']; ?> minutes you need a net speed of at least <b><?php echo (int) $e['wpm']; ?> WPM</b>. Words = key depressions ÷ 5. The <b>first 5 mistakes are free</b>; after that <b>5 words are cut for each mistake</b>. Speed = (words − cut words) ÷ <?php echo (int) $e['minutes']; ?> minutes. Wrong, missed, added, repeated or incomplete words are full mistakes; spacing, punctuation, word order and paragraph slips are half mistakes<?php echo $e['lang'] === 'hi' ? '' : ', and so are capital/small letter slips'; ?>. Backspace works only on the current and the previous word.</p>
+    <?php else: ?>
     <p><?php echo esc_html($rule); ?> <?php echo esc_html($e['allowed']); ?>% errors are allowed. Wrong, missed or added words are full mistakes; spacing, capital and punctuation slips are half mistakes.<?php if (!empty($e['retype'])) echo ' This is a retyping exam: type the passage on screen as given.'; ?></p>
+    <?php endif; ?>
     <div class="eh-info">
       <div><span>Languages</span><b><?php echo $e['lang'] === 'hi' ? 'Hindi - Krutidev, Hindi - Mangal Inscript, Hindi - Remington Gail' : esc_html(eh_lang_label($e['lang'])); ?></b></div>
       <div><span>Target Speed</span><b><?php echo (int) eh_target_wpm($e); ?> WPM</b></div>
@@ -23,7 +27,7 @@ $rule = $e['unit'] === 'keys'
       <div><span>Time duration</span><b><?php echo (int) $e['minutes']; ?>:00 min</b></div>
       <div><span>Students using this exam</span><b><?php echo number_format_i18n($att[$e['slug']] ?? 0); ?> times</b></div>
       <div><span>Total Tests</span><b><?php echo count(eh_passages($e['lang'] === 'en' ? 'en' : 'hi')); ?>+ Tests</b></div>
-      <div><span>Live Passages</span><b>6 new passages daily</b></div>
+      <div><span>Live Passages</span><b><?php echo ($e['eval'] ?? '') === 'upsssc' ? '30 new passages daily (10 Easy, 10 Moderate, 10 Hard)' : '6 new passages daily'; ?></b></div>
     </div>
     <?php if (in_array($e['lang'], ['mr', 'or'], true)): ?><p class="eh-tip">ℹ️ Passages in this language are coming soon. You can practise on English passages for now.</p><?php endif; ?>
     <a class="btn dark lg" href="<?php echo esc_url(home_url('/typing/' . $e['slug'] . '/')); ?>">Start Typing Test →</a>
