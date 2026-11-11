@@ -1114,3 +1114,5 @@ script,style,template{display:none!important}
 .eh-dash .eh-cmp-t{font-size:18px;font-weight:500}
 .eh-dash .eh-ksw-note{font-size:15px;font-weight:700}
 @media(max-width:700px){.eh-dash .eh-dash-head h2{font-size:25px}.eh-dash .eh-dash-head .muted{font-size:15px}.eh-dash .eh-dcard span{font-size:14px}.eh-dash .eh-dcard b{font-size:27px}.eh-dash .eh-dash-mini b{font-size:19px}.eh-dash .eh-formula h3{font-size:19px}.eh-dash .eh-formula li{font-size:15.5px}.eh-dash .eh-cmp-title{font-size:21px}.eh-dash .eh-verdict{font-size:18px}}
+.eh-dash .eh-dcard.c5 b{font-size:29px;white-space:nowrap}
+@media(max-width:700px){.eh-dash .eh-dcard.c5 b{font-size:21px}}

@@ -140,8 +140,12 @@
     var ICO = ['<path d="M12 14l4-4"/><path d="M3.3 16a9 9 0 1 1 17.4 0"/>','<path d="M3 12h4l3-8 4 16 3-8h4"/>','<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>','<circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/>','<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/>','<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/>','<circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none" opacity=".35"/>','<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'];
     var cards = [
       ['Net Speed', up ? n2(V.wpm) : R.net, up ? 'WPM / ' + V.need : 'WPM', up && !V.pass ? 'bad' : 'c1'], ['Gross Speed', up ? n2(V.words / V.mins) : R.gross, 'WPM', 'c2'], ['Accuracy', R.acc, '%', 'c3'], up ? ['Mistakes', n2(V.errs), '/ 5 free', V.errs > 5 ? 'bad' : 'c4'] : ['Error', R.err, '%', R.err > allowed ? 'bad' : 'c4'],
-      ['Key Depressions', R.keys, keysMode && !up ? '/ ' + X.target : '', keysMode && !up && R.keys < X.target ? 'bad' : 'c5'], ['Full Mistakes', R.full, '', 'c6'], ['Half Mistakes', R.half, '', 'c7'], ['Time Taken', fmtMin(R.minutes), '', 'c8']
-    ].map(function (k, i) { return '<div class="eh-dcard ' + k[3] + '"><div class="eh-dc-top"><span>' + k[0] + '</span><i class="eh-dc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + ICO[i] + '</svg></i></div><b>' + k[1] + ' <small>' + k[2] + '</small></b></div>'; }).join('');
+      up ? ['Total Keystrokes / Words Typed', R.keys + ' / ' + n2(V.words), '', 'c5'] : ['Key Depressions', R.keys, keysMode ? '/ ' + X.target : '', keysMode && R.keys < X.target ? 'bad' : 'c5'], ['Full Mistakes', R.full, '', 'c6'], ['Half Mistakes', R.half, '', 'c7'], ['Time Taken', fmtMin(R.minutes), '', 'c8']
+    ];
+    /* key strokes card comes first, as on the exam's own result sheet */
+    cards.unshift(cards.splice(4, 1)[0]);
+    var ICO2 = ICO.slice(); ICO2.unshift(ICO2.splice(4, 1)[0]);
+    cards = cards.map(function (k, i) { var ICO = ICO2; return '<div class="eh-dcard ' + k[3] + '"><div class="eh-dc-top"><span>' + k[0] + '</span><i class="eh-dc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + ICO[i] + '</svg></i></div><b>' + k[1] + ' <small>' + k[2] + '</small></b></div>'; }).join('');
     var mini = [['Words Typed', R.words], ['Keystroke Errors', R.kerr], ['Backspace', R.backspaces], ['Missed words', c.om], ['Added words', c.add], ['Wrong words', c.sub], ['Space/Case/Punct/Order', c.space + '/' + c.case + '/' + c.punct + '/' + c.trans], ['Pending Words', R.pending || 0]]
       .map(function (k) { return '<div><span>' + k[0] + '</span><b>' + k[1] + '</b></div>'; }).join('');
     var amount = keysMode ? R.keys : R.words;
