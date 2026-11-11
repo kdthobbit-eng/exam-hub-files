@@ -77,7 +77,7 @@ if ($row):
   <p class="muted small"><?php echo esc_html(wp_date('d/m/Y')); ?> · <?php echo esc_html(eh_opt('brand_typing') ?: eh_opt('brand')); ?></p>
   <?php if ($allday): ?>
   <h1 class="eh-live-h">UPSSSC Junior Assistant Live Typing</h1>
-  <p class="muted"><?php echo count($S); ?> passages today: 6 English and 6 Hindi (Krutidev or Mangal Inscript), with 2 Easy, 2 Moderate and 2 Hard in each language. All are full length and open the whole day. Everyone gets the same passage, and each passage has its own ranking by net speed.</p>
+  <p class="muted"><?php echo count($S); ?> passages today: <?php $eh_news = ''; foreach ($S as $x) if (!empty($x['news'])) $eh_news = $x['news']; echo $eh_news ? 'English and Hindi (Krutidev or Mangal Inscript), 10 Easy, 10 Moderate and 10 Hard in each language, written from the news of ' . esc_html(date_i18n('j F Y', strtotime($eh_news))) . '.' : '6 English and 6 Hindi (Krutidev or Mangal Inscript), with 2 Easy, 2 Moderate and 2 Hard in each language.'; ?> All are full length and open the whole day. Everyone gets the same passage, and each passage has its own ranking by net speed.</p>
   <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
   <?php else: ?>
   <h1 class="eh-live-h">Live Typing — same passage, same time, for everyone</h1>

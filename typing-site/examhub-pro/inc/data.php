@@ -77,8 +77,9 @@ function eh_passage_levels($list) {
     foreach ($list as $i => $p) {
         $w = max(1, $p['words'] ?? 1);
         $sym = preg_match_all('/[0-9,.;:()"\'\-।]/u', $p['text']);
-        $by[$p['lang']][$i] = ($p['chars'] / $w) + 4 * ($sym / $w);
         $list[$i] += ['special' => false, 'date' => ''];
+        if (!empty($p['level'])) continue; /* news passages come with their own level */
+        $by[$p['lang']][$i] = ($p['chars'] / $w) + 4 * ($sym / $w);
     }
     foreach ($by as $scores) {
         asort($scores); $n = count($scores); $k = 0;
@@ -90,7 +91,7 @@ function eh_passage_levels($list) {
 /* Passages released per day: 3 per day (morning / afternoon / evening) by rotation + admin passages on their own date */
 function eh_passage_days($lang, $days = 7) {
     $all = eh_passages($lang);
-    $pool = array_values(array_filter($all, function ($p) { return empty($p['special']) && strpos($p['id'], 'p') !== 0; }));
+    $pool = array_values(array_filter($all, function ($p) { return empty($p['special']) && empty($p['day']) && strpos($p['id'], 'p') !== 0; }));
     $n = count($pool); $out = [];
     $today = (int) floor((current_time('timestamp')) / 86400);
     for ($d = 0; $d < $days; $d++) {
@@ -126,16 +127,21 @@ function eh_live_schedule() {
         foreach ([['en', 'upsssc-assistants-english-typing-test', 'English'], ['hi', 'upsssc-assistants-hindi-typing-test', 'Hindi']] as $x) {
             $e = eh_exam($x[1]); if (!$e) continue;
             $e['name'] = 'UPSSSC Junior Assistant ' . $x[2] . ' Typing';
-            $all = array_values(array_filter(eh_passages($x[0]), function ($p) { return empty($p['special']) && strpos($p['id'], 'p') !== 0; }));
+            $every = eh_passages($x[0]);
+            /* news set: passages written from the day's news (field "day"). The newest set up to today is shown in full: 10 Easy, 10 Moderate, 10 Hard. */
+            $nd = '';
+            foreach ($every as $p) if (!empty($p['day']) && $p['day'] <= $date && $p['day'] > $nd) $nd = $p['day'];
+            $all = array_values(array_filter($every, function ($p) use ($nd) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && ($nd ? ($p['day'] ?? '') === $nd : empty($p['day'])); }));
             $need = max((int) ceil($e['target'] * 1.3), (int) $e['minutes'] * 720); /* enough text for well over 100 WPM */
             $no = 0;
             foreach ($groups as $label => $lv) {
                 $pool = array_values(array_filter($all, function ($p) use ($lv) { return in_array($p['level'], $lv, true); }));
                 $n = count($pool); if (!$n) continue;
-                for ($k = 0; $k < 2 && $k < $n; $k++) {
-                    $start = ($day * 2 + $k) % $n; $seq = []; $len = 0;
+                $per = $nd ? $n : 2;
+                for ($k = 0; $k < $per && $k < $n; $k++) {
+                    $start = $nd ? $k : ($day * 2 + $k) % $n; $seq = []; $len = 0;
                     for ($q = 0; $q < $n && $q < 8; $q++) { $seq[] = $pool[($start + $q) % $n]; $len += $seq[$q]['chars'] + 1; if ($len >= $need && $q >= 1) break; }
-                    $out[] = ['exam' => $e, 'lang' => $x[0], 'passage' => $seq[0], 'plist' => $seq, 'chars' => max(0, $len - 1), 'level' => $label, 'no' => ++$no, 'allday' => true,
+                    $out[] = ['exam' => $e, 'lang' => $x[0], 'passage' => $seq[0], 'plist' => $seq, 'chars' => max(0, $len - 1), 'level' => $label, 'no' => ++$no, 'allday' => true, 'news' => $nd,
                         'start' => '12:00 AM', 'end' => '11:59 PM', 's' => 0, 'e' => 1439, 'date' => $date];
                 }
             }
