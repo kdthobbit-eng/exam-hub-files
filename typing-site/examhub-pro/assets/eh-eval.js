@@ -103,15 +103,15 @@
 
   function fmtMin(m) { var s = Math.round(m * 60); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2) + ' min'; }
   /* Pass or fail, by the exam's own rule.
-     UPSSSC (X.eval === 'upsssc'): words = real words typed; mistakes = full + half ÷ 2; the first 5 mistakes are free,
+     UPSSSC (X.eval === 'upsssc'): words = key depressions ÷ 5 (R.mode 'words' = real words typed, shown only as a second view); mistakes = full + half ÷ 2; the first 5 mistakes are free,
      each mistake after that cuts 5 words; speed = net words ÷ minutes; needs X.wpm.
      Others: key depressions (or words) must reach the target and error % must stay within the limit. */
   function verdict(R, X) {
     var allowed = X.allowed || 5;
     if (X.eval === 'upsssc' && X.wpm) {
-      var errs = (+R.full || 0) + (+R.half || 0) / 2, kw = (+R.words || 0), pen = Math.max(0, errs - 5) * 5, nw = Math.max(0, kw - pen);
+      var errs = (+R.full || 0) + (+R.half || 0) / 2, byW = R.mode === 'words' || !(+R.keys), kw = byW ? (+R.words || 0) : (+R.keys) / 5, pen = Math.max(0, errs - 5) * 5, nw = Math.max(0, kw - pen);
       var m = Math.max(+R.minutes || 0, +X.minutes || 5), sp = nw / m;
-      return { rule: 'upsssc', pass: sp >= X.wpm, wpm: sp, words: kw, errs: errs, pen: pen, netWords: nw, mins: m, need: +X.wpm };
+      return { rule: 'upsssc', pass: sp >= X.wpm, wpm: sp, words: kw, errs: errs, pen: pen, netWords: nw, mins: m, need: +X.wpm, byWords: byW };
     }
     var amount = X.unit === 'keys' ? R.keys : R.words;
     return { rule: 'std', pass: amount >= X.target && R.err <= allowed, amount: amount };
@@ -119,6 +119,13 @@
   function n2(v) { return (Math.round(v * 100) / 100).toString(); }
   /* R: net gross acc err keys kerr words full half backspaces minutes pass pending title date ; X: exam */
   function dashboard(R, X, ops) {
+    if (!(X.eval === 'upsssc' && X.wpm)) return dashBody(R, X, ops);
+    /* official result = key stroke formula (5 key strokes = 1 word). The switch only shows the word-count view. */
+    var W = {}; for (var k in R) W[k] = R[k]; W.mode = 'words';
+    return '<label class="eh-ksw"><input type="checkbox" checked> <span class="eh-ksw-t"></span> <b>Key Stroke Based Formula</b> <small>5 key strokes = 1 word · used for result and rank</small></label>' +
+      '<div class="eh-kv" data-k="keys">' + dashBody(R, X, ops) + '</div><div class="eh-kv" data-k="words" hidden><p class="eh-ksw-note">Word-count view (only for comparison). Your result and rank use the key stroke formula.</p>' + dashBody(W, X, ops) + '</div>';
+  }
+  function dashBody(R, X, ops) {
     var V = verdict(R, X), up = V.rule === 'upsssc'; R.pass = V.pass ? 1 : 0;
     var c = counts(ops), allowed = X.allowed || 5, keysMode = X.unit === 'keys';
     var tgt = (+X.target).toLocaleString('en-IN') + (keysMode ? ' key depressions' : ' words');
@@ -138,7 +145,7 @@
       .map(function (k) { return '<div><span>' + k[0] + '</span><b>' + k[1] + '</b></div>'; }).join('');
     var amount = keysMode ? R.keys : R.words;
     var fu = up ? '<div class="eh-formula"><h3>How your result was worked out (UPSSSC rule)</h3><ol>' +
-      '<li><b>Words typed</b> = real words you typed = <b>' + n2(V.words) + '</b></li>' +
+      (V.byWords ? '<li><b>Words typed</b> = real words you typed = <b>' + n2(V.words) + '</b></li>' : '<li><b>Words typed</b> = key depressions ÷ 5 = ' + R.keys + ' ÷ 5 = <b>' + n2(V.words) + '</b></li>') +
       '<li><b>Mistakes</b> = Full ' + R.full + ' + Half ' + R.half + ' ÷ 2 = <b>' + n2(V.errs) + '</b> (the first 5 are free)</li>' +
       '<li><b>Penalty</b> = ' + (V.errs > 5 ? '(' + n2(V.errs) + ' − 5) × 5 = <b>' + n2(V.pen) + ' words</b>' : '<b>0 words</b>, because mistakes are 5 or fewer') + '</li>' +
       '<li><b>Net words</b> = ' + n2(V.words) + ' − ' + n2(V.pen) + ' = <b>' + n2(V.netWords) + '</b></li>' +
@@ -157,6 +164,8 @@
     return head + '<div class="eh-dash-grid">' + cards + '</div><div class="eh-dash-mini">' + mini + '</div>' + (up ? fu : f) + '<h3 class="eh-cmp-title">Detailed Comparison</h3>' + cmp;
   }
   function bindDash(root) {
+    var sw = root.querySelector('.eh-ksw input');
+    if (sw) sw.addEventListener('change', function () { root.querySelectorAll('.eh-kv').forEach(function (v) { v.hidden = (v.getAttribute('data-k') === 'keys') !== sw.checked; }); });
     root.querySelectorAll('.eh-cmp-tabs button').forEach(function (b) {
       b.addEventListener('click', function () {
         root.querySelectorAll('.eh-cmp-tabs button').forEach(function (x) { x.classList.toggle('on', x === b); });
