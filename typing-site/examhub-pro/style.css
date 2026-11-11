@@ -1185,3 +1185,14 @@ script,style,template{display:none!important}
 .ex-tool .eh-psg-btn{width:auto!important;padding:0 10px!important;font-weight:700;font-size:13px}
 .ex-tool .eh-psg-btn.on{background:#e8590c!important;color:#fff!important;border-color:#e8590c!important}
 .eh-exam:not(.ew-nopass) .eh-psg-btn{display:none!important}
+/* result inside a narrow column (live page has the ranking on the side): stack the score box on top */
+.eh-panel.eh-dash{container-type:inline-size}
+@container (max-width:980px){
+ .eh-dash .eh-top{grid-template-columns:1fr}
+ .eh-dash .eh-score-n b{font-size:70px}
+ .eh-dash .eh-dash-grid.eh-g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@container (max-width:560px){
+ .eh-dash .eh-dash-grid.eh-g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .eh-dash .eh-dcard.eh-wide b{font-size:30px}
+}
