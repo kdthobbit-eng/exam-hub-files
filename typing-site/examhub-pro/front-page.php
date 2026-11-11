@@ -65,7 +65,7 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
     <p class="uh-lead"><?php echo eh_t('Notes, daily quiz, mock tests and exam-style typing practice for UPSSSC and other UP exams. All in one place.', 'UPSSSC और UP की बाकी भर्तियों के लिए नोट्स, रोज़ क्विज, मॉक टेस्ट और एग्जाम जैसी टाइपिंग प्रैक्टिस। सब एक जगह।'); ?></p>
     <div class="uh-cta">
       <a class="uh-btn" href="#batches"><?php echo eh_t('See running batches', 'चल रहे बैच देखें'); ?><?php echo $arrow; ?></a>
-      <a class="uh-btn ghost" href="<?php echo esc_url(home_url('/live-typing/')); ?>"><?php echo eh_t('Junior Assistant Live Typing', 'जूनियर असिस्टेंट लाइव टाइपिंग'); ?><?php echo $arrow; ?></a>
+      <a class="uh-btn" href="<?php echo esc_url(home_url('/live-typing/')); ?>"><?php echo eh_t('Junior Assistant Live Typing', 'जूनियर असिस्टेंट लाइव टाइपिंग'); ?><?php echo $arrow; ?></a>
     </div>
     <ul class="uh-stats">
       <li><b data-count="60000" data-suffix="+">60,000+</b><span><?php echo eh_t('students with us', 'विद्यार्थी हमारे साथ'); ?></span></li>
