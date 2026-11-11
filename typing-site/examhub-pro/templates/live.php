@@ -97,9 +97,12 @@ if ($row):
 <?php else:
   $allday = $S && !empty($S[0]['allday']); ?>
 <section class="wrap eh-section">
-  <p class="muted small"><?php echo esc_html(wp_date('d/m/Y')); ?> · <?php echo esc_html(eh_opt('brand_typing') ?: eh_opt('brand')); ?></p>
+  <?php if (!$allday): ?><p class="muted small"><?php echo esc_html(wp_date('d/m/Y')); ?> · <?php echo esc_html(eh_opt('brand_typing') ?: eh_opt('brand')); ?></p><?php endif; ?>
   <?php if ($allday): ?>
+  <div class="eh-lt-head"><div class="eh-lt-top"><div class="eh-lt-title">
+  <p class="eh-lt-kick"><span class="eh-lt-dot"></span> Live today · <?php echo esc_html(eh_opt('brand_typing') ?: eh_opt('brand')); ?></p>
   <h1 class="eh-live-h">UPSSSC Junior Assistant Live Typing</h1>
+  <p class="eh-lt-sub">Same passage for everyone · open all day · ranking by net speed</p></div>
   <?php $eh_news = ''; foreach ($S as $x) if (!empty($x['news'])) $eh_news = $x['news'];
   $eh_fd = function ($d) { return date_i18n('j M Y', strtotime($d)); };
   $eh_cur = $eh_news ?: wp_date('Y-m-d'); $eh_ix = array_search($eh_cur, $eh_days, true);
@@ -118,6 +121,7 @@ if ($row):
     <div class="eh-dp-pop" id="eh-dp-pop" hidden></div>
   </div>
   <?php endif; ?>
+  </div><div class="eh-lt-bar">
   <p class="eh-dp-sum"><b><?php echo count($S); ?></b> passages<?php if ($eh_news): ?> · <span class="eh-lvl easy">10 Easy</span> <span class="eh-lvl moderate">10 Moderate</span> <span class="eh-lvl hard">10 Hard</span> · English + Hindi · from the day's news<?php endif; ?></p>
   <script>
   (function () {
@@ -143,6 +147,7 @@ if ($row):
   })();
   </script>
   <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
+  </div></div>
   <?php else: ?>
   <h1 class="eh-live-h">Live Typing — same passage, same time, for everyone</h1>
   <p class="muted">Each exam has a live test at a fixed time every day. Everyone gets the same passage and the day's ranking is by net speed.</p>
