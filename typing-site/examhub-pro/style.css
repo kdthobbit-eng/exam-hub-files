@@ -986,3 +986,10 @@ script,style,template{display:none!important}
 .eh-exam .ex-photo{align-items:flex-end}
 .eh-exam .ex-photo b{white-space:nowrap;max-width:46vw;overflow:hidden;text-overflow:ellipsis}
 .eh-exam .ex-time{top:30px}
+
+/* live typing: date strip */
+.eh-days{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 14px}
+.eh-days-l{font-weight:800;color:#4b311d}
+.eh-days a{padding:7px 14px;border-radius:999px;border:1.5px solid #e6d9c6;background:#fffaf2;color:#4b311d;font-weight:700;text-decoration:none;font-size:14px}
+.eh-days a.on{background:#8a431f;border-color:#8a431f;color:#fff}
+.eh-days a em{font-style:normal;font-size:11px;opacity:.85;margin-left:4px;text-transform:uppercase;letter-spacing:.04em}

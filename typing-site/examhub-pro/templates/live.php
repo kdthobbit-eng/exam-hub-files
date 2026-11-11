@@ -1,9 +1,13 @@
 <?php
-$S = eh_live_schedule();
+$eh_days = eh_live_days();
+$eh_day = preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) ($_GET['day'] ?? '')) && in_array($_GET['day'], $eh_days, true) ? $_GET['day'] : '';
+$S = eh_live_schedule($eh_day);
 $now = (int) wp_date('G') * 60 + (int) wp_date('i');
 $sel = sanitize_title($_GET['exam'] ?? '');
 $pid = sanitize_key($_GET['p'] ?? ''); $kb = sanitize_key($_GET['kb'] ?? '');
 $row = null; foreach ($S as $r) if (!$row && $r['exam']['slug'] === $sel && ($pid === '' || ($r['passage']['id'] ?? '') === $pid)) $row = $r;
+/* a passage of an older day still opens from its link */
+if (!$row && $pid !== '') foreach ($eh_days as $d) { foreach (eh_live_schedule($d) as $r) if (!$row && $r['exam']['slug'] === $sel && ($r['passage']['id'] ?? '') === $pid) $row = $r; if ($row) break; }
 $medal = ['🥇', '🥈', '🥉'];
 global $wpdb;
 get_header();
@@ -77,7 +81,16 @@ if ($row):
   <p class="muted small"><?php echo esc_html(wp_date('d/m/Y')); ?> · <?php echo esc_html(eh_opt('brand_typing') ?: eh_opt('brand')); ?></p>
   <?php if ($allday): ?>
   <h1 class="eh-live-h">UPSSSC Junior Assistant Live Typing</h1>
-  <p class="muted"><?php echo count($S); ?> passages today: <?php $eh_news = ''; foreach ($S as $x) if (!empty($x['news'])) $eh_news = $x['news']; echo $eh_news ? 'English and Hindi (Krutidev or Mangal Inscript), 10 Easy, 10 Moderate and 10 Hard in each language, written from the news of ' . esc_html(date_i18n('j F Y', strtotime($eh_news))) . '.' : '6 English and 6 Hindi (Krutidev or Mangal Inscript), with 2 Easy, 2 Moderate and 2 Hard in each language.'; ?> All are full length and open the whole day. Everyone gets the same passage, and each passage has its own ranking by net speed.</p>
+  <?php $eh_news = ''; foreach ($S as $x) if (!empty($x['news'])) $eh_news = $x['news'];
+  $eh_fd = function ($d) { return date_i18n('j M Y', strtotime($d)); };
+  if ($eh_days): ?>
+  <div class="eh-days"><span class="eh-days-l">Date:</span>
+    <?php foreach (array_slice($eh_days, 0, 14) as $k => $d): ?>
+      <a class="<?php echo $d === $eh_news ? 'on' : ''; ?>" href="<?php echo esc_url($k === 0 ? home_url('/live-typing/') : add_query_arg('day', $d, home_url('/live-typing/'))); ?>"><?php echo esc_html($eh_fd($d)); ?><?php if ($k === 0) echo ' <em>' . ($d === wp_date('Y-m-d') ? 'Today' : 'Latest') . '</em>'; ?></a>
+    <?php endforeach; ?>
+  </div>
+  <?php endif; ?>
+  <p class="muted"><?php echo count($S); ?> passages<?php echo $eh_news ? ' of <b>' . esc_html(date_i18n('j F Y', strtotime($eh_news))) . '</b>' : ' today'; ?>: <?php echo $eh_news ? 'English and Hindi (Krutidev or Mangal Inscript), 10 Easy, 10 Moderate and 10 Hard in each language, written from that day\'s news. Older days stay open under their own date.' : '6 English and 6 Hindi (Krutidev or Mangal Inscript), with 2 Easy, 2 Moderate and 2 Hard in each language.'; ?> All are full length and open the whole day. Everyone gets the same passage, and each passage has its own ranking by net speed.</p>
   <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
   <?php else: ?>
   <h1 class="eh-live-h">Live Typing — same passage, same time, for everyone</h1>

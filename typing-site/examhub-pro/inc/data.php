@@ -115,7 +115,14 @@ function eh_slot_passage($lang, $slot) {
 /* Live Typing. Default: 30 UPSSSC Junior Assistant tests a day (15 English + 15 Hindi), all open the whole day;
    the set of passages moves on every day. Option eh_live_schedule (JSON [{"exam":"slug","start":"07:00","end":"10:40"}])
    replaces this list with timed slots when it is filled in. */
-function eh_live_schedule() {
+/* days that have their own news set, newest first (never a future day) */
+function eh_live_days() {
+    $today = wp_date('Y-m-d'); $d = [];
+    foreach (eh_passages() as $p) if (!empty($p['day']) && $p['day'] <= $today) $d[$p['day']] = 1;
+    krsort($d);
+    return array_keys($d);
+}
+function eh_live_schedule($want = '') {
     $date = wp_date('Y-m-d');
     $j = json_decode((string) get_option('eh_live_schedule', ''), true);
     $out = [];
@@ -131,6 +138,7 @@ function eh_live_schedule() {
             /* news set: passages written from the day's news (field "day"). The newest set up to today is shown in full: 10 Easy, 10 Moderate, 10 Hard. */
             $nd = '';
             foreach ($every as $p) if (!empty($p['day']) && $p['day'] <= $date && $p['day'] > $nd) $nd = $p['day'];
+            if ($want && $want <= $date) foreach ($every as $p) if (($p['day'] ?? '') === $want) { $nd = $want; break; }
             $all = array_values(array_filter($every, function ($p) use ($nd) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && ($nd ? ($p['day'] ?? '') === $nd : empty($p['day'])); }));
             $need = max((int) ceil($e['target'] * 1.3), (int) $e['minutes'] * 720); /* enough text for well over 100 WPM */
             $no = 0;
