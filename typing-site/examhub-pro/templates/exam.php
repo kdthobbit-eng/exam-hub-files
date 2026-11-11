@@ -27,7 +27,7 @@ $rule = $e['unit'] === 'keys'
       <div><span>Time duration</span><b><?php echo (int) $e['minutes']; ?>:00 min</b></div>
       <div><span>Students using this exam</span><b><?php echo number_format_i18n($att[$e['slug']] ?? 0); ?> times</b></div>
       <div><span>Total Tests</span><b><?php echo count(eh_passages($e['lang'] === 'en' ? 'en' : 'hi')); ?>+ Tests</b></div>
-      <div><span>Live Passages</span><b><?php echo ($e['eval'] ?? '') === 'upsssc' ? '30 new passages daily (10 Easy, 10 Moderate, 10 Hard)' : '6 new passages daily'; ?></b></div>
+      <div><span>Live Passages</span><b><?php echo ($e['eval'] ?? '') === 'upsssc' ? '30 new passages daily (10 Easy, 10 Moderate, 10 Hard)' : '20 new passages daily'; ?></b></div>
     </div>
     <?php if (in_array($e['lang'], ['mr', 'or'], true)): ?><p class="eh-tip">ℹ️ Passages in this language are coming soon. You can practise on English passages for now.</p><?php endif; ?>
     <a class="btn dark lg" href="<?php echo esc_url(home_url('/typing/' . $e['slug'] . '/')); ?>">Start Typing Test →</a>

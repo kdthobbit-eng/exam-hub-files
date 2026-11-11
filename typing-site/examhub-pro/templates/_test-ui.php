@@ -98,7 +98,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
           <?php else: ?>
           <div class="eh-psel-top"><h3>Choose a passage</h3>
             <?php if ($eh_special): ?><button type="button" class="btn ghost sm" id="eh-sp-open">★ Special Passages</button><?php endif; ?></div>
-          <p class="eh-lvl-legend">B - Basic · E - Easy · M - Moderate · H - Hard · <span class="muted">6 new passages daily</span></p>
+          <p class="eh-lvl-legend">B - Basic · E - Easy · M - Moderate · H - Hard · <span class="muted">20 new passages daily</span></p>
           <label class="eh-prow rnd"><input type="radio" name="eh-psg" value="" checked><span class="lv">?</span><span class="t">Random passage</span><span class="n"></span></label>
           <?php foreach ($eh_days as $i => $day): ?>
             <details class="eh-day" <?php echo $i < 2 ? 'open' : ''; ?>><summary><?php echo esc_html($i === 0 ? 'Today — ' : ($i === 1 ? 'Yesterday — ' : '')); echo esc_html(wp_date('d M Y, l', strtotime($day['date'] . ' 12:00'))); ?> <span class="muted">(<?php echo count($day['items']); ?>)</span></summary>

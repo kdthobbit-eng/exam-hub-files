@@ -91,13 +91,25 @@ function eh_passage_levels($list) {
 /* Passages released per day: 3 per day (morning / afternoon / evening) by rotation + admin passages on their own date */
 function eh_passage_days($lang, $days = 7) {
     $all = eh_passages($lang);
-    $pool = array_values(array_filter($all, function ($p) { return empty($p['special']) && empty($p['day']) && strpos($p['id'], 'p') !== 0; }));
-    $n = count($pool); $out = [];
+    $tdate = wp_date('Y-m-d');
+    /* practice pool: the regular passages plus Live news passages of past days (today's stay on Live Typing) */
+    $pool = array_values(array_filter($all, function ($p) use ($tdate) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && (empty($p['day']) || $p['day'] < $tdate); }));
+    /* 20 passages a day, hard-heavy: 8 Hard, 6 Moderate, 4 Easy, 2 Basic (a short group is filled from the others) */
+    $want = ['H' => 8, 'M' => 6, 'E' => 4, 'B' => 2];
+    $grp = ['H' => [], 'M' => [], 'E' => [], 'B' => []];
+    foreach ($pool as $p) { $lv = $p['level'] ?? 'M'; if (!isset($grp[$lv])) $lv = 'M'; $grp[$lv][] = $p; }
+    $out = [];
     $today = (int) floor((current_time('timestamp')) / 86400);
     for ($d = 0; $d < $days; $d++) {
-        $day = $today - $d; $date = gmdate('Y-m-d', $day * 86400); $items = [];
+        $day = $today - $d; $date = gmdate('Y-m-d', $day * 86400); $items = []; $seen = [];
         foreach ($all as $p) if (strpos($p['id'], 'p') === 0 && empty($p['special']) && $p['date'] === $date) $items[] = $p;
-        for ($k = 0; $k < 6 && $n; $k++) $items[] = $pool[(($day * 6 + $k) % $n + $n) % $n];
+        $left = 0;
+        foreach ($want as $lv => $c) {
+            $g = $grp[$lv]; $n = count($g); $got = 0;
+            for ($k = 0; $k < $n && $got < $c; $k++) { $p = $g[(($day * $c + $k) % $n + $n) % $n]; if (isset($seen[$p['id']])) continue; $seen[$p['id']] = 1; $items[] = $p; $got++; }
+            $left += $c - $got;
+        }
+        for ($k = 0, $n = count($pool); $left > 0 && $k < $n; $k++) { $p = $pool[(($day * 7 + $k) % $n + $n) % $n]; if (isset($seen[$p['id']])) continue; $seen[$p['id']] = 1; $items[] = $p; $left--; }
         $out[] = ['date' => $date, 'items' => $items];
     }
     return $out;
