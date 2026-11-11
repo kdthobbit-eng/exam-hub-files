@@ -103,13 +103,13 @@
 
   function fmtMin(m) { var s = Math.round(m * 60); return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2) + ' min'; }
   /* Pass or fail, by the exam's own rule.
-     UPSSSC (X.eval === 'upsssc'): words = key depressions ÷ 5; mistakes = full + half ÷ 2; the first 5 mistakes are free,
+     UPSSSC (X.eval === 'upsssc'): words = real words typed; mistakes = full + half ÷ 2; the first 5 mistakes are free,
      each mistake after that cuts 5 words; speed = net words ÷ minutes; needs X.wpm.
      Others: key depressions (or words) must reach the target and error % must stay within the limit. */
   function verdict(R, X) {
     var allowed = X.allowed || 5;
     if (X.eval === 'upsssc' && X.wpm) {
-      var errs = (+R.full || 0) + (+R.half || 0) / 2, kw = (+R.keys || 0) / 5, pen = Math.max(0, errs - 5) * 5, nw = Math.max(0, kw - pen);
+      var errs = (+R.full || 0) + (+R.half || 0) / 2, kw = (+R.words || 0), pen = Math.max(0, errs - 5) * 5, nw = Math.max(0, kw - pen);
       var m = Math.max(+R.minutes || 0, +X.minutes || 5), sp = nw / m;
       return { rule: 'upsssc', pass: sp >= X.wpm, wpm: sp, words: kw, errs: errs, pen: pen, netWords: nw, mins: m, need: +X.wpm };
     }
@@ -138,7 +138,7 @@
       .map(function (k) { return '<div><span>' + k[0] + '</span><b>' + k[1] + '</b></div>'; }).join('');
     var amount = keysMode ? R.keys : R.words;
     var fu = up ? '<div class="eh-formula"><h3>How your result was worked out (UPSSSC rule)</h3><ol>' +
-      '<li><b>Words typed</b> = key depressions ÷ 5 = ' + R.keys + ' ÷ 5 = <b>' + n2(V.words) + '</b></li>' +
+      '<li><b>Words typed</b> = real words you typed = <b>' + n2(V.words) + '</b></li>' +
       '<li><b>Mistakes</b> = Full ' + R.full + ' + Half ' + R.half + ' ÷ 2 = <b>' + n2(V.errs) + '</b> (the first 5 are free)</li>' +
       '<li><b>Penalty</b> = ' + (V.errs > 5 ? '(' + n2(V.errs) + ' − 5) × 5 = <b>' + n2(V.pen) + ' words</b>' : '<b>0 words</b>, because mistakes are 5 or fewer') + '</li>' +
       '<li><b>Net words</b> = ' + n2(V.words) + ' − ' + n2(V.pen) + ' = <b>' + n2(V.netWords) + '</b></li>' +

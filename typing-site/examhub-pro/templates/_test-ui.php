@@ -56,7 +56,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
         <?php if (($eh_exam['eval'] ?? '') === 'upsssc'): ?>
         <li>These rules are from the commission's typing test instructions (Advt. 12-Exam/2024 admit card).</li>
         <li>Backspace works only on the word you are typing and the <b>one word before it</b> (2 words in all). Older words are locked.</li>
-        <li>Speed = (key depressions ÷ 5 − penalty) ÷ <?php echo (int) $eh_exam['minutes']; ?> minutes. The <b>first 5 mistakes are free</b>; every mistake after that cuts <b>5 words</b>. You need <b><?php echo (int) ($eh_exam['wpm'] ?? 0); ?> WPM</b> to qualify.</li>
+        <li>Speed = (words typed − penalty) ÷ <?php echo (int) $eh_exam['minutes']; ?> minutes. The <b>first 5 mistakes are free</b>; every mistake after that cuts <b>5 words</b>. You need <b><?php echo (int) ($eh_exam['wpm'] ?? 0); ?> WPM</b> to qualify.</li>
         <li>Two words typed in the wrong order count as a <b>half mistake</b>.</li>
         <li>Do not use the Ctrl key. Keep typing until the time is over; there is no break once the test starts.</li>
         <?php else: ?>
