@@ -1196,3 +1196,20 @@ script,style,template{display:none!important}
  .eh-dash .eh-dash-grid.eh-g3{grid-template-columns:repeat(2,minmax(0,1fr))}
  .eh-dash .eh-dcard.eh-wide b{font-size:30px}
 }
+/* live list table: neat fixed columns, scrolls sideways on small screens (like a sheet) */
+.eh-table-wrap:has(.eh-live-table){overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:16px}
+.eh-live-table{min-width:980px;table-layout:fixed;width:100%}
+.eh-live-table th{white-space:nowrap;font-size:12.5px;letter-spacing:.6px}
+.eh-live-table th:nth-child(1){width:48px}.eh-live-table th:nth-child(2){width:210px}.eh-live-table th:nth-child(3){width:110px}
+.eh-live-table th:nth-child(4){width:auto}.eh-live-table th:nth-child(5){width:150px}.eh-live-table th:nth-child(6){width:90px}
+.eh-live-table th:nth-child(7){width:130px}.eh-live-table th:nth-child(8){width:150px}
+.eh-live-table td{padding:14px 12px;line-height:1.35}
+.eh-live-table td:nth-child(2) b{font-size:14.5px;font-weight:700;color:#3f3125}
+.eh-live-table td:nth-child(2) .small{font-weight:700;color:#8a431f}
+.eh-live-table td:nth-child(4){font-size:16px;font-weight:800;color:#1f160e}
+.eh-live-table td:nth-child(4) .muted{font-size:13px;font-weight:600}
+.eh-live-table td:nth-child(3),.eh-live-table td:nth-child(6),.eh-live-table td:nth-child(7),.eh-live-table td:nth-child(8){white-space:nowrap}
+.eh-live-table td:nth-child(5){font-weight:700}
+.eh-live-table .eh-live-act .btn{white-space:nowrap}
+.eh-live-table{min-width:1140px}
+.eh-live-table th:nth-child(4){width:260px}
