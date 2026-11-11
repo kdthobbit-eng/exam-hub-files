@@ -125,6 +125,7 @@
     return '<label class="eh-ksw"><input type="checkbox" checked> <span class="eh-ksw-t"></span> <b>Key Stroke Based Formula</b> <small>5 key strokes = 1 word · used for result and rank</small></label>' +
       '<div class="eh-kv" data-k="keys">' + dashBody(R, X, ops) + '</div><div class="eh-kv" data-k="words" hidden><p class="eh-ksw-note">Word-count view (only for comparison). Your result and rank use the key stroke formula.</p>' + dashBody(W, X, ops) + '</div>';
   }
+  function eh_tgt(X, t) { return X.wpm ? X.wpm + '' : t; }
   function dashBody(R, X, ops) {
     var V = verdict(R, X), up = V.rule === 'upsssc'; R.pass = V.pass ? 1 : 0;
     var c = counts(ops), allowed = X.allowed || 5, keysMode = X.unit === 'keys';
@@ -136,19 +137,25 @@
     var mm = function (m) { m = Math.round((+m || 0) * 60); return ('0' + Math.floor(m / 60)).slice(-2) + ':' + ('0' + m % 60).slice(-2) + ' min.'; };
     var info = '<div class="eh-dash-info">' + [['Exam Title', esc(X.name)], ['Passage Title', esc(R.title || '—')], ['Total Key Depression', R.total ? R.total : '—'], ['Time Duration', mm(R.dur || X.minutes)], ['Typing Date', esc(R.date || '—')], ['Time Taken', mm(R.minutes)]]
       .map(function (k) { return '<div><span>' + k[0] + ':</span> <b>' + k[1] + '</b></div>'; }).join('') + '</div>';
-    head += info;
     var ICO = ['<path d="M12 14l4-4"/><path d="M3.3 16a9 9 0 1 1 17.4 0"/>','<path d="M3 12h4l3-8 4 16 3-8h4"/>','<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>','<circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/>','<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/>','<path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/>','<circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none" opacity=".35"/>','<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'];
     var cards = [
-      ['Net Speed', up ? n2(V.wpm) : R.net, up ? 'WPM / ' + V.need : 'WPM', up && !V.pass ? 'bad' : 'c1'], ['Gross Speed', up ? n2(V.words / V.mins) : R.gross, 'WPM', 'c2'], ['Accuracy', R.acc, '%', 'c3'], up ? ['Mistakes', n2(V.errs), '/ 5 free', V.errs > 5 ? 'bad' : 'c4'] : ['Error', R.err, '%', R.err > allowed ? 'bad' : 'c4'],
+      ['Gross Speed', up ? n2(V.words / V.mins) : R.gross, 'WPM', 'c2'], ['Accuracy', R.acc, '%', 'c3'], up ? ['Mistakes', n2(V.errs), '/ 5 free', V.errs > 5 ? 'bad' : 'c4'] : ['Error', R.err, '%', R.err > allowed ? 'bad' : 'c4'],
       up ? ['Total Keystrokes / Words Typed', R.keys + ' / ' + n2(V.words), '', 'c5'] : ['Key Depressions', R.keys, keysMode ? '/ ' + X.target : '', keysMode && R.keys < X.target ? 'bad' : 'c5'], ['Full Mistakes', R.full, '', 'c6'], ['Half Mistakes', R.half, '', 'c7'], ['Time Taken', fmtMin(R.minutes), '', 'c8']
     ];
     /* key strokes card comes first, as on the exam's own result sheet */
-    cards.unshift(cards.splice(4, 1)[0]);
-    var ICO2 = ICO.slice(); ICO2.unshift(ICO2.splice(4, 1)[0]);
+    cards.unshift(cards.splice(3, 1)[0]);
+    var ICO2 = [ICO[4], ICO[1], ICO[2], ICO[3], ICO[5], ICO[6], ICO[7]];
+    var wide = cards.shift(), wideIc = ICO2.shift();
+    wide = '<div class="eh-dcard eh-wide"><div><span>' + wide[0] + '</span><b>' + wide[1] + ' <small>' + wide[2] + '</small></b></div><i class="eh-dc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + wideIc + '</svg></i></div>';
     cards = cards.map(function (k, i) { var ICO = ICO2; return '<div class="eh-dcard ' + k[3] + '"><div class="eh-dc-top"><span>' + k[0] + '</span><i class="eh-dc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + ICO[i] + '</svg></i></div><b>' + k[1] + ' <small>' + k[2] + '</small></b></div>'; }).join('');
     var mini = [['Words Typed', R.words], ['Keystroke Errors', R.kerr], ['Backspace', R.backspaces], ['Missed words', c.om], ['Added words', c.add], ['Wrong words', c.sub], ['Space/Case/Punct/Order', c.space + '/' + c.case + '/' + c.punct + '/' + c.trans], ['Pending Words', R.pending || 0]]
       .map(function (k) { return '<div><span>' + k[0] + '</span><b>' + k[1] + '</b></div>'; }).join('');
     var amount = keysMode ? R.keys : R.words;
+    var fu3 = up ? '<div class="eh-formula eh-f3"><h3>How your result was worked out (UPSSSC rule)</h3><div class="eh-f3-g">' +
+      '<div><span>1 · Words</span><p>' + (V.byWords ? 'Real words typed' : R.keys + ' ÷ 5') + ' = <b>' + n2(V.words) + '</b></p></div>' +
+      '<div><span>2 · Penalty</span><p>' + n2(V.errs) + ' mistake' + (V.errs === 1 ? '' : 's') + ', 5 free = <b>' + n2(V.pen) + ' words</b></p></div>' +
+      '<div><span>3 · Speed</span><p>' + n2(V.netWords) + ' ÷ ' + n2(V.mins) + ' = <b class="' + (V.pass ? 'ok' : 'no') + '">' + n2(V.wpm) + ' WPM</b></p></div>' +
+      '</div><p class="eh-verdict-line">Result: ' + (V.pass ? '<b class="ok">Qualified</b> — speed is ' + V.need + ' WPM or more after the penalty.' : '<b class="no">Not Qualified</b> — speed after the penalty is below ' + V.need + ' WPM.') + '</p></div>' : '';
     var fu = up ? '<div class="eh-formula"><h3>How your result was worked out (UPSSSC rule)</h3><ol>' +
       (V.byWords ? '<li><b>Words typed</b> = real words you typed = <b>' + n2(V.words) + '</b></li>' : '<li><b>Words typed</b> = key depressions ÷ 5 = ' + R.keys + ' ÷ 5 = <b>' + n2(V.words) + '</b></li>') +
       '<li><b>Mistakes</b> = Full ' + R.full + ' + Half ' + R.half + ' ÷ 2 = <b>' + n2(V.errs) + '</b> (the first 5 are free)</li>' +
@@ -166,7 +173,14 @@
     var legend = '<p class="eh-legend"><span class="d-ok">Correct</span> <span class="d-sub">Wrong word (Full)</span> <span class="d-om">Missed word (Full)</span> <span class="d-add">Added word (Full)</span> <span class="d-half">Half mistake</span></p>';
     var cmp = '<div class="eh-cmp-wrap"><div class="eh-cmp-tabs"><button type="button" class="on" data-v="two">Side by side</button><button type="button" data-v="one">Inline</button></div>' + legend +
       '<div class="eh-cmp-v" data-v="two">' + twoCol(ops) + '</div><div class="eh-cmp-v eh-diff" data-v="one" hidden>' + inline(ops) + '</div></div>';
-    return head + '<div class="eh-dash-grid">' + cards + '</div><div class="eh-dash-mini">' + mini + '</div>' + (up ? fu : f) + '<h3 class="eh-cmp-title">Detailed Comparison</h3>' + cmp;
+    var sp = up ? n2(V.wpm) : R.net;
+    var hero = '<div class="eh-score ' + (R.pass ? 'ok' : 'no') + '"><div><p class="eh-kicker">Performance Dashboard</p><h2>' + esc(X.name) + '</h2>' +
+      '<p class="eh-score-sub">' + (R.title ? esc(R.title) : '') + (R.title && R.date ? ' · ' : '') + (R.date ? esc(R.date) : '') + '</p></div>' +
+      '<div class="eh-score-n"><span>Net Speed</span><b>' + sp + '</b><em>WPM · needed ' + (up ? V.need : esc(eh_tgt(X, tgt))) + '</em></div>' +
+      '<div class="eh-score-v">' + (R.pass ? '✔ Qualified' : '✘ Not Qualified') + '</div>' +
+      '<p class="eh-score-rule">' + (up ? 'First 5 mistakes free, then 5 words cut for each mistake' : 'Allowed error ' + allowed + '%') + '</p></div>';
+    return '<div class="eh-top">' + hero + '<div class="eh-top-r">' + wide + '<div class="eh-dash-grid eh-g3">' + cards + '</div></div></div>' + info +
+      '<div class="eh-dash-mini">' + mini + '</div>' + (up ? fu3 : f) + '<h3 class="eh-cmp-title">Detailed Comparison</h3>' + cmp;
   }
   function bindDash(root) {
     var sw = root.querySelector('.eh-ksw input');
