@@ -1031,3 +1031,47 @@ script,style,template{display:none!important}
 .eh-live-lock.done{background:#f0fdf4;border-color:#bbf7d0}
 .pill.eh-att{background:#dcfce7;color:#166534;font-weight:800}
 .eh-live-table tr.eh-row-att td{background:#f7fdf9}
+
+/* ===== Result dashboard: bright premium theme (cream + brand brown/orange) ===== */
+.eh-panel.eh-dash{background:linear-gradient(180deg,#fffdf8 0%,#fff 240px);border:1px solid #efe4d3;border-radius:24px;box-shadow:0 20px 50px rgba(75,49,29,.08);padding:28px}
+.eh-dash .eh-ksw{background:#fff;border:1px solid #f1e3cf;box-shadow:0 4px 14px rgba(75,49,29,.05)}
+.eh-dash .eh-dash-head{border-bottom:1px dashed #ecdcc6;padding-bottom:18px}
+.eh-dash .eh-kicker{display:inline-block;background:#fff1e6;color:#e8590c;border:0;padding:6px 14px;border-radius:999px;font-size:11.5px;letter-spacing:1.6px}
+.eh-dash .eh-dash-head h2{font-size:28px;color:#2b1d12;margin:10px 0 6px}
+.eh-dash .eh-dash-head .muted{color:#7a6652}
+.eh-dash .eh-verdict{font-size:22px;padding:12px 24px;border-radius:999px;letter-spacing:.2px;margin:6px 0 0}
+.eh-dash .eh-verdict.ok{background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;box-shadow:0 10px 24px rgba(22,163,74,.28)}
+.eh-dash .eh-verdict.no{background:linear-gradient(135deg,#dc2626,#f97316);color:#fff;box-shadow:0 10px 24px rgba(220,38,38,.25)}
+.eh-dash .eh-dash-info{background:#fffaf2;border:1px solid #f1e3cf;border-radius:16px;padding:16px 18px;gap:10px 24px}
+.eh-dash .eh-dash-info span{color:#8a7560}.eh-dash .eh-dash-info b{color:#2b1d12}
+.eh-dash .eh-dash-grid{gap:14px}
+.eh-dash .eh-dcard{position:relative;overflow:hidden;background:#fff;border:1px solid #f0e4d4;border-radius:18px;box-shadow:0 8px 22px rgba(75,49,29,.07);padding:18px 18px 16px;transition:transform .18s,box-shadow .18s}
+.eh-dash .eh-dcard:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(75,49,29,.12)}
+.eh-dash .eh-dcard:before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--acc,#e8590c)}
+.eh-dash .eh-dcard span{font-size:12px;letter-spacing:.8px;color:#8a7560}
+.eh-dash .eh-dcard b{font-family:Inter,sans-serif;font-weight:800;font-size:32px;color:var(--acc,#2b1d12);margin-top:8px}
+.eh-dash .eh-dcard b small{color:#a08a72;font-weight:600}
+.eh-dash .eh-dcard.c1{--acc:#16a34a;background:#fff}.eh-dash .eh-dcard.c2{--acc:#2563eb;background:#fff}.eh-dash .eh-dcard.c3{--acc:#d97706;background:#fff}.eh-dash .eh-dcard.c4{--acc:#7c3aed;background:#fff}
+.eh-dash .eh-dcard.c5{--acc:#0d9488}.eh-dash .eh-dcard.c6{--acc:#dc2626}.eh-dash .eh-dcard.c7{--acc:#ea580c}.eh-dash .eh-dcard.c8{--acc:#8a431f}
+.eh-dash .eh-dcard.bad{--acc:#dc2626;background:#fff7f7;border-color:#fecaca;box-shadow:0 8px 22px rgba(220,38,38,.10)}
+.eh-dash .eh-dash-mini{border:0;background:transparent;gap:10px;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));overflow:visible}
+.eh-dash .eh-dash-mini div{background:#fffaf2;border:1px solid #f1e3cf;border-radius:14px;padding:10px 12px}
+.eh-dash .eh-dash-mini div:last-child{border-right:1px solid #f1e3cf}
+.eh-dash .eh-dash-mini span{color:#8a7560;font-weight:600}.eh-dash .eh-dash-mini b{color:#2b1d12;font-size:18px}
+.eh-dash .eh-formula{background:linear-gradient(135deg,#fff7ec,#fffdf8);color:#3d2b1c;border:1px solid #f3dcc0;border-left:5px solid #e8590c;border-radius:18px;padding:22px 24px;box-shadow:0 8px 22px rgba(232,89,12,.08)}
+.eh-dash .eh-formula h3{color:#2b1d12;font-size:18px;margin:0 0 14px}
+.eh-dash .eh-formula ol{list-style:none;padding:0;counter-reset:st;gap:8px}
+.eh-dash .eh-formula li{counter-increment:st;position:relative;padding:9px 12px 9px 46px;background:#fff;border:1px solid #f3e6d6;border-radius:12px}
+.eh-dash .eh-formula li:before{content:counter(st);position:absolute;left:10px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:#e8590c;color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center}
+.eh-dash .eh-formula b{color:#b4440c}
+.eh-dash .eh-verdict-line{margin-top:14px;padding:12px 14px;border-radius:12px;background:#fff;border:1px dashed #f3dcc0;font-weight:600}
+.eh-dash .eh-verdict-line .ok{color:#15803d}.eh-dash .eh-verdict-line .no{color:#dc2626}
+.eh-dash .eh-cmp-title{font-size:20px;color:#2b1d12;margin-top:28px}
+.eh-dash .eh-cmp-tabs{border:1px solid #f0e4d4;border-radius:999px;background:#fffaf2;padding:4px;gap:4px}
+.eh-dash .eh-cmp-tabs button{border-radius:999px;background:transparent;color:#6b5a48;padding:8px 18px}
+.eh-dash .eh-cmp-tabs button.on{background:#8a431f;color:#fff;box-shadow:0 4px 12px rgba(138,67,31,.25)}
+.eh-dash .eh-legend span{border-radius:999px;padding:3px 10px;font-weight:600;font-size:12.5px}
+.eh-dash .eh-legend .d-ok{background:#f0fdf4;color:#15803d}
+.eh-dash .eh-cmp-t{border:1px solid #f0e4d4;border-radius:16px;box-shadow:0 6px 16px rgba(75,49,29,.05);background:#fff}
+.eh-dash .eh-cmp h4{color:#2b1d12}
+@media(max-width:700px){.eh-panel.eh-dash{padding:18px;border-radius:18px}.eh-dash .eh-dash-head h2{font-size:22px}.eh-dash .eh-dcard b{font-size:26px}.eh-dash .eh-verdict{font-size:19px;padding:10px 20px}}
