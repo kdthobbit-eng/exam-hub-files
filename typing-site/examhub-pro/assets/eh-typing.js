@@ -364,7 +364,7 @@
       setTimeout(after, 0);
       return;
     }
-    if (/^(ArrowLeft|ArrowRight|ArrowUp|ArrowDown|Home|End|PageUp|PageDown|Delete|Tab|Enter)$/.test(e.key)) { e.preventDefault(); return; }
+    if (/^(ArrowLeft|ArrowRight|ArrowUp|ArrowDown|Home|End|PageUp|PageDown|Delete|Tab|Enter|Clear|Insert)$/.test(e.key) && !(/^Numpad[0-9]$/.test(e.code) && !native())) { e.preventDefault(); return; }
     if (e.key === ' ' || e.code === 'Space') {
       if (!raw.length || (!S.set.xs && /\s$/.test(raw))) { e.preventDefault(); return; }
       /* like the real exam: after the passage's word count, space bar stops adding words */
@@ -377,7 +377,10 @@
     var map = S.layout === 'inscript' ? H.INSCRIPT : H.US;
     var pair = map[e.code];
     /* number pad keys (and any digit key the map lacks) type the plain digit, as in the real exam */
-    if (!pair && /^Numpad/.test(e.code) && /^[0-9.+\-*\/]$/.test(e.key)) pair = [e.key, e.key];
+    var np = /^Numpad([0-9])$/.exec(e.code);
+    if (np) pair = [np[1], np[1]]; /* number pad digits, even with Num Lock off */
+    else if (!pair && /^Numpad/.test(e.code) && /^[.+\-*\/]$/.test(e.key)) pair = [e.key, e.key];
+    else if (!pair && /^[0-9]$/.test(e.key)) pair = [e.key, e.key];
     if (!pair) { if (e.key.length === 1) e.preventDefault(); return; }
     e.preventDefault();
     begin(); S.keys++; click();
