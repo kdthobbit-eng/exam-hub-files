@@ -199,6 +199,7 @@
 },
 {
 "slug": "up-police-asi-accounts-hindi-typing",
+"nohl": true,
 "name": "UP Police ASI Accounts Hindi Typing",
 "lang": "hi",
 "unit": "words",
@@ -1127,6 +1128,7 @@
 },
 {
 "slug": "up-police-si-asi-computer-operator-hindi-typing",
+"nohl": true,
 "name": "UP Police SI/ASI/Computer Operator Hindi Typing",
 "lang": "hi",
 "unit": "words",
@@ -1138,6 +1140,7 @@
 },
 {
 "slug": "up-police-si-asi-computer-operator-english-typing",
+"nohl": true,
 "name": "UP Police SI/ASI/Computer Operator English Typing",
 "lang": "en",
 "unit": "words",

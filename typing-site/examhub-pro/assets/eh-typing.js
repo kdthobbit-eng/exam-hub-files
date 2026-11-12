@@ -284,7 +284,7 @@
     for (i = from; i < to; i++) {
       el = pv.querySelector('[data-i="' + i + '"]'); if (!el) continue;
       el.classList.remove('wok', 'wbad');
-      if (S.set.whl && i < n) el.classList.add(typedW[i] === S.words[i] ? 'wok' : 'wbad');
+      if (S.set.whl && !exam.nohl && i < n) el.classList.add(typedW[i] === S.words[i] ? 'wok' : 'wbad');
     }
     wsDone = n - 1;
   }
@@ -295,7 +295,7 @@
     if (force) { pv.querySelectorAll('.wok,.wbad').forEach(function (e) { e.classList.remove('wok', 'wbad'); }); wsDone = S.words ? S.words.length : 0; }
     wordStatus(n);
     var b = pv.querySelector('[data-i="' + n + '"]');
-    if (b && S.set.hl) b.classList.add('cur');
+    if (b && S.set.hl && !exam.nohl) b.classList.add('cur');
     if (b) {
       var top = b.offsetTop - pv.offsetTop;
       if (top > pv.scrollTop + pv.clientHeight - 50 || top < pv.scrollTop) pv.scrollTop = top - 30;
