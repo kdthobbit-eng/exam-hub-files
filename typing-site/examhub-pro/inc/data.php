@@ -94,23 +94,24 @@ function eh_passage_days($lang, $days = 7) {
     $tdate = wp_date('Y-m-d');
     /* practice pool: the regular passages plus Live news passages of past days (today's stay on Live Typing) */
     $pool = array_values(array_filter($all, function ($p) use ($tdate) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && (empty($p['day']) || $p['day'] < $tdate); }));
-    /* 20 passages a day, like Live Typing: 6 Easy, 7 Moderate, 7 Hard (Basic counts as Easy); a short group is filled from Moderate */
+    /* 20 passages a day, like Live Typing: 6 Easy, 7 Moderate, 7 Hard (Basic counts as Easy).
+       The pool is cut into separate sets of 20, so no passage appears on two days; only as many days are shown as there are sets. */
     $want = ['E' => 6, 'M' => 7, 'H' => 7];
-    $grp = ['E' => [], 'M' => [], 'H' => []];
-    foreach ($pool as $p) { $lv = $p['level'] ?? 'M'; if ($lv === 'B') $lv = 'E'; if (!isset($grp[$lv])) $lv = 'M'; $grp[$lv][] = $p; }
+    $q = ['E' => [], 'M' => [], 'H' => []];
+    foreach (array_reverse($pool) as $p) { $lv = $p['level'] ?? 'M'; if ($lv === 'B') $lv = 'E'; if (!isset($q[$lv])) $lv = 'M'; $q[$lv][] = $p; } /* newest first */
+    $per = array_sum($want); $sets = max(1, intdiv(count($pool), $per)); $chunks = [];
+    for ($c = 0; $c < $sets; $c++) {
+        $items = [];
+        foreach ($want as $lv => $n) for ($k = 0; $k < $n && $q[$lv]; $k++) $items[] = array_shift($q[$lv]);
+        foreach (['M', 'H', 'E'] as $lv) while (count($items) < $per && $q[$lv]) $items[] = array_shift($q[$lv]);
+        $chunks[] = $items;
+    }
     $out = [];
     $today = (int) floor((current_time('timestamp')) / 86400);
-    for ($d = 0; $d < $days; $d++) {
-        $day = $today - $d; $date = gmdate('Y-m-d', $day * 86400); $items = []; $seen = [];
-        foreach ($all as $p) if (strpos($p['id'], 'p') === 0 && empty($p['special']) && $p['date'] === $date) $items[] = $p;
-        $left = 0;
-        foreach ($want as $lv => $c) {
-            $g = $grp[$lv]; $n = count($g); $got = 0;
-            for ($k = 0; $k < $n && $got < $c; $k++) { $p = $g[(($day * $c + $k) % $n + $n) % $n]; if (isset($seen[$p['id']])) continue; $seen[$p['id']] = 1; $items[] = $p; $got++; }
-            $left += $c - $got;
-        }
-        $fill = $grp['M'] ?: $pool;
-        for ($k = 0, $n = count($fill); $left > 0 && $k < $n; $k++) { $p = $fill[(($day * 7 + $k) % $n + $n) % $n]; if (isset($seen[$p['id']])) continue; $seen[$p['id']] = 1; $items[] = $p; $left--; }
+    for ($d = 0; $d < $days && $d < $sets; $d++) {
+        $day = $today - $d; $date = gmdate('Y-m-d', $day * 86400); $items = [];
+        foreach ($all as $p) if (strpos($p['id'], 'p') === 0 && empty($p['special']) && ($p['date'] ?? '') === $date) $items[] = $p;
+        $items = array_merge($items, $chunks[(($day % $sets) + $sets) % $sets]);
         $out[] = ['date' => $date, 'items' => $items];
     }
     return $out;
