@@ -21,7 +21,7 @@ D.R.pending=0;el.innerHTML=E.dashboard(D.R,D.X,ops);E.bindDash(el);})();
 JS);
 get_header(); ?>
 <section class="wrap eh-section">
-  <p class="muted small"><a href="<?php echo esc_url(home_url('/my-dashboard/')); ?>">← Typing History</a> · Candidate: <b><?php echo esc_html($R['name']); ?></b></p>
+  <p class="muted small"><a href="<?php echo esc_url(home_url('/my-dashboard/')); ?>">← Typing History</a></p>
   <div class="eh-panel eh-dash"><div id="eh-res-dash"></div>
   <?php if (!$row['typed']): ?><p class="eh-tip">The typed copy of this older test was not saved, so the word-by-word comparison is not available.</p><?php endif; ?>
   <div class="eh-res-actions">

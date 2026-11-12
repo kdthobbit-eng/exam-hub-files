@@ -1336,10 +1336,10 @@ button.eh-dp-nav{cursor:pointer;font:inherit}
 .eh-dash .eh-tbl{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.35}
 .eh-dash .eh-tbl th,.eh-dash .eh-tbl td{padding:7px 10px;border-bottom:1px solid #f0e7dc;vertical-align:middle;text-align:left}
 .eh-dash .eh-tbl tr:last-child th,.eh-dash .eh-tbl tr:last-child td{border-bottom:0}
-.eh-dash .eh-kv{table-layout:fixed}
-.eh-dash .eh-kv th{width:26%;background:#faf6f0;color:#6b5a4c;font-weight:600;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.eh-dash .eh-kv td{width:24%;color:#2a1a10;font-weight:700;border-right:1px solid #f0e7dc;overflow-wrap:anywhere}
-.eh-dash .eh-kv td:last-child{border-right:0}
+.eh-dash .eh-kvt{table-layout:fixed}
+.eh-dash .eh-kvt th{width:26%;background:#faf6f0;color:#6b5a4c;font-weight:600;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.eh-dash .eh-kvt td{width:24%;color:#2a1a10;font-weight:700;border-right:1px solid #f0e7dc;overflow-wrap:anywhere}
+.eh-dash .eh-kvt td:last-child{border-right:0}
 .eh-dash .eh-calc{table-layout:fixed}
 .eh-dash .eh-calc thead th{background:#4a2c1a;color:#fff;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:8px 12px}
 .eh-dash .eh-calc thead th:nth-child(1){width:16%}.eh-dash .eh-calc thead th:nth-child(2){width:34%}.eh-dash .eh-calc thead th:nth-child(3){width:30%}.eh-dash .eh-calc thead th:nth-child(4){width:20%}
@@ -1353,12 +1353,12 @@ button.eh-dp-nav{cursor:pointer;font:inherit}
 .eh-dash .eh-cc span{font-size:12px;font-weight:600;color:#6b5a4c}
 .eh-dash .eh-chead h2{font-size:18px}
 @media(max-width:820px){.eh-dash .eh-tbls2{grid-template-columns:1fr;gap:0}}
-@media(max-width:560px){.eh-dash .eh-tbl{font-size:12.5px}.eh-dash .eh-tbl th,.eh-dash .eh-tbl td{padding:6px 8px}.eh-dash .eh-kv th{white-space:normal;font-size:11.5px}.eh-dash .eh-calc thead th{font-size:11px;padding:7px 8px}}
-.eh-dash .eh-t4.eh-kv th{width:32%}.eh-dash .eh-t4.eh-kv td{width:18%}
-.eh-dash .eh-t3.eh-kv th{width:28%}.eh-dash .eh-t3.eh-kv td{width:22%}
-.eh-dash .eh-t3.eh-kv tr{height:33px}
-@media(max-width:900px){.eh-dash .eh-kv tr{display:table-row}.eh-dash .eh-kv th,.eh-dash .eh-kv td{border-bottom:1px solid #f0e7dc}.eh-dash .eh-kv tr:last-child th,.eh-dash .eh-kv tr:last-child td{border-bottom:0}.eh-dash .eh-t3.eh-kv th,.eh-dash .eh-t4.eh-kv th{width:30%;white-space:normal}.eh-dash .eh-t3.eh-kv td,.eh-dash .eh-t4.eh-kv td{width:20%}}
-@media(max-width:600px){.eh-dash .eh-calc thead th:nth-child(1){width:30%}.eh-dash .eh-calc thead th:nth-child(3){width:38%}.eh-dash .eh-calc thead th:nth-child(4){width:32%}.eh-dash .eh-calc th,.eh-dash .eh-calc td{white-space:normal;overflow:visible;text-overflow:clip;word-break:normal;overflow-wrap:normal}.eh-dash .eh-kv th{overflow:visible;text-overflow:clip;overflow-wrap:anywhere}}
+@media(max-width:560px){.eh-dash .eh-tbl{font-size:12.5px}.eh-dash .eh-tbl th,.eh-dash .eh-tbl td{padding:6px 8px}.eh-dash .eh-kvt th{white-space:normal;font-size:11.5px}.eh-dash .eh-calc thead th{font-size:11px;padding:7px 8px}}
+.eh-dash .eh-t4.eh-kvt th{width:32%}.eh-dash .eh-t4.eh-kvt td{width:18%}
+.eh-dash .eh-t3.eh-kvt th{width:28%}.eh-dash .eh-t3.eh-kvt td{width:22%}
+.eh-dash .eh-t3.eh-kvt tr{height:33px}
+@media(max-width:900px){.eh-dash .eh-kvt tr{display:table-row}.eh-dash .eh-kvt th,.eh-dash .eh-kvt td{border-bottom:1px solid #f0e7dc}.eh-dash .eh-kvt tr:last-child th,.eh-dash .eh-kvt tr:last-child td{border-bottom:0}.eh-dash .eh-t3.eh-kvt th,.eh-dash .eh-t4.eh-kvt th{width:30%;white-space:normal}.eh-dash .eh-t3.eh-kvt td,.eh-dash .eh-t4.eh-kvt td{width:20%}}
+@media(max-width:600px){.eh-dash .eh-calc thead th:nth-child(1){width:30%}.eh-dash .eh-calc thead th:nth-child(3){width:38%}.eh-dash .eh-calc thead th:nth-child(4){width:32%}.eh-dash .eh-calc th,.eh-dash .eh-calc td{white-space:normal;overflow:visible;text-overflow:clip;word-break:normal;overflow-wrap:normal}.eh-dash .eh-kvt th{overflow:visible;text-overflow:clip;overflow-wrap:anywhere}}
 /* ===== Result: info header, formula strip, more-details dropdown ===== */
 .eh-dash .eh-ihead{margin:0 0 14px}
 .eh-dash .eh-ihead h2{text-align:center;font:800 22px/1.2 Inter,system-ui,sans-serif;color:#2a1a10;margin:2px 0 12px;letter-spacing:-.2px}
@@ -1374,9 +1374,9 @@ button.eh-dp-nav{cursor:pointer;font:inherit}
 .eh-dash .eh-more summary:before{content:'▸';color:#a0522d;transition:transform .2s}.eh-dash .eh-more[open] summary:before{transform:rotate(90deg)}
 .eh-dash .eh-more summary small{font-weight:500;color:#7a6a5c;font-size:12.5px}
 .eh-dash .eh-more-b{padding:0 14px 14px}.eh-dash .eh-more-b .eh-tbl-h:first-child{margin-top:2px}
-.eh-dash .eh-more .eh-t4.eh-kv th{width:16%}.eh-dash .eh-more .eh-t4.eh-kv td{width:9%}
-@media(max-width:900px){.eh-dash .eh-info{grid-template-columns:1fr 1fr}.eh-dash .eh-more .eh-t4.eh-kv tr{display:grid;grid-template-columns:1fr 1fr 1fr 1fr}}
-@media(max-width:560px){.eh-dash .eh-info{grid-template-columns:1fr;gap:5px}.eh-dash .eh-ihead h2{font-size:19px}.eh-dash .eh-more .eh-t4.eh-kv tr{grid-template-columns:30% 20% 30% 20%}.eh-dash .eh-fstrip{font-size:13px}}
+.eh-dash .eh-more .eh-t4.eh-kvt th{width:16%}.eh-dash .eh-more .eh-t4.eh-kvt td{width:9%}
+@media(max-width:900px){.eh-dash .eh-info{grid-template-columns:1fr 1fr}.eh-dash .eh-more .eh-t4.eh-kvt tr{display:grid;grid-template-columns:1fr 1fr 1fr 1fr}}
+@media(max-width:560px){.eh-dash .eh-info{grid-template-columns:1fr;gap:5px}.eh-dash .eh-ihead h2{font-size:19px}.eh-dash .eh-more .eh-t4.eh-kvt tr{grid-template-columns:30% 20% 30% 20%}.eh-dash .eh-fstrip{font-size:13px}}
 .eh-dash .eh-info>div{border:0!important;background:none!important;padding:0!important;box-shadow:none!important;border-radius:0!important;min-height:0!important}
 @media(max-width:560px){.eh-dash .eh-info{padding:10px 12px}.eh-dash .eh-info>div{font-size:13px}.eh-dash .eh-cc.k{grid-column:1/-1;min-height:0}.eh-dash .eh-cc{min-height:0}}
 @media(max-width:560px){.eh-dash .eh-cc.res{grid-column:1/-1}}
@@ -1436,3 +1436,36 @@ button.eh-dp-nav{cursor:pointer;font:inherit}
 .ex-sp b{color:#15803d;font-weight:800}.ex-sp small{color:#8a7a6c;font-weight:700;font-size:11.5px}.ex-ac{color:#6b5a4c}
 @media(max-width:900px){.ex-hero-in{flex-direction:column;align-items:stretch}.ex-hero-r{text-align:center}.ex-start{width:100%}.ex-body{grid-template-columns:1fr}.ex-hero h1{font-size:27px}}
 @media(max-width:560px){.ex-hero{padding:22px 0 24px;border-radius:0 0 22px 22px}.ex-tiles{gap:8px}.ex-tile{padding:12px 6px}.ex-tile b{font-size:17px}.ex-chips span{font-size:13px;padding:6px 11px}.ex-board table{font-size:14px}.ex-board td{padding:10px 6px}}
+/* ===== Result: dashboard fills the first screen, rank + rest below ===== */
+.eh-dash .eh-screen{min-height:calc(100vh - 150px);display:flex;flex-direction:column;justify-content:center;padding:6px 0 4px}
+.eh-dash .eh-ihead h2{font-size:28px;margin:0 0 4px}
+.eh-dash .eh-cand{text-align:center;margin:0 0 14px;color:#7a6a5c;font-size:14px}
+.eh-dash .eh-ihead{margin-bottom:16px}
+.eh-dash .eh-cgrid{gap:14px}
+.eh-dash .eh-cc{min-height:104px;padding:16px 46px 16px 18px}
+.eh-dash .eh-cc span{font-size:13.5px}
+.eh-dash .eh-cc b{font-size:30px}
+.eh-dash .eh-cc.big b{font-size:36px}
+.eh-dash .eh-cc.res b{font-size:27px}
+.eh-dash .eh-fstrip{text-align:center;font-size:15px;margin-top:16px}
+.eh-dash .eh-scr-hint{text-align:center;margin:14px 0 0;color:#8a7a6c;font-size:13px;font-weight:600}
+.eh-dash .eh-dash-slot{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:18px 0 14px;padding:14px 16px;background:#fffaf3;border:1px solid #eadcca;border-radius:14px}
+.eh-dash .eh-dash-slot:empty{display:none}
+.eh-dash .eh-dash-slot #eh-res-saved{margin:0;flex:1 1 220px;font-size:15px;font-weight:700;color:#4a2c1a}
+.eh-dash .eh-dash-slot #eh-res-saved:empty{display:none}
+.eh-dash .eh-dash-slot #eh-res-saved:not(:empty):before{content:'🏆 ';}
+.eh-dash .eh-dash-slot .eh-res-actions{margin:0;display:flex;flex-wrap:wrap;gap:10px}
+.eh-dash .eh-ksw{margin:0 0 12px}
+@media(max-width:700px){.eh-dash .eh-screen{min-height:0}.eh-dash .eh-ihead h2{font-size:22px}.eh-dash .eh-cc{min-height:80px;padding:12px 40px 12px 12px}.eh-dash .eh-cc b{font-size:22px}.eh-dash .eh-cc.big b{font-size:26px}.eh-dash .eh-cc.res b{font-size:19px}.eh-dash .eh-fstrip{font-size:13px}}
+.eh-dash .eh-screen{min-height:min(calc(100vh - 110px),700px);justify-content:flex-start;padding-top:0}
+.eh-dash .eh-screen .eh-cgrid{flex:1 1 auto;grid-auto-rows:1fr;max-height:330px}
+.eh-dash .eh-screen .eh-cc{min-height:118px}
+.eh-dash .eh-screen .eh-cc b{font-size:34px}.eh-dash .eh-screen .eh-cc.big b{font-size:40px}.eh-dash .eh-screen .eh-cc.res b{font-size:30px}
+.eh-dash .eh-info dt,.eh-dash .eh-info dd{padding-top:11px;padding-bottom:11px}
+@media(max-width:700px){.eh-dash .eh-screen{min-height:0}.eh-dash .eh-screen .eh-cgrid{max-height:none}.eh-dash .eh-screen .eh-cc{min-height:80px}.eh-dash .eh-screen .eh-cc b{font-size:22px}.eh-dash .eh-screen .eh-cc.big b{font-size:26px}.eh-dash .eh-screen .eh-cc.res b{font-size:19px}}
+.eh-dash .eh-screen{min-height:min(calc(100vh - 110px),590px)}
+.eh-dash .eh-screen .eh-cgrid{flex:0 0 auto;grid-auto-rows:auto;max-height:none}
+.eh-dash .eh-screen .eh-cc{min-height:122px}
+.eh-dash .eh-screen .eh-cc.k b{font-size:30px;white-space:nowrap}
+@media(max-width:700px){.eh-dash .eh-screen .eh-cc{min-height:80px}.eh-dash .eh-screen .eh-cc.k b{font-size:22px}}
+.eh-dash .eh-screen{min-height:0}
