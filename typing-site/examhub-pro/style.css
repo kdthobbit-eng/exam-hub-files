@@ -1477,3 +1477,7 @@ body:has(#eh-result:not([hidden])) .eh-live .eh-rank .eh-podium{max-width:620px}
 body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 #eh-result.eh-dash{padding:24px 28px}
 @media(max-width:700px){#eh-result.eh-dash{padding:16px 14px}}
+/* sound button with a label */
+.ex-tool button[data-act="mute"]{display:inline-flex;align-items:center;gap:5px;width:auto!important;padding:0 9px!important}
+.ex-tool button[data-act="mute"] .eh-snd-lab{font-size:12px;font-weight:700;white-space:nowrap}
+.ex-tool button[data-act="mute"].on{background:#e7f6ec!important;color:#15803d!important;border-color:#9fd8ad!important}

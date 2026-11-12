@@ -136,6 +136,7 @@
     if (S.words) mark(true);
     store.set('set2', st);
     var sb = $('#eh-snd-btn'); if (sb) sb.textContent = st.snd ? '❚❚ Stop Typing Sound' : '▷ Play Typing Sound';
+    document.querySelectorAll('.eh-snd-lab').forEach(function (l) { l.textContent = st.snd ? 'Sound On' : 'Sound Off'; l.parentNode.classList.toggle('on', !!st.snd); });
     var fb = $('#eh-full'); if (fb) fb.textContent = document.fullscreenElement ? '⤢ Exit Fullscreen' : '⛶ Fullscreen';
   }
   [['set-tcs', 'tcs'], ['set-bks', 'bks'], ['set-lbks', 'lbks'], ['set-whl', 'whl'], ['set-hl', 'hl'], ['set-lc', 'lc'], ['set-as', 'as'], ['set-xs', 'xs'], ['set-scr', 'scr'], ['set-snd', 'snd']].forEach(function (p) {
