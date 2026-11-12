@@ -71,13 +71,12 @@ function eh_tgb_stats($k) {
     $ts = $wpdb->get_row($wpdb->prepare("SELECT COUNT(*) n, COUNT(DISTINCT $p) ppl, COALESCE(SUM(pass),0) ok, COALESCE(SUM(live_date IS NOT NULL),0) lv, COALESCE(ROUND(AVG(net)),0) avg FROM $t WHERE created BETWEEN %s AND %s", $a, $b), ARRAY_A);
     $su = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->users} WHERE user_registered BETWEEN %s AND %s", get_gmt_from_date($a), get_gmt_from_date($b)));
     $n = function ($x) { return number_format_i18n((int) $x); };
-    $o = '📊 <b>' . esc_html($lab) . '</b>' . "\n\n";
-    $o .= '👀 Visitors: <b>' . $n($vis['v'] ?? 0) . '</b>  ·  Page views: ' . $n($vis['pv'] ?? 0) . "\n";
-    $o .= '⌨️ Typing tests: <b>' . $n($ts['n']) . '</b>  ·  People: ' . $n($ts['ppl']) . "\n";
-    $o .= '✅ Qualified: ' . $n($ts['ok']) . '  ·  ❌ Not qualified: ' . $n((int) $ts['n'] - (int) $ts['ok']) . "\n";
-    $o .= '⚡ Live typing tests: ' . $n($ts['lv']) . "\n";
-    $o .= '📈 Average net speed: ' . (int) $ts['avg'] . " WPM\n";
-    $o .= '👤 New sign-ups: <b>' . $n($su) . '</b>';
+    $row = function ($l, $v) { return str_pad($l, 15, ' ') . str_pad($v, 9, ' ', STR_PAD_LEFT) . "\n"; };
+    $tn = (int) $ts['n']; $pct = $tn ? round((int) $ts['ok'] * 100 / $tn) . '%' : '-';
+    $o = '📊 <b>' . esc_html($lab) . '</b>' . "\n";
+    $o .= "\n👀 <b>Website</b>\n<pre>" . $row('Visitors', $n($vis['v'] ?? 0)) . $row('Page views', $n($vis['pv'] ?? 0)) . '</pre>';
+    $o .= "\n⌨️ <b>Typing tests</b>\n<pre>" . $row('Total tests', $n($tn)) . $row('People', $n($ts['ppl'])) . $row('Qualified', $n($ts['ok'])) . $row('Not qualified', $n($tn - (int) $ts['ok'])) . $row('Pass rate', $pct) . $row('Live typing', $n($ts['lv'])) . $row('Avg net speed', (int) $ts['avg'] . ' WPM') . '</pre>';
+    $o .= "\n👤 <b>New sign-ups</b>\n<pre>" . $row('Sign-ups', $n($su)) . '</pre>';
     if ($k === 'hour' && strtotime((string) get_option('eh_tgb_since', '2000-01-01')) > current_time('timestamp') - 7200) $o .= "\n\n<i>घंटे वाली गिनती बॉट जुड़ने के बाद से शुरू हुई है।</i>";
     return $o;
 }
