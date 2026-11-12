@@ -79,6 +79,8 @@ function eh_stats_page() {
         $lang[isset($lang[$l]) ? $l : 'other'] += (int) $r['n'];
     }
     $takers = eh_stats_takers(500);
+    $tk_all = (int) $wpdb->get_var('SELECT COUNT(DISTINCT user_id) FROM ' . eh_table() . ' WHERE user_id > 0');
+    $csv_form = function () { echo '<form method="post" action="' . esc_url(admin_url('admin-post.php')) . '" style="display:inline"><input type="hidden" name="action" value="eh_stats_csv">'; wp_nonce_field('eh_stats_csv'); submit_button('Download CSV / डाउनलोड', 'secondary', 'submit', false); echo '</form>'; };
     $n = 'number_format_i18n';
     $card = function ($big, $en, $hi, $small = '') { echo '<div class="ehs-c"><b>' . esc_html($big) . '</b><span>' . esc_html($en) . '<br><i>' . esc_html($hi) . '</i></span>' . ($small ? '<small>' . esc_html($small) . '</small>' : '') . '</div>'; };
     list($v1u, $v1p) = $vis($today); list($v7u, $v7p) = $vis($d7); list($v30u, $v30p) = $vis($d30); list($vau, $vap) = $vis('');
@@ -89,9 +91,14 @@ function eh_stats_page() {
       .ehs-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;max-width:1100px}
       .ehs-c{background:#fff;border:1px solid #dcdcde;border-left:4px solid #f26b1d;border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
       .ehs-c b{font-size:28px;line-height:1.1;color:#06213d}.ehs-c span{font-size:13px;color:#1d2327}.ehs-c i{color:#646970;font-style:normal}.ehs-c small{color:#646970}
-      .ehs table{max-width:1100px}.ehs .ehs-note{color:#646970;max-width:900px}
+      .ehs table{max-width:1100px}.ehs-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 6px}.ehs-top .button-primary b{font-size:15px}.ehs-cnt{display:inline-block;background:#f26b1d;color:#fff;border-radius:999px;padding:2px 12px;font-size:15px;margin-left:8px;vertical-align:middle}.ehs .ehs-note{color:#646970;max-width:900px}
     </style>
     <h1>Visitors &amp; Tests <span style="font-weight:400;color:#646970">/ विज़िटर और टेस्ट</span></h1>
+    <div class="ehs-top">
+      <a class="button button-primary" href="#ehs-emails">📧 Emails of test takers / ईमेल: <b><?php echo esc_html($n($tk_all)); ?></b> ↓</a>
+      <?php $csv_form(); ?>
+      <input type="search" id="ehs-q-top" placeholder="Search name or email / नाम या ईमेल खोजें" class="regular-text">
+    </div>
 
     <h2>Visitors <i>वेबसाइट पर कितने लोग आए</i></h2>
     <div class="ehs-g"><?php
@@ -124,16 +131,19 @@ function eh_stats_page() {
       $card($n(max(0, $p_all - $p_live)), 'Did not take Live Typing', 'लाइव टाइपिंग नहीं दी', 'out of ' . $n($p_all) . ' test takers');
     ?></div>
 
-    <h2>Emails of test takers <i>टेस्ट देने वालों के ईमेल</i></h2>
+    <h2 id="ehs-emails">Emails of test takers <i>टेस्ट देने वालों के ईमेल</i> <span class="ehs-cnt"><?php echo esc_html($n($tk_all)); ?></span></h2>
     <p class="ehs-note">Only logged-in users have an email. Guests type a name only, so they have no email here. / ईमेल सिर्फ लॉगिन करके टेस्ट देने वालों का होता है।</p>
-    <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" style="margin:0 0 10px"><input type="hidden" name="action" value="eh_stats_csv"><?php wp_nonce_field('eh_stats_csv'); submit_button('Download all as CSV / CSV डाउनलोड', 'secondary', 'submit', false); ?></form>
-    <table class="widefat striped"><thead><tr><th>#</th><th>Name / नाम</th><th>Email</th><th>Tests / टेस्ट</th><th>Live Typing</th><th>Last test / आखिरी टेस्ट</th></tr></thead><tbody>
+    <div class="ehs-top"><?php $csv_form(); ?> <input type="search" id="ehs-q" placeholder="Search name or email / नाम या ईमेल खोजें" class="regular-text"> <span id="ehs-shown" class="ehs-note"></span></div>
+    <table class="widefat striped" id="ehs-tk"><thead><tr><th>#</th><th>Name / नाम</th><th>Email</th><th>Tests / टेस्ट</th><th>Live Typing</th><th>Last test / आखिरी टेस्ट</th></tr></thead><tbody>
       <?php if (!$takers): ?><tr><td colspan="6">No logged-in test takers yet. / अभी कोई नहीं।</td></tr><?php endif; ?>
       <?php foreach ($takers as $i => $r): ?>
-        <tr><td><?php echo $i + 1; ?></td><td><?php echo esc_html($r['name']); ?></td><td><a href="mailto:<?php echo esc_attr($r['email']); ?>"><?php echo esc_html($r['email']); ?></a></td><td><?php echo esc_html($n($r['tests'])); ?></td><td><?php echo $r['live'] ? 'Yes / हाँ (' . esc_html($n($r['live'])) . ')' : 'No / नहीं'; ?></td><td><?php echo esc_html(wp_date('d M Y, H:i', strtotime($r['last']))); ?></td></tr>
+        <tr><td><?php echo $i + 1; ?></td><td><?php echo esc_html($r['name']); ?></td><td><a href="mailto:<?php echo esc_attr($r['email']); ?>"><?php echo esc_html($r['email']); ?></a></td><td><?php echo esc_html($n($r['tests'])); ?></td><td><?php echo $r['live'] ? 'Yes / हाँ (' . esc_html($n($r['live'])) . ')' : 'No / नहीं'; ?></td><td><?php echo esc_html(mysql2date('d M Y, H:i', $r['last'])); ?></td></tr>
       <?php endforeach; ?>
     </tbody></table>
     <?php if (count($takers) >= 500): ?><p class="ehs-note">Showing the latest 500. The CSV has everyone.</p><?php endif; ?>
+    <script>(function(){var rows=[].slice.call(document.querySelectorAll('#ehs-tk tbody tr')),a=document.getElementById('ehs-q'),b=document.getElementById('ehs-q-top'),out=document.getElementById('ehs-shown');
+    function f(v){var q=v.trim().toLowerCase(),k=0;rows.forEach(function(r){var on=!q||r.textContent.toLowerCase().indexOf(q)>-1;r.style.display=on?'':'none';if(on)k++;});if(out)out.textContent=q?k+' found / मिले':'';a.value=v;b.value=v;}
+    a.addEventListener('input',function(){f(a.value);});b.addEventListener('input',function(){f(b.value);if(b.value)document.getElementById('ehs-emails').scrollIntoView({behavior:'smooth'});});})();</script>
     </div>
     <?php
 }
