@@ -99,7 +99,6 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
           <div class="eh-psel-top"><h3>Choose a passage</h3>
             <?php if ($eh_special): ?><button type="button" class="btn ghost sm" id="eh-sp-open">★ Special Passages</button><?php endif; ?></div>
           <p class="eh-lvl-legend"><span class="eh-lvl easy">Easy</span> <span class="eh-lvl moderate">Moderate</span> <span class="eh-lvl hard">Hard</span> · <span class="muted">20 new passages daily — pick a date</span></p>
-          <label class="eh-prow rnd"><input type="radio" name="eh-psg" value="" checked><span class="lv">?</span><span class="t">Random passage</span><span class="n"></span></label>
           <?php if ($eh_days): $eh_lab = function ($i, $d) { return $i === 0 ? 'Today' : ($i === 1 ? 'Yesterday' : wp_date('l', strtotime($d . ' 12:00'))); }; ?>
           <div class="eh-dp eh-pday-dp" id="eh-pday-dp">
             <button type="button" class="eh-dp-nav off" data-go="1" aria-label="Previous day">‹</button>
@@ -122,9 +121,11 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
           <script>(function(){var box=document.getElementById('eh-pday-dp');if(!box)return;var days=[].slice.call(document.querySelectorAll('.eh-pday')),pop=document.getElementById('eh-pday-pop'),btn=document.getElementById('eh-pday-btn'),cur=0;
           function show(i){if(i<0||i>=days.length)return;cur=i;days.forEach(function(d,k){d.hidden=k!==i;});var d=days[i];btn.querySelector('b').textContent=d.getAttribute('data-d');btn.querySelector('small').textContent=d.getAttribute('data-l');
           box.querySelector('[data-go="1"]').classList.toggle('off',i>=days.length-1);box.querySelector('[data-go="-1"]').classList.toggle('off',i<=0);
-          [].forEach.call(pop.querySelectorAll('button'),function(b){b.classList.toggle('on',+b.getAttribute('data-i')===i);});pop.hidden=true;}
+          [].forEach.call(pop.querySelectorAll('button'),function(b){b.classList.toggle('on',+b.getAttribute('data-i')===i);});pop.hidden=true;
+          var sel=document.querySelector('input[name=eh-psg]:checked');if(!sel||sel.closest('.eh-pday')!==d){var f=d.querySelector('input[name=eh-psg]');if(f){f.checked=true;f.dispatchEvent(new Event('change',{bubbles:true}));}}}
           box.addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;e.stopPropagation();if(t===btn){pop.hidden=!pop.hidden;return;}if(t.hasAttribute('data-go')){show(cur+(+t.getAttribute('data-go')));return;}if(t.hasAttribute('data-i'))show(+t.getAttribute('data-i'));});
-          document.addEventListener('click',function(){pop.hidden=true;});show(0);})();</script>
+          document.addEventListener('click',function(){pop.hidden=true;});show(0);
+          window.addEventListener('load',function(){var c=document.querySelector('input[name=eh-psg]:checked'),d=c&&c.closest('.eh-pday');if(d&&d.hidden)show(+d.getAttribute('data-i'));});})();</script>
           <?php endif; ?>
           <?php endif; ?>
           <input type="hidden" id="eh-opt-passage" value="">
