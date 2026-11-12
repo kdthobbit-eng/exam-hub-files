@@ -94,8 +94,8 @@ function eh_passage_days($lang, $days = 7) {
     $tdate = wp_date('Y-m-d');
     /* practice pool: the regular passages plus Live news passages of past days (today's stay on Live Typing) */
     $pool = array_values(array_filter($all, function ($p) use ($tdate) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && (empty($p['day']) || $p['day'] < $tdate); }));
-    /* 20 passages a day, hard-heavy: 8 Hard, 6 Moderate, 4 Easy, 2 Basic (a short group is filled from the others) */
-    $want = ['H' => 8, 'M' => 6, 'E' => 4, 'B' => 2];
+    /* 20 passages a day, all Hard (owner asked: students found practice easy); a short Hard pool is filled from Moderate */
+    $want = ['H' => 20, 'M' => 0, 'E' => 0, 'B' => 0];
     $grp = ['H' => [], 'M' => [], 'E' => [], 'B' => []];
     foreach ($pool as $p) { $lv = $p['level'] ?? 'M'; if (!isset($grp[$lv])) $lv = 'M'; $grp[$lv][] = $p; }
     $out = [];
@@ -109,7 +109,8 @@ function eh_passage_days($lang, $days = 7) {
             for ($k = 0; $k < $n && $got < $c; $k++) { $p = $g[(($day * $c + $k) % $n + $n) % $n]; if (isset($seen[$p['id']])) continue; $seen[$p['id']] = 1; $items[] = $p; $got++; }
             $left += $c - $got;
         }
-        for ($k = 0, $n = count($pool); $left > 0 && $k < $n; $k++) { $p = $pool[(($day * 7 + $k) % $n + $n) % $n]; if (isset($seen[$p['id']])) continue; $seen[$p['id']] = 1; $items[] = $p; $left--; }
+        $fill = $grp['M'] ?: $pool;
+        for ($k = 0, $n = count($fill); $left > 0 && $k < $n; $k++) { $p = $fill[(($day * 7 + $k) % $n + $n) % $n]; if (isset($seen[$p['id']])) continue; $seen[$p['id']] = 1; $items[] = $p; $left--; }
         $out[] = ['date' => $date, 'items' => $items];
     }
     return $out;
