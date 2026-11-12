@@ -219,7 +219,7 @@
       cc(up ? 'Total Keystrokes / Words Typed' : 'Key Depressions', up ? R.keys + ' / ' + n2(V.words) : R.keys, 'k', ICO[4]) +
       cc('Full Mistakes', R.full, '', ICO[5]) + cc('Half Mistakes', R.half, '', ICO[6]) +
       cc('Total Mistakes', errsAll + (up ? ' <small>/ 5 free</small>' : ''), up && V.errs > 5 ? 'warn' : '', ICO[3]) +
-      cc('Backspace Count', (+R.backspaces || 0), '', '<path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1z"/><path d="m12 9 6 6m0-6-6 6"/>') + cc('Accuracy', R.acc + ' <small>%</small>', '', ICO[2]) +
+      cc('Backspace Count', (+R.backspaces || 0), '', '<path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1z"/><path d="m12 9 6 6m0-6-6 6"/>') + cc('Gross Speed', (up ? n2(V.words / V.mins) : R.gross) + ' <small>WPM</small>', '', ICO[1]) + cc('Accuracy', R.acc + ' <small>%</small>', '', ICO[2]) +
       cc('Net Speed', sp + ' <small>WPM</small>', pc + ' big', ICO[0]) +
       cc('Result', R.pass ? '✔ Qualified' : '✘ Not Qualified', pc + ' res', '') + '</div>';
     var strip = up ? '<p class="eh-fstrip">🧮 <b>Net Speed</b> = (' + n2(V.words) + ' − ' + (V.errs > 5 ? '(' + n2(V.errs) + ' − 5) × 6' : '0') + ') ÷ ' + n2(V.mins) + ' = <b class="' + pc + '">' + n2(V.wpm) + ' WPM</b> <span>· first 5 mistakes free, then 6 words cut for each, needed ' + V.need + ' WPM</span></p>'
