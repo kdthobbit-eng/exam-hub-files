@@ -336,7 +336,7 @@
     if (now) run(); else stT = setTimeout(run, 180);
   }
 
-  function render() { ta.value = kdMode() ? S.buf : current(); ta.scrollTop = ta.scrollHeight; ta.setSelectionRange(ta.value.length, ta.value.length); }
+  function render() { ta.value = kdMode() ? S.buf : current(); S.shown = ta.value; ta.scrollTop = ta.scrollHeight; ta.setSelectionRange(ta.value.length, ta.value.length); }
   /* UPSSSC rule: Backspace works only on the word being typed and the one before it; older words are locked */
   function updLock() {
     if (exam.eval !== 'upsssc') return;
@@ -360,7 +360,7 @@
       if (!S.set.bks || !raw.length) { e.preventDefault(); return; }
       if (S.set.lbks && /\s$/.test(raw)) { e.preventDefault(); return; }
       if (exam.eval === 'upsssc' && raw.length <= (S.lock || 0)) { e.preventDefault(); return; }
-      S.bks++; click();
+      S.bks++; click(); if (!e.synthetic) S.lastKey = Date.now();
       if (!native()) { e.preventDefault(); S.buf = Array.from(S.buf).slice(0, -1).join(''); render(); }
       setTimeout(after, 0);
       return;
@@ -383,7 +383,7 @@
     else if (!pair && /^Numpad/.test(e.code) && /^[.+\-*\/]$/.test(e.key)) pair = [e.key, e.key];
     else if (!pair && /^[0-9]$/.test(e.key)) pair = [e.key, e.key];
     if (!pair) { if (e.key.length === 1) e.preventDefault(); return; }
-    e.preventDefault();
+    e.preventDefault(); if (!e.synthetic) S.lastKey = Date.now();
     begin(); S.keys++; click();
     S.buf += pair[e.shiftKey ? 1 : 0];
     render(); after();
@@ -485,7 +485,15 @@
   ta.addEventListener('paste', function (e) { e.preventDefault(); });
   ta.addEventListener('drop', function (e) { e.preventDefault(); });
   ta.addEventListener('contextmenu', function (e) { e.preventDefault(); });
-  ta.addEventListener('input', function () { if (!native()) render(); else after(); });
+  ta.addEventListener('input', function () {
+    if (native()) { after(); return; }
+    var v = ta.value, sh = S.shown || '';
+    if (!S.done && v !== sh && Date.now() - (S.lastKey || 0) > 120) {
+      if (v.indexOf(sh) === 0) { render(); feedText(v.slice(sh.length)); return; }
+      if (sh.indexOf(v) === 0) { render(); feedBack(Array.from(sh).length - Array.from(v).length); return; }
+    }
+    render();
+  });
   /* finish an Alt code when Alt is let go (Windows cp1252 numbers, as in every typing software) */
   var CP = {128:8364,130:8218,131:402,132:8222,133:8230,134:8224,135:8225,136:710,137:8240,138:352,139:8249,140:338,142:381,145:8216,146:8217,147:8220,148:8221,149:8226,150:8211,151:8212,152:732,153:8482,154:353,155:8250,156:339,158:382,159:376};
   ta.addEventListener('keyup', function (e) {
@@ -496,7 +504,37 @@
     begin(); S.keys++; click(); S.buf += ch; render(); after();
   });
   /* the browser may also insert the Alt-code letter itself; the buffer already has it */
-  ta.addEventListener('beforeinput', function (e) { if (!native() && e.inputType === 'insertText') e.preventDefault(); });
+  /* Tablets / phones with a keyboard: Android often sends key "Unidentified", so the letter arrives as text.
+     Turn each English letter back into its key and type it through the Hindi layout. */
+  var REV = (function () {
+    var m = {}, i, c, sh = ')!@#$%^&*(';
+    for (i = 0; i < 26; i++) { c = String.fromCharCode(97 + i); m[c] = ['Key' + c.toUpperCase(), false]; m[c.toUpperCase()] = ['Key' + c.toUpperCase(), true]; }
+    for (i = 0; i < 10; i++) { m[String(i)] = ['Digit' + i, false]; m[sh[i]] = ['Digit' + i, true]; }
+    [['`', '~', 'Backquote'], ['-', '_', 'Minus'], ['=', '+', 'Equal'], ['[', '{', 'BracketLeft'], [']', '}', 'BracketRight'], ['\\', '|', 'Backslash'],
+     [';', ':', 'Semicolon'], ["'", '"', 'Quote'], [',', '<', 'Comma'], ['.', '>', 'Period'], ['/', '?', 'Slash']].forEach(function (p) { m[p[0]] = [p[2], false]; m[p[1]] = [p[2], true]; });
+    m[' '] = ['Space', false];
+    return m;
+  })();
+  function fake(key, code, shift) { return { key: key, code: code, shiftKey: !!shift, altKey: false, ctrlKey: false, metaKey: false, synthetic: true, preventDefault: function () {} }; }
+  function feedText(t) {
+    Array.from(t).forEach(function (ch) {
+      if (ch === '\n') return;
+      var r = REV[ch];
+      if (r) onKey(fake(ch, r[0], r[1]));
+      else { begin(); S.keys++; S.buf += ch; render(); after(); } /* a letter with no English key: keep it as typed */
+    });
+  }
+  function feedBack(n) { for (var i = 0; i < n; i++) onKey(fake('Backspace', 'Backspace', false)); }
+  ta.addEventListener('beforeinput', function (e) {
+    if (native() || S.done) return;
+    if (e.inputType === 'insertText' || e.inputType === 'insertReplacementText') {
+      e.preventDefault();
+      if (Date.now() - (S.lastKey || 0) < 120) return; /* the key press already typed it */
+      if (e.data) feedText(e.data);
+    } else if (e.inputType === 'deleteContentBackward' && Date.now() - (S.lastKey || 0) > 120) {
+      e.preventDefault(); feedBack(1);
+    }
+  });
   ta.addEventListener('mousedown', function (e) { if (!native()) { e.preventDefault(); ta.focus(); } });
   pv.addEventListener('copy', function (e) { e.preventDefault(); });
   window.addEventListener('beforeunload', function (e) { if (S.started && !S.done) { e.preventDefault(); e.returnValue = ''; } });
