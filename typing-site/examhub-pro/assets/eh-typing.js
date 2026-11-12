@@ -348,6 +348,11 @@
   function onKey(e) {
     if (S.done) return;
     kLow = e.key === ' ' || e.code === 'Space' || e.key === 'Backspace';
+    /* Alt codes (hold Alt, type 0197 on the number pad, let go): Krutidev ऊ and other signs are typed this way */
+    if (e.altKey && !e.ctrlKey && !native()) {
+      var dg = /^(Numpad|Digit)([0-9])$/.exec(e.code);
+      if (dg) { e.preventDefault(); S.alt = (S.alt || '') + dg[2]; return; }
+    }
     if (e.ctrlKey || e.metaKey || e.altKey) { if (/^(KeyV|KeyA|KeyZ|KeyY|KeyX)$/.test(e.code)) e.preventDefault(); return; }
     var raw = rawText();
     if (e.key === 'Backspace') {
@@ -476,6 +481,17 @@
   ta.addEventListener('drop', function (e) { e.preventDefault(); });
   ta.addEventListener('contextmenu', function (e) { e.preventDefault(); });
   ta.addEventListener('input', function () { if (!native()) render(); else after(); });
+  /* finish an Alt code when Alt is let go (Windows cp1252 numbers, as in every typing software) */
+  var CP = {128:8364,130:8218,131:402,132:8222,133:8230,134:8224,135:8225,136:710,137:8240,138:352,139:8249,140:338,142:381,145:8216,146:8217,147:8220,148:8221,149:8226,150:8211,151:8212,152:732,153:8482,154:353,155:8250,156:339,158:382,159:376};
+  ta.addEventListener('keyup', function (e) {
+    if (e.key !== 'Alt' || !S.alt) return;
+    e.preventDefault(); var n = parseInt(S.alt, 10); S.alt = '';
+    if (S.done || native() || !(n > 31 && n < 256)) return;
+    var ch = String.fromCharCode(CP[n] || n);
+    begin(); S.keys++; click(); S.buf += ch; render(); after();
+  });
+  /* the browser may also insert the Alt-code letter itself; the buffer already has it */
+  ta.addEventListener('beforeinput', function (e) { if (!native() && e.inputType === 'insertText') e.preventDefault(); });
   ta.addEventListener('mousedown', function (e) { if (!native()) { e.preventDefault(); ta.focus(); } });
   pv.addEventListener('copy', function (e) { e.preventDefault(); });
   window.addEventListener('beforeunload', function (e) { if (S.started && !S.done) { e.preventDefault(); e.returnValue = ''; } });
