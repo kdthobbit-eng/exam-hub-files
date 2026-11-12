@@ -40,6 +40,6 @@ get_header(); ?>
   <?php endforeach; ?>
   </tbody></table></div>
   <?php if ($total > $size): ?><div class="eh-pager"><?php $pages = (int) ceil($total / $size); for ($k = max(1, $pg - 4); $k <= min($pages, $pg + 4); $k++) echo '<a class="' . ($k === $pg ? 'on' : '') . '" href="' . esc_url(add_query_arg('pg', $k)) . '">' . $k . '</a>'; ?></div><?php endif; ?>
-  <p class="muted small">Target = speed (WPM) needed to qualify. Green = above target, red = below target. UPSSSC Junior Assistant results are marked by the commission's rule: the first 5 mistakes are free, then 5 words are cut for each mistake.</p>
+  <p class="muted small">Target = speed (WPM) needed to qualify. Green = above target, red = below target. UPSSSC Junior Assistant results are marked by the commission's rule: the first 5 mistakes are free, then 6 words (the wrong word + 5) are cut for each extra mistake.</p>
 </section>
 <?php get_footer();

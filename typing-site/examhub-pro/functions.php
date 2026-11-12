@@ -172,7 +172,7 @@ function eh_result_verdict($row, $e) {
     if (!$e || empty($e['target'])) return ['pass' => (int) ($row['pass'] ?? 0)];
     if (($e['eval'] ?? '') === 'upsssc' && !empty($e['wpm'])) {
         $errs = (int) $row['full_m'] + (int) $row['half_m'] / 2;
-        $nw = max(0, ((int) $row['keys_count'] > 0 ? (int) $row['keys_count'] / 5 : (int) $row['words']) - max(0, $errs - 5) * 5);
+        $nw = max(0, ((int) $row['keys_count'] > 0 ? (int) $row['keys_count'] / 5 : (int) $row['words']) - max(0, $errs - 5) * 6); /* each mistake after 5: the wrong word + 5 words (as AR Typing) */
         $sp = $nw / max((float) $row['minutes'], (float) $e['minutes'], 0.01);
         return ['pass' => $sp >= (float) $e['wpm'] ? 1 : 0, 'wpm' => $sp];
     }
