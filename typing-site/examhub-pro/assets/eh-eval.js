@@ -208,7 +208,20 @@
       '<tr><th>Net words</th><td>words − penalty</td><td>' + n2(V.words) + ' − ' + n2(V.pen) + '</td><td><b>' + n2(V.netWords) + '</b></td></tr>' +
       '<tr class="eh-calc-sp"><th>Speed</th><td>net words ÷ minutes</td><td>' + n2(V.netWords) + ' ÷ ' + n2(V.mins) + '</td><td>' + res + n2(V.wpm) + ' WPM</b></td></tr>' +
       '</tbody><tfoot><tr><td colspan="4">Result: ' + res + (V.pass ? 'Qualified' : 'Not Qualified') + '</b> — needed ' + V.need + ' WPM, got ' + n2(V.wpm) + ' WPM.</td></tr></tfoot></table></div>' : f;
-    return '<div class="eh-top">' + hero + '<div class="eh-top-r">' + wide + '<div class="eh-dash-grid eh-g3">' + cards + '</div></div></div>' +
+    /* compact 4 x 2 card grid (one screen), title line on top */
+    var cc = function (lab, val, cls, ic) { return '<div class="eh-cc ' + (cls || '') + '"><span>' + lab + '</span><b>' + val + '</b>' + (ic ? '<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + ic + '</svg></i>' : '') + '</div>'; };
+    var pc = R.pass ? 'ok' : 'no';
+    var errsAll = up ? n2(V.errs) : n2((+R.full || 0) + (+R.half || 0) / 2);
+    var grid = '<div class="eh-chead"><div><p class="eh-kicker">Performance Dashboard</p><h2>' + esc(X.name) + '</h2><p class="eh-score-sub">' + (R.title ? esc(R.title) : '') + (R.title && R.date ? ' · ' : '') + (R.date ? esc(R.date) : '') + '</p></div>' +
+      '<p class="eh-crule">' + (up ? 'First 5 mistakes free, then 5 words cut for each mistake · needed ' + V.need + ' WPM' : 'Allowed error ' + allowed + '% · needed ' + esc(eh_tgt(X, tgt))) + '</p></div>' +
+      '<div class="eh-cgrid">' +
+      cc(up ? 'Total Keystrokes / Words Typed' : 'Key Depressions', up ? R.keys + ' / ' + n2(V.words) : R.keys, 'k', ICO[4]) +
+      cc('Full Mistakes', R.full, '', ICO[5]) + cc('Half Mistakes', R.half, '', ICO[6]) +
+      cc('Total Mistakes', errsAll + (up ? ' <small>/ 5 free</small>' : ''), up && V.errs > 5 ? 'warn' : '', ICO[3]) +
+      cc('Gross Speed', (up ? n2(V.words / V.mins) : R.gross) + ' <small>WPM</small>', '', ICO[1]) + cc('Accuracy', R.acc + ' <small>%</small>', '', ICO[2]) +
+      cc('Net Speed', sp + ' <small>WPM</small>', pc + ' big', ICO[0]) +
+      cc('Result', R.pass ? '✔ Qualified' : '✘ Not Qualified', pc + ' res', '') + '</div>';
+    return grid +
       '<div class="eh-tbls">' + tDet + tWord + '</div>' + tCalc + '<h3 class="eh-cmp-title">Detailed Comparison</h3>' + cmp;
   }
   function bindDash(root) {
