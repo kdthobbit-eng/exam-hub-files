@@ -1469,3 +1469,11 @@ button.eh-dp-nav{cursor:pointer;font:inherit}
 .eh-dash .eh-screen .eh-cc.k b{font-size:30px;white-space:nowrap}
 @media(max-width:700px){.eh-dash .eh-screen .eh-cc{min-height:80px}.eh-dash .eh-screen .eh-cc.k b{font-size:22px}}
 .eh-dash .eh-screen{min-height:0}
+/* ===== After a test: result dashboard first and full width; hero and ranking go below ===== */
+body:has(#eh-result:not([hidden])) .eh-live-hero,body:has(#eh-result:not([hidden])) .eh-page-head.slim{display:none}
+body:has(#eh-result:not([hidden])) .eh-live{grid-template-columns:1fr!important}
+body:has(#eh-result:not([hidden])) .eh-live>aside{order:2}
+body:has(#eh-result:not([hidden])) .eh-live .eh-rank .eh-podium{max-width:620px}
+body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
+#eh-result.eh-dash{padding:24px 28px}
+@media(max-width:700px){#eh-result.eh-dash{padding:16px 14px}}

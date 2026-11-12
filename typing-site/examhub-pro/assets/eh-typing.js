@@ -425,12 +425,13 @@
 
   function showResult(R, ops) {
     result.hidden = false; setup.hidden = true;
+    document.body.classList.add('eh-has-result'); /* dashboard first: page header and side ranking move out of the way */
     R.pending = Math.max(0, S.words.length - R.words); R.total = S.words.join(' ').length; R.dur = exam.minutes;
     R.title = S.title; R.date = new Date().toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
     $('#eh-res-dash').innerHTML = window.EHEval.dashboard(R, exam, ops);
     window.EHEval.bindDash($('#eh-res-dash'));
     $('#eh-res-link').hidden = true;
-    window.scrollTo({ top: result.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    window.scrollTo({ top: Math.max(0, result.getBoundingClientRect().top + window.scrollY - 70), behavior: 'auto' });
   }
 
   function save(R) {
@@ -475,7 +476,7 @@
       S.goStep(1);
     }
   })();
-  $('#eh-again').addEventListener('click', function () { result.hidden = true; setup.hidden = false; if (S.goStep) S.goStep(2); });
+  $('#eh-again').addEventListener('click', function () { document.body.classList.remove('eh-has-result'); result.hidden = true; setup.hidden = false; if (S.goStep) S.goStep(2); });
   ta.addEventListener('keydown', onKey);
   ta.addEventListener('paste', function (e) { e.preventDefault(); });
   ta.addEventListener('drop', function (e) { e.preventDefault(); });
