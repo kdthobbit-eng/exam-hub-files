@@ -170,6 +170,7 @@ function eh_lang_label($l) { return ['en' => 'English', 'hi' => 'Hindi', 'mr' =>
 /* Pass or fail for a saved result row, by the exam's own rule (same as EHEval.verdict in eh-eval.js) */
 function eh_result_verdict($row, $e) {
     if (!$e || empty($e['target'])) return ['pass' => (int) ($row['pass'] ?? 0)];
+    if (isset($row['typed'])) $row['keys_count'] = max((int) $row['keys_count'], mb_strlen(trim((string) $row['typed']))); /* letters on screen */
     if (($e['eval'] ?? '') === 'upsssc' && !empty($e['wpm'])) {
         $errs = (int) $row['full_m'] + (int) $row['half_m'] / 2;
         $nw = max(0, ((int) $row['keys_count'] > 0 ? (int) $row['keys_count'] / 5 : (int) $row['words']) - max(0, $errs - 5) * 6); /* each mistake after 5: the wrong word + 5 words (as AR Typing) */

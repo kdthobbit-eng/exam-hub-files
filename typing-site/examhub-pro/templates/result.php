@@ -5,7 +5,7 @@ if (!$row) { global $wp_query; $wp_query->set_404(); status_header(404); include
 $X = $row['exam'] === 'demo' ? ['slug' => 'demo', 'name' => 'Demo Typing Test', 'unit' => 'words', 'target' => 250, 'minutes' => 5, 'allowed' => (float) eh_opt('allowed_error'), 'lang' => 'en'] : (eh_exam($row['exam']) ?: ['slug' => $row['exam'], 'name' => $row['exam'], 'unit' => 'words', 'target' => 0, 'minutes' => 10, 'allowed' => 5, 'lang' => 'en']);
 $R = [
     'net' => (int) $row['net'], 'gross' => (int) $row['gross'], 'acc' => (float) $row['acc'], 'err' => (float) $row['err'],
-    'keys' => (int) $row['keys_count'], 'kerr' => (int) $row['kerr'], 'words' => (int) $row['words'], 'full' => (int) $row['full_m'],
+    'keys' => max((int) $row['keys_count'], mb_strlen(trim((string) ($row['typed'] ?? '')))), 'kerr' => (int) $row['kerr'], 'words' => (int) $row['words'], 'full' => (int) $row['full_m'],
     'half' => (int) $row['half_m'], 'backspaces' => (int) $row['backspaces'], 'minutes' => (float) $row['minutes'], 'pass' => (int) $row['pass'],
     'title' => $row['title'], 'date' => wp_date('d M Y, h:i A', strtotime($row['created'])), 'name' => eh_display_name($row), 'dur' => (int) $X['minutes'],
 ];

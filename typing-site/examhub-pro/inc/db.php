@@ -98,9 +98,12 @@ add_action('init', function () {
     if (!is_admin() || !current_user_can('manage_options')) return;
     $exams = eh_exams(); $sig = [];
     foreach ($exams as $e) $sig[] = $e['slug'] . '|' . $e['unit'] . '|' . $e['target'] . '|' . $e['minutes'] . '|' . ($e['allowed'] ?? '') . '|' . ($e['wpm'] ?? '') . '|' . ($e['eval'] ?? '');
-    $ver = md5('v4' . implode(';', $sig));
+    $ver = md5('v5' . implode(';', $sig));
     if (get_option('eh_rules_ver') === $ver) return;
     global $wpdb; $t = eh_table(); $n = 0;
+    /* Hindi keyboards (Windows Inscript / Mangal) did not report every key press, so some saved key counts were far too low.
+       The key count is the letters left on screen, so use the saved typed text where it is longer. */
+    $wpdb->query("UPDATE $t SET keys_count = CHAR_LENGTH(TRIM(typed)) WHERE typed <> '' AND CHAR_LENGTH(TRIM(typed)) > keys_count");
     foreach ($exams as $e) {
         if (empty($e['target'])) continue;
         if (($e['eval'] ?? '') === 'upsssc' && !empty($e['wpm'])) {
