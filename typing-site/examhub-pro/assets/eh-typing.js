@@ -123,7 +123,7 @@
     var st = S.set;
     test.classList.toggle('tcs', !!st.tcs);
     var W = CFG.win || {}, kd = kdMode();
-    var pbase = kd ? 22 : (+W.pfs || (isHindi ? 16 : 19)), tbase = kd ? 24 : (+W.tfs || 21);
+    var pbase = kd ? 23 : (+W.pfs || (isHindi ? 18 : 20)) + 1, tbase = kd ? 25 : (+W.tfs || 21) + 1; /* a little bigger than before */
     var plh = kd ? 26.5 : (+W.plh || pbase * 1.5), tlh = kd ? 33 : (+W.tlh || tbase * 1.3);
     var pf = pbase + st.fs, tf = tbase + st.fs;
     pv.style.fontSize = pf + 'px'; pv.style.lineHeight = (plh * pf / pbase).toFixed(2) + 'px';
@@ -181,15 +181,22 @@
         var d = nbuf.getChannelData(0);
         for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
       }
-      var t = actx.currentTime, src = actx.createBufferSource(), bp = actx.createBiquadFilter(), g = actx.createGain();
-      src.buffer = nbuf; src.playbackRate.value = 0.9 + Math.random() * 0.25;
-      bp.type = 'bandpass'; bp.frequency.value = kLow ? 1300 : 2500 + Math.random() * 600; bp.Q.value = 0.9;
-      g.gain.setValueAtTime(0.55, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.045);
-      src.connect(bp); bp.connect(g); g.connect(actx.destination); src.start(t);
+      /* mechanical keyboard: a sharp top click, a short plastic body and a low bottom-out thock */
+      var t = actx.currentTime, out = actx.createGain(); out.gain.value = 0.9; out.connect(actx.destination);
+      var hit = function (when, freq, q, gain, len, rate) {
+        var s1 = actx.createBufferSource(), f1 = actx.createBiquadFilter(), g1 = actx.createGain();
+        s1.buffer = nbuf; s1.playbackRate.value = rate; f1.type = 'bandpass'; f1.frequency.value = freq; f1.Q.value = q;
+        g1.gain.setValueAtTime(0.0001, when); g1.gain.linearRampToValueAtTime(gain, when + 0.002); g1.gain.exponentialRampToValueAtTime(0.0001, when + len);
+        s1.connect(f1); f1.connect(g1); g1.connect(out); s1.start(when); s1.stop(when + len + 0.01);
+      };
+      var r = 0.92 + Math.random() * 0.16;
+      hit(t, (kLow ? 3200 : 4200) * r, 2.2, kLow ? 0.35 : 0.45, 0.012, 1.3);   /* click */
+      hit(t + 0.004, (kLow ? 700 : 1100) * r, 1.4, kLow ? 0.7 : 0.55, kLow ? 0.06 : 0.04, 0.9); /* body */
       var o = actx.createOscillator(), g2 = actx.createGain();
-      o.type = 'sine'; o.frequency.setValueAtTime(kLow ? 110 : 170, t); o.frequency.exponentialRampToValueAtTime(60, t + 0.03);
-      g2.gain.setValueAtTime(kLow ? 0.24 : 0.16, t); g2.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
-      o.connect(g2); g2.connect(actx.destination); o.start(t); o.stop(t + 0.05);
+      o.type = 'triangle'; o.frequency.setValueAtTime(kLow ? 140 : 210, t + 0.006); o.frequency.exponentialRampToValueAtTime(kLow ? 55 : 80, t + 0.04);
+      g2.gain.setValueAtTime(0.0001, t + 0.006); g2.gain.linearRampToValueAtTime(kLow ? 0.32 : 0.2, t + 0.009); g2.gain.exponentialRampToValueAtTime(0.0001, t + (kLow ? 0.07 : 0.05));
+      o.connect(g2); g2.connect(out); o.start(t + 0.006); o.stop(t + 0.08);
+      hit(t + 0.055 + Math.random() * 0.02, 2600 * r, 1.8, 0.12, 0.015, 1.1); /* soft key release */
     } catch (e) {}
   }
 
@@ -364,6 +371,8 @@
     }
     var map = S.layout === 'inscript' ? H.INSCRIPT : H.US;
     var pair = map[e.code];
+    /* number pad keys (and any digit key the map lacks) type the plain digit, as in the real exam */
+    if (!pair && /^Numpad/.test(e.code) && /^[0-9.+\-*\/]$/.test(e.key)) pair = [e.key, e.key];
     if (!pair) { if (e.key.length === 1) e.preventDefault(); return; }
     e.preventDefault();
     begin(); S.keys++; click();
