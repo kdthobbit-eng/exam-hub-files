@@ -64,6 +64,7 @@
       }
       out.push(o);
     }
+    out.rest = src.slice(best); /* part of the passage not reached (time over) - shown, never counted */
     return out;
   }
 
@@ -76,16 +77,32 @@
       if (o.t === 'add') return '<span class="d-add" title="Added words">' + esc(o.w) + '</span>';
       if (o.t === 'half') return '<span class="d-half" title="Half mistake: ' + (WHY[o.why] || '') + '">' + esc(o.w) + ' <s>' + esc(o.s) + '</s></span>';
       return '<span class="d-sub" title="Full mistake">' + esc(o.w) + ' <s>' + esc(o.s) + '</s></span>';
-    }).join(' ');
+    }).join(' ') + restHtml(ops);
+  }
+  /* the part of the passage that was not reached, in grey (max 200 words) */
+  function restHtml(ops) {
+    var r = ops.rest || []; if (!r.length) return '';
+    var shown = r.slice(0, 200).map(esc).join(' ');
+    return '<div class="d-rest"><b class="d-rest-h">Not typed (time over) · ' + r.length + ' words</b> ' + shown + (r.length > 200 ? ' …' : '') + '</div>';
   }
   function twoCol(ops) {
-    var L = [], R = [];
-    ops.forEach(function (o) {
+    var L = [], R = [], run = 0;
+    function flush() { if (run) { R.push('<span class="d-skip">⟵ ' + run + ' word' + (run > 1 ? 's' : '') + ' missed</span>'); run = 0; } }
+    ops.forEach(function (o, k) {
       var cls = o.t === 'ok' ? 'd-ok' : o.t === 'half' ? 'd-half' : o.t === 'om' ? 'd-om' : o.t === 'add' ? 'd-add' : 'd-sub';
-      if (o.t !== 'add') L.push('<span class="' + cls + '">' + esc(o.s) + '</span>');
-      if (o.t !== 'om') R.push('<span class="' + cls + '">' + esc(o.w) + '</span>');
+      if (o.t === 'om') {
+        /* a run of 3+ missed words is a skipped line: mark it as one block */
+        var a = k, b = k; while (a > 0 && ops[a - 1].t === 'om') a--; while (b < ops.length - 1 && ops[b + 1].t === 'om') b++;
+        var long = b - a + 1 >= 3;
+        L.push((long && k === a ? '<span class="d-skipblk" title="Skipped: ' + (b - a + 1) + ' words">' : '') + '<span class="' + cls + '">' + esc(o.s) + '</span>' + (long && k === b ? '</span>' : ''));
+        run++; return;
+      }
+      flush();
+      L.push('<span class="' + cls + '">' + esc(o.s) + '</span>');
+      R.push('<span class="' + cls + '">' + esc(o.w) + '</span>');
     });
-    return '<div class="eh-cmp"><div><h4>Original Passage</h4><div class="eh-cmp-t">' + L.join(' ') + '</div></div><div><h4>What you typed</h4><div class="eh-cmp-t">' + R.join(' ') + '</div></div></div>';
+    flush();
+    return '<div class="eh-cmp"><div><h4>Original Passage</h4><div class="eh-cmp-t">' + L.join(' ') + restHtml(ops) + '</div></div><div><h4>What you typed</h4><div class="eh-cmp-t">' + R.join(' ') + '</div></div></div>';
   }
   function counts(ops) {
     var c = { full: 0, half: 0, om: 0, add: 0, sub: 0, space: 0, case: 0, punct: 0, trans: 0 };
@@ -170,7 +187,7 @@
       '<li><b>Error %</b> = mistakes ÷ words × 100 = ' + errs + ' ÷ ' + (R.words || 0) + ' × 100 = <b>' + R.err + '%</b> (allowed ' + allowed + '%)</li>' +
       '<li><b>' + (keysMode ? 'Key depressions' : 'Words') + '</b>: you typed ' + amount + ', needed ' + X.target + ' → ' + (amount >= X.target ? '✔ done' : '✘ short') + '</li>' +
       '</ol><p class="eh-verdict-line">Result: ' + (R.pass ? '<b class="ok">Qualified</b> — target met and errors within the limit.' : '<b class="no">Not Qualified</b> — ' + (amount < X.target ? 'target not met' : '') + (amount < X.target && R.err > allowed ? ' and ' : '') + (R.err > allowed ? 'error ' + allowed + '% limit crossed' : '') + '.') + '</p></div>';
-    var legend = '<p class="eh-legend"><span class="d-ok">Correct</span> <span class="d-sub">Wrong word (Full)</span> <span class="d-om">Missed word (Full)</span> <span class="d-add">Added word (Full)</span> <span class="d-half">Half mistake</span></p>';
+    var legend = '<p class="eh-legend"><span class="d-ok">Correct</span> <span class="d-sub">Wrong word (Full)</span> <span class="d-om">Missed word (Full)</span> <span class="d-add">Added word (Full)</span> <span class="d-skip">Skipped line</span> <span class="d-rest-k">Not typed</span> <span class="d-half">Half mistake</span></p>';
     var cmp = '<div class="eh-cmp-wrap"><div class="eh-cmp-tabs"><button type="button" class="on" data-v="two">Side by side</button><button type="button" data-v="one">Inline</button></div>' + legend +
       '<div class="eh-cmp-v" data-v="two">' + twoCol(ops) + '</div><div class="eh-cmp-v eh-diff" data-v="one" hidden>' + inline(ops) + '</div></div>';
     var sp = up ? n2(V.wpm) : R.net;

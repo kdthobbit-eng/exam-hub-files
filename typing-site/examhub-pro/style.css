@@ -1254,3 +1254,10 @@ script,style,template{display:none!important}
 .eh-lt-bar .eh-live-chips button{border:0;border-radius:999px;padding:9px 20px;font-size:15px;font-weight:800;background:transparent;color:#4b311d}
 .eh-lt-bar .eh-live-chips button.on{background:#4b311d;color:#fff}
 @media(max-width:700px){.eh-lt-head{padding:18px 16px 14px}.eh-lt-head .eh-live-h{font-size:27px}.eh-lt-bar .eh-live-chips{width:100%}.eh-lt-bar .eh-live-chips button{flex:1}}
+
+/* comparison: skipped lines and the part not reached */
+.eh-cmp-t .d-skipblk{background:#fff7d6;outline:2px dashed #d97706;outline-offset:2px;border-radius:6px;padding:2px 0}
+.eh-cmp-t .d-skip,.eh-legend .d-skip{display:inline-block;background:#d97706;color:#fff!important;font-weight:800;font-size:.8em;padding:2px 8px;border-radius:999px}
+.eh-cmp-t .d-rest{margin-top:12px;padding-top:10px;border-top:2px dashed #d9c7b1;color:#9a8a78}
+.eh-cmp-t .d-rest-h{display:block;color:#6b5a48;font-size:.82em;letter-spacing:.3px;margin-bottom:4px}
+.eh-legend .d-rest-k{background:#efe7dc;color:#6b5a48}
