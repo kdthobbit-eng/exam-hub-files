@@ -53,7 +53,6 @@
     var ps = $('#eh-opt-passage');
     var pick = function () { var r = setup.querySelector('input[name="eh-psg"]:checked'); ps.value = r ? r.value : ''; };
     setup.querySelectorAll('input[name="eh-psg"]').forEach(function (r) { r.addEventListener('change', function () {
-      setup.querySelectorAll('input[name="eh-psg"]').forEach(function (o) { if (o !== r && o.value === r.value) o.checked = true; });
       pick(); var m = $('#eh-sp-modal'); if (m && r.closest('#eh-sp-modal')) m.hidden = true;
     }); });
     pick();
