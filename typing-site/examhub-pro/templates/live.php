@@ -1,6 +1,6 @@
 <?php
 $eh_days = eh_live_days();
-$eh_day = preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) ($_GET['day'] ?? '')) && in_array($_GET['day'], $eh_days, true) ? $_GET['day'] : '';
+$eh_day = preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) ($_GET['ldate'] ?? '')) && in_array($_GET['ldate'], $eh_days, true) ? $_GET['ldate'] : '';
 $S = eh_live_schedule($eh_day);
 $now = (int) wp_date('G') * 60 + (int) wp_date('i');
 $sel = sanitize_title($_GET['exam'] ?? '');
@@ -106,7 +106,7 @@ if ($row):
   <?php $eh_news = ''; foreach ($S as $x) if (!empty($x['news'])) $eh_news = $x['news'];
   $eh_fd = function ($d) { return date_i18n('j M Y', strtotime($d)); };
   $eh_cur = $eh_news ?: wp_date('Y-m-d'); $eh_ix = array_search($eh_cur, $eh_days, true);
-  $eh_u = function ($d) use ($eh_days) { return $d === ($eh_days[0] ?? '') ? home_url('/live-typing/') : add_query_arg('day', $d, home_url('/live-typing/')); };
+  $eh_u = function ($d) use ($eh_days) { return $d === ($eh_days[0] ?? '') ? home_url('/live-typing/') : add_query_arg('ldate', $d, home_url('/live-typing/')); };
   $eh_newer = $eh_ix !== false && $eh_ix > 0 ? $eh_days[$eh_ix - 1] : ''; $eh_older = $eh_ix !== false && isset($eh_days[$eh_ix + 1]) ? $eh_days[$eh_ix + 1] : '';
   if ($eh_days): ?>
   <div class="eh-dp" id="eh-dp" data-days="<?php echo esc_attr(implode(',', $eh_days)); ?>" data-cur="<?php echo esc_attr($eh_cur); ?>" data-base="<?php echo esc_url(home_url('/live-typing/')); ?>">
@@ -137,7 +137,7 @@ if ($row):
       for (var k = 0; k < first; k++) h += '<span></span>';
       for (var d = 1; d <= n; d++) {
         var id = y + '-' + z(m + 1) + '-' + z(d);
-        h += days.indexOf(id) > -1 ? '<a class="' + (id === cur ? 'on' : '') + '" href="' + (id === days[0] ? base : base + '?day=' + id) + '">' + d + '</a>' : '<span class="na">' + d + '</span>';
+        h += days.indexOf(id) > -1 ? '<a class="' + (id === cur ? 'on' : '') + '" href="' + (id === days[0] ? base : base + '?ldate=' + id) + '">' + d + '</a>' : '<span class="na">' + d + '</span>';
       }
       pop.innerHTML = h + '</div><p>Dates in colour have passages.</p>';
     }

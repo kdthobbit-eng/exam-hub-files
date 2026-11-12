@@ -1261,3 +1261,5 @@ script,style,template{display:none!important}
 .eh-cmp-t .d-rest{margin-top:12px;padding-top:10px;border-top:2px dashed #d9c7b1;color:#9a8a78}
 .eh-cmp-t .d-rest-h{display:block;color:#6b5a48;font-size:.82em;letter-spacing:.3px;margin-bottom:4px}
 .eh-legend .d-rest-k{background:#efe7dc;color:#6b5a48}
+.eh-lt-head .eh-dp-pop{left:auto;right:0}
+@media(max-width:700px){.eh-lt-head .eh-dp-pop{right:auto;left:0}}
