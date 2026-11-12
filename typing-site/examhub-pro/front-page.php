@@ -104,6 +104,32 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
       </div>
     </article>
 
+    <?php /* UPSSSC Alert's own book (details as posted in the UPSSSC Alert Telegram group) */
+    $bk_img = file_exists(EH_DIR . '/assets/book-supertet.jpg') ? EH_URI . '/assets/book-supertet.jpg' : '';
+    $bk_tg = 'https://t.me/Booksalert2026'; $bk_wa = 'https://wa.me/918726821839?text=' . rawurlencode('UP SUPER TET BOOK order'); ?>
+    <article class="uh-feat uh-book" data-rv>
+      <div class="uh-feat-txt">
+        <p class="uh-tag"><?php echo eh_t('Book · UP SUPER TET', 'किताब · UP SUPER TET'); ?></p>
+        <h3><?php echo eh_t('UP SUPER TET Book', 'UP SUPER TET बुक'); ?> <em><?php echo eh_t('Published by UPSSSC Alert', 'प्रकाशक: UPSSSC Alert'); ?></em></h3>
+        <ul class="uh-list two">
+          <li><?php echo eh_t('Made for the new syllabus', 'नए पाठ्यक्रम के अनुसार तैयार'); ?></li>
+          <li><?php echo eh_t('Detailed theory, tricks and one-liners', 'विस्तृत थ्योरी, ट्रिक्स और वन-लाइनर'); ?></li>
+          <li><?php echo eh_t('6,000+ questions with model papers', '6,000+ प्रश्न और मॉडल पेपर'); ?></li>
+          <li><?php echo eh_t('Full preparation for all 360 marks', 'पूरे 360 अंकों की तैयारी एक किताब से'); ?></li>
+          <li><?php echo eh_t('Home delivery across India in 2-3 days', 'पूरे भारत में 2-3 दिन में घर तक डिलीवरी'); ?></li>
+          <li><?php echo eh_t('Also at book shops in Ayodhya, Barabanki, Banda, Fatehpur and Mahoba', 'अयोध्या, बाराबंकी, बांदा, फतेहपुर और महोबा की दुकानों पर भी'); ?></li>
+        </ul>
+        <div class="uh-feat-foot">
+          <p class="uh-fee"><small><?php echo eh_t('Book price', 'किताब की कीमत'); ?></small>₹429</p>
+          <a class="uh-btn dark" href="<?php echo esc_url($bk_tg); ?>" target="_blank" rel="noopener"><?php echo eh_t('Order on Telegram', 'टेलीग्राम पर ऑर्डर करें'); ?><?php echo $arrow; ?></a>
+          <a class="uh-btn line" href="<?php echo esc_url($bk_wa); ?>" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <div class="uh-feat-img uh-book-img"><?php if ($bk_img): ?><img src="<?php echo esc_url($bk_img); ?>" alt="UP SUPER TET Book by UPSSSC Alert" loading="lazy"><?php else: ?>
+        <div class="uh-book-cover"><span>UPSSSC ALERT</span><b>UP SUPER TET</b><i>6000+ <?php echo eh_t('questions', 'प्रश्न'); ?> · <?php echo eh_t('theory', 'थ्योरी'); ?> · <?php echo eh_t('model papers', 'मॉडल पेपर'); ?></i></div><?php endif; ?>
+        <span class="uh-new"><?php echo eh_t('Our book', 'हमारी किताब'); ?></span></div>
+    </article>
+
     <div class="uh-bgrid">
       <?php foreach (array_slice($batches, 1) as $i => $b): ?>
       <article class="uh-b" data-rv style="--d:<?php echo $i * 80; ?>ms">

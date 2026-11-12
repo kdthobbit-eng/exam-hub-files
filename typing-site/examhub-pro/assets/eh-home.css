@@ -272,3 +272,13 @@ body.home{animation:uhfade .6s ease both}
   body.home.uh-scrolled .eh-header .eh-logo-name,body.home.uh-scrolled .eh-header .eh-logo-name em{font-size:23px}
   body.home.uh-scrolled .eh-header .eh-logo-mark{width:50px;height:50px}
 }
+
+/* book card (after the JE Mechanical batch) */
+.uh-book{grid-template-columns:1.2fr 1fr}
+.uh-book .uh-book-img{background:linear-gradient(135deg,#fff3e3,#f6e3c8)}
+.uh-book .uh-book-img img{object-fit:contain;padding:22px}
+.uh-book-cover{position:absolute;inset:34px 18%;border-radius:10px 18px 18px 10px;background:linear-gradient(160deg,#8a431f,#4b311d);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;text-align:center;padding:24px;box-shadow:14px 18px 34px rgba(75,49,29,.35),inset 10px 0 0 rgba(255,255,255,.12)}
+.uh-book-cover span{font-weight:800;letter-spacing:2px;font-size:14px;color:#ffb27a}
+.uh-book-cover b{font-size:clamp(26px,3vw,40px);font-weight:900;line-height:1.05}
+.uh-book-cover i{font-style:normal;font-weight:700;font-size:14px;opacity:.9}
+@media(max-width:860px){.uh-book{grid-template-columns:1fr}.uh-book .uh-book-img{order:-1}}

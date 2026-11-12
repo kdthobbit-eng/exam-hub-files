@@ -3,6 +3,7 @@
    Run: php preview/build.php   (from typing-site/) */
 $T = __DIR__ . '/../examhub-pro';
 define('EH_URI', '../examhub-pro');
+define('EH_DIR', __DIR__ . '/../examhub-pro');
 function esc_url($s) { return htmlspecialchars((string) $s, ENT_QUOTES); }
 function esc_html($s) { return htmlspecialchars((string) $s, ENT_QUOTES); }
 function esc_attr($s) { return htmlspecialchars((string) $s, ENT_QUOTES); }
