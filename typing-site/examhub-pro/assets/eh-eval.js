@@ -199,7 +199,7 @@
     /* details, word check and working, organised as tables */
     var tr2 = function (list, n) { var h = ''; for (var i = 0; i < list.length; i += n) { h += '<tr>'; for (var j = i; j < i + n; j++) h += list[j] ? '<th>' + list[j][0] + '</th><td>' + list[j][1] + '</td>' : '<th></th><td></td>'; h += '</tr>'; } return h; };
     var tDet = '<h4 class="eh-tbl-h">Test details</h4><div class="eh-tbl-w"><table class="eh-tbl eh-t3 eh-kv">' + tr2([['Typing Date', esc(R.date || '—')], ['Key Depression', R.total ? R.total : '—'], ['Time Duration', mm(R.dur || X.minutes)], ['Time Taken', mm(R.minutes)]], 2) + '</table></div>';
-    var tWord = '<h4 class="eh-tbl-h">Word check</h4><div class="eh-tbl-w"><table class="eh-tbl eh-t4 eh-kv">' + tr2([['Words Typed', R.words], ['Keystroke Errors', R.kerr], ['Backspace', R.backspaces], ['Pending Words', R.pending || 0], ['Missed words', c.om], ['Added words', c.add], ['Wrong words', c.sub], ['Space/Case/Punct/Order', c.space + ' / ' + c.case + ' / ' + c.punct + ' / ' + c.trans]], 2) + '</table></div>';
+    var tWord = '<h4 class="eh-tbl-h">Word check</h4><div class="eh-tbl-w"><table class="eh-tbl eh-t4 eh-kv">' + tr2([['Words Typed', R.words], ['Keystroke Errors', R.kerr], ['Backspace', R.backspaces], ['Pending Words', R.pending || 0], ['Missed words', c.om], ['Added words', c.add], ['Wrong words', c.sub], ['Space/Case/Punct/Order', c.space + ' / ' + c.case + ' / ' + c.punct + ' / ' + c.trans]], 4) + '</table></div>';
     var res = '<b class="' + (V.pass ? 'ok' : 'no') + '">';
     var tCalc = up ? '<h4 class="eh-tbl-h">How your result was worked out (UPSSSC rule)</h4><div class="eh-tbl-w"><table class="eh-tbl eh-calc"><thead><tr><th>Step</th><th>Rule</th><th>Working</th><th>Answer</th></tr></thead><tbody>' +
       '<tr><th>Words</th><td>' + (V.byWords ? 'real words typed' : 'key strokes ÷ 5') + '</td><td>' + (V.byWords ? n2(V.words) : R.keys + ' ÷ 5') + '</td><td><b>' + n2(V.words) + '</b></td></tr>' +
@@ -212,8 +212,10 @@
     var cc = function (lab, val, cls, ic) { return '<div class="eh-cc ' + (cls || '') + '"><span>' + lab + '</span><b>' + val + '</b>' + (ic ? '<i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + ic + '</svg></i>' : '') + '</div>'; };
     var pc = R.pass ? 'ok' : 'no';
     var errsAll = up ? n2(V.errs) : n2((+R.full || 0) + (+R.half || 0) / 2);
-    var grid = '<div class="eh-chead"><div><p class="eh-kicker">Performance Dashboard</p><h2>' + esc(X.name) + '</h2><p class="eh-score-sub">' + (R.title ? esc(R.title) : '') + (R.title && R.date ? ' · ' : '') + (R.date ? esc(R.date) : '') + '</p></div>' +
-      '<p class="eh-crule">' + (up ? 'First 5 mistakes free, then 5 words cut for each mistake · needed ' + V.need + ' WPM' : 'Allowed error ' + allowed + '% · needed ' + esc(eh_tgt(X, tgt))) + '</p></div>' +
+    var grid = '<div class="eh-ihead"><h2>Performance Dashboard</h2><dl class="eh-info">' +
+      '<div><dt>Exam Title</dt><dd>' + esc(X.name) + '</dd></div><div><dt>Total Key Strokes</dt><dd>' + (R.total || R.keys) + '</dd></div><div><dt>Typing Date</dt><dd>' + esc(R.date || '—') + '</dd></div>' +
+      '<div><dt>Passage Title</dt><dd>' + esc(R.title || '—') + '</dd></div><div><dt>Time Duration</dt><dd>' + mm(R.dur || X.minutes) + '</dd></div><div><dt>Time Taken</dt><dd>' + mm(R.minutes) + '</dd></div>' +
+      '</dl></div>' +
       '<div class="eh-cgrid">' +
       cc(up ? 'Total Keystrokes / Words Typed' : 'Key Depressions', up ? R.keys + ' / ' + n2(V.words) : R.keys, 'k', ICO[4]) +
       cc('Full Mistakes', R.full, '', ICO[5]) + cc('Half Mistakes', R.half, '', ICO[6]) +
@@ -221,8 +223,11 @@
       cc('Gross Speed', (up ? n2(V.words / V.mins) : R.gross) + ' <small>WPM</small>', '', ICO[1]) + cc('Accuracy', R.acc + ' <small>%</small>', '', ICO[2]) +
       cc('Net Speed', sp + ' <small>WPM</small>', pc + ' big', ICO[0]) +
       cc('Result', R.pass ? '✔ Qualified' : '✘ Not Qualified', pc + ' res', '') + '</div>';
-    return grid +
-      '<div class="eh-tbls eh-tbls2"><div>' + tDet + '</div><div>' + tWord + '</div></div>' + tCalc + '<h3 class="eh-cmp-title">Detailed Comparison</h3>' + cmp;
+    var strip = up ? '<p class="eh-fstrip">🧮 <b>Net Speed</b> = (' + n2(V.words) + ' − ' + (V.errs > 5 ? '(' + n2(V.errs) + ' − 5) × 5' : '0') + ') ÷ ' + n2(V.mins) + ' = <b class="' + pc + '">' + n2(V.wpm) + ' WPM</b> <span>· first 5 mistakes free, needed ' + V.need + ' WPM</span></p>'
+      : '<p class="eh-fstrip">🧮 <b>Net Speed</b> = (' + R.words + ' − ' + errsAll + ') ÷ ' + mins.toFixed(2) + ' = <b class="' + pc + '">' + R.net + ' WPM</b> <span>· allowed error ' + allowed + '%</span></p>';
+    return grid + strip +
+      '<details class="eh-more"><summary>More details <small>Word check · full working</small></summary><div class="eh-more-b">' + tWord + tCalc + '</div></details>' +
+      '<h3 class="eh-cmp-title">Detailed Comparison</h3>' + cmp;
   }
   function bindDash(root) {
     var sw = root.querySelector('.eh-ksw input');

@@ -1359,3 +1359,24 @@ button.eh-dp-nav{cursor:pointer;font:inherit}
 .eh-dash .eh-t3.eh-kv tr{height:33px}
 @media(max-width:900px){.eh-dash .eh-kv tr{display:table-row}.eh-dash .eh-kv th,.eh-dash .eh-kv td{border-bottom:1px solid #f0e7dc}.eh-dash .eh-kv tr:last-child th,.eh-dash .eh-kv tr:last-child td{border-bottom:0}.eh-dash .eh-t3.eh-kv th,.eh-dash .eh-t4.eh-kv th{width:30%;white-space:normal}.eh-dash .eh-t3.eh-kv td,.eh-dash .eh-t4.eh-kv td{width:20%}}
 @media(max-width:600px){.eh-dash .eh-calc thead th:nth-child(1){width:30%}.eh-dash .eh-calc thead th:nth-child(3){width:38%}.eh-dash .eh-calc thead th:nth-child(4){width:32%}.eh-dash .eh-calc th,.eh-dash .eh-calc td{white-space:normal;overflow:visible;text-overflow:clip;word-break:normal;overflow-wrap:normal}.eh-dash .eh-kv th{overflow:visible;text-overflow:clip;overflow-wrap:anywhere}}
+/* ===== Result: info header, formula strip, more-details dropdown ===== */
+.eh-dash .eh-ihead{margin:0 0 14px}
+.eh-dash .eh-ihead h2{text-align:center;font:800 22px/1.2 Inter,system-ui,sans-serif;color:#2a1a10;margin:2px 0 12px;letter-spacing:-.2px}
+.eh-dash .eh-info{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:8px 20px;margin:0;padding:12px 14px;background:#faf6f0;border:1px solid #eee3d6;border-radius:10px}
+.eh-dash .eh-info>div{display:flex;gap:6px;min-width:0;font-size:13.5px;line-height:1.35}
+.eh-dash .eh-info dt{font-weight:700;color:#2a1a10;white-space:nowrap}.eh-dash .eh-info dt:after{content:':'}
+.eh-dash .eh-info dd{margin:0;color:#5a4a3d;font-weight:500;overflow-wrap:anywhere}
+.eh-dash .eh-fstrip{margin:12px 0 0;padding:10px 14px;background:#f3f7ff;border:1px solid #d6e2fb;border-radius:10px;font-size:14px;color:#2a3a5a;line-height:1.4}
+.eh-dash .eh-fstrip b.ok{color:#1b7a3a}.eh-dash .eh-fstrip b.no{color:#c62828}.eh-dash .eh-fstrip span{color:#5a6a8a;font-size:12.5px}
+.eh-dash .eh-more{margin:12px 0 0;border:1px solid #e9ddd0;border-radius:10px;background:#fff}
+.eh-dash .eh-more summary{cursor:pointer;list-style:none;padding:10px 14px;font-weight:800;font-size:14px;color:#2a1a10;display:flex;align-items:center;gap:8px}
+.eh-dash .eh-more summary::-webkit-details-marker{display:none}
+.eh-dash .eh-more summary:before{content:'▸';color:#a0522d;transition:transform .2s}.eh-dash .eh-more[open] summary:before{transform:rotate(90deg)}
+.eh-dash .eh-more summary small{font-weight:500;color:#7a6a5c;font-size:12.5px}
+.eh-dash .eh-more-b{padding:0 14px 14px}.eh-dash .eh-more-b .eh-tbl-h:first-child{margin-top:2px}
+.eh-dash .eh-more .eh-t4.eh-kv th{width:16%}.eh-dash .eh-more .eh-t4.eh-kv td{width:9%}
+@media(max-width:900px){.eh-dash .eh-info{grid-template-columns:1fr 1fr}.eh-dash .eh-more .eh-t4.eh-kv tr{display:grid;grid-template-columns:1fr 1fr 1fr 1fr}}
+@media(max-width:560px){.eh-dash .eh-info{grid-template-columns:1fr;gap:5px}.eh-dash .eh-ihead h2{font-size:19px}.eh-dash .eh-more .eh-t4.eh-kv tr{grid-template-columns:30% 20% 30% 20%}.eh-dash .eh-fstrip{font-size:13px}}
+.eh-dash .eh-info>div{border:0!important;background:none!important;padding:0!important;box-shadow:none!important;border-radius:0!important;min-height:0!important}
+@media(max-width:560px){.eh-dash .eh-info{padding:10px 12px}.eh-dash .eh-info>div{font-size:13px}.eh-dash .eh-cc.k{grid-column:1/-1;min-height:0}.eh-dash .eh-cc{min-height:0}}
+@media(max-width:560px){.eh-dash .eh-cc.res{grid-column:1/-1}}
