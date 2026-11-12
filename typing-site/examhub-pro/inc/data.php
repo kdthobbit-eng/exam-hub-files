@@ -94,10 +94,10 @@ function eh_passage_days($lang, $days = 7) {
     $tdate = wp_date('Y-m-d');
     /* practice pool: the regular passages plus Live news passages of past days (today's stay on Live Typing) */
     $pool = array_values(array_filter($all, function ($p) use ($tdate) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && (empty($p['day']) || $p['day'] < $tdate); }));
-    /* 20 passages a day, all Hard (owner asked: students found practice easy); a short Hard pool is filled from Moderate */
-    $want = ['H' => 20, 'M' => 0, 'E' => 0, 'B' => 0];
-    $grp = ['H' => [], 'M' => [], 'E' => [], 'B' => []];
-    foreach ($pool as $p) { $lv = $p['level'] ?? 'M'; if (!isset($grp[$lv])) $lv = 'M'; $grp[$lv][] = $p; }
+    /* 20 passages a day, like Live Typing: 6 Easy, 7 Moderate, 7 Hard (Basic counts as Easy); a short group is filled from Moderate */
+    $want = ['E' => 6, 'M' => 7, 'H' => 7];
+    $grp = ['E' => [], 'M' => [], 'H' => []];
+    foreach ($pool as $p) { $lv = $p['level'] ?? 'M'; if ($lv === 'B') $lv = 'E'; if (!isset($grp[$lv])) $lv = 'M'; $grp[$lv][] = $p; }
     $out = [];
     $today = (int) floor((current_time('timestamp')) / 86400);
     for ($d = 0; $d < $days; $d++) {

@@ -1263,3 +1263,14 @@ script,style,template{display:none!important}
 .eh-legend .d-rest-k{background:#efe7dc;color:#6b5a48}
 .eh-lt-head .eh-dp-pop{left:auto;right:0}
 @media(max-width:700px){.eh-lt-head .eh-dp-pop{right:auto;left:0}}
+
+/* practice: date picker and level groups like Live Typing */
+.eh-pday-dp{margin:4px 0 10px}
+.eh-pday-pop{width:260px;display:grid;gap:6px;max-height:330px;overflow:auto}
+.eh-pday-pop button{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;border:1px solid #efe4d4;border-radius:10px;background:#fffaf3;cursor:pointer;font:inherit;color:#4b311d}
+.eh-pday-pop button small{color:#8a7560;font-weight:700}
+.eh-pday-pop button.on,.eh-pday-pop button:hover{background:#4b311d;color:#fff;border-color:#4b311d}.eh-pday-pop button.on small,.eh-pday-pop button:hover small{color:#ffd9b8}
+.eh-pday-h{margin:14px 0 6px;display:flex;align-items:center;gap:8px;font-weight:700}
+.eh-prow .eh-lvl{min-width:82px;text-align:center;font-size:12.5px;font-weight:800;padding:4px 10px;flex:none}
+.eh-lvl-legend .eh-lvl{font-size:12.5px;padding:3px 10px}
+button.eh-dp-nav{cursor:pointer;font:inherit}

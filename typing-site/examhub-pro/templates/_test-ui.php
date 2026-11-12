@@ -27,7 +27,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
   $eh_lvl = ['B' => 'Basic', 'E' => 'Easy', 'M' => 'Moderate', 'H' => 'Hard'];
   $eh_row = function ($p, $checked = false) use ($eh_lvl) {
       return '<label class="eh-prow"><input type="radio" name="eh-psg" value="' . esc_attr($p['id']) . '"' . ($checked ? ' checked' : '') . '>'
-          . '<span class="lv lv-' . esc_attr($p['level']) . '" title="' . esc_attr($eh_lvl[$p['level']] ?? '') . '">' . esc_html($p['level']) . '</span>'
+          . '<span class="eh-lvl ' . esc_attr($p['level'] === 'B' ? 'easy' : strtolower($eh_lvl[$p['level']] ?? 'moderate')) . '">' . esc_html($p['level'] === 'B' ? 'Easy' : ($eh_lvl[$p['level']] ?? '')) . '</span>'
           . '<span class="t">' . esc_html($p['title']) . '</span><span class="n">' . number_format_i18n($p['chars']) . ' keys · ' . (int) $p['words'] . ' words</span></label>';
   };
   ?>
@@ -98,13 +98,34 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
           <?php else: ?>
           <div class="eh-psel-top"><h3>Choose a passage</h3>
             <?php if ($eh_special): ?><button type="button" class="btn ghost sm" id="eh-sp-open">★ Special Passages</button><?php endif; ?></div>
-          <p class="eh-lvl-legend">B - Basic · E - Easy · M - Moderate · H - Hard · <span class="muted">20 new passages daily</span></p>
+          <p class="eh-lvl-legend"><span class="eh-lvl easy">Easy</span> <span class="eh-lvl moderate">Moderate</span> <span class="eh-lvl hard">Hard</span> · <span class="muted">20 new passages daily — pick a date</span></p>
           <label class="eh-prow rnd"><input type="radio" name="eh-psg" value="" checked><span class="lv">?</span><span class="t">Random passage</span><span class="n"></span></label>
+          <?php if ($eh_days): $eh_lab = function ($i, $d) { return $i === 0 ? 'Today' : ($i === 1 ? 'Yesterday' : wp_date('l', strtotime($d . ' 12:00'))); }; ?>
+          <div class="eh-dp eh-pday-dp" id="eh-pday-dp">
+            <button type="button" class="eh-dp-nav off" data-go="1" aria-label="Previous day">‹</button>
+            <button type="button" class="eh-dp-btn" id="eh-pday-btn"><span class="eh-dp-ic">📅</span><span class="eh-dp-t"><b><?php echo esc_html(wp_date('j M Y', strtotime($eh_days[0]['date'] . ' 12:00'))); ?></b><small>Today</small></span><span class="eh-dp-ar">▾</span></button>
+            <button type="button" class="eh-dp-nav off" data-go="-1" aria-label="Next day">›</button>
+            <div class="eh-dp-pop eh-pday-pop" id="eh-pday-pop" hidden>
+              <?php foreach ($eh_days as $i => $day) echo '<button type="button" data-i="' . $i . '" class="' . ($i === 0 ? 'on' : '') . '"><b>' . esc_html(wp_date('j M Y', strtotime($day['date'] . ' 12:00'))) . '</b><small>' . esc_html($eh_lab($i, $day['date'])) . ' · ' . count($day['items']) . '</small></button>'; ?>
+            </div>
+          </div>
           <?php foreach ($eh_days as $i => $day): ?>
-            <details class="eh-day" <?php echo $i < 2 ? 'open' : ''; ?>><summary><?php echo esc_html($i === 0 ? 'Today — ' : ($i === 1 ? 'Yesterday — ' : '')); echo esc_html(wp_date('d M Y, l', strtotime($day['date'] . ' 12:00'))); ?> <span class="muted">(<?php echo count($day['items']); ?>)</span></summary>
-              <?php foreach ($day['items'] as $p) echo $eh_row($p); ?>
-            </details>
+            <div class="eh-pday" data-i="<?php echo $i; ?>" data-d="<?php echo esc_attr(wp_date('j M Y', strtotime($day['date'] . ' 12:00'))); ?>" data-l="<?php echo esc_attr($eh_lab($i, $day['date'])); ?>"<?php echo $i ? ' hidden' : ''; ?>>
+              <?php foreach (['E' => 'Easy', 'M' => 'Moderate', 'H' => 'Hard'] as $lk => $ln):
+                $its = array_values(array_filter($day['items'], function ($p) use ($lk) { $l = $p['level'] ?? 'M'; return ($l === 'B' ? 'E' : $l) === $lk; }));
+                if (!$its) continue; ?>
+                <p class="eh-pday-h"><span class="eh-lvl <?php echo strtolower($ln); ?>"><?php echo $ln; ?></span> <span class="muted"><?php echo count($its); ?> passages</span></p>
+                <?php foreach ($its as $p) echo $eh_row($p); ?>
+              <?php endforeach; ?>
+            </div>
           <?php endforeach; ?>
+          <script>(function(){var box=document.getElementById('eh-pday-dp');if(!box)return;var days=[].slice.call(document.querySelectorAll('.eh-pday')),pop=document.getElementById('eh-pday-pop'),btn=document.getElementById('eh-pday-btn'),cur=0;
+          function show(i){if(i<0||i>=days.length)return;cur=i;days.forEach(function(d,k){d.hidden=k!==i;});var d=days[i];btn.querySelector('b').textContent=d.getAttribute('data-d');btn.querySelector('small').textContent=d.getAttribute('data-l');
+          box.querySelector('[data-go="1"]').classList.toggle('off',i>=days.length-1);box.querySelector('[data-go="-1"]').classList.toggle('off',i<=0);
+          [].forEach.call(pop.querySelectorAll('button'),function(b){b.classList.toggle('on',+b.getAttribute('data-i')===i);});pop.hidden=true;}
+          box.addEventListener('click',function(e){var t=e.target.closest('button');if(!t)return;e.stopPropagation();if(t===btn){pop.hidden=!pop.hidden;return;}if(t.hasAttribute('data-go')){show(cur+(+t.getAttribute('data-go')));return;}if(t.hasAttribute('data-i'))show(+t.getAttribute('data-i'));});
+          document.addEventListener('click',function(){pop.hidden=true;});show(0);})();</script>
+          <?php endif; ?>
           <?php endif; ?>
           <input type="hidden" id="eh-opt-passage" value="">
         </div>
