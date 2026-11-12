@@ -110,12 +110,12 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
     <article class="uh-feat uh-book" data-rv>
       <div class="uh-feat-txt">
         <p class="uh-tag"><?php echo eh_t('Book · UP SUPER TET', 'किताब · UP SUPER TET'); ?></p>
-        <h3><?php echo eh_t('UP SUPER TET Book', 'UP SUPER TET बुक'); ?> <em><?php echo eh_t('Published by UPSSSC Alert', 'प्रकाशक: UPSSSC Alert'); ?></em></h3>
+        <h3><?php echo eh_t('UP SUPER TET Book', 'UP SUPER TET बुक'); ?> <em><?php echo eh_t('First edition 2026 · by Prateek Tiwari', 'प्रथम संस्करण 2026 · प्रतीक तिवारी'); ?></em></h3>
         <ul class="uh-list two">
-          <li><?php echo eh_t('Made for the new syllabus', 'नए पाठ्यक्रम के अनुसार तैयार'); ?></li>
-          <li><?php echo eh_t('Detailed theory, tricks and one-liners', 'विस्तृत थ्योरी, ट्रिक्स और वन-लाइनर'); ?></li>
-          <li><?php echo eh_t('6,000+ questions with model papers', '6,000+ प्रश्न और मॉडल पेपर'); ?></li>
-          <li><?php echo eh_t('Full preparation for all 360 marks', 'पूरे 360 अंकों की तैयारी एक किताब से'); ?></li>
+          <li><?php echo eh_t('Assistant Teacher (Class 1-5), new syllabus', 'सहायक अध्यापक (कक्षा 1-5), नया पाठ्यक्रम'); ?></li>
+          <li><?php echo eh_t('Chapter-wise theory, tricks and one-liners', 'अध्यायवार थ्योरी, ट्रिक्स और वन-लाइनर'); ?></li>
+          <li><?php echo eh_t('6,000+ MCQ, solved PYQs and 1 exam-level model paper', '6,000+ MCQ, हल किए पिछले प्रश्न और 1 मॉडल पेपर'); ?></li>
+          <li><?php echo eh_t('All subjects for the 360-mark paper, NEP 2020 and NCF 2023 aligned', '360 अंक के पेपर के सभी विषय, NEP 2020 और NCF 2023 के अनुसार'); ?></li>
           <li><?php echo eh_t('Home delivery across India in 2-3 days', 'पूरे भारत में 2-3 दिन में घर तक डिलीवरी'); ?></li>
           <li><?php echo eh_t('Also at book shops in Ayodhya, Barabanki, Banda, Fatehpur and Mahoba', 'अयोध्या, बाराबंकी, बांदा, फतेहपुर और महोबा की दुकानों पर भी'); ?></li>
         </ul>

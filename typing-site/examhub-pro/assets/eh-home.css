@@ -282,3 +282,4 @@ body.home{animation:uhfade .6s ease both}
 .uh-book-cover b{font-size:clamp(26px,3vw,40px);font-weight:900;line-height:1.05}
 .uh-book-cover i{font-style:normal;font-weight:700;font-size:14px;opacity:.9}
 @media(max-width:860px){.uh-book{grid-template-columns:1fr}.uh-book .uh-book-img{order:-1}}
+.uh-book .uh-book-img img{object-fit:cover;padding:0}
