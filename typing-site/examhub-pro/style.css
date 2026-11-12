@@ -1274,3 +1274,34 @@ script,style,template{display:none!important}
 .eh-prow .eh-lvl{min-width:82px;text-align:center;font-size:12.5px;font-weight:800;padding:4px 10px;flex:none}
 .eh-lvl-legend .eh-lvl{font-size:12.5px;padding:3px 10px}
 button.eh-dp-nav{cursor:pointer;font:inherit}
+/* ===== Result: compact professional layout (fits one screen) ===== */
+.eh-panel.eh-dash{padding:20px 22px;border-radius:18px}
+.eh-dash .eh-ksw{padding:8px 12px;margin-bottom:12px}.eh-dash .eh-ksw b{font-size:15px}.eh-dash .eh-ksw small{font-size:13px}
+.eh-dash .eh-top{grid-template-columns:290px minmax(0,1fr);gap:14px}
+.eh-dash .eh-score{padding:16px 18px;gap:8px;border-radius:14px}
+.eh-dash .eh-kicker{font-size:11.5px;margin:0}
+.eh-dash .eh-score h2{font-size:17px;margin:2px 0 4px}
+.eh-dash .eh-score-sub{font-size:13px}
+.eh-dash .eh-score-n span{font-size:13.5px}
+.eh-dash .eh-score-n b{font-size:56px;letter-spacing:-1.5px;margin:2px 0}
+.eh-dash .eh-score-n em{font-size:13.5px}
+.eh-dash .eh-score-v{font-size:16px;padding:8px 18px;border-radius:10px}
+.eh-dash .eh-score-rule{font-size:12px;line-height:1.4}
+.eh-dash .eh-top-r{gap:10px}
+.eh-dash .eh-top-r .eh-g3{gap:10px;grid-auto-rows:auto;flex:0 0 auto}
+.eh-dash .eh-dcard,.eh-dash .eh-top-r .eh-g3 .eh-dcard{min-height:0;padding:12px 14px;gap:4px;justify-content:space-between}
+.eh-dash .eh-dcard span{font-size:13px;font-weight:700}
+.eh-dash .eh-dcard b{font-size:24px;margin-top:4px}
+.eh-dash .eh-dcard b small{font-size:12.5px}
+.eh-dash .eh-dc-ic{width:28px;height:28px;border-radius:8px}.eh-dash .eh-dc-ic svg{width:16px;height:16px}
+.eh-dash .eh-dcard.eh-wide{padding:12px 14px}
+.eh-dash .eh-dcard.eh-wide span{font-size:13.5px}
+.eh-dash .eh-dcard.eh-wide b,.eh-dash .eh-dcard.c5 b{font-size:28px;margin-top:2px}
+.eh-dash .eh-tbl-h{font-size:15.5px;margin:16px 0 8px}
+.eh-dash .eh-tbl{font-size:14px}
+.eh-dash .eh-tbl th,.eh-dash .eh-tbl td{padding:8px 12px}
+.eh-dash .eh-calc .eh-calc-sp th,.eh-dash .eh-calc .eh-calc-sp td{font-size:15px}
+.eh-dash .eh-calc tfoot td{font-size:14.5px}
+.eh-dash .eh-cmp-title{font-size:17px;margin:20px 0 8px}
+.eh-dash .eh-cmp-t{font-size:16px}
+@media(max-width:700px){.eh-dash .eh-score-n b{font-size:48px}.eh-dash .eh-dcard b{font-size:21px}.eh-dash .eh-dcard.eh-wide b{font-size:24px}}
