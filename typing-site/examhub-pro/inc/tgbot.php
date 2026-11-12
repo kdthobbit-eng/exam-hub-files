@@ -49,7 +49,7 @@ function eh_tgb_role($id) {
 
 /* ---------- numbers ---------- */
 function eh_tgb_range($k) {
-    $now = current_time('timestamp'); $d = wp_date('Y-m-d', $now);
+    $now = time(); /* wp_date() adds the site time zone itself */ $d = wp_date('Y-m-d', $now);
     switch ($k) {
         case 'hour':  return [wp_date('Y-m-d H:i:s', $now - 3600), wp_date('Y-m-d H:i:s', $now), 'पिछला 1 घंटा'];
         case 'yday':  $y = wp_date('Y-m-d', $now - 86400); return [$y . ' 00:00:00', $y . ' 23:59:59', 'कल (' . wp_date('d M', $now - 86400) . ')'];
@@ -102,7 +102,7 @@ function eh_tgb_top() {
 function eh_tgb_users() {
     global $wpdb; $d = current_time('Y-m-d');
     $today = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->users} WHERE user_registered >= %s", get_gmt_from_date($d . ' 00:00:00')));
-    $wk = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->users} WHERE user_registered >= %s", get_gmt_from_date(wp_date('Y-m-d', current_time('timestamp') - 6 * 86400) . ' 00:00:00')));
+    $wk = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->users} WHERE user_registered >= %s", get_gmt_from_date(wp_date('Y-m-d', time() - 6 * 86400) . ' 00:00:00')));
     $all = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->users}");
     return '👤 <b>Sign-ups</b>' . "\n\nआज: <b>" . number_format_i18n($today) . "</b>\nपिछले 7 दिन: " . number_format_i18n($wk) . "\nकुल यूज़र: <b>" . number_format_i18n($all) . '</b>';
 }
