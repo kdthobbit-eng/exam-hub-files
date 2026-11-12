@@ -1398,3 +1398,10 @@ button.eh-dp-nav{cursor:pointer;font:inherit}
 @media(max-width:560px){.eh-dash .eh-info{grid-template-columns:1fr}.eh-dash .eh-info>div{border-right:0!important;border-bottom:1px solid #eee3d6!important;grid-template-columns:118px 1fr}.eh-dash .eh-info>div:last-child{border-bottom:0!important}.eh-dash .eh-info dt{font-size:12.5px;padding:8px 10px}.eh-dash .eh-info dd{font-size:13px;padding:8px 10px}}
 @media(min-width:901px){.eh-dash .eh-info>div:nth-child(3n+1){grid-template-columns:118px 1fr}.eh-dash .eh-info>div:nth-child(3n+2){grid-template-columns:140px 1fr}.eh-dash .eh-info>div:nth-child(3n){grid-template-columns:116px 1fr}}
 @media(max-width:560px){.eh-dash .eh-info>div:nth-child(n){border-bottom:1px solid #eee3d6!important}.eh-dash .eh-info>div:last-child{border-bottom:0!important}}
+/* ===== Start Typing button: bigger and stands out ===== */
+#eh-start.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:260px;padding:17px 34px;font-size:19px;font-weight:800;letter-spacing:.2px;border:0;border-radius:14px;color:#fff;background:linear-gradient(135deg,#16a34a,#0f9f6e);box-shadow:0 10px 24px -8px rgba(22,163,74,.6),0 0 0 4px rgba(22,163,74,.15);transition:transform .15s,box-shadow .15s}
+#eh-start.btn:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px rgba(22,163,74,.7),0 0 0 5px rgba(22,163,74,.2)}
+#eh-start.btn:not(:disabled){animation:ehStartPulse 1.8s ease-in-out infinite}
+#eh-start.btn:disabled{background:#cfc6bc;color:#fff;box-shadow:none;cursor:not-allowed;animation:none}
+@keyframes ehStartPulse{0%,100%{box-shadow:0 10px 24px -8px rgba(22,163,74,.6),0 0 0 4px rgba(22,163,74,.15)}50%{box-shadow:0 10px 24px -8px rgba(22,163,74,.6),0 0 0 9px rgba(22,163,74,.08)}}
+@media(max-width:560px){#eh-start.btn{width:100%;min-width:0;font-size:18px;padding:16px 20px}}
