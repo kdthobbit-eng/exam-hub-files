@@ -1,43 +1,74 @@
 <?php get_header();
 $e = eh_exam(get_query_var('eh_slug')); $att = eh_attempt_counts(); $board = eh_leaderboard($e['slug'], '', 10);
-$rule = $e['unit'] === 'keys'
-  ? 'In ' . (int) $e['minutes'] . ' minutes you need at least ' . number_format_i18n($e['target']) . ' key depressions.'
-  : 'In ' . (int) $e['minutes'] . ' minutes you need to type about ' . number_format_i18n($e['target']) . ' words.';
+$up = ($e['eval'] ?? '') === 'upsssc';
+$min = (int) $e['minutes']; $wpm = (int) eh_target_wpm($e);
+$kb = $e['lang'] === 'hi' ? 'Krutidev · Mangal Inscript · Remington Gail' : eh_lang_label($e['lang']);
+$start = home_url('/typing/' . $e['slug'] . '/');
+$used = number_format_i18n($att[$e['slug']] ?? 0); $tests = count(eh_passages($e['lang'] === 'en' ? 'en' : 'hi'));
+if ($up) {
+    $rules = [
+        '<b>Words</b> = key strokes ÷ 5',
+        '<b>First 5 mistakes free</b>, then 6 words cut for each mistake (the wrong word + 5)',
+        '<b>Speed</b> = net words ÷ ' . $min . ' minutes · need <b>' . (int) $e['wpm'] . ' WPM</b>',
+        'Wrong, missed, added, repeated or incomplete word = <b>full</b> mistake; spacing, punctuation, word order and paragraph slips = <b>half</b>' . ($e['lang'] === 'hi' ? '' : ' (capital/small letter slips too)'),
+        'Backspace works only on the current and the previous word',
+    ];
+} else {
+    $rules = [
+        $e['unit'] === 'keys' ? 'In <b>' . $min . ' minutes</b> type at least <b>' . number_format_i18n($e['target']) . ' key depressions</b>' : 'In <b>' . $min . ' minutes</b> type about <b>' . number_format_i18n($e['target']) . ' words</b>',
+        '<b>' . esc_html($e['allowed']) . '% errors</b> are allowed',
+        'Wrong, missed or added word = <b>full</b> mistake; spacing, capital and punctuation slips = <b>half</b>',
+    ];
+    if (!empty($e['retype'])) $rules[] = 'Retyping exam: type the passage on screen as given';
+}
+$tiles = [
+    ['🎯', $wpm . ' WPM', 'Target'],
+    ['⏱', $min . ':00', 'Minutes'],
+    ['⌨️', number_format_i18n($e['target']), $e['unit'] === 'keys' ? 'Keystrokes' : 'Words'],
+    ['👥', $used, 'Students'],
+    ['📚', $tests . '+', 'Tests'],
+    ['⚡', $up ? '30/day' : '20/day', 'Live passages'],
+];
+$medal = ['🥇', '🥈', '🥉'];
 ?>
-<section class="eh-page-head"><div class="wrap eh-exam-head">
-  <div>
-    <p class="muted small"><a href="<?php echo esc_url(home_url('/exams/')); ?>">Exams</a> / <?php echo esc_html(eh_cat_label($e['cat'])); ?></p>
+<section class="ex-hero"><div class="wrap ex-hero-in">
+  <div class="ex-hero-l">
+    <p class="ex-crumb"><a href="<?php echo esc_url(home_url('/exams/')); ?>">Exams</a> / <?php echo esc_html(eh_cat_label($e['cat'])); ?></p>
     <h1><?php echo esc_html($e['name']); ?></h1>
-  </div>
-  <div class="eh-exam-head-r"><a class="eh-explore" href="<?php echo esc_url(home_url('/exams/')); ?>">Explore all exams →</a>
-  <a class="btn dark lg" href="<?php echo esc_url(home_url('/typing/' . $e['slug'] . '/')); ?>">Start Typing Test →</a></div>
-</div></section>
-<section class="wrap eh-section eh-two">
-  <div>
-    <h2>About</h2>
-    <?php if (($e['eval'] ?? '') === 'upsssc'): ?>
-    <p>UPSSSC rule (from the admit card): in <?php echo (int) $e['minutes']; ?> minutes you need a net speed of at least <b><?php echo (int) $e['wpm']; ?> WPM</b>. Words = key depressions ÷ 5. The <b>first 5 mistakes are free</b>; after that <b>6 words are cut for each mistake</b> (the wrong word + 5). Speed = (words − cut words) ÷ <?php echo (int) $e['minutes']; ?> minutes. Wrong, missed, added, repeated or incomplete words are full mistakes; spacing, punctuation, word order and paragraph slips are half mistakes<?php echo $e['lang'] === 'hi' ? '' : ', and so are capital/small letter slips'; ?>. Backspace works only on the current and the previous word.</p>
-    <?php else: ?>
-    <p><?php echo esc_html($rule); ?> <?php echo esc_html($e['allowed']); ?>% errors are allowed. Wrong, missed or added words are full mistakes; spacing, capital and punctuation slips are half mistakes.<?php if (!empty($e['retype'])) echo ' This is a retyping exam: type the passage on screen as given.'; ?></p>
-    <?php endif; ?>
-    <div class="eh-info">
-      <div><span>Languages</span><b><?php echo $e['lang'] === 'hi' ? 'Hindi - Krutidev, Hindi - Mangal Inscript, Hindi - Remington Gail' : esc_html(eh_lang_label($e['lang'])); ?></b></div>
-      <div><span>Target Speed</span><b><?php echo (int) eh_target_wpm($e); ?> WPM</b></div>
-      <div><span><?php echo $e['unit'] === 'keys' ? 'Keystrokes' : 'Words'; ?></span><b><?php echo esc_html(eh_target_label($e)); ?></b></div>
-      <div><span>Time duration</span><b><?php echo (int) $e['minutes']; ?>:00 min</b></div>
-      <div><span>Students using this exam</span><b><?php echo number_format_i18n($att[$e['slug']] ?? 0); ?> times</b></div>
-      <div><span>Total Tests</span><b><?php echo count(eh_passages($e['lang'] === 'en' ? 'en' : 'hi')); ?>+ Tests</b></div>
-      <div><span>Live Passages</span><b><?php echo ($e['eval'] ?? '') === 'upsssc' ? '30 new passages daily (10 Easy, 10 Moderate, 10 Hard)' : '20 new passages daily'; ?></b></div>
+    <div class="ex-chips">
+      <span>⏱ <?php echo $min; ?> min</span><span>🎯 <?php echo $wpm; ?> WPM</span><span>⌨️ <?php echo esc_html(eh_target_label($e)); ?></span><span><?php echo esc_html($kb); ?></span>
     </div>
-    <?php if (in_array($e['lang'], ['mr', 'or'], true)): ?><p class="eh-tip">ℹ️ Passages in this language are coming soon. You can practise on English passages for now.</p><?php endif; ?>
-    <a class="btn dark lg" href="<?php echo esc_url(home_url('/typing/' . $e['slug'] . '/')); ?>">Start Typing Test →</a>
   </div>
-  <div>
-    <h2>Top Results</h2>
-    <div class="eh-table-wrap"><table class="eh-table"><thead><tr><th>#</th><th>Name</th><th>Net</th><th>Acc.</th><th></th></tr></thead><tbody>
-    <?php if (!$board): ?><tr><td colspan="5" class="muted">No tests yet.</td></tr><?php endif; ?>
-    <?php foreach ($board as $i => $r): ?><tr><td><?php echo $i + 1; ?></td><td><?php echo esc_html(eh_display_name($r)); ?></td><td><b><?php echo (int) $r['net']; ?></b></td><td><?php echo esc_html($r['acc']); ?>%</td><td><?php echo $r['pass'] ? '<span class="pill ok">Pass</span>' : '<span class="pill no">Fail</span>'; ?></td></tr><?php endforeach; ?>
-    </tbody></table></div>
+  <div class="ex-hero-r">
+    <a class="ex-start" href="<?php echo esc_url($start); ?>">▶ Start Typing Test</a>
+    <p><?php echo esc_html($used); ?> students · <?php echo (int) $tests; ?>+ tests</p>
+    <a class="ex-explore" href="<?php echo esc_url(home_url('/exams/')); ?>">Explore all exams →</a>
+  </div>
+</div></section>
+<section class="wrap ex-body">
+  <div class="ex-col">
+    <div class="ex-tiles">
+      <?php foreach ($tiles as $t): ?><div class="ex-tile"><i><?php echo $t[0]; ?></i><b><?php echo esc_html($t[1]); ?></b><span><?php echo esc_html($t[2]); ?></span></div><?php endforeach; ?>
+    </div>
+    <h2 class="ex-h">📋 <?php echo $up ? 'UPSSSC Rule <small>(from the admit card)</small>' : 'Exam Rule'; ?></h2>
+    <ol class="ex-rules">
+      <?php foreach ($rules as $k => $r): ?><li><b class="ex-n"><?php echo $k + 1; ?></b><span><?php echo $r; ?></span></li><?php endforeach; ?>
+    </ol>
+    <?php if (in_array($e['lang'], ['mr', 'or'], true)): ?><p class="eh-tip">ℹ️ Passages in this language are coming soon. You can practise on English passages for now.</p><?php endif; ?>
+    <a class="ex-start ex-start-sm" href="<?php echo esc_url($start); ?>">▶ Start Typing Test</a>
+  </div>
+  <div class="ex-col">
+    <h2 class="ex-h">🏆 Top Results</h2>
+    <div class="ex-board"><table>
+      <?php if (!$board): ?><tr><td class="muted" style="padding:16px">No tests yet. Be the first!</td></tr><?php endif; ?>
+      <?php foreach ($board as $i => $r): ?><tr>
+        <td class="ex-rk"><?php echo $i < 3 ? $medal[$i] : $i + 1; ?></td>
+        <td class="ex-nm"><?php echo esc_html(eh_display_name($r)); ?></td>
+        <td class="ex-sp"><b><?php echo (int) $r['net']; ?></b> <small>WPM</small></td>
+        <td class="ex-ac"><?php echo esc_html($r['acc']); ?>%</td>
+        <td><?php echo $r['pass'] ? '<span class="pill ok">Pass</span>' : '<span class="pill no">Fail</span>'; ?></td>
+      </tr><?php endforeach; ?>
+    </table></div>
   </div>
 </section>
 <?php get_footer();
