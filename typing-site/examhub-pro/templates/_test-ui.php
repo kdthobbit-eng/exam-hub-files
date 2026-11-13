@@ -98,7 +98,7 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
           <?php else: ?>
           <div class="eh-psel-top"><h3>Choose a passage</h3>
             <?php if ($eh_special): ?><button type="button" class="btn ghost sm" id="eh-sp-open">★ Special Passages</button><?php endif; ?></div>
-          <p class="eh-lvl-legend"><span class="eh-lvl easy">Easy</span> <span class="eh-lvl moderate">Moderate</span> <span class="eh-lvl hard">Hard</span> · <span class="muted">20 new passages daily — pick a date</span></p>
+          <p class="eh-lvl-legend"><span class="eh-lvl superhard">Super Hard</span> <span class="eh-lvl easy">Easy</span> <span class="eh-lvl moderate">Moderate</span> <span class="eh-lvl hard">Hard</span> · <span class="muted">20 new passages daily — pick a date</span></p>
           <?php if ($eh_days): $eh_lab = function ($i, $d) { return $i === 0 ? 'Today' : ($i === 1 ? 'Yesterday' : wp_date('l', strtotime($d . ' 12:00'))); }; ?>
           <div class="eh-dp eh-pday-dp" id="eh-pday-dp">
             <button type="button" class="eh-dp-nav off" data-dgo="1" aria-label="Previous day">‹</button>
@@ -110,10 +110,10 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
           </div>
           <?php foreach ($eh_days as $i => $day): ?>
             <div class="eh-pday" data-i="<?php echo $i; ?>" data-d="<?php echo esc_attr(wp_date('j M Y', strtotime($day['date'] . ' 12:00'))); ?>" data-l="<?php echo esc_attr($eh_lab($i, $day['date'])); ?>"<?php echo $i ? ' hidden' : ''; ?>>
-              <?php foreach (['E' => 'Easy', 'M' => 'Moderate', 'H' => 'Hard'] as $lk => $ln):
+              <?php foreach (['S' => 'Super Hard', 'E' => 'Easy', 'M' => 'Moderate', 'H' => 'Hard'] as $lk => $ln):
                 $its = array_values(array_filter($day['items'], function ($p) use ($lk) { $l = $p['level'] ?? 'M'; return ($l === 'B' ? 'E' : $l) === $lk; }));
                 if (!$its) continue; ?>
-                <p class="eh-pday-h"><span class="eh-lvl <?php echo strtolower($ln); ?>"><?php echo $ln; ?></span> <span class="muted"><?php echo count($its); ?> passages</span></p>
+                <p class="eh-pday-h"><span class="eh-lvl <?php echo str_replace(' ', '', strtolower($ln)); ?>"><?php echo $ln; ?></span> <span class="muted"><?php echo count($its); ?> passages</span></p>
                 <?php foreach ($its as $p) echo $eh_row($p); ?>
               <?php endforeach; ?>
             </div>

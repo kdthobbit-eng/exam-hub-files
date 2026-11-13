@@ -68,4 +68,4 @@ cd /var/www/erojgarresult; sh /root/eh-deploy.sh <SHA> && wp --allow-root option
 - Upcoming exams ki pakki tareekh user se lekar popup me daalna.
 - Telegram channel/group ka naam/link badalna ho to user batayega.
 
-- Live Typing me "Super Hard" level (code S): 25 passage (20 EN + 5 HI, day 2026-11-13), list me sabse upar. Hindi passages me sirf Krutidev-safe chinh (no quotes, colon, latin).
+- Live Typing me "Super Hard" level (code S): 25 passage (20 EN + 5 HI, day 2026-11-13), list me sabse upar; All Exams Typing me bhi har exam ki "Today" list me sabse upar (daily sets se alag). Hindi passages me sirf Krutidev-safe chinh (no quotes, colon, latin).

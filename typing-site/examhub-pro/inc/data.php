@@ -93,7 +93,9 @@ function eh_passage_days($lang, $days = 7) {
     $all = eh_passages($lang);
     $tdate = wp_date('Y-m-d');
     /* practice pool: the regular passages plus Live news passages of past days (today's stay on Live Typing) */
-    $pool = array_values(array_filter($all, function ($p) use ($tdate) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && (empty($p['day']) || $p['day'] < $tdate || !empty($p['both'])); }));
+    $pool = array_values(array_filter($all, function ($p) use ($tdate) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && ($p['level'] ?? '') !== 'S' && (empty($p['day']) || $p['day'] < $tdate || !empty($p['both'])); }));
+    /* Super Hard passages are not part of the daily sets: all of them are shown on top of today's list */
+    $super = array_values(array_filter($all, function ($p) use ($tdate) { return ($p['level'] ?? '') === 'S' && empty($p['special']) && ($p['day'] ?? '') <= $tdate; }));
     /* 20 passages a day, like Live Typing: 6 Easy, 7 Moderate, 7 Hard (Basic counts as Easy).
        The pool is cut into separate sets of 20, so no passage appears on two days; only as many days are shown as there are sets. */
     $want = ['E' => 6, 'M' => 7, 'H' => 7];
@@ -111,7 +113,7 @@ function eh_passage_days($lang, $days = 7) {
     for ($d = 0; $d < $days && $d < $sets; $d++) {
         $day = $today - $d; $date = gmdate('Y-m-d', $day * 86400); $items = [];
         foreach ($all as $p) if (strpos($p['id'], 'p') === 0 && empty($p['special']) && ($p['date'] ?? '') === $date) $items[] = $p;
-        $items = array_merge($items, $chunks[(($day % $sets) + $sets) % $sets]);
+        $items = array_merge($d === 0 ? $super : [], $items, $chunks[(($day % $sets) + $sets) % $sets]);
         $out[] = ['date' => $date, 'items' => $items];
     }
     return $out;
