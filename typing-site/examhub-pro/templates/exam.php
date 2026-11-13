@@ -14,7 +14,12 @@ if ($up) {
         'Backspace works only on the current and the previous word',
     ];
 } else {
-    $rules = [
+    $rules = ($e['eval'] ?? '') === 'uppolice' && !empty($e['wpm']) ? [
+        'Passage of about <b>' . number_format_i18n($e['target']) . ' words</b>; you need not finish it',
+        '<b>Speed</b> = (words typed − mistakes) ÷ ' . $min . ' minutes · need <b>' . (int) $e['wpm'] . ' WPM</b>',
+        '<b>' . esc_html($e['allowed']) . '% errors</b> are allowed (85% accuracy)',
+        'Wrong, missed or added word = <b>full</b> mistake; spacing, capital and punctuation slips = <b>half</b>',
+    ] : [
         $e['unit'] === 'keys' ? 'In <b>' . $min . ' minutes</b> type at least <b>' . number_format_i18n($e['target']) . ' key depressions</b>' : 'In <b>' . $min . ' minutes</b> type about <b>' . number_format_i18n($e['target']) . ' words</b>',
         '<b>' . esc_html($e['allowed']) . '% errors</b> are allowed',
         'Wrong, missed or added word = <b>full</b> mistake; spacing, capital and punctuation slips = <b>half</b>',
