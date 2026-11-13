@@ -103,14 +103,14 @@ if ($row):
   <?php if ($allday): ?>
   <div class="eh-lt-head<?php echo $eh_set ? ' eh-lt-3284' : ''; ?>"><div class="eh-lt-top"><div class="eh-lt-title">
   <?php if ($eh_set): ?>
-  <p class="eh-lt-kick"><span class="eh-lt-dot"></span> परीक्षा जैसा पैटर्न · <a href="<?php echo esc_url(home_url('/live-typing/')); ?>">← Live Typing</a></p>
-  <h1 class="eh-live-h">3284 Exam Pattern Typing</h1>
-  <p class="eh-lt-sub">UPSSSC Junior Assistant 3284 की असली typing परीक्षा जैसे आसान पैसेज · English + Hindi (Krutidev / Mangal)</p></div>
+  <p class="eh-lt-kick"><span class="eh-lt-dot"></span> 3284 Pattern · <a href="<?php echo esc_url(home_url('/live-typing/')); ?>">← Live Typing</a></p>
+  <h1 class="eh-live-h">3284 Pattern Passage</h1>
+  <p class="eh-lt-sub">UPSSSC Junior Assistant 3284 · English + हिंदी (Krutidev / Mangal)</p></div>
   <?php else: ?>
   <p class="eh-lt-kick"><span class="eh-lt-dot"></span> Live today · <?php echo esc_html(eh_opt('brand_typing') ?: eh_opt('brand')); ?></p>
   <h1 class="eh-live-h">UPSSSC Junior Assistant Live Typing</h1>
   <p class="eh-lt-sub">Same passage for everyone · open all day · ranking by net speed</p>
-  <a class="eh-3284-cta" href="<?php echo esc_url(add_query_arg('set', '3284', home_url('/live-typing/'))); ?>">🔴 3284 Exam Pattern Typing →</a></div>
+  <a class="eh-3284-cta" href="<?php echo esc_url(add_query_arg('set', '3284', home_url('/live-typing/'))); ?>">🔴 3284 Pattern Passage →</a></div>
   <?php endif; ?>
   <?php $eh_news = ''; foreach ($S as $x) if (!empty($x['news'])) $eh_news = $x['news'];
   $eh_fd = function ($d) { return date_i18n('j M Y', strtotime($d)); };
@@ -173,7 +173,7 @@ if ($row):
       <li>⏰ पहली शिफ्ट सुबह 8 बजे से, गेट पर समय से पहले पहुंचें</li>
       <li>💪 घबराएं नहीं, दबाव संभाल लिया तो 30 WPM वाला भी आराम से निकाल लेगा</li>
     </ul>
-    <p class="eh-3284-note">नीचे के सभी पैसेज इसी पैटर्न पर हैं: आसान शब्द, लगभग कोई अंक नहीं, त्योहार, महापुरुष और समीक्षा (review) वाले विषय।</p>
+    <p class="eh-3284-note">नीचे के सभी पैसेज 3284 पैटर्न पर हैं। त्योहार, महापुरुष और Review वाले टॉपिक भी हैं।</p>
   </div>
   <?php endif; ?>
   </div></div>

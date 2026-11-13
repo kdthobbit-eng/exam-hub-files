@@ -155,7 +155,7 @@ function eh_live_schedule($want = '') {
             $nd = '';
             foreach ($every as $p) if (!empty($p['day']) && $p['day'] <= $date && $p['day'] > $nd) $nd = $p['day'];
             if ($want && $want <= $date) foreach ($every as $p) if (($p['day'] ?? '') === $want) { $nd = $want; break; }
-            if ($want === '3284') { $nd = '3284'; $e['name'] = 'UPSSSC JA 3284 Exam Pattern ' . $x[2] . ' Typing'; } /* exam-pattern set: easy matter like the real 3284 typing test */
+            if ($want === '3284') { $nd = '3284'; $e['name'] = 'UPSSSC JA 3284 Pattern Passage · ' . $x[2]; } /* exam-pattern set: easy matter like the real 3284 typing test */
             $all = array_values(array_filter($every, function ($p) use ($nd) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && ($nd ? ($p['day'] ?? '') === $nd : empty($p['day'])); }));
             $need = max((int) ceil($e['target'] * 1.3), (int) $e['minutes'] * 720); /* enough text for well over 100 WPM */
             $no = 0;
