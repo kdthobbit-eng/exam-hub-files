@@ -166,7 +166,7 @@ function eh_live_schedule($want = '') {
                 for ($k = 0; $k < $per && $k < $n; $k++) {
                     $start = $nd ? $k : ($day * 2 + $k) % $n; $seq = []; $len = 0;
                     for ($q = 0; $q < $n && $q < 8; $q++) { $seq[] = $pool[($start + $q) % $n]; $len += $seq[$q]['chars'] + 1; if ($len >= $need && $q >= 1) break; }
-                    $out[] = ['exam' => $e, 'lang' => $x[0], 'passage' => $seq[0], 'plist' => $seq, 'chars' => max(0, $len - 1), 'level' => $nd === '3284' ? '3284 Pattern' : $label, 'no' => ++$no, 'allday' => true, 'news' => $nd,
+                    $out[] = ['exam' => $e, 'lang' => $x[0], 'passage' => $seq[0], 'plist' => $seq, 'chars' => max(0, $len - 1), 'level' => $nd === '3284' ? (!empty($seq[0]['tag']) ? $seq[0]['tag'] : '3284 Pattern') : $label, 'no' => ++$no, 'allday' => true, 'news' => $nd,
                         'start' => '12:00 AM', 'end' => '11:59 PM', 's' => 0, 'e' => 1439, 'date' => $date];
                 }
             }
@@ -175,6 +175,7 @@ function eh_live_schedule($want = '') {
         $mixed = [];
         /* Super Hard passages stay on top of the list (English first, then Hindi) */
         foreach (['en', 'hi'] as $lg) foreach ($out as $r) if ($r['lang'] === $lg && $r['level'] === 'Super Hard') $mixed[] = $r;
+        foreach ($out as $r) if ($r['level'] === 'Evening Shift') $mixed[] = $r; /* 3284: latest shift passages on top */
         foreach (['en', 'hi'] as $lg) {
             $by = [];
             foreach ($out as $r) if ($r['lang'] === $lg) $by[$r['level']][] = $r;
