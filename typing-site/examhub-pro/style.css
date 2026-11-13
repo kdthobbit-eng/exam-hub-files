@@ -1528,3 +1528,13 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 .eh-3284-t td{color:#2a1a10;font-weight:500;border-right:1px solid #f3e3e3}.eh-3284-t td:last-child{border-right:0}
 @media(max-width:760px){.eh-3284-t,.eh-3284-t tbody,.eh-3284-t tr{display:block}.eh-3284-t tr{display:grid;grid-template-columns:110px 1fr}.eh-3284-t th,.eh-3284-t td{width:auto;border-right:0;white-space:normal}.eh-3284-t td[colspan]{grid-column:2}}
 .eh-3284-cta{flex-wrap:wrap}.eh-3284-cta small{flex-basis:100%;font-size:12.5px;font-weight:600;opacity:.92}
+/* 3284 info: premium tiles */
+.eh-3284-info{font-family:Inter,"Noto Sans Devanagari",system-ui,sans-serif;box-shadow:0 14px 34px -22px rgba(153,27,27,.45)}
+.eh-3284-ih{background:linear-gradient(135deg,#991b1b,#dc2626);border-bottom:0;padding:14px 18px}
+.eh-3284-ih b{color:#fff;font-size:18px;letter-spacing:.2px}.eh-3284-ih span{color:#fde2e2;font-size:13.5px}
+.eh-3284-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:14px;background:#fffafa}
+.eh-3284-tile{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #f3dede;border-radius:12px;padding:12px 14px}
+.eh-3284-tile i{flex:0 0 38px;height:38px;border-radius:10px;background:#fee2e2;display:grid;place-items:center;font-style:normal;font-size:19px}
+.eh-3284-tile span{display:block;font-size:12.5px;font-weight:700;color:#b91c1c;text-transform:uppercase;letter-spacing:.4px}
+.eh-3284-tile b{display:block;font-size:15.5px;font-weight:700;color:#1f1410;line-height:1.45;margin-top:2px}
+@media(max-width:760px){.eh-3284-grid{grid-template-columns:1fr}}

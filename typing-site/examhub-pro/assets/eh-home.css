@@ -289,3 +289,6 @@ body.home{animation:uhfade .6s ease both}
 .uh-3284 .dot{width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 0 0 rgba(255,255,255,.7);animation:uh3284 1.6s infinite}
 .uh-3284 svg{margin-left:auto}
 @keyframes uh3284{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}70%{box-shadow:0 0 0 10px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+/* 3284 button: same size and font as the hero buttons, red */
+.uh-btn.uh-btn-3284{background:#dc2626;border-color:#dc2626;color:#fff}
+.uh-btn.uh-btn-3284:hover{background:#b91c1c;border-color:#b91c1c;color:#fff}

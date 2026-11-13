@@ -161,13 +161,18 @@ if ($row):
   <?php if ($eh_set): ?>
   <div class="eh-3284-info">
     <div class="eh-3284-ih"><b>परीक्षा की जानकारी</b><span>UPSSSC 3284 Junior Assistant Typing · 13 नवंबर 2026 · परीक्षा केंद्र से लौटे अभ्यर्थियों की समीक्षा पर आधारित</span></div>
-    <table class="eh-3284-t">
-      <tr><th>कीबोर्ड</th><td>HP K100, सभी के लिए एक जैसा</td><th>English पैसेज</th><td>विषय नेताजी सुभाष चंद्र बोस, शब्द ज़्यादातर 5-6 अक्षर के, अंक लगभग नहीं</td></tr>
-      <tr><th>हिंदी पैसेज</th><td>विषय ‘कुंवर’, एक पैसेज दीपावली पर भी</td><th>अक्षर</th><td>कुछ शब्द Capital में, बाकी small letters</td></tr>
-      <tr><th>Login</th><td>Roll No. / Registration No. और Password, टेस्ट से लगभग आधा घंटा पहले</td><th>Demo</th><td>असली टेस्ट से पहले लगभग 1 मिनट</td></tr>
-      <tr><th>Font / भाषा</th><td>Krutidev या Mangal ऊपर से चुनें, भाषा Alt + Shift से बदलती है</td><th>Font का आकार</th><td>छोटा</td></tr>
-      <tr><th>शिफ्ट</th><td colspan="3">पहली शिफ्ट सुबह 8 बजे से, गेट पर समय से पहले पहुंचें</td></tr>
-    </table>
+    <div class="eh-3284-grid">
+      <div class="eh-3284-tile"><i>⌨️</i><div><span>कीबोर्ड</span><b>HP K100, सभी के लिए एक जैसा</b></div></div>
+      <div class="eh-3284-tile"><i>🇬🇧</i><div><span>English पैसेज</span><b>विषय: नेताजी सुभाष चंद्र बोस · शब्द ज़्यादातर 5-6 अक्षर के</b></div></div>
+      <div class="eh-3284-tile"><i>🇮🇳</i><div><span>हिंदी पैसेज</span><b>विषय: दीपावली</b></div></div>
+      <div class="eh-3284-tile"><i>🔤</i><div><span>पैसेज में आए शब्द</span><b>Jewellery, Precious, Education, Agitation, तारीख 01.10.1945</b></div></div>
+      <div class="eh-3284-tile"><i>🔠</i><div><span>अक्षर</span><b>कुछ शब्द Capital में, बाकी small letters</b></div></div>
+      <div class="eh-3284-tile"><i>🔐</i><div><span>Login</span><b>Roll No. / Registration No. और Password, टेस्ट से लगभग आधा घंटा पहले</b></div></div>
+      <div class="eh-3284-tile"><i>▶️</i><div><span>Demo</span><b>असली टेस्ट से पहले लगभग 1 मिनट</b></div></div>
+      <div class="eh-3284-tile"><i>🌐</i><div><span>भाषा</span><b>Krutidev या Mangal ऊपर से चुनें, भाषा Alt + Shift से बदलती है</b></div></div>
+      <div class="eh-3284-tile"><i>🔎</i><div><span>Font</span><b>आकार छोटा</b></div></div>
+      <div class="eh-3284-tile"><i>⏰</i><div><span>शिफ्ट</span><b>पहली शिफ्ट सुबह 8 बजे, गेट पर समय से पहले पहुंचें</b></div></div>
+    </div>
   </div>
   <?php endif; ?>
   </div></div>
