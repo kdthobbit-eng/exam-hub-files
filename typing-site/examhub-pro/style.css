@@ -1495,3 +1495,6 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 .eh-live-lv button.on{color:#fff}
 .eh-lt-bar{flex-wrap:wrap;gap:10px}
 @media(max-width:700px){.eh-live-lv{width:100%}.eh-live-lv button{flex:1;padding:9px 6px;font-size:14px}}
+/* Super Hard level */
+.eh-lvl.superhard{background:#1c1917;color:#fde047}
+.eh-live-lv button.lv-s{color:#1c1917}.eh-live-lv button.lv-s.on{background:#1c1917;color:#fde047}

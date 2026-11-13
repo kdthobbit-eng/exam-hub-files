@@ -24,10 +24,10 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
   $eh_days = empty($cfg['fixedPassage']) ? eh_passage_days($lang, 7) : [];
   $eh_special = array_values(array_filter($cfg['passages'], function ($p) { return !empty($p['special']); }));
   $eh_unit = $eh_exam['unit'] === 'keys' ? 'keys' : 'words';
-  $eh_lvl = ['B' => 'Basic', 'E' => 'Easy', 'M' => 'Moderate', 'H' => 'Hard'];
+  $eh_lvl = ['B' => 'Basic', 'E' => 'Easy', 'M' => 'Moderate', 'H' => 'Hard', 'S' => 'Super Hard'];
   $eh_row = function ($p, $checked = false) use ($eh_lvl) {
       return '<label class="eh-prow"><input type="radio" name="eh-psg" value="' . esc_attr($p['id']) . '"' . ($checked ? ' checked' : '') . '>'
-          . '<span class="eh-lvl ' . esc_attr($p['level'] === 'B' ? 'easy' : strtolower($eh_lvl[$p['level']] ?? 'moderate')) . '">' . esc_html($p['level'] === 'B' ? 'Easy' : ($eh_lvl[$p['level']] ?? '')) . '</span>'
+          . '<span class="eh-lvl ' . esc_attr($p['level'] === 'B' ? 'easy' : str_replace(' ', '', strtolower($eh_lvl[$p['level']] ?? 'moderate'))) . '">' . esc_html($p['level'] === 'B' ? 'Easy' : ($eh_lvl[$p['level']] ?? '')) . '</span>'
           . '<span class="t">' . esc_html($p['title']) . '</span><span class="n">' . number_format_i18n($p['chars']) . ' keys · ' . (int) $p['words'] . ' words</span></label>';
   };
   ?>

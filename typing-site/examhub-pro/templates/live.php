@@ -123,7 +123,7 @@ if ($row):
   <?php endif; ?>
   </div><div class="eh-lt-bar">
   <?php $eh_lc = array_count_values(array_map(function ($r) { return $r['level'] ?? ''; }, $S)); ?>
-  <p class="eh-dp-sum"><b><?php echo count($S); ?></b> passages<?php if ($eh_news): ?> · <span class="eh-lvl easy"><?php echo (int) ($eh_lc['Easy'] ?? 0); ?> Easy</span> <span class="eh-lvl moderate"><?php echo (int) ($eh_lc['Moderate'] ?? 0); ?> Moderate</span> <span class="eh-lvl hard"><?php echo (int) ($eh_lc['Hard'] ?? 0); ?> Hard</span> · English + Hindi<?php endif; ?></p>
+  <p class="eh-dp-sum"><b><?php echo count($S); ?></b> passages<?php if ($eh_news): ?> ·<?php if (!empty($eh_lc['Super Hard'])): ?> <span class="eh-lvl superhard"><?php echo (int) $eh_lc['Super Hard']; ?> Super Hard</span><?php endif; ?> <span class="eh-lvl easy"><?php echo (int) ($eh_lc['Easy'] ?? 0); ?> Easy</span> <span class="eh-lvl moderate"><?php echo (int) ($eh_lc['Moderate'] ?? 0); ?> Moderate</span> <span class="eh-lvl hard"><?php echo (int) ($eh_lc['Hard'] ?? 0); ?> Hard</span> · English + Hindi<?php endif; ?></p>
   <script>
   (function () {
     var box = document.getElementById('eh-dp'); if (!box) return;
@@ -148,23 +148,23 @@ if ($row):
   })();
   </script>
   <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
-  <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
+  <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-s" data-l="superhard">Super Hard</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
   </div></div>
   <?php else: ?>
   <h1 class="eh-live-h">Live Typing — same passage, same time, for everyone</h1>
   <p class="muted">Each exam has a live test at a fixed time every day. Everyone gets the same passage and the day's ranking is by net speed.</p>
   <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
-  <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
+  <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-s" data-l="superhard">Super Hard</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
   <?php endif; ?>
   <div class="eh-table-wrap"><table class="eh-table eh-live-table"><thead><tr><th>#</th><th>Test</th><th>Level</th><th>Passage</th><th>Language</th><th>Time</th><th>Status</th><th>Start</th></tr></thead><tbody>
   <?php foreach ($S as $i => $r):
       $st = $now < $r['s'] ? 'soon' : ($now <= $r['e'] ? 'live' : 'done');
       $q = ['exam' => $r['exam']['slug']]; if (!empty($r['allday'])) $q['p'] = $r['passage']['id'];
       $url = add_query_arg($q, home_url('/live-typing/')); ?>
-    <tr data-f="<?php echo esc_attr($r['lang']); ?>" data-lv="<?php echo esc_attr(strtolower($r['level'] ?? '')); ?>" class="<?php echo isset($eh_done[$r['exam']['slug'] . '|' . ($r['passage']['id'] ?? '')]) ? 'eh-row-att' : ''; ?>">
+    <tr data-f="<?php echo esc_attr($r['lang']); ?>" data-lv="<?php echo esc_attr(str_replace(' ', '', strtolower($r['level'] ?? ''))); ?>" class="<?php echo isset($eh_done[$r['exam']['slug'] . '|' . ($r['passage']['id'] ?? '')]) ? 'eh-row-att' : ''; ?>">
       <td><?php echo $i + 1; ?></td>
       <td><b><?php echo esc_html($r['exam']['name']); ?></b><?php if (!empty($r['no'])) echo '<br><span class="muted small">Passage ' . (int) $r['no'] . '</span>'; ?></td>
-      <td><?php echo !empty($r['level']) ? '<span class="eh-lvl ' . esc_attr(strtolower($r['level'])) . '">' . esc_html($r['level']) . '</span>' : '—'; ?></td>
+      <td><?php echo !empty($r['level']) ? '<span class="eh-lvl ' . esc_attr(str_replace(' ', '', strtolower($r['level']))) . '">' . esc_html($r['level']) . '</span>' : '—'; ?></td>
       <td class="small"><?php echo esc_html($r['passage']['title'] ?? '—'); ?><br><span class="muted"><?php echo $r['passage'] ? number_format_i18n($r['chars'] ?? $r['passage']['chars']) . ' key strokes' : ''; ?></span></td>
       <td><?php echo $r['lang'] === 'hi' ? 'Hindi<br><span class="muted small">Krutidev / Mangal Inscript</span>' : 'English'; ?></td>
       <td><?php echo !empty($r['allday']) ? 'All day' : esc_html(gmdate('h:i A', $r['s'] * 60) . ' – ' . gmdate('h:i A', $r['e'] * 60)); ?></td>

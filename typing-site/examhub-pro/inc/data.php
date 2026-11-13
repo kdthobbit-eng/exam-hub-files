@@ -98,7 +98,7 @@ function eh_passage_days($lang, $days = 7) {
        The pool is cut into separate sets of 20, so no passage appears on two days; only as many days are shown as there are sets. */
     $want = ['E' => 6, 'M' => 7, 'H' => 7];
     $q = ['E' => [], 'M' => [], 'H' => []];
-    foreach (array_reverse($pool) as $p) { $lv = $p['level'] ?? 'M'; if ($lv === 'B') $lv = 'E'; if (!isset($q[$lv])) $lv = 'M'; $q[$lv][] = $p; } /* newest first */
+    foreach (array_reverse($pool) as $p) { $lv = $p['level'] ?? 'M'; if ($lv === 'B') $lv = 'E'; if ($lv === 'S') $lv = 'H'; if (!isset($q[$lv])) $lv = 'M'; $q[$lv][] = $p; } /* newest first */
     $per = array_sum($want); $sets = max(1, intdiv(count($pool), $per)); $chunks = [];
     for ($c = 0; $c < $sets; $c++) {
         $items = [];
@@ -144,7 +144,7 @@ function eh_live_schedule($want = '') {
         /* 6 English + 6 Hindi a day: 2 Easy, 2 Moderate, 2 Hard in each language. Every test is a full-length text:
            the day's passage first, then more passages of the same level, so nobody runs out of words. */
         $day = (int) floor(current_time('timestamp') / 86400);
-        $groups = ['Easy' => ['B', 'E'], 'Moderate' => ['M'], 'Hard' => ['H']];
+        $groups = ['Super Hard' => ['S'], 'Easy' => ['B', 'E'], 'Moderate' => ['M'], 'Hard' => ['H']];
         foreach ([['en', 'upsssc-assistants-english-typing-test', 'English'], ['hi', 'upsssc-assistants-hindi-typing-test', 'Hindi']] as $x) {
             $e = eh_exam($x[1]); if (!$e) continue;
             $e['name'] = 'UPSSSC Junior Assistant ' . $x[2] . ' Typing';
@@ -170,6 +170,8 @@ function eh_live_schedule($want = '') {
         }
         /* mix the levels in the list: Easy, Moderate, Hard, Easy, Moderate, Hard ... in each language */
         $mixed = [];
+        /* Super Hard passages stay on top of the list (English first, then Hindi) */
+        foreach (['en', 'hi'] as $lg) foreach ($out as $r) if ($r['lang'] === $lg && $r['level'] === 'Super Hard') $mixed[] = $r;
         foreach (['en', 'hi'] as $lg) {
             $by = [];
             foreach ($out as $r) if ($r['lang'] === $lg) $by[$r['level']][] = $r;
