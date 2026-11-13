@@ -28,6 +28,7 @@ get_header(); ?>
     <a class="btn dark" href="<?php echo esc_url(add_query_arg(array_filter(['passage' => $row['passage']]), $X['slug'] === 'demo' ? home_url('/demo-typing/') : home_url('/typing/' . $X['slug'] . '/'))); ?>">Retype this passage</a>
     <a class="btn ghost" href="<?php echo esc_url(home_url('/exam/' . $X['slug'] . '/')); ?>">Exam page</a>
     <?php echo eh_tg_buttons('inline'); ?>
-  </div></div>
+  </div>
+  <?php if (eh_is_3284_exam($X)) echo eh_video_3284('in-dash'); ?></div>
 </section>
 <?php get_footer();

@@ -1542,3 +1542,10 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 .btn.eh-next-btn{background:linear-gradient(135deg,#16a34a,#0f9f6e);color:#fff!important;border:0;font-weight:800;font-size:16px;padding:12px 22px;box-shadow:0 8px 20px -8px rgba(22,163,74,.6)}
 .btn.eh-next-btn:hover{filter:brightness(1.07)}
 #eh-next-psg:not(.eh-res-actions #eh-next-psg){display:none}
+/* 3284 video card: small, square-ish */
+.eh-3284-vid{width:100%;max-width:380px;background:#fff;border:1.5px solid #fecaca;border-top:4px solid #dc2626;border-radius:14px;padding:12px;box-shadow:0 12px 28px -20px rgba(153,27,27,.5)}
+.eh-3284-vid.in-live{margin:14px 0 0}
+.eh-3284-vid.in-dash{margin:20px auto 4px}
+.eh-3284-vh{margin:0 0 8px;font-size:15px;font-weight:800;color:#991b1b;line-height:1.35}
+.eh-3284-vid video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;background:#000}
+.eh-3284-skip{margin:10px 0 0;text-align:center;background:#dc2626;color:#fff;font-weight:800;font-size:16px;padding:9px 10px;border-radius:10px;letter-spacing:.2px}

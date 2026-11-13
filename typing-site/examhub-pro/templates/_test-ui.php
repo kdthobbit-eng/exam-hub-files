@@ -221,5 +221,6 @@ wp_add_inline_script('eh-hindi', 'window.EH_TEST=' . wp_json_encode($cfg, JSON_U
     <div id="eh-res-dash"></div>
     <p id="eh-res-saved" class="muted small"></p>
     <div class="eh-res-actions"><button id="eh-again" class="btn dark">Take test again</button><button id="eh-retype" class="btn ghost" type="button">Retype same passage</button><a id="eh-res-link" class="btn ghost" hidden href="#">🔗 Result link</a><a class="btn ghost" href="<?php echo esc_url(home_url('/exam-based-result/')); ?>">Leaderboard</a><?php echo eh_tg_buttons('inline'); ?></div>
+    <?php if (eh_is_3284_exam($eh_exam ?? [])) echo eh_video_3284('in-dash'); ?>
   </div>
 </div>

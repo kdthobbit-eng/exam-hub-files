@@ -304,3 +304,12 @@ function eh_upcoming() {
     ]];
     return $j;
 }
+
+/* UPSSSC 3284: small video card from the exam centre, with a "Typing Skip" note */
+function eh_video_3284($cls = '') {
+    $u = get_template_directory_uri() . '/assets/';
+    return '<div class="eh-3284-vid ' . esc_attr($cls) . '"><p class="eh-3284-vh">🎥 3284 Typing · परीक्षा केंद्र से अभ्यर्थी की बात</p>'
+        . '<video controls preload="none" playsinline poster="' . esc_url($u . 'video-3284.jpg') . '"><source src="' . esc_url($u . 'video-3284.mp4') . '" type="video/mp4"></video>'
+        . '<p class="eh-3284-skip">🙏 Typing Skip ज़रूर करें</p></div>';
+}
+function eh_is_3284_exam($x) { $s = (string) ($x['slug'] ?? ''); return ($x['eval'] ?? '') === 'upsssc' && strpos($s, 'assistant') !== false; }

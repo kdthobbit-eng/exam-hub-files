@@ -185,6 +185,7 @@ if ($row):
       <div class="eh-3284-tile"><i>⏰</i><div><span>शिफ्ट</span><b>पहली शिफ्ट सुबह 8 बजे, गेट पर समय से पहले पहुंचें</b></div></div>
     </div>
   </div>
+  <?php echo eh_video_3284('in-live'); ?>
   <?php endif; ?>
   </div></div>
   <?php else: ?>
