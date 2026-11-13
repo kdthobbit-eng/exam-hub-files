@@ -283,3 +283,9 @@ body.home{animation:uhfade .6s ease both}
 .uh-book-cover i{font-style:normal;font-weight:700;font-size:14px;opacity:.9}
 @media(max-width:860px){.uh-book{grid-template-columns:1fr}.uh-book .uh-book-img{order:-1}}
 .uh-book .uh-book-img img{object-fit:cover;padding:0}
+/* 3284 exam-pattern link under the hero buttons */
+.uh-3284{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;max-width:560px;background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff!important;text-decoration:none!important;padding:13px 18px;border-radius:14px;box-shadow:0 10px 24px -10px rgba(220,38,38,.7)}
+.uh-3284 b{font-size:17px;font-weight:800}.uh-3284 small{flex-basis:100%;order:3;font-size:13px;opacity:.92;margin-left:22px}
+.uh-3284 .dot{width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 0 0 rgba(255,255,255,.7);animation:uh3284 1.6s infinite}
+.uh-3284 svg{margin-left:auto}
+@keyframes uh3284{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}70%{box-shadow:0 0 0 10px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}

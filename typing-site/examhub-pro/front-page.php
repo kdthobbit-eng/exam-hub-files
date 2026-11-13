@@ -67,6 +67,7 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
       <a class="uh-btn" href="#batches"><?php echo eh_t('See running batches', 'चल रहे बैच देखें'); ?><?php echo $arrow; ?></a>
       <a class="uh-btn" href="<?php echo esc_url(home_url('/live-typing/')); ?>"><?php echo eh_t('Junior Assistant Live Typing', 'जूनियर असिस्टेंट लाइव टाइपिंग'); ?><?php echo $arrow; ?></a>
     </div>
+    <a class="uh-3284" href="<?php echo esc_url(home_url('/live-typing/?set=3284')); ?>"><span class="dot"></span><b><?php echo eh_t('3284 Exam Pattern Typing', '3284 परीक्षा पैटर्न टाइपिंग'); ?></b><small><?php echo eh_t('Easy passages just like the real 3284 typing test', 'असली 3284 टाइपिंग परीक्षा जैसे आसान पैसेज'); ?></small><?php echo $arrow; ?></a>
     <ul class="uh-stats">
       <li><b data-count="60000" data-suffix="+">60,000+</b><span><?php echo eh_t('students with us', 'विद्यार्थी हमारे साथ'); ?></span></li>
       <li><b data-count="6000" data-suffix="+">6,000+</b><span><?php echo eh_t('students joined our batches', 'विद्यार्थी हमारे बैच से जुड़े'); ?></span></li>

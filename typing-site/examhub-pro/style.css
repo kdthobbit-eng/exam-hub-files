@@ -1498,3 +1498,21 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 /* Super Hard level */
 .eh-lvl.superhard{background:#1c1917;color:#fde047}
 .eh-live-lv button.lv-s{color:#1c1917}.eh-live-lv button.lv-s.on{background:#1c1917;color:#fde047}
+/* ===== 3284 exam-pattern section (red) ===== */
+.eh-3284-cta{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff!important;font-weight:800;font-size:15px;padding:10px 18px;border-radius:12px;text-decoration:none!important;box-shadow:0 8px 20px -8px rgba(220,38,38,.6)}
+.eh-3284-cta:hover{filter:brightness(1.08)}
+.eh-lt-3284{border-top:5px solid #dc2626}
+.eh-lt-3284 .eh-live-h{color:#b91c1c}
+.eh-lt-3284 .eh-lt-kick a{color:#b91c1c;font-weight:700}
+.eh-lt-3284 .eh-live-lv{display:none}
+.eh-3284-info{flex-basis:100%;margin-top:14px;background:#fff5f5;border:1.5px solid #fecaca;border-left:5px solid #dc2626;border-radius:12px;padding:14px 18px}
+.eh-3284-info h3{margin:0 0 8px;font-size:17px;color:#991b1b}.eh-3284-info h3 small{font-size:12.5px;color:#7f1d1d;font-weight:600}
+.eh-3284-info ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
+.eh-3284-info li{font-size:14.5px;line-height:1.5;color:#3a1a1a}
+.eh-3284-note{margin:10px 0 0;font-size:13.5px;color:#7f1d1d;font-weight:600}
+@media(max-width:760px){.eh-3284-info ul{grid-template-columns:1fr}}
+/* red 3284 banner used on home and all-exams pages */
+.eh-3284-band{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:linear-gradient(135deg,#fff1f1,#ffe4e4);border:1.5px solid #fca5a5;border-left:6px solid #dc2626;border-radius:16px;padding:16px 20px;margin:18px 0}
+.eh-3284-band b{display:block;font-size:19px;color:#991b1b;font-weight:800}
+.eh-3284-band span{font-size:14px;color:#4a1d1d}
+.eh-3284-band a.go{background:#dc2626;color:#fff!important;font-weight:800;padding:11px 20px;border-radius:12px;text-decoration:none!important;white-space:nowrap}

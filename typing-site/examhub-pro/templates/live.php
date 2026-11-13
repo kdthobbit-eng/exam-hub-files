@@ -1,11 +1,13 @@
 <?php
 $eh_days = eh_live_days();
 $eh_day = preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) ($_GET['ldate'] ?? '')) && in_array($_GET['ldate'], $eh_days, true) ? $_GET['ldate'] : '';
-$S = eh_live_schedule($eh_day);
+$eh_set = (($_GET['set'] ?? '') === '3284');
+$S = eh_live_schedule($eh_set ? '3284' : $eh_day);
 $now = (int) wp_date('G') * 60 + (int) wp_date('i');
 $sel = sanitize_title($_GET['exam'] ?? '');
 $pid = sanitize_key($_GET['p'] ?? ''); $kb = sanitize_key($_GET['kb'] ?? '');
 $row = null; foreach ($S as $r) if (!$row && $r['exam']['slug'] === $sel && ($pid === '' || ($r['passage']['id'] ?? '') === $pid)) $row = $r;
+if (!$row && strpos($pid, 'x3284') === 0) foreach (eh_live_schedule('3284') as $r) if (!$row && $r['exam']['slug'] === $sel && ($r['passage']['id'] ?? '') === $pid) $row = $r;
 /* a passage of an older day still opens from its link */
 if (!$row && $pid !== '') foreach ($eh_days as $d) { foreach (eh_live_schedule($d) as $r) if (!$row && $r['exam']['slug'] === $sel && ($r['passage']['id'] ?? '') === $pid) $row = $r; if ($row) break; }
 $medal = ['🥇', '🥈', '🥉'];
@@ -99,16 +101,23 @@ if ($row):
 <section class="wrap eh-section">
   <?php if (!$allday): ?><p class="muted small"><?php echo esc_html(wp_date('d/m/Y')); ?> · <?php echo esc_html(eh_opt('brand_typing') ?: eh_opt('brand')); ?></p><?php endif; ?>
   <?php if ($allday): ?>
-  <div class="eh-lt-head"><div class="eh-lt-top"><div class="eh-lt-title">
+  <div class="eh-lt-head<?php echo $eh_set ? ' eh-lt-3284' : ''; ?>"><div class="eh-lt-top"><div class="eh-lt-title">
+  <?php if ($eh_set): ?>
+  <p class="eh-lt-kick"><span class="eh-lt-dot"></span> परीक्षा जैसा पैटर्न · <a href="<?php echo esc_url(home_url('/live-typing/')); ?>">← Live Typing</a></p>
+  <h1 class="eh-live-h">3284 Exam Pattern Typing</h1>
+  <p class="eh-lt-sub">UPSSSC Junior Assistant 3284 की असली typing परीक्षा जैसे आसान पैसेज · English + Hindi (Krutidev / Mangal)</p></div>
+  <?php else: ?>
   <p class="eh-lt-kick"><span class="eh-lt-dot"></span> Live today · <?php echo esc_html(eh_opt('brand_typing') ?: eh_opt('brand')); ?></p>
   <h1 class="eh-live-h">UPSSSC Junior Assistant Live Typing</h1>
-  <p class="eh-lt-sub">Same passage for everyone · open all day · ranking by net speed</p></div>
+  <p class="eh-lt-sub">Same passage for everyone · open all day · ranking by net speed</p>
+  <a class="eh-3284-cta" href="<?php echo esc_url(add_query_arg('set', '3284', home_url('/live-typing/'))); ?>">🔴 3284 Exam Pattern Typing →</a></div>
+  <?php endif; ?>
   <?php $eh_news = ''; foreach ($S as $x) if (!empty($x['news'])) $eh_news = $x['news'];
   $eh_fd = function ($d) { return date_i18n('j M Y', strtotime($d)); };
   $eh_cur = $eh_news ?: wp_date('Y-m-d'); $eh_ix = array_search($eh_cur, $eh_days, true);
   $eh_u = function ($d) use ($eh_days) { return $d === ($eh_days[0] ?? '') ? home_url('/live-typing/') : add_query_arg('ldate', $d, home_url('/live-typing/')); };
   $eh_newer = $eh_ix !== false && $eh_ix > 0 ? $eh_days[$eh_ix - 1] : ''; $eh_older = $eh_ix !== false && isset($eh_days[$eh_ix + 1]) ? $eh_days[$eh_ix + 1] : '';
-  if ($eh_days): ?>
+  if ($eh_days && !$eh_set): ?>
   <div class="eh-dp" id="eh-dp" data-days="<?php echo esc_attr(implode(',', $eh_days)); ?>" data-cur="<?php echo esc_attr($eh_cur); ?>" data-base="<?php echo esc_url(home_url('/live-typing/')); ?>">
     <a class="eh-dp-nav<?php echo $eh_older ? '' : ' off'; ?>" <?php echo $eh_older ? 'href="' . esc_url($eh_u($eh_older)) . '"' : ''; ?> aria-label="Previous day">‹</a>
     <button type="button" class="eh-dp-btn" id="eh-dp-btn" aria-haspopup="true">
@@ -149,6 +158,24 @@ if ($row):
   </script>
   <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
   <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-s" data-l="superhard">Super Hard</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
+  <?php if ($eh_set): ?>
+  <div class="eh-3284-info">
+    <h3>📋 3284 Typing परीक्षा में क्या आया <small>(परीक्षा देकर आए अभ्यर्थियों के अनुसार)</small></h3>
+    <ul>
+      <li>⌨️ <b>कीबोर्ड:</b> HP K100, सबके लिए एक जैसा</li>
+      <li>🇬🇧 <b>English:</b> मैटर आसान, शब्द ज़्यादातर 5-6 अक्षर के, बड़े शब्द नहीं, अंक लगभग नहीं। विषय: <b>नेताजी सुभाष चंद्र बोस</b></li>
+      <li>🇮🇳 <b>हिंदी:</b> आसान मैटर। विषय: <b>‘कुंवर’</b> पर, और एक पैसेज <b>दीपावली</b> पर भी आया</li>
+      <li>🔠 कुछ शब्द Capital में थे, बाकी small letters</li>
+      <li>🔐 <b>Login:</b> Roll No. / Registration No. और Password से, टेस्ट से लगभग आधा घंटा पहले</li>
+      <li>▶️ पहले लगभग <b>1 मिनट का Demo</b>, फिर असली टेस्ट</li>
+      <li>🔤 ऊपर <b>Krutidev / Mangal</b> चुनने का विकल्प; भाषा <b>Alt + Shift</b> से बदलती है</li>
+      <li>🔎 Font का आकार छोटा था</li>
+      <li>⏰ पहली शिफ्ट सुबह 8 बजे से, गेट पर समय से पहले पहुंचें</li>
+      <li>💪 घबराएं नहीं, दबाव संभाल लिया तो 30 WPM वाला भी आराम से निकाल लेगा</li>
+    </ul>
+    <p class="eh-3284-note">नीचे के सभी पैसेज इसी पैटर्न पर हैं: आसान शब्द, लगभग कोई अंक नहीं, त्योहार, महापुरुष और समीक्षा (review) वाले विषय।</p>
+  </div>
+  <?php endif; ?>
   </div></div>
   <?php else: ?>
   <h1 class="eh-live-h">Live Typing — same passage, same time, for everyone</h1>
