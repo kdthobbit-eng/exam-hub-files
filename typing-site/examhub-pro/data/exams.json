@@ -207,7 +207,10 @@
 "minutes": 15,
 "cat": "state",
 "retype": false,
-"rule": "words"
+"rule": "words",
+"eval": "uppolice",
+"wpm": 15,
+"allowed": 15
 },
 {
 "slug": "rssb-nhm-data-entry-operator-hindi-typing-rajasthan",
@@ -1136,7 +1139,10 @@
 "minutes": 15,
 "cat": "state",
 "retype": false,
-"rule": "words"
+"rule": "words",
+"eval": "uppolice",
+"wpm": 25,
+"allowed": 15
 },
 {
 "slug": "up-police-si-asi-computer-operator-english-typing",
@@ -1148,7 +1154,10 @@
 "minutes": 15,
 "cat": "state",
 "retype": false,
-"rule": "words"
+"rule": "words",
+"eval": "uppolice",
+"wpm": 30,
+"allowed": 15
 },
 {
 "slug": "dsssb-delhi-jja-hindi-typing-session-court",

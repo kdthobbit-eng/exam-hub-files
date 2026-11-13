@@ -178,6 +178,11 @@ function eh_result_verdict($row, $e) {
         $sp = $nw / max((float) $row['minutes'], (float) $e['minutes'], 0.01);
         return ['pass' => $sp >= (float) $e['wpm'] ? 1 : 0, 'wpm' => $sp];
     }
+    if (($e['eval'] ?? '') === 'uppolice' && !empty($e['wpm'])) { /* UP Police: net WPM = (words - mistakes) / 15 min, 85% accuracy */
+        $errs = (int) $row['full_m'] + (int) $row['half_m'] / 2; $w = (int) $row['words'];
+        $sp = max(0, $w - $errs) / max((float) $row['minutes'], (float) $e['minutes'], 0.01);
+        return ['pass' => ($sp >= (float) $e['wpm'] && ($w ? $errs / $w * 100 : 100) <= (float) ($e['allowed'] ?? 15)) ? 1 : 0, 'wpm' => $sp];
+    }
     $amount = $e['unit'] === 'keys' ? (int) $row['keys_count'] : (int) $row['words'];
     return ['pass' => ($amount >= (int) $e['target'] && (float) $row['err'] <= (float) ($e['allowed'] ?? 5)) ? 1 : 0];
 }

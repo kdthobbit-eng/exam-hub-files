@@ -130,6 +130,10 @@
       var m = Math.max(+R.minutes || 0, +X.minutes || 5), sp = nw / m;
       return { rule: 'upsssc', pass: sp >= X.wpm, wpm: sp, words: kw, errs: errs, pen: pen, netWords: nw, mins: m, need: +X.wpm, byWords: byW };
     }
+    if (X.eval === 'uppolice' && X.wpm) { /* UP Police (UPPRPB): net WPM = (words typed - mistakes) / 15 min, needs 25/30 WPM and 85% accuracy */
+      var e2 = (+R.full || 0) + (+R.half || 0) / 2, w2 = +R.words || 0, m2 = Math.max(+R.minutes || 0, +X.minutes || 15), sp2 = Math.max(0, w2 - e2) / m2, ep = w2 ? e2 / w2 * 100 : 100;
+      return { rule: 'uppolice', pass: sp2 >= X.wpm && ep <= (X.allowed || 15), wpm: sp2, words: w2, errs: e2, errPct: ep, mins: m2, need: +X.wpm, amount: w2 };
+    }
     var amount = X.unit === 'keys' ? R.keys : R.words;
     return { rule: 'std', pass: amount >= X.target && R.err <= allowed, amount: amount };
   }
@@ -148,7 +152,7 @@
     var tgt = (+X.target).toLocaleString('en-IN') + (keysMode ? ' key depressions' : ' words');
     var errs = R.full + R.half / 2, mins = Math.max(R.minutes, 1 / 60);
     var head = '<div class="eh-dash-head"><div><p class="eh-kicker">Performance Dashboard</p><h2>' + esc(X.name) + '</h2>' +
-      '<p class="muted">' + (R.title ? 'Passage: <b>' + esc(R.title) + '</b> · ' : '') + (R.date ? esc(R.date) + ' · ' : '') + (up ? 'Needed ' + V.need + ' WPM in ' + X.minutes + ' min · first 5 mistakes free, then 6 words cut for each extra mistake' : 'Target ' + tgt + ' in ' + X.minutes + ' min · Allowed error ' + allowed + '%') + '</p></div>' +
+      '<p class="muted">' + (R.title ? 'Passage: <b>' + esc(R.title) + '</b> · ' : '') + (R.date ? esc(R.date) + ' · ' : '') + (up ? 'Needed ' + V.need + ' WPM in ' + X.minutes + ' min · first 5 mistakes free, then 6 words cut for each extra mistake' : V.rule === 'uppolice' ? 'Needed ' + V.need + ' WPM in ' + X.minutes + ' min · allowed error ' + allowed + '%' : 'Target ' + tgt + ' in ' + X.minutes + ' min · Allowed error ' + allowed + '%') + '</p></div>' +
       '<div class="eh-verdict ' + (R.pass ? 'ok' : 'no') + '">' + (R.pass ? '✔ Qualified' : '✘ Not Qualified') + '</div></div>';
     var mm = function (m) { m = Math.round((+m || 0) * 60); return ('0' + Math.floor(m / 60)).slice(-2) + ':' + ('0' + m % 60).slice(-2) + ' min.'; };
     var info = '<div class="eh-dash-info">' + [['Exam Title', esc(X.name)], ['Passage Title', esc(R.title || '—')], ['Key Depression', R.total ? R.total : '—'], ['Time Duration', mm(R.dur || X.minutes)], ['Typing Date', esc(R.date || '—')], ['Time Taken', mm(R.minutes)]]
@@ -184,8 +188,9 @@
       '<li><b>Mistakes</b> = Full ' + R.full + ' + Half ' + R.half + ' ÷ 2 = <b>' + errs + '</b></li>' +
       '<li><b>Net Speed</b> = (words − mistakes) ÷ minutes = (' + R.words + ' − ' + errs + ') ÷ ' + mins.toFixed(2) + ' = <b>' + R.net + ' WPM</b></li>' +
       '<li><b>Error %</b> = mistakes ÷ words × 100 = ' + errs + ' ÷ ' + (R.words || 0) + ' × 100 = <b>' + R.err + '%</b> (allowed ' + allowed + '%)</li>' +
-      '<li><b>' + (keysMode ? 'Key depressions' : 'Words') + '</b>: you typed ' + amount + ', needed ' + X.target + ' → ' + (amount >= X.target ? '✔ done' : '✘ short') + '</li>' +
-      '</ol><p class="eh-verdict-line">Result: ' + (R.pass ? '<b class="ok">Qualified</b> — target met and errors within the limit.' : '<b class="no">Not Qualified</b> — ' + (amount < X.target ? 'target not met' : '') + (amount < X.target && R.err > allowed ? ' and ' : '') + (R.err > allowed ? 'error ' + allowed + '% limit crossed' : '') + '.') + '</p></div>';
+      (V.rule === 'uppolice' ? '<li><b>Speed</b> (UP Police rule) = (words − mistakes) ÷ ' + n2(V.mins) + ' min = <b>' + n2(V.wpm) + ' WPM</b>, needed ' + V.need + ' → ' + (V.wpm >= V.need ? '✔ done' : '✘ short') + '</li>' +
+      '</ol><p class="eh-verdict-line">Result: ' + (R.pass ? '<b class="ok">Qualified</b> — speed ' + V.need + ' WPM or more and errors within ' + allowed + '%.' : '<b class="no">Not Qualified</b> — ' + (V.wpm < V.need ? 'speed below ' + V.need + ' WPM' : '') + (V.wpm < V.need && R.err > allowed ? ' and ' : '') + (R.err > allowed ? 'error ' + allowed + '% limit crossed' : '') + '.') + '</p></div>' : '<li><b>' + (keysMode ? 'Key depressions' : 'Words') + '</b>: you typed ' + amount + ', needed ' + X.target + ' → ' + (amount >= X.target ? '✔ done' : '✘ short') + '</li>' +
+      '</ol><p class="eh-verdict-line">Result: ' + (R.pass ? '<b class="ok">Qualified</b> — target met and errors within the limit.' : '<b class="no">Not Qualified</b> — ' + (amount < X.target ? 'target not met' : '') + (amount < X.target && R.err > allowed ? ' and ' : '') + (R.err > allowed ? 'error ' + allowed + '% limit crossed' : '') + '.') + '</p></div>');
     var legend = '<p class="eh-legend"><span class="d-ok">Correct</span> <span class="d-sub">Wrong word (Full)</span> <span class="d-om">Missed word (Full)</span> <span class="d-add">Added word (Full)</span> <span class="d-skip">Skipped line</span> <span class="d-rest-k">Not typed</span> <span class="d-half">Half mistake</span></p>';
     var cmp = '<div class="eh-cmp-wrap"><div class="eh-cmp-tabs"><button type="button" class="on" data-v="two">Side by side</button><button type="button" data-v="one">Inline</button></div>' + legend +
       '<div class="eh-cmp-v" data-v="two">' + twoCol(ops) + '</div><div class="eh-cmp-v eh-diff" data-v="one" hidden>' + inline(ops) + '</div></div>';

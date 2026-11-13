@@ -414,6 +414,7 @@
     var amount = exam.unit === 'keys' ? kd : words;
     var V = window.EHEval.verdict({ keys: kd, words: words, full: full, half: half, err: errPct, minutes: secs / 60 }, exam), pass = V.pass;
     if (V.rule === 'upsssc') { net = Math.floor(V.wpm); gross = Math.round(V.words / V.mins); }
+    if (V.rule === 'uppolice') { net = +V.wpm.toFixed(2); gross = Math.round(V.words / V.mins); }
     var R = {
       exam: exam.slug, layout: S.layout, passage: S.passageId, minutes: +(secs / 60).toFixed(2),
       keys: kd, chars: typed.length, words: words, full: full, half: half, backspaces: S.bks, kerr: e.ke,
