@@ -177,8 +177,9 @@ if ($row):
       <div class="eh-3284-tile"><i>⌨️</i><div><span>कीबोर्ड</span><b>HP K100, सभी के लिए एक जैसा</b></div></div>
       <div class="eh-3284-tile"><i>🇬🇧</i><div><span>English पैसेज</span><b>विषय: नेताजी सुभाष चंद्र बोस · शब्द ज़्यादातर 5-6 अक्षर के</b></div></div>
       <div class="eh-3284-tile"><i>🇮🇳</i><div><span>हिंदी पैसेज (सुबह)</span><b>विषय: दीपावली</b></div></div>
-      <div class="eh-3284-tile eh-3284-eve"><i>🌇</i><div><span>13 Nov · शाम की शिफ्ट (हिंदी)</span><b>विषय: सन् 1947 ई. का विभाजन, लाहौर से अमृतसर आए डॉक्टर की सेवा, शरणार्थियों का निःशुल्क इलाज · स्तर हल्का Moderate</b></div></div>
-      <div class="eh-3284-tile"><i>✍️</i><div><span>शाम की शिफ्ट में ध्यान दें</span><b>विसर्ग (ः) कई जगह आया: Mangal में Shift + -, Krutidev में % · नुक्ता वाले शब्द: कर्फ़्यू, क़ाफ़िले · कठिन शब्द: हृदयविदारक, चुनौतीपूर्ण, अनिश्चितताओं, औषधालय, शरणस्थली</b></div></div>
+      <div class="eh-3284-tile eh-3284-eve"><i>🌇</i><div><span>13 Nov · शाम की शिफ्ट (English)</span><b>पैसेज भारतीय सेना (Indian Army) से शुरू हुआ, एक जगह का नाम भी आया · स्तर Medium</b></div></div>
+      <div class="eh-3284-tile eh-3284-eve"><i>🌇</i><div><span>13 Nov · शाम की शिफ्ट (हिंदी)</span><b>विषय: सन् 1947 ई. का विभाजन, लाहौर से अमृतसर आए डॉक्टर की सेवा, शरणार्थियों का निःशुल्क इलाज · स्तर Moderate से थोड़ा Hard · तारीख English अंकों में</b></div></div>
+      <div class="eh-3284-tile"><i>✍️</i><div><span>शाम की शिफ्ट में ध्यान दें</span><b>कोलन/विसर्ग (थे: थी: किया:) कई जगह आया: Mangal में Shift + -, Krutidev में % · डॉ॰ और ई॰ जैसे चिह्न भी दिखे · नुक्ता वाले शब्द: कर्फ़्यू, क़ाफ़िले · कठिन शब्द: हृदयविदारक, चुनौतीपूर्ण, अनिश्चितताओं, औषधालय, शरणस्थली</b></div></div>
       <div class="eh-3284-tile"><i>🔤</i><div><span>पैसेज में आए शब्द</span><b>Jewellery, Precious, Education, Agitation, तारीख 01.10.1945</b></div></div>
       <div class="eh-3284-tile"><i>🔠</i><div><span>अक्षर</span><b>कुछ शब्द Capital में, बाकी small letters</b></div></div>
       <div class="eh-3284-tile"><i>🔐</i><div><span>Login</span><b>Roll No. / Registration No. और Password, टेस्ट से लगभग आधा घंटा पहले</b></div></div>
