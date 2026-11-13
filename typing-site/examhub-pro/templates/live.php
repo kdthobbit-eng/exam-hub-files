@@ -116,12 +116,12 @@ if ($row):
   <?php if ($eh_set): ?>
   <p class="eh-lt-kick"><span class="eh-lt-dot"></span> 3284 Pattern · <a href="<?php echo esc_url(home_url('/live-typing/')); ?>">← Live Typing</a></p>
   <h1 class="eh-live-h">UPSSSC 3284 Junior Assistant</h1>
-  <p class="eh-lt-sub">Pattern Passage · परीक्षा केंद्र से लौटे अभ्यर्थियों की समीक्षा पर आधारित · English + हिंदी (Krutidev / Mangal)</p></div>
+  <p class="eh-lt-sub">Pattern Passage · सभी शिफ्टों के पैटर्न व परीक्षा केंद्र से मिली समीक्षा पर आधारित · English + हिंदी (Krutidev / Mangal)</p></div>
   <?php else: ?>
   <p class="eh-lt-kick"><span class="eh-lt-dot"></span> Live today · <?php echo esc_html(eh_opt('brand_typing') ?: eh_opt('brand')); ?></p>
   <h1 class="eh-live-h">UPSSSC Junior Assistant Live Typing</h1>
   <p class="eh-lt-sub">Same passage for everyone · open all day · ranking by net speed</p>
-  <a class="eh-3284-cta" href="<?php echo esc_url(add_query_arg('set', '3284', home_url('/live-typing/'))); ?>">🔴 UPSSSC 3284 Junior Assistant Pattern Passage →<small>परीक्षा केंद्र से लौटे अभ्यर्थियों की समीक्षा पर आधारित</small></a></div>
+  <a class="eh-3284-cta" href="<?php echo esc_url(add_query_arg('set', '3284', home_url('/live-typing/'))); ?>">🔴 UPSSSC 3284 Junior Assistant Pattern Passage →<small>सभी शिफ्टों के पैटर्न व परीक्षा केंद्र से मिली समीक्षा पर आधारित</small></a></div>
   <?php endif; ?>
   <?php $eh_news = ''; foreach ($S as $x) if (!empty($x['news'])) $eh_news = $x['news'];
   $eh_fd = function ($d) { return date_i18n('j M Y', strtotime($d)); };
@@ -171,7 +171,7 @@ if ($row):
   <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-s" data-l="superhard">Super Hard</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
   <?php if ($eh_set): ?>
   <div class="eh-3284-info">
-    <div class="eh-3284-ih"><b>परीक्षा की जानकारी</b><span>UPSSSC 3284 Junior Assistant Typing · 13 नवंबर 2026 · परीक्षा केंद्र से लौटे अभ्यर्थियों की समीक्षा पर आधारित</span></div>
+    <div class="eh-3284-ih"><b>परीक्षा की जानकारी</b><span>UPSSSC 3284 Junior Assistant Typing · 13 नवंबर 2026 · सभी शिफ्टों के पैटर्न व परीक्षा केंद्र से मिली समीक्षा पर आधारित</span></div>
     <div class="eh-3284-grid">
       <div class="eh-3284-tile"><i>⌨️</i><div><span>कीबोर्ड</span><b>HP K100, सभी के लिए एक जैसा</b></div></div>
       <div class="eh-3284-tile"><i>🇬🇧</i><div><span>English पैसेज</span><b>विषय: नेताजी सुभाष चंद्र बोस · शब्द ज़्यादातर 5-6 अक्षर के</b></div></div>

@@ -292,3 +292,10 @@ body.home{animation:uhfade .6s ease both}
 /* 3284 button: same size and font as the hero buttons, red */
 .uh-btn.uh-btn-3284{background:#dc2626;border-color:#dc2626;color:#fff}
 .uh-btn.uh-btn-3284:hover{background:#b91c1c;border-color:#b91c1c;color:#fff}
+/* 3284 big Hindi card under the hero buttons */
+.uh-3284big{display:flex;align-items:center;gap:16px;margin-top:18px;max-width:720px;background:linear-gradient(135deg,#b91c1c,#dc2626 55%,#ef4444);color:#fff!important;text-decoration:none!important;padding:18px 22px;border-radius:18px;box-shadow:0 16px 34px -14px rgba(185,28,28,.75);transition:transform .15s}
+.uh-3284big:hover{transform:translateY(-2px)}
+.uh-3284-dot{flex:0 0 14px;height:14px;border-radius:50%;background:#fff;animation:uh3284 1.6s infinite}
+.uh-3284-t{flex:1;min-width:0}.uh-3284-t b{display:block;font-size:22px;font-weight:800;line-height:1.25}.uh-3284-t small{display:block;margin-top:4px;font-size:14.5px;opacity:.95;font-weight:600}
+.uh-3284-go{flex:0 0 auto;background:#fff;color:#b91c1c;font-weight:800;font-size:16px;padding:11px 18px;border-radius:12px;white-space:nowrap}
+@media(max-width:640px){.uh-3284big{flex-wrap:wrap;padding:16px}.uh-3284-t b{font-size:19px}.uh-3284-go{flex-basis:100%;text-align:center}}
