@@ -5,12 +5,15 @@ on:
       file: {description: "quiz/*.json", required: true}
       chat: {description: "Telegram chat id or @username", required: true}
       start: {description: "Start from item index", required: false, default: "0"}
+      sleep: {description: "Seconds between items", required: false, default: "3.2"}
+      thread: {description: "Forum topic id (optional)", required: false, default: ""}
 jobs:
   send:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        run: python3 bot/send_quiz.py "${{ inputs.file }}" "${{ inputs.chat }}" "${{ inputs.start }}"
+          QUIZ_SLEEP: ${{ inputs.sleep }}
+        run: python3 bot/send_quiz.py "${{ inputs.file }}" "${{ inputs.chat }}" "${{ inputs.start }}" "${{ inputs.thread }}"

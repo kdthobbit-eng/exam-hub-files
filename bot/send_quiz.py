@@ -23,26 +23,28 @@ def call(method, **p):
     raise RuntimeError("too many retries")
 
 
-def main(path, chat, start=0):
+def main(path, chat, start=0, thread=None):
+    extra = {"message_thread_id": int(thread)} if thread else {}
     items = json.load(open(path, encoding="utf-8"))
     for i, it in enumerate(items):
         if i < start or it["type"] == "end":
             continue
         if it["type"] == "photo":
-            call("sendPhoto", chat_id=chat, photo=it["url"], caption=it.get("caption", ""), parse_mode="HTML")
+            call("sendPhoto", **extra, chat_id=chat, photo=it["url"], caption=it.get("caption", ""), parse_mode="HTML")
         elif it["type"] == "msg":
-            call("sendMessage", chat_id=chat, text=it["text"], parse_mode="HTML", disable_web_page_preview=True)
+            call("sendMessage", **extra, chat_id=chat, text=it["text"], parse_mode="HTML", disable_web_page_preview=True)
         else:
-            call("sendPoll", chat_id=chat, question=it["q"], options=[{"text": o} for o in it["options"]],
+            call("sendPoll", **extra, chat_id=chat, question=it["q"], options=[{"text": o} for o in it["options"]],
                  type="quiz", correct_option_id=it["answer"], is_anonymous=True,
                  explanation=it.get("explain", "")[:200])
         print("sent", i, flush=True)
-        time.sleep(3.2)
+        time.sleep(float(os.environ.get("QUIZ_SLEEP","3.2")))
 
 
 if __name__ == "__main__":
     try:
-        main(sys.argv[1], sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 0)
+        main(sys.argv[1], sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 0,
+             sys.argv[4] if len(sys.argv) > 4 else None)
     except Exception as e:
         print(f"::error::{str(e)[:500]}")
         sys.exit(1)
