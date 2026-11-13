@@ -9,7 +9,7 @@ API = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN']}"
 def call(method, **p):
     data = urllib.parse.urlencode({k: json.dumps(v, ensure_ascii=False) if isinstance(v, (list, dict)) else v
                                    for k, v in p.items()}).encode()
-    for _ in range(5):
+    for _ in range(10):
         try:
             with urllib.request.urlopen(f"{API}/{method}", data=data, timeout=60) as r:
                 return json.loads(r.read())
@@ -20,6 +20,9 @@ def call(method, **p):
                 time.sleep(wait + 1)
                 continue
             raise RuntimeError(f"{method}: {body}")
+        except (urllib.error.URLError, ConnectionError, TimeoutError) as e:
+            print("net retry:", e, flush=True)
+            time.sleep(5)
     raise RuntimeError("too many retries")
 
 
