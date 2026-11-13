@@ -166,7 +166,7 @@ function eh_live_schedule($want = '') {
                 for ($k = 0; $k < $per && $k < $n; $k++) {
                     $start = $nd ? $k : ($day * 2 + $k) % $n; $seq = []; $len = 0;
                     for ($q = 0; $q < $n && $q < 8; $q++) { $seq[] = $pool[($start + $q) % $n]; $len += $seq[$q]['chars'] + 1; if ($len >= $need && $q >= 1) break; }
-                    $out[] = ['exam' => $e, 'lang' => $x[0], 'passage' => $seq[0], 'plist' => $seq, 'chars' => max(0, $len - 1), 'level' => $label, 'no' => ++$no, 'allday' => true, 'news' => $nd,
+                    $out[] = ['exam' => $e, 'lang' => $x[0], 'passage' => $seq[0], 'plist' => $seq, 'chars' => max(0, $len - 1), 'level' => $nd === '3284' ? '3284 Pattern' : $label, 'no' => ++$no, 'allday' => true, 'news' => $nd,
                         'start' => '12:00 AM', 'end' => '11:59 PM', 's' => 0, 'e' => 1439, 'date' => $date];
                 }
             }
@@ -178,7 +178,7 @@ function eh_live_schedule($want = '') {
         foreach (['en', 'hi'] as $lg) {
             $by = [];
             foreach ($out as $r) if ($r['lang'] === $lg) $by[$r['level']][] = $r;
-            for ($i = 0, $more = true; $more; $i++) { $more = false; foreach (['Easy', 'Moderate', 'Hard'] as $lv) if (isset($by[$lv][$i])) { $mixed[] = $by[$lv][$i]; $more = true; } }
+            for ($i = 0, $more = true; $more; $i++) { $more = false; foreach (['Easy', 'Moderate', 'Hard', '3284 Pattern'] as $lv) if (isset($by[$lv][$i])) { $mixed[] = $by[$lv][$i]; $more = true; } }
         }
         foreach ($mixed as $i => &$r) $r['no'] = $i + 1; unset($r);
         return $mixed;

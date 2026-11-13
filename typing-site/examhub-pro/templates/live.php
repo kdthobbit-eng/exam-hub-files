@@ -132,7 +132,7 @@ if ($row):
   <?php endif; ?>
   </div><div class="eh-lt-bar">
   <?php $eh_lc = array_count_values(array_map(function ($r) { return $r['level'] ?? ''; }, $S)); ?>
-  <p class="eh-dp-sum"><b><?php echo count($S); ?></b> passages<?php if ($eh_news): ?> ·<?php if (!empty($eh_lc['Super Hard'])): ?> <span class="eh-lvl superhard"><?php echo (int) $eh_lc['Super Hard']; ?> Super Hard</span><?php endif; ?> <span class="eh-lvl easy"><?php echo (int) ($eh_lc['Easy'] ?? 0); ?> Easy</span> <span class="eh-lvl moderate"><?php echo (int) ($eh_lc['Moderate'] ?? 0); ?> Moderate</span> <span class="eh-lvl hard"><?php echo (int) ($eh_lc['Hard'] ?? 0); ?> Hard</span> · English + Hindi<?php endif; ?></p>
+  <?php if ($eh_set): $eh_lg = array_count_values(array_column($S, 'lang')); ?><p class="eh-dp-sum"><b><?php echo count($S); ?></b> passages · English <?php echo (int) ($eh_lg['en'] ?? 0); ?> · हिंदी <?php echo (int) ($eh_lg['hi'] ?? 0); ?></p><?php else: ?><p class="eh-dp-sum"><b><?php echo count($S); ?></b> passages<?php if ($eh_news): ?> ·<?php if (!empty($eh_lc['Super Hard'])): ?> <span class="eh-lvl superhard"><?php echo (int) $eh_lc['Super Hard']; ?> Super Hard</span><?php endif; ?> <span class="eh-lvl easy"><?php echo (int) ($eh_lc['Easy'] ?? 0); ?> Easy</span> <span class="eh-lvl moderate"><?php echo (int) ($eh_lc['Moderate'] ?? 0); ?> Moderate</span> <span class="eh-lvl hard"><?php echo (int) ($eh_lc['Hard'] ?? 0); ?> Hard</span> · English + Hindi<?php endif; ?></p><?php endif; ?>
   <script>
   (function () {
     var box = document.getElementById('eh-dp'); if (!box) return;
@@ -160,20 +160,14 @@ if ($row):
   <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-s" data-l="superhard">Super Hard</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
   <?php if ($eh_set): ?>
   <div class="eh-3284-info">
-    <h3>📋 UPSSSC 3284 Junior Assistant Typing परीक्षा में क्या आया <small>(परीक्षा देकर आए अभ्यर्थियों के अनुसार)</small></h3>
-    <ul>
-      <li>⌨️ <b>कीबोर्ड:</b> HP K100, सबके लिए एक जैसा</li>
-      <li>🇬🇧 <b>English:</b> मैटर आसान, शब्द ज़्यादातर 5-6 अक्षर के, बड़े शब्द नहीं, अंक लगभग नहीं। विषय: <b>नेताजी सुभाष चंद्र बोस</b></li>
-      <li>🇮🇳 <b>हिंदी:</b> आसान मैटर। विषय: <b>‘कुंवर’</b> पर, और एक पैसेज <b>दीपावली</b> पर भी आया</li>
-      <li>🔠 कुछ शब्द Capital में थे, बाकी small letters</li>
-      <li>🔐 <b>Login:</b> Roll No. / Registration No. और Password से, टेस्ट से लगभग आधा घंटा पहले</li>
-      <li>▶️ पहले लगभग <b>1 मिनट का Demo</b>, फिर असली टेस्ट</li>
-      <li>🔤 ऊपर <b>Krutidev / Mangal</b> चुनने का विकल्प; भाषा <b>Alt + Shift</b> से बदलती है</li>
-      <li>🔎 Font का आकार छोटा था</li>
-      <li>⏰ पहली शिफ्ट सुबह 8 बजे से, गेट पर समय से पहले पहुंचें</li>
-      <li>💪 घबराएं नहीं, दबाव संभाल लिया तो 30 WPM वाला भी आराम से निकाल लेगा</li>
-    </ul>
-    <p class="eh-3284-note">नीचे के सभी पैसेज 3284 पैटर्न पर हैं। त्योहार, महापुरुष और Review वाले टॉपिक भी हैं।</p>
+    <div class="eh-3284-ih"><b>परीक्षा की जानकारी</b><span>UPSSSC 3284 Junior Assistant Typing · 13 नवंबर 2026 · परीक्षा देकर आए अभ्यर्थियों के अनुसार</span></div>
+    <table class="eh-3284-t">
+      <tr><th>कीबोर्ड</th><td>HP K100, सभी के लिए एक जैसा</td><th>English पैसेज</th><td>विषय नेताजी सुभाष चंद्र बोस, शब्द ज़्यादातर 5-6 अक्षर के, अंक लगभग नहीं</td></tr>
+      <tr><th>हिंदी पैसेज</th><td>विषय ‘कुंवर’, एक पैसेज दीपावली पर भी</td><th>अक्षर</th><td>कुछ शब्द Capital में, बाकी small letters</td></tr>
+      <tr><th>Login</th><td>Roll No. / Registration No. और Password, टेस्ट से लगभग आधा घंटा पहले</td><th>Demo</th><td>असली टेस्ट से पहले लगभग 1 मिनट</td></tr>
+      <tr><th>Font / भाषा</th><td>Krutidev या Mangal ऊपर से चुनें, भाषा Alt + Shift से बदलती है</td><th>Font का आकार</th><td>छोटा</td></tr>
+      <tr><th>शिफ्ट</th><td colspan="3">पहली शिफ्ट सुबह 8 बजे से, गेट पर समय से पहले पहुंचें</td></tr>
+    </table>
   </div>
   <?php endif; ?>
   </div></div>
