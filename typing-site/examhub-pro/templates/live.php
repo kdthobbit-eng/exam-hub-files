@@ -6,6 +6,7 @@ $S = eh_live_schedule($eh_set ? '3284' : $eh_day);
 $now = (int) wp_date('G') * 60 + (int) wp_date('i');
 $sel = sanitize_title($_GET['exam'] ?? '');
 $pid = sanitize_key($_GET['p'] ?? ''); $kb = sanitize_key($_GET['kb'] ?? '');
+if (strpos($pid, 'x3284his') === 0) $pid = 'x3284hie' . substr($pid, 8); /* old links from a cached list (ids were x3284hiS01..) */
 $row = null; foreach ($S as $r) if (!$row && $r['exam']['slug'] === $sel && ($pid === '' || ($r['passage']['id'] ?? '') === $pid)) $row = $r;
 if (!$row && strpos($pid, 'x3284') === 0) foreach (eh_live_schedule('3284') as $r) if (!$row && $r['exam']['slug'] === $sel && ($r['passage']['id'] ?? '') === $pid) $row = $r;
 /* a passage of an older day still opens from its link */
