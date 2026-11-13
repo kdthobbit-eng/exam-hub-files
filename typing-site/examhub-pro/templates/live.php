@@ -41,7 +41,7 @@ if ($row):
   <div><?php $eh_mine = $eh_done[$L['exam']['slug'] . '|' . $lp] ?? null;
     if ($open && $L['passage'] && !$eh_uid): ?>
       <div class="eh-panel eh-live-lock"><span class="eh-live-lock-ic">🔒</span>
-        <h2>Log in to take Live Typing</h2>
+        <h2><?php echo strpos($lp, 'x3284') === 0 ? 'Log in to take UPSSSC 3284 Pattern Passage' : 'Log in to take Live Typing'; ?></h2>
         <p class="muted">Live Typing has a ranking, so each test is saved to your account. It is free and takes one minute.</p>
         <div class="eh-live-lock-btns"><a class="btn dark" href="<?php echo esc_url(eh_login_page_url($eh_back)); ?>">Log in →</a>
         <a class="btn ghost" href="<?php echo esc_url(add_query_arg('redirect_to', rawurlencode($eh_back), eh_signup_page_url())); ?>">New user? Sign up</a></div>

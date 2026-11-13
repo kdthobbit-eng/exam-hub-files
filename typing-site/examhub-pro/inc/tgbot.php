@@ -91,6 +91,20 @@ function eh_tgb_live() {
     foreach ($rows as $i => $r) { $e = eh_exam($r['exam']); $o .= $md[$i] . ' ' . esc_html(eh_display_name($r)) . ' — <b>' . (int) $r['net'] . ' WPM</b> · ' . esc_html($r['acc']) . '%' . ($e ? ' · ' . esc_html($e['name']) : '') . "\n"; }
     return $o;
 }
+function eh_tgb_3284() {
+    global $wpdb; $t = eh_table(); $d = current_time('Y-m-d'); $pp = eh_stats_people_sql();
+    $q = function ($extra) use ($wpdb, $t, $pp) { return $wpdb->get_row("SELECT COUNT(*) n, COUNT(DISTINCT $pp) ppl, COALESCE(SUM(pass),0) ok, COALESCE(ROUND(AVG(net)),0) avg FROM $t WHERE passage LIKE 'x3284%' $extra", ARRAY_A); };
+    $all = $q(''); $today = $q($wpdb->prepare('AND created >= %s', $d . ' 00:00:00'));
+    $en = (int) $wpdb->get_var("SELECT COUNT(*) FROM $t WHERE passage LIKE 'x3284en%'"); $hi = (int) $wpdb->get_var("SELECT COUNT(*) FROM $t WHERE passage LIKE 'x3284hi%'");
+    $n = function ($x) { return number_format_i18n((int) $x); };
+    $row = function ($l, $v) { return str_pad($l, 15, ' ') . str_pad($v, 9, ' ', STR_PAD_LEFT) . "\n"; };
+    $o = '🔴 <b>UPSSSC 3284 Pattern Passage</b>' . "\n";
+    $o .= "\n📅 <b>आज</b>\n<pre>" . $row('Tests', $n($today['n'])) . $row('People', $n($today['ppl'])) . $row('Qualified', $n($today['ok'])) . $row('Avg net speed', (int) $today['avg'] . ' WPM') . '</pre>';
+    $o .= "\n🌐 <b>शुरू से अब तक</b>\n<pre>" . $row('Tests', $n($all['n'])) . $row('People', $n($all['ppl'])) . $row('Qualified', $n($all['ok'])) . $row('English tests', $n($en)) . $row('Hindi tests', $n($hi)) . $row('Avg net speed', (int) $all['avg'] . ' WPM') . '</pre>';
+    $rows = $wpdb->get_results("SELECT name, user_id, net, acc FROM $t WHERE passage LIKE 'x3284%' ORDER BY net DESC, acc DESC LIMIT 5", ARRAY_A);
+    if ($rows) { $md = ['🥇', '🥈', '🥉', '4.', '5.']; $o .= "\n🏆 <b>Top 5</b>\n"; foreach ($rows as $i => $r) $o .= $md[$i] . ' ' . esc_html(eh_display_name($r)) . ' — <b>' . (int) $r['net'] . ' WPM</b> · ' . esc_html($r['acc']) . "%\n"; }
+    return $o;
+}
 function eh_tgb_top() {
     global $wpdb; $t = eh_table(); $d = current_time('Y-m-d');
     $rows = $wpdb->get_results($wpdb->prepare("SELECT exam, COUNT(*) n FROM $t WHERE created >= %s GROUP BY exam ORDER BY n DESC LIMIT 8", $d . ' 00:00:00'), ARRAY_A);
@@ -114,6 +128,7 @@ function eh_tgb_menu_kb($role) {
         [['text' => '📅 Yesterday', 'callback_data' => 'r:yday'], ['text' => '🗓 Last 7 days', 'callback_data' => 'r:7d']],
         [['text' => '📆 This month', 'callback_data' => 'r:month'], ['text' => '🌐 Full (All time)', 'callback_data' => 'r:all']],
         [['text' => '⚡ Live Typing', 'callback_data' => 'live'], ['text' => '🏆 Top exams', 'callback_data' => 'top']],
+        [['text' => '🔴 3284 Pattern Passage', 'callback_data' => 'p3284']],
         [['text' => '👤 Sign-ups', 'callback_data' => 'users'], ['text' => '👥 Admins', 'callback_data' => 'admins']],
     ];
     if ($role === 'owner') $kb[] = [['text' => '➕ Add admin', 'callback_data' => 'add']];
@@ -152,6 +167,7 @@ function eh_tgb_hook(WP_REST_Request $req) {
         elseif (strpos($data, 'r:') === 0) { $text = eh_tgb_stats(substr($data, 2)); $kb = eh_tgb_back_kb($data); }
         elseif ($data === 'live') { $text = eh_tgb_live(); $kb = eh_tgb_back_kb('live'); }
         elseif ($data === 'top') { $text = eh_tgb_top(); $kb = eh_tgb_back_kb('top'); }
+        elseif ($data === 'p3284') { $text = eh_tgb_3284(); $kb = eh_tgb_back_kb('p3284'); }
         elseif ($data === 'users') { $text = eh_tgb_users(); $kb = eh_tgb_back_kb('users'); }
         elseif ($data === 'admins') { [$text, $kb] = eh_tgb_admins_view($role); }
         elseif ($data === 'add' && $role === 'owner') {
@@ -196,6 +212,7 @@ function eh_tgb_hook(WP_REST_Request $req) {
     if ($txt === '/today') $send(eh_tgb_stats('today'), eh_tgb_back_kb('r:today'));
     elseif ($txt === '/hour') $send(eh_tgb_stats('hour'), eh_tgb_back_kb('r:hour'));
     elseif ($txt === '/all') $send(eh_tgb_stats('all'), eh_tgb_back_kb('r:all'));
+    elseif ($txt === '/3284') $send(eh_tgb_3284(), eh_tgb_back_kb('p3284'));
     else $send(eh_tgb_menu_text(), eh_tgb_menu_kb($role));
     return ['ok' => true];
 }
@@ -214,7 +231,7 @@ add_action('admin_post_eh_tgb_save', function () {
         if (!get_option('eh_tgb_secret')) update_option('eh_tgb_secret', wp_generate_password(40, false), false);
         if (!get_option('eh_tgb_since')) update_option('eh_tgb_since', current_time('mysql'), false);
         $r = eh_tgb_api('setWebhook', ['url' => rest_url('eh/v1/tgbot'), 'secret_token' => get_option('eh_tgb_secret'), 'allowed_updates' => ['message', 'callback_query'], 'drop_pending_updates' => true]);
-        eh_tgb_api('setMyCommands', ['commands' => [['command' => 'start', 'description' => 'Menu'], ['command' => 'today', 'description' => 'आज के आँकड़े'], ['command' => 'hour', 'description' => 'पिछला 1 घंटा'], ['command' => 'all', 'description' => 'शुरू से अब तक']]]);
+        eh_tgb_api('setMyCommands', ['commands' => [['command' => 'start', 'description' => 'Menu'], ['command' => 'today', 'description' => 'आज के आँकड़े'], ['command' => 'hour', 'description' => 'पिछला 1 घंटा'], ['command' => 'all', 'description' => 'शुरू से अब तक'], ['command' => '3284', 'description' => '3284 Pattern Passage']]]);
         $msg = !empty($r['ok']) ? 'connected' : 'fail';
     } elseif ($do === 'ids') {
         update_option('eh_tgb_ids', sanitize_textarea_field(wp_unslash($_POST['ids'] ?? '')), false); $msg = 'saved';
