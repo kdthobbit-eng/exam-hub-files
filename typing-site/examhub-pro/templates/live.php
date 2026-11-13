@@ -122,7 +122,8 @@ if ($row):
   </div>
   <?php endif; ?>
   </div><div class="eh-lt-bar">
-  <p class="eh-dp-sum"><b><?php echo count($S); ?></b> passages<?php if ($eh_news): ?> · <span class="eh-lvl easy">10 Easy</span> <span class="eh-lvl moderate">10 Moderate</span> <span class="eh-lvl hard">10 Hard</span> · English + Hindi · from the day's news<?php endif; ?></p>
+  <?php $eh_lc = array_count_values(array_map(function ($r) { return $r['level'] ?? ''; }, $S)); ?>
+  <p class="eh-dp-sum"><b><?php echo count($S); ?></b> passages<?php if ($eh_news): ?> · <span class="eh-lvl easy"><?php echo (int) ($eh_lc['Easy'] ?? 0); ?> Easy</span> <span class="eh-lvl moderate"><?php echo (int) ($eh_lc['Moderate'] ?? 0); ?> Moderate</span> <span class="eh-lvl hard"><?php echo (int) ($eh_lc['Hard'] ?? 0); ?> Hard</span> · English + Hindi<?php endif; ?></p>
   <script>
   (function () {
     var box = document.getElementById('eh-dp'); if (!box) return;
@@ -147,18 +148,20 @@ if ($row):
   })();
   </script>
   <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
+  <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
   </div></div>
   <?php else: ?>
   <h1 class="eh-live-h">Live Typing — same passage, same time, for everyone</h1>
   <p class="muted">Each exam has a live test at a fixed time every day. Everyone gets the same passage and the day's ranking is by net speed.</p>
   <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
+  <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
   <?php endif; ?>
   <div class="eh-table-wrap"><table class="eh-table eh-live-table"><thead><tr><th>#</th><th>Test</th><th>Level</th><th>Passage</th><th>Language</th><th>Time</th><th>Status</th><th>Start</th></tr></thead><tbody>
   <?php foreach ($S as $i => $r):
       $st = $now < $r['s'] ? 'soon' : ($now <= $r['e'] ? 'live' : 'done');
       $q = ['exam' => $r['exam']['slug']]; if (!empty($r['allday'])) $q['p'] = $r['passage']['id'];
       $url = add_query_arg($q, home_url('/live-typing/')); ?>
-    <tr data-f="<?php echo esc_attr($r['lang']); ?>" class="<?php echo isset($eh_done[$r['exam']['slug'] . '|' . ($r['passage']['id'] ?? '')]) ? 'eh-row-att' : ''; ?>">
+    <tr data-f="<?php echo esc_attr($r['lang']); ?>" data-lv="<?php echo esc_attr(strtolower($r['level'] ?? '')); ?>" class="<?php echo isset($eh_done[$r['exam']['slug'] . '|' . ($r['passage']['id'] ?? '')]) ? 'eh-row-att' : ''; ?>">
       <td><?php echo $i + 1; ?></td>
       <td><b><?php echo esc_html($r['exam']['name']); ?></b><?php if (!empty($r['no'])) echo '<br><span class="muted small">Passage ' . (int) $r['no'] . '</span>'; ?></td>
       <td><?php echo !empty($r['level']) ? '<span class="eh-lvl ' . esc_attr(strtolower($r['level'])) . '">' . esc_html($r['level']) . '</span>' : '—'; ?></td>
@@ -183,13 +186,13 @@ if ($row):
   <div class="eh-live-pg" id="eh-live-pg"></div>
 </section>
 <script>
-(function(){var bs=document.querySelectorAll('.eh-live-chips button'),rows=[].slice.call(document.querySelectorAll('.eh-live-table tbody tr')),pg=document.getElementById('eh-live-pg'),per=20,f='',page=1;
-function draw(){var list=rows.filter(function(r){return !f||r.getAttribute('data-f')===f;}),n=Math.max(1,Math.ceil(list.length/per));if(page>n)page=n;
+(function(){var bl=document.querySelectorAll('.eh-live-lv button'),l='',bs=document.querySelectorAll('.eh-live-chips button'),rows=[].slice.call(document.querySelectorAll('.eh-live-table tbody tr')),pg=document.getElementById('eh-live-pg'),per=20,f='',page=1;
+function draw(){var list=rows.filter(function(r){return (!f||r.getAttribute('data-f')===f)&&(!l||r.getAttribute('data-lv')===l);}),n=Math.max(1,Math.ceil(list.length/per));if(page>n)page=n;
 rows.forEach(function(r){r.style.display='none';});list.forEach(function(r,i){if(i>=(page-1)*per&&i<page*per)r.style.display='';});
 if(!pg)return;if(n<2){pg.innerHTML='';return;}var h='<button type="button" data-p="'+(page-1)+'"'+(page<2?' disabled':'')+'>← Prev</button>';
 for(var k=1;k<=n;k++)h+='<button type="button" data-p="'+k+'" class="'+(k===page?'on':'')+'">'+k+'</button>';
 pg.innerHTML=h+'<button type="button" data-p="'+(page+1)+'"'+(page>=n?' disabled':'')+'>Next →</button><span>Page '+page+' of '+n+'</span>';}
 if(pg)pg.addEventListener('click',function(e){var p=e.target.getAttribute&&e.target.getAttribute('data-p');if(!p||e.target.disabled)return;page=+p;draw();var t=document.querySelector('.eh-live-chips');if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});
-bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.classList.toggle('on',x===b)});f=b.getAttribute('data-f');page=1;draw();});});draw();})();
+bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.classList.toggle('on',x===b)});f=b.getAttribute('data-f');page=1;draw();});});bl.forEach(function(b){b.addEventListener('click',function(){bl.forEach(function(x){x.classList.toggle('on',x===b)});l=b.getAttribute('data-l');page=1;draw();});});draw();})();
 </script>
 <?php endif; get_footer();

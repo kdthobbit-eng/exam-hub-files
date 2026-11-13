@@ -1486,3 +1486,12 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 .eh-dash .eh-cc.res span{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
 .eh-dash .eh-cc.res b,.eh-dash .eh-screen .eh-cc.res b{margin:0;font-size:28px}
 @media(max-width:700px){.eh-dash .eh-cc.res b,.eh-dash .eh-screen .eh-cc.res b{font-size:21px}.eh-dash .eh-cc.res span{font-size:13px}}
+/* live: level filter next to English / Hindi */
+.eh-live-lv{margin:0;display:flex;gap:6px;background:#fff;border:1.5px solid #e3d3bd;border-radius:999px;padding:4px}
+.eh-live-lv button{border:0;border-radius:999px;padding:9px 16px;font-size:15px;font-weight:800;background:transparent;color:#4b311d;cursor:pointer}
+.eh-live-lv button.on{background:#4b311d;color:#fff}
+.eh-live-lv button.lv-e.on{background:#16a34a}.eh-live-lv button.lv-m.on{background:#d97706}.eh-live-lv button.lv-h.on{background:#dc2626}
+.eh-live-lv button.lv-e{color:#15803d}.eh-live-lv button.lv-m{color:#b45309}.eh-live-lv button.lv-h{color:#b91c1c}
+.eh-live-lv button.on{color:#fff}
+.eh-lt-bar{flex-wrap:wrap;gap:10px}
+@media(max-width:700px){.eh-live-lv{width:100%}.eh-live-lv button{flex:1;padding:9px 6px;font-size:14px}}

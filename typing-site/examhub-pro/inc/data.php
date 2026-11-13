@@ -168,7 +168,15 @@ function eh_live_schedule($want = '') {
                 }
             }
         }
-        return $out;
+        /* mix the levels in the list: Easy, Moderate, Hard, Easy, Moderate, Hard ... in each language */
+        $mixed = [];
+        foreach (['en', 'hi'] as $lg) {
+            $by = [];
+            foreach ($out as $r) if ($r['lang'] === $lg) $by[$r['level']][] = $r;
+            for ($i = 0, $more = true; $more; $i++) { $more = false; foreach (['Easy', 'Moderate', 'Hard'] as $lv) if (isset($by[$lv][$i])) { $mixed[] = $by[$lv][$i]; $more = true; } }
+        }
+        foreach ($mixed as $i => &$r) $r['no'] = $i + 1; unset($r);
+        return $mixed;
     }
     foreach ($j as $r) {
         $e = eh_exam($r['exam'] ?? ''); if (!$e) continue;
