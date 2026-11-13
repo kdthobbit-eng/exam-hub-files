@@ -22,6 +22,15 @@ if ($row):
     $L = $row; $open = $now >= $L['s'] && $now <= $L['e'];
     $allday = !empty($L['allday']); $lp = sanitize_key($L['passage']['id'] ?? '');
     $board = eh_leaderboard($L['exam']['slug'], $L['date'], 25, 0, $lp);
+    /* next passage in the same list (same language and level first), skipping ones already typed */
+    $eh_list = $S; $eh_in = false; foreach ($eh_list as $r) if ($r['exam']['slug'] === $L['exam']['slug'] && ($r['passage']['id'] ?? '') === $lp) $eh_in = true;
+    if (!$eh_in) $eh_list = eh_live_schedule(strpos($lp, 'x3284') === 0 ? '3284' : (string) ($L['news'] ?? ''));
+    $eh_next = ''; $eh_at = -1; foreach ($eh_list as $i => $r) if ($r['exam']['slug'] === $L['exam']['slug'] && ($r['passage']['id'] ?? '') === $lp) $eh_at = $i;
+    if ($eh_at >= 0) { $cnt = count($eh_list);
+        foreach ([true, false] as $same) { for ($k = 1; $k < $cnt && !$eh_next; $k++) { $r = $eh_list[($eh_at + $k) % $cnt];
+            if ($r['lang'] !== $L['lang'] || ($same && $r['level'] !== $L['level']) || isset($eh_done[$r['exam']['slug'] . '|' . ($r['passage']['id'] ?? '')])) continue;
+            $q = ['exam' => $r['exam']['slug'], 'p' => $r['passage']['id']]; if (strpos($lp, 'x3284') === 0) $q['set'] = '3284'; if ($kb) $q['kb'] = $kb;
+            $eh_next = add_query_arg($q, home_url('/live-typing/')); } if ($eh_next) break; } }
     $players = (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_table() . ' WHERE live_date = %s AND exam = %s AND passage = %s', $L['date'], $L['exam']['slug'], $lp));
 ?>
 <section class="eh-live-hero"><div class="wrap eh-live-hero-in">
@@ -50,7 +59,7 @@ if ($row):
       <div class="eh-panel eh-live-lock done"><span class="eh-live-lock-ic">✅</span>
         <h2>Attempted</h2>
         <p class="muted">You have already typed this passage. Your speed: <b><?php echo (int) $eh_mine['net']; ?> WPM</b> · <?php echo $eh_mine['pass'] ? 'Qualified' : 'Not qualified'; ?>. Each live passage can be typed once, so the ranking stays fair.</p>
-        <div class="eh-live-lock-btns"><a class="btn dark" href="<?php echo esc_url(eh_result_url($eh_mine['id'], $eh_mine['rkey'])); ?>">See my result →</a>
+        <div class="eh-live-lock-btns"><?php if ($eh_next): ?><a class="btn eh-next-btn" href="<?php echo esc_url($eh_next); ?>">अगला पैसेज →</a><?php endif; ?><a class="btn dark" href="<?php echo esc_url(eh_result_url($eh_mine['id'], $eh_mine['rkey'])); ?>">See my result →</a>
         <a class="btn ghost" href="<?php echo esc_url(home_url('/live-typing/')); ?>">Other passages</a></div>
       </div>
     <?php elseif ($open && $L['passage']):
@@ -59,6 +68,8 @@ if ($row):
       if (!empty($L['plist'])) $eh_cfg['passages'] = $L['plist'];
       if ($L['lang'] === 'hi' && in_array($kb, ['krutidev', 'inscript'], true)) $eh_cfg['layout'] = $kb;
       include __DIR__ . '/_test-ui.php';
+      if ($eh_next): ?><a id="eh-next-psg" class="btn eh-next-btn" href="<?php echo esc_url($eh_next); ?>">अगला पैसेज →</a>
+      <script>(function(){var n=document.getElementById('eh-next-psg'),a=document.querySelector('#eh-result .eh-res-actions');if(n&&a)a.insertBefore(n,a.firstChild);})();</script><?php endif;
     else: ?>
       <div class="eh-panel eh-live-closed"><h2><?php echo $now < $L['s'] ? 'Test opens at ' . esc_html($L['start']) : 'Today’s live test is over'; ?></h2>
       <p class="muted">Meanwhile, practise this exam.</p>

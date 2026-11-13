@@ -1538,3 +1538,7 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 .eh-3284-tile span{display:block;font-size:12.5px;font-weight:700;color:#b91c1c;text-transform:uppercase;letter-spacing:.4px}
 .eh-3284-tile b{display:block;font-size:15.5px;font-weight:700;color:#1f1410;line-height:1.45;margin-top:2px}
 @media(max-width:760px){.eh-3284-grid{grid-template-columns:1fr}}
+/* Next passage button after a live test */
+.btn.eh-next-btn{background:linear-gradient(135deg,#16a34a,#0f9f6e);color:#fff!important;border:0;font-weight:800;font-size:16px;padding:12px 22px;box-shadow:0 8px 20px -8px rgba(22,163,74,.6)}
+.btn.eh-next-btn:hover{filter:brightness(1.07)}
+#eh-next-psg:not(.eh-res-actions #eh-next-psg){display:none}
