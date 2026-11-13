@@ -1555,3 +1555,4 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 .eh-3284-tile.eh-3284-eve{border-color:#f59e0b;background:#fffbeb}
 
 .eh-new-at{display:block;margin-top:2px;font-size:11px;font-weight:700;color:#16a34a;white-space:nowrap}
+.eh-lvl.new{background:#dcfce7;color:#166534}

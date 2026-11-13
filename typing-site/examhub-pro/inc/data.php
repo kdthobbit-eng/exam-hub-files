@@ -45,6 +45,8 @@ add_action('init', function () {
 
 function eh_passages($lang = null) {
     $list = json_decode(file_get_contents(EH_DIR . '/data/passages.json'), true) ?: [];
+    /* passages added from the Telegram bot (owner): kept in the database, so a theme update does not remove them */
+    $bot = get_option('eh_bot_passages', []); if (is_array($bot)) foreach ($bot as $b) if (!empty($b['id']) && !empty($b['text'])) $list[] = $b;
     $posts = get_posts(['post_type' => 'eh_passage', 'post_status' => 'publish', 'numberposts' => 300]);
     foreach ($posts as $p) {
         $terms = wp_get_post_terms($p->ID, 'eh_plang', ['fields' => 'slugs']);
@@ -93,9 +95,9 @@ function eh_passage_days($lang, $days = 7) {
     $all = eh_passages($lang);
     $tdate = wp_date('Y-m-d');
     /* practice pool: the regular passages plus Live news passages of past days (today's stay on Live Typing) */
-    $pool = array_values(array_filter($all, function ($p) use ($tdate) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && ($p['level'] ?? '') !== 'S' && (empty($p['day']) || $p['day'] < $tdate || !empty($p['both'])); }));
+    $pool = array_values(array_filter($all, function ($p) use ($tdate) { return empty($p['special']) && empty($p['bot']) && strpos($p['id'], 'p') !== 0 && ($p['level'] ?? '') !== 'S' && (empty($p['day']) || $p['day'] < $tdate || !empty($p['both'])); }));
     /* Super Hard passages are not part of the daily sets: all of them are shown on top of today's list */
-    $super = array_values(array_filter($all, function ($p) use ($tdate) { return ($p['level'] ?? '') === 'S' && empty($p['special']) && ($p['day'] ?? '') <= $tdate; }));
+    $super = array_values(array_filter($all, function ($p) use ($tdate) { return ($p['level'] ?? '') === 'S' && empty($p['special']) && empty($p['bot']) && ($p['day'] ?? '') <= $tdate; }));
     /* 20 passages a day, like Live Typing: 6 Easy, 7 Moderate, 7 Hard (Basic counts as Easy).
        The pool is cut into separate sets of 20, so no passage appears on two days; only as many days are shown as there are sets. */
     $want = ['E' => 6, 'M' => 7, 'H' => 7];
@@ -113,7 +115,10 @@ function eh_passage_days($lang, $days = 7) {
     for ($d = 0; $d < $days && $d < $sets; $d++) {
         $day = $today - $d; $date = gmdate('Y-m-d', $day * 86400); $items = [];
         foreach ($all as $p) if (strpos($p['id'], 'p') === 0 && empty($p['special']) && ($p['date'] ?? '') === $date) $items[] = $p;
-        $items = array_merge($d === 0 ? $super : [], $items, $chunks[(($day % $sets) + $sets) % $sets]);
+        /* bot passages on the day they were added, newest first, on top */
+        $bt = array_values(array_filter($all, function ($p) use ($date) { return !empty($p['bot']) && substr((string) ($p['added'] ?? ''), 0, 10) === $date; }));
+        usort($bt, function ($x, $y) { return strcmp($y['added'], $x['added']); });
+        $items = array_merge($bt, $d === 0 ? $super : [], $items, $chunks[(($day % $sets) + $sets) % $sets]);
         $out[] = ['date' => $date, 'items' => $items];
     }
     return $out;
@@ -156,7 +161,7 @@ function eh_live_schedule($want = '') {
             foreach ($every as $p) if (!empty($p['day']) && $p['day'] <= $date && $p['day'] > $nd) $nd = $p['day'];
             if ($want && $want <= $date) foreach ($every as $p) if (($p['day'] ?? '') === $want) { $nd = $want; break; }
             if ($want === '3284') { $nd = '3284'; $e['name'] = 'UPSSSC 3284 Junior Assistant ' . $x[2] . ' Typing'; } /* exam-pattern set: easy matter like the real 3284 typing test */
-            $all = array_values(array_filter($every, function ($p) use ($nd) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && ($nd ? ($p['day'] ?? '') === $nd : empty($p['day'])); }));
+            $all = array_values(array_filter($every, function ($p) use ($nd) { return empty($p['special']) && strpos($p['id'], 'p') !== 0 && (!empty($p['bot']) || ($nd ? ($p['day'] ?? '') === $nd : empty($p['day']))); /* bot passages: in every list (Live + 3284) */ }));
             $need = max((int) ceil($e['target'] * 1.3), (int) $e['minutes'] * 720); /* enough text for well over 100 WPM */
             $no = 0;
             foreach ($groups as $label => $lv) {
@@ -175,7 +180,7 @@ function eh_live_schedule($want = '') {
         $mixed = [];
         /* Super Hard passages stay on top of the list (English first, then Hindi) */
         foreach (['en', 'hi'] as $lg) foreach ($out as $r) if ($r['lang'] === $lg && $r['level'] === 'Super Hard') $mixed[] = $r;
-        foreach ($out as $r) if ($r['level'] === 'Evening Shift') $mixed[] = $r; /* 3284: latest shift passages on top */
+        foreach ($out as $r) if ($r['level'] === 'Evening Shift' || $r['level'] === 'New') $mixed[] = $r; /* 3284: latest shift passages on top */
         foreach (['en', 'hi'] as $lg) {
             $by = [];
             foreach ($out as $r) if ($r['lang'] === $lg) $by[$r['level']][] = $r;

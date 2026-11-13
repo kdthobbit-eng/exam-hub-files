@@ -131,7 +131,7 @@ function eh_tgb_menu_kb($role) {
         [['text' => '🔴 3284 Pattern Passage', 'callback_data' => 'p3284']],
         [['text' => '👤 Sign-ups', 'callback_data' => 'users'], ['text' => '👥 Admins', 'callback_data' => 'admins']],
     ];
-    if ($role === 'owner') $kb[] = [['text' => '➕ Add admin', 'callback_data' => 'add'], ['text' => '🔄 Update theme', 'callback_data' => 'upd']];
+    if ($role === 'owner') { $kb[] = [['text' => '📝 पैसेज जोड़ें', 'callback_data' => 'pa'], ['text' => '📋 मेरे पैसेज', 'callback_data' => 'pl']]; $kb[] = [['text' => '➕ Add admin', 'callback_data' => 'add'], ['text' => '🔄 Update theme', 'callback_data' => 'upd']]; }
     return ['inline_keyboard' => $kb];
 }
 function eh_tgb_back_kb($again) { return ['inline_keyboard' => [[['text' => '🔄 Refresh', 'callback_data' => $again], ['text' => '☰ Menu', 'callback_data' => 'menu']]]]; }
@@ -146,6 +146,43 @@ function eh_tgb_admins_view($role) {
     foreach (eh_tgb_extra_ids() as $id) if (!isset(eh_tgb_admins()[$id])) $o .= '• ID <code>' . esc_html($id) . "</code> (WP admin से जोड़ा)\n";
     $kb[] = [['text' => '☰ Menu', 'callback_data' => 'menu']];
     return [$o, ['inline_keyboard' => $kb]];
+}
+
+/* ---------- passages from the bot (owner only) ---------- */
+function eh_tgb_pstate($id, $v = null) {
+    $st = get_option('eh_tgb_pstate', []); if (!is_array($st)) $st = [];
+    if ($v === null) return $st[$id] ?? null;
+    if ($v === false) unset($st[$id]); else $st[$id] = $v + ['t' => time()];
+    update_option('eh_tgb_pstate', $st, false); return $v;
+}
+function eh_tgb_lvname($l) { return ['E' => 'Easy', 'M' => 'Moderate', 'H' => 'Hard', 'S' => 'Super Hard'][$l] ?? $l; }
+function eh_tgb_pclean($t) {
+    $t = str_replace(["\r\n", "\r", "\n", "\t", "\u{00A0}", "\u{200B}"], ' ', (string) $t);
+    $t = str_replace(['“', '”', '‘', '’'], ['"', '"', "'", "'"], $t);
+    return trim(preg_replace('/ {2,}/u', ' ', $t));
+}
+function eh_tgb_pwarn($lang, $t) {
+    $w = [];
+    $hi = preg_match_all('/[\x{0900}-\x{097F}]/u', $t); $lat = preg_match_all('/[A-Za-z]/', $t);
+    if ($lang === 'hi' && $hi < 20) $w[] = 'यह हिंदी पैसेज नहीं लग रहा';
+    if ($lang === 'en' && $hi > 0) $w[] = 'English पैसेज में हिंदी अक्षर हैं';
+    if ($lang === 'hi' && $lat) $w[] = 'हिंदी में ' . $lat . ' अंग्रेज़ी अक्षर हैं';
+    if ($lang === 'hi' && preg_match('/[";%₹]/u', $t)) $w[] = 'हिंदी में " ; % ₹ जैसे चिह्न हैं (Krutidev में दिक्कत)';
+    return $w;
+}
+function eh_tgb_purge() { if (function_exists('wp_cache_flush')) wp_cache_flush(); do_action('litespeed_purge_all'); if (function_exists('rocket_clean_domain')) rocket_clean_domain(); if (function_exists('w3tc_flush_all')) w3tc_flush_all(); }
+function eh_tgb_plist_view() {
+    $bot = get_option('eh_bot_passages', []); if (!is_array($bot)) $bot = [];
+    usort($bot, function ($x, $y) { return strcmp($y['added'] ?? '', $x['added'] ?? ''); });
+    $t = '📋 <b>Bot से डाले गए पैसेज</b> (' . count($bot) . ')' . "\n";
+    $kb = [];
+    foreach (array_slice($bot, 0, 15) as $i => $p) {
+        $t .= "\n" . ($i + 1) . '. ' . ($p['lang'] === 'hi' ? '🇮🇳' : '🇬🇧') . ' <b>' . esc_html(mb_substr($p['title'], 0, 40)) . '</b> · ' . eh_tgb_lvname($p['level']) . ' · ' . (int) $p['words'] . ' शब्द · ' . esc_html(date('d M h:i A', strtotime($p['added'])));
+        $kb[] = [['text' => '❌ ' . ($i + 1) . '. ' . mb_substr($p['title'], 0, 28), 'callback_data' => 'pd:' . $p['id']]];
+    }
+    if (!$bot) $t .= "\nअभी कोई नहीं।";
+    $kb[] = [['text' => '📝 पैसेज जोड़ें', 'callback_data' => 'pa'], ['text' => '☰ Menu', 'callback_data' => 'menu']];
+    return [$t, ['inline_keyboard' => $kb]];
 }
 
 /* ---------- webhook ---------- */
@@ -175,6 +212,38 @@ function eh_tgb_hook(WP_REST_Request $req) {
             update_option('eh_tgb_join', ['c' => $code, 'x' => time() + 600], false);
             $text = '➕ <b>नया admin जोड़ें</b>' . "\n\nयह code उस आदमी को भेजिए। वह इस बॉट में यह लिखे:\n\n<code>/join " . $code . "</code>\n\nCode 10 मिनट चलेगा और एक ही बार काम करेगा।";
             $kb = eh_tgb_back_kb('menu');
+        } elseif ($data === 'pa' && $role === 'owner') {
+            eh_tgb_pstate($id, ['s' => 'lang']);
+            $text = '📝 <b>नया पैसेज</b>' . "\n\nभाषा चुनिए:"; $kb = ['inline_keyboard' => [[['text' => '🇬🇧 English', 'callback_data' => 'pa:l:en'], ['text' => '🇮🇳 हिंदी', 'callback_data' => 'pa:l:hi']], [['text' => '❌ रद्द', 'callback_data' => 'pa:x']]]];
+        } elseif (strpos($data, 'pa:l:') === 0 && $role === 'owner') {
+            $st = eh_tgb_pstate($id) ?: []; $st['lang'] = substr($data, 5) === 'hi' ? 'hi' : 'en'; $st['s'] = 'level'; eh_tgb_pstate($id, $st);
+            $text = '📝 भाषा: <b>' . ($st['lang'] === 'hi' ? 'हिंदी' : 'English') . '</b>' . "\n\nस्तर चुनिए:";
+            $kb = ['inline_keyboard' => [[['text' => '🟢 Easy', 'callback_data' => 'pa:v:E'], ['text' => '🟡 Moderate', 'callback_data' => 'pa:v:M']], [['text' => '🔴 Hard', 'callback_data' => 'pa:v:H'], ['text' => '🟣 Super Hard', 'callback_data' => 'pa:v:S']], [['text' => '❌ रद्द', 'callback_data' => 'pa:x']]]];
+        } elseif (strpos($data, 'pa:v:') === 0 && $role === 'owner') {
+            $st = eh_tgb_pstate($id) ?: []; $v = substr($data, 5); $st['level'] = in_array($v, ['E', 'M', 'H', 'S'], true) ? $v : 'M'; $st['s'] = 'title'; eh_tgb_pstate($id, $st);
+            $text = '📝 ' . ($st['lang'] === 'hi' ? 'हिंदी' : 'English') . ' · <b>' . eh_tgb_lvname($st['level']) . '</b>' . "\n\nअब पैसेज का <b>शीर्षक</b> लिखकर भेजिए।"; $kb = ['inline_keyboard' => [[['text' => '❌ रद्द', 'callback_data' => 'pa:x']]]];
+        } elseif ($data === 'pa:x' && $role === 'owner') {
+            eh_tgb_pstate($id, false); $text = '❌ रद्द कर दिया।' . "\n\n" . eh_tgb_menu_text(); $kb = eh_tgb_menu_kb($role);
+        } elseif ($data === 'pa:ok' && $role === 'owner') {
+            $st = eh_tgb_pstate($id);
+            if (!$st || empty($st['text'])) { $text = 'कुछ नहीं मिला, फिर से शुरू कीजिए।'; $kb = eh_tgb_menu_kb($role); }
+            else {
+                $bot = get_option('eh_bot_passages', []); if (!is_array($bot)) $bot = [];
+                $pid = 'bt' . strtolower(base_convert((string) time(), 10, 36)) . $st['lang'];
+                $bot[] = ['id' => $pid, 'lang' => $st['lang'], 'title' => $st['title'], 'text' => $st['text'], 'words' => count(preg_split('/\s+/u', $st['text'])), 'chars' => mb_strlen($st['text']),
+                    'level' => $st['level'], 'day' => '', 'added' => wp_date('Y-m-d H:i:s'), 'bot' => true, 'tag' => 'New'];
+                update_option('eh_bot_passages', $bot, false); eh_tgb_pstate($id, false); eh_tgb_purge();
+                $text = '✅ <b>पैसेज वेबसाइट पर डाल दिया</b>' . "\n\n<b>" . esc_html($st['title']) . '</b> · ' . ($st['lang'] === 'hi' ? 'हिंदी' : 'English') . ' · ' . eh_tgb_lvname($st['level']) . "\n\nअब यह Live Typing, 3284 सेक्शन और All Exams (सभी " . ($st['lang'] === 'hi' ? 'हिंदी' : 'English') . " exams) में सबसे ऊपर है।\n🔗 " . esc_url(home_url('/live-typing/'));
+                $kb = ['inline_keyboard' => [[['text' => '📝 एक और', 'callback_data' => 'pa'], ['text' => '📋 मेरे पैसेज', 'callback_data' => 'pl']], [['text' => '☰ Menu', 'callback_data' => 'menu']]]];
+            }
+        } elseif ($data === 'pl' && $role === 'owner') {
+            [$text, $kb] = eh_tgb_plist_view();
+        } elseif (strpos($data, 'pd:') === 0 && $role === 'owner') {
+            $did = substr($data, 3); $text = '⚠️ यह पैसेज वेबसाइट से हटाना है?'; $kb = ['inline_keyboard' => [[['text' => '✅ हाँ, हटाओ', 'callback_data' => 'pdy:' . $did], ['text' => '↩ नहीं', 'callback_data' => 'pl']]]];
+        } elseif (strpos($data, 'pdy:') === 0 && $role === 'owner') {
+            $did = substr($data, 4); $bot = get_option('eh_bot_passages', []); if (!is_array($bot)) $bot = [];
+            $bot = array_values(array_filter($bot, function ($p) use ($did) { return ($p['id'] ?? '') !== $did; })); update_option('eh_bot_passages', $bot, false); eh_tgb_purge();
+            $note = 'हटा दिया'; [$text, $kb] = eh_tgb_plist_view();
         } elseif ($data === 'upd' && $role === 'owner') {
             $cur = substr((string) get_option('eh_deployed_sha', '-'), 0, 7);
             $api = wp_remote_get('https://api.github.com/repos/kdthobbit-eng/exam-hub-files/commits/main', ['timeout' => 15, 'headers' => ['User-Agent' => 'exam-hub-updater', 'Accept' => 'application/vnd.github+json']]);
@@ -226,6 +295,24 @@ function eh_tgb_hook(WP_REST_Request $req) {
     }
     $role = eh_tgb_role($id);
     if (!$role) { $send('⛔ आपको इस बॉट की अनुमति नहीं है।' . "\nआपकी Telegram ID: <code>" . esc_html($id) . '</code>'); return ['ok' => true]; }
+    $pst = $role === 'owner' && strpos($txt, '/') !== 0 ? eh_tgb_pstate($id) : null;
+    if ($pst && time() - (int) ($pst['t'] ?? 0) < 3600 && in_array($pst['s'] ?? '', ['title', 'text'], true)) {
+        $cx = ['inline_keyboard' => [[['text' => '❌ रद्द', 'callback_data' => 'pa:x']]]];
+        if ($pst['s'] === 'title') {
+            $pst['title'] = mb_substr(eh_tgb_pclean($txt), 0, 90); $pst['s'] = 'text'; eh_tgb_pstate($id, $pst);
+            $send('📝 शीर्षक: <b>' . esc_html($pst['title']) . '</b>' . "\n\nअब पूरा <b>पैसेज paste</b> करके भेजिए।", $cx);
+        } else {
+            $p = eh_tgb_pclean($txt); $w = count(preg_split('/\s+/u', $p));
+            if ($w < 40) { $send('⚠️ पैसेज बहुत छोटा है (' . $w . ' शब्द)। कम से कम 40 शब्द भेजिए।', $cx); return ['ok' => true]; }
+            $dup = false; $k = mb_substr($p, 0, 60); foreach (eh_passages() as $q2) if (mb_substr($q2['text'], 0, 60) === $k) { $dup = true; break; }
+            if ($dup) { $send('⚠️ यह पैसेज पहले से वेबसाइट पर है। दूसरा भेजिए।', $cx); return ['ok' => true]; }
+            $pst['text'] = $p; $pst['s'] = 'confirm'; eh_tgb_pstate($id, $pst);
+            $warn = eh_tgb_pwarn($pst['lang'], $p);
+            $send('👀 <b>झलक</b>' . "\n\n<b>" . esc_html($pst['title']) . '</b> · ' . ($pst['lang'] === 'hi' ? 'हिंदी' : 'English') . ' · ' . eh_tgb_lvname($pst['level']) . "\n" . $w . ' शब्द · ' . mb_strlen($p) . " key strokes\n\n<i>" . esc_html(mb_substr($p, 0, 220)) . '…</i>' . ($warn ? "\n\n⚠️ " . esc_html(implode(' · ', $warn)) : '') . "\n\nवेबसाइट पर डालें?",
+                ['inline_keyboard' => [[['text' => '✅ हाँ, डालो', 'callback_data' => 'pa:ok'], ['text' => '❌ रद्द', 'callback_data' => 'pa:x']]]]);
+        }
+        return ['ok' => true];
+    }
     if ($txt === '/today') $send(eh_tgb_stats('today'), eh_tgb_back_kb('r:today'));
     elseif ($txt === '/hour') $send(eh_tgb_stats('hour'), eh_tgb_back_kb('r:hour'));
     elseif ($txt === '/all') $send(eh_tgb_stats('all'), eh_tgb_back_kb('r:all'));
