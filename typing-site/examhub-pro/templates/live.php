@@ -104,13 +104,13 @@ if ($row):
   <div class="eh-lt-head<?php echo $eh_set ? ' eh-lt-3284' : ''; ?>"><div class="eh-lt-top"><div class="eh-lt-title">
   <?php if ($eh_set): ?>
   <p class="eh-lt-kick"><span class="eh-lt-dot"></span> 3284 Pattern · <a href="<?php echo esc_url(home_url('/live-typing/')); ?>">← Live Typing</a></p>
-  <h1 class="eh-live-h">3284 Pattern Passage</h1>
-  <p class="eh-lt-sub">UPSSSC Junior Assistant 3284 · English + हिंदी (Krutidev / Mangal)</p></div>
+  <h1 class="eh-live-h">UPSSSC 3284 Junior Assistant</h1>
+  <p class="eh-lt-sub">Pattern Passage · English + हिंदी (Krutidev / Mangal)</p></div>
   <?php else: ?>
   <p class="eh-lt-kick"><span class="eh-lt-dot"></span> Live today · <?php echo esc_html(eh_opt('brand_typing') ?: eh_opt('brand')); ?></p>
   <h1 class="eh-live-h">UPSSSC Junior Assistant Live Typing</h1>
   <p class="eh-lt-sub">Same passage for everyone · open all day · ranking by net speed</p>
-  <a class="eh-3284-cta" href="<?php echo esc_url(add_query_arg('set', '3284', home_url('/live-typing/'))); ?>">🔴 3284 Pattern Passage →</a></div>
+  <a class="eh-3284-cta" href="<?php echo esc_url(add_query_arg('set', '3284', home_url('/live-typing/'))); ?>">🔴 UPSSSC 3284 Junior Assistant Pattern Passage →</a></div>
   <?php endif; ?>
   <?php $eh_news = ''; foreach ($S as $x) if (!empty($x['news'])) $eh_news = $x['news'];
   $eh_fd = function ($d) { return date_i18n('j M Y', strtotime($d)); };
@@ -160,7 +160,7 @@ if ($row):
   <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-s" data-l="superhard">Super Hard</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
   <?php if ($eh_set): ?>
   <div class="eh-3284-info">
-    <h3>📋 3284 Typing परीक्षा में क्या आया <small>(परीक्षा देकर आए अभ्यर्थियों के अनुसार)</small></h3>
+    <h3>📋 UPSSSC 3284 Junior Assistant Typing परीक्षा में क्या आया <small>(परीक्षा देकर आए अभ्यर्थियों के अनुसार)</small></h3>
     <ul>
       <li>⌨️ <b>कीबोर्ड:</b> HP K100, सबके लिए एक जैसा</li>
       <li>🇬🇧 <b>English:</b> मैटर आसान, शब्द ज़्यादातर 5-6 अक्षर के, बड़े शब्द नहीं, अंक लगभग नहीं। विषय: <b>नेताजी सुभाष चंद्र बोस</b></li>
