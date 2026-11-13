@@ -4907,7 +4907,8 @@
   "chars": 1045,
   "level": "M",
   "day": "2026-11-13",
-  "both": true
+  "both": true,
+  "added": "2026-11-13 23:10"
  },
  {
   "id": "hx4en02",
@@ -4918,7 +4919,8 @@
   "chars": 1003,
   "level": "M",
   "day": "2026-11-13",
-  "both": true
+  "both": true,
+  "added": "2026-11-13 23:10"
  },
  {
   "id": "hx4en03",
@@ -4929,7 +4931,8 @@
   "chars": 969,
   "level": "M",
   "day": "2026-11-13",
-  "both": true
+  "both": true,
+  "added": "2026-11-13 23:10"
  },
  {
   "id": "hx4hi01",
@@ -4940,7 +4943,8 @@
   "chars": 823,
   "level": "M",
   "day": "2026-11-13",
-  "both": true
+  "both": true,
+  "added": "2026-11-13 23:10"
  },
  {
   "id": "hx4hi02",
@@ -4951,7 +4955,8 @@
   "chars": 740,
   "level": "M",
   "day": "2026-11-13",
-  "both": true
+  "both": true,
+  "added": "2026-11-13 23:10"
  },
  {
   "id": "shen1",
@@ -5802,7 +5807,8 @@
   "chars": 1063,
   "level": "M",
   "day": "3284",
-  "tag": "Evening Shift"
+  "tag": "Evening Shift",
+  "added": "2026-11-13 21:05"
  },
  {
   "id": "x3284ene02",
@@ -5813,7 +5819,8 @@
   "chars": 1055,
   "level": "M",
   "day": "3284",
-  "tag": "Evening Shift"
+  "tag": "Evening Shift",
+  "added": "2026-11-13 21:05"
  },
  {
   "id": "x3284ene03",
@@ -5824,7 +5831,8 @@
   "chars": 1053,
   "level": "M",
   "day": "3284",
-  "tag": "Evening Shift"
+  "tag": "Evening Shift",
+  "added": "2026-11-13 21:05"
  },
  {
   "id": "x3284hi24",
@@ -5985,7 +5993,8 @@
   "chars": 991,
   "level": "M",
   "day": "3284",
-  "tag": "Evening Shift"
+  "tag": "Evening Shift",
+  "added": "2026-11-13 20:20"
  },
  {
   "id": "x3284hie02",
@@ -5996,7 +6005,8 @@
   "chars": 874,
   "level": "M",
   "day": "3284",
-  "tag": "Evening Shift"
+  "tag": "Evening Shift",
+  "added": "2026-11-13 20:20"
  },
  {
   "id": "x3284hie03",
@@ -6007,7 +6017,8 @@
   "chars": 836,
   "level": "M",
   "day": "3284",
-  "tag": "Evening Shift"
+  "tag": "Evening Shift",
+  "added": "2026-11-13 20:20"
  },
  {
   "id": "x3284hie04",
@@ -6018,7 +6029,8 @@
   "chars": 878,
   "level": "M",
   "day": "3284",
-  "tag": "Evening Shift"
+  "tag": "Evening Shift",
+  "added": "2026-11-13 20:20"
  },
  {
   "id": "x3284hie05",
@@ -6029,7 +6041,8 @@
   "chars": 918,
   "level": "M",
   "day": "3284",
-  "tag": "Evening Shift"
+  "tag": "Evening Shift",
+  "added": "2026-11-13 20:20"
  },
  {
   "id": "x3284hie06",
@@ -6040,6 +6053,7 @@
   "chars": 887,
   "level": "M",
   "day": "3284",
-  "tag": "Evening Shift"
+  "tag": "Evening Shift",
+  "added": "2026-11-13 20:20"
  }
 ]

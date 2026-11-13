@@ -1553,3 +1553,5 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 /* 3284 evening shift */
 .eh-lvl.eveningshift{background:#fde68a;color:#7c2d12;white-space:nowrap}
 .eh-3284-tile.eh-3284-eve{border-color:#f59e0b;background:#fffbeb}
+
+.eh-new-at{display:block;margin-top:2px;font-size:11px;font-weight:700;color:#16a34a;white-space:nowrap}

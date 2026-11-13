@@ -209,7 +209,7 @@ if ($row):
       <td><?php echo !empty($r['level']) ? '<span class="eh-lvl ' . esc_attr(str_replace(' ', '', strtolower($r['level']))) . '">' . esc_html($r['level']) . '</span>' : '—'; ?></td>
       <td class="small"><?php echo esc_html($r['passage']['title'] ?? '—'); ?><br><span class="muted"><?php echo $r['passage'] ? number_format_i18n($r['chars'] ?? $r['passage']['chars']) . ' key strokes' : ''; ?></span></td>
       <td><?php echo $r['lang'] === 'hi' ? 'Hindi<br><span class="muted small">Krutidev / Mangal Inscript</span>' : 'English'; ?></td>
-      <td><?php echo !empty($r['allday']) ? 'All day' : esc_html(gmdate('h:i A', $r['s'] * 60) . ' – ' . gmdate('h:i A', $r['e'] * 60)); ?></td>
+      <td><?php echo !empty($r['allday']) ? 'All day' : esc_html(gmdate('h:i A', $r['s'] * 60) . ' – ' . gmdate('h:i A', $r['e'] * 60)); ?><?php if (!empty($r['passage']['added']) && ($at = strtotime($r['passage']['added'])) && time() - ($at - 19800) < 3 * 86400) echo '<small class="eh-new-at">🆕 ' . esc_html(date('d M, h:i A', $at)) . '</small>'; ?></td>
       <?php $mine = $eh_done[$r['exam']['slug'] . '|' . ($r['passage']['id'] ?? '')] ?? null; ?>
       <td><?php echo $mine ? '<span class="pill eh-att">✓ Attempted</span>' : ($st === 'live' ? '<span class="pill ok">● Open</span>' : ($st === 'soon' ? '<span class="pill">Soon</span>' : '<span class="pill no">Closed</span>')); ?></td>
       <td class="eh-live-act"><?php if ($mine): ?>

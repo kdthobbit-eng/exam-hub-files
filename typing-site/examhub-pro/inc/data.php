@@ -181,6 +181,10 @@ function eh_live_schedule($want = '') {
             foreach ($out as $r) if ($r['lang'] === $lg) $by[$r['level']][] = $r;
             for ($i = 0, $more = true; $more; $i++) { $more = false; foreach (['Easy', 'Moderate', 'Hard', '3284 Pattern'] as $lv) if (isset($by[$lv][$i])) { $mixed[] = $by[$lv][$i]; $more = true; } }
         }
+        /* newest added passages (date + time) on top, latest first */
+        $new = []; $old = [];
+        foreach ($mixed as $k => $r) { if (!empty($r['passage']['added'])) $new[] = [$r['passage']['added'], $k, $r]; else $old[] = $r; }
+        if ($new) { usort($new, function ($x, $y) { return strcmp($y[0], $x[0]) ?: ($x[1] - $y[1]); }); $mixed = array_merge(array_column($new, 2), $old); }
         foreach ($mixed as $i => &$r) $r['no'] = $i + 1; unset($r);
         return $mixed;
     }
