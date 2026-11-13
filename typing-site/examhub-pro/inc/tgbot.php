@@ -131,7 +131,7 @@ function eh_tgb_menu_kb($role) {
         [['text' => '🔴 3284 Pattern Passage', 'callback_data' => 'p3284']],
         [['text' => '👤 Sign-ups', 'callback_data' => 'users'], ['text' => '👥 Admins', 'callback_data' => 'admins']],
     ];
-    if ($role === 'owner') $kb[] = [['text' => '➕ Add admin', 'callback_data' => 'add']];
+    if ($role === 'owner') $kb[] = [['text' => '➕ Add admin', 'callback_data' => 'add'], ['text' => '🔄 Update theme', 'callback_data' => 'upd']];
     return ['inline_keyboard' => $kb];
 }
 function eh_tgb_back_kb($again) { return ['inline_keyboard' => [[['text' => '🔄 Refresh', 'callback_data' => $again], ['text' => '☰ Menu', 'callback_data' => 'menu']]]]; }
@@ -175,12 +175,29 @@ function eh_tgb_hook(WP_REST_Request $req) {
             update_option('eh_tgb_join', ['c' => $code, 'x' => time() + 600], false);
             $text = '➕ <b>नया admin जोड़ें</b>' . "\n\nयह code उस आदमी को भेजिए। वह इस बॉट में यह लिखे:\n\n<code>/join " . $code . "</code>\n\nCode 10 मिनट चलेगा और एक ही बार काम करेगा।";
             $kb = eh_tgb_back_kb('menu');
+        } elseif ($data === 'upd' && $role === 'owner') {
+            $cur = substr((string) get_option('eh_deployed_sha', '-'), 0, 7);
+            $api = wp_remote_get('https://api.github.com/repos/kdthobbit-eng/exam-hub-files/commits/main', ['timeout' => 15, 'headers' => ['User-Agent' => 'exam-hub-updater', 'Accept' => 'application/vnd.github+json']]);
+            $j = json_decode(wp_remote_retrieve_body($api), true); $new = is_array($j) && !empty($j['sha']) ? substr($j['sha'], 0, 7) : '?';
+            $msg = is_array($j) && !empty($j['commit']['message']) ? strtok($j['commit']['message'], "\n") : '';
+            $text = '🔄 <b>Theme Update</b>' . "\n\nअभी लगी version: <code>" . esc_html($cur) . "</code>\nGitHub पर नई: <code>" . esc_html($new) . '</code>' . ($msg ? "\n<i>" . esc_html(mb_substr($msg, 0, 120)) . '</i>' : '') . "\n\n" . ($cur === $new ? '✅ वेबसाइट पहले से नई version पर है।' : 'Update करना है?');
+            $kb = ['inline_keyboard' => [[['text' => '✅ हाँ, Update करो', 'callback_data' => 'upd:go']], [['text' => '☰ Menu', 'callback_data' => 'menu']]]];
+        } elseif ($data === 'upd:go' && $role === 'owner') {
+            if (get_transient('eh_tgb_upd_lock')) { $note = 'Update पहले से चल रहा है…'; }
+            else {
+                set_transient('eh_tgb_upd_lock', 1, 180);
+                eh_tgb_api('answerCallbackQuery', ['callback_query_id' => $q['id'], 'text' => 'Update शुरू…']); $q['id'] = '';
+                $r = function_exists('eh_self_update') ? eh_self_update() : 'Updater नहीं मिला';
+                delete_transient('eh_tgb_upd_lock');
+                $text = (strpos($r, 'OK') === 0 ? '✅ <b>Theme update हो गई</b>' . "\nVersion: <code>" . esc_html(substr($r, 3)) . '</code>' : '❌ <b>Update नहीं हुआ</b>' . "\n" . esc_html($r));
+                $kb = eh_tgb_back_kb('upd');
+            }
         } elseif (strpos($data, 'del:') === 0 && $role === 'owner') {
             $a = eh_tgb_admins(); $did = substr($data, 4);
             if (isset($a[$did]) && $a[$did]['r'] !== 'owner') { $note = $a[$did]['n'] . ' हटा दिए गए'; unset($a[$did]); update_option('eh_tgb_admins', $a, false); }
             [$text, $kb] = eh_tgb_admins_view($role);
         }
-        eh_tgb_api('answerCallbackQuery', ['callback_query_id' => $q['id'], 'text' => $note]);
+        if ($q['id'] !== '') eh_tgb_api('answerCallbackQuery', ['callback_query_id' => $q['id'], 'text' => $note]);
         if ($text !== '') eh_tgb_api('editMessageText', ['chat_id' => $chat, 'message_id' => $mid, 'text' => $text . "\n\n<i>" . esc_html(wp_date('d M, h:i:s A')) . '</i>', 'parse_mode' => 'HTML', 'reply_markup' => $kb]);
         return ['ok' => true];
     }
@@ -213,6 +230,7 @@ function eh_tgb_hook(WP_REST_Request $req) {
     elseif ($txt === '/hour') $send(eh_tgb_stats('hour'), eh_tgb_back_kb('r:hour'));
     elseif ($txt === '/all') $send(eh_tgb_stats('all'), eh_tgb_back_kb('r:all'));
     elseif ($txt === '/3284') $send(eh_tgb_3284(), eh_tgb_back_kb('p3284'));
+    elseif ($txt === '/update' && $role === 'owner') $send('🔄 Theme update के लिए नीचे बटन दबाइए।', ['inline_keyboard' => [[['text' => '🔄 Update theme', 'callback_data' => 'upd']]]]);
     else $send(eh_tgb_menu_text(), eh_tgb_menu_kb($role));
     return ['ok' => true];
 }
@@ -231,7 +249,7 @@ add_action('admin_post_eh_tgb_save', function () {
         if (!get_option('eh_tgb_secret')) update_option('eh_tgb_secret', wp_generate_password(40, false), false);
         if (!get_option('eh_tgb_since')) update_option('eh_tgb_since', current_time('mysql'), false);
         $r = eh_tgb_api('setWebhook', ['url' => rest_url('eh/v1/tgbot'), 'secret_token' => get_option('eh_tgb_secret'), 'allowed_updates' => ['message', 'callback_query'], 'drop_pending_updates' => true]);
-        eh_tgb_api('setMyCommands', ['commands' => [['command' => 'start', 'description' => 'Menu'], ['command' => 'today', 'description' => 'आज के आँकड़े'], ['command' => 'hour', 'description' => 'पिछला 1 घंटा'], ['command' => 'all', 'description' => 'शुरू से अब तक'], ['command' => '3284', 'description' => '3284 Pattern Passage']]]);
+        eh_tgb_api('setMyCommands', ['commands' => [['command' => 'start', 'description' => 'Menu'], ['command' => 'today', 'description' => 'आज के आँकड़े'], ['command' => 'hour', 'description' => 'पिछला 1 घंटा'], ['command' => 'all', 'description' => 'शुरू से अब तक'], ['command' => '3284', 'description' => '3284 Pattern Passage'], ['command' => 'update', 'description' => 'Theme update (owner)']]]);
         $msg = !empty($r['ok']) ? 'connected' : 'fail';
     } elseif ($do === 'ids') {
         update_option('eh_tgb_ids', sanitize_textarea_field(wp_unslash($_POST['ids'] ?? '')), false); $msg = 'saved';
