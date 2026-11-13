@@ -3,7 +3,7 @@
   <h1>All Typing Exams</h1><p class="muted"><?php echo count($exams); ?> exams. Pick yours and start a test.</p>
 </div></section>
 <section class="wrap eh-section">
-  <div class="eh-3284-band"><div><b>🔴 UPSSSC 3284 Junior Assistant Pattern Passage</b><span>English + हिंदी · परीक्षा में क्या आया, सब हिंदी में</span></div><a class="go" href="<?php echo esc_url(add_query_arg('set', '3284', home_url('/live-typing/'))); ?>">अभी टाइप करें →</a></div>
+  <div class="eh-3284-band"><div><b>🔴 UPSSSC 3284 Junior Assistant Pattern Passage</b><span>परीक्षा केंद्र से लौटे अभ्यर्थियों की समीक्षा पर आधारित · English + हिंदी · परीक्षा में क्या आया, सब हिंदी में</span></div><a class="go" href="<?php echo esc_url(add_query_arg('set', '3284', home_url('/live-typing/'))); ?>">अभी टाइप करें →</a></div>
   <div class="eh-filters">
     <input id="eh-exam-search" type="search" placeholder="Search exams… e.g. SSC, High Court, UPSSSC" autocomplete="off">
     <select id="eh-f-cat"><option value="">All Category</option><?php foreach (['court', 'central', 'central-org', 'state'] as $c) echo '<option value="' . $c . '">' . esc_html(eh_cat_label($c)) . '</option>'; ?></select>

@@ -1527,3 +1527,4 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 .eh-3284-t th{width:13%;background:#fdf8f8;color:#7f1d1d;font-weight:700;white-space:nowrap}
 .eh-3284-t td{color:#2a1a10;font-weight:500;border-right:1px solid #f3e3e3}.eh-3284-t td:last-child{border-right:0}
 @media(max-width:760px){.eh-3284-t,.eh-3284-t tbody,.eh-3284-t tr{display:block}.eh-3284-t tr{display:grid;grid-template-columns:110px 1fr}.eh-3284-t th,.eh-3284-t td{width:auto;border-right:0;white-space:normal}.eh-3284-t td[colspan]{grid-column:2}}
+.eh-3284-cta{flex-wrap:wrap}.eh-3284-cta small{flex-basis:100%;font-size:12.5px;font-weight:600;opacity:.92}
