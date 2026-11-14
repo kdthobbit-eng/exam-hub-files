@@ -37,6 +37,10 @@ public class MainActivity extends Activity {
     private WebSocket ws;
     private boolean wantOn = false, connected = false;
     private ValueCallback<Uri[]> fileCb;
+    private WebView chat;
+    private LinearLayout chatBox;
+    private View splitter;
+    private LinearLayout rootLayout;
 
     // ---------------------------------------------------------------- UI
     @Override protected void onCreate(Bundle b) {
@@ -69,6 +73,11 @@ public class MainActivity extends Activity {
         tabBtn.setOnClickListener(v -> tabDialog());
         bar.addView(tabBtn);
 
+        TextView chatBtn = new TextView(this);
+        chatBtn.setText("💬"); chatBtn.setTextSize(20); chatBtn.setPadding(10 * dp, 0, 4 * dp, 0);
+        chatBtn.setOnClickListener(v -> toggleChat());
+        bar.addView(chatBtn);
+
         claudeSw = new Switch(this);
         claudeSw.setText("Claude"); claudeSw.setPadding(8 * dp, 0, 4 * dp, 0);
         claudeSw.setOnCheckedChangeListener((v, on) -> setClaude(on));
@@ -86,6 +95,26 @@ public class MainActivity extends Activity {
 
         holder = new FrameLayout(this);
         root.addView(holder, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1));
+
+        splitter = new View(this);
+        splitter.setBackgroundColor(0xFF6366F1);
+        splitter.setVisibility(View.GONE);
+        root.addView(splitter, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 14 * dp));
+        splitter.setOnTouchListener((v, ev) -> {
+            if (ev.getAction() == MotionEvent.ACTION_MOVE || ev.getAction() == MotionEvent.ACTION_UP) {
+                int total = rootLayout.getHeight();
+                int[] loc = new int[2]; rootLayout.getLocationOnScreen(loc);
+                int h = (int) (total - (ev.getRawY() - loc[1]));
+                h = Math.max(total / 6, Math.min(h, total * 5 / 6));
+                chatBox.getLayoutParams().height = h; chatBox.requestLayout();
+                if (ev.getAction() == MotionEvent.ACTION_UP) prefs.edit().putFloat("chatFrac", h / (float) total).apply();
+            }
+            return true;
+        });
+        chatBox = new LinearLayout(this);
+        chatBox.setVisibility(View.GONE);
+        root.addView(chatBox, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
+        rootLayout = root;
         setContentView(root);
 
         Uri data = getIntent().getData();
@@ -145,6 +174,58 @@ public class MainActivity extends Activity {
                 .setPositiveButton("+ Naya tab", (d, w) -> newTab(prefs.getString("home", "https://www.google.com")))
                 .setNeutralButton("Ye tab band karo", (d, w) -> closeTab(cur))
                 .show();
+    }
+
+    private void toggleChat() {
+        if (chat == null) {
+            chat = new WebView(this);
+            WebSettings cs = chat.getSettings();
+            cs.setJavaScriptEnabled(true); cs.setDomStorageEnabled(true); cs.setDatabaseEnabled(true);
+            cs.setMediaPlaybackRequiresUserGesture(false);
+            cs.setUserAgentString(cs.getUserAgentString().replace("; wv", ""));
+            CookieManager.getInstance().setAcceptThirdPartyCookies(chat, true);
+            chat.setWebViewClient(new WebViewClient() {
+                @Override public boolean shouldOverrideUrlLoading(WebView v, WebResourceRequest r) {
+                    String h = r.getUrl().getHost() == null ? "" : r.getUrl().getHost();
+                    if (h.endsWith("claude.ai") || h.endsWith("anthropic.com") || h.endsWith("google.com") || h.endsWith("gstatic.com")
+                            || h.endsWith("googleusercontent.com") || h.endsWith("apple.com")) return false;
+                    newTab(r.getUrl().toString());   // other links open in the browser above
+                    return true;
+                }
+            });
+            chat.setWebChromeClient(new WebChromeClient() {
+                @Override public boolean onShowFileChooser(WebView v, ValueCallback<Uri[]> cb, FileChooserParams p) {
+                    if (fileCb != null) fileCb.onReceiveValue(null);
+                    fileCb = cb;
+                    try { startActivityForResult(p.createIntent(), 42); } catch (Exception e) { fileCb = null; return false; }
+                    return true;
+                }
+                @Override public void onPermissionRequest(PermissionRequest req) {
+                    if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(Manifest.permission.RECORD_AUDIO) != android.content.pm.PackageManager.PERMISSION_GRANTED)
+                        requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, 2);
+                    ui.post(() -> req.grant(req.getResources()));
+                }
+            });
+            chatBox.addView(chat, new LinearLayout.LayoutParams(-1, -1));
+            chat.loadUrl(prefs.getString("chatUrl", "https://claude.ai/recents"));
+        }
+        boolean show = chatBox.getVisibility() != View.VISIBLE;
+        if (show) {
+            int total = rootLayout.getHeight();
+            chatBox.getLayoutParams().height = (int) (total * prefs.getFloat("chatFrac", 0.5f));
+        } else if (chat.getUrl() != null && chat.getUrl().contains("claude.ai/chat/")) {
+            prefs.edit().putString("chatUrl", chat.getUrl()).apply();
+        }
+        chatBox.setVisibility(show ? View.VISIBLE : View.GONE);
+        splitter.setVisibility(show ? View.VISIBLE : View.GONE);
+        chatBox.requestLayout();
+    }
+
+    @Override protected void onPause() {
+        super.onPause();
+        if (chat != null && chat.getUrl() != null && chat.getUrl().contains("claude.ai/chat/"))
+            prefs.edit().putString("chatUrl", chat.getUrl()).apply();
+        CookieManager.getInstance().flush();
     }
 
     private void toast(String s) { Toast.makeText(this, s, Toast.LENGTH_LONG).show(); }
@@ -250,7 +331,8 @@ public class MainActivity extends Activity {
     }
 
     @Override public void onBackPressed() {
-        if (cur >= 0 && web().canGoBack()) web().goBack();
+        if (chat != null && chatBox.getVisibility() == View.VISIBLE && chat.hasFocus() && chat.canGoBack()) chat.goBack();
+        else if (cur >= 0 && web().canGoBack()) web().goBack();
         else moveTaskToBack(true);
     }
 
