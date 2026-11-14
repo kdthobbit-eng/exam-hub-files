@@ -41,6 +41,8 @@ public class MainActivity extends Activity {
     private LinearLayout chatBox;
     private View splitter;
     private LinearLayout rootLayout;
+    private LinearLayout topBar;
+    private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipe;
 
     // ---------------------------------------------------------------- UI
     @Override protected void onCreate(Bundle b) {
@@ -88,13 +90,19 @@ public class MainActivity extends Activity {
         menu.setOnClickListener(this::menu);
         bar.addView(menu);
         root.addView(bar);
+        topBar = bar;
 
         progress = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
         progress.setMax(100);
         root.addView(progress, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 4 * dp));
 
         holder = new FrameLayout(this);
-        root.addView(holder, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1));
+        swipe = new androidx.swiperefreshlayout.widget.SwipeRefreshLayout(this);
+        swipe.addView(holder, new ViewGroup.LayoutParams(-1, -1));
+        swipe.setOnChildScrollUpCallback((parent, child) -> cur >= 0 && web().getScrollY() > 0);
+        swipe.setOnRefreshListener(() -> { web().reload(); ui.postDelayed(() -> swipe.setRefreshing(false), 1500); });
+        swipe.setColorSchemeColors(0xFF6366F1);
+        root.addView(swipe, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1));
 
         splitter = new View(this);
         splitter.setBackgroundColor(0xFF6366F1);
@@ -273,6 +281,17 @@ public class MainActivity extends Activity {
         s.setSupportMultipleWindows(false);
         s.setJavaScriptCanOpenWindowsAutomatically(true);
         s.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+        s.setCacheMode(WebSettings.LOAD_DEFAULT);
+        if (Build.VERSION.SDK_INT >= 23) s.setOffscreenPreRaster(true);
+        if (Build.VERSION.SDK_INT >= 26) w.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_IMPORTANT, true);
+        w.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        w.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        if (Build.VERSION.SDK_INT >= 23) w.setOnScrollChangeListener((v, x, y, ox, oy) -> {
+            if (v != web()) return;
+            int dy = y - oy;
+            if (dy > 12 && y > 150 && topBar.getVisibility() == View.VISIBLE) topBar.setVisibility(View.GONE);
+            else if ((dy < -12 || y < 50) && topBar.getVisibility() != View.VISIBLE) topBar.setVisibility(View.VISIBLE);
+        });
         s.setUserAgentString(s.getUserAgentString().replace("; wv", ""));
         CookieManager.getInstance().setAcceptThirdPartyCookies(w, true);
         noRequestedWith(w);
@@ -287,6 +306,7 @@ public class MainActivity extends Activity {
             }
             @Override public void onPageStarted(WebView v, String u, Bitmap f) { if (v == web()) urlBar.setText(u); }
             @Override public void onPageFinished(WebView v, String u) {
+                if (swipe != null) swipe.setRefreshing(false);
                 if (v == web()) urlBar.setText(u);
                 if (v == web() && loadWaiter != null) { Done d = loadWaiter; loadWaiter = null; ui.postDelayed(d::run, 600); }
             }
@@ -323,7 +343,10 @@ public class MainActivity extends Activity {
 
     private void switchTab(int i) {
         if (i < 0 || i >= tabs.size()) return;
+        for (int k = 0; k < tabs.size(); k++) if (k != i) tabs.get(k).onPause();
+        tabs.get(i).onResume();
         cur = i;
+        topBar.setVisibility(View.VISIBLE);
         holder.removeAllViews();
         holder.addView(web(), new FrameLayout.LayoutParams(-1, -1));
         urlBar.setText(web().getUrl());
