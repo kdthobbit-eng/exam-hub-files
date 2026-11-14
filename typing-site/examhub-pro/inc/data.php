@@ -189,7 +189,7 @@ function eh_live_schedule($want = '') {
         /* newest added passages (date + time) on top, latest first */
         $new = []; $old = [];
         foreach ($mixed as $k => $r) { if (!empty($r['passage']['added'])) $new[] = [$r['passage']['added'], $k, $r]; else $old[] = $r; }
-        if ($new) { usort($new, function ($x, $y) { return strcmp($y[0], $x[0]) ?: ($x[1] - $y[1]); }); $mixed = array_merge(array_column($new, 2), $old); }
+        if ($new) { usort($new, function ($x, $y) { return strcmp($y[0], $x[0]) ?: strcmp($x[2]['lang'], $y[2]['lang']) ?: (crc32($x[2]['passage']['id']) <=> crc32($y[2]['passage']['id'])); }); /* same time: English first, then a fixed random mix of levels */ $mixed = array_merge(array_column($new, 2), $old); }
         foreach ($mixed as $i => &$r) $r['no'] = $i + 1; unset($r);
         return $mixed;
     }
