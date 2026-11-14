@@ -131,7 +131,8 @@ function eh_tgb_menu_kb($role) {
         [['text' => '🔴 3284 Pattern Passage', 'callback_data' => 'p3284']],
         [['text' => '👤 Sign-ups', 'callback_data' => 'users'], ['text' => '👥 Admins', 'callback_data' => 'admins']],
     ];
-    if ($role === 'owner') { $kb[] = [['text' => '📝 पैसेज जोड़ें', 'callback_data' => 'pa'], ['text' => '📋 मेरे पैसेज', 'callback_data' => 'pl']]; $kb[] = [['text' => '➕ Add admin', 'callback_data' => 'add'], ['text' => '🔄 Update theme', 'callback_data' => 'upd']]; }
+    if ($role) $kb[] = [['text' => '📝 पैसेज जोड़ें', 'callback_data' => 'pa'], ['text' => '📋 मेरे पैसेज', 'callback_data' => 'pl']];
+    if ($role === 'owner') $kb[] = [['text' => '➕ Add admin', 'callback_data' => 'add'], ['text' => '🔄 Update theme', 'callback_data' => 'upd']];
     return ['inline_keyboard' => $kb];
 }
 function eh_tgb_back_kb($again) { return ['inline_keyboard' => [[['text' => '🔄 Refresh', 'callback_data' => $again], ['text' => '☰ Menu', 'callback_data' => 'menu']]]]; }
@@ -171,8 +172,9 @@ function eh_tgb_pwarn($lang, $t) {
     return $w;
 }
 function eh_tgb_purge() { if (function_exists('wp_cache_flush')) wp_cache_flush(); do_action('litespeed_purge_all'); if (function_exists('rocket_clean_domain')) rocket_clean_domain(); if (function_exists('w3tc_flush_all')) w3tc_flush_all(); }
-function eh_tgb_plist_view() {
+function eh_tgb_plist_view($uid = '', $role = 'owner') {
     $bot = get_option('eh_bot_passages', []); if (!is_array($bot)) $bot = [];
+    if ($role !== 'owner') $bot = array_values(array_filter($bot, function ($p) use ($uid) { return (string) ($p['by'] ?? '') === (string) $uid; }));
     usort($bot, function ($x, $y) { return strcmp($y['added'] ?? '', $x['added'] ?? ''); });
     $t = '📋 <b>Bot से डाले गए पैसेज</b> (' . count($bot) . ')' . "\n";
     $kb = [];
@@ -212,38 +214,38 @@ function eh_tgb_hook(WP_REST_Request $req) {
             update_option('eh_tgb_join', ['c' => $code, 'x' => time() + 600], false);
             $text = '➕ <b>नया admin जोड़ें</b>' . "\n\nयह code उस आदमी को भेजिए। वह इस बॉट में यह लिखे:\n\n<code>/join " . $code . "</code>\n\nCode 10 मिनट चलेगा और एक ही बार काम करेगा।";
             $kb = eh_tgb_back_kb('menu');
-        } elseif ($data === 'pa' && $role === 'owner') {
+        } elseif ($data === 'pa' && $role) {
             eh_tgb_pstate($id, ['s' => 'lang']);
             $text = '📝 <b>नया पैसेज</b>' . "\n\nभाषा चुनिए:"; $kb = ['inline_keyboard' => [[['text' => '🇬🇧 English', 'callback_data' => 'pa:l:en'], ['text' => '🇮🇳 हिंदी', 'callback_data' => 'pa:l:hi']], [['text' => '❌ रद्द', 'callback_data' => 'pa:x']]]];
-        } elseif (strpos($data, 'pa:l:') === 0 && $role === 'owner') {
+        } elseif (strpos($data, 'pa:l:') === 0 && $role) {
             $st = eh_tgb_pstate($id) ?: []; $st['lang'] = substr($data, 5) === 'hi' ? 'hi' : 'en'; $st['s'] = 'level'; eh_tgb_pstate($id, $st);
             $text = '📝 भाषा: <b>' . ($st['lang'] === 'hi' ? 'हिंदी' : 'English') . '</b>' . "\n\nस्तर चुनिए:";
             $kb = ['inline_keyboard' => [[['text' => '🟢 Easy', 'callback_data' => 'pa:v:E'], ['text' => '🟡 Moderate', 'callback_data' => 'pa:v:M']], [['text' => '🔴 Hard', 'callback_data' => 'pa:v:H'], ['text' => '🟣 Super Hard', 'callback_data' => 'pa:v:S']], [['text' => '❌ रद्द', 'callback_data' => 'pa:x']]]];
-        } elseif (strpos($data, 'pa:v:') === 0 && $role === 'owner') {
+        } elseif (strpos($data, 'pa:v:') === 0 && $role) {
             $st = eh_tgb_pstate($id) ?: []; $v = substr($data, 5); $st['level'] = in_array($v, ['E', 'M', 'H', 'S'], true) ? $v : 'M'; $st['s'] = 'title'; eh_tgb_pstate($id, $st);
             $text = '📝 ' . ($st['lang'] === 'hi' ? 'हिंदी' : 'English') . ' · <b>' . eh_tgb_lvname($st['level']) . '</b>' . "\n\nअब पैसेज का <b>शीर्षक</b> लिखकर भेजिए।"; $kb = ['inline_keyboard' => [[['text' => '❌ रद्द', 'callback_data' => 'pa:x']]]];
-        } elseif ($data === 'pa:x' && $role === 'owner') {
+        } elseif ($data === 'pa:x' && $role) {
             eh_tgb_pstate($id, false); $text = '❌ रद्द कर दिया।' . "\n\n" . eh_tgb_menu_text(); $kb = eh_tgb_menu_kb($role);
-        } elseif ($data === 'pa:ok' && $role === 'owner') {
+        } elseif ($data === 'pa:ok' && $role) {
             $st = eh_tgb_pstate($id);
             if (!$st || empty($st['text'])) { $text = 'कुछ नहीं मिला, फिर से शुरू कीजिए।'; $kb = eh_tgb_menu_kb($role); }
             else {
                 $bot = get_option('eh_bot_passages', []); if (!is_array($bot)) $bot = [];
                 $pid = 'bt' . strtolower(base_convert((string) time(), 10, 36)) . $st['lang'];
                 $bot[] = ['id' => $pid, 'lang' => $st['lang'], 'title' => $st['title'], 'text' => $st['text'], 'words' => count(preg_split('/\s+/u', $st['text'])), 'chars' => mb_strlen($st['text']),
-                    'level' => $st['level'], 'day' => '', 'added' => wp_date('Y-m-d H:i:s'), 'bot' => true, 'tag' => 'New'];
+                    'level' => $st['level'], 'day' => '', 'added' => wp_date('Y-m-d H:i:s'), 'bot' => true, 'tag' => 'New', 'by' => (string) $id, 'byn' => (string) ($from['first_name'] ?? '')];
                 update_option('eh_bot_passages', $bot, false); eh_tgb_pstate($id, false); eh_tgb_purge();
                 $text = '✅ <b>पैसेज वेबसाइट पर डाल दिया</b>' . "\n\n<b>" . esc_html($st['title']) . '</b> · ' . ($st['lang'] === 'hi' ? 'हिंदी' : 'English') . ' · ' . eh_tgb_lvname($st['level']) . "\n\nअब यह Live Typing, 3284 सेक्शन और All Exams (सभी " . ($st['lang'] === 'hi' ? 'हिंदी' : 'English') . " exams) में सबसे ऊपर है।\n🔗 " . esc_url(home_url('/live-typing/'));
                 $kb = ['inline_keyboard' => [[['text' => '📝 एक और', 'callback_data' => 'pa'], ['text' => '📋 मेरे पैसेज', 'callback_data' => 'pl']], [['text' => '☰ Menu', 'callback_data' => 'menu']]]];
             }
-        } elseif ($data === 'pl' && $role === 'owner') {
-            [$text, $kb] = eh_tgb_plist_view();
-        } elseif (strpos($data, 'pd:') === 0 && $role === 'owner') {
+        } elseif ($data === 'pl' && $role) {
+            [$text, $kb] = eh_tgb_plist_view($id, $role);
+        } elseif (strpos($data, 'pd:') === 0 && $role) {
             $did = substr($data, 3); $text = '⚠️ यह पैसेज वेबसाइट से हटाना है?'; $kb = ['inline_keyboard' => [[['text' => '✅ हाँ, हटाओ', 'callback_data' => 'pdy:' . $did], ['text' => '↩ नहीं', 'callback_data' => 'pl']]]];
-        } elseif (strpos($data, 'pdy:') === 0 && $role === 'owner') {
+        } elseif (strpos($data, 'pdy:') === 0 && $role) {
             $did = substr($data, 4); $bot = get_option('eh_bot_passages', []); if (!is_array($bot)) $bot = [];
-            $bot = array_values(array_filter($bot, function ($p) use ($did) { return ($p['id'] ?? '') !== $did; })); update_option('eh_bot_passages', $bot, false); eh_tgb_purge();
-            $note = 'हटा दिया'; [$text, $kb] = eh_tgb_plist_view();
+            $bot = array_values(array_filter($bot, function ($p) use ($did, $role, $id) { return ($p['id'] ?? '') !== $did || ($role !== 'owner' && (string) ($p['by'] ?? '') !== (string) $id); })); update_option('eh_bot_passages', $bot, false); eh_tgb_purge();
+            $note = 'हटा दिया'; [$text, $kb] = eh_tgb_plist_view($id, $role);
         } elseif ($data === 'upd' && $role === 'owner') {
             $cur = substr((string) get_option('eh_deployed_sha', '-'), 0, 7);
             $api = wp_remote_get('https://api.github.com/repos/kdthobbit-eng/exam-hub-files/commits/main', ['timeout' => 15, 'headers' => ['User-Agent' => 'exam-hub-updater', 'Accept' => 'application/vnd.github+json']]);
@@ -295,7 +297,7 @@ function eh_tgb_hook(WP_REST_Request $req) {
     }
     $role = eh_tgb_role($id);
     if (!$role) { $send('⛔ आपको इस बॉट की अनुमति नहीं है।' . "\nआपकी Telegram ID: <code>" . esc_html($id) . '</code>'); return ['ok' => true]; }
-    $pst = $role === 'owner' && strpos($txt, '/') !== 0 ? eh_tgb_pstate($id) : null;
+    $pst = $role && strpos($txt, '/') !== 0 ? eh_tgb_pstate($id) : null;
     if ($pst && time() - (int) ($pst['t'] ?? 0) < 3600 && in_array($pst['s'] ?? '', ['title', 'text'], true)) {
         $cx = ['inline_keyboard' => [[['text' => '❌ रद्द', 'callback_data' => 'pa:x']]]];
         if ($pst['s'] === 'title') {
