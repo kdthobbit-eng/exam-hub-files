@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
         TextView chatBtn = new TextView(this);
         chatBtn.setText("💬"); chatBtn.setTextSize(20); chatBtn.setPadding(10 * dp, 0, 4 * dp, 0);
         chatBtn.setOnClickListener(v -> toggleChat());
-        bar.addView(chatBtn);
+        // chat panel removed: claude.ai logs out inside WebView
 
         claudeSw = new Switch(this);
         claudeSw.setText("Claude"); claudeSw.setPadding(8 * dp, 0, 4 * dp, 0);
@@ -118,10 +118,7 @@ public class MainActivity extends Activity {
         setContentView(root);
 
         Uri data = getIntent().getData();
-        boolean claudeLink = data != null && isClaude(data);
-        newTab(data != null && !claudeLink ? data.toString() : prefs.getString("home", "https://www.google.com"));
-        if (claudeLink) ui.post(() -> openChat(data.toString()));
-        else ui.post(() -> openChat(null));   // Claude chat khula rahe by default
+        newTab(data != null ? data.toString() : prefs.getString("home", "https://www.google.com"));
         if (Build.VERSION.SDK_INT >= 33) requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
         if (prefs.getBoolean("on", false) && !server().isEmpty()) claudeSw.setChecked(true);
         refreshStatus();
@@ -130,8 +127,7 @@ public class MainActivity extends Activity {
     @Override protected void onNewIntent(Intent i) {
         super.onNewIntent(i);
         if (i.getData() == null) return;
-        if (isClaude(i.getData())) openChat(i.getData().toString());
-        else newTab(i.getData().toString());
+        newTab(i.getData().toString());
     }
 
     private void hideKb() {
@@ -282,9 +278,6 @@ public class MainActivity extends Activity {
         noRequestedWith(w);
         w.setWebViewClient(new WebViewClient() {
             @Override public boolean shouldOverrideUrlLoading(WebView v, WebResourceRequest r) {
-                if (isClaude(r.getUrl()) && r.getUrl().getPath() != null && r.getUrl().getPath().contains("magic-link")) {
-                    openChat(r.getUrl().toString()); return true;
-                }
                 String sc = r.getUrl().getScheme();
                 if (sc != null && !sc.startsWith("http") && !sc.equals("about") && !sc.equals("data") && !sc.equals("blob")) {
                     try { startActivity(new Intent(Intent.ACTION_VIEW, r.getUrl())); } catch (Exception ignored) {}
@@ -355,7 +348,6 @@ public class MainActivity extends Activity {
 
     private void load(String u) {
         String f = fixUrl(u);
-        if (isClaude(Uri.parse(f)) && f.contains("magic-link")) { openChat(f); return; }
         web().loadUrl(f);
     }
 
