@@ -5,7 +5,10 @@ D=/opt/vps-mcp; mkdir -p $D
 curl -fsSL https://raw.githubusercontent.com/kdthobbit-eng/exam-hub-files/main/tools/vps-mcp/server.py -o $D/server.py
 [ -d $D/.venv ] || /root/.local/bin/uv venv -q $D/.venv
 /root/.local/bin/uv pip install -q --python $D/.venv/bin/python "mcp<2" uvicorn playwright
-$D/.venv/bin/python -m playwright install --with-deps chromium >/dev/null 2>&1 || $D/.venv/bin/python -m playwright install chromium
+echo "Chrome install ho raha hai (2-3 min)..."
+DEBIAN_FRONTEND=noninteractive apt-get install -y -qq libatomic1 >/dev/null 2>&1 || true
+$D/.venv/bin/python -m playwright install-deps chromium >/dev/null 2>&1 || true
+$D/.venv/bin/python -m playwright install chromium >/dev/null 2>&1 || echo "Chrome install nahi hua — terminal tools phir bhi chalenge"
 printf '[Unit]\nDescription=VPS MCP\nAfter=network-online.target\n[Service]\nWorkingDirectory=%s\nExecStart=%s/.venv/bin/python server.py\nRestart=always\nRestartSec=5\n[Install]\nWantedBy=multi-user.target\n' $D $D > /etc/systemd/system/vps-mcp.service
 systemctl daemon-reload && systemctl enable -q vps-mcp && systemctl restart vps-mcp
 if ! grep -q 8768 /etc/caddy/Caddyfile; then
