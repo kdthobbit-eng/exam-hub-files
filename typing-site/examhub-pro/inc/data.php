@@ -181,7 +181,7 @@ function eh_live_schedule($want = '') {
         $mixed = [];
         /* Super Hard passages stay on top of the list (English first, then Hindi) */
         foreach (['en', 'hi'] as $lg) foreach ($out as $r) if ($r['lang'] === $lg && $r['level'] === 'Super Hard') $mixed[] = $r;
-        foreach ($out as $r) if ($r['level'] === 'Evening Shift' || $r['level'] === 'New') $mixed[] = $r; /* 3284: latest shift passages on top */
+        foreach ($out as $r) if ($r['level'] === 'Evening Shift' || $r['level'] === 'New' || strpos($r['level'], 'Review') !== false) $mixed[] = $r; /* 3284: latest shift passages on top */
         foreach (['en', 'hi'] as $lg) {
             $by = [];
             foreach ($out as $r) if ($r['lang'] === $lg) $by[$r['level']][] = $r;

@@ -1556,3 +1556,6 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 
 .eh-new-at{display:block;margin-top:2px;font-size:11px;font-weight:700;color:#16a34a;white-space:nowrap}
 .eh-lvl.new{background:#dcfce7;color:#166534}
+/* 14 Nov review tiles + badge */
+.eh-3284-tile.eh-3284-new{border-color:#16a34a;background:#f0fdf4}
+.eh-lvl[class~="14novreview"]{background:#dc2626;color:#fff}
