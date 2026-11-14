@@ -490,14 +490,19 @@
   /* finish an Alt code when Alt is let go (Windows cp1252 numbers, as in every typing software) */
   var CP = {128:8364,130:8218,131:402,132:8222,133:8230,134:8224,135:8225,136:710,137:8240,138:352,139:8249,140:338,142:381,145:8216,146:8217,147:8220,148:8221,149:8226,150:8211,151:8212,152:732,153:8482,154:353,155:8250,156:339,158:382,159:376};
   ta.addEventListener('keyup', function (e) {
-    if (e.key !== 'Alt' || !S.alt) return;
+    if ((e.key !== 'Alt' && e.key !== 'AltGraph') || !S.alt) return;
     e.preventDefault(); var n = parseInt(S.alt, 10); S.alt = '';
     if (S.done || native() || !(n > 31 && n < 256)) return;
     var ch = String.fromCharCode(CP[n] || n);
     begin(); S.keys++; click(); S.buf += ch; render(); after();
   });
   /* the browser may also insert the Alt-code letter itself; the buffer already has it */
-  ta.addEventListener('beforeinput', function (e) { if (!native() && e.inputType === 'insertText') e.preventDefault(); });
+  ta.addEventListener('beforeinput', function (e) {
+    if (native() || e.inputType !== 'insertText') return;
+    e.preventDefault();
+    /* Alt code letter sent by Windows itself (e.g. Alt+0161 = ¡ = ँ): take it, so the code still works if Alt's keyup never arrives */
+    if (S.alt && e.data && e.data.length === 1 && !S.done) { S.alt = ''; begin(); S.keys++; click(); S.buf += e.data; render(); after(); }
+  });
   ta.addEventListener('mousedown', function (e) { if (!native()) { e.preventDefault(); ta.focus(); } });
   pv.addEventListener('copy', function (e) { e.preventDefault(); });
   window.addEventListener('beforeunload', function (e) { if (S.started && !S.done) { e.preventDefault(); e.returnValue = ''; } });
