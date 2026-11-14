@@ -58,9 +58,22 @@ async def status() -> str:
     return await run("uptime; free -h; df -h / | tail -1; for s in caddy telegram-mcp yt-mcp phone-mcp vps-mcp; do printf '%-14s %s\\n' $s $(systemctl is-active $s); done", 30)
 
 # ---------------- headless Chrome ----------------
-_B = {"pw": None, "browser": None, "page": None}
+_B = {"pw": None, "browser": None, "page": None, "last": 0.0, "watch": None}
+IDLE_CLOSE = int(os.environ.get("VPS_BROWSER_IDLE", "600"))  # 10 min
+
+async def _idle_watch():
+    import time
+    while _B["browser"] is not None:
+        await asyncio.sleep(30)
+        if time.time() - _B["last"] > IDLE_CLOSE and _B["browser"] is not None:
+            try: await _B["browser"].close()
+            except Exception: pass
+            _B["browser"] = None; _B["page"] = None
+    _B["watch"] = None
 
 async def _page():
+    import time
+    _B["last"] = time.time()
     if _B["page"] is None or _B["page"].is_closed():
         from playwright.async_api import async_playwright
         if _B["pw"] is None: _B["pw"] = await async_playwright().start()
@@ -69,6 +82,7 @@ async def _page():
                 "/opt/vps-mcp/chrome-profile", headless=True, viewport={"width": 1280, "height": 800}, locale="en-IN",
                 args=["--no-sandbox", "--disable-dev-shm-usage"])
         _B["page"] = _B["browser"].pages[0] if _B["browser"].pages else await _B["browser"].new_page()
+    if _B["watch"] is None: _B["watch"] = asyncio.create_task(_idle_watch())
     return _B["page"]
 
 @mcp.tool()
