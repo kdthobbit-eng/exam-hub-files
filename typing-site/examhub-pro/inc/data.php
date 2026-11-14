@@ -94,8 +94,9 @@ function eh_passage_levels($list) {
 function eh_passage_days($lang, $days = 7) {
     $all = eh_passages($lang);
     $tdate = wp_date('Y-m-d');
+    $tdate0 = gmdate('Y-m-d', ((int) floor(current_time('timestamp') / 86400) - $days + 1) * 86400); /* stamped passages of the shown days are not in the rotating pool */
     /* practice pool: the regular passages plus Live news passages of past days (today's stay on Live Typing) */
-    $pool = array_values(array_filter($all, function ($p) use ($tdate) { return empty($p['special']) && empty($p['bot']) && strpos($p['id'], 'p') !== 0 && ($p['level'] ?? '') !== 'S' && (empty($p['day']) || $p['day'] < $tdate || !empty($p['both'])); }));
+    $pool = array_values(array_filter($all, function ($p) use ($tdate, $tdate0) { return empty($p['special']) && empty($p['bot']) && !(!empty($p['added']) && !empty($p['both']) && substr($p['added'], 0, 10) >= $tdate0) && strpos($p['id'], 'p') !== 0 && ($p['level'] ?? '') !== 'S' && (empty($p['day']) || $p['day'] < $tdate || !empty($p['both'])); }));
     /* Super Hard passages are not part of the daily sets: all of them are shown on top of today's list */
     $super = array_values(array_filter($all, function ($p) use ($tdate) { return ($p['level'] ?? '') === 'S' && empty($p['special']) && empty($p['bot']) && ($p['day'] ?? '') <= $tdate; }));
     /* 20 passages a day, like Live Typing: 6 Easy, 7 Moderate, 7 Hard (Basic counts as Easy).
@@ -115,9 +116,9 @@ function eh_passage_days($lang, $days = 7) {
     for ($d = 0; $d < $days && $d < $sets; $d++) {
         $day = $today - $d; $date = gmdate('Y-m-d', $day * 86400); $items = [];
         foreach ($all as $p) if (strpos($p['id'], 'p') === 0 && empty($p['special']) && ($p['date'] ?? '') === $date) $items[] = $p;
-        /* bot passages on the day they were added, newest first, on top */
-        $bt = array_values(array_filter($all, function ($p) use ($date) { return !empty($p['bot']) && substr((string) ($p['added'] ?? ''), 0, 10) === $date; }));
-        usort($bt, function ($x, $y) { return strcmp($y['added'], $x['added']); });
+        /* passages stamped with an added time (bot or new sets) sit on top of the day they were added, newest first */
+        $bt = array_values(array_filter($all, function ($p) use ($date) { return (!empty($p['bot']) || (!empty($p['both']) && empty($p['special']) && ($p['level'] ?? '') !== 'S')) && substr((string) ($p['added'] ?? ''), 0, 10) === $date; }));
+        usort($bt, function ($x, $y) { return strcmp($y['added'], $x['added']) ?: (crc32($x['id']) <=> crc32($y['id'])); });
         $items = array_merge($bt, $d === 0 ? $super : [], $items, $chunks[(($day % $sets) + $sets) % $sets]);
         $out[] = ['date' => $date, 'items' => $items];
     }
