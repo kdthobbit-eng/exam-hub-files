@@ -1559,3 +1559,9 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 /* 14 Nov review tiles + badge */
 .eh-3284-tile.eh-3284-new{border-color:#16a34a;background:#f0fdf4}
 .eh-lvl[class~="14novreview"]{background:#dc2626;color:#fff}
+/* live table: long level tags and "new" time must wrap inside their cell (mobile) */
+.eh-live-table td:nth-child(3),.eh-live-table td:nth-child(6){white-space:normal}
+.eh-live-table td:nth-child(3) .eh-lvl{white-space:normal;display:inline-block;max-width:100%;text-align:center;line-height:1.25}
+.eh-live-table th:nth-child(3){width:130px}
+.eh-live-table td:nth-child(6) small,.eh-live-table td:nth-child(6) span{display:block;white-space:normal;word-break:break-word}
+.eh-live-table td{overflow:hidden}
