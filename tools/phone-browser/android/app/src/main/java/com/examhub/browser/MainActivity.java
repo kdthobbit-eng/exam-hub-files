@@ -118,7 +118,10 @@ public class MainActivity extends Activity {
         setContentView(root);
 
         Uri data = getIntent().getData();
-        newTab(data != null ? data.toString() : prefs.getString("home", "https://www.google.com"));
+        boolean claudeLink = data != null && isClaude(data);
+        newTab(data != null && !claudeLink ? data.toString() : prefs.getString("home", "https://www.google.com"));
+        if (claudeLink) ui.post(() -> openChat(data.toString()));
+        else ui.post(() -> openChat(null));   // Claude chat khula rahe by default
         if (Build.VERSION.SDK_INT >= 33) requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
         if (prefs.getBoolean("on", false) && !server().isEmpty()) claudeSw.setChecked(true);
         refreshStatus();
@@ -126,7 +129,9 @@ public class MainActivity extends Activity {
 
     @Override protected void onNewIntent(Intent i) {
         super.onNewIntent(i);
-        if (i.getData() != null) newTab(i.getData().toString());
+        if (i.getData() == null) return;
+        if (isClaude(i.getData())) openChat(i.getData().toString());
+        else newTab(i.getData().toString());
     }
 
     private void hideKb() {
@@ -176,6 +181,17 @@ public class MainActivity extends Activity {
                 .show();
     }
 
+    private static boolean isClaude(Uri u) {
+        String h = u.getHost() == null ? "" : u.getHost();
+        return h.equals("claude.ai") || h.endsWith(".claude.ai");
+    }
+
+    /** Shows the chat panel; url = a claude.ai link (e.g. email login link) to load in it. */
+    private void openChat(String url) {
+        if (chatBox.getVisibility() != View.VISIBLE) toggleChat();
+        if (url != null) chat.loadUrl(url);
+    }
+
     private void toggleChat() {
         if (chat == null) {
             chat = new WebView(this);
@@ -183,6 +199,9 @@ public class MainActivity extends Activity {
             cs.setJavaScriptEnabled(true); cs.setDomStorageEnabled(true); cs.setDatabaseEnabled(true);
             cs.setMediaPlaybackRequiresUserGesture(false);
             cs.setUserAgentString(cs.getUserAgentString().replace("; wv", ""));
+            cs.setSupportMultipleWindows(false);
+            cs.setJavaScriptCanOpenWindowsAutomatically(true);
+            noRequestedWith(chat);
             CookieManager.getInstance().setAcceptThirdPartyCookies(chat, true);
             chat.setWebViewClient(new WebViewClient() {
                 @Override public boolean shouldOverrideUrlLoading(WebView v, WebResourceRequest r) {
@@ -212,6 +231,7 @@ public class MainActivity extends Activity {
         boolean show = chatBox.getVisibility() != View.VISIBLE;
         if (show) {
             int total = rootLayout.getHeight();
+            if (total <= 0) total = (int) (getResources().getDisplayMetrics().heightPixels * 0.9);
             chatBox.getLayoutParams().height = (int) (total * prefs.getFloat("chatFrac", 0.5f));
         } else if (chat.getUrl() != null && chat.getUrl().contains("claude.ai/chat/")) {
             prefs.edit().putString("chatUrl", chat.getUrl()).apply();
@@ -226,6 +246,14 @@ public class MainActivity extends Activity {
         if (chat != null && chat.getUrl() != null && chat.getUrl().contains("claude.ai/chat/"))
             prefs.edit().putString("chatUrl", chat.getUrl()).apply();
         CookieManager.getInstance().flush();
+    }
+
+    /** Stop sending X-Requested-With (Google sign-in blocks WebViews that send it). */
+    private static void noRequestedWith(WebView w) {
+        try {
+            if (androidx.webkit.WebViewFeature.isFeatureSupported(androidx.webkit.WebViewFeature.REQUESTED_WITH_HEADER_ALLOW_LIST))
+                androidx.webkit.WebSettingsCompat.setRequestedWithHeaderOriginAllowList(w.getSettings(), new java.util.HashSet<>());
+        } catch (Throwable ignored) {}
     }
 
     private void toast(String s) { Toast.makeText(this, s, Toast.LENGTH_LONG).show(); }
@@ -251,8 +279,12 @@ public class MainActivity extends Activity {
         s.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
         s.setUserAgentString(s.getUserAgentString().replace("; wv", ""));
         CookieManager.getInstance().setAcceptThirdPartyCookies(w, true);
+        noRequestedWith(w);
         w.setWebViewClient(new WebViewClient() {
             @Override public boolean shouldOverrideUrlLoading(WebView v, WebResourceRequest r) {
+                if (isClaude(r.getUrl()) && r.getUrl().getPath() != null && r.getUrl().getPath().contains("magic-link")) {
+                    openChat(r.getUrl().toString()); return true;
+                }
                 String sc = r.getUrl().getScheme();
                 if (sc != null && !sc.startsWith("http") && !sc.equals("about") && !sc.equals("data") && !sc.equals("blob")) {
                     try { startActivity(new Intent(Intent.ACTION_VIEW, r.getUrl())); } catch (Exception ignored) {}
@@ -321,7 +353,11 @@ public class MainActivity extends Activity {
         return "https://www.google.com/search?q=" + Uri.encode(u);
     }
 
-    private void load(String u) { web().loadUrl(fixUrl(u)); }
+    private void load(String u) {
+        String f = fixUrl(u);
+        if (isClaude(Uri.parse(f)) && f.contains("magic-link")) { openChat(f); return; }
+        web().loadUrl(f);
+    }
 
     @Override protected void onActivityResult(int req, int res, Intent data) {
         if (req == 42 && fileCb != null) {
