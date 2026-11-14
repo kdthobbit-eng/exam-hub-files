@@ -33,7 +33,7 @@ get_header(); ?>
     </tr></thead><tbody>
     <?php if (!$rows): ?><tr><td colspan="11" class="muted">Nothing here yet. <a href="<?php echo esc_url(home_url('/exams/')); ?>">Take your first test →</a></td></tr><?php endif; ?>
     <?php foreach ($rows as $i => $r):
-        $e = eh_exam($r['exam']); $p = $ps[$r['passage']] ?? null; $tw = eh_target_wpm($e); list($gw, $nw) = eh_row_speeds($r);
+        $e = eh_exam($r['exam']); $p = $ps[$r['passage']] ?? null; $tw = eh_target_wpm($e); list($gw, $nw, $rpass, $rkeys) = eh_row_speeds($r, $e); $r['pass'] = $rpass;
         $retype = $r['exam'] === 'demo' ? home_url('/demo-typing/') : home_url('/typing/' . $r['exam'] . '/');
         if ($r['passage']) $retype = add_query_arg('passage', $r['passage'], $retype); ?>
       <tr>
@@ -41,7 +41,7 @@ get_header(); ?>
         <td><b><?php echo esc_html($e ? $e['name'] : ($r['exam'] === 'demo' ? 'Demo Typing' : $r['exam'])); ?></b><br><span class="muted small"><?php echo $e ? (int) $e['minutes'] . ':00 min' : ''; ?><?php echo $r['live_date'] ? ' · Live' : ''; ?></span> <?php echo $r['pass'] ? '<span class="pill ok">Qualified</span>' : '<span class="pill no">Unqualified</span>'; ?></td>
         <td class="small"><?php echo esc_html($r['title'] ?: ($p['title'] ?? '—')); ?><br><span class="muted"><?php echo $e && $e['unit'] === 'keys' ? number_format_i18n($e['target']) . ' keystrokes given' : ($p ? number_format_i18n($p['chars']) . ' keystrokes' : ''); ?></span></td>
         <td class="small"><?php echo esc_html(mysql2date('d/m/Y', $r['created'])); ?><br><span class="muted">Used: <?php echo esc_html(gmdate('i:s', (int) round($r['minutes'] * 60))); ?> min</span></td>
-        <td><?php echo (int) $r['keys_count']; ?></td>
+        <td><?php echo (int) $rkeys; ?></td>
         <td><b><?php echo $tw ?: '—'; ?></b></td>
         <td class="<?php echo $tw && $gw >= $tw ? 'g' : 'r'; ?>"><b><?php echo esc_html($gw); ?></b></td>
         <td class="<?php echo $tw && $nw >= $tw ? 'g' : 'r'; ?>"><b><?php echo esc_html($nw); ?></b></td>

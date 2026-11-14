@@ -193,10 +193,18 @@ function eh_target_wpm($e) {
     /* official norm: 5 key depressions = 1 word */
     return $e['unit'] === 'keys' ? (int) round($e['target'] / $m / 5) : (int) round($e['target'] / $m);
 }
-function eh_row_speeds($r) {
+function eh_row_speeds($r, $e = null) {
+    /* same numbers as the result page: UPSSSC rule = keystrokes / 5 with the 6-word cut, UP Police = (words - mistakes) / 15 min */
+    if ($e && in_array($e['eval'] ?? '', ['upsssc', 'uppolice'], true) && !empty($e['wpm'])) {
+        $keys = max((int) $r['keys_count'], mb_strlen(trim((string) ($r['typed'] ?? ''))));
+        $m = max((float) $r['minutes'], (float) $e['minutes'], 0.01);
+        $g = ($e['eval'] === 'upsssc' && $keys > 0 ? $keys / 5 : (int) $r['words']) / $m;
+        $v = eh_result_verdict($r, $e);
+        return [number_format($g, 2, '.', ''), number_format((float) ($v['wpm'] ?? 0), 2, '.', ''), (int) $v['pass'], $keys];
+    }
     $min = max(1 / 60, (float) $r['minutes']);
     $g = (int) $r['words'] / $min; $n = max(0, (int) $r['words'] - ((int) $r['full_m'] + (int) $r['half_m'] / 2)) / $min;
-    return [number_format($g, 2, '.', ''), number_format($n, 2, '.', '')];
+    return [number_format($g, 2, '.', ''), number_format($n, 2, '.', ''), (int) ($r['pass'] ?? 0), max((int) $r['keys_count'], mb_strlen(trim((string) ($r['typed'] ?? ''))))];
 }
 function eh_target_label($e) { return number_format_i18n($e['target']) . ($e['unit'] === 'keys' ? ' keys' : ' words'); }
 

@@ -20,7 +20,7 @@ get_header(); ?>
   <?php if (!$rows): ?><tr><td colspan="11" class="muted">No results yet. <a href="<?php echo esc_url(home_url('/exams/')); ?>">take the first test</a>.</td></tr><?php endif; ?>
   <?php foreach ($rows as $i => $r):
       $e = eh_exam($r['exam']); $p = $ps[$r['passage']] ?? null;
-      $tgtSpeed = eh_target_wpm($e); list($gw, $nw) = eh_row_speeds($r);
+      $tgtSpeed = eh_target_wpm($e); list($gw, $nw, $rpass, $rkeys) = eh_row_speeds($r, $e); $r['pass'] = $rpass;
       /* exams marked by a commission rule (UPSSSC): show the speed worked out by that rule */
       if ($e && ($e['eval'] ?? '') === 'upsssc') { $gw = (int) $r['gross']; $nw = (int) $r['net']; }
       $cg = !$tgtSpeed || $gw >= $tgtSpeed ? 'g' : 'r'; $cn = !$tgtSpeed || $nw >= $tgtSpeed ? 'g' : 'r'; ?>
@@ -31,7 +31,7 @@ get_header(); ?>
       <td class="small"><?php echo esc_html($r['title'] ?: ($p['title'] ?? '—')); ?><?php if ($p) echo ' - ' . number_format_i18n($p['chars']) . ' key strokes'; ?></td>
       <td class="small"><?php echo esc_html(mysql2date('d/m/Y', $r['created'])); ?></td>
       <td class="small"><?php echo esc_html(gmdate('i:s', (int) round($r['minutes'] * 60))); ?> min.</td>
-      <td><?php echo (int) $r['keys_count']; ?></td>
+      <td><?php echo (int) $rkeys; ?></td>
       <td><b><?php echo $tgtSpeed ?: '—'; ?></b></td>
       <td class="<?php echo $cg; ?>"><b><?php echo esc_html($gw); ?></b></td>
       <td class="<?php echo $cn; ?>"><b><?php echo esc_html($nw); ?></b></td>
