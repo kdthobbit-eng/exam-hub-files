@@ -11,6 +11,9 @@ $R = [
 ];
 if ($row['exam'] !== 'demo') $R['pass'] = eh_result_verdict($row, $X)['pass'];
 foreach (eh_passages() as $pp) { if ($pp['id'] === $row['passage']) { $R['total'] = mb_strlen(trim(preg_replace('/\s+/u', ' ', $pp['text']))); break; } }
+/* the text actually given on screen (a live test can run on into the next passages): count that, so keys typed never exceed it */
+if (!empty($row['src'])) $R['total'] = max((int) ($R['total'] ?? 0), mb_strlen(trim(preg_replace('/\s+/u', ' ', (string) $row['src']))));
+if (!empty($R['total']) && $R['keys'] > $R['total']) $R['total'] = $R['keys'];
 wp_enqueue_script('eh-eval', EH_URI . '/assets/eh-eval.js', [], EH_VER, true);
 wp_add_inline_script('eh-eval', 'window.EH_RES=' . wp_json_encode(['R' => $R, 'X' => $X, 'src' => (string) $row['src'], 'typed' => (string) $row['typed']], JSON_UNESCAPED_UNICODE) . ';', 'before');
 wp_add_inline_script('eh-eval', <<<JS
