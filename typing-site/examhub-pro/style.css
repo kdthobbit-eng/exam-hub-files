@@ -1565,3 +1565,8 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 .eh-live-table th:nth-child(3){width:130px}
 .eh-live-table td:nth-child(6) small,.eh-live-table td:nth-child(6) span{display:block;white-space:normal;word-break:break-word}
 .eh-live-table td{overflow:hidden}
+
+/* result: only the dashboard on screen, next passage at the bottom */
+.eh-rhide{display:none!important}
+.eh-res-bottom{display:flex;justify-content:center;margin:22px 0 6px}
+.eh-res-bottom .eh-next-btn{font-size:17px;padding:13px 34px}

@@ -203,6 +203,7 @@
 
   /* ---------- start ---------- */
   function startTest() {
+    focusResult(false);
     /* open the exam window in full screen (like F11) as soon as the test starts; Esc or the Fullscreen button leaves it */
     try { if (!document.fullscreenElement) { var rf = test.requestFullscreen || test.webkitRequestFullscreen; if (rf) { var fp = rf.call(test); if (fp && fp.catch) fp.catch(function () {}); } } } catch (e) {}
     S.layout = $('#eh-opt-layout').value; store.set('layout', S.layout);
@@ -428,15 +429,29 @@
     save(R);
   }
 
+  /* result like AR: only the dashboard on screen (site header, page heading, side boxes hidden) */
+  function focusResult(on) {
+    [].forEach.call(document.querySelectorAll('.eh-rhide'), function (x) { x.classList.remove('eh-rhide'); });
+    if (!on) return;
+    for (var el = result; el && el.parentNode && el !== document.body; el = el.parentNode) {
+      [].forEach.call(el.parentNode.children, function (c) { if (c !== el && !/^(SCRIPT|STYLE|LINK)$/.test(c.tagName)) c.classList.add('eh-rhide'); });
+    }
+  }
+  function nextRadio() {
+    var rs = [].slice.call(document.querySelectorAll('input[name=eh-psg]')), cur = S.passageId || ((document.querySelector('input[name=eh-psg]:checked') || {}).value);
+    for (var i = 0; i < rs.length; i++) if (rs[i].value === cur) return rs[i + 1] || null;
+    return null;
+  }
   function showResult(R, ops) {
-    result.hidden = false; setup.hidden = true;
+    result.hidden = false; setup.hidden = true; focusResult(true);
+    var nb = $('#eh-next-auto'); if (nb) nb.hidden = !!document.getElementById('eh-next-psg') || !nextRadio();
     document.body.classList.add('eh-has-result'); /* dashboard first: page header and side ranking move out of the way */
     R.pending = Math.max(0, S.words.length - R.words); R.total = S.words.join(' ').length; R.dur = exam.minutes;
     R.title = S.title; R.date = new Date().toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
     $('#eh-res-dash').innerHTML = window.EHEval.dashboard(R, exam, ops);
     window.EHEval.bindDash($('#eh-res-dash'));
     $('#eh-res-link').hidden = true;
-    window.scrollTo({ top: Math.max(0, result.getBoundingClientRect().top + window.scrollY - 70), behavior: 'auto' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
   function save(R) {
@@ -481,7 +496,13 @@
       S.goStep(1);
     }
   })();
-  $('#eh-again').addEventListener('click', function () { document.body.classList.remove('eh-has-result'); result.hidden = true; setup.hidden = false; if (S.goStep) S.goStep(2); });
+  if ($('#eh-next-auto')) $('#eh-next-auto').addEventListener('click', function () {
+    var n = nextRadio(); if (!n) return;
+    n.checked = true; n.dispatchEvent(new Event('change', { bubbles: true }));
+    if ($('#eh-opt-passage')) $('#eh-opt-passage').value = n.value;
+    document.body.classList.remove('eh-has-result'); result.hidden = true; startTest();
+  });
+  $('#eh-again').addEventListener('click', function () { focusResult(false); document.body.classList.remove('eh-has-result'); result.hidden = true; setup.hidden = false; if (S.goStep) S.goStep(2); });
   ta.addEventListener('keydown', onKey);
   ta.addEventListener('paste', function (e) { e.preventDefault(); });
   ta.addEventListener('drop', function (e) { e.preventDefault(); });

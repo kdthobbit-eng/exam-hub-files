@@ -70,7 +70,7 @@ if ($row):
       if ($L['lang'] === 'hi' && in_array($kb, ['krutidev', 'inscript'], true)) $eh_cfg['layout'] = $kb;
       include __DIR__ . '/_test-ui.php';
       if ($eh_next): ?><a id="eh-next-psg" class="btn eh-next-btn" href="<?php echo esc_url($eh_next); ?>">अगला पैसेज →</a>
-      <script>(function(){var n=document.getElementById('eh-next-psg'),a=document.querySelector('#eh-result .eh-res-actions');if(n&&a)a.insertBefore(n,a.firstChild);})();</script><?php endif;
+      <script>(function(){var n=document.getElementById('eh-next-psg'),a=document.querySelector('#eh-result .eh-res-bottom')||document.querySelector('#eh-result .eh-res-actions');if(n&&a)a.insertBefore(n,a.firstChild);})();</script><?php endif;
     else: ?>
       <div class="eh-panel eh-live-closed"><h2><?php echo $now < $L['s'] ? 'Test opens at ' . esc_html($L['start']) : 'Today’s live test is over'; ?></h2>
       <p class="muted">Meanwhile, practise this exam.</p>
