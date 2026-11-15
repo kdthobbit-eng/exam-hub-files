@@ -175,7 +175,7 @@ if ($row):
   if ($eh_fn): $eh_fu = home_url('/typing/upsssc-assistants-english-typing-test/'); ?>
   <div class="eh-full" id="full-exam">
     <div class="eh-full-h"><span class="eh-full-badge">NEW</span><b>3284 Full Exam · English + हिंदी एक साथ</b>
-    <span>परीक्षा की तरह पहले English (5 मिनट), Submit होते ही 15 सेकंड में हिंदी (5 मिनट) अपने आप शुरू · अंत में दोनों का एक साथ परिणाम · सभी पैसेज Hard</span></div>
+    <span>परीक्षा की तरह पहले English (5 मिनट), Submit होते ही 15 सेकंड में हिंदी (5 मिनट) अपने आप शुरू · अंत में दोनों का एक साथ परिणाम</span></div>
     <div class="eh-full-sets">
     <?php for ($i = 1; $i <= $eh_fn; $i++): ?>
       <div class="eh-full-set"><b>Set <?php echo $i; ?></b>
