@@ -16,7 +16,7 @@ if (in_array($eh_full, [1, 2], true) && $slug === ($eh_full === 1 ? 'upsssc-assi
         $fkb = in_array($_GET['kb'] ?? '', ['krutidev', 'inscript'], true) ? $_GET['kb'] : 'krutidev';
         $eh_exam['name'] = 'UPSSSC 3284 Full Exam · ' . ($fl === 'en' ? 'Part 1 English' : 'Part 2 Hindi');
         $eh_cfg = ['fixedPassage' => $seq[0]['id'], 'passages' => $seq, 'lockTime' => true, 'full' => $eh_full, 'fullSet' => $fs, 'fullKb' => $fkb,
-            'fullNext' => add_query_arg(['full' => 2, 'fs' => $fs, 'kb' => $fkb], home_url('/typing/upsssc-assistants-hindi-typing-test/'))];
+            'fullCount' => count($fp), 'fullFirst' => home_url('/typing/upsssc-assistants-english-typing-test/'), 'fullNext' => add_query_arg(['full' => 2, 'fs' => $fs, 'kb' => $fkb], home_url('/typing/upsssc-assistants-hindi-typing-test/'))];
         if ($eh_full === 2) $eh_cfg['layout'] = $fkb;
     }
 }

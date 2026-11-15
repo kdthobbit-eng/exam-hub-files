@@ -175,14 +175,17 @@ if ($row):
   if ($eh_fn): $eh_fu = home_url('/typing/upsssc-assistants-english-typing-test/'); ?>
   <div class="eh-full" id="full-exam">
     <div class="eh-full-h"><span class="eh-full-badge">NEW</span><b>3284 Full Exam · English + हिंदी एक साथ</b>
-    <span>परीक्षा की तरह पहले English (5 मिनट), Submit होते ही 15 सेकंड में हिंदी (5 मिनट) अपने आप शुरू · अंत में दोनों का एक साथ परिणाम</span></div>
-    <div class="eh-full-sets">
-    <?php for ($i = 1; $i <= $eh_fn; $i++): ?>
-      <div class="eh-full-set"><b>Set <?php echo $i; ?></b>
-        <a href="<?php echo esc_url(add_query_arg(['full' => 1, 'fs' => $i, 'kb' => 'krutidev'], $eh_fu)); ?>">Krutidev →</a>
-        <a href="<?php echo esc_url(add_query_arg(['full' => 1, 'fs' => $i, 'kb' => 'inscript'], $eh_fu)); ?>">Mangal →</a></div>
-    <?php endfor; ?>
+    <span>परीक्षा की तरह पहले English (5 मिनट), Submit होते ही 15 सेकंड में हिंदी (5 मिनट) अपने आप शुरू · अंत में दोनों का एक साथ परिणाम · <?php echo (int) $eh_fn; ?> सेट</span></div>
+    <div class="eh-full-tool" id="eh-full-tool" data-u="<?php echo esc_url($eh_fu); ?>" data-n="<?php echo (int) $eh_fn; ?>">
+      <label><span>Set चुनें</span><select id="eh-ft-set"><option value="r">🎲 Random Set</option><?php for ($i = 1; $i <= $eh_fn; $i++) echo '<option value="' . $i . '">Set ' . $i . '</option>'; ?></select></label>
+      <div class="eh-ft-kb"><span>हिंदी कीबोर्ड</span><label><input type="radio" name="eh-ft-kb" value="krutidev" checked> Krutidev</label><label><input type="radio" name="eh-ft-kb" value="inscript"> Mangal</label></div>
+      <button type="button" class="eh-ft-go" id="eh-ft-go">Full Exam शुरू करें →</button>
     </div>
+    <script>(function(){var t=document.getElementById('eh-full-tool');if(!t)return;var s=document.getElementById('eh-ft-set');
+    try{var k=localStorage.getItem('eh_ftkb');if(k){var r=t.querySelector('input[value="'+JSON.parse(k)+'"]');if(r)r.checked=true;}}catch(e){}
+    document.getElementById('eh-ft-go').addEventListener('click',function(){var n=+t.getAttribute('data-n'),v=s.value==='r'?1+Math.floor(Math.random()*n):+s.value,kb=t.querySelector('input[name=eh-ft-kb]:checked').value;
+    try{localStorage.setItem('eh_ftkb',JSON.stringify(kb));}catch(e){}
+    location.href=t.getAttribute('data-u')+'?full=1&fs='+v+'&kb='+kb;});})();</script>
   </div>
   <?php endif; ?>
   <div class="eh-3284-info">

@@ -1595,3 +1595,11 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 .eh-fs-c.pass{background:#dcfce7;border-color:#86efac}.eh-fs-c.fail{background:#fee2e2;border-color:#fca5a5}
 @media(max-width:640px){.eh-fs-g{grid-template-columns:1fr}}
 .eh-3284-band a.go+a.go{background:#7c3aed}
+
+.eh-full-tool{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px;margin-top:12px;background:#fff;border:1px solid #ddd6fe;border-radius:14px;padding:12px 14px}
+.eh-full-tool span{display:block;font-size:12.5px;font-weight:700;color:#5b21b6;margin-bottom:4px}
+.eh-full-tool select{min-width:150px;padding:9px 10px;border:1.5px solid #c4b5fd;border-radius:10px;font-weight:700;font-size:15px;background:#faf5ff}
+.eh-ft-kb label{display:inline-flex;align-items:center;gap:5px;margin-right:12px;font-weight:700;font-size:15px;cursor:pointer}
+.eh-ft-go{background:#7c3aed;color:#fff;border:0;border-radius:10px;padding:11px 20px;font-weight:800;font-size:15px;cursor:pointer;margin-left:auto}
+.eh-ft-go:hover{filter:brightness(1.08)}
+@media(max-width:640px){.eh-ft-go{width:100%;margin-left:0}.eh-full-tool label{flex:1}}

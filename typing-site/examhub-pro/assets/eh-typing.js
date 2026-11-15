@@ -500,6 +500,8 @@
     var both = E && E.pass && H2.pass;
     box.innerHTML = '<h3>UPSSSC 3284 Full Exam · Set ' + (CFG.fullSet || 1) + ' का परिणाम</h3><div class="eh-fs-g">' + row('भाग 1 · English', E) + row('भाग 2 · हिंदी', H2) +
       '<div class="eh-fs-c ' + (both ? 'pass' : 'fail') + '"><span>कुल परिणाम</span><b>' + (both ? 'Qualified ✓' : 'Not qualified') + '</b><em>दोनों भाषाओं में Qualified होना ज़रूरी</em></div></div>';
+    var ns = (CFG.fullSet || 1) + 1; if (ns > (CFG.fullCount || 1)) ns = 1;
+    box.innerHTML += '<a class="eh-ft-go" style="display:inline-block;margin-top:12px;text-decoration:none" href="' + CFG.fullFirst + '?full=1&fs=' + ns + '&kb=' + (CFG.fullKb || 'krutidev') + '">अगला Set ' + ns + ' शुरू करें →</a>';
     var d = $('#eh-res-dash'); d.insertBefore(box, d.firstChild);
     try { sessionStorage.removeItem('eh_full_en'); } catch (x) {}
   }
