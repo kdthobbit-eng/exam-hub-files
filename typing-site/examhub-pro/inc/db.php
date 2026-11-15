@@ -5,6 +5,35 @@ define('EH_DB_VER', '2');
 
 /* from this time, saved key counts are capped per word (see eh-typing.js finish) and must not be raised to the typed length */
 if (!defined('EH_KCAP_FROM')) define('EH_KCAP_FROM', '2026-11-15 19:10:00');
+/* old results whose key count was capped afterwards (a long run of keys without spaces), see eh_kfix() */
+function eh_kfixed() { $a = get_option('eh_kfixed', []); return is_array($a) ? array_map('intval', $a) : []; }
+/* key count with each typed word worth at most 20 letters, as used from EH_KCAP_FROM on (the browser caps at passage word + 2) */
+function eh_kcap_keys($typed) {
+    $w = preg_split('/\s+/u', trim((string) $typed), -1, PREG_SPLIT_NO_EMPTY); $k = 0;
+    foreach ($w as $x) $k += min(mb_strlen($x), 20);
+    return $w ? $k + count($w) - 1 : 0;
+}
+/* re-score one saved result with the capped key count; returns [old net, new net] or null */
+function eh_kfix($id) {
+    global $wpdb; $t = eh_table();
+    $r = $wpdb->get_row($wpdb->prepare("SELECT id, exam, typed, keys_count, net FROM $t WHERE id = %d", $id), ARRAY_A);
+    if (!$r || $r['typed'] === '' || $r['typed'] === null) return null;
+    $e = eh_exam($r['exam']); if (!$e) return null;
+    $k = eh_kcap_keys($r['typed']); $old = (int) $r['net'];
+    $cur = max((int) $r['keys_count'], mb_strlen(trim($r['typed'])));
+    if ($k >= $cur) return [$old, $old];
+    $wpdb->update($t, ['keys_count' => $k], ['id' => $id]);
+    if (($e['eval'] ?? '') === 'upsssc' && !empty($e['wpm'])) {
+        $sp = '(GREATEST(0, IF(keys_count > 0, keys_count / 5, words) - GREATEST(0, full_m + half_m / 2 - 5) * 6) / GREATEST(minutes, %f, 0.01))';
+        $wpdb->query($wpdb->prepare("UPDATE $t SET pass = IF($sp >= %f, 1, 0), net = FLOOR($sp), gross = ROUND(IF(keys_count > 0, keys_count / 5, words) / GREATEST(minutes, %f, 0.01)) WHERE id = %d",
+            (float) $e['minutes'], (float) $e['wpm'], (float) $e['minutes'], (float) $e['minutes'], $id));
+    } elseif ($e['unit'] === 'keys') {
+        $wpdb->query($wpdb->prepare("UPDATE $t SET pass = IF(keys_count >= %d AND err <= %f, 1, 0) WHERE id = %d", (int) $e['target'], (float) ($e['allowed'] ?? 5), $id));
+    }
+    $f = eh_kfixed(); if (!in_array((int) $id, $f, true)) { $f[] = (int) $id; update_option('eh_kfixed', $f, false); }
+    delete_transient('eh_attempts');
+    return [$old, (int) $wpdb->get_var($wpdb->prepare("SELECT net FROM $t WHERE id = %d", $id))];
+}
 function eh_table() { global $wpdb; return $wpdb->prefix . 'eh_results'; }
 
 add_action('init', function () {
@@ -105,7 +134,7 @@ add_action('init', function () {
     global $wpdb; $t = eh_table(); $n = 0;
     /* Hindi keyboards (Windows Inscript / Mangal) did not report every key press, so some saved key counts were far too low.
        The key count is the letters left on screen, so use the saved typed text where it is longer. */
-    $wpdb->query($wpdb->prepare("UPDATE $t SET keys_count = CHAR_LENGTH(TRIM(typed)) WHERE typed <> '' AND CHAR_LENGTH(TRIM(typed)) > keys_count AND created < %s", EH_KCAP_FROM));
+    $wpdb->query($wpdb->prepare("UPDATE $t SET keys_count = CHAR_LENGTH(TRIM(typed)) WHERE typed <> '' AND CHAR_LENGTH(TRIM(typed)) > keys_count AND created < %s" . (eh_kfixed() ? ' AND id NOT IN (' . implode(',', eh_kfixed()) . ')' : ''), EH_KCAP_FROM));
     foreach ($exams as $e) {
         if (empty($e['target'])) continue;
         if (($e['eval'] ?? '') === 'upsssc' && !empty($e['wpm'])) {

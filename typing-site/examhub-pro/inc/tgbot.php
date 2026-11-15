@@ -113,6 +113,29 @@ Time " . esc_html($r['created']) . "
     }
     return $o;
 }
+/* owner-only: results with a run of 25+ letters without a space (key-mash) */
+function eh_tgb_glitch() {
+    global $wpdb; $t = eh_table();
+    $rows = $wpdb->get_results("SELECT id, name, user_id, exam, net, keys_count, typed, created FROM $t WHERE typed REGEXP '[^[:space:]]{25,}' ORDER BY net DESC LIMIT 400", ARRAY_A);
+    $fx = eh_kfixed(); $list = [];
+    foreach ($rows as $r) {
+        if (in_array((int) $r['id'], $fx, true)) continue;
+        $k = eh_kcap_keys($r['typed']); $cur = max((int) $r['keys_count'], mb_strlen(trim($r['typed'])));
+        if ($k >= $cur) continue;
+        $list[] = $r + ['cut' => $cur - $k];
+    }
+    $o = '🧪 <b>Glitch check</b> (बिना space के 25+ अक्षर)' . "
+
+ऐसे result: <b>" . count($list) . '</b>' . (count($rows) >= 400 ? ' (पहले 400 देखे)' : '') . "
+";
+    foreach (array_slice($list, 0, 12) as $r) $o .= "
+#" . (int) $r['id'] . ' ' . esc_html(eh_display_name($r)) . ' · ' . (int) $r['net'] . ' WPM · −' . (int) $r['cut'] . ' keys · ' . esc_html(substr($r['created'], 0, 10)) . ' · ' . esc_html(str_replace('-typing-test', '', $r['exam']));
+    if ($list) $o .= "
+
+एक ठीक करें: <code>/fix ID</code>
+सब ठीक करें: <code>/fixall</code>";
+    return $o;
+}
 function eh_tgb_3284() {
     global $wpdb; $t = eh_table(); $d = current_time('Y-m-d'); $pp = eh_stats_people_sql();
     $q = function ($extra) use ($wpdb, $t, $pp) { return $wpdb->get_row("SELECT COUNT(*) n, COUNT(DISTINCT $pp) ppl, COALESCE(SUM(pass),0) ok, COALESCE(ROUND(AVG(net)),0) avg FROM $t WHERE passage LIKE 'x3284%' $extra", ARRAY_A); };
@@ -341,6 +364,13 @@ function eh_tgb_hook(WP_REST_Request $req) {
     elseif ($txt === '/hour') $send(eh_tgb_stats('hour'), eh_tgb_back_kb('r:hour'));
     elseif ($txt === '/all') $send(eh_tgb_stats('all'), eh_tgb_back_kb('r:all'));
     elseif ($txt === '/3284') $send(eh_tgb_3284(), eh_tgb_back_kb('p3284'));
+    elseif ($txt === '/glitch' && $role === 'owner') $send(eh_tgb_glitch(), eh_tgb_back_kb('menu'));
+    elseif (preg_match('#^/fix\s+(\d+)$#', $txt, $fm) && $role === 'owner') { $x = eh_kfix((int) $fm[1]); $send($x ? '✅ #' . (int) $fm[1] . ' ठीक: ' . $x[0] . ' → <b>' . $x[1] . ' WPM</b>' : '⚠️ #' . (int) $fm[1] . ' नहीं मिला।', eh_tgb_back_kb('menu')); }
+    elseif ($txt === '/fixall' && $role === 'owner') {
+        global $wpdb; $ids = $wpdb->get_col('SELECT id FROM ' . eh_table() . " WHERE typed REGEXP '[^[:space:]]{25,}' LIMIT 2000"); $c = 0;
+        foreach ($ids as $i) { $x = eh_kfix((int) $i); if ($x && $x[0] !== $x[1]) $c++; }
+        $send('✅ ' . $c . ' result ठीक किए गए।', eh_tgb_back_kb('menu'));
+    }
     elseif ($txt === '/check' && $role === 'owner') $send(eh_tgb_check(), eh_tgb_back_kb('menu'));
     elseif ($txt === '/update' && $role === 'owner') $send('🔄 Theme update के लिए नीचे बटन दबाइए।', ['inline_keyboard' => [[['text' => '🔄 Update theme', 'callback_data' => 'upd']]]]);
     else $send(eh_tgb_menu_text(), eh_tgb_menu_kb($role));
