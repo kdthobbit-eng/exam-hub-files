@@ -119,7 +119,7 @@ function eh_passage_days($lang, $days = 7) {
         /* passages stamped with an added time (bot or new sets) sit on top of the day they were added, newest first */
         $bt = array_values(array_filter($all, function ($p) use ($date) { return (!empty($p['bot']) || (!empty($p['both']) && empty($p['special']) && ($p['level'] ?? '') !== 'S')) && substr((string) ($p['added'] ?? ''), 0, 10) === $date; }));
         usort($bt, function ($x, $y) { return strcmp($y['added'], $x['added']) ?: (crc32($x['id']) <=> crc32($y['id'])); });
-        $items = array_merge($bt, $d === 0 ? $super : [], $items, $chunks[(($day % $sets) + $sets) % $sets]);
+        $items = array_merge($d === 0 ? $super : [], $bt, $items, $chunks[(($day % $sets) + $sets) % $sets]);
         $out[] = ['date' => $date, 'items' => $items];
     }
     return $out;
