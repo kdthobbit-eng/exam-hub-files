@@ -91,6 +91,28 @@ function eh_tgb_live() {
     foreach ($rows as $i => $r) { $e = eh_exam($r['exam']); $o .= $md[$i] . ' ' . esc_html(eh_display_name($r)) . ' — <b>' . (int) $r['net'] . ' WPM</b> · ' . esc_html($r['acc']) . '%' . ($e ? ' · ' . esc_html($e['name']) : '') . "\n"; }
     return $o;
 }
+/* owner-only: today's fastest live results with keyboard, letters and typed text, to spot fake speeds */
+function eh_tgb_check() {
+    global $wpdb; $t = eh_table(); $d = current_time('Y-m-d');
+    $rows = $wpdb->get_results($wpdb->prepare("SELECT id, name, user_id, exam, layout, passage, minutes, keys_count, words, full_m, half_m, backspaces, net, acc, created, LEFT(typed, 160) tp, CHAR_LENGTH(typed) tl, LEFT(src, 160) sp FROM $t WHERE live_date = %s ORDER BY net DESC LIMIT 3", $d), ARRAY_A);
+    if (!$rows) return 'आज कोई live result नहीं।';
+    $o = '🔍 <b>Check · आज के top 3</b>' . "
+";
+    foreach ($rows as $r) {
+        $m = max(0.01, (float) $r['minutes']);
+        $o .= "
+<b>#" . (int) $r['id'] . ' ' . esc_html(eh_display_name($r)) . '</b> · ' . esc_html($r['exam']) . "
+Net " . (int) $r['net'] . ' · Acc ' . esc_html($r['acc']) . '% · Layout <b>' . esc_html($r['layout'] ?: '-') . '</b>' .
+            "
+Min " . esc_html($r['minutes']) . ' · Keys ' . (int) $r['keys_count'] . ' · Typed ' . (int) $r['tl'] . ' (' . round((int) $r['tl'] / $m) . '/min) · Words ' . (int) $r['words'] . ' · BS ' . (int) $r['backspaces'] . ' · Full ' . (int) $r['full_m'] .
+            "
+Time " . esc_html($r['created']) . "
+<i>T: " . esc_html($r['tp']) . "</i>
+<i>S: " . esc_html($r['sp']) . "</i>
+";
+    }
+    return $o;
+}
 function eh_tgb_3284() {
     global $wpdb; $t = eh_table(); $d = current_time('Y-m-d'); $pp = eh_stats_people_sql();
     $q = function ($extra) use ($wpdb, $t, $pp) { return $wpdb->get_row("SELECT COUNT(*) n, COUNT(DISTINCT $pp) ppl, COALESCE(SUM(pass),0) ok, COALESCE(ROUND(AVG(net)),0) avg FROM $t WHERE passage LIKE 'x3284%' $extra", ARRAY_A); };
@@ -319,6 +341,7 @@ function eh_tgb_hook(WP_REST_Request $req) {
     elseif ($txt === '/hour') $send(eh_tgb_stats('hour'), eh_tgb_back_kb('r:hour'));
     elseif ($txt === '/all') $send(eh_tgb_stats('all'), eh_tgb_back_kb('r:all'));
     elseif ($txt === '/3284') $send(eh_tgb_3284(), eh_tgb_back_kb('p3284'));
+    elseif ($txt === '/check' && $role === 'owner') $send(eh_tgb_check(), eh_tgb_back_kb('menu'));
     elseif ($txt === '/update' && $role === 'owner') $send('🔄 Theme update के लिए नीचे बटन दबाइए।', ['inline_keyboard' => [[['text' => '🔄 Update theme', 'callback_data' => 'upd']]]]);
     else $send(eh_tgb_menu_text(), eh_tgb_menu_kb($role));
     return ['ok' => true];
