@@ -172,8 +172,11 @@ if ($row):
   <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-s" data-l="superhard">Super Hard</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
   <?php if ($eh_set): ?>
   <div class="eh-3284-info">
-    <div class="eh-3284-ih"><b>परीक्षा की जानकारी</b><span>UPSSSC 3284 Junior Assistant Typing · 13-14 नवंबर 2026 · सभी शिफ्टों के पैटर्न व परीक्षा केंद्र से मिली समीक्षा पर आधारित</span></div>
+    <div class="eh-3284-ih"><b>परीक्षा की जानकारी</b><span>UPSSSC 3284 Junior Assistant Typing · 13-15 नवंबर 2026 · सभी शिफ्टों के पैटर्न व परीक्षा केंद्र से मिली समीक्षा पर आधारित</span></div>
     <div class="eh-3284-grid">
+      <div class="eh-3284-tile eh-3284-new"><i>🆕</i><div><span>15 Nov · English पैसेज</span><b>विषय: UPI, AI से जुड़ा · UPI पूरा CAPITAL · अंक जैसे 900 million · शुरू की 3 लाइन कठिन, बड़े शब्द · स्तर Moderate-Hard</b></div></div>
+      <div class="eh-3284-tile eh-3284-new"><i>🆕</i><div><span>15 Nov · हिंदी पैसेज</span><b>कहानी जैसा, छोटे और सरल शब्द · अंक या स्पेशल कैरेक्टर लगभग नहीं · स्तर Easy</b></div></div>
+      <div class="eh-3284-tile eh-3284-new"><i>📏</i><div><span>15 Nov · लाइन</span><b>एक लाइन में 40-42 शब्द · English लगभग 5 लाइन टाइप हुई (अभ्यर्थियों के अनुसार) · पहले English, फिर हिंदी</b></div></div>
       <div class="eh-3284-tile eh-3284-new"><i>🆕</i><div><span>14 Nov · English पैसेज</span><b>विषय: Investment, Mutual Fund, Silver ETF · पहला शब्द Investment · स्तर Moderate</b></div></div>
       <div class="eh-3284-tile eh-3284-new"><i>🆕</i><div><span>14 Nov · English में अंक</span><b>2025, 2026, 13310, करोड़ की राशि, कॉमा वाले बड़े नंबर · कुछ शब्द पूरे CAPITAL में (ETF)</b></div></div>
       <div class="eh-3284-tile eh-3284-new"><i>🆕</i><div><span>14 Nov · हिंदी पैसेज</span><b>विषय: आत्मा, माया, जड़-चेतन · केवल कॉमा और हाइफ़न, कोई अंक या स्पेशल कैरेक्टर नहीं · स्तर Easy</b></div></div>
