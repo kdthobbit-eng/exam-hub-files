@@ -92,9 +92,9 @@ function eh_tgb_live() {
     return $o;
 }
 /* owner-only: today's fastest live results with keyboard, letters and typed text, to spot fake speeds */
-function eh_tgb_check($d = '', $q = '') {
+function eh_tgb_check($d = '', $q = '', $k = 0) {
     global $wpdb; $t = eh_table(); if (!$d) $d = current_time('Y-m-d');
-    $rows = $wpdb->get_results($wpdb->prepare("SELECT id, name, user_id, exam, layout, passage, minutes, keys_count, words, full_m, half_m, backspaces, net, acc, created, LEFT(typed, 160) tp, CHAR_LENGTH(typed) tl, LEFT(src, 160) sp FROM $t WHERE DATE(created) = %s" . ($q ? ' AND (exam LIKE %s)' : '') . " ORDER BY net DESC LIMIT 5", ...($q ? [$d, '%' . $wpdb->esc_like($q) . '%'] : [$d])), ARRAY_A);
+    $rows = $wpdb->get_results($wpdb->prepare("SELECT id, name, user_id, exam, layout, passage, minutes, keys_count, words, full_m, half_m, backspaces, net, acc, created, LEFT(typed, 160) tp, CHAR_LENGTH(typed) tl, LEFT(src, 160) sp FROM $t WHERE " . ($k ? '(keys_count = %d OR CHAR_LENGTH(TRIM(typed)) = %d) AND created >= %s' : 'DATE(created) = %s') . ($q ? ' AND (exam LIKE %s)' : '') . " ORDER BY net DESC LIMIT 5", ...array_merge($k ? [$k, $k, $d] : [$d], $q ? ['%' . $wpdb->esc_like($q) . '%'] : [])), ARRAY_A);
     if (!$rows) return 'आज कोई live result नहीं।';
     $o = '🔍 <b>Check · ' . esc_html($d) . ' top 5</b>' . "
 ";
@@ -372,6 +372,7 @@ function eh_tgb_hook(WP_REST_Request $req) {
         $send('✅ ' . $c . ' result ठीक किए गए।', eh_tgb_back_kb('menu'));
     }
     elseif (preg_match('#^/check\s+(\d{4}-\d{2}-\d{2})(?:\s+(\S+))?$#', $txt, $cm) && $role === 'owner') $send(eh_tgb_check($cm[1], $cm[2] ?? ''), eh_tgb_back_kb('menu'));
+    elseif (preg_match('#^/find\s+(\d+)$#', $txt, $km) && $role === 'owner') $send(eh_tgb_check(wp_date('Y-m-d', time() - 10 * 86400), '', (int) $km[1]), eh_tgb_back_kb('menu'));
     elseif ($txt === '/check' && $role === 'owner') $send(eh_tgb_check(), eh_tgb_back_kb('menu'));
     elseif ($txt === '/update' && $role === 'owner') $send('🔄 Theme update के लिए नीचे बटन दबाइए।', ['inline_keyboard' => [[['text' => '🔄 Update theme', 'callback_data' => 'upd']]]]);
     else $send(eh_tgb_menu_text(), eh_tgb_menu_kb($role));
