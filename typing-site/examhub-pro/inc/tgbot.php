@@ -92,11 +92,11 @@ function eh_tgb_live() {
     return $o;
 }
 /* owner-only: today's fastest live results with keyboard, letters and typed text, to spot fake speeds */
-function eh_tgb_check() {
-    global $wpdb; $t = eh_table(); $d = current_time('Y-m-d');
-    $rows = $wpdb->get_results($wpdb->prepare("SELECT id, name, user_id, exam, layout, passage, minutes, keys_count, words, full_m, half_m, backspaces, net, acc, created, LEFT(typed, 160) tp, CHAR_LENGTH(typed) tl, LEFT(src, 160) sp FROM $t WHERE live_date = %s ORDER BY net DESC LIMIT 3", $d), ARRAY_A);
+function eh_tgb_check($d = '', $q = '') {
+    global $wpdb; $t = eh_table(); if (!$d) $d = current_time('Y-m-d');
+    $rows = $wpdb->get_results($wpdb->prepare("SELECT id, name, user_id, exam, layout, passage, minutes, keys_count, words, full_m, half_m, backspaces, net, acc, created, LEFT(typed, 160) tp, CHAR_LENGTH(typed) tl, LEFT(src, 160) sp FROM $t WHERE DATE(created) = %s" . ($q ? ' AND (exam LIKE %s)' : '') . " ORDER BY net DESC LIMIT 5", ...($q ? [$d, '%' . $wpdb->esc_like($q) . '%'] : [$d])), ARRAY_A);
     if (!$rows) return 'आज कोई live result नहीं।';
-    $o = '🔍 <b>Check · आज के top 3</b>' . "
+    $o = '🔍 <b>Check · ' . esc_html($d) . ' top 5</b>' . "
 ";
     foreach ($rows as $r) {
         $m = max(0.01, (float) $r['minutes']);
@@ -104,7 +104,7 @@ function eh_tgb_check() {
 <b>#" . (int) $r['id'] . ' ' . esc_html(eh_display_name($r)) . '</b> · ' . esc_html($r['exam']) . "
 Net " . (int) $r['net'] . ' · Acc ' . esc_html($r['acc']) . '% · Layout <b>' . esc_html($r['layout'] ?: '-') . '</b>' .
             "
-Min " . esc_html($r['minutes']) . ' · Keys ' . (int) $r['keys_count'] . ' · Typed ' . (int) $r['tl'] . ' (' . round((int) $r['tl'] / $m) . '/min) · Words ' . (int) $r['words'] . ' · BS ' . (int) $r['backspaces'] . ' · Full ' . (int) $r['full_m'] .
+Min " . esc_html($r['minutes']) . ' · Keys ' . (int) $r['keys_count'] . ' · Typed ' . (int) $r['tl'] . ' (' . round((int) $r['tl'] / $m) . '/min) · Net ' . (int) $r['net'] . ' · Words ' . (int) $r['words'] . ' · BS ' . (int) $r['backspaces'] . ' · Full ' . (int) $r['full_m'] .
             "
 Time " . esc_html($r['created']) . "
 <i>T: " . esc_html($r['tp']) . "</i>
@@ -371,6 +371,7 @@ function eh_tgb_hook(WP_REST_Request $req) {
         foreach ($ids as $i) { $x = eh_kfix((int) $i); if ($x && $x[0] !== $x[1]) $c++; }
         $send('✅ ' . $c . ' result ठीक किए गए।', eh_tgb_back_kb('menu'));
     }
+    elseif (preg_match('#^/check\s+(\d{4}-\d{2}-\d{2})(?:\s+(\S+))?$#', $txt, $cm) && $role === 'owner') $send(eh_tgb_check($cm[1], $cm[2] ?? ''), eh_tgb_back_kb('menu'));
     elseif ($txt === '/check' && $role === 'owner') $send(eh_tgb_check(), eh_tgb_back_kb('menu'));
     elseif ($txt === '/update' && $role === 'owner') $send('🔄 Theme update के लिए नीचे बटन दबाइए।', ['inline_keyboard' => [[['text' => '🔄 Update theme', 'callback_data' => 'upd']]]]);
     else $send(eh_tgb_menu_text(), eh_tgb_menu_kb($role));
