@@ -422,6 +422,15 @@
       gross: gross, net: net, acc: +acc.toFixed(2), err: +errPct.toFixed(2), pass: pass ? 1 : 0, live: CFG.live || ''
     };
     closeExam();
+    if (CFG.full === 1) {
+      /* Full Exam part 1: no result screen; Hindi follows after a short break */
+      try { sessionStorage.setItem('eh_full_en', JSON.stringify({ net: R.net, gross: R.gross, acc: R.acc, err: R.err, pass: R.pass, words: R.words, keys: R.keys, full: full, half: half, set: CFG.fullSet, t: Date.now() })); } catch (x) {}
+      R.mist = window.EHEval.mistakes(ops); R.title = S.title;
+      var su = 0; ops.forEach(function (o) { if (o.t !== 'add') su += o.s.split(' ').length; });
+      R.typed = typed.slice(0, 12000); R.src = S.words.slice(0, su + 15).join(' ').slice(0, 14000);
+      var sp = save(R, true); fullBreak(R, sp);
+      return;
+    }
     showResult(R, ops);
     var srcUpto = 0; ops.forEach(function (o) { if (o.t !== 'add') srcUpto += o.s.split(' ').length; });
     R.typed = typed.slice(0, 20000); R.src = S.words.slice(0, srcUpto + 15).join(' ').slice(0, 25000);
@@ -450,13 +459,14 @@
     R.title = S.title; R.date = new Date().toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
     $('#eh-res-dash').innerHTML = window.EHEval.dashboard(R, exam, ops);
     window.EHEval.bindDash($('#eh-res-dash'));
+    if (CFG.full === 2) fullSummary(R);
     $('#eh-res-link').hidden = true;
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
-  function save(R) {
+  function save(R, keep) {
     if (!CFG.loggedIn) R.name = store.get('name', '');
-    fetch(CFG.rest + 'result', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': CFG.nonce }, body: JSON.stringify(R) })
+    return fetch(CFG.rest + 'result', { method: 'POST', credentials: 'same-origin', keepalive: !!keep, headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': CFG.nonce }, body: JSON.stringify(R) })
       .then(function (r) { return r.json(); })
       .then(function (j) {
         var s = $('#eh-res-saved'); if (s) s.textContent = j && j.ok ? (j.rank ? 'Result saved · your rank today #' + j.rank : 'Result saved') : '';
@@ -464,6 +474,39 @@
         document.dispatchEvent(new Event('eh:saved'));
       })
       .catch(function () {});
+  }
+
+  /* ---------- 3284 Full Exam: English, then Hindi ---------- */
+  function fullBreak(R, sp) {
+    var left = 15, go = false, ov = document.createElement('div');
+    ov.className = 'eh-full-break';
+    ov.innerHTML = '<div class="eh-fb-box"><span class="eh-fb-tag">UPSSSC 3284 Full Exam</span><h2>English submit हो गया ✓</h2>' +
+      '<p>English · <b>' + R.net + ' WPM</b> · Accuracy ' + R.acc + '% · ' + (R.pass ? '<b class="ok">Qualified</b>' : '<b class="no">Not qualified</b>') + '</p>' +
+      '<p class="eh-fb-next">हिंदी (' + (CFG.fullKb === 'inscript' ? 'Mangal Inscript' : 'Krutidev') + ') <b id="eh-fb-n">15</b> सेकंड में अपने आप शुरू होगी</p>' +
+      '<button type="button" class="btn dark" id="eh-fb-go">हिंदी अभी शुरू करें →</button></div>';
+    document.body.appendChild(ov);
+    function next() {
+      if (go) return; go = true; $('#eh-fb-go').textContent = 'Hindi खुल रही है…';
+      var t = new Promise(function (r) { setTimeout(r, 2500); });
+      Promise.race([sp || t, t]).then(function () { location.href = CFG.fullNext; }, function () { location.href = CFG.fullNext; });
+    }
+    $('#eh-fb-go').addEventListener('click', next);
+    var iv = setInterval(function () { left--; var n = $('#eh-fb-n'); if (n) n.textContent = Math.max(0, left); if (left <= 0) { clearInterval(iv); next(); } }, 1000);
+  }
+  function fullSummary(H2) {
+    var E = null; try { E = JSON.parse(sessionStorage.getItem('eh_full_en') || 'null'); } catch (x) {}
+    var box = document.createElement('div'); box.className = 'eh-full-sum';
+    var row = function (n, r) { return '<div class="eh-fs-c"><span>' + n + '</span>' + (r ? '<b>' + r.net + ' WPM</b><em>Accuracy ' + r.acc + '% · ' + (r.pass ? '<i class="ok">Qualified</i>' : '<i class="no">Not qualified</i>') + '</em>' : '<b>—</b><em>English भाग नहीं मिला</em>') + '</div>'; };
+    var both = E && E.pass && H2.pass;
+    box.innerHTML = '<h3>UPSSSC 3284 Full Exam · Set ' + (CFG.fullSet || 1) + ' का परिणाम</h3><div class="eh-fs-g">' + row('भाग 1 · English', E) + row('भाग 2 · हिंदी', H2) +
+      '<div class="eh-fs-c ' + (both ? 'pass' : 'fail') + '"><span>कुल परिणाम</span><b>' + (both ? 'Qualified ✓' : 'Not qualified') + '</b><em>दोनों भाषाओं में Qualified होना ज़रूरी</em></div></div>';
+    var d = $('#eh-res-dash'); d.insertBefore(box, d.firstChild);
+    try { sessionStorage.removeItem('eh_full_en'); } catch (x) {}
+  }
+  if (CFG.full === 2) {
+    /* Hindi part opens straight into the exam window, after the Krutidev font is ready */
+    var fgo = function () { setTimeout(function () { if (!S.started) startTest(); }, 400); };
+    if (document.fonts && document.fonts.load) document.fonts.load('20px EHKruti').then(fgo, fgo); else fgo();
   }
 
   /* ---------- buttons ---------- */

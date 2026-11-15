@@ -1571,3 +1571,27 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 .eh-rhide{display:none!important}
 .eh-res-bottom{display:flex;justify-content:center;margin:22px 0 6px}
 .eh-res-bottom .eh-next-btn{font-size:17px;padding:13px 34px}
+
+/* 3284 Full Exam */
+.eh-full{border:2px solid #7c3aed;background:#f5f3ff;border-radius:16px;padding:16px 18px;margin:14px 0}
+.eh-full-h b{display:block;font-size:18px;color:#3b0764;margin:4px 0}.eh-full-h span{font-size:14px;color:#4c1d95}
+.eh-full-badge{display:inline-block!important;background:#7c3aed;color:#fff!important;font-weight:800;font-size:11px!important;padding:2px 8px;border-radius:20px}
+.eh-full-sets{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:12px}
+.eh-full-set{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #ddd6fe;border-radius:12px;padding:8px 10px}
+.eh-full-set b{flex:1;color:#3b0764}.eh-full-set a{background:#7c3aed;color:#fff!important;font-weight:700;font-size:13px;padding:6px 10px;border-radius:8px;text-decoration:none!important}
+.eh-full-set a+a{background:#1e293b}
+.eh-full-break{position:fixed;inset:0;z-index:99999;background:rgba(15,23,42,.92);display:flex;align-items:center;justify-content:center;padding:16px}
+.eh-fb-box{background:#fff;border-radius:20px;max-width:460px;width:100%;padding:28px 24px;text-align:center}
+.eh-fb-tag{display:inline-block;background:#ede9fe;color:#5b21b6;font-weight:800;font-size:12px;padding:4px 12px;border-radius:20px}
+.eh-fb-box h2{margin:12px 0 8px;font-size:24px}.eh-fb-box p{margin:6px 0;color:#334155}
+.eh-fb-box .ok{color:#16a34a}.eh-fb-box .no{color:#dc2626}.eh-fb-next{font-size:16px}.eh-fb-next b{font-size:22px;color:#7c3aed}
+.eh-fb-box .btn{margin-top:14px;width:100%}
+.eh-full-sum{border:2px solid #7c3aed;border-radius:16px;padding:14px 16px;margin:0 0 14px;background:#faf5ff}
+.eh-full-sum h3{margin:0 0 10px;font-size:17px;color:#3b0764}
+.eh-fs-g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.eh-fs-c{background:#fff;border:1px solid #e9d5ff;border-radius:12px;padding:10px 12px}
+.eh-fs-c span{display:block;font-size:12.5px;color:#64748b}.eh-fs-c b{display:block;font-size:20px;margin:2px 0}.eh-fs-c em{font-style:normal;font-size:12.5px;color:#475569}
+.eh-fs-c i{font-style:normal;font-weight:700}.eh-fs-c .ok{color:#16a34a}.eh-fs-c .no{color:#dc2626}
+.eh-fs-c.pass{background:#dcfce7;border-color:#86efac}.eh-fs-c.fail{background:#fee2e2;border-color:#fca5a5}
+@media(max-width:640px){.eh-fs-g{grid-template-columns:1fr}}
+.eh-3284-band a.go+a.go{background:#7c3aed}

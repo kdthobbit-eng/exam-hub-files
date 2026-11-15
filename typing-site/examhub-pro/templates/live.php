@@ -171,6 +171,20 @@ if ($row):
   <div class="eh-chips eh-live-chips"><button type="button" class="on" data-f="">All</button><button type="button" data-f="en">English</button><button type="button" data-f="hi">Hindi</button></div>
   <div class="eh-chips eh-live-lv"><button type="button" class="on" data-l="">All levels</button><button type="button" class="lv-s" data-l="superhard">Super Hard</button><button type="button" class="lv-e" data-l="easy">Easy</button><button type="button" class="lv-m" data-l="moderate">Moderate</button><button type="button" class="lv-h" data-l="hard">Hard</button></div>
   <?php if ($eh_set): ?>
+  <?php $eh_fn = count(array_filter(eh_passages('en'), function ($p) { return ($p['day'] ?? '') === 'full3284'; }));
+  if ($eh_fn): $eh_fu = home_url('/typing/upsssc-assistants-english-typing-test/'); ?>
+  <div class="eh-full" id="full-exam">
+    <div class="eh-full-h"><span class="eh-full-badge">NEW</span><b>3284 Full Exam · English + हिंदी एक साथ</b>
+    <span>परीक्षा की तरह पहले English (5 मिनट), Submit होते ही 15 सेकंड में हिंदी (5 मिनट) अपने आप शुरू · अंत में दोनों का एक साथ परिणाम · सभी पैसेज Hard</span></div>
+    <div class="eh-full-sets">
+    <?php for ($i = 1; $i <= $eh_fn; $i++): ?>
+      <div class="eh-full-set"><b>Set <?php echo $i; ?></b>
+        <a href="<?php echo esc_url(add_query_arg(['full' => 1, 'fs' => $i, 'kb' => 'krutidev'], $eh_fu)); ?>">Krutidev →</a>
+        <a href="<?php echo esc_url(add_query_arg(['full' => 1, 'fs' => $i, 'kb' => 'inscript'], $eh_fu)); ?>">Mangal →</a></div>
+    <?php endfor; ?>
+    </div>
+  </div>
+  <?php endif; ?>
   <div class="eh-3284-info">
     <div class="eh-3284-ih"><b>परीक्षा की जानकारी</b><span>UPSSSC 3284 Junior Assistant Typing · 13-15 नवंबर 2026 · सभी शिफ्टों के पैटर्न व परीक्षा केंद्र से मिली समीक्षा पर आधारित</span></div>
     <div class="eh-3284-grid">

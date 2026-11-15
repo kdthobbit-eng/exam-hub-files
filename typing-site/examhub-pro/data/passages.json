@@ -9145,5 +9145,125 @@
   "both": true,
   "added": "2026-11-15 07:50",
   "tag": "New"
+ },
+ {
+  "id": "fx3284en1",
+  "lang": "en",
+  "title": "ONDC and the Future of Digital Commerce",
+  "text": "The Open Network for Digital Commerce, or ONDC, was incorporated in December 2021 as a not-for-profit company under the Department for Promotion of Industry and Internal Trade, DPIIT. Unlike conventional e-commerce marketplaces, ONDC is not an application or a platform; it is an interoperable protocol that allows any buyer application to discover products listed on any seller application. A kirana shopkeeper in Gorakhpur, a handloom weaver in Varanasi and a restaurant in Lucknow can therefore reach customers across the country without depending on a single dominant intermediary. By September 2026, the network had registered more than 7,64,000 sellers and service providers in over 1,200 cities, processing approximately 1.6 crore transactions every month. Policymakers believe that such decentralised infrastructure can democratise e-commerce, reduce commission charges, strengthen competition and empower Micro, Small and Medium Enterprises, MSMEs. Nevertheless, challenges such as inconsistent delivery logistics, grievance redressal, cataloguing standards and limited consumer awareness must be addressed systematically before the network achieves its transformative potential.",
+  "words": 160,
+  "chars": 1188,
+  "level": "H",
+  "day": "full3284"
+ },
+ {
+  "id": "fx3284en2",
+  "lang": "en",
+  "title": "Algorithms, Accountability and Public Infrastructure",
+  "text": "Governments increasingly rely on algorithms to allocate resources, identify beneficiaries, detect irregularities and forecast demand for essential services. Sophisticated software now evaluates applications for pensions, scholarships, subsidised housing and crop insurance within minutes, a process that previously required weeks of manual verification. However, algorithmic decision-making is only as reliable as the information on which it is trained. Incomplete land records, outdated Aadhaar-seeded bank accounts, spelling inconsistencies and duplicate entries can wrongly exclude genuine beneficiaries from welfare schemes. Experts therefore recommend periodic audits, explainable models, human oversight and a transparent mechanism through which citizens can challenge automated decisions. The Ministry of Electronics and Information Technology, MeitY, has emphasised responsible, inclusive and trustworthy artificial intelligence, while the Digital Personal Data Protection Act, 2023 imposes obligations regarding consent, purpose limitation and security safeguards. Technology infrastructure must be designed not merely for efficiency, but also for fairness, accessibility, accountability and the protection of constitutional rights.",
+  "words": 151,
+  "chars": 1241,
+  "level": "H",
+  "day": "full3284"
+ },
+ {
+  "id": "fx3284en3",
+  "lang": "en",
+  "title": "Unified Payments Interface: Scale and Security",
+  "text": "The Unified Payments Interface, UPI, developed by the National Payments Corporation of India, NPCI, has become the backbone of India's digital economy. In October 2026, UPI recorded approximately 20,700 million transactions valued at more than Rs. 27,28,000 crore, and the system now serves over 900 million users through 680 participating banks. Interoperability, real-time settlement, negligible charges and QR-code acceptance have enabled street vendors, transporters, pharmacists and agricultural cooperatives to embrace cashless payments. UPI is now accepted in Singapore, the UAE, France, Mauritius, Sri Lanka, Bhutan and Nepal, reinforcing India's leadership in digital public infrastructure. Nevertheless, phenomenal growth has created vulnerabilities. Fraudsters impersonate bank officials, distribute counterfeit applications and manipulate victims into approving collect requests. The Reserve Bank of India, RBI, has therefore introduced device binding, transaction limits, AI-based fraud monitoring and the MuleHunter.AI tool to identify suspicious accounts. Customers should never enter their UPI PIN merely to receive money, because a PIN authorises debits only.",
+  "words": 155,
+  "chars": 1176,
+  "level": "H",
+  "day": "full3284"
+ },
+ {
+  "id": "fx3284en4",
+  "lang": "en",
+  "title": "Artificial Intelligence and Employment",
+  "text": "Artificial Intelligence, AI, is transforming manufacturing, healthcare, banking, agriculture, logistics and public administration at an unprecedented pace. Generative models can draft correspondence, summarise judgements, translate documents into 22 scheduled languages and answer citizens' queries round the clock. According to industry estimates, India's AI market may exceed US$ 17 billion by 2027, and the IndiaAI Mission, sanctioned with a budgetary allocation of Rs. 10,371.92 crore, intends to establish computing capacity of more than 18,000 GPUs. Economists, however, caution that automation could displace routine clerical, data-entry and customer-support occupations unless workers are reskilled systematically. Simultaneously, entirely new opportunities are emerging in data annotation, cybersecurity, model evaluation, robotics maintenance and digital governance. Universities, polytechnics and Industrial Training Institutes, ITIs, must therefore redesign curricula, emphasise problem-solving and integrate practical training. Responsible deployment also requires robust regulation, unbiased datasets, transparent procurement and meaningful human supervision, so that technological progress strengthens rather than undermines inclusive economic development.",
+  "words": 151,
+  "chars": 1271,
+  "level": "H",
+  "day": "full3284"
+ },
+ {
+  "id": "fx3284en5",
+  "lang": "en",
+  "title": "Cybersecurity of Critical Infrastructure",
+  "text": "Critical information infrastructure includes power grids, telecommunication networks, railway signalling, banking systems, ports, hospitals and government databases whose disruption could seriously affect national security, public health or economic stability. Ransomware attacks have increasingly targeted such institutions, encrypting servers and demanding payment in cryptocurrency. The Indian Computer Emergency Response Team, CERT-In, recorded more than 20,41,000 cybersecurity incidents in 2024, and its directions require organisations to report specified incidents within 6 hours and to preserve ICT logs for a rolling period of 180 days. The National Critical Information Infrastructure Protection Centre, NCIIPC, coordinates protection of designated sectors. Effective defence depends upon multi-layered security architecture, encrypted communication, regular vulnerability assessment, offline backups and strict access control. Equally important is disciplined behaviour by employees, because a single careless click on a malicious attachment can compromise an entire network. Government offices must conduct periodic training, enforce strong passwords, prohibit unauthorised pen drives and update operating systems promptly to maintain resilience against sophisticated adversaries.",
+  "words": 158,
+  "chars": 1293,
+  "level": "H",
+  "day": "full3284"
+ },
+ {
+  "id": "fx3284en6",
+  "lang": "en",
+  "title": "Direct Benefit Transfer and Financial Inclusion",
+  "text": "Direct Benefit Transfer, DBT, launched on 01 January 2013, has fundamentally changed the way welfare benefits reach citizens. Instead of routing subsidies through multiple intermediaries, the government now transfers money directly into Aadhaar-linked bank accounts of beneficiaries. More than 320 schemes of 53 ministries currently use the DBT platform, and cumulative transfers have exceeded Rs. 44,00,000 crore. The JAM trinity, comprising Jan Dhan accounts, Aadhaar and Mobile numbers, provides the foundation for this architecture. According to official estimates, DBT has generated savings of over Rs. 3,48,000 crore by eliminating duplicate, ghost and ineligible beneficiaries. The PM-KISAN scheme alone has transferred more than Rs. 3,90,000 crore to farmers in successive instalments. However, implementation challenges persist, including biometric authentication failures, dormant accounts, inaccurate seeding and limited banking access in remote areas. Strengthening Business Correspondent networks, simplifying grievance redressal and promoting digital literacy are essential to ensure that every eligible citizen receives entitlements promptly and transparently.",
+  "words": 153,
+  "chars": 1175,
+  "level": "H",
+  "day": "full3284"
+ },
+ {
+  "id": "fx3284hi1",
+  "lang": "hi",
+  "title": "ध्यान और मन की एकाग्रता",
+  "text": "ध्यान एक ऐसी प्राचीन साधना है, जो मन को बाहरी विचलनों से हटाकर भीतर की शांति की ओर ले जाती है। आधुनिक जीवन की भाग-दौड़, प्रतिस्पर्धा और असुरक्षा ने मनुष्य के मन को अत्यधिक अशांत बना दिया है। मन निरंतर अतीत की स्मृतियों और भविष्य की आशंकाओं में विचरता रहता है, जिसके कारण वर्तमान क्षण का आनंद छूट जाता है। ध्यान का अभ्यास इस भटकाव को धीरे-धीरे नियंत्रित करता है। प्रतिदिन प्रातःकाल पंद्रह-बीस मिनट शांत स्थान पर सुखासन में बैठकर श्वास-प्रश्वास पर ध्यान केंद्रित करने से एकाग्रता, स्मरण-शक्ति और निर्णय-क्षमता में उल्लेखनीय वृद्धि होती है। वैज्ञानिक अनुसंधानों से भी सिद्ध हुआ है कि नियमित ध्यान रक्तचाप, तनाव, अनिद्रा और चिड़चिड़ेपन को कम करता है। विद्यार्थियों के लिए ध्यान विशेष रूप से उपयोगी है, क्योंकि इससे पढ़ाई में मन लगता है और परीक्षा का भय घटता है। ध्यान कोई चमत्कार नहीं, बल्कि धैर्य और निरंतरता से विकसित होने वाली कला है।",
+  "words": 150,
+  "chars": 833,
+  "level": "H",
+  "day": "full3284"
+ },
+ {
+  "id": "fx3284hi2",
+  "lang": "hi",
+  "title": "नकारात्मकता से मुक्ति",
+  "text": "नकारात्मकता एक ऐसा मानसिक विकार है, जो धीरे-धीरे व्यक्ति के आत्मविश्वास, उत्साह और रचनात्मकता को नष्ट कर देता है। जब मनुष्य हर परिस्थिति में केवल कमियाँ, असफलताएँ और आशंकाएँ देखने लगता है, तब उसकी सोचने-समझने की शक्ति कुंठित हो जाती है। प्रायः नकारात्मक विचार भ्रम पर आधारित होते हैं, जिनका वास्तविकता से कोई संबंध नहीं होता। दूसरों से निरंतर तुलना, अतीत की गलतियों पर पश्चाताप और भविष्य की अनावश्यक चिंता इस प्रवृत्ति को और गहरा करती है। मनोवैज्ञानिकों के अनुसार सकारात्मक दृष्टिकोण अपनाने के लिए सबसे पहले अपने विचारों के प्रति सजग होना आवश्यक है। कृतज्ञता का भाव, प्रेरक साहित्य का अध्ययन, सज्जनों की संगति, नियमित व्यायाम और ध्यान नकारात्मकता को दूर करने में अत्यंत सहायक हैं। ऊँचे लक्ष्य रखते हुए छोटी-छोटी सफलताओं का उत्सव मनाना चाहिए। जो व्यक्ति विपरीत परिस्थितियों में भी आशा का दीपक जलाए रखता है, वही अंततः विजयी होता है।",
+  "words": 144,
+  "chars": 830,
+  "level": "H",
+  "day": "full3284"
+ },
+ {
+  "id": "fx3284hi3",
+  "lang": "hi",
+  "title": "भ्रम और यथार्थ",
+  "text": "मनुष्य का अधिकांश दुःख भ्रम से उत्पन्न होता है। अंधेरे में पड़ी रस्सी को साँप समझकर व्यक्ति भयभीत हो उठता है, जबकि प्रकाश होते ही वास्तविकता स्पष्ट हो जाती है और भय समाप्त हो जाता है। भारतीय दर्शन में इसी को अविद्या अथवा अज्ञान कहा गया है। अज्ञानवश मनुष्य क्षणभंगुर सुख-सुविधाओं को स्थायी मान बैठता है और उनके छिन जाने पर व्याकुल हो जाता है। सोशल मीडिया के इस युग में भ्रामक सूचनाएँ, अफवाहें और अधूरी जानकारियाँ बड़ी तीव्रता से फैलती हैं, जिनसे समाज में अविश्वास और तनाव बढ़ता है। ऐसे वातावरण में विवेक, तर्क और स्वाध्याय ही भ्रम के आवरण को हटाने का माध्यम हैं। किसी भी सूचना पर विश्वास करने से पहले उसके स्रोत की जाँच-पड़ताल करना प्रत्येक जागरूक नागरिक का कर्तव्य है। संत-महात्माओं ने कहा है कि आत्मज्ञान का प्रकाश ही सबसे बड़ा प्रकाश है, जो मन के समस्त भ्रमों को दूर कर देता है।",
+  "words": 148,
+  "chars": 780,
+  "level": "H",
+  "day": "full3284"
+ },
+ {
+  "id": "fx3284hi4",
+  "lang": "hi",
+  "title": "योग - शरीर और चेतना का संतुलन",
+  "text": "योग भारत की प्राचीन और अमूल्य धरोहर है, जिसका उद्देश्य शरीर, मन और आत्मा के बीच सामंजस्य स्थापित करना है। महर्षि पतंजलि ने योगसूत्र में अष्टांग योग का वर्णन किया है, जिसमें यम, नियम, आसन, प्राणायाम, प्रत्याहार, धारणा, ध्यान और समाधि सम्मिलित हैं। आसनों के अभ्यास से शरीर लचीला और स्फूर्तिवान बनता है, जबकि प्राणायाम श्वसन-तंत्र को सुदृढ़ करता है और मन को स्थिर करता है। संयुक्त राष्ट्र महासभा ने वर्ष 2014 में 21 जून को अंतरराष्ट्रीय योग दिवस घोषित किया, जिसके पश्चात विश्व के 190 से अधिक देशों में योग के प्रति रुचि बढ़ी है। आज चिकित्सक भी मधुमेह, उच्च रक्तचाप, मोटापा और अवसाद जैसी समस्याओं में योग को सहायक उपचार के रूप में अपनाने की सलाह देते हैं। योग केवल व्यायाम नहीं, बल्कि अनुशासित और संयमित जीवन-शैली है। नियमित अभ्यास से व्यक्ति शारीरिक रूप से स्वस्थ, मानसिक रूप से प्रसन्न और आध्यात्मिक रूप से जाग्रत होता है।",
+  "words": 149,
+  "chars": 820,
+  "level": "H",
+  "day": "full3284"
+ },
+ {
+  "id": "fx3284hi5",
+  "lang": "hi",
+  "title": "आत्मनियंत्रण और सफलता",
+  "text": "आत्मनियंत्रण वह गुण है, जो मनुष्य को अपनी इच्छाओं, भावनाओं और आवेगों पर विजय प्राप्त करने की क्षमता प्रदान करता है। क्रोध, लोभ, ईर्ष्या और आलस्य मनुष्य के ऐसे आंतरिक शत्रु हैं, जो अवसर मिलते ही उसकी प्रगति में बाधा उत्पन्न करते हैं। सरकारी नौकरी की प्रतियोगिताओं में जुटे अभ्यर्थियों के लिए आत्मनियंत्रण विशेष रूप से महत्त्वपूर्ण है। मोबाइल फोन पर घंटों व्यर्थ समय बिताना, अनियमित दिनचर्या और देर रात तक जागना एकाग्रता को नष्ट कर देता है। इसके विपरीत, निर्धारित समय-सारणी, संतुलित आहार, पर्याप्त नींद और नियमित अभ्यास सफलता के मार्ग को सुगम बनाते हैं। टंकण-परीक्षा में भी वही अभ्यर्थी सफल होता है, जो घबराहट पर नियंत्रण रखते हुए शांत चित्त से, बिना जल्दबाज़ी के, शुद्धतापूर्वक टाइप करता है। महापुरुषों का जीवन इस बात का साक्षी है कि आत्मसंयम और दृढ़-संकल्प के बल पर असंभव प्रतीत होने वाले लक्ष्य भी प्राप्त किए जा सकते हैं।",
+  "words": 146,
+  "chars": 823,
+  "level": "H",
+  "day": "full3284"
+ },
+ {
+  "id": "fx3284hi6",
+  "lang": "hi",
+  "title": "डिजिटल भुगतान और जागरूकता",
+  "text": "डिजिटल भुगतान ने भारत की अर्थव्यवस्था में क्रांतिकारी परिवर्तन ला दिया है। यूपीआई के माध्यम से आज गाँव का छोटा दुकानदार भी क्यूआर कोड स्कैन करवाकर कुछ ही क्षणों में भुगतान प्राप्त कर लेता है। अक्टूबर 2026 में यूपीआई से लगभग 2070 करोड़ लेन-देन हुए, जो विश्व में किसी भी डिजिटल भुगतान प्रणाली का सर्वाधिक आँकड़ा है। प्रत्यक्ष लाभ अंतरण के माध्यम से सरकारी योजनाओं की धनराशि भी सीधे लाभार्थियों के बैंक खातों में पहुँच रही है, जिससे बिचौलियों की भूमिका समाप्त हुई है। किंतु इस सुविधा के साथ साइबर ठगी की घटनाएँ भी बढ़ी हैं। ठग स्वयं को बैंक-अधिकारी बताकर ओटीपी, पिन अथवा पासवर्ड माँगते हैं और भोले-भाले लोगों की जीवन-भर की कमाई हड़प लेते हैं। इसलिए प्रत्येक नागरिक को सतर्क रहना चाहिए। किसी अज्ञात लिंक पर क्लिक न करें, अपरिचित व्यक्ति को अपनी गोपनीय जानकारी न दें और ठगी होने पर तुरंत हेल्पलाइन नंबर 1930 पर शिकायत दर्ज कराएँ।",
+  "words": 151,
+  "chars": 824,
+  "level": "H",
+  "day": "full3284"
  }
 ]
