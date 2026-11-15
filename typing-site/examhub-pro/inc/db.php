@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-define('EH_DB_VER', '2');
+define('EH_DB_VER', '3');
 
 /* from this time, saved key counts are capped per word (see eh-typing.js finish) and must not be raised to the typed length */
 if (!defined('EH_KCAP_FROM')) define('EH_KCAP_FROM', '2026-11-15 19:10:00');
@@ -16,7 +16,7 @@ function eh_kcap_keys($typed) {
 /* re-score one saved result with the capped key count; returns [old net, new net] or null */
 function eh_kfix($id) {
     global $wpdb; $t = eh_table();
-    $r = $wpdb->get_row($wpdb->prepare("SELECT id, exam, typed, keys_count, net FROM $t WHERE id = %d", $id), ARRAY_A);
+    $r = $wpdb->get_row($wpdb->prepare("SELECT id, exam, typed, keys_count, net, dur FROM $t WHERE id = %d", $id), ARRAY_A);
     if (!$r || $r['typed'] === '' || $r['typed'] === null) return null;
     $e = eh_exam($r['exam']); if (!$e) return null;
     $k = eh_kcap_keys($r['typed']); $old = (int) $r['net'];
@@ -24,8 +24,8 @@ function eh_kfix($id) {
     if ($k >= $cur) return [$old, $old];
     $wpdb->update($t, ['keys_count' => $k], ['id' => $id]);
     if (($e['eval'] ?? '') === 'upsssc' && !empty($e['wpm'])) {
-        $sp = '(GREATEST(0, IF(keys_count > 0, keys_count / 5, words) - GREATEST(0, full_m + half_m / 2 - 5) * 6) / GREATEST(minutes, %f, 0.01))';
-        $wpdb->query($wpdb->prepare("UPDATE $t SET pass = IF($sp >= %f, 1, 0), net = FLOOR($sp), gross = ROUND(IF(keys_count > 0, keys_count / 5, words) / GREATEST(minutes, %f, 0.01)) WHERE id = %d",
+        $sp = '(GREATEST(0, IF(keys_count > 0, keys_count / 5, words) - GREATEST(0, full_m + half_m / 2 - 5) * 6) / GREATEST(minutes, IF(dur > 0, dur, %f), 0.01))';
+        $wpdb->query($wpdb->prepare("UPDATE $t SET pass = IF($sp >= %f, 1, 0), net = FLOOR($sp), gross = ROUND(IF(keys_count > 0, keys_count / 5, words) / GREATEST(minutes, IF(dur > 0, dur, %f), 0.01)) WHERE id = %d",
             (float) $e['minutes'], (float) $e['wpm'], (float) $e['minutes'], (float) $e['minutes'], $id));
     } elseif ($e['unit'] === 'keys') {
         $wpdb->query($wpdb->prepare("UPDATE $t SET pass = IF(keys_count >= %d AND err <= %f, 1, 0) WHERE id = %d", (int) $e['target'], (float) ($e['allowed'] ?? 5), $id));
@@ -50,6 +50,7 @@ add_action('init', function () {
         layout varchar(20) NOT NULL DEFAULT '',
         passage varchar(40) NOT NULL DEFAULT '',
         minutes decimal(6,2) NOT NULL DEFAULT 0,
+        dur decimal(6,2) NOT NULL DEFAULT 0,
         keys_count int(11) NOT NULL DEFAULT 0,
         words int(11) NOT NULL DEFAULT 0,
         full_m int(11) NOT NULL DEFAULT 0,
@@ -138,8 +139,8 @@ add_action('init', function () {
     foreach ($exams as $e) {
         if (empty($e['target'])) continue;
         if (($e['eval'] ?? '') === 'upsssc' && !empty($e['wpm'])) {
-            $sp = '(GREATEST(0, IF(keys_count > 0, keys_count / 5, words) - GREATEST(0, full_m + half_m / 2 - 5) * 6) / GREATEST(minutes, %f, 0.01))';
-            $n += (int) $wpdb->query($wpdb->prepare("UPDATE $t SET pass = IF($sp >= %f, 1, 0), net = FLOOR($sp), gross = ROUND(IF(keys_count > 0, keys_count / 5, words) / GREATEST(minutes, %f, 0.01)) WHERE exam = %s AND words > 0",
+            $sp = '(GREATEST(0, IF(keys_count > 0, keys_count / 5, words) - GREATEST(0, full_m + half_m / 2 - 5) * 6) / GREATEST(minutes, IF(dur > 0, dur, %f), 0.01))';
+            $n += (int) $wpdb->query($wpdb->prepare("UPDATE $t SET pass = IF($sp >= %f, 1, 0), net = FLOOR($sp), gross = ROUND(IF(keys_count > 0, keys_count / 5, words) / GREATEST(minutes, IF(dur > 0, dur, %f), 0.01)) WHERE exam = %s AND words > 0",
                 (float) $e['minutes'], (float) $e['wpm'], (float) $e['minutes'], (float) $e['minutes'], $e['slug']));
         } else {
             $col = $e['unit'] === 'keys' ? 'keys_count' : 'words';

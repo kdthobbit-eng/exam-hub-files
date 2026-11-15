@@ -3,6 +3,7 @@ $parts = explode('-', (string) get_query_var('eh_slug'), 2);
 $row = count($parts) === 2 ? eh_get_result((int) $parts[0], $parts[1]) : null;
 if (!$row) { global $wp_query; $wp_query->set_404(); status_header(404); include get_404_template(); exit; }
 $X = $row['exam'] === 'demo' ? ['slug' => 'demo', 'name' => 'Demo Typing Test', 'unit' => 'words', 'target' => 250, 'minutes' => 5, 'allowed' => (float) eh_opt('allowed_error'), 'lang' => 'en'] : (eh_exam($row['exam']) ?: ['slug' => $row['exam'], 'name' => $row['exam'], 'unit' => 'words', 'target' => 0, 'minutes' => 10, 'allowed' => 5, 'lang' => 'en']);
+if (!empty($row['dur']) && (float) $row['dur'] > 0) $X['minutes'] = (float) $row['dur'];
 $R = [
     'net' => (int) $row['net'], 'gross' => (int) $row['gross'], 'acc' => (float) $row['acc'], 'err' => (float) $row['err'],
     'keys' => ($row['created'] >= EH_KCAP_FROM || in_array((int) $row['id'], eh_kfixed(), true)) ? (int) $row['keys_count'] : max((int) $row['keys_count'], mb_strlen(trim((string) ($row['typed'] ?? '')))), 'kerr' => (int) $row['kerr'], 'words' => (int) $row['words'], 'full' => (int) $row['full_m'],

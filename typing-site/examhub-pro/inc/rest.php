@@ -33,19 +33,36 @@ function eh_rest_save(WP_REST_Request $r) {
     $mins = max(0.01, min(60, (float) ($p['minutes'] ?? 0)));
     $net = max(0, min(250, (int) ($p['net'] ?? 0)));
     if ($words / $mins > 260) return ['ok' => false];
+    /* never trust the browser's numbers alone: key count is capped by the typed text (each word worth at most 20 letters),
+       and for the UPSSSC rule speed and result are worked out again here with the same formula as the result page */
+    $typed = mb_substr(sanitize_textarea_field($p['typed'] ?? ''), 0, 20000);
+    $keys = max(0, min(30000, (int) ($p['keys'] ?? 0)));
+    if (trim($typed) !== '') $keys = min($keys, eh_kcap_keys($typed));
+    $full = max(0, (int) ($p['full'] ?? 0)); $half = max(0, (int) ($p['half'] ?? 0));
+    $gross = max(0, min(300, (int) ($p['gross'] ?? 0))); $pass = !empty($p['pass']) ? 1 : 0;
+    $ex = $exam !== 'demo' ? eh_exam($exam) : null;
+    /* test length the person chose (practice can be shorter or longer than the exam); live tests always use the exam's own length */
+    $dur = $ex ? (float) $ex['minutes'] : 5;
+    if (!$live && !empty($p['dur'])) $dur = max(1, min(60, (float) $p['dur']));
+    if ($ex && ($ex['eval'] ?? '') === 'upsssc' && !empty($ex['wpm'])) {
+        $m = max($mins, $dur, 0.01); $kw = $keys > 0 ? $keys / 5 : $words;
+        $sp = max(0, $kw - max(0, $full + $half / 2 - 5) * 6) / $m;
+        $net = min($net, (int) floor($sp)); $gross = (int) round($kw / $m); $pass = $sp >= (float) $ex['wpm'] ? 1 : 0;
+    }
+    $net = min($net, max($gross, 0));
     $wpdb->insert(eh_table(), [
         'user_id' => $uid, 'name' => $name, 'exam' => $exam,
         'layout' => sanitize_key($p['layout'] ?? ''), 'passage' => sanitize_key($p['passage'] ?? ''),
-        'minutes' => $mins, 'keys_count' => max(0, min(30000, (int) ($p['keys'] ?? 0))), 'words' => $words,
-        'full_m' => max(0, (int) ($p['full'] ?? 0)), 'half_m' => max(0, (int) ($p['half'] ?? 0)),
+        'minutes' => $mins, 'dur' => $dur, 'keys_count' => $keys, 'words' => $words,
+        'full_m' => $full, 'half_m' => $half,
         'backspaces' => max(0, (int) ($p['backspaces'] ?? 0)),
-        'gross' => max(0, min(300, (int) ($p['gross'] ?? 0))), 'net' => $net,
+        'gross' => $gross, 'net' => $net,
         'acc' => max(0, min(100, (float) ($p['acc'] ?? 0))), 'err' => max(0, min(100, (float) ($p['err'] ?? 0))),
-        'pass' => !empty($p['pass']) ? 1 : 0, 'live_date' => $live, 'ip_hash' => $ip, 'created' => current_time('mysql'),
+        'pass' => $pass, 'live_date' => $live, 'ip_hash' => $ip, 'created' => current_time('mysql'),
         'kerr' => max(0, min(30000, (int) ($p['kerr'] ?? 0))),
         'title' => mb_substr(sanitize_text_field($p['title'] ?? ''), 0, 180),
         'rkey' => $rkey = strtolower(wp_generate_password(8, false, false)),
-        'typed' => mb_substr(sanitize_textarea_field($p['typed'] ?? ''), 0, 20000),
+        'typed' => $typed,
         'src' => mb_substr(sanitize_textarea_field($p['src'] ?? ''), 0, 25000),
         'mist' => wp_json_encode(array_slice(array_values(array_filter(array_map(function ($x) {
             return is_array($x) && count($x) === 2 ? [mb_substr(sanitize_text_field($x[0]), 0, 40), mb_substr(sanitize_text_field($x[1]), 0, 40)] : null;

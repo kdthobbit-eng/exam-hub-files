@@ -417,11 +417,13 @@
     ops.forEach(function (o) { if (o.w == null) return; nt += String(o.w).split(' ').length; kc += Math.min(cl(o.w), o.s != null ? cl(o.s) + 2 : 12); });
     if (nt) kd = Math.min(tl, kc + nt - 1);
     var amount = exam.unit === 'keys' ? kd : words;
-    var V = window.EHEval.verdict({ keys: kd, words: words, full: full, half: half, err: errPct, minutes: secs / 60 }, exam), pass = V.pass;
+    /* speed is worked out over the length the person chose for this test (practice may be shorter or longer than the exam) */
+    var XD = {}; for (var xk in exam) XD[xk] = exam[xk]; XD.minutes = S.minutes || exam.minutes;
+    var V = window.EHEval.verdict({ keys: kd, words: words, full: full, half: half, err: errPct, minutes: secs / 60 }, XD), pass = V.pass;
     if (V.rule === 'upsssc') { net = Math.floor(V.wpm); gross = Math.round(V.words / V.mins); }
     if (V.rule === 'uppolice') { net = +V.wpm.toFixed(2); gross = Math.round(V.words / V.mins); }
     var R = {
-      exam: exam.slug, layout: S.layout, passage: S.passageId, minutes: +(secs / 60).toFixed(2),
+      exam: exam.slug, layout: S.layout, passage: S.passageId, minutes: +(secs / 60).toFixed(2), dur: XD.minutes,
       keys: kd, chars: typed.length, words: words, full: full, half: half, backspaces: S.bks, kerr: e.ke,
       gross: gross, net: net, acc: +acc.toFixed(2), err: +errPct.toFixed(2), pass: pass ? 1 : 0, live: CFG.live || ''
     };
@@ -459,9 +461,9 @@
     result.hidden = false; setup.hidden = true; focusResult(true);
     var nb = $('#eh-next-auto'); if (nb) nb.hidden = !!document.getElementById('eh-next-psg') || !nextRadio();
     document.body.classList.add('eh-has-result'); /* dashboard first: page header and side ranking move out of the way */
-    R.pending = Math.max(0, S.words.length - R.words); R.total = S.words.join(' ').length; R.dur = exam.minutes;
+    R.pending = Math.max(0, S.words.length - R.words); R.total = S.words.join(' ').length; R.dur = R.dur || exam.minutes; var XD = {}; for (var xk in exam) XD[xk] = exam[xk]; XD.minutes = R.dur;
     R.title = S.title; R.date = new Date().toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-    $('#eh-res-dash').innerHTML = window.EHEval.dashboard(R, exam, ops);
+    $('#eh-res-dash').innerHTML = window.EHEval.dashboard(R, XD, ops);
     window.EHEval.bindDash($('#eh-res-dash'));
     if (CFG.full === 2) fullSummary(R);
     $('#eh-res-link').hidden = true;
