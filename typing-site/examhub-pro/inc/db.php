@@ -3,6 +3,8 @@ if (!defined('ABSPATH')) exit;
 
 define('EH_DB_VER', '2');
 
+/* from this time, saved key counts are capped per word (see eh-typing.js finish) and must not be raised to the typed length */
+if (!defined('EH_KCAP_FROM')) define('EH_KCAP_FROM', '2026-11-15 19:10:00');
 function eh_table() { global $wpdb; return $wpdb->prefix . 'eh_results'; }
 
 add_action('init', function () {
@@ -103,7 +105,7 @@ add_action('init', function () {
     global $wpdb; $t = eh_table(); $n = 0;
     /* Hindi keyboards (Windows Inscript / Mangal) did not report every key press, so some saved key counts were far too low.
        The key count is the letters left on screen, so use the saved typed text where it is longer. */
-    $wpdb->query("UPDATE $t SET keys_count = CHAR_LENGTH(TRIM(typed)) WHERE typed <> '' AND CHAR_LENGTH(TRIM(typed)) > keys_count");
+    $wpdb->query($wpdb->prepare("UPDATE $t SET keys_count = CHAR_LENGTH(TRIM(typed)) WHERE typed <> '' AND CHAR_LENGTH(TRIM(typed)) > keys_count AND created < %s", EH_KCAP_FROM));
     foreach ($exams as $e) {
         if (empty($e['target'])) continue;
         if (($e['eval'] ?? '') === 'upsssc' && !empty($e['wpm'])) {

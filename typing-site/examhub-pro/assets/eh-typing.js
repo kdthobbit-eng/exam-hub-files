@@ -412,6 +412,10 @@
     var tl = Array.from(rawText().replace(/\s+$/, '')).length;
     /* phone keyboards do not report key presses, so when the count is 0 use the letters typed */
     var kd = tl; /* letters on screen; Hindi IME keyboards and phones do not report every key press, so the press count is not used */
+    /* a typed word earns at most its passage word's length + 2 letters, so a long run of keys without spaces cannot inflate the speed */
+    var cl = function (x) { return Array.from(x || '').length; }, kc = 0, nt = 0;
+    ops.forEach(function (o) { if (o.w == null) return; nt += String(o.w).split(' ').length; kc += Math.min(cl(o.w), o.s != null ? cl(o.s) + 2 : 12); });
+    if (nt) kd = Math.min(tl, kc + nt - 1);
     var amount = exam.unit === 'keys' ? kd : words;
     var V = window.EHEval.verdict({ keys: kd, words: words, full: full, half: half, err: errPct, minutes: secs / 60 }, exam), pass = V.pass;
     if (V.rule === 'upsssc') { net = Math.floor(V.wpm); gross = Math.round(V.words / V.mins); }
