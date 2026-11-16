@@ -607,7 +607,8 @@
 "minutes": 10,
 "cat": "court",
 "retype": false,
-"rule": "court"
+"rule": "court",
+"nohl": true
 },
 {
 "slug": "allahabad-high-court-hindi-typing-ahc",
@@ -618,7 +619,8 @@
 "minutes": 10,
 "cat": "court",
 "retype": false,
-"rule": "court"
+"rule": "court",
+"nohl": true
 },
 {
 "slug": "mp-high-court-english-typing-jabalpur",
