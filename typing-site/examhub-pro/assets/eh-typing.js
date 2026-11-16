@@ -386,7 +386,10 @@
     if (!pair) { if (e.key.length === 1) e.preventDefault(); return; }
     e.preventDefault();
     begin(); S.keys++; click();
-    S.buf += pair[e.shiftKey ? 1 : 0];
+    /* Caps Lock works like Shift on letter keys in Krutidev/Remington, as in the exam software */
+    var up = e.shiftKey;
+    if (S.layout !== 'inscript' && /^Key[A-Z]$/.test(e.code) && e.getModifierState && e.getModifierState('CapsLock')) up = !up;
+    S.buf += pair[up ? 1 : 0];
     render(); after();
   }
 
