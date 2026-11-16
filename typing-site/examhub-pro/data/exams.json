@@ -243,7 +243,8 @@
 "minutes": 20,
 "cat": "court",
 "retype": false,
-"rule": "court"
+"rule": "court",
+"nohl": true
 },
 {
 "slug": "marathon-hindi-typing-skill-test",
