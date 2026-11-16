@@ -250,16 +250,20 @@ if ($row):
     </tr>
   <?php endforeach; ?>
   </tbody></table></div>
+  <p class="eh-live-empty" id="eh-live-empty" hidden>Is filter me aaj koi passage nahi hai. "All levels" chuniye.</p>
   <div class="eh-live-pg" id="eh-live-pg"></div>
 </section>
 <script>
 (function(){var bl=document.querySelectorAll('.eh-live-lv button'),l='',bs=document.querySelectorAll('.eh-live-chips button'),rows=[].slice.call(document.querySelectorAll('.eh-live-table tbody tr')),pg=document.getElementById('eh-live-pg'),per=20,f='',page=1;
 function draw(){var list=rows.filter(function(r){return (!f||r.getAttribute('data-f')===f)&&(!l||r.getAttribute('data-lv')===l);}),n=Math.max(1,Math.ceil(list.length/per));if(page>n)page=n;
 rows.forEach(function(r){r.style.display='none';});list.forEach(function(r,i){if(i>=(page-1)*per&&i<page*per)r.style.display='';});
+var em=document.getElementById('eh-live-empty');if(em)em.hidden=list.length>0;
 if(!pg)return;if(n<2){pg.innerHTML='';return;}var h='<button type="button" data-p="'+(page-1)+'"'+(page<2?' disabled':'')+'>← Prev</button>';
 for(var k=1;k<=n;k++)h+='<button type="button" data-p="'+k+'" class="'+(k===page?'on':'')+'">'+k+'</button>';
 pg.innerHTML=h+'<button type="button" data-p="'+(page+1)+'"'+(page>=n?' disabled':'')+'>Next →</button><span>Page '+page+' of '+n+'</span>';}
 if(pg)pg.addEventListener('click',function(e){var p=e.target.getAttribute&&e.target.getAttribute('data-p');if(!p||e.target.disabled)return;page=+p;draw();var t=document.querySelector('.eh-live-chips');if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});
-bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.classList.toggle('on',x===b)});f=b.getAttribute('data-f');page=1;draw();});});bl.forEach(function(b){b.addEventListener('click',function(){bl.forEach(function(x){x.classList.toggle('on',x===b)});l=b.getAttribute('data-l');page=1;draw();});});draw();})();
+bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.classList.toggle('on',x===b)});f=b.getAttribute('data-f');page=1;draw();});});/* hide a level button when this day has no passage of that level, so a tap never leads to an empty list */
+bl.forEach(function(b){var v=b.getAttribute('data-l');if(v&&!rows.some(function(r){return r.getAttribute('data-lv')===v;}))b.style.display='none';});
+bl.forEach(function(b){b.addEventListener('click',function(){bl.forEach(function(x){x.classList.toggle('on',x===b)});l=b.getAttribute('data-l');page=1;draw();});});draw();})();
 </script>
 <?php endif; get_footer();

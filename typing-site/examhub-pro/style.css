@@ -1603,3 +1603,8 @@ body:has(#eh-result:not([hidden])) .eh-section{padding-top:18px}
 .eh-ft-go{background:#7c3aed;color:#fff;border:0;border-radius:10px;padding:11px 20px;font-weight:800;font-size:15px;cursor:pointer;margin-left:auto}
 .eh-ft-go:hover{filter:brightness(1.08)}
 @media(max-width:640px){.eh-ft-go{width:100%;margin-left:0}.eh-full-tool label{flex:1}}
+
+.eh-live-lv button.lv-s{color:#1c1917}.eh-live-lv button.lv-s.on{background:#1c1917;color:#fde047}
+.eh-live-lv button{white-space:nowrap;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media(max-width:700px){.eh-live-lv{overflow-x:auto;scrollbar-width:none}.eh-live-lv::-webkit-scrollbar{display:none}.eh-live-lv button{flex:1 0 auto;padding:10px 12px}}
+.eh-live-empty{margin:14px 0;padding:14px 18px;border-radius:12px;background:#fff7ed;border:1.5px dashed #fdba74;font-weight:600;color:#9a3412}
