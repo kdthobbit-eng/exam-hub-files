@@ -80,8 +80,9 @@ add_action('init', function () {
     add_rewrite_rule('^typing-insight/?$', 'index.php?eh_view=insight', 'top');
     add_rewrite_rule('^blog/?$', 'index.php?eh_view=blog', 'top');
     add_rewrite_rule('^exam-based-result/?$', 'index.php?eh_view=results', 'top');
+    add_rewrite_rule('^stet-mock-x9k4/?$', 'index.php?eh_view=stetmock', 'top');
     add_rewrite_rule('^(faqs|about-us|declaration|terms-of-service|privacy-policy|contact-us)/?$', 'index.php?eh_view=info&eh_slug=$matches[1]', 'top');
-    if (get_option('eh_rewrite_ver') !== '3') { flush_rewrite_rules(false); update_option('eh_rewrite_ver', '3'); }
+    if (get_option('eh_rewrite_ver') !== '4') { flush_rewrite_rules(false); update_option('eh_rewrite_ver', '4'); }
 });
 add_filter('query_vars', function ($v) { $v[] = 'eh_view'; $v[] = 'eh_slug'; return $v; });
 
@@ -139,7 +140,7 @@ function eh_view_url() { return home_url(strtok($_SERVER['REQUEST_URI'] ?? '/', 
 add_filter('rank_math/frontend/description', function ($d) { return get_query_var('eh_view') ? eh_view_desc() : $d; }, 9999);
 add_filter('rank_math/frontend/canonical', function ($c) { return get_query_var('eh_view') ? eh_view_url() : $c; }, 9999);
 add_filter('rank_math/opengraph/url', function ($c) { return get_query_var('eh_view') ? eh_view_url() : $c; }, 9999);
-add_filter('rank_math/frontend/robots', function ($r) { if (in_array(get_query_var('eh_view'), ['dashboard', 'result', 'insight'], true)) { $r['index'] = 'noindex'; } return $r; }, 9999);
+add_filter('rank_math/frontend/robots', function ($r) { if (in_array(get_query_var('eh_view'), ['dashboard', 'result', 'insight', 'stetmock'], true)) { $r['index'] = 'noindex'; } return $r; }, 9999);
 /* favicon (used until a Site Icon is set in WordPress) */
 add_action('wp_head', function () {
     if (function_exists('has_site_icon') && has_site_icon()) return;
