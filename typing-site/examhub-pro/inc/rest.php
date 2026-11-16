@@ -37,7 +37,7 @@ function eh_rest_save(WP_REST_Request $r) {
        and for the UPSSSC rule speed and result are worked out again here with the same formula as the result page */
     $typed = mb_substr(sanitize_textarea_field($p['typed'] ?? ''), 0, 20000);
     $keys = max(0, min(30000, (int) ($p['keys'] ?? 0)));
-    if (trim($typed) !== '') $keys = min($keys, eh_kcap_keys($typed));
+    if (trim($typed) !== '') $keys = eh_kcap_server($keys, $typed);
     $full = max(0, (int) ($p['full'] ?? 0)); $half = max(0, (int) ($p['half'] ?? 0));
     $gross = max(0, min(300, (int) ($p['gross'] ?? 0))); $pass = !empty($p['pass']) ? 1 : 0;
     $ex = $exam !== 'demo' ? eh_exam($exam) : null;

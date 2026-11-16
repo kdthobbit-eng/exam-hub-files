@@ -413,9 +413,12 @@
     /* phone keyboards do not report key presses, so when the count is 0 use the letters typed */
     var kd = tl; /* letters on screen; Hindi IME keyboards and phones do not report every key press, so the press count is not used */
     /* a typed word earns at most its passage word's length + 2 letters, so a long run of keys without spaces cannot inflate the speed */
-    var cl = function (x) { return Array.from(x || '').length; }, kc = 0, nt = 0;
-    ops.forEach(function (o) { if (o.w == null) return; nt += String(o.w).split(' ').length; kc += Math.min(cl(o.w), o.s != null ? cl(o.s) + 2 : 12); });
-    if (nt) kd = Math.min(tl, kc + nt - 1);
+    /* letters are counted in the same form as the screen: Krutidev keys for Krutidev, Unicode otherwise */
+    var kdm = kdMode() || S.layout === 'remington';
+    var cl = function (x) { x = String(x || ''); return Array.from(kdm ? H.unicodeToKD(x) : x).length; }, over = 0;
+    ops.forEach(function (o) { if (o.w == null) return; var lw = cl(o.w), ls = o.s != null ? cl(o.s) + 3 : 14; if (lw > ls) over += lw - ls; });
+    /* only the extra letters of over-long words are removed; normal typing keeps every letter */
+    if (over > 0) kd = Math.max(0, tl - over);
     var amount = exam.unit === 'keys' ? kd : words;
     /* speed is worked out over the length the person chose for this test (practice may be shorter or longer than the exam) */
     var XD = {}; for (var xk in exam) XD[xk] = exam[xk]; XD.minutes = S.minutes || exam.minutes;

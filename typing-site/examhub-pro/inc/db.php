@@ -13,6 +13,14 @@ function eh_kcap_keys($typed) {
     foreach ($w as $x) $k += min(mb_strlen($x), 20);
     return $w ? $k + count($w) - 1 : 0;
 }
+/* key count after removing only the extra letters of over-long typed words (a run of 25+ letters without a space); normal tests are unchanged */
+function eh_kcap_server($keys, $typed) {
+    $w = preg_split('/\s+/u', trim((string) $typed), -1, PREG_SPLIT_NO_EMPTY); $over = 0; $tot = 0;
+    foreach ($w as $x) { $l = mb_strlen($x); $tot += $l; if ($l > 24) $over += $l - 20; }
+    if (!$over || !$tot) return $keys;
+    $ratio = max(1, $keys / max(1, $tot + count($w) - 1));
+    return max(0, (int) round($keys - $over * $ratio));
+}
 /* re-score one saved result with the capped key count; returns [old net, new net] or null */
 function eh_kfix($id) {
     global $wpdb; $t = eh_table();
