@@ -431,3 +431,17 @@ function eh_tgb_page() {
     $f('ids', '<textarea name="ids" rows="4" class="large-text code">' . esc_textarea((string) get_option('eh_tgb_ids', '')) . '</textarea><br>', 'Save IDs');
     echo '</div></div>';
 }
+
+/* self-heal: every 15 minutes (on any page view) check the webhook; if it points elsewhere, is missing,
+   or Telegram reports a recent delivery error with messages waiting, register it again (pending messages kept). */
+add_action('shutdown', function () {
+    if (wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || !eh_tgb_token() || get_transient('eh_tgb_wh_chk')) return;
+    set_transient('eh_tgb_wh_chk', 1, 15 * MINUTE_IN_SECONDS);
+    if (function_exists('fastcgi_finish_request')) fastcgi_finish_request(); /* visitor gets the page first */
+    $w = eh_tgb_api('getWebhookInfo'); $w = is_array($w) && !empty($w['result']) ? $w['result'] : null;
+    if (!$w) return;
+    $url = rest_url('eh/v1/tgbot');
+    $bad = ($w['url'] ?? '') !== $url || (!empty($w['last_error_date']) && time() - (int) $w['last_error_date'] < 1800 && (int) ($w['pending_update_count'] ?? 0) > 0);
+    update_option('eh_tgb_wh_last', ['t' => time(), 'url' => $w['url'] ?? '', 'err' => $w['last_error_message'] ?? '', 'pending' => (int) ($w['pending_update_count'] ?? 0), 'fixed' => $bad ? 1 : 0], false);
+    if ($bad) eh_tgb_api('setWebhook', ['url' => $url, 'secret_token' => get_option('eh_tgb_secret'), 'allowed_updates' => ['message', 'callback_query'], 'drop_pending_updates' => false]);
+});
