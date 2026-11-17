@@ -1,0 +1,18 @@
+name: Fetch URL into repo
+on:
+  workflow_dispatch:
+    inputs:
+      url: {description: "URL", required: true}
+      path: {description: "repo path to save", required: true}
+permissions:
+  contents: write
+jobs:
+  f:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p "$(dirname "${{ inputs.path }}")"
+          curl -sSL -m 120 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" -o "${{ inputs.path }}" "${{ inputs.url }}"
+          file "${{ inputs.path }}"; ls -la "${{ inputs.path }}"
+          git config user.name "Exam Hub Bot" && git config user.email bot@users.noreply.github.com && git add "${{ inputs.path }}" && git commit -qm "Fetch ${{ inputs.path }}" && for i in 1 2 3; do git pull -q --rebase && git push -q && break; sleep 5; done
