@@ -24,3 +24,4 @@ sleep 4; systemctl is-active phone-mcp
 U=$(cat /root/phone-mcp-url.txt)
 echo "Claude connector link: $U"
 echo "Phone app link:        ${U%/mcp}/phone"
+echo "Live screen page:       ${U%/mcp}/view"

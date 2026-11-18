@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     private FrameLayout holder;
     private EditText urlBar;
     private TextView status, tabBtn;
-    private Switch claudeSw;
+    private TextView castBtn;
     private ProgressBar progress;
     private SharedPreferences prefs;
     private final Handler ui = new Handler(Looper.getMainLooper());
@@ -80,10 +80,10 @@ public class MainActivity extends Activity {
         chatBtn.setOnClickListener(v -> toggleChat());
         // chat panel removed: claude.ai logs out inside WebView
 
-        claudeSw = new Switch(this);
-        claudeSw.setText("Claude"); claudeSw.setPadding(8 * dp, 0, 4 * dp, 0);
-        claudeSw.setOnCheckedChangeListener((v, on) -> setClaude(on));
-        bar.addView(claudeSw);
+        castBtn = new TextView(this);
+        castBtn.setText("📺"); castBtn.setTextSize(20); castBtn.setPadding(10 * dp, 0, 4 * dp, 0);
+        castBtn.setOnClickListener(v -> { if (ScreenCastService.on()) stopCast(); else askCast(); });
+        bar.addView(castBtn);
 
         TextView menu = new TextView(this);
         menu.setText("⋮"); menu.setTextSize(22); menu.setPadding(10 * dp, 0, 8 * dp, 0);
@@ -128,7 +128,8 @@ public class MainActivity extends Activity {
         Uri data = getIntent().getData();
         newTab(data != null ? data.toString() : prefs.getString("home", "https://www.google.com"));
         if (Build.VERSION.SDK_INT >= 33) requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
-        if (prefs.getBoolean("on", false) && !server().isEmpty()) claudeSw.setChecked(true);
+        // Claude hamesha chalu: link save hai to turant judo, nahi to ek baar link maango.
+        if (!server().isEmpty()) setClaude(true); else serverDialog();
         refreshStatus();
     }
 
@@ -145,13 +146,20 @@ public class MainActivity extends Activity {
 
     private void menu(View v) {
         PopupMenu p = new PopupMenu(this, v);
+        p.getMenu().add(ScreenCastService.on() ? "Screen cast band karo" : "Screen cast chalu karo");
+        p.getMenu().add(TouchService.inst != null ? "Remote touch: chalu ✅" : "Remote touch chalu karo");
         p.getMenu().add("Connector link set karo");
+        p.getMenu().add("Phone ka naam: " + deviceName());
         p.getMenu().add("Reload");
         p.getMenu().add("Aage (forward)");
         p.getMenu().add("Ye page home banao");
         p.setOnMenuItemClickListener(it -> {
             String t = it.getTitle().toString();
             if (t.startsWith("Connector")) serverDialog();
+            else if (t.startsWith("Screen cast band")) stopCast();
+            else if (t.startsWith("Screen cast")) askCast();
+            else if (t.startsWith("Remote touch")) openTouchSettings();
+            else if (t.startsWith("Phone ka naam")) nameDialog();
             else if (t.equals("Reload")) web().reload();
             else if (t.startsWith("Aage")) { if (web().canGoForward()) web().goForward(); }
             else { prefs.edit().putString("home", web().getUrl()).apply(); toast("Home set"); }
@@ -167,8 +175,18 @@ public class MainActivity extends Activity {
         new AlertDialog.Builder(this).setTitle("Phone connector link").setView(e)
                 .setPositiveButton("Save", (d, w) -> {
                     prefs.edit().putString("server", e.getText().toString().trim()).apply();
-                    if (wantOn) { disconnect(); connect(); }
-                    else claudeSw.setChecked(true);
+                    disconnect(); setClaude(true);
+                }).setNegativeButton("Cancel", null).show();
+    }
+
+    private void nameDialog() {
+        EditText e = new EditText(this);
+        e.setText(deviceName());
+        new AlertDialog.Builder(this).setTitle("Is phone ka naam (jaise: Phone 2)").setView(e)
+                .setPositiveButton("Save", (d, w) -> {
+                    String n = e.getText().toString().trim();
+                    if (!n.isEmpty()) prefs.edit().putString("devname", n).apply();
+                    disconnect(); setClaude(true);
                 }).setNegativeButton("Cancel", null).show();
     }
 
@@ -375,6 +393,15 @@ public class MainActivity extends Activity {
     }
 
     @Override protected void onActivityResult(int req, int res, Intent data) {
+        if (req == 77) {
+            if (res == RESULT_OK && data != null) {
+                Intent svc = new Intent(this, ScreenCastService.class).putExtra("code", res).putExtra("data", data);
+                if (Build.VERSION.SDK_INT >= 26) startForegroundService(svc); else startService(svc);
+                toast("Screen cast chalu ✅ (band karne tak chalta rahega)");
+                ui.postDelayed(this::refreshStatus, 800);
+            } else toast("Screen cast ki permission nahi mili");
+            return;
+        }
         if (req == 42 && fileCb != null) {
             fileCb.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(res, data));
             fileCb = null;
@@ -399,7 +426,7 @@ public class MainActivity extends Activity {
     }
 
     private void setClaude(boolean on) {
-        if (on && server().isEmpty()) { claudeSw.setChecked(false); serverDialog(); return; }
+        if (on && server().isEmpty()) { serverDialog(); return; }
         wantOn = on;
         prefs.edit().putBoolean("on", on).apply();
         Intent svc = new Intent(this, KeepAliveService.class);
@@ -411,7 +438,10 @@ public class MainActivity extends Activity {
     }
 
     private void refreshStatus() {
-        ui.post(() -> status.setTextColor(!wantOn ? 0xFF94A3B8 : connected ? 0xFF16A34A : 0xFFF59E0B));
+        ui.post(() -> {
+            status.setTextColor(!wantOn ? 0xFF94A3B8 : connected ? 0xFF16A34A : 0xFFF59E0B);
+            if (castBtn != null) castBtn.setAlpha(ScreenCastService.on() ? 1f : 0.4f);
+        });
     }
 
     private void disconnect() {
@@ -429,7 +459,7 @@ public class MainActivity extends Activity {
                 connected = true; refreshStatus();
                 try {
                     s.send(new JSONObject().put("type", "hello").put("model", Build.MANUFACTURER + " " + Build.MODEL)
-                            .put("android", Build.VERSION.RELEASE).toString());
+                            .put("name", deviceName()).put("android", Build.VERSION.RELEASE).toString());
                 } catch (JSONException ignored) {}
                 ui.post(() -> toast("Claude se jud gaya ✅"));
             }
@@ -448,6 +478,33 @@ public class MainActivity extends Activity {
         if (ws != s) return;
         ws = null; connected = false; refreshStatus();
         if (wantOn) ui.postDelayed(this::connect, 5000);
+    }
+
+    private String deviceName() { return prefs.getString("devname", Build.MODEL); }
+
+    // ---------------------------------------------------------------- screen cast + remote touch
+    private void askCast() {
+        android.media.projection.MediaProjectionManager mpm =
+                (android.media.projection.MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
+        try { startActivityForResult(mpm.createScreenCaptureIntent(), 77); }
+        catch (Exception e) { toast("Is phone me screen cast nahi chal sakta"); }
+    }
+
+    private void stopCast() {
+        stopService(new Intent(this, ScreenCastService.class));
+        toast("Screen cast band");
+        ui.postDelayed(this::refreshStatus, 500);
+    }
+
+    private void openTouchSettings() {
+        toast("List me 'Exam Hub Remote Touch' dhoondo aur ON karo");
+        try { startActivity(new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS)); } catch (Exception ignored) {}
+    }
+
+    private TouchService touch(WebSocket s, int id) {
+        TouchService t = TouchService.inst;
+        if (t == null) fail(s, id, "Remote touch band hai — phone par app ⋮ → 'Remote touch chalu karo' se ek baar ON karna hoga");
+        return t;
     }
 
     // ---------------------------------------------------------------- commands
@@ -626,6 +683,76 @@ public class MainActivity extends Activity {
                     if (txt.isEmpty()) { ui.postDelayed(() -> reply(s, id, pageInfo()), (long) (sec * 1000)); return; }
                     long until = SystemClock.uptimeMillis() + 30000;
                     pollText(s, id, txt, until);
+                    break;
+                }
+                case "screen": {
+                    if (!ScreenCastService.on()) {
+                        if (A.optBoolean("ask", true)) ui.post(this::askCast);
+                        fail(s, id, "Screen cast band hai — phone par 'Start now / Shuru karein' dabana hoga (ek baar)"); return;
+                    }
+                    final int mw = A.optInt("max_width", 720), qq = A.optInt("quality", 60);
+                    new Thread(() -> {
+                        byte[] j = null;
+                        for (int k = 0; k < 20 && j == null; k++) {
+                            j = ScreenCastService.jpeg(mw, qq);
+                            if (j == null) SystemClock.sleep(150);
+                        }
+                        byte[] J = j;
+                        ui.post(() -> {
+                            if (J == null) { fail(s, id, "screen frame abhi nahi mila, dobara try karo"); return; }
+                            try {
+                                JSONObject o = new JSONObject().put("jpeg", Base64.encodeToString(J, Base64.NO_WRAP));
+                                TouchService t = TouchService.inst;
+                                if (t != null) o.put("app", t.currentApp());
+                                reply(s, id, o);
+                            } catch (JSONException e) { fail(s, id, e.toString()); }
+                        });
+                    }).start();
+                    break;
+                }
+                case "ptap": {
+                    TouchService t = touch(s, id); if (t == null) return;
+                    boolean ok = t.tap(A.optDouble("x"), A.optDouble("y"), A.optBoolean("long"));
+                    ui.postDelayed(() -> { if (ok) reply(s, id, "tapped"); else fail(s, id, "tap nahi hua"); }, 600);
+                    break;
+                }
+                case "pswipe": {
+                    TouchService t = touch(s, id); if (t == null) return;
+                    double x1 = A.optDouble("x1", 0.5), y1 = A.optDouble("y1", 0.7), x2 = A.optDouble("x2", 0.5), y2 = A.optDouble("y2", 0.3);
+                    String dir = A.optString("direction");
+                    if (dir.equals("up")) { x1 = x2 = 0.5; y1 = 0.75; y2 = 0.25; }
+                    else if (dir.equals("down")) { x1 = x2 = 0.5; y1 = 0.25; y2 = 0.75; }
+                    else if (dir.equals("left")) { y1 = y2 = 0.5; x1 = 0.85; x2 = 0.15; }
+                    else if (dir.equals("right")) { y1 = y2 = 0.5; x1 = 0.15; x2 = 0.85; }
+                    long ms = A.optLong("ms", 350);
+                    boolean ok = t.swipe(x1, y1, x2, y2, ms);
+                    ui.postDelayed(() -> { if (ok) reply(s, id, "swiped"); else fail(s, id, "swipe nahi hua"); }, ms + 500);
+                    break;
+                }
+                case "pkey": {
+                    TouchService t = touch(s, id); if (t == null) return;
+                    if (t.key(A.optString("key"))) ui.postDelayed(() -> reply(s, id, "pressed"), 600);
+                    else fail(s, id, "button nahi daba: " + A.optString("key"));
+                    break;
+                }
+                case "ptype": {
+                    TouchService t = touch(s, id); if (t == null) return;
+                    if (t.type(A.optString("text"))) reply(s, id, "typed");
+                    else fail(s, id, "koi text box focus me nahi hai — pehle us box par tap karo");
+                    break;
+                }
+                case "apps": {
+                    reply(s, id, TouchService.apps(getPackageManager(), A.optString("filter")));
+                    break;
+                }
+                case "open_app": {
+                    android.content.Context c = TouchService.inst != null ? TouchService.inst : this;
+                    reply(s, id, "khola: " + TouchService.openApp(c, A.optString("name")));
+                    break;
+                }
+                case "cast_status": {
+                    reply(s, id, new JSONObject().put("cast", ScreenCastService.on()).put("touch", TouchService.inst != null)
+                            .put("name", deviceName()));
                     break;
                 }
                 case "toast": {
