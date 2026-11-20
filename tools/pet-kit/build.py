@@ -146,7 +146,7 @@ h2{{font-size:13pt;color:#015a3e;margin:6px 0 8px}}
 </style></head><body>
 <div class="cover"><img src="{logo_data()}" alt=""><div><h1>{e(meta["title"])}</h1>
 <p>{e(meta.get("subtitle", "Unofficial Answer Key · विस्तृत हल · सारे Source Official Website से (Link सहित)"))}</p>
-<div class="meta"><span>{e(meta.get("date"))}</span><span>{e(meta.get("shift"))}</span><span>{len(qs)} प्रश्न</span><span>{meta.get("minutes", 120)} मिनट</span><span>+1 / −{meta.get("negative", 0.25)}</span></div></div></div>
+<div class="meta"><span>{e(meta.get("date"))}</span><span>{e(meta.get("shift"))}</span>{"" if meta.get("hide_count") else f"<span>{len(qs)} प्रश्न</span>"}<span>{meta.get("minutes", 120)} मिनट</span><span>+1 / −{meta.get("negative", 0.25)}</span></div></div></div>
 {f'<div class="note">{e(meta.get("note"))}</div>' if meta.get("note") else ""}
 <h2>उत्तर कुंजी</h2><div class="key">{key}</div>
 <h2>प्रश्नवार हल</h2>

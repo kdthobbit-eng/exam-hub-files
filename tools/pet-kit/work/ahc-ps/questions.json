@@ -1,0 +1,1346 @@
+[
+ {
+  "n": 1,
+  "section": "Computer",
+  "q": "What is the primary purpose of the Windows taskbar?",
+  "options": [
+   "Display internet speed",
+   "Managing printer settings",
+   "Cleaning system memory",
+   "Providing quick access to open programs and the Start menu"
+  ],
+  "answer": 3,
+  "explain": "टास्कबार से Start मेन्यू, खुले प्रोग्राम और पिन किए ऐप तुरंत खुलते हैं।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 2,
+  "section": "English",
+  "q": "Complete the following sentence with an adverb. Babita has done ____ beautiful embroidery on the sheet.",
+  "options": [
+   "Similar",
+   "He",
+   "Too much",
+   "Good"
+  ],
+  "answer": 2,
+  "explain": "'Too much' (क्रियाविशेषण) मात्रा बताता है; Similar/Good विशेषण हैं, He सर्वनाम।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 3,
+  "section": "Science",
+  "q": "Which statement best describes the relationship between the work done in raising an object and its gain in potential energy?",
+  "options": [
+   "The work done is less than the gain in potential energy",
+   "The object loses energy equal to the work done",
+   "The work done is equal to the gain in potential energy",
+   "The work done is greater than the gain in potential energy"
+  ],
+  "answer": 2,
+  "explain": "वस्तु को ऊपर उठाने में किया गया कार्य = स्थितिज ऊर्जा में वृद्धि (mgh)।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 4,
+  "section": "English",
+  "q": "Select the correct sentence that transforms the given sentence to Direct Speech: He said that he was going to the market.",
+  "options": [
+   "He said, \"I was going to the market.\"",
+   "He said, \"I am going to the market.\"",
+   "He said, \"I will go to the market.\"",
+   "He said, \"I went to the market.\""
+  ],
+  "answer": 1,
+  "explain": "Indirect का past continuous (was going) Direct में present continuous (am going) बनता है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 5,
+  "section": "English",
+  "q": "Rearrange the jumbled sections to form a meaningful sentence. A: was completed  B: before the deadline  C: the group project  D: with everyone's effort  E: successfully",
+  "options": [
+   "BACDE",
+   "DCEAB",
+   "CAEBD",
+   "ACBDE"
+  ],
+  "answer": 2,
+  "explain": "The group project (C) was completed (A) successfully (E) before the deadline (B) with everyone's effort (D)।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 6,
+  "section": "Reasoning",
+  "q": "F, G, H, I, J and K live on six different floors (lowest = 1, top = 6). I lives on an even floor just above H. Only three people live between I and K. G lives on an even floor just above J. On which floor does J live?",
+  "options": [
+   "Bottom No. 2",
+   "Floor No. 5",
+   "Floor No. 3",
+   "Floor No. 4"
+  ],
+  "answer": 2,
+  "explain": "I=6, H=5, K=2 → G=4, J=3 (या I=2, K=6 → G=4, J=3)। दोनों स्थितियों में J तीसरी मंज़िल पर।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 7,
+  "section": "English",
+  "q": "Choose the correct one-word substitute for the highlighted phrase: The author received great recognition after his death, when his final novel was published worldwide.",
+  "options": [
+   "memorial",
+   "ancient",
+   "posthumously",
+   "legendary"
+  ],
+  "answer": 2,
+  "explain": "मृत्यु के बाद मिलने वाली मान्यता — posthumously (मरणोपरांत)।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 8,
+  "section": "Computer",
+  "q": "During computer development, what feature is most relevant to third-generation machines in terms of building and user interfaces?",
+  "options": [
+   "Introduction of integrated circuits and use of operating systems for better interaction",
+   "Use of vacuum tubes for direct communication and programming from binary",
+   "Use of microprocessors in personal computers",
+   "Use of artificial intelligence and natural language"
+  ],
+  "answer": 0,
+  "explain": "तीसरी पीढ़ी (1964–71) — इंटीग्रेटेड सर्किट (IC) और ऑपरेटिंग सिस्टम; वैक्यूम ट्यूब पहली पीढ़ी।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 9,
+  "section": "Computer",
+  "q": "What is the main benefit of using antivirus software as part of an information protection strategy?",
+  "options": [
+   "Detects and removes malicious software",
+   "Encrypts data",
+   "Backs up files",
+   "Restricts access to files"
+  ],
+  "answer": 0,
+  "explain": "एंटीवायरस का मुख्य कार्य मैलवेयर पहचानना और हटाना है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 10,
+  "section": "Geography",
+  "q": "The iron and steel industry is called a basic industry because it ________.",
+  "options": [
+   "Is fully owned by private firms",
+   "Supplies raw materials to many other industries",
+   "Is located only in coastal areas",
+   "Produces only consumer goods"
+  ],
+  "answer": 1,
+  "explain": "लोहा-इस्पात अन्य उद्योगों को कच्चा माल देता है, इसलिए आधारभूत उद्योग।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 11,
+  "section": "History",
+  "q": "In August 1765, after the Battle of Buxar, Mughal Emperor Shah Alam II granted the English East India Company which official title to collect revenues from Bengal, Bihar and Orissa?",
+  "options": [
+   "Military",
+   "Diwani",
+   "Qazi",
+   "Subedar"
+  ],
+  "answer": 1,
+  "explain": "इलाहाबाद की संधि (1765) से कंपनी को बंगाल, बिहार, उड़ीसा की दीवानी (राजस्व अधिकार) मिली।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 12,
+  "section": "Computer",
+  "q": "Why can a user choose 'Save As' after opening an existing MS Word document?",
+  "options": [
+   "To close the document without saving changes",
+   "To create a new file with a different name or location",
+   "To open any file in read-only mode",
+   "To delete the original file"
+  ],
+  "answer": 1,
+  "explain": "Save As से फ़ाइल नई जगह/नए नाम से सेव होती है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 13,
+  "section": "Computer",
+  "q": "Which scenario best illustrates the use of computers in decision-making in the healthcare sector?",
+  "options": [
+   "A clinic uses a computer to book patient appointments and send reminders",
+   "A hospital analyzes patient data to estimate disease outbreaks",
+   "A student types a health assignment",
+   "A pharmacy prints bills"
+  ],
+  "answer": 1,
+  "explain": "डेटा विश्लेषण से बीमारी फैलने का अनुमान — निर्णय लेने में कंप्यूटर का उपयोग।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 14,
+  "section": "Environment",
+  "q": "The National Chambal Sanctuary (National Chambal Gharial Wildlife Sanctuary) was first declared a protected area in 1978 in which state?",
+  "options": [
+   "Madhya Pradesh",
+   "Gujarat",
+   "Karnataka",
+   "Telangana"
+  ],
+  "answer": 0,
+  "explain": "राष्ट्रीय चंबल अभयारण्य 1978 में मध्य प्रदेश में घोषित; बाद में राजस्थान व UP में भी।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 15,
+  "section": "History",
+  "q": "What action of Gandhi in 1930 turned the opposition to the salt tax into a major national campaign?",
+  "options": [
+   "Refusal to participate in round table conferences",
+   "Establishment of the All India Trade Union Congress",
+   "Leading the march to Dandi",
+   "Boycott of the Simon Commission"
+  ],
+  "answer": 2,
+  "explain": "12 मार्च 1930 — साबरमती से दांडी तक नमक यात्रा, सविनय अवज्ञा आंदोलन की शुरुआत।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 16,
+  "section": "English",
+  "q": "Choose the sentence that correctly expresses an interrogative form in the active voice.",
+  "options": [
+   "Has the project been finished?",
+   "Is the article being written by you?",
+   "Did you see the film?",
+   "Was the letter written by her?"
+  ],
+  "answer": 2,
+  "explain": "बाकी तीनों passive हैं; 'Did you see the film?' active interrogative है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 17,
+  "section": "English",
+  "q": "Fill in the blanks: The scientist proposed ___ hypothesis supported by ___ empirical observation collected over several years of fieldwork.",
+  "options": [
+   "a, an",
+   "a, a",
+   "an, an",
+   "the, an"
+  ],
+  "answer": 0,
+  "explain": "hypothesis व्यंजन ध्वनि → a; empirical स्वर ध्वनि → an।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 18,
+  "section": "Maths",
+  "q": "A, B and C start a business investing in the ratio 2:3:5. If C's share in the profit is ₹1,500, what is the total profit?",
+  "options": [
+   "₹4,500",
+   "₹3,000",
+   "₹6,000",
+   "₹2,000"
+  ],
+  "answer": 1,
+  "explain": "C का भाग 5/10 = ₹1,500 → कुल लाभ = ₹3,000।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 19,
+  "section": "Reasoning",
+  "q": "Numbers: 183 647 925 762 514. If the product of the first and third digits of the largest number is added to the second digit of the smallest number, what is the result?",
+  "options": [
+   "51",
+   "53",
+   "55",
+   "49"
+  ],
+  "answer": 1,
+  "explain": "सबसे बड़ी 925 → 9×5 = 45; सबसे छोटी 183 का दूसरा अंक 8; 45+8 = 53।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 20,
+  "section": "Science",
+  "q": "Which function is mainly controlled by the cerebellum in the human brain?",
+  "options": [
+   "Integration of visual sensations",
+   "Regulation of body temperature",
+   "Maintenance of posture and balance",
+   "Control of heart rate"
+  ],
+  "answer": 2,
+  "explain": "अनुमस्तिष्क (cerebellum) शरीर का संतुलन और मुद्रा बनाए रखता है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 21,
+  "section": "English",
+  "q": "Choose the option which best replaces the underlined phrase: The committee rejected the proposal because it was too vague and open to multiple interpretations.",
+  "options": [
+   "ambivalent",
+   "lucid",
+   "explicit",
+   "ambiguous"
+  ],
+  "answer": 3,
+  "explain": "कई अर्थ निकलने वाला — ambiguous (अस्पष्ट/द्विअर्थी)।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 22,
+  "section": "Geography",
+  "q": "A short agricultural season between Rabi and Kharif in which watermelon, muskmelon and cucumber are grown is called:",
+  "options": [
+   "Zayed (Zaid)",
+   "Taid",
+   "Baid",
+   "Kharif"
+  ],
+  "answer": 0,
+  "explain": "रबी और खरीफ के बीच का छोटा मौसम — जायद।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 23,
+  "section": "Current Affairs",
+  "q": "On 5 September 2026, ISRO successfully conducted a hot test of the Power Head Test Article (PHTA) at full thrust for which type of engine?",
+  "options": [
+   "Cryogenic Engine",
+   "Hypergolic Liquid Engine",
+   "Solid Rocket Motor",
+   "Semi-cryogenic Engine"
+  ],
+  "answer": 3,
+  "explain": "PHTA ISRO के सेमी-क्रायोजेनिक इंजन (SE2000, LOX-केरोसिन) का परीक्षण मॉड्यूल है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 24,
+  "section": "Science",
+  "q": "What is the formula unit mass of sodium chloride (NaCl)?",
+  "options": [
+   "36.5 u",
+   "23.0 u",
+   "46.5 u",
+   "58.5 u"
+  ],
+  "answer": 3,
+  "explain": "Na (23) + Cl (35.5) = 58.5 u।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 25,
+  "section": "English",
+  "q": "Identify the segment with an error: She go / to school / every morning / with her friends.",
+  "options": [
+   "to school",
+   "every morning",
+   "She go",
+   "with her friends"
+  ],
+  "answer": 2,
+  "explain": "She के साथ 'goes' आएगा — त्रुटि 'She go' में।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 26,
+  "section": "Culture",
+  "q": "In the Braj region of Uttar Pradesh, Lathmar Holi is celebrated between which two towns?",
+  "options": [
+   "Sarnath and Varanasi",
+   "Ayodhya and Faizabad",
+   "Barsana and Nandgaon",
+   "Mathura and Vrindavan"
+  ],
+  "answer": 2,
+  "explain": "लट्ठमार होली बरसाना और नंदगाँव के बीच खेली जाती है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 27,
+  "section": "Reasoning",
+  "q": "Mr. Bucky drives 11 km south, turns right and drives 7 km, turns right and drives 21 km, turns right and drives 23 km, turns right and drives 10 km to reach P. How far and in which direction should he drive to return to A?",
+  "options": [
+   "16 km westward",
+   "9 km westward",
+   "16 km eastward",
+   "9 km eastward"
+  ],
+  "answer": 0,
+  "explain": "x: −7+23 = +16 (पूर्व), y: −11+21−10 = 0 → P, A से 16 km पूर्व; वापसी 16 km पश्चिम।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 28,
+  "section": "English",
+  "q": "Choose the correct idiom: The new student proved to be someone with hidden talents that nobody expected.",
+  "options": [
+   "a blue moon",
+   "a white elephant",
+   "a dark horse",
+   "a black sheep"
+  ],
+  "answer": 2,
+  "explain": "Dark horse — छिपी प्रतिभा वाला जो अप्रत्याशित रूप से सफल हो।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 29,
+  "section": "Computer",
+  "q": "You accidentally typed \"Teh\" instead of \"The\" several times. Which feature can fix this throughout the worksheet?",
+  "options": [
+   "Find and Replace",
+   "Flash Fill",
+   "Spell Check",
+   "AutoCorrect"
+  ],
+  "answer": 0,
+  "explain": "आधिकारिक कुंजी: Find and Replace — एक बार में पूरी शीट में सभी 'Teh' बदल जाते हैं।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 30,
+  "section": "Hindi",
+  "q": "लोकोक्ति का अर्थ: 'नई दुकान में मालिक को खुद खड़ा होना पड़ता है, क्योंकि बिना मरे स्वर्ग नहीं मिलता।'",
+  "options": [
+   "बड़ा बनने के लिए स्वार्थी बनो",
+   "काम स्वयं किए बिना ठीक नहीं होता",
+   "स्वर्ग मरने के बाद ही मिलता है",
+   "नई दुकान में काम न करें"
+  ],
+  "answer": 1,
+  "explain": "'आप मरे बिना स्वर्ग नहीं दिखता' — अपना काम स्वयं करने पर ही ठीक होता है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 31,
+  "section": "Computer",
+  "q": "What is the full form of CPU, called the brain of the computer?",
+  "options": [
+   "Central Processing Unit",
+   "Core Program Utility",
+   "Central Program Utility",
+   "Computer Processing Unit"
+  ],
+  "answer": 0,
+  "explain": "CPU = Central Processing Unit।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 32,
+  "section": "English",
+  "q": "People travelling in a vehicle, ship or aircraft are collectively known as:",
+  "options": [
+   "scavengers",
+   "passengers",
+   "pedlars",
+   "pedestrians"
+  ],
+  "answer": 1,
+  "explain": "वाहन/जहाज़/विमान में यात्रा करने वाले — passengers।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 33,
+  "section": "English",
+  "q": "Fill in the blank: My wallet ______ in a crowded bus.",
+  "options": [
+   "was stolen",
+   "stole",
+   "is stole",
+   "has stolen"
+  ],
+  "answer": 0,
+  "explain": "Passive voice, past: was + V3 → was stolen।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 34,
+  "section": "English",
+  "q": "Select the SYNONYM of 'profound': The policy had a profound impact on society.",
+  "options": [
+   "temporary",
+   "unimportant",
+   "deep",
+   "shallow"
+  ],
+  "answer": 2,
+  "explain": "Profound = deep (गहरा)।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 35,
+  "section": "English",
+  "q": "He is interested ___ learning French.",
+  "options": [
+   "in",
+   "on",
+   "to",
+   "for"
+  ],
+  "answer": 0,
+  "explain": "interested के साथ preposition 'in'।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 37,
+  "section": "Economy",
+  "q": "Which Union Ministry compiles and releases the headline All-India CPI with base revisions from the Household Consumption Expenditure Survey?",
+  "options": [
+   "Ministry of Statistics and Programme Implementation",
+   "Ministry of Labour and Employment",
+   "Ministry of Finance",
+   "Ministry of Consumer Affairs"
+  ],
+  "answer": 0,
+  "explain": "All-India CPI (ग्रामीण/शहरी/संयुक्त) MoSPI का NSO जारी करता है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 39,
+  "section": "Science",
+  "q": "The brain and spinal cord together form ______ nervous system.",
+  "options": [
+   "Central",
+   "Autonomous",
+   "Physique",
+   "Peripheral"
+  ],
+  "answer": 0,
+  "explain": "मस्तिष्क + मेरुरज्जु = केंद्रीय तंत्रिका तंत्र (CNS)।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 40,
+  "section": "Geography",
+  "q": "The Grand Banks off Newfoundland are rich fishing areas formed by the convergence of the warm Gulf Stream and which cold current?",
+  "options": [
+   "Labrador Current",
+   "Benguela Stream",
+   "Canary Stream",
+   "Kuroshio Current"
+  ],
+  "answer": 0,
+  "explain": "गल्फ स्ट्रीम (गर्म) + लैब्राडोर (ठंडी) धारा के मिलन से ग्रैंड बैंक्स।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 42,
+  "section": "Computer",
+  "q": "To move a sentence from start to finish in MS Word without retyping, which sequence is best?",
+  "options": [
+   "Cut → Paste",
+   "Delete → Retype",
+   "Save → Open",
+   "Copy → Delete"
+  ],
+  "answer": 0,
+  "explain": "Cut (Ctrl+X) → Paste (Ctrl+V) से टेक्स्ट स्थानांतरित होता है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 44,
+  "section": "Science",
+  "q": "Which statement regarding atomic number is incorrect?",
+  "options": [
+   "Atomic number represents the number of protons in the nucleus",
+   "The atomic number is equal to the sum of protons and neutrons",
+   "Atomic number is denoted by Z",
+   "Modern periodic table is based on atomic number"
+  ],
+  "answer": 1,
+  "explain": "प्रोटॉन + न्यूट्रॉन = द्रव्यमान संख्या, परमाणु क्रमांक नहीं।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 45,
+  "section": "Computer",
+  "q": "Remote teams need real-time collaboration, instant file sharing and integration with project tools. Which best meets these needs?",
+  "options": [
+   "Traditional email platforms",
+   "Cloud-based collaborative platforms like Slack or Microsoft Teams",
+   "Fax machines",
+   "Postal mail"
+  ],
+  "answer": 1,
+  "explain": "Slack/Teams जैसे क्लाउड प्लेटफॉर्म रियल-टाइम सहयोग देते हैं।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 46,
+  "section": "Science",
+  "q": "A sound wave oscillates 50 times in 1 second. What is its time period?",
+  "options": [
+   "0.02 s",
+   "0.05 s",
+   "0.1 s",
+   "0.5 s"
+  ],
+  "answer": 0,
+  "explain": "T = 1/f = 1/50 = 0.02 s।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 47,
+  "section": "Geography",
+  "q": "According to Census 2011, which state recorded the highest sex ratio (1,084 females per 1,000 males)?",
+  "options": [
+   "Kerala",
+   "Andhra Pradesh",
+   "Tamil Nadu",
+   "Goa"
+  ],
+  "answer": 0,
+  "explain": "जनगणना 2011 में केरल का लिंगानुपात 1084 — सर्वाधिक।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 48,
+  "section": "Hindi Literature",
+  "q": "A researcher wants to study a major devotional composition in Awadhi describing the life of Ram. Which work is most suitable?",
+  "options": [
+   "Ramcharitmanas",
+   "Padmavat",
+   "Invoker",
+   "Sursagar"
+  ],
+  "answer": 0,
+  "explain": "तुलसीदास का रामचरितमानस अवधी में राम-कथा है; पद्मावत (जायसी) प्रेमकथा, सूरसागर ब्रज में।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 49,
+  "section": "Maths",
+  "q": "15,625 registered voters; 80% voted; 5% of votes invalid; winner got 52% of valid votes. Votes received by winner?",
+  "options": [
+   "6,175",
+   "6,105",
+   "6,125",
+   "6,250"
+  ],
+  "answer": 0,
+  "explain": "15625×0.8 = 12500; वैध = 11875; 52% = 6175।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 50,
+  "section": "Computer",
+  "q": "A security engineer uses encryption tools at multiple stages of data transmission. What does this indicate?",
+  "options": [
+   "Encryption tools are used after data reaches its destination",
+   "Encryption tools are only required before transmission",
+   "Encryption is used at multiple stages to protect data throughout transmission",
+   "Encryption slows the network"
+  ],
+  "answer": 2,
+  "explain": "हर चरण पर एन्क्रिप्शन — पूरे ट्रांसमिशन में डेटा की सुरक्षा।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 51,
+  "section": "Maths",
+  "q": "At 20% compound interest, the 2nd-year interest is ₹1,480 more than the 1st-year interest. The amount after 2 years is reinvested for 1 year at 18%. Final amount after 3 years?",
+  "options": [
+   "₹61,340.40",
+   "₹65,720.40",
+   "₹63,860.40",
+   "₹62,870.40"
+  ],
+  "answer": 3,
+  "explain": "0.04P = 1480 → P = 37000; 2 वर्ष बाद 53,280; ×1.18 = ₹62,870.40।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 52,
+  "section": "Environment",
+  "q": "Project Cheetah was launched in which year?",
+  "options": [
+   "2008",
+   "2026",
+   "2022",
+   "2015"
+  ],
+  "answer": 2,
+  "explain": "17 सितंबर 2022 को कुनो (MP) में नामीबिया से चीते लाए गए।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 53,
+  "section": "Culture",
+  "q": "Which pair is correctly matched with its regional folk dance?",
+  "options": [
+   "Meghalaya – Bhangra",
+   "Sikkim – Lavani",
+   "Assam – Bihu",
+   "Ladakh – Garba"
+  ],
+  "answer": 2,
+  "explain": "बिहू असम का नृत्य; भांगड़ा पंजाब, लावणी महाराष्ट्र, गरबा गुजरात।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 54,
+  "section": "Computer",
+  "q": "Which method is commonly used to secure a smartphone against unauthorized access?",
+  "options": [
+   "Regularly updating software",
+   "Disabling Bluetooth connectivity",
+   "Fingerprint scanning only",
+   "Using a screen lock (PIN/password/biometric)"
+  ],
+  "answer": 3,
+  "explain": "स्क्रीन लॉक (PIN/पासवर्ड/बायोमेट्रिक) अनधिकृत पहुँच रोकता है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 55,
+  "section": "Computer",
+  "q": "In Windows, what is a common file extension for a text document?",
+  "options": [
+   ".exe",
+   ".txt",
+   ".jpg",
+   ".mp3"
+  ],
+  "answer": 1,
+  "explain": ".txt — टेक्स्ट फ़ाइल।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 56,
+  "section": "English",
+  "q": "Neither the committee nor the members expressed ___ dissatisfaction overtly, although several concerns were later documented.",
+  "options": [
+   "his",
+   "its",
+   "their",
+   "her"
+  ],
+  "answer": 2,
+  "explain": "Neither…nor में क्रिया/सर्वनाम निकट वाले (members, बहुवचन) से — their।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 57,
+  "section": "Reasoning",
+  "q": "Select the triad that follows the same pattern: BG - EJ - HM, PU - SX - VA",
+  "options": [
+   "QV - TX - WZ",
+   "KC - NG - QJ",
+   "LD - OG - RJ",
+   "MR - PU - SX"
+  ],
+  "answer": 3,
+  "explain": "हर पद में दोनों अक्षर +3; पद के भीतर अंतर +5 (B→G)। MR-PU-SX में यही पैटर्न।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 58,
+  "section": "History",
+  "q": "Which post-Mauryan dynasty of western India and the Deccan had royal women retaining their father's gotra after marriage?",
+  "options": [
+   "Satavahana",
+   "Wakataka",
+   "Kushana",
+   "Shunga"
+  ],
+  "answer": 0,
+  "explain": "सातवाहन राजाओं के नाम मातृ-गोत्र से (जैसे गौतमीपुत्र) — रानियाँ पिता का गोत्र रखती थीं।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 59,
+  "section": "English",
+  "q": "Choose the correct indirect statement: The scientist said, \"These results do not support our earlier theory.\"",
+  "options": [
+   "The scientist told that these results had not supported their earlier theory.",
+   "The scientist said that these results were not supporting their theory.",
+   "The scientist said that these results do not support our earlier theory.",
+   "The scientist said that those results did not support their earlier theory."
+  ],
+  "answer": 3,
+  "explain": "these→those, do not support→did not support, our→their।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 60,
+  "section": "Economy",
+  "q": "As per the Ministry of Coal quarterly booklet (Q1 2025-26), which state was the largest coal producer in FY 2024?",
+  "options": [
+   "West Bengal",
+   "Odisha",
+   "Chhattisgarh",
+   "Jharkhand"
+  ],
+  "answer": 1,
+  "explain": "आधिकारिक कुंजी: ओडिशा सबसे बड़ा कोयला उत्पादक।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 61,
+  "section": "English",
+  "q": "Identify the error: By the time the guests arrived, / she had finish / preparing the dinner / yesterday evening.",
+  "options": [
+   "yesterday evening",
+   "preparing the dinner",
+   "she had finish",
+   "By the time the guests arrived"
+  ],
+  "answer": 2,
+  "explain": "Past perfect में V3 — 'had finished'।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 62,
+  "section": "Geography",
+  "q": "The black soil of the Deccan plateau, ideal for cotton, is locally known as ______.",
+  "options": [
+   "Khadar soil",
+   "Bangar soil",
+   "Lowland soil",
+   "Regur soil"
+  ],
+  "answer": 3,
+  "explain": "काली मिट्टी को 'रेगुर' कहते हैं।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 63,
+  "section": "Computer",
+  "q": "What kind of software acts as an intermediary between hardware and user applications?",
+  "options": [
+   "System",
+   "Security",
+   "Utility",
+   "Application"
+  ],
+  "answer": 0,
+  "explain": "सिस्टम सॉफ्टवेयर (जैसे OS) हार्डवेयर और एप्लिकेशन के बीच सेतु।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 64,
+  "section": "History",
+  "q": "By the 1890s, which three leaders criticized the moderates' 'politics of prayers and petitions' and emphasized self-reliance and mass mobilization?",
+  "options": [
+   "Bipin Chandra Pal, Bal Gangadhar Tilak and Lala Lajpat Rai",
+   "Surendranath Banerjee, Anandmohan Bose and Romesh Chandra Dutt",
+   "Dadabhai Naoroji, G.K. Gokhale and Pherozeshah Mehta",
+   "Mahatma Gandhi, Nehru and Sardar Patel"
+  ],
+  "answer": 0,
+  "explain": "लाल-बाल-पाल — उग्रवादी नेता, स्वराज व जन-आंदोलन के समर्थक।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 66,
+  "section": "English",
+  "q": "Identify the segment with a grammatical error: They reached the site / after the river / has overflowed during / the previous night.",
+  "options": [
+   "They reached the site",
+   "the previous night",
+   "has overflowed during",
+   "after the river"
+  ],
+  "answer": 2,
+  "explain": "पहले हुई भूतकाल की क्रिया — 'had overflowed' होना चाहिए।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 67,
+  "section": "History",
+  "q": "Which Mughal courtier founded the autonomous principality of Hyderabad and the Asaf Jahi dynasty (1724)?",
+  "options": [
+   "Nizam-ul-Mulk Asaf Jah I",
+   "Saadat Khan Burhan-ul-Mulk",
+   "Murshid Quli Khan",
+   "Mir Jumla"
+  ],
+  "answer": 0,
+  "explain": "निज़ाम-उल-मुल्क आसफ़ जाह प्रथम ने 1724 में हैदराबाद राज्य स्थापित किया।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 68,
+  "section": "English",
+  "q": "What does the idiom \"Jump on the bandwagon\" mean?",
+  "options": [
+   "To join others in doing something popular",
+   "To travel quickly to a new place",
+   "To lead a group",
+   "To leave a group"
+  ],
+  "answer": 0,
+  "explain": "लोकप्रिय चीज़ में दूसरों के साथ शामिल हो जाना।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 69,
+  "section": "Computer",
+  "q": "Best way to change the width of multiple adjacent columns simultaneously in MS Excel?",
+  "options": [
+   "Draw a column border",
+   "Select the columns and use the Format menu",
+   "Double-click a cell",
+   "Use the Delete key"
+  ],
+  "answer": 1,
+  "explain": "कॉलम चुनकर Format → Column Width से सभी की चौड़ाई एक साथ।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 70,
+  "section": "UP GK",
+  "q": "In which district is the Mohiuddinpur Sugar Mill of UP State Sugar Corporation located?",
+  "options": [
+   "Kanpur",
+   "Bhadohi",
+   "Moradabad",
+   "Meerut"
+  ],
+  "answer": 3,
+  "explain": "मोहिउद्दीनपुर चीनी मिल मेरठ ज़िले में।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 71,
+  "section": "English",
+  "q": "SYNONYM of 'reluctant': He was reluctant to accept the new proposal.",
+  "options": [
+   "unwilling",
+   "prepared",
+   "eager",
+   "certain"
+  ],
+  "answer": 0,
+  "explain": "Reluctant = unwilling (अनिच्छुक)।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 72,
+  "section": "Computer",
+  "q": "Real-time text-based communication between two or more users on the Internet is commonly done using ______.",
+  "options": [
+   "File Downloading",
+   "Discussion Forum",
+   "Instant Messaging",
+   "Web Browsing"
+  ],
+  "answer": 2,
+  "explain": "इंस्टेंट मैसेजिंग — संदेश तुरंत दोनों स्क्रीन पर।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 74,
+  "section": "Polity",
+  "q": "Under Article 246 and the Seventh Schedule, which list includes education, forests, marriage and adoption, on which both Parliament and States can legislate?",
+  "options": [
+   "Union List",
+   "State List",
+   "Concurrent List",
+   "Residuary List"
+  ],
+  "answer": 2,
+  "explain": "समवर्ती सूची — शिक्षा, वन, विवाह, दत्तक ग्रहण आदि।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 76,
+  "section": "Computer",
+  "q": "What is the primary advantage of using LAN in an organization?",
+  "options": [
+   "It provides virus protection for all devices",
+   "It acts as a data backup tool",
+   "It enables resource sharing among connected devices",
+   "It increases internet speed"
+  ],
+  "answer": 2,
+  "explain": "LAN से प्रिंटर, फ़ाइल आदि संसाधन साझा होते हैं।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 77,
+  "section": "English",
+  "q": "Select the active voice: The homework will be completed by the students.",
+  "options": [
+   "The students are completing the homework.",
+   "The students have completed the homework.",
+   "The students completed the homework.",
+   "The students will complete the homework."
+  ],
+  "answer": 3,
+  "explain": "will be + V3 का active — will + V1।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 78,
+  "section": "Computer",
+  "q": "Which MS PowerPoint feature previews how a new template will affect your slides before applying it?",
+  "options": [
+   "Slide Sorter",
+   "Master View",
+   "Transition Preview",
+   "Live Preview"
+  ],
+  "answer": 3,
+  "explain": "Live Preview — क्लिक से पहले ही बदलाव दिखता है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 79,
+  "section": "Hindi",
+  "q": "'रात्रि' का पर्यायवाची शब्द है:",
+  "options": [
+   "वाम",
+   "व्याल",
+   "राजीव",
+   "क्षणदा"
+  ],
+  "answer": 3,
+  "explain": "क्षणदा = रात; व्याल = साँप, राजीव = कमल, वाम = बायाँ।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 80,
+  "section": "English",
+  "q": "Awareness about cleanliness is ______ positive change is visible.",
+  "options": [
+   "Restlessness",
+   "Elsewhere",
+   "Everywhere",
+   "Therefore"
+  ],
+  "answer": 2,
+  "explain": "Adverb of place — Everywhere।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 81,
+  "section": "Computer",
+  "q": "Which keyboard shortcut in MS PowerPoint starts the presentation from the beginning?",
+  "options": [
+   "F8",
+   "F5",
+   "F2",
+   "F9"
+  ],
+  "answer": 1,
+  "explain": "F5 — शुरू से स्लाइड शो; Shift+F5 — वर्तमान स्लाइड से।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 82,
+  "section": "History",
+  "q": "Which approach reflects the political methods of the moderate INC leaders (1885–1905)?",
+  "options": [
+   "Submission of petitions and resolutions demanding constitutional reforms",
+   "Organizing a nationwide boycott",
+   "Armed revolution",
+   "Mass civil disobedience"
+  ],
+  "answer": 0,
+  "explain": "नरमपंथी — प्रार्थना, याचिका, प्रस्ताव (संवैधानिक तरीके)।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 83,
+  "section": "English",
+  "q": "She wants to become ___ engineer who designs innovative solutions.",
+  "options": [
+   "an",
+   "the",
+   "No",
+   "a"
+  ],
+  "answer": 0,
+  "explain": "engineer स्वर ध्वनि से — an।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 84,
+  "section": "Maths",
+  "q": "6 devices at 100% of list price, 10 at 80%, and every additional device at 60%. If the average price is 80% of list price, how many devices in total?",
+  "options": [
+   "20",
+   "19",
+   "22",
+   "24"
+  ],
+  "answer": 2,
+  "explain": "600 + 800 + 60k = 80(16+k) → k = 6; कुल 22।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 85,
+  "section": "Geography",
+  "q": "Which strait separates peninsular India from the northernmost part of Sri Lanka?",
+  "options": [
+   "Strait of Hormuz",
+   "Sunda Strait",
+   "Strait of Malacca",
+   "Palk Strait"
+  ],
+  "answer": 3,
+  "explain": "पाक जलडमरूमध्य भारत (तमिलनाडु) व श्रीलंका (जाफना) के बीच।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 86,
+  "section": "Current Affairs",
+  "q": "At the 46th FIDE Chess Olympiad (September 2026), which country won gold in the Women's category?",
+  "options": [
+   "India",
+   "Georgia",
+   "China",
+   "Kazakhstan"
+  ],
+  "answer": 2,
+  "explain": "आधिकारिक कुंजी: महिला वर्ग में स्वर्ण — चीन (ओलंपियाड समरकंद, उज़्बेकिस्तान)।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 87,
+  "section": "Computer",
+  "q": "Which component temporarily holds data actively used by the CPU?",
+  "options": [
+   "Printed Circuit Board",
+   "Read Only Memory",
+   "Random Access Memory",
+   "Central Processing Unit"
+  ],
+  "answer": 2,
+  "explain": "RAM अस्थायी (volatile) मेमोरी है।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 88,
+  "section": "Reasoning",
+  "q": "SQO 71, LJH 67, ECA 63, XVT 59, ?",
+  "options": [
+   "QOM 54",
+   "PON 55",
+   "QOM 55",
+   "PON 54"
+  ],
+  "answer": 2,
+  "explain": "अक्षर −7 (X→Q, V→O, T→M), संख्या −4 → QOM 55।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 89,
+  "section": "Computer",
+  "q": "What is the primary function of antivirus software?",
+  "options": [
+   "Slowing down the computer's performance",
+   "Detecting and removing malicious software",
+   "Blocking all internet access",
+   "Increasing storage space"
+  ],
+  "answer": 1,
+  "explain": "मैलवेयर का पता लगाना और हटाना।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 90,
+  "section": "Current Affairs",
+  "q": "Exercise Veer Guardian 2026: 1. It is a 14-day India–Japan air exercise at Jodhpur Air Force Station. 2. IAF deployed Su-30 MKI, Rafale and LCA Tejas; JASDF participated with F-2A. Which is correct?",
+  "options": [
+   "Both statements 1 and 2 are incorrect",
+   "Both statements 1 and 2 are correct",
+   "Only statement 1",
+   "Only statement 2"
+  ],
+  "answer": 1,
+  "explain": "आधिकारिक कुंजी: दोनों कथन सही।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ },
+ {
+  "n": 100,
+  "section": "English",
+  "q": "Passage: \"...Many people get (5)______ to television and consider themselves compensated for the loss of sleep.\" Fill blank 5.",
+  "options": [
+   "addicted",
+   "confiscated",
+   "substituted",
+   "frustrated"
+  ],
+  "answer": 0,
+  "explain": "addicted to — किसी चीज़ की लत लगना।",
+  "source": "इलाहाबाद हाईकोर्ट — आधिकारिक उत्तर कुंजी",
+  "source_url": "https://www.allahabadhighcourt.in/",
+  "doubt": false
+ }
+]
