@@ -1684,3 +1684,7 @@ body.eh-mockauth .eh-au .eh-auth2-tabs a.on{color:#0f2a4d}
 body.eh-mockauth .eh-au .eh-auth2-form input{border-color:#d7e0ea!important;background:#f8fafc!important}
 @media(max-width:560px){.eh-mhd{padding:8px 12px}.eh-mhd-x b{display:none}.eh-mhd-x{padding:3px}}
 body.eh-mockauth .eh-footer{display:none!important}
+/* Super TET mock link in the menu */
+.eh-menu a[href*="super-tet-mock"]{color:#123a86!important;font-weight:700;position:relative}
+.eh-menu a[href*="super-tet-mock"]:after{content:"LIVE";font:800 9px Inter,sans-serif;letter-spacing:.4px;background:#e11d48;color:#fff;border-radius:6px;padding:1px 5px;margin-left:5px;vertical-align:2px}
+.eh-drawer-links a[href*="super-tet-mock"],.eh-mnav a[href*="super-tet-mock"]{color:#123a86!important;font-weight:700}

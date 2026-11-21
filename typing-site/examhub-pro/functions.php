@@ -258,7 +258,7 @@ function eh_tg_buttons($class = '') {
 /* default menu if none set */
 function eh_member_links() {
     return [
-        'live' => ['/live-typing/', '⚡ Live Typing'], 'exams' => ['/exams/', 'All Exams Typing'], 'history' => ['/my-dashboard/', 'Typing History'],
+        'mock' => ['/super-tet-mock/', '📝 Super TET Mock'], 'live' => ['/live-typing/', '⚡ Live Typing'], 'exams' => ['/exams/', 'All Exams Typing'], 'history' => ['/my-dashboard/', 'Typing History'],
         'hall' => ['/exam-hall-typing/', 'Exam Hall Typing'], 'download' => ['/download-passages/', 'Download Passages'], 'insight' => ['/typing-insight/', '📈 Typing Insight'],
     ];
 }
@@ -269,10 +269,17 @@ function eh_member_nav($active = '') {
     foreach (eh_member_links() as $k => $l) $h .= '<a class="' . ($k === $active ? 'on' : '') . ($k === 'insight' ? ' ins' : '') . '" href="' . esc_url(home_url($l[0])) . '">' . esc_html($l[1]) . '</a>';
     return $h . '</div></nav>';
 }
+/* custom WP menus also get the Super TET mock link */
+add_filter('wp_nav_menu_items', function ($items, $args) {
+    if (($args->theme_location ?? '') !== 'primary' || strpos($items, 'super-tet-mock') !== false) return $items;
+    $li = '<li class="menu-item eh-mock-li"><a href="' . esc_url(home_url('/super-tet-mock/')) . '">' . (is_user_logged_in() ? '📝 Super TET Mock' : 'Super TET Mock') . '</a></li>';
+    $p = strpos($items, '</li>');
+    return $p === false ? $li . $items : substr($items, 0, $p + 5) . $li . substr($items, $p + 5);
+}, 10, 2);
 function eh_default_menu() {
     $items = is_user_logged_in()
         ? array_merge([['/', '🏠 Home']], array_values(eh_member_links()))
-        : [['/', 'Home'], ['/exams/', 'Exams'], ['/demo-typing/', 'Demo Typing'], ['/live-typing/', 'Live Typing'], ['/exam-based-result/', 'Result'], ['/blog/', 'Typing Tips']];
+        : [['/', 'Home'], ['/super-tet-mock/', 'Super TET Mock'], ['/exams/', 'Exams'], ['/demo-typing/', 'Demo Typing'], ['/live-typing/', 'Live Typing'], ['/exam-based-result/', 'Result'], ['/blog/', 'Typing Tips']];
     echo '<ul class="eh-menu">';
     foreach ($items as $i) echo '<li><a href="' . esc_url(home_url($i[0])) . '">' . esc_html($i[1]) . '</a></li>';
     echo '</ul>';

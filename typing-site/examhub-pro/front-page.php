@@ -67,7 +67,6 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
       <a class="uh-btn" href="#batches"><?php echo eh_t('See running batches', 'चल रहे बैच देखें'); ?><?php echo $arrow; ?></a>
       <a class="uh-btn" href="<?php echo esc_url(home_url('/live-typing/')); ?>"><?php echo eh_t('Junior Assistant Live Typing', 'जूनियर असिस्टेंट लाइव टाइपिंग'); ?><?php echo $arrow; ?></a>
     </div>
-    <a class="uh-3284big" href="<?php echo esc_url(home_url('/live-typing/?set=3284')); ?>"><span class="uh-3284-dot"></span><span class="uh-3284-t"><b>UPSSSC 3284 कनिष्ठ सहायक पैटर्न पैसेज</b><small>सभी शिफ्टों के पैटर्न पर आधारित · English + हिंदी (Krutidev / Mangal)</small></span><span class="uh-3284-go">अभी टाइप करें →</span></a>
     <?php if (function_exists('eh_stm_round')): $stm = eh_stm_round('m1'); if ($stm && time() < $stm['end_ts']): ?>
     <a class="uh-stm" id="uh-stm" href="<?php echo esc_url(home_url('/super-tet-mock/')); ?>" data-start="<?php echo (int) $stm['start_ts']; ?>" data-end="<?php echo (int) $stm['end_ts']; ?>" data-now="<?php echo time(); ?>">
       <span class="uh-stm-l"><img src="<?php echo esc_url(EH_URI . '/assets/upsssc-alert-logo.svg'); ?>" alt="UPSSSC ALERT" width="54" height="54">
