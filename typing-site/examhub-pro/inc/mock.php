@@ -13,8 +13,8 @@ function eh_stm_rounds() {
     $ts = function ($s) use ($tz) { return (new DateTime($s, $tz))->getTimestamp(); };
     $o = get_option('eh_stm_rounds');
     $list = is_array($o) && $o ? $o : [
-        ['id' => 't1', 'name' => 'Super TET Mock 2026 — ट्रायल', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 01:00', 'paper' => 'supertet-mock1'],
-        ['id' => 'm1', 'name' => 'Super TET Mock 2026 — लाइव', 'login' => '2026-11-22 09:30', 'start' => '2026-11-22 10:00', 'end' => '2026-11-22 12:00', 'paper' => 'supertet-mock1'],
+        ['id' => 't1', 'name' => 'Super TET Mock 2026 — ट्रायल', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 00:00', 'paper' => 'supertet-mock1'],
+        ['id' => 'm1', 'name' => 'Super TET Mock 2026 — लाइव', 'login' => '2026-11-22 00:00', 'start' => '2026-11-22 00:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
     ];
     return array_map(function ($r) use ($ts) {
         $r['login_ts'] = $ts($r['login']); $r['start_ts'] = $ts($r['start']); $r['end_ts'] = $ts($r['end']);

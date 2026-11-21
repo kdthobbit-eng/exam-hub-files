@@ -417,7 +417,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
   </div>
   <div class="card" style="margin-bottom:16px"><h2>महत्वपूर्ण निर्देश</h2><ol class="rules">
    <li>परीक्षा देने के लिए xlstudy.in पर लॉग-इन ज़रूरी है। एक अकाउंट से केवल एक प्रयास।</li>
-   <li>परीक्षा निर्धारित समय पर ही शुरू होगी। देर से आने पर केवल बचा हुआ समय मिलेगा।</li>
+   <li>मॉक पूरे दिन खुला है — दिन में कभी भी शुरू करें, शुरू करने के बाद पूरे 120 मिनट मिलेंगे। अंतिम रैंक दिन समाप्त होने के बाद।</li>
    <li>हर उत्तर सर्वर पर सेव होता है। नेट जाने या फ़ोन बंद होने पर दोबारा खोलें — परीक्षा वहीं से चलेगी।</li>
    <li>समय पूरा होते ही परीक्षा अपने आप सबमिट हो जाएगी।</li>
    <li>सबमिट के बाद स्कोर, रैंक, परसेंटाइल, सेक्शन-वार विश्लेषण और हर प्रश्न की व्याख्या मिलेगी। प्रश्न-पत्र व उत्तर-कुंजी PDF में डाउनलोड कर सकेंगे।</li>
@@ -560,11 +560,11 @@ function status(){const n=now();return n<R.login?'soon':n<R.start?'login':n<R.en
 function home(){const n=now(),st=status();
  $('h-date').textContent=ist(R.start,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
  $('h-time').textContent=tStr(R.start)+' – '+tStr(R.end);$('cf-date').textContent=ist(R.start,{day:'numeric',month:'long',year:'numeric'})+' · '+tStr(R.start)+' – '+tStr(R.end);
- const live=st==='live';$('h-chip').classList.toggle('live',live);$('h-chipt').textContent=live?'LIVE · परीक्षा चल रही है':st==='over'?'परीक्षा समाप्त':'लाइव मॉक टेस्ट';
- const left=st==='over'?0:Math.max(0,(live?R.end:R.start)-n);$('cd-lbl').textContent=st==='over'?'परीक्षा समाप्त हो चुकी है':live?'परीक्षा समाप्त होने में':'परीक्षा शुरू होने में';
+ const live=st==='live';$('h-chip').classList.toggle('live',live);$('h-chipt').textContent=live?'LIVE · मॉक आज पूरे दिन खुला है':st==='over'?'परीक्षा समाप्त':'लाइव मॉक टेस्ट';
+ const left=st==='over'?0:Math.max(0,(live?R.end:R.start)-n);$('cd-lbl').textContent=st==='over'?'मॉक समाप्त हो चुका है':live?'मॉक बंद होने में':'मॉक खुलने में';
  const d=Math.floor(left/86400),h=Math.floor(left%86400/3600),m=Math.floor(left%3600/60),s=left%60;
  $('cd').innerHTML=(d?ring(d,30,'दिन'):'')+ring(h,24,'घंटे')+ring(m,60,'मिनट')+ring(s,60,'सेकंड');
- const tl=[[R.login,'लॉग-इन व निर्देश','उम्मीदवार विवरण जाँचें, निर्देश पढ़ें'],[R.start,'परीक्षा शुरू','प्रश्न-पत्र खुलेगा · 120 मिनट'],[R.end,'परीक्षा समाप्त','सभी उत्तर अपने आप सबमिट'],[R.end,'रिज़ल्ट','स्कोर सबमिट के तुरंत बाद · अंतिम रैंक/परसेंटाइल समाप्ति के बाद']];
+ const tl=[[R.login,'लॉग-इन व निर्देश','उम्मीदवार विवरण जाँचें, निर्देश पढ़ें'],[R.start,'मॉक खुलेगा','पूरे दिन में कभी भी शुरू करें · 120 मिनट'],[R.end,'मॉक बंद','इसके बाद नया प्रयास नहीं'],[R.end,'रिज़ल्ट','स्कोर सबमिट के तुरंत बाद · अंतिम रैंक/परसेंटाइल समाप्ति के बाद']];
  const th=tl.map((x,i)=>`<li class="${n>=x[0]&&i<3?'on':''}"><span class="t">${tStr(x[0]).replace(' ','<br>')}</span><div><b>${x[1]}</b><span>${x[2]}</span></div></li>`).join('');if($('tl').innerHTML!==th)$('tl').innerHTML=th;
  cta(st)}
 function cta(st){let h='',p='',b='';const a=A;
@@ -574,7 +574,7 @@ function cta(st){let h='',p='',b='';const a=A;
  else if(+a.started){h='आपकी परीक्षा जारी है';p='बचा समय '+fmt(a.deadline-now())+' · आपके उत्तर सर्वर पर सेव हैं।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा जारी रखें ›</button>'}
  else if(st==='soon'){h='नमस्ते, '+ME.name;p='लॉग-इन '+tStr(R.login)+' से खुलेगा। तब तक नीचे पैटर्न और निर्देश देख लें।';b='<button class="b b-wh b-lg" disabled>'+tStr(R.login)+' से खुलेगा</button>'}
  else if(st==='over'){h='यह परीक्षा समाप्त हो चुकी है';p='प्रश्न-पत्र और उत्तर-कुंजी डाउनलोड करें।';b='<button class="b b-pr b-lg" id="c-paper">⬇ प्रश्न-पत्र + उत्तर-कुंजी</button>'}
- else {h='नमस्ते, '+ME.name;p=st==='live'?'परीक्षा चल रही है। अभी प्रवेश करने पर बचा हुआ समय मिलेगा: '+fmt(Math.min(7200,R.end-now())):'विवरण जाँचें और निर्देश पढ़ें। परीक्षा '+tStr(R.start)+' पर शुरू होगी।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा में प्रवेश करें ›</button>'}
+ else {h='नमस्ते, '+ME.name;p=st==='live'?(R.end-now()>=7200?'मॉक खुला है। शुरू करने पर आपको पूरे 120 मिनट मिलेंगे।':'मॉक बंद होने वाला है — अभी शुरू करने पर केवल '+fmt(R.end-now())+' मिलेंगे।'):'विवरण जाँचें और निर्देश पढ़ें। परीक्षा '+tStr(R.start)+' पर शुरू होगी।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा में प्रवेश करें ›</button>'}
  if($('c-h').textContent!==h)$('c-h').textContent=h;if($('c-p').textContent!==p)$('c-p').textContent=p;
  if($('c-bt').dataset.k!==b){$('c-bt').innerHTML=b;$('c-bt').dataset.k=b;const g=$('c-go');if(g)g.onclick=enter;const pp=$('c-paper');if(pp)pp.onclick=paper}}
 function enter(){if(+A.submitted)return showResult();if(+A.started)return start();go('s-conf')}
