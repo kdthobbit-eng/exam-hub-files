@@ -81,8 +81,9 @@ add_action('init', function () {
     add_rewrite_rule('^blog/?$', 'index.php?eh_view=blog', 'top');
     add_rewrite_rule('^exam-based-result/?$', 'index.php?eh_view=results', 'top');
     add_rewrite_rule('^stet-mock-x9k4/?$', 'index.php?eh_view=stetmock', 'top');
+    add_rewrite_rule('^super-tet-mock/?$', 'index.php?eh_view=supertet', 'top');
     add_rewrite_rule('^(faqs|about-us|declaration|terms-of-service|privacy-policy|contact-us)/?$', 'index.php?eh_view=info&eh_slug=$matches[1]', 'top');
-    if (get_option('eh_rewrite_ver') !== '4') { flush_rewrite_rules(false); update_option('eh_rewrite_ver', '4'); }
+    if (get_option('eh_rewrite_ver') !== '5') { flush_rewrite_rules(false); update_option('eh_rewrite_ver', '5'); }
 });
 add_filter('query_vars', function ($v) { $v[] = 'eh_view'; $v[] = 'eh_slug'; return $v; });
 
