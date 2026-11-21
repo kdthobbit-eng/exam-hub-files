@@ -12,11 +12,14 @@ $eh_cfg = [
     'round' => eh_stm_round_out(eh_stm_round()),
     'login' => eh_login_page_url($eh_self), 'signup' => add_query_arg('redirect_to', rawurlencode($eh_self), home_url('/signup/')),
     'logo' => get_template_directory_uri() . '/assets/upsssc-alert-logo.svg',
+    'logout' => wp_logout_url($eh_self), 'tgc' => eh_opt('tg_channel'), 'tgg' => eh_opt('tg_group'), 'tgj' => eh_opt('tg_join'),
+    'wa' => eh_wa_url('Hello, I want to join the Acharya 2.0 (Super TET) batch.'), 'bookwa' => 'https://wa.me/918726821839?text=' . rawurlencode('UP SUPER TET BOOK order'),
+    'booktg' => 'https://t.me/Booksalert2026', 'book' => get_template_directory_uri() . '/assets/book-supertet.jpg',
 ];
 $eh_logo = esc_url($eh_cfg['logo']);
-$eh_hd = function ($sub = 'Online Examination', $right = '') use ($eh_logo) { ?>
+$eh_hd = function ($sub = 'Online Examination', $right = '', $out = false) use ($eh_logo, $eh_in, $eh_cfg) { ?>
  <header class="hd"><div class="brand"><img src="<?php echo $eh_logo; ?>" alt="UPSSSC ALERT" width="44" height="44"><div><b>UPSSSC ALERT</b><span><?php echo esc_html($sub); ?></span></div></div>
-  <div class="hdr"><?php echo $right; ?><div class="xl"><i>XL</i><div><b>XL Study</b><span>xlstudy.in</span></div></div></div></header>
+  <div class="hdr"><?php echo $right; ?><?php if ($out && $eh_in): ?><a class="lo" href="<?php echo esc_url($eh_cfg['logout']); ?>" title="लॉग-आउट"><svg viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11"/></svg><span>लॉग-आउट</span></a><?php endif; ?><div class="xl"><i>XL</i><div><b>XL Study</b><span>xlstudy.in</span></div></div></div></header>
 <?php };
 $eh_ph = '<svg viewBox="0 0 40 40"><circle cx="20" cy="15" r="8"/><path d="M4 40c0-9 7-15 16-15s16 6 16 15z"/></svg>';
 ?><!DOCTYPE html>
@@ -264,6 +267,84 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:20px;white-space:nowrap}
 .p-l{background:#dcfce7;color:#166534}.p-s{background:#e8f0fb;color:#1d4f9a}.p-o{background:#eef2f7;color:#5b6675}.p-i{background:#fff4d6;color:#8a5a00}
 
+/* logout, info bar, watermark, smooth */
+.lo{display:inline-flex;align-items:center;gap:6px;color:var(--mu);text-decoration:none;font-size:13px;font-weight:600;border:1px solid var(--ln);border-radius:30px;padding:6px 12px;background:#fff}
+.lo svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lo:hover{color:var(--rd);border-color:#f1c4bd}
+.hd{padding-top:max(8px,env(safe-area-inset-top))}
+.ibar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 16px;background:linear-gradient(90deg,#0f2a4d,#1c4a80);color:#fff}
+.ibar .who{display:flex;align-items:center;gap:10px;min-width:0}
+.ibar .who .av{width:36px;height:36px;border-color:rgba(255,255,255,.6);box-shadow:none}
+.ibar .who b{display:block;font-size:14px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+.ibar .who span{font-size:11.5px;opacity:.8}
+.ibar .tmr{background:#fff;color:var(--nv);padding:4px 14px 4px 5px}
+.ibar .tmr i{background:var(--pr2)}.ibar .tmr i svg{stroke:var(--nv)}
+.ibar .tmr span{opacity:.65}
+.ibar .tmr.low{background:#fff;color:var(--rd);animation:bl2 1s steps(2) infinite}
+@keyframes bl2{50%{background:#ffe3df}}
+#s-exam{position:fixed;inset:0;z-index:10}
+.qa{background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='460' height='300' viewBox='0 0 460 300'%3E%3Ctext x='230' y='160' text-anchor='middle' transform='rotate(-24 230 150)' font-family='Arial,Helvetica,sans-serif' font-size='28' font-weight='800' letter-spacing='3' fill='%230f2a4d' fill-opacity='0.055'%3EUPSSSC ALERT%3C/text%3E%3C/svg%3E");background-attachment:local}
+.scr.on{animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+#s-exam.on{animation:none}
+.op{transition:background .12s,border-color .12s}
+.op:active{transform:scale(.995)}
+/* result extras */
+.hstat{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.hstat span{background:rgba(255,255,255,.12);border-radius:30px;padding:5px 14px;font-size:13.5px}
+.hstat b{font-family:Poppins,sans-serif;color:#ffd277}
+.livebadge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#166534;background:#dcfce7;border-radius:20px;padding:2px 10px;margin-left:auto}
+.livebadge:before{content:"";width:8px;height:8px;border-radius:50%;background:#22a35a;animation:pl 1.6s infinite}
+.dist{overflow-x:auto;padding:8px 2px 4px;scrollbar-width:thin}
+.dist .bars{display:flex;align-items:flex-end;gap:6px;height:190px;min-width:max-content;border-bottom:2px solid #e3e9f0;padding:0 4px}
+.dist .bc{width:44px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.dist .bc b{font-size:12px;font-family:Poppins,sans-serif;color:var(--nv);margin-bottom:3px}
+.dist .bc i{display:block;width:100%;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#7fa8e0,#1d63c7);min-height:3px;transition:height .6s ease}
+.dist .bc.me i{background:linear-gradient(180deg,#ffd277,#c9962e)}
+.dist .lb2{display:flex;gap:6px;min-width:max-content;padding:4px 4px 0}
+.dist .lb2 span{width:44px;text-align:center;font-size:11px;color:var(--mu);font-family:Poppins,sans-serif}
+.dist .lb2 span.me{color:#a87612;font-weight:700}
+.solbtn{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--ln);border-radius:16px;padding:16px 18px;margin:16px 0;cursor:pointer;width:100%;text-align:left;font:inherit;color:inherit}
+.solbtn i{width:48px;height:48px;border-radius:50%;background:var(--pr2);color:var(--pr);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:22px;flex:none}
+.solbtn b{display:block;font-size:16px;color:var(--nv)}.solbtn span{font-size:13px;color:var(--mu)}
+.solbtn em{margin-left:auto;font-style:normal;font-size:22px;color:var(--pr)}
+.join{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.join a{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:16px;color:#fff;text-decoration:none;background:linear-gradient(135deg,#1f8fd6,#2aa3e8);box-shadow:0 6px 18px rgba(31,143,214,.25)}
+.join a.g{background:linear-gradient(135deg,#0f2a4d,#1c4a80);box-shadow:0 6px 18px rgba(15,42,77,.25)}
+.join a i{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex:none}
+.join a i svg{width:22px;height:22px;fill:#fff}
+.join a b{display:block;font-size:15px}.join a span{font-size:12.5px;opacity:.85}
+.promo{border-radius:22px;overflow:hidden;background:radial-gradient(700px 300px at 100% 0,rgba(255,210,119,.25),transparent 60%),linear-gradient(135deg,#0d2443,#1c4a80);color:#fff;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);margin:18px 0 10px;box-shadow:0 14px 34px rgba(15,42,77,.22)}
+.promo .pt{padding:24px 26px}
+.promo .tagp{display:inline-block;background:#ffd277;color:#3b2a00;font-weight:800;font-size:12px;border-radius:20px;padding:3px 12px}
+.promo h3{font-family:Poppins,'Noto Sans Devanagari',sans-serif;font-size:26px;margin:10px 0 4px;line-height:1.15}
+.promo h3 em{font-style:normal;color:#ffd277}
+.promo p{margin:0 0 12px;opacity:.88;font-size:14px}
+.promo ul{list-style:none;margin:0 0 16px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;font-size:14px}
+.promo li{display:flex;gap:8px;align-items:flex-start}
+.promo li:before{content:"✓";width:20px;height:20px;border-radius:50%;background:rgba(61,220,120,.2);color:#6ff0a0;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+.promo .pr{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.promo .fee{font-family:Poppins,sans-serif;font-size:30px;font-weight:700;color:#ffd277;line-height:1}
+.promo .fee small{display:block;font-size:11.5px;color:#fff;opacity:.75;font-weight:500;font-family:'Noto Sans Devanagari',sans-serif}
+.promo .pb{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:24px;background:rgba(255,255,255,.06);border-left:1px solid rgba(255,255,255,.1);text-align:center}
+.promo .pb img{width:150px;border-radius:10px;box-shadow:0 10px 24px rgba(0,0,0,.35);transform:rotate(-3deg)}
+.promo .pb b{font-size:15px}.promo .pb span{font-size:13px;opacity:.85}
+.b-wa{background:#25d366;color:#fff}
+#s-sol .top{position:sticky;top:0;z-index:5;background:#fff;box-shadow:0 2px 10px rgba(15,42,77,.08);padding:10px 14px;display:flex;align-items:center;gap:10px}
+#s-sol .top h3{margin:0;font-size:16px;color:var(--nv)}
+.pdfwait{position:fixed;inset:0;background:rgba(10,25,45,.6);z-index:60;display:none;align-items:center;justify-content:center;color:#fff;flex-direction:column;gap:14px;font-size:15px}
+.pdfwait.on{display:flex}
+.pdfwait .pc{width:90px;height:90px;border-radius:50%;border:6px solid rgba(255,255,255,.2);border-top-color:#ffd277;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+#pdfStage{position:fixed;left:-10000px;top:0;width:760px;background:#fff;font-family:'Noto Sans Devanagari',Arial,sans-serif;color:#17202b}
+@media(max-width:760px){
+ .lo span{display:none}.lo{padding:7px}
+ .ibar{padding:6px 10px}.ibar .who .av{display:none}.ibar .tmr b{font-size:17px}
+ .acts .l{display:contents}.acts .r{display:contents}
+ #bmark{order:1}#bsave{order:2}#bback{order:3}#bclr{order:4}
+ .promo{grid-template-columns:1fr}.promo .pb{border-left:0;border-top:1px solid rgba(255,255,255,.1)}.promo ul{grid-template-columns:1fr}.promo h3{font-size:22px}
+ .join{grid-template-columns:1fr}
+}
 #printArea{display:none}
 @media print{.scr,.mdl,.shade{display:none!important}#printArea{display:block;font-size:11.5px;line-height:1.5}
  #printArea h1{text-align:center;font-size:16px;margin:0 0 2px}#printArea .pq{break-inside:avoid;margin-bottom:7px}
@@ -273,7 +354,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 @media(max-width:760px){
  .hd{padding:7px 10px}.brand img{width:38px;height:38px}.brand b{font-size:14px}.brand span{font-size:11px}
  .xl{padding:3px 9px 3px 3px}.xl i{width:28px;height:28px;font-size:11.5px}.xl b{font-size:12px}.xl span{display:none}
- .hdr{gap:8px}.hdr .cin,.hdr .av,#s-exam .xl{display:none}
+ .hdr{gap:8px}.hdr .cin,.hdr .av{display:none}
  .tmr{padding:4px 12px 4px 4px}.tmr i{width:26px;height:26px}.tmr b{font-size:16px}
  .hero{padding:24px 16px 84px}.hero .st{font-size:14.5px}.ring{width:72px;height:72px}.ring b{font-size:22px}.ring span{font-size:10.5px}.cd{gap:10px}
  .cta{flex-direction:column;align-items:stretch;text-align:center;gap:12px;padding:18px}.cta .av{margin:0 auto}.cta .bt{justify-content:stretch}.cta .bt .b{flex:1}
@@ -304,7 +385,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 
 <!-- ===== home ===== -->
 <section class="scr on" id="s-home">
- <?php $eh_hd('Online Examination'); ?>
+ <?php $eh_hd('Online Examination', '', true); ?>
  <div class="hero"><div class="hin">
   <div><span class="chip" id="h-chip"><span class="dot"></span><span id="h-chipt">लाइव मॉक टेस्ट</span></span>
    <h1>UP Super TET <em>2026</em></h1>
@@ -387,7 +468,9 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 
 <!-- ===== exam ===== -->
 <section class="scr" id="s-exam">
- <?php $eh_hd('UP Super TET 2026 · Live Mock', '<div class="cin">Candidate: <b class="cn"></b><br>Roll No: <b class="roll"></b></div><div class="av">' . $eh_ph . '</div><div class="tmr" id="tbox"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></i><div><span>Time Left</span><b id="tm">2:00:00</b></div></div>'); ?>
+ <?php $eh_hd('UP Super TET 2026 · Live Mock'); ?>
+ <div class="ibar"><div class="who"><div class="av"><?php echo $eh_ph; ?></div><div><b class="cn"></b><span>Roll No: <span class="roll"></span></span></div></div>
+  <div class="tmr" id="tbox"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></i><div><span>Time Left</span><b id="tm">2:00:00</b></div></div></div>
  <div class="secbar"><span class="lbl">Sections</span><div class="secs" id="secs"></div></div>
  <div class="body">
   <div class="main">
@@ -396,7 +479,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
     <button class="pbtn mob" id="popen"><svg viewBox="0 0 16 16"><path d="M1 1h4v4H1zm5 0h4v4H6zm5 0h4v4h-4zM1 6h4v4H1zm5 0h4v4H6zm5 0h4v4h-4zM1 11h4v4H1zm5 0h4v4H6zm5 0h4v4h-4z"/></svg>Palette</button></span></div>
    <div class="qa" id="qa"></div>
    <div class="acts"><div class="l"><button class="b b-mk" id="bmark">Mark for Review &amp; Next</button><button class="b b-wh" id="bclr">Clear Response</button></div>
-    <div class="r"><button class="b b-wh" id="bback">‹ Back</button><button class="b b-pr" id="bsave">Save &amp; Next</button></div></div>
+    <div class="r"><button class="b b-wh" id="bback">‹ Back</button><button class="b b-pr" id="bsave">Save &amp; Next ›</button></div></div>
   </div>
   <aside class="side" id="side">
    <div class="grab"><span>Question Palette</span><button id="pclose" aria-label="बंद करें">×</button></div>
@@ -412,8 +495,14 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 
 <!-- ===== result ===== -->
 <section class="scr" id="s-res">
- <?php $eh_hd('Result · Score Card'); ?>
+ <?php $eh_hd('Result · Score Card', '', true); ?>
  <div id="resw"></div>
+</section>
+
+<!-- ===== solutions ===== -->
+<section class="scr" id="s-sol">
+ <div class="top"><button class="b b-wh" id="solback">‹ रिज़ल्ट</button><h3>प्रश्न एवं व्याख्या</h3></div>
+ <div class="wrap" style="padding-top:12px"><div class="filt" id="filt"></div><div id="sols"></div></div>
 </section>
 
 <!-- ===== admin ===== -->
@@ -425,6 +514,10 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 
 <div class="mdl" id="mdl"><div class="bx"><h3><span id="mt"></span><button id="mx" aria-label="बंद करें">×</button></h3><div class="in" id="mb"></div><div class="ftr" id="mf"></div></div></div>
 <div id="printArea"></div>
+<div class="pdfwait" id="pdfwait"><div class="pc"></div><div id="pdfmsg">PDF बन रही है…</div></div>
+<div id="pdfStage"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 
 <script>
 {
@@ -491,7 +584,9 @@ function acc(){const i=A.cur,d=Math.round((Date.now()-qStart)/1000);if(d>0&&d<36
 function sv(c,t){const e=$('sv');e.className='sv '+c;e.textContent=t}
 function push(fin,keep){acc();if(saving&&!fin){dirty=true;return Promise.resolve()}saving=true;dirty=false;sv('w','Saving…');
  return api('save',{ans:A.ans,st:A.st,tq:A.tq,cur:A.cur,tabs:A.tabs,submit:fin?1:0},keep).then(j=>{saving=false;sv('','Saved');if(j.now)off=j.now*1000-Date.now();return j}).catch(e=>{saving=false;dirty=true;sv('x','Offline');throw e})}
-let pt=null;function later(){dirty=true;clearTimeout(pt);pt=setTimeout(()=>push().catch(()=>{}),700)}
+const LK=()=>'eh_stm_'+R.id+'_'+ME.roll;
+function backup(){try{localStorage.setItem(LK(),JSON.stringify({ans:A.ans,st:A.st,tq:A.tq,cur:A.cur,tabs:A.tabs,t:now()}))}catch(e){}}
+let pt=null;function later(){dirty=true;backup();clearTimeout(pt);pt=setTimeout(()=>push().catch(()=>{}),700)}
 document.addEventListener('visibilitychange',()=>{if(!A||!+A.started||+A.submitted||!$('s-exam').classList.contains('on'))return;
  if(document.hidden){hidAt=Date.now();push(false,true).catch(()=>{})}else if(hidAt&&Date.now()-hidAt>1500){hidAt=0;A.tabs=(+A.tabs||0)+1;later();modal('चेतावनी','<p style="line-height:1.7;margin:0">परीक्षा के दौरान दूसरी टैब या ऐप खोलना वर्जित है। यह गिनती दर्ज कर ली गई है। (कुल: <b>'+A.tabs+'</b>)</p>')}});
 window.addEventListener('online',()=>{if(dirty&&A&&!+A.submitted)push().catch(()=>{})});
@@ -526,42 +621,96 @@ function submit(auto){if(subbing)return;subbing=true;clearInterval(T);clearInter
  tryIt(0)}
 
 /* ---------- result ---------- */
+let LT=null;
 function showResult(){go('s-res');$('resw').innerHTML='<p style="text-align:center;padding:60px 20px">रिज़ल्ट तैयार हो रहा है…</p>';
  api('result').then(renderRes).catch(()=>{close();$('resw').innerHTML='<p style="text-align:center;padding:60px 20px">रिज़ल्ट लोड नहीं हुआ। <button class="b b-pr" onclick="location.reload()">दोबारा</button></p>'})}
-function renderRes(d){RS=d;close();const ans=d.ans||{},tq=d.tq||{},k=d.key;
- const sk=120-d.correct-d.wrong,att=d.correct+d.wrong,ac=att?Math.round(d.correct*100/att):0;
- const per=SECS.map(s=>{let c=0,w=0,t=0;s.q.forEach(i=>{const a=ans[i];t+=+tq[i]||0;if(!a)return;a===k[i]?c++:w++});return {n:s.n,len:s.q.length,c,w,m:c*3-w,t}});
- const tt=Math.max(1,per.reduce((a,p)=>a+p.t,0));
- const C2=2*Math.PI*72,po=C2*(1-d.percentile/100),mx=Math.max(1,d.topper,d.score);
- let h=`<div class="rhero"><div class="in"><div class="av big">${PH}</div><div><h2>${esc(d.name)}</h2><p>रोल नं. <span class="num">${esc(d.roll)}</span> · UP Super TET 2026 लाइव मॉक</p><p>लगा समय: ${mins(d.used)}${d.tabs?' · टैब बदले: '+d.tabs:''}</p></div></div></div>
- <div class="wrap"><div class="rtop"><div class="gauge"><svg viewBox="0 0 170 170"><circle class="bgc" cx="85" cy="85" r="72"/><circle class="fgc" id="gfg" cx="85" cy="85" r="72" stroke-dasharray="${C2.toFixed(1)}" stroke-dashoffset="${C2.toFixed(1)}"/></svg><div><b>${d.percentile.toFixed(2)}</b><span>परसेंटाइल</span></div></div>
+function perSec(d){const ans=d.ans||{},tq=d.tq||{},k=d.key;return SECS.map(s=>{let c=0,w=0,t=0;s.q.forEach(i=>{const a=ans[i];t+=+tq[i]||0;if(!a)return;a===k[i]?c++:w++});return {n:s.n,len:s.q.length,c,w,m:c*3-w,t}})}
+const TGI='<svg viewBox="0 0 24 24"><path d="M21.5 4.2 2.9 11.4c-1.3.5-1.3 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.4l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.2-15c.3-1.3-.5-1.9-1.6-1.2zM8.6 14.1l9.6-6c.5-.3.9-.1.5.2l-7.9 7.2-.3 3.2-1.9-4.6z"/></svg>';
+function joinHTML(){return `<div class="join"><a href="${esc(C.tgc)}" target="_blank" rel="noopener"><i>${TGI}</i><div><b>UPSSSC ALERT चैनल</b><span>टेलीग्राम चैनल ज्वाइन करें</span></div></a><a class="g" href="${esc(C.tgg)}" target="_blank" rel="noopener"><i>${TGI}</i><div><b>UPSSSC ALERT ग्रुप</b><span>टेलीग्राम ग्रुप ज्वाइन करें</span></div></a></div>`}
+function renderRes(d){RS=d;close();
+ const sk=120-d.correct-d.wrong,att=d.correct+d.wrong,ac=att?Math.round(d.correct*100/att):0,per=perSec(d),tt=Math.max(1,per.reduce((a,p)=>a+p.t,0));
+ const C2=2*Math.PI*72;
+ let h=`<div class="rhero"><div class="in"><div class="av big">${PH}</div><div><h2>${esc(d.name)}</h2><p>रोल नं. <span class="num">${esc(d.roll)}</span> · UP Super TET 2026 लाइव मॉक · लगा समय ${mins(d.used)}${d.tabs?' · टैब बदले '+d.tabs:''}</p>
+ <div class="hstat"><span>परसेंटाइल <b id="hp">${d.percentile.toFixed(2)}</b></span><span>रैंक <b id="hr">${d.rank}</b> / <span id="ht">${d.total}</span></span><span>अंक <b>${d.score}</b> / 360</span></div></div></div></div>
+ <div class="wrap"><div class="rtop"><div class="gauge"><svg viewBox="0 0 170 170"><circle class="bgc" cx="85" cy="85" r="72"/><circle class="fgc" id="gfg" cx="85" cy="85" r="72" stroke-dasharray="${C2.toFixed(1)}" stroke-dashoffset="${C2.toFixed(1)}"/></svg><div><b id="gp">${d.percentile.toFixed(2)}</b><span>परसेंटाइल</span></div></div>
  <div class="kps"><div class="kp"><i class="i1">★</i><div><b>${d.score}<small style="font-size:13px;color:var(--mu)"> / 360</small></b><span>कुल अंक</span></div></div>
- <div class="kp"><i class="i2">#</i><div><b>${d.rank}<small style="font-size:13px;color:var(--mu)"> / ${d.total}</small></b><span>रैंक</span></div></div>
+ <div class="kp"><i class="i2">#</i><div><b><span id="kr">${d.rank}</span><small style="font-size:13px;color:var(--mu)"> / <span id="kt">${d.total}</span></small></b><span>रैंक</span></div></div>
+ <div class="kp"><i style="background:#f0e9fb;color:var(--pu)">%</i><div><b>${ac}%</b><span>सटीकता</span></div></div>
  <div class="kp"><i class="i3">✓</i><div><b>${d.correct}</b><span>सही (+${d.correct*3})</span></div></div>
  <div class="kp"><i class="i4">✗</i><div><b>${d.wrong}</b><span>गलत (−${d.wrong})</span></div></div>
- <div class="kp"><i style="background:#eef2f7;color:#5b6675">—</i><div><b>${sk}</b><span>छोड़े</span></div></div>
- <div class="kp"><i style="background:#f0e9fb;color:var(--pu)">%</i><div><b>${ac}%</b><span>सटीकता</span></div></div></div></div>
- ${d.final?'':'<div class="note">⏳ परीक्षा अभी चल रही है — रैंक और परसेंटाइल अभी तक सबमिट हुए <b>'+d.total+'</b> उम्मीदवारों के आधार पर है। परीक्षा समाप्त होने के बाद यही पेज खोलें, अंतिम रैंक दिखेगी।</div>'}
- <div class="grid2" style="margin-top:16px"><div class="card cmp"><h2>तुलना</h2>
-  ${[['आपका स्कोर',d.score,'var(--pr)'],['औसत स्कोर',d.avg,'#9aa8b8'],['टॉपर',d.topper,'var(--gd)']].map(x=>`<div class="row"><span>${x[0]}</span><div class="track"><i style="width:${Math.max(0,x[1])*100/mx}%;background:${x[2]}"></i></div><b class="num" style="text-align:right">${x[1]}</b></div>`).join('')}
+ <div class="kp"><i style="background:#eef2f7;color:#5b6675">—</i><div><b>${sk}</b><span>छोड़े</span></div></div></div></div>
+ <div class="note" id="rnote"></div>
+ <div class="card" style="margin-top:16px"><h2>किस अंक पर कितने उम्मीदवार <span class="livebadge" id="lvb">LIVE</span></h2><div class="dist" id="dist"></div><p style="font-size:12.5px;color:var(--mu);margin:8px 0 0" id="dnote"></p></div>
+ <div class="grid2" style="margin-top:16px"><div class="card cmp"><h2>तुलना</h2><div id="cmp"></div>
   <h2 style="margin-top:18px">समय का उपयोग</h2>${per.map(p=>`<div class="row" style="grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 58px;font-size:12.5px"><span>${esc(p.n)}</span><div class="track"><i style="width:${p.t*100/tt}%;background:var(--nv2)"></i></div><span class="num" style="text-align:right">${Math.floor(p.t/60)}:${String(p.t%60).padStart(2,'0')}</span></div>`).join('')}
- </div><div class="card"><h2>टॉप 10</h2><ol class="lb">${(d.top||[]).map((x,i)=>`<li><i>${i+1}</i><span>${esc(x.n)}</span><b>${x.s}</b></li>`).join('')||'<li>अभी कोई नहीं</li>'}</ol></div></div>
- <div class="card"><h2>सेक्शन-वार प्रदर्शन</h2><div class="lgnd"><span style="--c:var(--gr)">सही</span><span style="--c:var(--rd)">गलत</span><span style="--c:#dfe6ee">छोड़े</span></div>
+ </div><div class="card"><h2>टॉप 10</h2><ol class="lb" id="top"></ol></div></div>
+ <div class="card" style="margin-top:16px"><h2>सेक्शन-वार प्रदर्शन</h2><div class="lgnd"><span style="--c:var(--gr)">सही</span><span style="--c:var(--rd)">गलत</span><span style="--c:#dfe6ee">छोड़े</span></div>
   ${per.map(p=>`<div class="secr"><div>${esc(p.n)}<small>${p.c} सही · ${p.w} गलत · ${p.len-p.c-p.w} छोड़े (कुल ${p.len})</small></div><div class="track"><i style="width:${p.c*100/p.len}%;background:var(--gr)"></i><i style="width:${p.w*100/p.len}%;background:var(--rd)"></i></div><span class="m">${p.m}<small style="display:inline;font-weight:400"> /${p.len*3}</small></span></div>`).join('')}</div>
- <div style="display:flex;gap:10px;flex-wrap:wrap;margin:16px 0"><button class="b b-pr" id="pdf">⬇ प्रश्न-पत्र + उत्तर-कुंजी (PDF)</button><button class="b b-wh" id="rhome">होम</button></div>
- <div class="card" style="margin-bottom:24px"><h2>उत्तर एवं व्याख्या</h2><div class="filt" id="filt"><button class="on" data-f="all">सभी (120)</button><button data-f="c">सही (${d.correct})</button><button data-f="w">गलत (${d.wrong})</button><button data-f="s">छोड़े (${sk})</button></div><div id="sols"></div></div>
+ <button class="solbtn" id="vsol"><i>📖</i><div><b>प्रश्न एवं व्याख्या देखें</b><span>सभी 120 प्रश्न · आपका उत्तर · सही उत्तर · व्याख्या</span></div><em>›</em></button>
+ <div style="display:flex;gap:10px;flex-wrap:wrap;margin:0 0 6px"><button class="b b-pr b-lg" id="pdf" style="flex:1">⬇ रिज़ल्ट + प्रश्न-पत्र PDF डाउनलोड</button><button class="b b-wh b-lg" id="rhome">होम</button></div>
+ ${joinHTML()}
+ <div class="promo"><div class="pt"><span class="tagp">UPSSSC ALERT · पेड बैच</span><h3>आचार्य 2.0 <em>Super TET</em></h3><p>रैपिड रिवीजन बैच — परीक्षा से पहले पूरा सिलेबस दोबारा, आपकी कमज़ोर सेक्शन पर ज़ोर।</p>
+  <ul><li>सभी विषयों के PDF नोट्स</li><li>टॉपिक-वाइज और मिक्स प्रैक्टिस क्विज</li><li>10 फुल लेंथ टेस्ट</li><li>पिछले वर्षों के प्रश्न (PYQ)</li></ul>
+  <div class="pr"><div class="fee"><small>बैच फीस</small>₹199</div><a class="b b-gd b-lg" href="${esc(C.tgj)}" target="_blank" rel="noopener">अभी जुड़ें ›</a><a class="b b-wa" href="${esc(C.wa)}" target="_blank" rel="noopener">WhatsApp</a></div></div>
+  <div class="pb"><img src="${esc(C.book)}" alt="UP SUPER TET Book" loading="lazy"><b>UP SUPER TET बुक · ₹429</b><span>6,000+ MCQ · थ्योरी · मॉडल पेपर · घर तक डिलीवरी</span><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><a class="b b-wh" href="${esc(C.booktg)}" target="_blank" rel="noopener">ऑर्डर करें</a><a class="b b-wa" href="${esc(C.bookwa)}" target="_blank" rel="noopener">WhatsApp</a></div></div></div>
  <div class="foot"><img src="${esc(C.logo)}" alt=""> UPSSSC ALERT × XL Study · xlstudy.in</div></div>`;
- $('resw').innerHTML=h;sols('all');setTimeout(()=>{const g=$('gfg');if(g)g.style.strokeDashoffset=po},80);
- $('pdf').onclick=()=>printPaper(d.q,d.key);$('rhome').onclick=()=>{go('s-home');home()};
- $('filt').onclick=e=>{const b=e.target.closest('[data-f]');if(!b)return;$('filt').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));sols(b.dataset.f)}}
-function sols(f){const d=RS,ans=d.ans||{};$('sols').innerHTML=d.q.map((q,i)=>{const a=ans[i],k=!a?'s':(a===d.key[i]?'c':'w');if(f!=='all'&&f!==k)return '';
+ $('resw').innerHTML=h;liveUpd(d,true);
+ $('pdf').onclick=()=>makePdf(RS);$('rhome').onclick=()=>{clearInterval(LT);go('s-home');home()};
+ $('vsol').onclick=()=>{fl('all');go('s-sol')};
+ clearInterval(LT);LT=setInterval(()=>{if(!$('s-res').classList.contains('on'))return;api('live').then(x=>liveUpd(x,false)).catch(()=>{})},20000)}
+function liveUpd(x,first){const d=RS;Object.assign(d,x);
+ const C2=2*Math.PI*72;setTimeout(()=>{const g=$('gfg');if(g)g.style.strokeDashoffset=C2*(1-d.percentile/100)},first?80:0);
+ $('gp').textContent=d.percentile.toFixed(2);$('hp').textContent=d.percentile.toFixed(2);$('hr').textContent=d.rank;$('kr').textContent=d.rank;$('ht').textContent=d.total;$('kt').textContent=d.total;
+ $('rnote').innerHTML=d.final?'✅ परीक्षा समाप्त — यह अंतिम रैंक और परसेंटाइल है।':'⏳ परीक्षा अभी चल रही है ('+d.writing+' उम्मीदवार अभी पेपर दे रहे हैं)। रैंक और परसेंटाइल अभी तक सबमिट हुए <b>'+d.total+'</b> उम्मीदवारों के आधार पर है और हर 20 सेकंड में अपडेट होती है।';
+ $('lvb').style.display=d.final?'none':'';
+ const mx=Math.max(1,d.topper,d.score);$('cmp').innerHTML=[['आपका स्कोर',d.score,'var(--pr)'],['औसत स्कोर',d.avg,'#9aa8b8'],['टॉपर',d.topper,'var(--gd)']].map(x=>`<div class="row"><span>${x[0]}</span><div class="track"><i style="width:${Math.max(0,x[1])*100/mx}%;background:${x[2]}"></i></div><b class="num" style="text-align:right">${x[1]}</b></div>`).join('');
+ $('top').innerHTML=(d.top||[]).map((x,i)=>`<li><i>${i+1}</i><span>${esc(x.n)}</span><b>${x.s}</b></li>`).join('')||'<li>अभी कोई नहीं</li>';
+ const B={},step=10;(d.dist||[]).forEach(([s,c])=>{const b=Math.floor(s/step)*step;B[b]=(B[b]||0)+c});
+ const keys=Object.keys(B).map(Number);const mine=Math.floor(d.score/step)*step;keys.push(mine);
+ const lo=Math.min(0,...keys),hi=Math.max(...keys),bm=Math.max(1,...Object.values(B));let bars='',lbl='';
+ for(let b=lo;b<=hi;b+=step){const c=B[b]||0,me=b===mine;bars+=`<div class="bc${me?' me':''}" title="${b} से ${b+step-1} अंक: ${c}"><b>${c||''}</b><i style="height:${c?Math.max(4,c*150/bm):0}px"></i></div>`;lbl+=`<span class="${me?'me':''}">${b}</span>`}
+ $('dist').innerHTML=`<div class="bars">${bars}</div><div class="lb2">${lbl}</div>`;
+ $('dnote').innerHTML='हर बार 10 अंकों का समूह है (जैसे 120 = 120 से 129 अंक)। <b style="color:#a87612">सुनहरा बार</b> = आपका स्कोर। कुल '+d.total+' उम्मीदवार।';
+ if(first){const me=$('dist').querySelector('.me');if(me)$('dist').scrollLeft=me.offsetLeft-$('dist').clientWidth/2}}
+let FL='all';
+function fl(f){FL=f;const d=RS,sk=120-d.correct-d.wrong;$('filt').innerHTML=[['all','सभी (120)'],['c','सही ('+d.correct+')'],['w','गलत ('+d.wrong+')'],['s','छोड़े ('+sk+')']].map(x=>`<button class="${x[0]===f?'on':''}" data-f="${x[0]}">${x[1]}</button>`).join('');sols(f);window.scrollTo(0,0)}
+$('filt').onclick=e=>{const b=e.target.closest('[data-f]');if(b)fl(b.dataset.f)};
+$('solback').onclick=()=>go('s-res');
+function solHTML(d,i,f){const ans=d.ans||{},q=d.q[i],a=ans[i],k=!a?'s':(a===d.key[i]?'c':'w');if(f&&f!=='all'&&f!==k)return '';
  const tg={s:'<span class="tg s">छोड़ा</span>',c:'<span class="tg c">सही +3</span>',w:'<span class="tg w">गलत −1</span>'}[k];
- return `<div class="sol"><div class="h"><span>प्रश्न ${i+1} · ${esc(SECS[secOf(i)].n)}</span>${tg}</div>${q.p?'<div style="color:var(--mu);font-size:13px">[गद्यांश आधारित]</div>':''}<div>${esc(q.q)}</div>${q.o.map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">${j+1}. ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗':'')}</div>`).join('')}${d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`}).join('')}
-function printPaper(q,key){let h='<h1>UP Super TET 2026 — लाइव मॉक · UPSSSC ALERT × XL Study</h1><p style="text-align:center;margin:0 0 10px">120 प्रश्न · 360 अंक · 120 मिनट · सही +3 · गलत −1 · xlstudy.in</p><div class="cols">';
- q.forEach((x,i)=>{h+=`<div class="pq"><b>${i+1}.</b> ${x.p&&!(q[i-1]&&q[i-1].p===x.p)?'<i>'+esc(x.p)+'</i><br>':''}${esc(x.q)}<br>(1) ${esc(x.o[0])} &nbsp; (2) ${esc(x.o[1])}<br>(3) ${esc(x.o[2])} &nbsp; (4) ${esc(x.o[3])}</div>`});
- h+='</div><h1 style="margin-top:14px;break-before:page">उत्तर-कुंजी</h1><div class="key">'+key.map((a,i)=>`<div>${i+1} - (${L.indexOf(a)+1})</div>`).join('')+'</div>';
- $('printArea').innerHTML=h;window.print()}
-function paper(){api('paper').then(j=>printPaper(j.q,j.key)).catch(e=>modal('सूचना','<p style="margin:0">'+esc((e&&e.message)||'उपलब्ध नहीं')+'</p>'))}
+ return `<div class="sol"><div class="h"><span>प्रश्न ${i+1} · ${esc(SECS[secOf(i)].n)}</span>${tg}</div>${q.p?'<div style="color:var(--mu);font-size:13px">[गद्यांश आधारित]</div>':''}<div>${esc(q.q)}</div>${q.o.map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">${j+1}. ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ (आपका उत्तर)':'')}</div>`).join('')}${d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`}
+function sols(f){$('sols').innerHTML=RS.q.map((q,i)=>solHTML(RS,i,f)).join('')||'<p style="text-align:center;color:var(--mu);padding:30px">कोई प्रश्न नहीं</p>'}
+
+/* ---------- PDF (one click download, with details + watermark + join links) ---------- */
+function libs(){return new Promise((ok,no)=>{let n=0;const t=setInterval(()=>{if(window.html2canvas&&window.jspdf){clearInterval(t);ok()}else if(++n>150){clearInterval(t);no()}},100)})}
+async function makePdf(d){const W=$('pdfwait'),M=$('pdfmsg');W.classList.add('on');M.textContent='PDF बन रही है…';
+ try{await libs();if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+  const st=$('pdfStage'),blocks=[],css=`<style>#pdfStage *{box-sizing:border-box}#pdfStage .pb{padding:10px 26px}#pdfStage h1{font-size:22px;margin:0;color:#0f2a4d}#pdfStage table{width:100%;border-collapse:collapse;font-size:14px}#pdfStage td,#pdfStage th{border:1px solid #dbe3ec;padding:6px 9px;text-align:left}#pdfStage th{background:#f2f5f9}#pdfStage .qq{font-size:14.5px;line-height:1.65;border:1px solid #e3e9f0;border-radius:10px;padding:10px 12px}#pdfStage .o{padding:2px 8px;border-radius:6px}#pdfStage .ok{background:#e3f5e6;color:#14532d;font-weight:700}#pdfStage .bad{background:#fde6e2;color:#8a1c0c}#pdfStage .ex{background:#f4f8fc;border-left:3px solid #1d63c7;padding:5px 9px;margin-top:5px;font-size:13px}#pdfStage .jb{display:inline-block;padding:12px 18px;border-radius:12px;color:#fff;font-weight:700;font-size:15px;margin-right:10px}</style>`;
+  const mk=h=>{const e=document.createElement('div');e.className='pb';e.innerHTML=h;st.appendChild(e);blocks.push(e);return e};
+  st.innerHTML=css;
+  const head=`<div style="display:flex;align-items:center;gap:14px;border-bottom:3px solid #0f2a4d;padding-bottom:10px"><img src="${esc(C.logo.replace('.svg','.png'))}" style="width:62px;height:62px;border-radius:50%"><div style="flex:1"><h1>UPSSSC ALERT</h1><div style="font-size:13px;color:#5f6b7a">UP Super TET 2026 — लाइव मॉक टेस्ट · xlstudy.in</div></div><div style="text-align:right;font-size:13px;color:#0f2a4d;font-weight:700">XL Study<br><span style="font-weight:400;color:#5f6b7a">xlstudy.in</span></div></div>`;
+  if(d.name!=null){const per=perSec(d),sk=120-d.correct-d.wrong;
+   mk(head+`<table style="margin-top:12px"><tr><th>उम्मीदवार का नाम</th><td>${esc(d.name)}</td><th>रोल नंबर</th><td>${esc(d.roll)}</td></tr><tr><th>ईमेल</th><td>${esc(d.email||'')}</td><th>परीक्षा तिथि</th><td>${d.started?ist(d.started,{day:'numeric',month:'long',year:'numeric'}):''}</td></tr><tr><th>कुल अंक</th><td><b>${d.score} / 360</b></td><th>परसेंटाइल</th><td><b>${d.percentile.toFixed(2)}</b></td></tr><tr><th>रैंक</th><td>${d.rank} / ${d.total}</td><th>लगा समय</th><td>${mins(d.used)}</td></tr><tr><th>सही / गलत / छोड़े</th><td>${d.correct} / ${d.wrong} / ${sk}</td><th>टॉपर / औसत</th><td>${d.topper} / ${d.avg}</td></tr></table>
+   <table style="margin-top:10px"><tr><th>सेक्शन</th><th>प्रश्न</th><th>सही</th><th>गलत</th><th>अंक</th></tr>${per.map(p=>`<tr><td>${esc(p.n)}</td><td>${p.len}</td><td>${p.c}</td><td>${p.w}</td><td><b>${p.m}</b></td></tr>`).join('')}</table>`)}
+  else mk(head+'<p style="font-size:14px;margin:10px 0 0">120 प्रश्न · 360 अंक · 120 मिनट · सही +3 · गलत −1</p>');
+  const ans=d.ans||{};
+  d.q.forEach((q,i)=>{const a=ans[i];mk(`<div class="qq"><b>प्रश्न ${i+1}.</b> ${q.p&&!(d.q[i-1]&&d.q[i-1].p===q.p)?'<div style="color:#5f6b7a;font-size:13px">'+esc(q.p)+'</div>':''}${esc(q.q)}${q.o.map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">(${j+1}) ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ आपका उत्तर':'')}</div>`).join('')}${d.name!=null&&!a?'<div style="font-size:12.5px;color:#5f6b7a">आपने यह प्रश्न छोड़ा</div>':''}${d.exp&&d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`)});
+  const jb=mk(`<div style="border:2px solid #0f2a4d;border-radius:16px;padding:16px;text-align:center"><div style="font-size:17px;font-weight:700;color:#0f2a4d;margin-bottom:10px">रोज़ाना क्विज, नोट्स और मॉक टेस्ट के लिए जुड़ें</div><span class="jb" id="pj1" style="background:#229ed9">टेलीग्राम चैनल ज्वाइन करें</span><span class="jb" id="pj2" style="background:#0f2a4d">टेलीग्राम ग्रुप ज्वाइन करें</span><div style="font-size:13px;color:#5f6b7a;margin-top:10px">आचार्य 2.0 Super TET बैच ₹199 · UP SUPER TET बुक ₹429 · xlstudy.in</div></div>`);
+  await Promise.all([...st.querySelectorAll('img')].map(im=>im.complete?1:new Promise(r=>{im.onload=im.onerror=r})));
+  const {jsPDF}=window.jspdf,pdf=new jsPDF({unit:'pt',format:'a4',compress:true}),PW=pdf.internal.pageSize.getWidth(),PH2=pdf.internal.pageSize.getHeight(),mg=22,sc=(PW-2*mg)/760,cap=(PH2-2*mg-14)/sc;
+  const pages=[];let cur=[],hh=0;blocks.forEach(b=>{const h=b.offsetHeight+4;if(hh+h>cap&&cur.length){pages.push(cur);cur=[];hh=0}cur.push(b);hh+=h});if(cur.length)pages.push(cur);
+  for(let n=0;n<pages.length;n++){M.textContent='PDF बन रही है… '+Math.round(n*100/pages.length)+'%';
+   const pd=document.createElement('div');pd.style.cssText='width:760px;background:#fff';pages[n].forEach(b=>{b.style.marginBottom='4px';pd.appendChild(b)});st.appendChild(pd);
+   const cv=await html2canvas(pd,{scale:1.3,backgroundColor:'#ffffff',useCORS:true,logging:false,ignoreElements:e=>e.classList&&(e.classList.contains('scr')||e.classList.contains('mdl'))});
+   if(n)pdf.addPage();pdf.addImage(cv.toDataURL('image/jpeg',.72),'JPEG',mg,mg,PW-2*mg,pd.offsetHeight*sc);
+   if(pages[n].includes(jb)){const pr=pd.getBoundingClientRect();[['pj1',C.tgc],['pj2',C.tgg]].forEach(([id,u])=>{const r=jb.querySelector('#'+id).getBoundingClientRect();pdf.link(mg+(r.left-pr.left)*sc,mg+(r.top-pr.top)*sc,r.width*sc,r.height*sc,{url:u})})}
+   pd.remove();await new Promise(r=>setTimeout(r,0))}
+  const np=pdf.internal.getNumberOfPages();
+  for(let p=1;p<=np;p++){pdf.setPage(p);pdf.saveGraphicsState();pdf.setGState(new pdf.GState({opacity:.07}));pdf.setTextColor(15,42,77);pdf.setFont('helvetica','bold');pdf.setFontSize(64);pdf.text('UPSSSC ALERT',PW/2,PH2/2,{align:'center',angle:35});pdf.restoreGraphicsState();
+   pdf.setFontSize(8.5);pdf.setTextColor(120);pdf.setFont('helvetica','normal');pdf.text('UPSSSC ALERT  x  XL Study  ·  xlstudy.in',mg,PH2-10);pdf.text(p+' / '+np,PW-mg,PH2-10,{align:'right'})}
+  pdf.save('SuperTET-Mock-'+(d.name?String(d.name).replace(/[^A-Za-z0-9]+/g,'-').replace(/^-|-$/g,'')||'Result':'Paper')+'.pdf');st.innerHTML='';W.classList.remove('on')}
+ catch(e){W.classList.remove('on');$('pdfStage').innerHTML='';modal('PDF नहीं बनी','<p style="margin:0">नेट जाँचकर दोबारा कोशिश करें।</p>')}}
+function paper(){api('paper').then(j=>makePdf({q:j.q,key:j.key,exp:j.exp,name:null})).catch(e=>modal('सूचना','<p style="margin:0">'+esc((e&&e.message)||'उपलब्ध नहीं')+'</p>'))}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('mf').children.length){close()}if(e.key==='Escape')side(0)});
 
 /* ---------- admin ---------- */
@@ -583,7 +732,7 @@ if(C.admin){go('s-adm');ME.name='Admin';adm();setInterval(adm,10000);
  $('a-csv').onclick=()=>{const rows=window._rows||[];const c='name,email,status,device,answered,correct,wrong,score,started,submitted,tabs\n'+rows.map(x=>[x.name,x.email,+x.submitted?'submitted':+x.started?'started':'login',x.dev,x.answered,x.correct,x.wrong,x.score,+x.started?new Date(x.started*1000).toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}):'',+x.submitted?new Date(x.submitted*1000).toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}):'',x.tabs].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+c],{type:'text/csv'}));a.download='super-tet-mock.csv';document.body.appendChild(a);a.click();a.remove()}}
 else if(C.in){api('state').then(j=>{off=j.now*1000-Date.now();R=j.round;A=j.attempt;ME={name:j.name,roll:j.roll};names();home();
- if(+A.started&&!+A.submitted)start()}).catch(()=>{$('c-h').textContent='लोड नहीं हुआ';$('c-p').textContent='पेज दोबारा खोलें।'})}
+ if(+A.started&&!+A.submitted){try{const b=JSON.parse(localStorage.getItem(LK())||'null');if(b&&b.t>(+A.last||0)+2){A.ans=b.ans||A.ans;A.st=b.st||A.st;A.tq=b.tq||A.tq;A.cur=b.cur;A.tabs=Math.max(+A.tabs||0,+b.tabs||0);dirty=true}}catch(e){}start();if(dirty)push().catch(()=>{})}}).catch(()=>{$('c-h').textContent='लोड नहीं हुआ';$('c-p').textContent='पेज दोबारा खोलें।'})}
 }
 </script>
 </body>

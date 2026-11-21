@@ -121,34 +121,39 @@ function eh_stm_round_out($r) {
 }
 function eh_stm_attempt_out($row, $r) {
     $o = ['started' => (int) $row['started'], 'deadline' => (int) $row['deadline'], 'submitted' => (int) $row['submitted'],
-          'cur' => (int) $row['cur'], 'tabs' => (int) $row['tabs'],
+          'cur' => (int) $row['cur'], 'tabs' => (int) $row['tabs'], 'last' => (int) $row['last'],
           'ans' => (object) (json_decode($row['ans'] ?: '{}', true) ?: []), 'st' => (object) (json_decode($row['st'] ?: '{}', true) ?: []), 'tq' => (object) (json_decode($row['tq'] ?: '{}', true) ?: [])];
     if ($row['started'] && !$row['submitted']) $o['q'] = eh_stm_public_q($r);
     return $o;
 }
 function eh_stm_result($r, $row) {
-    global $wpdb; $t = eh_stm_table();
     eh_stm_expire($r);
     $row = eh_stm_row($r['id'], $row['uid']);
-    $base = $wpdb->prepare("FROM $t WHERE round = %s AND submitted > 0", $r['id']);
-    $n = (int) $wpdb->get_var("SELECT COUNT(*) $base");
-    $s = (int) $row['score'];
-    $above = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) $base AND score > %d", $s));
-    $le = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) $base AND score <= %d", $s));
-    $agg = $wpdb->get_row("SELECT MAX(score) mx, AVG(score) av, AVG(correct) ac, AVG(wrong) aw $base", ARRAY_A);
-    $top = $wpdb->get_results("SELECT name, score, correct, wrong $base ORDER BY score DESC, (submitted - started) ASC LIMIT 10", ARRAY_A);
     $Q = eh_stm_paper($r);
-    return [
-        'ok' => true, 'name' => $row['name'], 'roll' => eh_stm_roll((int) $row['uid']),
-        'score' => $s, 'correct' => (int) $row['correct'], 'wrong' => (int) $row['wrong'],
-        'used' => max(0, (int) $row['submitted'] - (int) $row['started']), 'tabs' => (int) $row['tabs'],
-        'rank' => $above + 1, 'total' => $n, 'percentile' => $n ? round($le * 100 / $n, 2) : 100,
-        'topper' => (int) ($agg['mx'] ?? 0), 'avg' => round((float) ($agg['av'] ?? 0), 1),
-        'top' => array_map(function ($x) { return ['n' => eh_stm_short($x['name']), 's' => (int) $x['score']]; }, $top),
+    return array_merge([
+        'ok' => true, 'name' => $row['name'], 'email' => $row['email'], 'roll' => eh_stm_roll((int) $row['uid']),
+        'score' => (int) $row['score'], 'correct' => (int) $row['correct'], 'wrong' => (int) $row['wrong'],
+        'started' => (int) $row['started'], 'used' => max(0, (int) $row['submitted'] - (int) $row['started']), 'tabs' => (int) $row['tabs'],
         'ans' => (object) (json_decode($row['ans'] ?: '{}', true) ?: []), 'tq' => (object) (json_decode($row['tq'] ?: '{}', true) ?: []),
         'key' => array_map(function ($q) { return $q['a']; }, $Q), 'exp' => array_map(function ($q) { return $q['e'] ?? ''; }, $Q),
-        'q' => eh_stm_public_q($r), 'final' => time() >= $r['end_ts'],
-    ];
+        'q' => eh_stm_public_q($r),
+    ], eh_stm_live($r, (int) $row['score']));
+}
+function eh_stm_live($r, $score) {
+    global $wpdb; $t = eh_stm_table();
+    eh_stm_expire($r);
+    $base = $wpdb->prepare("FROM $t WHERE round = %s AND submitted > 0", $r['id']);
+    $n = (int) $wpdb->get_var("SELECT COUNT(*) $base");
+    $above = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) $base AND score > %d", $score));
+    $le = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) $base AND score <= %d", $score));
+    $agg = $wpdb->get_row("SELECT MAX(score) mx, AVG(score) av $base", ARRAY_A);
+    $d = $wpdb->get_results("SELECT score s, COUNT(*) c $base GROUP BY score", ARRAY_A);
+    $top = $wpdb->get_results("SELECT name, score $base ORDER BY score DESC, (submitted - started) ASC LIMIT 10", ARRAY_A);
+    $live = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $t WHERE round = %s AND started > 0 AND submitted = 0 AND last > %d", $r['id'], time() - 120));
+    return ['total' => $n, 'rank' => $above + 1, 'percentile' => $n ? round($le * 100 / $n, 2) : 100,
+        'topper' => (int) ($agg['mx'] ?? 0), 'avg' => round((float) ($agg['av'] ?? 0), 1), 'writing' => $live, 'final' => time() >= $r['end_ts'],
+        'dist' => array_map(function ($x) { return [(int) $x['s'], (int) $x['c']]; }, $d),
+        'top' => array_map(function ($x) { return ['n' => eh_stm_short($x['name']), 's' => (int) $x['score']]; }, $top)];
 }
 function eh_stm_short($n) { $p = preg_split('/\s+/', trim($n)); return $p[0] . (isset($p[1]) ? ' ' . mb_substr($p[1], 0, 1) . '.' : ''); }
 
@@ -191,10 +196,15 @@ add_action('rest_api_init', function () {
         if (!$row['submitted']) { if (time() <= (int) $row['deadline'] + 20) return new WP_Error('run', 'running', ['status' => 409]); eh_stm_finish_row($r, $row, (int) $row['deadline']); }
         return eh_stm_result($r, $row);
     }]);
+    register_rest_route('eh/v1', '/stm/live', ['methods' => 'GET', 'permission_callback' => $auth, 'callback' => function () {
+        $r = eh_stm_round(); $row = eh_stm_row($r['id'], get_current_user_id());
+        if (!$row || !$row['submitted']) return new WP_Error('no', 'no result', ['status' => 404]);
+        return eh_stm_live($r, (int) $row['score']);
+    }]);
     register_rest_route('eh/v1', '/stm/paper', ['methods' => 'GET', 'permission_callback' => $auth, 'callback' => function () {
         $r = eh_stm_round(); $row = eh_stm_row($r['id'], get_current_user_id());
         if (time() < $r['end_ts'] && !($row && $row['submitted'])) return new WP_Error('no', 'परीक्षा समाप्त होने के बाद', ['status' => 403]);
-        return ['q' => eh_stm_public_q($r), 'key' => array_map(function ($q) { return $q['a']; }, eh_stm_paper($r))];
+        return ['q' => eh_stm_public_q($r), 'key' => array_map(function ($q) { return $q['a']; }, eh_stm_paper($r)), 'exp' => array_map(function ($q) { return $q['e'] ?? ''; }, eh_stm_paper($r))];
     }]);
     register_rest_route('eh/v1', '/stm/admin', ['methods' => 'GET', 'permission_callback' => $admin, 'callback' => function (WP_REST_Request $q) {
         global $wpdb;
