@@ -17,8 +17,8 @@ $eh_cfg = [
     'booktg' => 'https://t.me/Booksalert2026', 'book' => get_template_directory_uri() . '/assets/book-supertet.jpg',
 ];
 $eh_logo = esc_url($eh_cfg['logo']);
-$eh_hd = function ($sub = 'Online Examination', $right = '', $out = false) use ($eh_logo, $eh_in, $eh_cfg) { ?>
- <header class="hd"><div class="brand"><img src="<?php echo $eh_logo; ?>" alt="UPSSSC ALERT" width="44" height="44"><div><b>UPSSSC ALERT</b><span><?php echo esc_html($sub); ?></span></div></div>
+$eh_hd = function ($sub = 'Online Examination', $right = '', $out = false, $home = true) use ($eh_logo, $eh_in, $eh_cfg) { ?>
+ <header class="hd"><div class="brand"><?php if ($home): ?><a class="hm" href="<?php echo esc_url(home_url('/')); ?>" title="xlstudy.in होम"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5M5.5 9.5V20h5v-6h3v6h5V9.5"/></svg><span>होम</span></a><?php endif; ?><img src="<?php echo $eh_logo; ?>" alt="UPSSSC ALERT" width="44" height="44"><div><b>UPSSSC ALERT</b><span><?php echo esc_html($sub); ?></span></div></div>
   <div class="hdr"><?php echo $right; ?><?php if ($out && $eh_in): ?><a class="lo" href="<?php echo esc_url($eh_cfg['logout']); ?>" title="लॉग-आउट"><svg viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11"/></svg><span>लॉग-आउट</span></a><?php endif; ?><div class="xl"><i>XL</i><div><b>XL Study</b><span>xlstudy.in</span></div></div></div></header>
 <?php };
 $eh_ph = '<svg viewBox="0 0 40 40"><circle cx="20" cy="15" r="8"/><path d="M4 40c0-9 7-15 16-15s16 6 16 15z"/></svg>';
@@ -277,6 +277,12 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:20px;white-space:nowrap}
 .p-l{background:#dcfce7;color:#166534}.p-s{background:#e8f0fb;color:#1d4f9a}.p-o{background:#eef2f7;color:#5b6675}.p-i{background:#fff4d6;color:#8a5a00}
 
+/* home button */
+.hm{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 14px 0 10px;margin-right:4px;border-radius:30px;text-decoration:none;color:#fff;font-weight:700;font-size:13.5px;background:linear-gradient(135deg,#1d63c7,#0f2a4d);box-shadow:0 4px 12px -4px rgba(29,99,199,.6);transition:transform .15s,box-shadow .15s;flex:none}
+.hm:hover{transform:translateY(-1px);box-shadow:0 8px 18px -6px rgba(29,99,199,.7)}
+.brand .hm span{display:inline;color:#fff;font-size:13.5px;white-space:nowrap}
+.hm svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:760px){.hm{height:36px;width:36px;padding:0;justify-content:center;margin-right:2px}.hm span{display:none}.hm svg{width:18px;height:18px}}
 /* logout, info bar, watermark, smooth */
 .lo{display:inline-flex;align-items:center;gap:6px;color:var(--mu);text-decoration:none;font-size:13px;font-weight:600;border:1px solid var(--ln);border-radius:30px;padding:6px 12px;background:#fff}
 .lo svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -479,7 +485,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 
 <!-- ===== exam ===== -->
 <section class="scr" id="s-exam">
- <?php $eh_hd('UP Super TET 2026 · Live Mock'); ?>
+ <?php $eh_hd('UP Super TET 2026 · Live Mock', '', false, false); ?>
  <div class="ibar"><div class="who"><div class="av"><?php echo $eh_ph; ?></div><div><b class="cn"></b><span>Roll No: <span class="roll"></span></span></div></div>
   <div class="tmr" id="tbox"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></i><div><span>Time Left</span><b id="tm">2:00:00</b></div></div></div>
  <div class="secbar"><span class="lbl">Sections</span><div class="secs" id="secs"></div></div>
