@@ -1,9 +1,10 @@
 <?php $err = $GLOBALS['eh_auth_error'] ?? ''; get_header(); ?>
-<main class="eh-auth2">
+<main class="eh-auth2 eh-au">
+  <?php include __DIR__ . '/_auth-side.php'; ?>
   <div class="eh-auth2-card">
-    <div class="eh-auth2-tabs"><a class="on" href="<?php echo esc_url(eh_login_page_url()); ?>">Login</a><a href="<?php echo esc_url(eh_signup_page_url()); ?>">New User</a></div>
-    <h1>Login</h1>
-    <p class="eh-auth2-sub">Log in to keep your typing history and results.</p>
+    <div class="eh-auth2-tabs"><a class="on" href="<?php echo esc_url(eh_login_page_url(isset($_REQUEST['redirect_to']) ? eh_safe_redirect_target() : '')); ?>">Log in</a><a href="<?php echo esc_url(add_query_arg(isset($_REQUEST['redirect_to']) ? ['redirect_to' => rawurlencode(eh_safe_redirect_target())] : [], eh_signup_page_url())); ?>">New user</a></div>
+    <h1>Welcome back</h1>
+    <p class="eh-auth2-sub">Log in with your email or mobile number.</p>
     <?php if ($err): ?><div class="eh-alert"><?php echo esc_html($err); ?></div><?php endif; ?>
     <form method="post" class="eh-auth2-form" novalidate>
       <?php wp_nonce_field('eh_auth', '_eh'); ?>
@@ -16,8 +17,7 @@
       <button class="eh-auth2-btn" type="submit">Login</button>
     </form>
     <?php $g = eh_google_button(); if ($g): ?><div class="eh-auth2-or"><span>or</span></div><div class="eh-auth2-google"><?php echo $g; ?></div><?php endif; ?>
-    <p class="eh-auth2-switch">New here? <a href="<?php echo esc_url(eh_signup_page_url()); ?>">New user? Sign up</a></p>
+    <p class="eh-auth2-switch">New here? <a href="<?php echo esc_url(add_query_arg(isset($_REQUEST['redirect_to']) ? ['redirect_to' => rawurlencode(eh_safe_redirect_target())] : [], eh_signup_page_url())); ?>">Create a free account</a></p>
   </div>
-  <ul class="eh-auth2-perks"><li>✔ 100% free, no plans</li><li>✔ Result and history for every test</li><li>✔ Your rank in Live Typing</li></ul>
 </main>
 <?php get_footer();

@@ -106,7 +106,7 @@ function eh_stm_expire($r) {
     foreach ($rows as $row) eh_stm_finish_row($r, $row, (int) $row['deadline']);
 }
 function eh_stm_public_q($r) {
-    return array_map(function ($q) { $o = ['q' => $q['q'], 'o' => $q['o']]; if (!empty($q['p'])) $o['p'] = $q['p']; return $o; }, eh_stm_paper($r));
+    return array_map(function ($q) { $o = ['q' => $q['q'], 'o' => $q['o']]; if (!empty($q['p'])) $o['p'] = $q['p']; if (!empty($q['qe'])) { $o['qe'] = $q['qe']; $o['oe'] = $q['oe']; } return $o; }, eh_stm_paper($r));
 }
 function eh_stm_status($r) {
     $n = time();

@@ -72,7 +72,17 @@ button{font-family:inherit;cursor:pointer}
 .b-lg{padding:14px 26px;font-size:16px;border-radius:12px}
 
 /* landing */
-.hero{background:radial-gradient(900px 400px at 85% -10%,rgba(201,162,74,.22),transparent 60%),linear-gradient(135deg,#0d2443,#1c4a80);color:#fff;padding:34px 18px 92px}
+.hero{position:relative;overflow:hidden;color:#fff;padding:38px 18px 100px;background:radial-gradient(520px 320px at 92% 8%,rgba(255,196,84,.38),transparent 62%),radial-gradient(560px 380px at 8% 110%,rgba(124,92,255,.42),transparent 62%),radial-gradient(400px 260px at 55% 120%,rgba(0,190,200,.28),transparent 65%),linear-gradient(125deg,#0a1b3f 0%,#123a86 48%,#1764c8 100%)}
+.hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1.4px);background-size:22px 22px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%);mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.hero:after{content:"";position:absolute;width:520px;height:520px;right:-170px;top:-200px;border-radius:50%;border:2px solid rgba(255,214,120,.25);box-shadow:0 0 0 46px rgba(255,214,120,.06),0 0 0 110px rgba(255,214,120,.04)}
+.hin{position:relative;z-index:1}
+.hero .ring .fgc{stroke:url(#rg)}
+.ring{filter:drop-shadow(0 6px 16px rgba(0,0,0,.25))}
+.ring .bgc{stroke:rgba(255,255,255,.18)}
+.ring div{background:rgba(255,255,255,.06);border-radius:50%;margin:8px;backdrop-filter:blur(2px)}
+.fact{position:relative;overflow:hidden;box-shadow:0 6px 18px -10px rgba(15,42,77,.25)}
+.fact:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--fc,#1d63c7)}
+.facts .fact:nth-child(1){--fc:linear-gradient(90deg,#1d63c7,#5b8def)}.facts .fact:nth-child(2){--fc:linear-gradient(90deg,#d39a22,#f3c561)}.facts .fact:nth-child(3){--fc:linear-gradient(90deg,#1f9d55,#55c98a)}.facts .fact:nth-child(4){--fc:linear-gradient(90deg,#de4434,#f08376)}
 .hin{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:center}
 .chip{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:5px 14px;border-radius:30px;font-size:13px;font-weight:600}
 .chip .dot{width:9px;height:9px;border-radius:50%;background:#ffcf5a}
@@ -364,7 +374,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
  .box .in{padding:16px}.box>h3{padding:11px 16px;font-size:14.5px}
  .bar .b{flex:1;padding:12px 10px}.bar{flex-wrap:wrap}.wait{order:-1;flex-basis:100%}.wait:empty{display:none}
  .secbar .lbl{display:none}
- .qbar{padding:8px 12px}.qbar .lang{display:none}
+ .qbar{padding:8px 12px}.qbar .lang{font-size:0}.qbar .lang select{font-size:12.5px;padding:5px 6px}.qbar .sv{display:none}
  .qa{padding:12px 12px 16px}.qt{font-size:16px}.op{font-size:15.5px;padding:11px 12px}
  .acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
  .acts .l,.acts .r{display:contents}.acts .b{padding:12px 6px;font-size:13.5px;width:100%}
@@ -381,7 +391,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d63c7"/><stop offset="1" stop-color="#2f9e55"/></linearGradient></defs></svg>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1d63c7"/><stop offset="1" stop-color="#2f9e55"/></linearGradient><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe29a"/><stop offset="1" stop-color="#ff9f43"/></linearGradient></defs></svg>
 
 <!-- ===== home ===== -->
 <section class="scr on" id="s-home">
@@ -457,9 +467,9 @@ table.t td:first-child,table.t th:first-child{text-align:left}
   <div class="tw"><table class="t" style="max-width:640px"><thead><tr><th>सेक्शन</th><th>प्रश्न</th><th>अंक</th></tr></thead><tbody id="pat2"></tbody></table></div>
   <ol style="margin-top:14px"><li>प्रश्न-पत्र में 10 सेक्शन हैं। ऊपर सेक्शन के नाम पर क्लिक करके किसी भी सेक्शन में कभी भी जा सकते हैं।</li>
   <li>परीक्षा के दौरान दूसरी टैब/ऐप खोलना वर्जित है। ऐसा करने पर चेतावनी आएगी और गिनती दर्ज होगी।</li>
-  <li>प्रश्न हिंदी में हैं; आवश्यक शब्द कोष्ठक में अंग्रेज़ी में दिए गए हैं। अंग्रेज़ी भाषा के प्रश्न अंग्रेज़ी में हैं।</li>
+  <li>प्रश्न-पत्र हिंदी और English दोनों भाषाओं में है। परीक्षा के दौरान ऊपर <b>View in / भाषा</b> से कभी भी भाषा बदल सकते हैं। हिंदी, संस्कृत और अंग्रेज़ी भाषा के प्रश्न अपनी ही भाषा में रहेंगे।</li>
   <li>परीक्षा शुरू होने का समय होते ही नीचे का बटन अपने आप चालू हो जाएगा।</li></ol>
-  <label style="display:block">डिफ़ॉल्ट भाषा: <select style="padding:7px 10px;font-size:14px;border-radius:8px;border:1px solid var(--ln)"><option>हिंदी</option></select></label>
+  <label style="display:block">डिफ़ॉल्ट भाषा / Default Language: <select id="lsel0" style="padding:7px 10px;font-size:14px;border-radius:8px;border:1px solid var(--ln)"><option value="hi">हिंदी</option><option value="en">English</option></select></label>
   <label class="agree"><input type="checkbox" id="agree"><span>मैंने सभी निर्देश पढ़ और समझ लिए हैं। मैं घोषणा करता/करती हूँ कि परीक्षा में किसी भी अनुचित साधन का प्रयोग नहीं करूँगा/करूँगी।</span></label>
   <div class="err" id="ag-err"></div>
  </div></div></div>
@@ -475,7 +485,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
  <div class="body">
   <div class="main">
    <div class="qbar"><span class="no" id="qno">Question No. 1</span>
-    <span class="r"><span class="sv" id="sv">Saved</span><span class="lang">View in <select><option>हिंदी</option></select></span><span class="mk"><i class="p">+3</i><i class="n">−1</i></span>
+    <span class="r"><span class="sv" id="sv">Saved</span><span class="lang">View in <select id="lsel"><option value="hi">हिंदी</option><option value="en">English</option></select></span><span class="mk"><i class="p">+3</i><i class="n">−1</i></span>
     <button class="pbtn mob" id="popen"><svg viewBox="0 0 16 16"><path d="M1 1h4v4H1zm5 0h4v4H6zm5 0h4v4h-4zM1 6h4v4H1zm5 0h4v4H6zm5 0h4v4h-4zM1 11h4v4H1zm5 0h4v4H6zm5 0h4v4h-4z"/></svg>Palette</button></span></div>
    <div class="qa" id="qa"></div>
    <div class="acts"><div class="l"><button class="b b-mk" id="bmark">Mark for Review &amp; Next</button><button class="b b-wh" id="bclr">Clear Response</button></div>
@@ -501,7 +511,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 
 <!-- ===== solutions ===== -->
 <section class="scr" id="s-sol">
- <div class="top"><button class="b b-wh" id="solback">‹ रिज़ल्ट</button><h3>प्रश्न एवं व्याख्या</h3></div>
+ <div class="top"><button class="b b-wh" id="solback">‹ रिज़ल्ट</button><h3>प्रश्न एवं व्याख्या</h3><select id="lsel2" style="margin-left:auto;padding:7px 10px;border-radius:8px;border:1px solid var(--ln);font-family:inherit"><option value="hi">हिंदी</option><option value="en">English</option></select></div>
  <div class="wrap" style="padding-top:12px"><div class="filt" id="filt"></div><div id="sols"></div></div>
 </section>
 
@@ -527,7 +537,9 @@ const r=(a,b)=>Array.from({length:b-a+1},(_,i)=>a-1+i);
 const SECS=[["सामान्य ज्ञान एवं समसामयिकी",r(1,25)],["तार्किक ज्ञान",r(26,30)],["हिंदी, संस्कृत एवं अंग्रेजी",r(31,60)],["विज्ञान",r(61,68)],["गणित",r(69,84)],["पर्यावरण एवं सामाजिक अध्ययन",r(85,92)],["शिक्षण कौशल",r(93,100)],["बाल मनोविज्ञान",r(101,108)],["सूचना तकनीक (ICT)",r(109,112).concat(r(117,120))],["जीवन कौशल / प्रबंधन",r(113,116)]].map(x=>({n:x[0],q:x[1]}));
 const L=['A','B','C','D'],$=id=>document.getElementById(id);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let off=C.now*1000-Date.now(),R=C.round,A=null,Q=[],ME={name:'',roll:''},sel=null,T=null,BG=null,dirty=false,saving=false,qStart=Date.now(),subbing=false,RS=null,AR='',hidAt=0;
+let off=C.now*1000-Date.now(),R=C.round,A=null,Q=[],ME={name:'',roll:''},sel=null,T=null,BG=null,dirty=false,saving=false,qStart=Date.now(),subbing=false,RS=null,AR='',hidAt=0,LANG='hi';try{LANG=localStorage.getItem('eh_stm_lang')||'hi'}catch(e){}
+const QT=q=>LANG==='en'&&q.qe?q.qe:q.q,QO=q=>LANG==='en'&&q.oe?q.oe:q.o;
+function setLang(v){LANG=v==='en'?'en':'hi';try{localStorage.setItem('eh_stm_lang',LANG)}catch(e){}['lsel','lsel0'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=LANG})}
 const now=()=>Math.floor((Date.now()+off)/1000);
 const ist=(t,o)=>new Date(t*1000).toLocaleString('hi-IN',Object.assign({timeZone:'Asia/Kolkata'},o));
 const tStr=t=>new Date(t*1000).toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit'}).toUpperCase();
@@ -596,7 +608,7 @@ $('secs').onclick=e=>{const b=e.target.closest('[data-s]');if(b)show(SECS[+b.dat
 function show(i){if(A.cur!==i)acc();A.cur=i;qStart=Date.now();if(stOf(i)==='nv')A.st[i]='na';sel=A.ans[i]||null;const q=Q[i];
  $('qno').textContent='Question No. '+(i+1);
  let h='';if(q.p)h+='<div class="pass"><b>गद्यांश / Passage</b>'+esc(q.p.replace(/^(निर्देश|Direction)[^:]*:\s*/,''))+'</div>';
- h+='<div class="qt">'+esc(q.q)+'</div>'+q.o.map((o,k)=>`<label class="op${sel===L[k]?' sel':''}"><input type="radio" name="op" value="${L[k]}"${sel===L[k]?' checked':''}><span class="k">${k+1}</span><span>${esc(o)}</span></label>`).join('');
+ h+='<div class="qt">'+esc(QT(q))+'</div>'+QO(q).map((o,k)=>`<label class="op${sel===L[k]?' sel':''}"><input type="radio" name="op" value="${L[k]}"${sel===L[k]?' checked':''}><span class="k">${k+1}</span><span>${esc(o)}</span></label>`).join('');
  $('qa').innerHTML=h;$('qa').scrollTop=0;secs();pal();later()}
 $('qa').onchange=e=>{if(e.target.name==='op'){sel=e.target.value;document.querySelectorAll('.op').forEach(o=>o.classList.toggle('sel',o.querySelector('input').checked))}};
 function next(){const k=secOf(A.cur),s=SECS[k].q,p=s.indexOf(A.cur);if(p<s.length-1)show(s[p+1]);else if(k<SECS.length-1)show(SECS[k+1].q[0]);else{secs();pal();later()}}
@@ -612,7 +624,8 @@ $('palg').onclick=e=>{const b=e.target.closest('[data-q]');if(b){show(+b.dataset
 function side(o){$('side').classList.toggle('open',!!o);$('shade').classList.toggle('on',!!o)}
 $('popen').onclick=()=>side(1);$('pclose').onclick=()=>side(0);$('shade').onclick=()=>side(0);
 $('bins').onclick=()=>{side(0);modal('Instructions','<ul style="line-height:1.9;margin:0;padding-left:20px"><li>120 प्रश्न · 120 मिनट · 360 अंक</li><li>सही उत्तर +3, गलत उत्तर −1, छोड़ा 0</li><li>उत्तर सेव करने के लिए Save &amp; Next दबाएँ</li><li>किसी भी सेक्शन में कभी भी जा सकते हैं</li><li>समय समाप्त होने पर परीक्षा अपने आप सबमिट होगी</li></ul>')};
-$('bqp').onclick=()=>{side(0);modal('Question Paper',Q.map((q,i)=>`<p style="margin:0 0 10px;line-height:1.7"><b>${i+1}.</b> ${esc(q.q)}</p>`).join(''))};
+$('bqp').onclick=()=>{side(0);modal('Question Paper',Q.map((q,i)=>`<p style="margin:0 0 10px;line-height:1.7"><b>${i+1}.</b> ${esc(QT(q))}</p>`).join(''))};
+$('lsel').onchange=e=>{setLang(e.target.value);show(A.cur)};$('lsel0').onchange=e=>setLang(e.target.value);setLang(LANG);
 $('bsub').onclick=()=>{side(0);const rows=SECS.map(s=>{const c=cnt(s.q);return `<tr><td>${esc(s.n)}</td><td>${s.q.length}</td><td>${c.an+c.am}</td><td>${c.na}</td><td>${c.mr+c.am}</td><td>${c.nv}</td></tr>`}).join('');
  modal('Exam Summary',`<div class="tw"><table class="t"><thead><tr><th>Section</th><th>Questions</th><th>Answered</th><th>Not Answered</th><th>Marked</th><th>Not Visited</th></tr></thead>${rows}</table></div><p style="margin:14px 0 0;font-weight:600;line-height:1.7">बचा समय: <span class="num">${fmt(A.deadline-now())}</span><br>क्या आप परीक्षा सबमिट करना चाहते हैं? सबमिट के बाद उत्तर बदले नहीं जा सकेंगे।</p>`,[['No','b-wh',close],['Yes, Submit','b-pr',()=>{close();submit(false)}]])};
 function submit(auto){if(subbing)return;subbing=true;clearInterval(T);clearInterval(BG);
@@ -673,12 +686,12 @@ function liveUpd(x,first){const d=RS;Object.assign(d,x);
  $('dnote').innerHTML='हर बार 10 अंकों का समूह है (जैसे 120 = 120 से 129 अंक)। <b style="color:#a87612">सुनहरा बार</b> = आपका स्कोर। कुल '+d.total+' उम्मीदवार।';
  if(first){const me=$('dist').querySelector('.me');if(me)$('dist').scrollLeft=me.offsetLeft-$('dist').clientWidth/2}}
 let FL='all';
-function fl(f){FL=f;const d=RS,sk=120-d.correct-d.wrong;$('filt').innerHTML=[['all','सभी (120)'],['c','सही ('+d.correct+')'],['w','गलत ('+d.wrong+')'],['s','छोड़े ('+sk+')']].map(x=>`<button class="${x[0]===f?'on':''}" data-f="${x[0]}">${x[1]}</button>`).join('');sols(f);window.scrollTo(0,0)}
+function fl(f){FL=f;$('lsel2').value=LANG;const d=RS,sk=120-d.correct-d.wrong;$('filt').innerHTML=[['all','सभी (120)'],['c','सही ('+d.correct+')'],['w','गलत ('+d.wrong+')'],['s','छोड़े ('+sk+')']].map(x=>`<button class="${x[0]===f?'on':''}" data-f="${x[0]}">${x[1]}</button>`).join('');sols(f);window.scrollTo(0,0)}
 $('filt').onclick=e=>{const b=e.target.closest('[data-f]');if(b)fl(b.dataset.f)};
-$('solback').onclick=()=>go('s-res');
+$('solback').onclick=()=>go('s-res');$('lsel2').onchange=e=>{setLang(e.target.value);sols(FL)};
 function solHTML(d,i,f){const ans=d.ans||{},q=d.q[i],a=ans[i],k=!a?'s':(a===d.key[i]?'c':'w');if(f&&f!=='all'&&f!==k)return '';
  const tg={s:'<span class="tg s">छोड़ा</span>',c:'<span class="tg c">सही +3</span>',w:'<span class="tg w">गलत −1</span>'}[k];
- return `<div class="sol"><div class="h"><span>प्रश्न ${i+1} · ${esc(SECS[secOf(i)].n)}</span>${tg}</div>${q.p?'<div style="color:var(--mu);font-size:13px">[गद्यांश आधारित]</div>':''}<div>${esc(q.q)}</div>${q.o.map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">${j+1}. ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ (आपका उत्तर)':'')}</div>`).join('')}${d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`}
+ return `<div class="sol"><div class="h"><span>प्रश्न ${i+1} · ${esc(SECS[secOf(i)].n)}</span>${tg}</div>${q.p?'<div style="color:var(--mu);font-size:13px">[गद्यांश आधारित]</div>':''}<div>${esc(QT(q))}</div>${QO(q).map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">${j+1}. ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ (आपका उत्तर)':'')}</div>`).join('')}${d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`}
 function sols(f){$('sols').innerHTML=RS.q.map((q,i)=>solHTML(RS,i,f)).join('')||'<p style="text-align:center;color:var(--mu);padding:30px">कोई प्रश्न नहीं</p>'}
 
 /* ---------- PDF (one click download, with details + watermark + join links) ---------- */
@@ -694,7 +707,7 @@ async function makePdf(d){const W=$('pdfwait'),M=$('pdfmsg');W.classList.add('on
    <table style="margin-top:10px"><tr><th>सेक्शन</th><th>प्रश्न</th><th>सही</th><th>गलत</th><th>अंक</th></tr>${per.map(p=>`<tr><td>${esc(p.n)}</td><td>${p.len}</td><td>${p.c}</td><td>${p.w}</td><td><b>${p.m}</b></td></tr>`).join('')}</table>`)}
   else mk(head+'<p style="font-size:14px;margin:10px 0 0">120 प्रश्न · 360 अंक · 120 मिनट · सही +3 · गलत −1</p>');
   const ans=d.ans||{};
-  d.q.forEach((q,i)=>{const a=ans[i];mk(`<div class="qq"><b>प्रश्न ${i+1}.</b> ${q.p&&!(d.q[i-1]&&d.q[i-1].p===q.p)?'<div style="color:#5f6b7a;font-size:13px">'+esc(q.p)+'</div>':''}${esc(q.q)}${q.o.map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">(${j+1}) ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ आपका उत्तर':'')}</div>`).join('')}${d.name!=null&&!a?'<div style="font-size:12.5px;color:#5f6b7a">आपने यह प्रश्न छोड़ा</div>':''}${d.exp&&d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`)});
+  d.q.forEach((q,i)=>{const a=ans[i];mk(`<div class="qq"><b>प्रश्न ${i+1}.</b> ${q.p&&!(d.q[i-1]&&d.q[i-1].p===q.p)?'<div style="color:#5f6b7a;font-size:13px">'+esc(q.p)+'</div>':''}${esc(QT(q))}${QO(q).map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">(${j+1}) ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ आपका उत्तर':'')}</div>`).join('')}${d.name!=null&&!a?'<div style="font-size:12.5px;color:#5f6b7a">आपने यह प्रश्न छोड़ा</div>':''}${d.exp&&d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`)});
   const jb=mk(`<div style="border:2px solid #0f2a4d;border-radius:16px;padding:16px;text-align:center"><div style="font-size:17px;font-weight:700;color:#0f2a4d;margin-bottom:10px">रोज़ाना क्विज, नोट्स और मॉक टेस्ट के लिए जुड़ें</div><span class="jb" id="pj1" style="background:#229ed9">टेलीग्राम चैनल ज्वाइन करें</span><span class="jb" id="pj2" style="background:#0f2a4d">टेलीग्राम ग्रुप ज्वाइन करें</span><div style="font-size:13px;color:#5f6b7a;margin-top:10px">आचार्य 2.0 Super TET बैच ₹199 · UP SUPER TET बुक ₹429 · xlstudy.in</div></div>`);
   await Promise.all([...st.querySelectorAll('img')].map(im=>im.complete?1:new Promise(r=>{im.onload=im.onerror=r})));
   const {jsPDF}=window.jspdf,pdf=new jsPDF({unit:'pt',format:'a4',compress:true}),PW=pdf.internal.pageSize.getWidth(),PH2=pdf.internal.pageSize.getHeight(),mg=22,sc=(PW-2*mg)/760,cap=(PH2-2*mg-14)/sc;
