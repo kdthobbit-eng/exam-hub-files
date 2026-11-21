@@ -2,7 +2,7 @@
 /* Super TET live mock: rounds, attempts, server-side timer, scoring, rank, percentile, admin. */
 if (!defined('ABSPATH')) exit;
 
-define('EH_STM_DB', '1');
+define('EH_STM_DB', '2');
 define('EH_STM_SECS', 7200);
 
 function eh_stm_table() { global $wpdb; return $wpdb->prefix . 'eh_mock'; }
@@ -13,8 +13,8 @@ function eh_stm_rounds() {
     $ts = function ($s) use ($tz) { return (new DateTime($s, $tz))->getTimestamp(); };
     $o = get_option('eh_stm_rounds');
     $list = is_array($o) && $o ? $o : [
-        ['id' => 't1', 'name' => 'Super TET Mock 2026 — ट्रायल', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 00:00', 'paper' => 'supertet-mock1'],
-        ['id' => 'm1', 'name' => 'Super TET Mock 2026 — लाइव', 'login' => '2026-11-22 00:00', 'start' => '2026-11-22 00:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
+        ['id' => 't1', 'name' => 'Super TET Mock 2026 — ट्रायल', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 09:30', 'paper' => 'supertet-mock1'],
+        ['id' => 'm1', 'name' => 'Super TET Mock 2026 — लाइव', 'login' => '2026-11-22 09:30', 'start' => '2026-11-22 10:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
     ];
     return array_map(function ($r) use ($ts) {
         $r['login_ts'] = $ts($r['login']); $r['start_ts'] = $ts($r['start']); $r['end_ts'] = $ts($r['end']);
@@ -44,6 +44,8 @@ add_action('init', function () {
         id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
         round varchar(12) NOT NULL DEFAULT '',
         uid bigint(20) unsigned NOT NULL DEFAULT 0,
+        att smallint(5) NOT NULL DEFAULT 1,
+        counted tinyint(1) NOT NULL DEFAULT 0,
         name varchar(80) NOT NULL DEFAULT '',
         email varchar(120) NOT NULL DEFAULT '',
         seen int(10) unsigned NOT NULL DEFAULT 0,
@@ -62,15 +64,17 @@ add_action('init', function () {
         st text NULL,
         tq text NULL,
         PRIMARY KEY  (id),
-        UNIQUE KEY ru (round,uid),
+        UNIQUE KEY rua (round,uid,att),
         KEY round (round)
     ) $c;");
+    if ($wpdb->get_var("SHOW INDEX FROM $t WHERE Key_name = 'ru'")) $wpdb->query("ALTER TABLE $t DROP INDEX ru");
+    $wpdb->query("UPDATE $t SET counted = 1 WHERE submitted > 0 AND att = 1");
     update_option('eh_stm_db', EH_STM_DB);
 });
 
 function eh_stm_row($round, $uid) {
     global $wpdb;
-    return $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . eh_stm_table() . ' WHERE round = %s AND uid = %d', $round, $uid), ARRAY_A);
+    return $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . eh_stm_table() . ' WHERE round = %s AND uid = %d ORDER BY att DESC LIMIT 1', $round, $uid), ARRAY_A);
 }
 function eh_stm_touch($r) {
     global $wpdb;
@@ -97,7 +101,8 @@ function eh_stm_finish_row($r, $row, $when) {
     global $wpdb;
     $ans = json_decode($row['ans'] ?: '{}', true) ?: [];
     [$c, $w, $s] = eh_stm_score($r, $ans);
-    $wpdb->update(eh_stm_table(), ['submitted' => $when, 'correct' => $c, 'wrong' => $w, 'score' => $s], ['id' => $row['id']]);
+    $wpdb->query($wpdb->prepare('UPDATE ' . eh_stm_table() . ' SET counted = 0 WHERE round = %s AND uid = %d AND att < %d', $row['round'], $row['uid'], $row['att']));
+    $wpdb->update(eh_stm_table(), ['submitted' => $when, 'correct' => $c, 'wrong' => $w, 'score' => $s, 'counted' => 1], ['id' => $row['id']]);
 }
 /* Attempts whose time ran out without a submit are submitted at their deadline. */
 function eh_stm_expire($r) {
@@ -121,7 +126,7 @@ function eh_stm_round_out($r) {
 }
 function eh_stm_attempt_out($row, $r) {
     $o = ['started' => (int) $row['started'], 'deadline' => (int) $row['deadline'], 'submitted' => (int) $row['submitted'],
-          'cur' => (int) $row['cur'], 'tabs' => (int) $row['tabs'], 'last' => (int) $row['last'],
+          'cur' => (int) $row['cur'], 'tabs' => (int) $row['tabs'], 'last' => (int) $row['last'], 'att' => (int) $row['att'],
           'ans' => (object) (json_decode($row['ans'] ?: '{}', true) ?: []), 'st' => (object) (json_decode($row['st'] ?: '{}', true) ?: []), 'tq' => (object) (json_decode($row['tq'] ?: '{}', true) ?: [])];
     if ($row['started'] && !$row['submitted']) $o['q'] = eh_stm_public_q($r);
     return $o;
@@ -136,20 +141,21 @@ function eh_stm_result($r, $row) {
         'started' => (int) $row['started'], 'used' => max(0, (int) $row['submitted'] - (int) $row['started']), 'tabs' => (int) $row['tabs'],
         'ans' => (object) (json_decode($row['ans'] ?: '{}', true) ?: []), 'tq' => (object) (json_decode($row['tq'] ?: '{}', true) ?: []),
         'key' => array_map(function ($q) { return $q['a']; }, $Q), 'exp' => array_map(function ($q) { return $q['e'] ?? ''; }, $Q),
-        'q' => eh_stm_public_q($r),
+        'q' => eh_stm_public_q($r), 'att' => (int) $row['att'],
+        'hist' => array_map(function ($x) { return [(int) $x['att'], (int) $x['score'], (int) $x['submitted']]; }, $GLOBALS['wpdb']->get_results($GLOBALS['wpdb']->prepare('SELECT att, score, submitted FROM ' . eh_stm_table() . ' WHERE round = %s AND uid = %d AND submitted > 0 ORDER BY att', $r['id'], $row['uid']), ARRAY_A)),
     ], eh_stm_live($r, (int) $row['score']));
 }
 function eh_stm_live($r, $score) {
     global $wpdb; $t = eh_stm_table();
     eh_stm_expire($r);
-    $base = $wpdb->prepare("FROM $t WHERE round = %s AND submitted > 0", $r['id']);
+    $base = $wpdb->prepare("FROM $t WHERE round = %s AND submitted > 0 AND counted = 1", $r['id']);
     $n = (int) $wpdb->get_var("SELECT COUNT(*) $base");
     $above = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) $base AND score > %d", $score));
     $le = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) $base AND score <= %d", $score));
     $agg = $wpdb->get_row("SELECT MAX(score) mx, AVG(score) av $base", ARRAY_A);
     $d = $wpdb->get_results("SELECT score s, COUNT(*) c $base GROUP BY score", ARRAY_A);
     $top = $wpdb->get_results("SELECT name, score $base ORDER BY score DESC, (submitted - started) ASC LIMIT 10", ARRAY_A);
-    $live = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $t WHERE round = %s AND started > 0 AND submitted = 0 AND last > %d", $r['id'], time() - 120));
+    $live = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(DISTINCT uid) FROM $t WHERE round = %s AND started > 0 AND submitted = 0 AND last > %d", $r['id'], time() - 120));
     return ['total' => $n, 'rank' => $above + 1, 'percentile' => $n ? round($le * 100 / $n, 2) : 100,
         'topper' => (int) ($agg['mx'] ?? 0), 'avg' => round((float) ($agg['av'] ?? 0), 1), 'writing' => $live, 'final' => time() >= $r['end_ts'],
         'dist' => array_map(function ($x) { return [(int) $x['s'], (int) $x['c']]; }, $d),
@@ -166,10 +172,15 @@ add_action('rest_api_init', function () {
         if ($row['started'] && !$row['submitted'] && time() > (int) $row['deadline'] + 20) { eh_stm_finish_row($r, $row, (int) $row['deadline']); $row = eh_stm_row($r['id'], $row['uid']); }
         return ['now' => time(), 'round' => eh_stm_round_out($r), 'roll' => eh_stm_roll((int) $row['uid']), 'name' => $row['name'], 'attempt' => eh_stm_attempt_out($row, $r)];
     }]);
-    register_rest_route('eh/v1', '/stm/start', ['methods' => 'POST', 'permission_callback' => $auth, 'callback' => function () {
+    register_rest_route('eh/v1', '/stm/start', ['methods' => 'POST', 'permission_callback' => $auth, 'callback' => function (WP_REST_Request $q) {
         global $wpdb;
         $r = eh_stm_round(); $row = eh_stm_touch($r); $now = time();
         if (eh_stm_status($r) !== 'live') return new WP_Error('closed', 'परीक्षा अभी खुली नहीं है', ['status' => 403]);
+        if ($row['submitted'] && !empty($q['retry'])) {
+            $u = wp_get_current_user();
+            $wpdb->insert(eh_stm_table(), ['round' => $r['id'], 'uid' => $u->ID, 'att' => (int) $row['att'] + 1, 'name' => $row['name'], 'email' => $row['email'], 'seen' => $now, 'last' => $now, 'ans' => '{}', 'st' => '{}', 'tq' => '{}']);
+            $row = eh_stm_row($r['id'], $u->ID);
+        }
         if (!$row['started']) {
             $wpdb->update(eh_stm_table(), ['started' => $now, 'deadline' => min($now + EH_STM_SECS, $r['end_ts']), 'last' => $now, 'dev' => wp_is_mobile() ? 'mobile' : 'pc'], ['id' => $row['id']]);
             $row = eh_stm_row($r['id'], $row['uid']);
@@ -209,7 +220,7 @@ add_action('rest_api_init', function () {
     register_rest_route('eh/v1', '/stm/admin', ['methods' => 'GET', 'permission_callback' => $admin, 'callback' => function (WP_REST_Request $q) {
         global $wpdb;
         $r = eh_stm_round(sanitize_key($q['round'] ?? '')); eh_stm_expire($r);
-        $rows = $wpdb->get_results($wpdb->prepare('SELECT id, uid, name, email, seen, started, deadline, last, submitted, answered, tabs, correct, wrong, score, dev FROM ' . eh_stm_table() . ' WHERE round = %s ORDER BY submitted > 0, score DESC, started DESC, seen DESC', $r['id']), ARRAY_A);
+        $rows = $wpdb->get_results($wpdb->prepare('SELECT id, uid, att, counted, name, email, seen, started, deadline, last, submitted, answered, tabs, correct, wrong, score, dev FROM ' . eh_stm_table() . ' WHERE round = %s ORDER BY submitted > 0, score DESC, started DESC, seen DESC', $r['id']), ARRAY_A);
         return ['now' => time(), 'round' => eh_stm_round_out($r), 'rounds' => array_map('eh_stm_round_out', eh_stm_rounds()), 'rows' => $rows];
     }]);
     register_rest_route('eh/v1', '/stm/reset', ['methods' => 'POST', 'permission_callback' => $admin, 'callback' => function (WP_REST_Request $q) {
@@ -222,10 +233,10 @@ function eh_stm_counts($r = null) {
     global $wpdb; $r = $r ?: eh_stm_round(); eh_stm_expire($r); $t = eh_stm_table(); $now = time();
     return [
         'round' => $r,
-        'seen' => (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $t WHERE round = %s", $r['id'])),
+        'seen' => (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(DISTINCT uid) FROM $t WHERE round = %s", $r['id'])),
         'live' => (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $t WHERE round = %s AND started > 0 AND submitted = 0 AND last > %d", $r['id'], $now - 120)),
         'started' => (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $t WHERE round = %s AND started > 0", $r['id'])),
-        'done' => (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $t WHERE round = %s AND submitted > 0", $r['id'])),
+        'done' => (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $t WHERE round = %s AND submitted > 0 AND counted = 1", $r['id'])),
         'top' => (int) $wpdb->get_var($wpdb->prepare("SELECT MAX(score) FROM $t WHERE round = %s AND submitted > 0", $r['id'])),
     ];
 }

@@ -314,6 +314,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 .dist .lb2{display:flex;gap:6px;min-width:max-content;padding:4px 4px 0}
 .dist .lb2 span{width:44px;text-align:center;font-size:11px;color:var(--mu);font-family:Poppins,sans-serif}
 .dist .lb2 span.me{color:#a87612;font-weight:700}
+.atts{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px}.atts div{flex:none;width:86px;height:86px;border-radius:50%;border:2px solid var(--ln);display:flex;flex-direction:column;align-items:center;justify-content:center}.atts div.on{border-color:var(--pr);background:var(--pr2)}.atts b{font-family:Poppins,sans-serif;font-size:20px;color:var(--nv)}.atts span{font-size:11.5px;color:var(--mu)}
 .solbtn{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--ln);border-radius:16px;padding:16px 18px;margin:16px 0;cursor:pointer;width:100%;text-align:left;font:inherit;color:inherit}
 .solbtn i{width:48px;height:48px;border-radius:50%;background:var(--pr2);color:var(--pr);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:22px;flex:none}
 .solbtn b{display:block;font-size:16px;color:var(--nv)}.solbtn span{font-size:13px;color:var(--mu)}
@@ -416,8 +417,8 @@ table.t td:first-child,table.t th:first-child{text-align:left}
    <div class="card"><h2>प्रश्न-पत्र का स्वरूप</h2><div class="tw"><table class="t"><thead><tr><th>विषय</th><th>प्रश्न</th><th>अंक</th></tr></thead><tbody id="pat"></tbody></table></div></div>
   </div>
   <div class="card" style="margin-bottom:16px"><h2>महत्वपूर्ण निर्देश</h2><ol class="rules">
-   <li>परीक्षा देने के लिए xlstudy.in पर लॉग-इन ज़रूरी है। एक अकाउंट से केवल एक प्रयास।</li>
-   <li>मॉक पूरे दिन खुला है — दिन में कभी भी शुरू करें, शुरू करने के बाद पूरे 120 मिनट मिलेंगे। अंतिम रैंक दिन समाप्त होने के बाद।</li>
+   <li>परीक्षा देने के लिए xlstudy.in पर लॉग-इन ज़रूरी है। जितनी बार चाहें दोबारा दे सकते हैं — रैंक में आपका सबसे नया प्रयास गिना जाएगा।</li>
+   <li>मॉक सुबह 10 बजे से रात 11:59 तक खुला है — इस बीच कभी भी शुरू करें, शुरू करने के बाद पूरे 120 मिनट मिलेंगे। अंतिम रैंक रात 11:59 के बाद।</li>
    <li>हर उत्तर सर्वर पर सेव होता है। नेट जाने या फ़ोन बंद होने पर दोबारा खोलें — परीक्षा वहीं से चलेगी।</li>
    <li>समय पूरा होते ही परीक्षा अपने आप सबमिट हो जाएगी।</li>
    <li>सबमिट के बाद स्कोर, रैंक, परसेंटाइल, सेक्शन-वार विश्लेषण और हर प्रश्न की व्याख्या मिलेगी। प्रश्न-पत्र व उत्तर-कुंजी PDF में डाउनलोड कर सकेंगे।</li>
@@ -560,30 +561,31 @@ function status(){const n=now();return n<R.login?'soon':n<R.start?'login':n<R.en
 function home(){const n=now(),st=status();
  $('h-date').textContent=ist(R.start,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
  $('h-time').textContent=tStr(R.start)+' – '+tStr(R.end);$('cf-date').textContent=ist(R.start,{day:'numeric',month:'long',year:'numeric'})+' · '+tStr(R.start)+' – '+tStr(R.end);
- const live=st==='live';$('h-chip').classList.toggle('live',live);$('h-chipt').textContent=live?'LIVE · मॉक आज पूरे दिन खुला है':st==='over'?'परीक्षा समाप्त':'लाइव मॉक टेस्ट';
+ const live=st==='live';$('h-chip').classList.toggle('live',live);$('h-chipt').textContent=live?'LIVE · मॉक रात 11:59 तक खुला है':st==='over'?'परीक्षा समाप्त':'लाइव मॉक टेस्ट';
  const left=st==='over'?0:Math.max(0,(live?R.end:R.start)-n);$('cd-lbl').textContent=st==='over'?'मॉक समाप्त हो चुका है':live?'मॉक बंद होने में':'मॉक खुलने में';
  const d=Math.floor(left/86400),h=Math.floor(left%86400/3600),m=Math.floor(left%3600/60),s=left%60;
  $('cd').innerHTML=(d?ring(d,30,'दिन'):'')+ring(h,24,'घंटे')+ring(m,60,'मिनट')+ring(s,60,'सेकंड');
- const tl=[[R.login,'लॉग-इन व निर्देश','उम्मीदवार विवरण जाँचें, निर्देश पढ़ें'],[R.start,'मॉक खुलेगा','पूरे दिन में कभी भी शुरू करें · 120 मिनट'],[R.end,'मॉक बंद','इसके बाद नया प्रयास नहीं'],[R.end,'रिज़ल्ट','स्कोर सबमिट के तुरंत बाद · अंतिम रैंक/परसेंटाइल समाप्ति के बाद']];
+ const tl=[[R.login,'लॉग-इन व निर्देश','उम्मीदवार विवरण जाँचें, निर्देश पढ़ें'],[R.start,'मॉक खुलेगा','रात 11:59 तक कभी भी शुरू करें · 120 मिनट'],[R.end,'मॉक बंद','इसके बाद नया प्रयास नहीं'],[R.end,'रिज़ल्ट','स्कोर सबमिट के तुरंत बाद · अंतिम रैंक/परसेंटाइल समाप्ति के बाद']];
  const th=tl.map((x,i)=>`<li class="${n>=x[0]&&i<3?'on':''}"><span class="t">${tStr(x[0]).replace(' ','<br>')}</span><div><b>${x[1]}</b><span>${x[2]}</span></div></li>`).join('');if($('tl').innerHTML!==th)$('tl').innerHTML=th;
  cta(st)}
 function cta(st){let h='',p='',b='';const a=A;
  if(!C.in){h='परीक्षा देने के लिए लॉग-इन करें';p='xlstudy.in का अकाउंट नहीं है तो 1 मिनट में नया अकाउंट बनाएँ।';b=`<a class="b b-wh b-lg" href="${esc(C.signup)}">नया अकाउंट</a><a class="b b-gd b-lg" href="${esc(C.login)}">लॉग-इन करें</a>`}
  else if(!a){h='लोड हो रहा है…'}
- else if(+a.submitted){h=ME.name+', आपका पेपर सबमिट हो चुका है';p='स्कोर, रैंक, परसेंटाइल और हर प्रश्न की व्याख्या देखें।';b='<button class="b b-gd b-lg" id="c-go">रिज़ल्ट देखें ›</button>'}
+ else if(+a.submitted){h=ME.name+', आपका प्रयास '+(a.att||1)+' सबमिट हो चुका है';p='रिज़ल्ट देखें, या दोबारा मॉक दें — रैंक में आपका नया स्कोर गिना जाएगा।';b='<button class="b b-wh b-lg" id="c-re"'+(st==='live'?'':' disabled')+'>↻ दोबारा दें</button><button class="b b-gd b-lg" id="c-go">रिज़ल्ट देखें ›</button>'}
  else if(+a.started){h='आपकी परीक्षा जारी है';p='बचा समय '+fmt(a.deadline-now())+' · आपके उत्तर सर्वर पर सेव हैं।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा जारी रखें ›</button>'}
  else if(st==='soon'){h='नमस्ते, '+ME.name;p='लॉग-इन '+tStr(R.login)+' से खुलेगा। तब तक नीचे पैटर्न और निर्देश देख लें।';b='<button class="b b-wh b-lg" disabled>'+tStr(R.login)+' से खुलेगा</button>'}
  else if(st==='over'){h='यह परीक्षा समाप्त हो चुकी है';p='प्रश्न-पत्र और उत्तर-कुंजी डाउनलोड करें।';b='<button class="b b-pr b-lg" id="c-paper">⬇ प्रश्न-पत्र + उत्तर-कुंजी</button>'}
  else {h='नमस्ते, '+ME.name;p=st==='live'?(R.end-now()>=7200?'मॉक खुला है। शुरू करने पर आपको पूरे 120 मिनट मिलेंगे।':'मॉक बंद होने वाला है — अभी शुरू करने पर केवल '+fmt(R.end-now())+' मिलेंगे।'):'विवरण जाँचें और निर्देश पढ़ें। परीक्षा '+tStr(R.start)+' पर शुरू होगी।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा में प्रवेश करें ›</button>'}
  if($('c-h').textContent!==h)$('c-h').textContent=h;if($('c-p').textContent!==p)$('c-p').textContent=p;
- if($('c-bt').dataset.k!==b){$('c-bt').innerHTML=b;$('c-bt').dataset.k=b;const g=$('c-go');if(g)g.onclick=enter;const pp=$('c-paper');if(pp)pp.onclick=paper}}
-function enter(){if(+A.submitted)return showResult();if(+A.started)return start();go('s-conf')}
+ if($('c-bt').dataset.k!==b){$('c-bt').innerHTML=b;$('c-bt').dataset.k=b;const g=$('c-go');if(g)g.onclick=enter;const re=$('c-re');if(re)re.onclick=retry;const pp=$('c-paper');if(pp)pp.onclick=paper}}
+let RETRY=0;function retry(){if(status()!=='live')return;RETRY=1;$('agree').checked=false;clearInterval(LT);go('s-conf')}
+function enter(){RETRY=0;if(+A.submitted)return showResult();if(+A.started)return start();go('s-conf')}
 function names(){document.querySelectorAll('.cn').forEach(e=>e.textContent=ME.name);document.querySelectorAll('.roll').forEach(e=>e.textContent=ME.roll)}
 
 /* ---------- begin ---------- */
 function waitTick(){const n=now(),b=$('begin');if(n<R.start){b.disabled=true;$('wait').innerHTML='परीक्षा शुरू होने में <b>'+fmt(R.start-n)+'</b>'}else if(n>=R.end){b.disabled=true;$('wait').textContent='परीक्षा समाप्त हो चुकी है'}else{b.disabled=false;$('wait').textContent=''}}
 $('begin').onclick=()=>{if(!$('agree').checked){$('ag-err').textContent='आगे बढ़ने के लिए घोषणा पर ✓ लगाएँ';return}
- $('begin').disabled=true;$('ag-err').textContent='';api('start',{}).then(j=>{off=j.now*1000-Date.now();A=j.attempt;start()}).catch(e=>{$('begin').disabled=false;$('ag-err').textContent=(e&&e.message)||'नेटवर्क त्रुटि, दोबारा प्रयास करें'})};
+ $('begin').disabled=true;$('ag-err').textContent='';api('start',{retry:RETRY}).then(j=>{off=j.now*1000-Date.now();A=j.attempt;RETRY=0;subbing=false;dirty=false;start()}).catch(e=>{$('begin').disabled=false;$('ag-err').textContent=(e&&e.message)||'नेटवर्क त्रुटि, दोबारा प्रयास करें'})};
 
 /* ---------- exam ---------- */
 const secOf=i=>SECS.findIndex(s=>s.q.includes(i));
@@ -596,7 +598,7 @@ function acc(){const i=A.cur,d=Math.round((Date.now()-qStart)/1000);if(d>0&&d<36
 function sv(c,t){const e=$('sv');e.className='sv '+c;e.textContent=t}
 function push(fin,keep){acc();if(saving&&!fin){dirty=true;return Promise.resolve()}saving=true;dirty=false;sv('w','Saving…');
  return api('save',{ans:A.ans,st:A.st,tq:A.tq,cur:A.cur,tabs:A.tabs,submit:fin?1:0},keep).then(j=>{saving=false;sv('','Saved');if(j.now)off=j.now*1000-Date.now();return j}).catch(e=>{saving=false;dirty=true;sv('x','Offline');throw e})}
-const LK=()=>'eh_stm_'+R.id+'_'+ME.roll;
+const LK=()=>'eh_stm_'+R.id+'_'+ME.roll+'_'+(A&&A.att||1);
 function backup(){try{localStorage.setItem(LK(),JSON.stringify({ans:A.ans,st:A.st,tq:A.tq,cur:A.cur,tabs:A.tabs,t:now()}))}catch(e){}}
 let pt=null;function later(){dirty=true;backup();clearTimeout(pt);pt=setTimeout(()=>push().catch(()=>{}),700)}
 document.addEventListener('visibilitychange',()=>{if(!A||!+A.started||+A.submitted||!$('s-exam').classList.contains('on'))return;
@@ -644,7 +646,7 @@ function renderRes(d){RS=d;close();
  const sk=120-d.correct-d.wrong,att=d.correct+d.wrong,ac=att?Math.round(d.correct*100/att):0,per=perSec(d),tt=Math.max(1,per.reduce((a,p)=>a+p.t,0));
  const C2=2*Math.PI*72;
  let h=`<div class="rhero"><div class="in"><div class="av big">${PH}</div><div><h2>${esc(d.name)}</h2><p>रोल नं. <span class="num">${esc(d.roll)}</span> · UP Super TET 2026 लाइव मॉक · लगा समय ${mins(d.used)}${d.tabs?' · टैब बदले '+d.tabs:''}</p>
- <div class="hstat"><span>परसेंटाइल <b id="hp">${d.percentile.toFixed(2)}</b></span><span>रैंक <b id="hr">${d.rank}</b> / <span id="ht">${d.total}</span></span><span>अंक <b>${d.score}</b> / 360</span></div></div></div></div>
+ <div class="hstat"><span>प्रयास <b>${d.att||1}</b></span><span>परसेंटाइल <b id="hp">${d.percentile.toFixed(2)}</b></span><span>रैंक <b id="hr">${d.rank}</b> / <span id="ht">${d.total}</span></span><span>अंक <b>${d.score}</b> / 360</span></div></div></div></div>
  <div class="wrap"><div class="rtop"><div class="gauge"><svg viewBox="0 0 170 170"><circle class="bgc" cx="85" cy="85" r="72"/><circle class="fgc" id="gfg" cx="85" cy="85" r="72" stroke-dasharray="${C2.toFixed(1)}" stroke-dashoffset="${C2.toFixed(1)}"/></svg><div><b id="gp">${d.percentile.toFixed(2)}</b><span>परसेंटाइल</span></div></div>
  <div class="kps"><div class="kp"><i class="i1">★</i><div><b>${d.score}<small style="font-size:13px;color:var(--mu)"> / 360</small></b><span>कुल अंक</span></div></div>
  <div class="kp"><i class="i2">#</i><div><b><span id="kr">${d.rank}</span><small style="font-size:13px;color:var(--mu)"> / <span id="kt">${d.total}</span></small></b><span>रैंक</span></div></div>
@@ -659,8 +661,9 @@ function renderRes(d){RS=d;close();
  </div><div class="card"><h2>टॉप 10</h2><ol class="lb" id="top"></ol></div></div>
  <div class="card" style="margin-top:16px"><h2>सेक्शन-वार प्रदर्शन</h2><div class="lgnd"><span style="--c:var(--gr)">सही</span><span style="--c:var(--rd)">गलत</span><span style="--c:#dfe6ee">छोड़े</span></div>
   ${per.map(p=>`<div class="secr"><div>${esc(p.n)}<small>${p.c} सही · ${p.w} गलत · ${p.len-p.c-p.w} छोड़े (कुल ${p.len})</small></div><div class="track"><i style="width:${p.c*100/p.len}%;background:var(--gr)"></i><i style="width:${p.w*100/p.len}%;background:var(--rd)"></i></div><span class="m">${p.m}<small style="display:inline;font-weight:400"> /${p.len*3}</small></span></div>`).join('')}</div>
+ ${(d.hist||[]).length>1?`<div class="card" style="margin-top:16px"><h2>आपके सभी प्रयास</h2><div class="atts">${d.hist.map(x=>`<div class="${x[0]===d.att?'on':''}"><b>${x[1]}</b><span>प्रयास ${x[0]}</span></div>`).join('')}</div><p style="font-size:12.5px;color:var(--mu);margin:8px 0 0">रैंक और परसेंटाइल में आपका सबसे नया प्रयास गिना जाता है।</p></div>`:''}
  <button class="solbtn" id="vsol"><i>📖</i><div><b>प्रश्न एवं व्याख्या देखें</b><span>सभी 120 प्रश्न · आपका उत्तर · सही उत्तर · व्याख्या</span></div><em>›</em></button>
- <div style="display:flex;gap:10px;flex-wrap:wrap;margin:0 0 6px"><button class="b b-pr b-lg" id="pdf" style="flex:1">⬇ रिज़ल्ट + प्रश्न-पत्र PDF डाउनलोड</button><button class="b b-wh b-lg" id="rhome">होम</button></div>
+ <div style="display:flex;gap:10px;flex-wrap:wrap;margin:0 0 6px"><button class="b b-pr b-lg" id="pdf" style="flex:1">⬇ रिज़ल्ट + प्रश्न-पत्र PDF डाउनलोड</button><button class="b b-gd b-lg" id="rretry">↻ दोबारा दें (प्रयास ${(d.att||1)+1})</button><button class="b b-wh b-lg" id="rhome">होम</button></div>
  ${joinHTML()}
  <div class="promo"><div class="pt"><span class="tagp">UPSSSC ALERT · पेड बैच</span><h3>आचार्य 2.0 <em>Super TET</em></h3><p>रैपिड रिवीजन बैच — परीक्षा से पहले पूरा सिलेबस दोबारा, आपकी कमज़ोर सेक्शन पर ज़ोर।</p>
   <ul><li>सभी विषयों के PDF नोट्स</li><li>टॉपिक-वाइज और मिक्स प्रैक्टिस क्विज</li><li>10 फुल लेंथ टेस्ट</li><li>पिछले वर्षों के प्रश्न (PYQ)</li></ul>
@@ -668,7 +671,7 @@ function renderRes(d){RS=d;close();
   <div class="pb"><img src="${esc(C.book)}" alt="UP SUPER TET Book" loading="lazy"><b>UP SUPER TET बुक · ₹429</b><span>6,000+ MCQ · थ्योरी · मॉडल पेपर · घर तक डिलीवरी</span><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><a class="b b-wh" href="${esc(C.booktg)}" target="_blank" rel="noopener">ऑर्डर करें</a><a class="b b-wa" href="${esc(C.bookwa)}" target="_blank" rel="noopener">WhatsApp</a></div></div></div>
  <div class="foot"><img src="${esc(C.logo)}" alt=""> UPSSSC ALERT × XL Study · xlstudy.in</div></div>`;
  $('resw').innerHTML=h;liveUpd(d,true);
- $('pdf').onclick=()=>makePdf(RS);$('rhome').onclick=()=>{clearInterval(LT);go('s-home');home()};
+ $('pdf').onclick=()=>makePdf(RS);$('rretry').onclick=()=>{if(status()!=='live'){modal('सूचना','<p style="margin:0">मॉक बंद हो चुका है, अब नया प्रयास नहीं हो सकता।</p>');return}retry()};if(status()!=='live')$('rretry').disabled=true;$('rhome').onclick=()=>{clearInterval(LT);go('s-home');home()};
  $('vsol').onclick=()=>{fl('all');go('s-sol')};
  clearInterval(LT);LT=setInterval(()=>{if(!$('s-res').classList.contains('on'))return;api('live').then(x=>liveUpd(x,false)).catch(()=>{})},20000)}
 function liveUpd(x,first){const d=RS;Object.assign(d,x);
@@ -729,11 +732,11 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('mf').children.le
 /* ---------- admin ---------- */
 function adm(){api('admin'+(AR?'?round='+AR:'')).then(d=>{off=d.now*1000-Date.now();const n=d.now,rows=d.rows;
  $('a-t').textContent=d.round.name;const ro=d.rounds.map(x=>`<option value="${x.id}"${x.id===d.round.id?' selected':''}>${esc(x.name)}</option>`).join('');if($('a-r').dataset.k!==ro){$('a-r').innerHTML=ro;$('a-r').dataset.k=ro}
- const live=rows.filter(x=>+x.started&&!+x.submitted&&n-x.last<120).length,st=rows.filter(x=>+x.started).length,dn=rows.filter(x=>+x.submitted),av=dn.length?Math.round(dn.reduce((a,x)=>a+ +x.score,0)/dn.length):0,tp=dn.length?Math.max(...dn.map(x=>+x.score)):0;
- $('a-k').innerHTML=[[rows.length,'लॉग-इन करके पेज खोला'],[live,'अभी पेपर दे रहे'],[st,'पेपर शुरू किया'],[dn.length,'सबमिट किया'],[av+' / '+tp,'औसत / टॉप स्कोर']].map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
+ const live=rows.filter(x=>+x.started&&!+x.submitted&&n-x.last<120).length,st=rows.filter(x=>+x.started).length,dn=rows.filter(x=>+x.submitted&&+x.counted),av=dn.length?Math.round(dn.reduce((a,x)=>a+ +x.score,0)/dn.length):0,tp=dn.length?Math.max(...dn.map(x=>+x.score)):0;
+ const uu=new Set(rows.map(x=>x.uid)).size;$('a-k').innerHTML=[[uu,'लॉग-इन करके पेज खोला'],[live,'अभी पेपर दे रहे'],[st,'पेपर शुरू किया'],[dn.length,'सबमिट किया'],[av+' / '+tp,'औसत / टॉप स्कोर']].map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
  const ago=t=>{t=n-t;return t<60?t+' से पहले':t<3600?Math.floor(t/60)+' मि पहले':Math.floor(t/3600)+' घं पहले'};
- $('a-tb').innerHTML='<thead><tr><th>नाम</th><th>ईमेल</th><th>स्थिति</th><th>डिवाइस</th><th>किए</th><th>स्कोर</th><th>शुरू</th><th>आखिरी बार</th><th>टैब</th><th></th></tr></thead>'+rows.map(x=>{const s=+x.submitted?'<span class="pill p-o">सबमिट</span>':+x.started?(n-x.last<120?'<span class="pill p-l">दे रहे</span>':'<span class="pill p-i">रुके हैं</span>'):'<span class="pill p-s">केवल लॉग-इन</span>';
-  return `<tr><td>${esc(x.name)}</td><td>${esc(x.email)}</td><td>${s}</td><td>${esc(x.dev)}</td><td>${x.answered}</td><td><b>${+x.submitted?x.score:'—'}</b></td><td>${+x.started?tStr(+x.started):'—'}</td><td>${ago(+x.last)}</td><td>${x.tabs}</td><td><button class="b b-wh" style="padding:4px 10px;font-size:12px" data-rs="${x.id}">रीसेट</button></td></tr>`}).join('');
+ $('a-tb').innerHTML='<thead><tr><th>नाम</th><th>ईमेल</th><th>प्रयास</th><th>स्थिति</th><th>डिवाइस</th><th>किए</th><th>स्कोर</th><th>शुरू</th><th>आखिरी बार</th><th>टैब</th><th></th></tr></thead>'+rows.map(x=>{const s=+x.submitted?'<span class="pill p-o">सबमिट</span>':+x.started?(n-x.last<120?'<span class="pill p-l">दे रहे</span>':'<span class="pill p-i">रुके हैं</span>'):'<span class="pill p-s">केवल लॉग-इन</span>';
+  return `<tr style="${+x.submitted&&!+x.counted?'opacity:.55':''}"><td>${esc(x.name)}</td><td>${esc(x.email)}</td><td>${x.att}${+x.counted?' ★':''}</td><td>${s}</td><td>${esc(x.dev)}</td><td>${x.answered}</td><td><b>${+x.submitted?x.score:'—'}</b></td><td>${+x.started?tStr(+x.started):'—'}</td><td>${ago(+x.last)}</td><td>${x.tabs}</td><td><button class="b b-wh" style="padding:4px 10px;font-size:12px" data-rs="${x.id}">रीसेट</button></td></tr>`}).join('');
  window._rows=rows}).catch(()=>{})}
 
 /* ---------- boot ---------- */
