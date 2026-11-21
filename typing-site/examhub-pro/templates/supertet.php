@@ -277,6 +277,12 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 .pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:20px;white-space:nowrap}
 .p-l{background:#dcfce7;color:#166534}.p-s{background:#e8f0fb;color:#1d4f9a}.p-o{background:#eef2f7;color:#5b6675}.p-i{background:#fff4d6;color:#8a5a00}
 
+/* end test button */
+.ibar .ir{display:flex;align-items:center;gap:10px}
+.endb{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 14px;border-radius:30px;border:1.5px solid rgba(255,255,255,.55);background:rgba(222,68,52,.92);color:#fff;font-weight:700;font-size:13px}
+.endb svg{width:13px;height:13px;fill:#fff}
+.endb:hover{background:#c5301f}
+@media(max-width:760px){.endb{height:34px;padding:0 11px;font-size:12px}.ibar .ir{gap:7px}}
 /* home button */
 .hm{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 14px 0 10px;margin-right:4px;border-radius:30px;text-decoration:none;color:#fff;font-weight:700;font-size:13.5px;background:linear-gradient(135deg,#1d63c7,#0f2a4d);box-shadow:0 4px 12px -4px rgba(29,99,199,.6);transition:transform .15s,box-shadow .15s;flex:none}
 .hm:hover{transform:translateY(-1px);box-shadow:0 8px 18px -6px rgba(29,99,199,.7)}
@@ -487,7 +493,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 <section class="scr" id="s-exam">
  <?php $eh_hd('UP Super TET 2026 · Live Mock', '', false, false); ?>
  <div class="ibar"><div class="who"><div class="av"><?php echo $eh_ph; ?></div><div><b class="cn"></b><span>Roll No: <span class="roll"></span></span></div></div>
-  <div class="tmr" id="tbox"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></i><div><span>Time Left</span><b id="tm">2:00:00</b></div></div></div>
+  <div class="ir"><button class="endb" id="bend" type="button"><svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg><span>End Test</span></button><div class="tmr" id="tbox"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></i><div><span>Time Left</span><b id="tm">2:00:00</b></div></div></div></div>
  <div class="secbar"><span class="lbl">Sections</span><div class="secs" id="secs"></div></div>
  <div class="body">
   <div class="main">
@@ -597,13 +603,13 @@ $('begin').onclick=()=>{if(!$('agree').checked){$('ag-err').textContent='आग�
 const secOf=i=>SECS.findIndex(s=>s.q.includes(i));
 const stOf=i=>A.st[i]||'nv';
 function start(){Q=A.q||[];if(!Q.length){location.reload();return}names();go('s-exam');show(+A.cur||0);tick();clearInterval(T);T=setInterval(tick,1000);
- clearInterval(BG);BG=setInterval(()=>{if(dirty)push().catch(()=>{})},15000);
+ clearInterval(BG);BG=setInterval(()=>{push().catch(()=>{})},20000);
  try{if(window.innerWidth<=760&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{})}catch(e){}}
 function tick(){const l=A.deadline-now();$('tm').textContent=fmt(l);$('tbox').classList.toggle('low',l<=300&&l>0);if(l<=0&&!+A.submitted)submit(true)}
 function acc(){const i=A.cur,d=Math.round((Date.now()-qStart)/1000);if(d>0&&d<3600)A.tq[i]=(+A.tq[i]||0)+d;qStart=Date.now()}
 function sv(c,t){const e=$('sv');e.className='sv '+c;e.textContent=t}
 function push(fin,keep){acc();if(saving&&!fin){dirty=true;return Promise.resolve()}saving=true;dirty=false;sv('w','Saving…');
- return api('save',{ans:A.ans,st:A.st,tq:A.tq,cur:A.cur,tabs:A.tabs,submit:fin?1:0},keep).then(j=>{saving=false;sv('','Saved');if(j.now)off=j.now*1000-Date.now();return j}).catch(e=>{saving=false;dirty=true;sv('x','Offline');throw e})}
+ return api('save',{ans:A.ans,st:A.st,tq:A.tq,cur:A.cur,tabs:A.tabs,submit:fin?1:0},keep).then(j=>{saving=false;sv('','Saved');if(j.now)off=j.now*1000-Date.now();if(j.submitted&&!fin&&!+A.submitted&&!subbing){A.submitted=1;clearInterval(T);clearInterval(BG);modal('परीक्षा समाप्त','<p style="margin:0">मॉक बंद कर दिया गया है, आपका पेपर अपने आप सबमिट हो गया है।</p>');showResult()}return j}).catch(e=>{saving=false;dirty=true;sv('x','Offline');throw e})}
 const LK=()=>'eh_stm_'+R.id+'_'+ME.roll+'_'+(A&&A.att||1);
 function backup(){try{localStorage.setItem(LK(),JSON.stringify({ans:A.ans,st:A.st,tq:A.tq,cur:A.cur,tabs:A.tabs,t:now()}))}catch(e){}}
 let pt=null;function later(){dirty=true;backup();clearTimeout(pt);pt=setTimeout(()=>push().catch(()=>{}),700)}
@@ -634,6 +640,7 @@ $('popen').onclick=()=>side(1);$('pclose').onclick=()=>side(0);$('shade').onclic
 $('bins').onclick=()=>{side(0);modal('Instructions','<ul style="line-height:1.9;margin:0;padding-left:20px"><li>120 प्रश्न · 120 मिनट · 360 अंक</li><li>सही उत्तर +3, गलत उत्तर −1, छोड़ा 0</li><li>उत्तर सेव करने के लिए Save &amp; Next दबाएँ</li><li>किसी भी सेक्शन में कभी भी जा सकते हैं</li><li>समय समाप्त होने पर परीक्षा अपने आप सबमिट होगी</li></ul>')};
 $('bqp').onclick=()=>{side(0);modal('Question Paper',Q.map((q,i)=>`<p style="margin:0 0 10px;line-height:1.7"><b>${i+1}.</b> ${esc(QT(q))}</p>`).join(''))};
 $('lsel').onchange=e=>{setLang(e.target.value);show(A.cur)};$('lsel0').onchange=e=>setLang(e.target.value);setLang(LANG);
+$('bend').onclick=()=>$('bsub').click();
 $('bsub').onclick=()=>{side(0);const rows=SECS.map(s=>{const c=cnt(s.q);return `<tr><td>${esc(s.n)}</td><td>${s.q.length}</td><td>${c.an+c.am}</td><td>${c.na}</td><td>${c.mr+c.am}</td><td>${c.nv}</td></tr>`}).join('');
  modal('Exam Summary',`<div class="tw"><table class="t"><thead><tr><th>Section</th><th>Questions</th><th>Answered</th><th>Not Answered</th><th>Marked</th><th>Not Visited</th></tr></thead>${rows}</table></div><p style="margin:14px 0 0;font-weight:600;line-height:1.7">बचा समय: <span class="num">${fmt(A.deadline-now())}</span><br>क्या आप परीक्षा सबमिट करना चाहते हैं? सबमिट के बाद उत्तर बदले नहीं जा सकेंगे।</p>`,[['No','b-wh',close],['Yes, Submit','b-pr',()=>{close();submit(false)}]])};
 function submit(auto){if(subbing)return;subbing=true;clearInterval(T);clearInterval(BG);

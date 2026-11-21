@@ -178,6 +178,7 @@ function eh_tgb_menu_kb($role) {
     ];
     if ($role) $kb[] = [['text' => '📝 पैसेज जोड़ें', 'callback_data' => 'pa'], ['text' => '📋 मेरे पैसेज', 'callback_data' => 'pl']];
     if ($role === 'owner') $kb[] = [['text' => '➕ Add admin', 'callback_data' => 'add'], ['text' => '🔄 Update theme', 'callback_data' => 'upd']];
+    if ($role === 'owner' && function_exists('eh_stm_bot_view')) $kb[] = [['text' => '📝 Super TET Mock (चालू / बंद)', 'callback_data' => 'mock']];
     return ['inline_keyboard' => $kb];
 }
 function eh_tgb_back_kb($again) { return ['inline_keyboard' => [[['text' => '🔄 Refresh', 'callback_data' => $again], ['text' => '☰ Menu', 'callback_data' => 'menu']]]]; }
@@ -308,6 +309,10 @@ function eh_tgb_hook(WP_REST_Request $req) {
                 $text = (strpos($r, 'OK') === 0 ? '✅ <b>Theme update हो गई</b>' . "\nVersion: <code>" . esc_html(substr($r, 3)) . '</code>' : '❌ <b>Update नहीं हुआ</b>' . "\n" . esc_html($r));
                 $kb = eh_tgb_back_kb('upd');
             }
+        } elseif ($data === 'mock' && $role === 'owner' && function_exists('eh_stm_bot_view')) { [$text, $kb] = eh_stm_bot_view();
+        } elseif ($data === 'stm:close' && $role === 'owner' && function_exists('eh_stm_bot_view')) { [$text, $kb] = eh_stm_bot_view(true);
+        } elseif ($data === 'stm:close:go' && $role === 'owner' && function_exists('eh_stm_close')) { eh_stm_close(eh_stm_round()['id']); $note = 'मॉक बंद कर दिया गया'; [$text, $kb] = eh_stm_bot_view();
+        } elseif ($data === 'stm:open' && $role === 'owner' && function_exists('eh_stm_open')) { eh_stm_open(eh_stm_round()['id']); $note = 'मॉक खोल दिया गया'; [$text, $kb] = eh_stm_bot_view();
         } elseif (strpos($data, 'del:') === 0 && $role === 'owner') {
             $a = eh_tgb_admins(); $did = substr($data, 4);
             if (isset($a[$did]) && $a[$did]['r'] !== 'owner') { $note = $a[$did]['n'] . ' हटा दिए गए'; unset($a[$did]); update_option('eh_tgb_admins', $a, false); }
@@ -364,7 +369,7 @@ function eh_tgb_hook(WP_REST_Request $req) {
     elseif ($txt === '/hour') $send(eh_tgb_stats('hour'), eh_tgb_back_kb('r:hour'));
     elseif ($txt === '/all') $send(eh_tgb_stats('all'), eh_tgb_back_kb('r:all'));
     elseif ($txt === '/3284') $send(eh_tgb_3284(), eh_tgb_back_kb('p3284'));
-    elseif ($txt === '/mock' && $role === 'owner' && function_exists('eh_stm_counts')) { $m = eh_stm_counts(); $send('📝 <b>' . esc_html($m['round']['name']) . "</b>\n\n👤 पेज खोला (लॉग-इन)   " . $m['seen'] . "\n🟢 अभी पेपर दे रहे   " . $m['live'] . "\n▶️ पेपर शुरू किया   " . $m['started'] . "\n✅ सबमिट किया   " . $m['done'] . "\n🏆 टॉप स्कोर   " . $m['top'] . " / 360\n\n" . wp_date('d M, h:i:s A'), eh_tgb_back_kb('menu')); }
+    elseif ($txt === '/mock' && $role === 'owner' && function_exists('eh_stm_bot_view')) { [$mt, $mk] = eh_stm_bot_view(); $send($mt . "\n\n" . wp_date('d M, h:i:s A'), $mk); }
     elseif ($txt === '/glitch' && $role === 'owner') $send(eh_tgb_glitch(), eh_tgb_back_kb('menu'));
     elseif (preg_match('#^/fix\s+(\d+)$#', $txt, $fm) && $role === 'owner') { $x = eh_kfix((int) $fm[1]); $send($x ? '✅ #' . (int) $fm[1] . ' ठीक: ' . $x[0] . ' → <b>' . $x[1] . ' WPM</b>' : '⚠️ #' . (int) $fm[1] . ' नहीं मिला।', eh_tgb_back_kb('menu')); }
     elseif ($txt === '/fixall' && $role === 'owner') {

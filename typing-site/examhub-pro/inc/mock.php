@@ -16,8 +16,12 @@ function eh_stm_rounds() {
         ['id' => 't1', 'name' => 'Super TET Mock 2026 — ट्रायल', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 09:30', 'paper' => 'supertet-mock1'],
         ['id' => 'm1', 'name' => 'Super TET Mock 2026 — लाइव', 'login' => '2026-11-22 09:30', 'start' => '2026-11-22 10:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
     ];
-    return array_map(function ($r) use ($ts) {
+    $ctl = get_option('eh_stm_ctl', []); if (!is_array($ctl)) $ctl = [];
+    return array_map(function ($r) use ($ts, $ctl) {
         $r['login_ts'] = $ts($r['login']); $r['start_ts'] = $ts($r['start']); $r['end_ts'] = $ts($r['end']);
+        $c = $ctl[$r['id']] ?? [];
+        if (!empty($c['start'])) { $r['start_ts'] = min($r['start_ts'], (int) $c['start']); $r['login_ts'] = min($r['login_ts'], $r['start_ts']); }
+        if (!empty($c['end'])) $r['end_ts'] = min($r['end_ts'], (int) $c['end']);
         return $r;
     }, $list);
 }
@@ -239,4 +243,32 @@ function eh_stm_counts($r = null) {
         'done' => (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $t WHERE round = %s AND submitted > 0 AND counted = 1", $r['id'])),
         'top' => (int) $wpdb->get_var($wpdb->prepare("SELECT MAX(score) FROM $t WHERE round = %s AND submitted > 0", $r['id'])),
     ];
+}
+
+/* Owner controls from the Telegram bot: close the mock now, or open it now. */
+function eh_stm_close($id) {
+    global $wpdb; $now = time();
+    $ctl = get_option('eh_stm_ctl', []); if (!is_array($ctl)) $ctl = [];
+    $ctl[$id] = array_merge($ctl[$id] ?? [], ['end' => $now]); update_option('eh_stm_ctl', $ctl, false);
+    $wpdb->query($wpdb->prepare('UPDATE ' . eh_stm_table() . ' SET deadline = %d WHERE round = %s AND started > 0 AND submitted = 0 AND deadline > %d', $now, $id, $now));
+}
+function eh_stm_open($id) {
+    $ctl = get_option('eh_stm_ctl', []); if (!is_array($ctl)) $ctl = [];
+    $c = $ctl[$id] ?? []; unset($c['end']); $c['start'] = time(); $ctl[$id] = $c; update_option('eh_stm_ctl', $ctl, false);
+}
+function eh_stm_bot_view($confirm = false) {
+    $m = eh_stm_counts(); $r = $m['round']; $st = eh_stm_status($r);
+    $tz = new DateTimeZone('Asia/Kolkata'); $f = function ($t) use ($tz) { return (new DateTime('@' . $t))->setTimezone($tz)->format('d M, h:i A'); };
+    $sl = ['soon' => '⏳ अभी खुला नहीं', 'login' => '🟡 लॉग-इन खुला, पेपर जल्द', 'live' => '🟢 LIVE — चल रहा है', 'over' => '🔴 बंद'][$st];
+    $t = '📝 <b>' . esc_html($r['name']) . "</b>\n" . $sl . "\n" . $f($r['start_ts']) . ' → ' . $f($r['end_ts'])
+        . "\n\n👤 पेज खोला (लॉग-इन)   " . $m['seen'] . "\n🟢 अभी पेपर दे रहे   " . $m['live'] . "\n▶️ पेपर शुरू किया   " . $m['started'] . "\n✅ सबमिट किया   " . $m['done'] . "\n🏆 टॉप स्कोर   " . $m['top'] . ' / 360';
+    if ($confirm) {
+        $t .= "\n\n⚠️ <b>मॉक अभी बंद करना है?</b>\nजो पेपर दे रहे हैं उनका पेपर अपने आप सबमिट हो जाएगा और कोई नया शुरू नहीं कर पाएगा।";
+        return [$t, ['inline_keyboard' => [[['text' => '✅ हाँ, बंद करो', 'callback_data' => 'stm:close:go'], ['text' => '❌ नहीं', 'callback_data' => 'mock']]]]];
+    }
+    $kb = [];
+    if ($st === 'live') $kb[] = [['text' => '⏹ मॉक अभी बंद करो', 'callback_data' => 'stm:close']];
+    else $kb[] = [['text' => '▶️ मॉक अभी खोलो', 'callback_data' => 'stm:open']];
+    $kb[] = [['text' => '🔄 Refresh', 'callback_data' => 'mock'], ['text' => '☰ Menu', 'callback_data' => 'menu']];
+    return [$t, ['inline_keyboard' => $kb]];
 }
