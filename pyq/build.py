@@ -93,7 +93,10 @@ def sep_page(lines, big=None):
 def main():
     cfg = json.load(open(os.path.join(HERE, "sources.json")))
     entries, fails, hashes = [], [], set()
+    only = os.environ.get("ONLY", "")
     for sec in cfg["sections"]:
+        if only and not re.search(only, sec["name"], re.I):
+            continue
         items = [tuple(x) for x in sec.get("items", [])]
         for p in sec.get("pages", []):
             items += scrape(p)
@@ -138,7 +141,7 @@ def main():
             for pg in PdfReader(io.BytesIO(e["data"])).pages: w.add_page(pg)
         fn = os.path.join(OUT, f"UPPSC_PYQ_2015-2026_part{pi:02d}.pdf")
         try:
-            w.compress_identical_objects(remove_duplicates=True, remove_orphans=True)
+            w.compress_identical_objects(remove_duplicates=True, remove_unreferenced=True)
         except Exception as e:
             print("compress skipped", e)
         with open(fn, "wb") as f: w.write(f)

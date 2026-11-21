@@ -7,6 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       chat: {description: "Telegram chat id (empty = don't send)", required: false, default: "439069428"}
+      only: {description: "Only sections matching this regex (empty = all)", required: false, default: ""}
       max_mb: {description: "Max MB per part", required: false, default: "45"}
 
 jobs:
@@ -22,6 +23,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ inputs.chat }}
           MAX_MB: ${{ inputs.max_mb }}
+          ONLY: ${{ inputs.only }}
         run: python -u pyq/build.py
       - uses: actions/upload-artifact@v4
         if: always()
