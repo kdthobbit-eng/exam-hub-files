@@ -5,6 +5,7 @@ Env: TELEGRAM_BOT_TOKEN, CHAT_ID (optional: skip sending if empty), MAX_MB (defa
 """
 import hashlib, io, json, os, re, sys, time, urllib.parse
 import requests
+from concurrent.futures import ThreadPoolExecutor
 from bs4 import BeautifulSoup
 from pypdf import PdfReader, PdfWriter
 from reportlab.lib.pagesizes import A4
@@ -17,15 +18,24 @@ MAX = int(os.environ.get("MAX_MB", "45")) * 1024 * 1024
 S = requests.Session(); S.headers.update(UA)
 
 
-def get(url, tries=3):
+BAD = {}  # host -> consecutive failures
+
+
+def get(url, tries=2):
+    host = urllib.parse.urlparse(url).netloc
+    if BAD.get(host, 0) >= 4:
+        print("  skip (host down)", url); return None
     for i in range(tries):
         try:
-            r = S.get(url, timeout=120, allow_redirects=True)
+            r = requests.get(url, headers=UA, timeout=(15, 60), allow_redirects=True)
             if r.status_code == 200:
+                BAD[host] = 0
                 return r
+            print("  http", r.status_code, url)
         except Exception as e:
-            print("  retry", i, url, e)
-        time.sleep(3)
+            print("  retry", i, url, type(e).__name__)
+        time.sleep(2)
+    BAD[host] = BAD.get(host, 0) + 1
     return None
 
 
@@ -84,8 +94,9 @@ def main():
         items = [tuple(x) for x in sec.get("items", [])]
         for p in sec.get("pages", []):
             items += scrape(p)
-        for title, url, src in items:
-            r = get(url)
+        with ThreadPoolExecutor(8) as ex:
+            got = list(ex.map(lambda it: get(it[1]), items))
+        for (title, url, src), r in zip(items, got):
             data = r.content if r else b""
             if not data.startswith(b"%PDF"):
                 fails.append(f"{title} | {url}"); print("FAIL", title, url); continue
@@ -99,7 +110,7 @@ def main():
             except Exception as e:
                 fails.append(f"{title} | {url} | {e}"); continue
             entries.append({"sec": sec["name"], "title": title, "url": url, "src": src, "data": data, "pages": n})
-            print("OK", n, "pp", title)
+            print("OK", n, "pp", title, flush=True)
 
     # split into parts by size
     parts, cur, size = [], [], 0
