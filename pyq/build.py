@@ -22,26 +22,23 @@ BAD = {}  # host -> consecutive failures
 
 
 def tg_get(ref):
-    """ref = tg:@channel/msgid -> copy to CHAT_ID via bot, download (<=20MB), delete the copy."""
-    tok, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("CHAT_ID")
+    """ref = tg:<chat_id>/<msg_id> of a chat where the bot is admin. Forward inside that chat, download (<=20MB), delete copy."""
+    tok = os.environ.get("TELEGRAM_BOT_TOKEN")
     ch, mid = ref[3:].rsplit("/", 1)
     api = f"https://api.telegram.org/bot{tok}"
     try:
-        r = requests.post(f"{api}/copyMessage", data={"chat_id": chat, "from_chat_id": ch, "message_id": mid,
-                                                      "disable_notification": True}, timeout=60).json()
-        if not r.get("ok"):
-            print("  tg copy fail", ref, str(r)[:150]); return None
-        new_id = r["result"]["message_id"]
-        m = requests.post(f"{api}/forwardMessage", data={"chat_id": chat, "from_chat_id": chat, "message_id": new_id,
+        m = requests.post(f"{api}/forwardMessage", data={"chat_id": ch, "from_chat_id": ch, "message_id": mid,
                                                          "disable_notification": True}, timeout=60).json()
-        doc = (m.get("result") or {}).get("document")
-        for x in (new_id, (m.get("result") or {}).get("message_id")):
-            if x: requests.post(f"{api}/deleteMessage", data={"chat_id": chat, "message_id": x}, timeout=30)
+        if not m.get("ok"):
+            print("  tg fwd fail", ref, str(m)[:200]); return None
+        res = m["result"]
+        requests.post(f"{api}/deleteMessage", data={"chat_id": ch, "message_id": res["message_id"]}, timeout=30)
+        doc = res.get("document")
         if not doc:
-            print("  tg no doc", ref, str(m)[:150]); return None
+            print("  tg no doc", ref); return None
         f = requests.get(f"{api}/getFile", params={"file_id": doc["file_id"]}, timeout=60).json()
         if not f.get("ok"):
-            print("  tg getFile fail (maybe >20MB)", ref, doc.get("file_size")); return None
+            print("  tg getFile fail (file >20MB?)", ref, doc.get("file_size"), str(f)[:120]); return None
         c = requests.get(f"https://api.telegram.org/file/bot{tok}/{f['result']['file_path']}", timeout=300)
         class R: pass
         o = R(); o.content = c.content; o.status_code = 200; o.text = ""
