@@ -1,0 +1,31 @@
+name: UPPSC PYQ combined PDF
+
+# Downloads all papers listed in pyq/sources.json, joins them into one PDF
+# (split into <=45 MB parts for Telegram) with a source page before each paper,
+# and sends the parts to a Telegram chat with the Exam Hub bot.
+on:
+  workflow_dispatch:
+    inputs:
+      chat: {description: "Telegram chat id (empty = don't send)", required: false, default: "439069428"}
+      max_mb: {description: "Max MB per part", required: false, default: "45"}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -q requests beautifulsoup4 pypdf reportlab
+      - env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ inputs.chat }}
+          MAX_MB: ${{ inputs.max_mb }}
+        run: python pyq/build.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: uppsc-pyq
+          path: out/
+          retention-days: 30
