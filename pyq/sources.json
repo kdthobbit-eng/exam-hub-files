@@ -1,139 +1,517 @@
 {
-  "note": "UPPSC PYQ 2015-2026: Prelims + MCQ-based Mains only. 'pages' are scraped on the runner for .pdf links; 'items' are direct PDFs.",
-  "sections": [
+ "note": "UPPSC PYQ 2015-2026: Prelims + MCQ-based Mains only. 'pages' are scraped on the runner for .pdf links; 'items' are direct PDFs.",
+ "sections": [
+  {
+   "name": "PCS (Combined State / Upper Subordinate) Prelims - GS-I & CSAT",
+   "items": [
+    [
+     "PCS Pre 2015 GS-I",
+     "https://cdn-images.prepp.in/public/image/92cb18517ea2c03c667cf5aadc50ec24.pdf",
+     "prepp.in"
+    ],
+    [
+     "PCS Pre 2015 CSAT",
+     "https://cdn-images.prepp.in/public/image/71fff8ab98dfe90e9e95a1ddc3018e99.pdf",
+     "prepp.in"
+    ],
+    [
+     "PCS Pre 2016 GS-I",
+     "https://cdn-images.prepp.in/public/image/62c120fb3de5f080ff9458f0bc1ec41d.pdf",
+     "prepp.in"
+    ],
+    [
+     "PCS Pre 2016 CSAT",
+     "https://cdn-images.prepp.in/public/image/9395f1eaec8455eb8a3fa87333ddaf2b.pdf",
+     "prepp.in"
+    ],
+    [
+     "PCS Pre 2017 GS-I",
+     "https://cdn-images.prepp.in/public/image/0717a870f04eadc624d119a100e4c8fc.pdf",
+     "prepp.in"
+    ],
+    [
+     "PCS Pre 2017 CSAT",
+     "https://cdn-images.prepp.in/public/image/3f5286cfbd867f05fb8bfee2931547d4.pdf",
+     "prepp.in"
+    ],
+    [
+     "PCS Pre 2018 GS-I",
+     "https://cdn-images.prepp.in/public/image/9ab1ca9fa32d54efc2455e6e129c14f4.pdf",
+     "prepp.in"
+    ],
+    [
+     "PCS Pre 2018 CSAT",
+     "https://cdn-images.prepp.in/public/image/6ad125cc50a7900fe78757b79a08ec1f.pdf",
+     "prepp.in"
+    ],
+    [
+     "PCS Pre 2019 GS-I",
+     "https://cdn-images.prepp.in/public/image/ac5ee3f6138da53d94bcb0890d4d8f02.pdf",
+     "prepp.in"
+    ],
+    [
+     "PCS Pre 2019 CSAT",
+     "https://cdn-images.prepp.in/public/image/0a5d3b461cd98945138905a80cc443cc.pdf",
+     "prepp.in"
+    ],
+    [
+     "PCS Pre 2020 GS-I",
+     "https://cdn-images.prepp.in/public/image/742fb42b728b94873cd3cdb623ab7cd1.pdf",
+     "prepp.in"
+    ],
+    [
+     "PCS Pre 2020 CSAT",
+     "https://cdn-images.prepp.in/public/image/uppsc-prelims-csat-question-paper-pdf-oct-11-2020-1759926312.pdf",
+     "prepp.in"
+    ]
+   ],
+   "pages": [
     {
-      "name": "PCS (Combined State / Upper Subordinate) Prelims - GS-I & CSAT",
-      "items": [
-        ["PCS Pre 2015 GS-I", "https://cdn-images.prepp.in/public/image/92cb18517ea2c03c667cf5aadc50ec24.pdf", "prepp.in"],
-        ["PCS Pre 2015 CSAT", "https://cdn-images.prepp.in/public/image/71fff8ab98dfe90e9e95a1ddc3018e99.pdf", "prepp.in"],
-        ["PCS Pre 2016 GS-I", "https://cdn-images.prepp.in/public/image/62c120fb3de5f080ff9458f0bc1ec41d.pdf", "prepp.in"],
-        ["PCS Pre 2016 CSAT", "https://cdn-images.prepp.in/public/image/9395f1eaec8455eb8a3fa87333ddaf2b.pdf", "prepp.in"],
-        ["PCS Pre 2017 GS-I", "https://cdn-images.prepp.in/public/image/0717a870f04eadc624d119a100e4c8fc.pdf", "prepp.in"],
-        ["PCS Pre 2017 CSAT", "https://cdn-images.prepp.in/public/image/3f5286cfbd867f05fb8bfee2931547d4.pdf", "prepp.in"],
-        ["PCS Pre 2018 GS-I", "https://cdn-images.prepp.in/public/image/9ab1ca9fa32d54efc2455e6e129c14f4.pdf", "prepp.in"],
-        ["PCS Pre 2018 CSAT", "https://cdn-images.prepp.in/public/image/6ad125cc50a7900fe78757b79a08ec1f.pdf", "prepp.in"],
-        ["PCS Pre 2019 GS-I", "https://cdn-images.prepp.in/public/image/ac5ee3f6138da53d94bcb0890d4d8f02.pdf", "prepp.in"],
-        ["PCS Pre 2019 CSAT", "https://cdn-images.prepp.in/public/image/0a5d3b461cd98945138905a80cc443cc.pdf", "prepp.in"],
-        ["PCS Pre 2020 GS-I", "https://cdn-images.prepp.in/public/image/742fb42b728b94873cd3cdb623ab7cd1.pdf", "prepp.in"],
-        ["PCS Pre 2020 CSAT", "https://cdn-images.prepp.in/public/image/uppsc-prelims-csat-question-paper-pdf-oct-11-2020-1759926312.pdf", "prepp.in"],
-        ["PCS Pre 2021 GS-I", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/10/13093039/UPPSC_2021_GS_PAPER_-11.pdf", "adda247.com"],
-        ["PCS Pre 2021 CSAT", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/10/13124016/UPPSC_2021_GS_PAPER_-2-1.pdf", "adda247.com"],
-        ["PCS Pre 2022 GS-I", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/10/13093026/UPPSC_PRE_2022_GS_Paper_-_1.pdf", "adda247.com"],
-        ["PCS Pre 2022 CSAT", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/10/13093028/UPPSC_PRE_2022_GS_Paper_-_2.pdf", "adda247.com"],
-        ["PCS Pre 2023 GS-I", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/10/13093023/UPPCS-PRELIMS-GS-2023-PREVIOUS-YEARS-QUESTION-PAPER-1.pdf", "adda247.com"],
-        ["PCS Pre 2023 CSAT", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/10/13093022/UPPCS-PRELIMS-GS-2023-PREVIOUS-YEARS-QUESTION-PAPER-2.pdf", "adda247.com"],
-        ["PCS Pre 2024 GS-I", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/10/13120133/UPPCS-PRELIMS-GS-2024-PREVIOUS-YEARS-QUESTION-PAPER-1.pdf", "adda247.com"],
-        ["PCS Pre 2024 CSAT", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/10/13120125/UPPSC_CSAT_Paper-2_2024.pdf", "adda247.com"],
-        ["PCS Pre 2025 GS-I", "https://www.adda247.com/jobs/wp-content/uploads/2026/03/29130107/UP-Pre-Paper-1.pdf", "adda247.com"],
-        ["PCS Pre 2025 CSAT", "https://www.adda247.com/jobs/wp-content/uploads/2026/03/29130055/UPPCS-Pre-Paper-II.pdf", "adda247.com"]
-      ]
+     "url": "https://prepp.in/uppsc-exam/previous-year-question-paper",
+     "source": "prepp.in",
+     "include": "Prelims 20(2[1-4])",
+     "exclude": "answer-key"
     },
     {
-      "name": "RO/ARO (Samiksha Adhikari) - Prelims GS & Hindi, Mains GS (objective)",
-      "items": [
-        ["RO/ARO 2016 Pre GS", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144726/uppsc-pre-exam-ro-aro-2016-gs-Paper.pdf", "adda247.com"],
-        ["RO/ARO 2016 Pre General Hindi", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144723/uppsc-pre-exam-ro-aro-2016-general-hindi-Paper.pdf", "adda247.com"],
-        ["RO/ARO 2017 Pre GS (held 20 Sep 2020)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144641/UPPSC-RO_ARO-General-Studies-Official-Paper-I-Held-On_-20-Sep-2020.pdf", "adda247.com"],
-        ["RO/ARO 2017 Pre General Hindi (held 20 Sep 2020)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144634/UPPSC-RO_ARO-General-Hindi-Official-Paper-II-Held-on_-20-Sep-2020.pdf", "adda247.com"],
-        ["RO/ARO 2021 Pre GS", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144537/UPPSC-ROARO-General-Studies-Paper-2021.pdf", "adda247.com"],
-        ["RO/ARO 2021 Pre General Hindi (5 Dec 2021)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144533/UPPSC-RO-ARO-5-Dec-2021-Hindi-Paper.pdf", "adda247.com"],
-        ["RO/ARO 2023 Pre GS (11 Feb 2024, cancelled)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144134/UPPSC-RO-ARO-General-Studies-Official-Paper-Held-On_-11-Feb-2024-Cancelled.pdf", "adda247.com"],
-        ["RO/ARO 2023 Pre General Hindi (11 Feb 2024, cancelled)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144129/UPPSC-RO-ARO-General-Hindi-Official-Paper-Held-On_-11-Feb-2024-Cancelled.pdf", "adda247.com"],
-        ["RO/ARO 2023 Pre (re-exam 27 Jul 2025)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144119/UPPSC-RO-ARO-2023-Preliminary-Exam-Official-Paper-Held-On-27-Jul-2025-Re-exam.pdf", "adda247.com"],
-        ["RO/ARO 2023 Mains Paper-1 GS (2 Feb 2026)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144123/UPPSC-RO-ARO-Mains-Question-Paper-1-2023-held-on-2nd-Feb-2026.pdf", "adda247.com"]
-      ]
-    },
-    {
-      "name": "UPPSC official site - all papers of 2025 exams (Prelims / objective)",
-      "pages": [
-        {"url": "https://uppsc.up.nic.in/OuterPages/PreQuesPapers.aspx?ID=PrevQues", "source": "uppsc.up.nic.in (official)",
-         "exclude": "PCS\\) MAINS|MAINS EXAMINATION-?2025 \\((COMMERCE|SANSKRIT|SCIENCE)\\)"}
-      ]
-    },
-    {
-      "name": "LT Grade (Assistant Teacher) 2018 & 2025 Prelims",
-      "items": [
-        ["LT 2018 Hindi", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110008/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-HINDI-Paper.pdf", "adda247.com"],
-        ["LT 2018 English", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110005/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-ENGLISH-Paper.pdf", "adda247.com"],
-        ["LT 2018 Sanskrit", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110023/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-SANSKRIT-Paper.pdf", "adda247.com"],
-        ["LT 2018 Maths", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110012/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-MATHEMATICS-Paper.pdf", "adda247.com"],
-        ["LT 2018 Science", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110028/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-SCIENCE-Paper.pdf", "adda247.com"],
-        ["LT 2018 Biology", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20105953/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-BIOLOGY-Paper.pdf", "adda247.com"],
-        ["LT 2018 Social Science", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20105944/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-SOCIAL-SCIENCE-Paper.pdf", "adda247.com"],
-        ["LT 2018 Civics", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110757/UP-LT-Grade-Teacher-2018-Civics-Previous-Year-Question-Paper.pdf", "adda247.com"],
-        ["LT 2018 Geography", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110758/UP-LT-Grade-Teacher-2018-Geography-Previous-Year-Question-Paper.pdf", "adda247.com"],
-        ["LT 2018 Commerce", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20105957/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-COMMERCE-Paper.pdf", "adda247.com"],
-        ["LT 2018 Computer", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110001/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-COMPUTER-Paper.pdf", "adda247.com"],
-        ["LT 2018 Arts", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20105948/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-ARTS-Paper.pdf", "adda247.com"],
-        ["LT 2018 Home Science", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110039/ASSISTANT-TEACHER-TRAINED-GRADUATE-EXAM-2018-HOME-SCIENCE-Paper.pdf", "adda247.com"],
-        ["LT 2018 Music", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110016/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-MUSIC-Paper.pdf", "adda247.com"],
-        ["LT 2018 Physical Education", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110020/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-PHYSICAL-EDUCATION-Paper.pdf", "adda247.com"],
-        ["LT 2018 Urdu", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110031/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-URDU-Paper.pdf", "adda247.com"],
-        ["LT 2018 Agriculture", "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110034/ASSISTANT-TEACHER-TRAINED-GRADUATE-EXAM-2018-AGRICULTURE-Paper.pdf", "adda247.com"],
-        ["LT 2025 Hindi (6 Dec 2025)", "https://www.adda247.com/jobs/wp-content/uploads/2025/12/08111657/UPPSC-LT-Grade-Prelims-Hindi-Question-Paper-Held-on-6-Dec-2025.pdf", "adda247.com"],
-        ["LT 2025 Maths (6 Dec 2025)", "https://www.adda247.com/jobs/wp-content/uploads/2025/12/08111637/UPPSC-LT-Grade-Prelims-Math-Question-Paper-Held-on-6-Dec-2025.pdf", "adda247.com"],
-        ["LT 2025 Science (7 Dec 2025)", "https://www.adda247.com/jobs/wp-content/uploads/2025/12/08111654/UPPSC-LT-Grade-2025-Science-Pre-Question-Paper-Held-on-7-Dec-2025.pdf", "adda247.com"],
-        ["LT 2025 Sanskrit (7 Dec 2025)", "https://www.adda247.com/jobs/wp-content/uploads/2025/12/08111643/UPPSC-LT-Grade-Sanskrit-Prelims-Question-Paper-Held-on-7-Dec-2025.pdf", "adda247.com"],
-        ["LT 2025 Home Science GS part (21 Dec 2025)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/12/21125927/UP-LT-Grade-Teacher-Home-Science-GS-Question-Paper-21-Dec-2025.pdf", "adda247.com"],
-        ["LT 2025 Home Science subject (21 Dec 2025)", "https://www.adda247.com/jobs/wp-content/uploads/2025/12/21144523/UPPSC.pdf", "adda247.com"],
-        ["LT 2025 Commerce (21 Dec 2025)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/12/22131238/UPPSC-LT-Grade-2025-Commerce-Question-Paper-21-Dec-2025.pdf", "adda247.com"],
-        ["LT 2025 Social Science (17 Jan 2026)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/02/11160137/UPPSC-LT-Grade-Assistant-Teacher-Social-Science-Official-Paper-Held-On_-17-Jan-2026-Shift-1.pdf", "adda247.com"],
-        ["LT 2025 Biology (17 Jan 2026)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/02/11160128/UPPSC-LT-Grade-Assistant-Teacher-Biology-Official-Paper-Held-On_-17-Jan-2026-Shift-2.pdf", "adda247.com"],
-        ["LT 2025 English (18 Jan 2026)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/02/11160132/UPPSC-LT-Grade-Assistant-Teacher-English-Official-Paper-Held-On_-18-Jan-2026-Shift-1.pdf", "adda247.com"],
-        ["LT 2025 Agriculture (24 Jan 2026)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/02/11160141/UPPSC-LT-Grade-Assistant-Teacher-Agriculture-Horticulture-Official-Paper-Held-On_-24-Jan-2026-Shift-2.pdf", "adda247.com"],
-        ["LT 2025 Computer Science (5 Apr 2026)", "https://www.adda247.com/jobs/wp-content/uploads/2026/04/05143251/UP-LT-Computer-Science-Paper.pdf", "adda247.com"]
-      ]
-    },
-    {
-      "name": "GIC Lecturer Prelims 2015, 2017, 2021",
-      "items": [
-        ["GIC 2015 General Studies (4 Oct 2015)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183749/UPPSC-GIC-General-Studies-Official-Paper-Held-On_-04-Oct-2015.pdf", "adda247.com"],
-        ["GIC 2015 Maths (15 Sep 2015)", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183808/UPPSC-GIC-Maths-Official-Paper-Held-On_-15-Sep-2015.pdf", "adda247.com"],
-        ["GIC 2017 General Studies", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183751/UPPSC-GIC-General-Studies-Official-Paper-Held-On_-2017.pdf", "adda247.com"],
-        ["GIC 2017 Hindi", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183759/UPPSC-GIC-Hindi-Official-Paper-Held-On_-2017.pdf", "adda247.com"],
-        ["GIC 2017 English", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183745/UPPSC-GIC-English-Official-Paper-Held-On_-2017.pdf", "adda247.com"],
-        ["GIC 2017 Sanskrit", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183809/UPPSC-GIC-Sanskrit-Official-Paper-Held-On_-2017.pdf", "adda247.com"],
-        ["GIC 2017 History", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183802/UPPSC-GIC-History-Official-Paper-Held-On_-2017.pdf", "adda247.com"],
-        ["GIC 2017 Civics", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183739/UPPSC-GIC-Civics-Official-Paper-Held-On_-2017.pdf", "adda247.com"],
-        ["GIC 2017 Economics", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183742/UPPSC-GIC-Economics-Official-Paper-Held-On_-2017.pdf", "adda247.com"],
-        ["GIC 2017 Sociology", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183814/UPPSC-GIC-Sociology-Official-Paper-Held-On_-2017.pdf", "adda247.com"],
-        ["GIC 2021 General Studies", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183756/UPPSC-GIC-General-Studies-Official-Paper-Held-On_-2021.pdf", "adda247.com"],
-        ["GIC 2021 Hindi", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183800/UPPSC-GIC-Hindi-Official-Paper-Held-On_-2021.pdf", "adda247.com"],
-        ["GIC 2021 English", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183746/UPPSC-GIC-English-Official-Paper-Held-On_-2021.pdf", "adda247.com"],
-        ["GIC 2021 Sanskrit", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183811/UPPSC-GIC-Sanskrit-Official-Paper-Held-On_-2021.pdf", "adda247.com"],
-        ["GIC 2021 History", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183805/UPPSC-GIC-History-Official-Paper-Held-On_-2021.pdf", "adda247.com"],
-        ["GIC 2021 Geography", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183757/UPPSC-GIC-Geography-Official-Paper-Held-On_-2021.pdf", "adda247.com"],
-        ["GIC 2021 Civics", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183740/UPPSC-GIC-Civics-Official-Paper-Held-On_-2021.pdf", "adda247.com"],
-        ["GIC 2021 Economics", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183744/UPPSC-GIC-Economics-Official-Paper-Held-On_-2021.pdf", "adda247.com"],
-        ["GIC 2021 Sociology", "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183815/UPPSC-GIC-Sociology-Official-Paper-Held-On_-2021.pdf", "adda247.com"]
-      ]
-    },
-    {
-      "name": "Polytechnic Lecturer 2021-22",
-      "items": [
-        ["Poly Lecturer Mechanical Paper I (22 Nov 2021)", "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04134035/UPPSC-Polytechnic-Lecturer-Mechanical-22-Nov-2021-Official-Paper-I-English.pdf", "adda247.com"],
-        ["Poly Lecturer Mechanical Paper II (22 Nov 2021)", "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04134154/UPPSC-Polytechnic-Lecturer-Mechanical-22-Nov-2021-Official-Paper-II-English.pdf", "adda247.com"],
-        ["Poly Lecturer Mechanical Paper I (23 Dec 2021)", "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04133057/UPPSC-Lecturer-Mechanical-2021-Paper-I-23-Dec-2021-English-1.pdf", "adda247.com"],
-        ["Poly Lecturer Civil Paper I (22 Dec 2021)", "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04133240/UPPSC-Polytechnic-Lecturer-Civil-22-Dec-2021-Official-Paper-I-English.pdf", "adda247.com"],
-        ["Poly Lecturer Civil Paper II (23 Nov 2021)", "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04133505/UPPSC-Polytechnic-Lecturer-Civil-23-Nov-2021-Official-Paper-II-English.pdf", "adda247.com"],
-        ["Poly Lecturer Electrical Paper I (22 Nov 2021)", "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04133551/UPPSC-Polytechnic-Lecturer-Electrical-22-Nov-2021-Official-Paper-I-English.pdf", "adda247.com"],
-        ["Poly Lecturer Electrical Paper II (22 Nov 2021)", "https://www.adda247.com/jobs/wp-content/uploads/2025/12/04104839/UPPSC-Polytechnic-Lecturer-Electrical-22-Nov-2021-Official-Paper-II-English-1.pdf", "adda247.com"],
-        ["Poly Lecturer Physics Paper II (22 Mar 2022)", "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04133202/UPPSC-Polytechnic-Lecturer-Physics-Official-Paper-II-Held-On_-22-Mar-2022.pdf", "adda247.com"]
-      ]
-    },
-    {
-      "name": "BEO, APO, AE, Staff Nurse and other exams (scraped from public pages)",
-      "pages": [
-        {"url": "https://www.adda247.com/upsc-exam/uppsc-beo-previous-year-question-paper", "source": "adda247.com", "include": "20(1[5-9]|2[0-6])", "exclude": "mains.*(hindi|essay)"},
-        {"url": "https://www.careerpower.in/uppsc-beo-previous-year-question-paper.html", "source": "careerpower.in", "include": "2020", "exclude": "hindi|essay"},
-        {"url": "https://www.adda247.com/exams/up/uppsc-apo-previous-year-question-papers/", "source": "adda247.com", "include": "20(1[5-9]|2[0-6])"},
-        {"url": "https://www.adda247.com/engineering-jobs/uppsc-ae-previous-year-paper", "source": "adda247.com", "include": "20(1[5-9]|2[0-6])"},
-        {"url": "https://www.adda247.com/engineering-jobs/uppsc-ae-electrical-previous-year-paper-download-now/", "source": "adda247.com", "include": "20(1[5-9]|2[0-6])"},
-        {"url": "https://www.adda247.com/engineering-jobs/uppsc-ae-mechanical-engineering-previous-year-papers-checkout-now", "source": "adda247.com", "include": "20(1[5-9]|2[0-6])"},
-        {"url": "https://prepp.in/uppsc-staff-nurse-exam/previous-year-question-paper", "source": "prepp.in", "exclude": "answer-key"},
-        {"url": "https://prepp.in/uppsc-beo-exam/question-paper", "source": "prepp.in", "exclude": "answer-key"},
-        {"url": "https://www.pw.live/judiciary/exams/up-pcs-j-question-paper", "source": "pw.live", "include": "20(1[5-9]|2[0-6])"}
-      ]
+     "url": "https://www.careerpower.in/uppsc-question-paper.html",
+     "source": "careerpower.in",
+     "include": "UPPSC 2025 (General Studies|CSAT)"
     }
-  ]
+   ]
+  },
+  {
+   "name": "RO/ARO (Samiksha Adhikari) - Prelims GS & Hindi, Mains GS (objective)",
+   "items": [
+    [
+     "RO/ARO 2016 Pre GS",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144726/uppsc-pre-exam-ro-aro-2016-gs-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "RO/ARO 2016 Pre General Hindi",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144723/uppsc-pre-exam-ro-aro-2016-general-hindi-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "RO/ARO 2017 Pre GS (held 20 Sep 2020)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144641/UPPSC-RO_ARO-General-Studies-Official-Paper-I-Held-On_-20-Sep-2020.pdf",
+     "adda247.com"
+    ],
+    [
+     "RO/ARO 2017 Pre General Hindi (held 20 Sep 2020)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144634/UPPSC-RO_ARO-General-Hindi-Official-Paper-II-Held-on_-20-Sep-2020.pdf",
+     "adda247.com"
+    ],
+    [
+     "RO/ARO 2021 Pre GS",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144537/UPPSC-ROARO-General-Studies-Paper-2021.pdf",
+     "adda247.com"
+    ],
+    [
+     "RO/ARO 2021 Pre General Hindi (5 Dec 2021)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144533/UPPSC-RO-ARO-5-Dec-2021-Hindi-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "RO/ARO 2023 Pre GS (11 Feb 2024, cancelled)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144134/UPPSC-RO-ARO-General-Studies-Official-Paper-Held-On_-11-Feb-2024-Cancelled.pdf",
+     "adda247.com"
+    ],
+    [
+     "RO/ARO 2023 Pre General Hindi (11 Feb 2024, cancelled)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144129/UPPSC-RO-ARO-General-Hindi-Official-Paper-Held-On_-11-Feb-2024-Cancelled.pdf",
+     "adda247.com"
+    ],
+    [
+     "RO/ARO 2023 Pre (re-exam 27 Jul 2025)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144119/UPPSC-RO-ARO-2023-Preliminary-Exam-Official-Paper-Held-On-27-Jul-2025-Re-exam.pdf",
+     "adda247.com"
+    ],
+    [
+     "RO/ARO 2023 Mains Paper-1 GS (2 Feb 2026)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/10/29144123/UPPSC-RO-ARO-Mains-Question-Paper-1-2023-held-on-2nd-Feb-2026.pdf",
+     "adda247.com"
+    ]
+   ],
+   "pages": [
+    {
+     "url": "https://prepp.in/uppsc-ro-aro-exam/previous-year-paper",
+     "source": "prepp.in",
+     "exclude": "answer-key"
+    }
+   ]
+  },
+  {
+   "name": "UPPSC official site - all papers of 2025 exams (Prelims / objective)",
+   "pages": [
+    {
+     "url": "https://uppsc.up.nic.in/OuterPages/PreQuesPapers.aspx?ID=PrevQues",
+     "source": "uppsc.up.nic.in (official)",
+     "exclude": "PCS\\) MAINS|MAINS EXAMINATION-?2025 \\((COMMERCE|SANSKRIT|SCIENCE)\\)"
+    }
+   ]
+  },
+  {
+   "name": "LT Grade (Assistant Teacher) 2018 & 2025 Prelims",
+   "items": [
+    [
+     "LT 2018 Hindi",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110008/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-HINDI-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 English",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110005/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-ENGLISH-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Sanskrit",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110023/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-SANSKRIT-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Maths",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110012/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-MATHEMATICS-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Science",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110028/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-SCIENCE-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Biology",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20105953/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-BIOLOGY-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Social Science",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20105944/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-SOCIAL-SCIENCE-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Civics",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110757/UP-LT-Grade-Teacher-2018-Civics-Previous-Year-Question-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Geography",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110758/UP-LT-Grade-Teacher-2018-Geography-Previous-Year-Question-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Commerce",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20105957/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-COMMERCE-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Computer",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110001/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-COMPUTER-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Arts",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20105948/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-ARTS-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Home Science",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110039/ASSISTANT-TEACHER-TRAINED-GRADUATE-EXAM-2018-HOME-SCIENCE-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Music",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110016/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-MUSIC-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Physical Education",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110020/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-PHYSICAL-EDUCATION-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Urdu",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110031/ASSISTANT-TEACHER-TRAINED-GRADUATE-2018-URDU-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2018 Agriculture",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/09/20110034/ASSISTANT-TEACHER-TRAINED-GRADUATE-EXAM-2018-AGRICULTURE-Paper.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 Hindi (6 Dec 2025)",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/12/08111657/UPPSC-LT-Grade-Prelims-Hindi-Question-Paper-Held-on-6-Dec-2025.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 Maths (6 Dec 2025)",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/12/08111637/UPPSC-LT-Grade-Prelims-Math-Question-Paper-Held-on-6-Dec-2025.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 Science (7 Dec 2025)",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/12/08111654/UPPSC-LT-Grade-2025-Science-Pre-Question-Paper-Held-on-7-Dec-2025.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 Sanskrit (7 Dec 2025)",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/12/08111643/UPPSC-LT-Grade-Sanskrit-Prelims-Question-Paper-Held-on-7-Dec-2025.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 Home Science GS part (21 Dec 2025)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/12/21125927/UP-LT-Grade-Teacher-Home-Science-GS-Question-Paper-21-Dec-2025.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 Home Science subject (21 Dec 2025)",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/12/21144523/UPPSC.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 Commerce (21 Dec 2025)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/12/22131238/UPPSC-LT-Grade-2025-Commerce-Question-Paper-21-Dec-2025.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 Social Science (17 Jan 2026)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/02/11160137/UPPSC-LT-Grade-Assistant-Teacher-Social-Science-Official-Paper-Held-On_-17-Jan-2026-Shift-1.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 Biology (17 Jan 2026)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/02/11160128/UPPSC-LT-Grade-Assistant-Teacher-Biology-Official-Paper-Held-On_-17-Jan-2026-Shift-2.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 English (18 Jan 2026)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/02/11160132/UPPSC-LT-Grade-Assistant-Teacher-English-Official-Paper-Held-On_-18-Jan-2026-Shift-1.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 Agriculture (24 Jan 2026)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2026/02/11160141/UPPSC-LT-Grade-Assistant-Teacher-Agriculture-Horticulture-Official-Paper-Held-On_-24-Jan-2026-Shift-2.pdf",
+     "adda247.com"
+    ],
+    [
+     "LT 2025 Computer Science (5 Apr 2026)",
+     "https://www.adda247.com/jobs/wp-content/uploads/2026/04/05143251/UP-LT-Computer-Science-Paper.pdf",
+     "adda247.com"
+    ]
+   ],
+   "pages": [
+    {
+     "url": "https://www.careerpower.in/up-lt-grade-teacher-previous-year-question-papers.html",
+     "source": "careerpower.in",
+     "include": "2018|2025|2026"
+    }
+   ]
+  },
+  {
+   "name": "GIC Lecturer Prelims 2015, 2017, 2021",
+   "items": [
+    [
+     "GIC 2015 General Studies (4 Oct 2015)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183749/UPPSC-GIC-General-Studies-Official-Paper-Held-On_-04-Oct-2015.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2015 Maths (15 Sep 2015)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183808/UPPSC-GIC-Maths-Official-Paper-Held-On_-15-Sep-2015.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2017 General Studies",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183751/UPPSC-GIC-General-Studies-Official-Paper-Held-On_-2017.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2017 Hindi",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183759/UPPSC-GIC-Hindi-Official-Paper-Held-On_-2017.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2017 English",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183745/UPPSC-GIC-English-Official-Paper-Held-On_-2017.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2017 Sanskrit",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183809/UPPSC-GIC-Sanskrit-Official-Paper-Held-On_-2017.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2017 History",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183802/UPPSC-GIC-History-Official-Paper-Held-On_-2017.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2017 Civics",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183739/UPPSC-GIC-Civics-Official-Paper-Held-On_-2017.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2017 Economics",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183742/UPPSC-GIC-Economics-Official-Paper-Held-On_-2017.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2017 Sociology",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183814/UPPSC-GIC-Sociology-Official-Paper-Held-On_-2017.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2021 General Studies",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183756/UPPSC-GIC-General-Studies-Official-Paper-Held-On_-2021.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2021 Hindi",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183800/UPPSC-GIC-Hindi-Official-Paper-Held-On_-2021.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2021 English",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183746/UPPSC-GIC-English-Official-Paper-Held-On_-2021.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2021 Sanskrit",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183811/UPPSC-GIC-Sanskrit-Official-Paper-Held-On_-2021.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2021 History",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183805/UPPSC-GIC-History-Official-Paper-Held-On_-2021.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2021 Geography",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183757/UPPSC-GIC-Geography-Official-Paper-Held-On_-2021.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2021 Civics",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183740/UPPSC-GIC-Civics-Official-Paper-Held-On_-2021.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2021 Economics",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183744/UPPSC-GIC-Economics-Official-Paper-Held-On_-2021.pdf",
+     "adda247.com"
+    ],
+    [
+     "GIC 2021 Sociology",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/22/2025/08/21183815/UPPSC-GIC-Sociology-Official-Paper-Held-On_-2021.pdf",
+     "adda247.com"
+    ]
+   ],
+   "pages": [
+    {
+     "url": "https://prepp.in/uppsc-gic-lecturer-exam/previous-year-question-paper",
+     "source": "prepp.in",
+     "include": "20(1[5-9]|2[0-6])",
+     "exclude": "answer-key|essay"
+    }
+   ]
+  },
+  {
+   "name": "Polytechnic Lecturer 2021-22",
+   "items": [
+    [
+     "Poly Lecturer Mechanical Paper I (22 Nov 2021)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04134035/UPPSC-Polytechnic-Lecturer-Mechanical-22-Nov-2021-Official-Paper-I-English.pdf",
+     "adda247.com"
+    ],
+    [
+     "Poly Lecturer Mechanical Paper II (22 Nov 2021)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04134154/UPPSC-Polytechnic-Lecturer-Mechanical-22-Nov-2021-Official-Paper-II-English.pdf",
+     "adda247.com"
+    ],
+    [
+     "Poly Lecturer Mechanical Paper I (23 Dec 2021)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04133057/UPPSC-Lecturer-Mechanical-2021-Paper-I-23-Dec-2021-English-1.pdf",
+     "adda247.com"
+    ],
+    [
+     "Poly Lecturer Civil Paper I (22 Dec 2021)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04133240/UPPSC-Polytechnic-Lecturer-Civil-22-Dec-2021-Official-Paper-I-English.pdf",
+     "adda247.com"
+    ],
+    [
+     "Poly Lecturer Civil Paper II (23 Nov 2021)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04133505/UPPSC-Polytechnic-Lecturer-Civil-23-Nov-2021-Official-Paper-II-English.pdf",
+     "adda247.com"
+    ],
+    [
+     "Poly Lecturer Electrical Paper I (22 Nov 2021)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04133551/UPPSC-Polytechnic-Lecturer-Electrical-22-Nov-2021-Official-Paper-I-English.pdf",
+     "adda247.com"
+    ],
+    [
+     "Poly Lecturer Electrical Paper II (22 Nov 2021)",
+     "https://www.adda247.com/jobs/wp-content/uploads/2025/12/04104839/UPPSC-Polytechnic-Lecturer-Electrical-22-Nov-2021-Official-Paper-II-English-1.pdf",
+     "adda247.com"
+    ],
+    [
+     "Poly Lecturer Physics Paper II (22 Mar 2022)",
+     "https://www.adda247.com/jobs/wp-content/uploads/sites/12/2025/12/04133202/UPPSC-Polytechnic-Lecturer-Physics-Official-Paper-II-Held-On_-22-Mar-2022.pdf",
+     "adda247.com"
+    ]
+   ]
+  },
+  {
+   "name": "BEO, APO, AE, Staff Nurse and other exams (scraped from public pages)",
+   "pages": [
+    {
+     "url": "https://www.adda247.com/upsc-exam/uppsc-beo-previous-year-question-paper",
+     "source": "adda247.com",
+     "include": "20(1[5-9]|2[0-6])",
+     "exclude": "mains.*(hindi|essay)"
+    },
+    {
+     "url": "https://www.careerpower.in/uppsc-beo-previous-year-question-paper.html",
+     "source": "careerpower.in",
+     "include": "2020",
+     "exclude": "hindi|essay"
+    },
+    {
+     "url": "https://www.adda247.com/exams/up/uppsc-apo-previous-year-question-papers/",
+     "source": "adda247.com",
+     "include": "20(1[5-9]|2[0-6])"
+    },
+    {
+     "url": "https://www.adda247.com/engineering-jobs/uppsc-ae-previous-year-paper",
+     "source": "adda247.com",
+     "include": "20(1[5-9]|2[0-6])"
+    },
+    {
+     "url": "https://www.adda247.com/engineering-jobs/uppsc-ae-electrical-previous-year-paper-download-now/",
+     "source": "adda247.com",
+     "include": "20(1[5-9]|2[0-6])"
+    },
+    {
+     "url": "https://www.adda247.com/engineering-jobs/uppsc-ae-mechanical-engineering-previous-year-papers-checkout-now",
+     "source": "adda247.com",
+     "include": "20(1[5-9]|2[0-6])"
+    },
+    {
+     "url": "https://prepp.in/uppsc-staff-nurse-exam/previous-year-question-paper",
+     "source": "prepp.in",
+     "exclude": "answer-key"
+    },
+    {
+     "url": "https://prepp.in/uppsc-beo-exam/question-paper",
+     "source": "prepp.in",
+     "exclude": "answer-key"
+    },
+    {
+     "url": "https://www.pw.live/judiciary/exams/up-pcs-j-question-paper",
+     "source": "pw.live",
+     "include": "20(1[5-9]|2[0-6])"
+    }
+   ]
+  }
+ ]
 }

@@ -27,7 +27,10 @@ def get(url, tries=2):
         print("  skip (host down)", url); return None
     for i in range(tries):
         try:
-            r = requests.get(url, headers=UA, timeout=(15, 60), allow_redirects=True)
+            hdr = dict(UA)
+            if "uppsc.up.nic.in" in host:
+                hdr["Referer"] = "https://uppsc.up.nic.in/OuterPages/PreQuesPapers.aspx?ID=PrevQues"
+            r = S.get(url, headers=hdr, timeout=(15, 60), allow_redirects=True)
             if r.status_code == 200:
                 BAD[host] = 0
                 return r
@@ -134,7 +137,10 @@ def main():
             for pg in sep_page([e["sec"], "", "Source: " + e["src"], e["url"]], e["title"]).pages: w.add_page(pg)
             for pg in PdfReader(io.BytesIO(e["data"])).pages: w.add_page(pg)
         fn = os.path.join(OUT, f"UPPSC_PYQ_2015-2026_part{pi:02d}.pdf")
-        w.compress_identical_objects(remove_identicals=True, remove_orphans=True)
+        try:
+            w.compress_identical_objects(remove_duplicates=True, remove_orphans=True)
+        except Exception as e:
+            print("compress skipped", e)
         with open(fn, "wb") as f: w.write(f)
         files.append((fn, part)); print("wrote", fn, os.path.getsize(fn) // 1024, "KB")
 
