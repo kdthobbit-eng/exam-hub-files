@@ -364,6 +364,7 @@ function eh_tgb_hook(WP_REST_Request $req) {
     elseif ($txt === '/hour') $send(eh_tgb_stats('hour'), eh_tgb_back_kb('r:hour'));
     elseif ($txt === '/all') $send(eh_tgb_stats('all'), eh_tgb_back_kb('r:all'));
     elseif ($txt === '/3284') $send(eh_tgb_3284(), eh_tgb_back_kb('p3284'));
+    elseif ($txt === '/mock' && $role === 'owner' && function_exists('eh_stm_counts')) { $m = eh_stm_counts(); $send('📝 <b>' . esc_html($m['round']['name']) . "</b>\n\n👤 पेज खोला (लॉग-इन)   " . $m['seen'] . "\n🟢 अभी पेपर दे रहे   " . $m['live'] . "\n▶️ पेपर शुरू किया   " . $m['started'] . "\n✅ सबमिट किया   " . $m['done'] . "\n🏆 टॉप स्कोर   " . $m['top'] . " / 360\n\n" . wp_date('d M, h:i:s A'), eh_tgb_back_kb('menu')); }
     elseif ($txt === '/glitch' && $role === 'owner') $send(eh_tgb_glitch(), eh_tgb_back_kb('menu'));
     elseif (preg_match('#^/fix\s+(\d+)$#', $txt, $fm) && $role === 'owner') { $x = eh_kfix((int) $fm[1]); $send($x ? '✅ #' . (int) $fm[1] . ' ठीक: ' . $x[0] . ' → <b>' . $x[1] . ' WPM</b>' : '⚠️ #' . (int) $fm[1] . ' नहीं मिला।', eh_tgb_back_kb('menu')); }
     elseif ($txt === '/fixall' && $role === 'owner') {
