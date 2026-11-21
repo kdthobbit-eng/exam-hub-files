@@ -21,7 +21,38 @@ S = requests.Session(); S.headers.update(UA)
 BAD = {}  # host -> consecutive failures
 
 
+def tg_get(ref):
+    """ref = tg:@channel/msgid -> copy to CHAT_ID via bot, download (<=20MB), delete the copy."""
+    tok, chat = os.environ.get("TELEGRAM_BOT_TOKEN"), os.environ.get("CHAT_ID")
+    ch, mid = ref[3:].rsplit("/", 1)
+    api = f"https://api.telegram.org/bot{tok}"
+    try:
+        r = requests.post(f"{api}/copyMessage", data={"chat_id": chat, "from_chat_id": ch, "message_id": mid,
+                                                      "disable_notification": True}, timeout=60).json()
+        if not r.get("ok"):
+            print("  tg copy fail", ref, str(r)[:150]); return None
+        new_id = r["result"]["message_id"]
+        m = requests.post(f"{api}/forwardMessage", data={"chat_id": chat, "from_chat_id": chat, "message_id": new_id,
+                                                         "disable_notification": True}, timeout=60).json()
+        doc = (m.get("result") or {}).get("document")
+        for x in (new_id, (m.get("result") or {}).get("message_id")):
+            if x: requests.post(f"{api}/deleteMessage", data={"chat_id": chat, "message_id": x}, timeout=30)
+        if not doc:
+            print("  tg no doc", ref, str(m)[:150]); return None
+        f = requests.get(f"{api}/getFile", params={"file_id": doc["file_id"]}, timeout=60).json()
+        if not f.get("ok"):
+            print("  tg getFile fail (maybe >20MB)", ref, doc.get("file_size")); return None
+        c = requests.get(f"https://api.telegram.org/file/bot{tok}/{f['result']['file_path']}", timeout=300)
+        class R: pass
+        o = R(); o.content = c.content; o.status_code = 200; o.text = ""
+        return o
+    except Exception as e:
+        print("  tg err", ref, e); return None
+
+
 def get(url, tries=2):
+    if url.startswith("tg:"):
+        return tg_get(url)
     host = urllib.parse.urlparse(url).netloc
     if BAD.get(host, 0) >= 4:
         print("  skip (host down)", url); return None

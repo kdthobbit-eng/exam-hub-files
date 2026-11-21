@@ -2,6 +2,26 @@
  "note": "UPPSC PYQ 2015-2026: Prelims + MCQ-based Mains only. 'pages' are scraped on the runner for .pdf links; 'items' are direct PDFs.",
  "sections": [
   {
+   "name": "TGTEST RO/ARO via Telegram",
+   "items": [
+    [
+     "RO/ARO 2016 Pre GS",
+     "tg:@UPPCS_UPSSSC_PAPERS/446",
+     "t.me/UPPCS_UPSSSC_PAPERS/446"
+    ],
+    [
+     "RO/ARO 2017 Pre GS",
+     "tg:@roaropreviousyearquestionpaper/59",
+     "t.me/roaropreviousyearquestionpaper/59"
+    ],
+    [
+     "RO/ARO 2021 Pre GS+Hindi",
+     "tg:@UPPSC_PYQ/11",
+     "t.me/UPPSC_PYQ/11"
+    ]
+   ]
+  },
+  {
    "name": "PCS (Combined State / Upper Subordinate) Prelims - GS-I & CSAT",
    "items": [
     [
