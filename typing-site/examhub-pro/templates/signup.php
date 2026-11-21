@@ -1,4 +1,7 @@
-<?php $err = $GLOBALS['eh_auth_error'] ?? ''; $v = function ($k) { return esc_attr(wp_unslash($_POST[$k] ?? '')); }; get_header(); ?>
+<?php $err = $GLOBALS['eh_auth_error'] ?? ''; $v = function ($k) { return esc_attr(wp_unslash($_POST[$k] ?? '')); }; $eh_mockauth = strpos(rawurldecode((string) ($_REQUEST['redirect_to'] ?? '')), 'super-tet-mock') !== false;
+if ($eh_mockauth) add_filter('body_class', function ($c) { $c[] = 'eh-mockauth'; return $c; });
+get_header(); ?>
+<?php if ($eh_mockauth): ?><div class="eh-mhd"><a class="eh-mhd-b" href="<?php echo esc_url(home_url('/super-tet-mock/')); ?>"><img src="<?php echo esc_url(EH_URI . '/assets/upsssc-alert-logo.svg'); ?>" alt="UPSSSC ALERT" width="42" height="42"><span><b>UPSSSC ALERT</b><small>Online Examination</small></span></a><span class="eh-mhd-x"><i>XL</i><b>XL Study</b></span></div><?php endif; ?>
 <main class="eh-auth2 eh-au">
   <?php include __DIR__ . '/_auth-side.php'; ?>
   <div class="eh-auth2-card">
