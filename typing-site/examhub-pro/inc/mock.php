@@ -2,7 +2,7 @@
 /* Super TET live mock: rounds, attempts, server-side timer, scoring, rank, percentile, admin. */
 if (!defined('ABSPATH')) exit;
 
-define('EH_STM_DB', '2');
+define('EH_STM_DB', '3');
 define('EH_STM_SECS', 7200);
 
 function eh_stm_table() { global $wpdb; return $wpdb->prefix . 'eh_mock'; }
@@ -55,6 +55,8 @@ add_action('init', function () {
         seen int(10) unsigned NOT NULL DEFAULT 0,
         started int(10) unsigned NOT NULL DEFAULT 0,
         deadline int(10) unsigned NOT NULL DEFAULT 0,
+        paused int(10) unsigned NOT NULL DEFAULT 0,
+        used int(10) unsigned NOT NULL DEFAULT 0,
         last int(10) unsigned NOT NULL DEFAULT 0,
         submitted int(10) unsigned NOT NULL DEFAULT 0,
         cur smallint(5) NOT NULL DEFAULT 0,
@@ -101,19 +103,34 @@ function eh_stm_score($r, $ans) {
     foreach ($ans as $i => $a) { if (!isset($Q[$i])) continue; if ($a === $Q[$i]['a']) $c++; else $w++; }
     return [$c, $w, $c * 3 - $w];
 }
+/* The clock runs only while the exam screen is open. A paused attempt (page left, or no heartbeat for 2 min)
+   keeps its remaining time; its effective deadline moves forward with the clock, capped at the round end. */
+function eh_stm_pause_from($row, $now) {
+    if (!$row['started'] || $row['submitted']) return 0;
+    if ((int) ($row['paused'] ?? 0)) return (int) $row['paused'];
+    if ($now - (int) $row['last'] > 120) return (int) $row['last'];
+    return 0;
+}
+function eh_stm_eff($r, $row, $now = null) {
+    $now = $now ?: time(); $d = (int) $row['deadline']; $ps = eh_stm_pause_from($row, $now);
+    if ($ps) $d = min((int) $r['end_ts'], $d + max(0, $now - $ps));
+    return $d;
+}
 function eh_stm_finish_row($r, $row, $when) {
     global $wpdb;
+    $allot = min(EH_STM_SECS, max(0, (int) $r['end_ts'] - (int) $row['started']));
+    $used = max(0, min($allot, $allot - max(0, eh_stm_eff($r, $row, $when) - $when)));
     $ans = json_decode($row['ans'] ?: '{}', true) ?: [];
     [$c, $w, $s] = eh_stm_score($r, $ans);
     $adm = user_can((int) $row['uid'], 'manage_options');
     if (!$adm) $wpdb->query($wpdb->prepare('UPDATE ' . eh_stm_table() . ' SET counted = 0 WHERE round = %s AND uid = %d AND att < %d', $row['round'], $row['uid'], $row['att']));
-    $wpdb->update(eh_stm_table(), ['submitted' => $when, 'correct' => $c, 'wrong' => $w, 'score' => $s, 'counted' => $adm ? 0 : 1], ['id' => $row['id']]);
+    $wpdb->update(eh_stm_table(), ['submitted' => $when, 'correct' => $c, 'wrong' => $w, 'score' => $s, 'counted' => $adm ? 0 : 1, 'used' => $used, 'paused' => 0], ['id' => $row['id']]);
 }
 /* Attempts whose time ran out without a submit are submitted at their deadline. */
 function eh_stm_expire($r) {
     global $wpdb;
     $rows = $wpdb->get_results($wpdb->prepare('SELECT * FROM ' . eh_stm_table() . ' WHERE round = %s AND started > 0 AND submitted = 0 AND deadline < %d', $r['id'], time() - 20), ARRAY_A);
-    foreach ($rows as $row) eh_stm_finish_row($r, $row, (int) $row['deadline']);
+    $n = time(); foreach ($rows as $row) { $d = eh_stm_eff($r, $row, $n); if ($d < $n - 20) eh_stm_finish_row($r, $row, $d); }
 }
 function eh_stm_public_q($r) {
     return array_map(function ($q) { $o = ['q' => $q['q'], 'o' => $q['o']]; if (!empty($q['p'])) $o['p'] = $q['p']; if (!empty($q['qe'])) { $o['qe'] = $q['qe']; $o['oe'] = $q['oe']; } return $o; }, eh_stm_paper($r));
@@ -130,7 +147,8 @@ function eh_stm_round_out($r) {
     return ['id' => $r['id'], 'name' => $r['name'], 'login' => $r['login_ts'], 'start' => $r['start_ts'], 'end' => $r['end_ts'], 'status' => eh_stm_status($r)];
 }
 function eh_stm_attempt_out($row, $r) {
-    $o = ['started' => (int) $row['started'], 'deadline' => (int) $row['deadline'], 'submitted' => (int) $row['submitted'],
+    $ps = eh_stm_pause_from($row, time());
+    $o = ['started' => (int) $row['started'], 'deadline' => eh_stm_eff($r, $row), 'paused' => $ps ? 1 : 0, 'left' => max(0, eh_stm_eff($r, $row) - time()), 'submitted' => (int) $row['submitted'],
           'cur' => (int) $row['cur'], 'tabs' => (int) $row['tabs'], 'last' => (int) $row['last'], 'att' => (int) $row['att'],
           'ans' => (object) (json_decode($row['ans'] ?: '{}', true) ?: []), 'st' => (object) (json_decode($row['st'] ?: '{}', true) ?: []), 'tq' => (object) (json_decode($row['tq'] ?: '{}', true) ?: [])];
     if ($row['started'] && !$row['submitted']) $o['q'] = eh_stm_public_q($r);
@@ -143,7 +161,7 @@ function eh_stm_result($r, $row) {
     return array_merge([
         'ok' => true, 'name' => $row['name'], 'email' => $row['email'], 'roll' => eh_stm_roll((int) $row['uid']),
         'score' => (int) $row['score'], 'correct' => (int) $row['correct'], 'wrong' => (int) $row['wrong'],
-        'started' => (int) $row['started'], 'used' => max(0, (int) $row['submitted'] - (int) $row['started']), 'tabs' => (int) $row['tabs'],
+        'started' => (int) $row['started'], 'used' => (int) ($row['used'] ?? 0) ?: max(0, min(EH_STM_SECS, (int) $row['submitted'] - (int) $row['started'])), 'tabs' => (int) $row['tabs'],
         'ans' => (object) (json_decode($row['ans'] ?: '{}', true) ?: []), 'tq' => (object) (json_decode($row['tq'] ?: '{}', true) ?: []),
         'key' => array_map(function ($q) { return $q['a']; }, $Q), 'exp' => array_map(function ($q) { return $q['e'] ?? ''; }, $Q),
         'q' => eh_stm_public_q($r), 'att' => (int) $row['att'], 'admin_test' => user_can((int) $row['uid'], 'manage_options'),
@@ -173,8 +191,13 @@ add_action('rest_api_init', function () {
     $admin = function () { return current_user_can('manage_options'); };
     register_rest_route('eh/v1', '/stm/state', ['methods' => 'GET', 'permission_callback' => $auth, 'callback' => function () {
         $r = eh_stm_round(); $row = eh_stm_touch($r);
-        global $wpdb; $wpdb->update(eh_stm_table(), ['last' => time()], ['id' => $row['id']]);
-        if ($row['started'] && !$row['submitted'] && time() > (int) $row['deadline'] + 20) { eh_stm_finish_row($r, $row, (int) $row['deadline']); $row = eh_stm_row($r['id'], $row['uid']); }
+        global $wpdb; $now = time(); $up = ['last' => $now];
+        if ($row['started'] && !$row['submitted']) {
+            $d = eh_stm_eff($r, $row, $now);
+            if ($d < $now - 20) { eh_stm_finish_row($r, $row, $d); $up = ['last' => $now]; }
+            elseif (!(int) ($row['paused'] ?? 0)) $up['paused'] = $row['paused'] = eh_stm_pause_from($row, $now) ?: min($now, (int) $row['last']);
+        }
+        $wpdb->update(eh_stm_table(), $up, ['id' => $row['id']]); $row = eh_stm_row($r['id'], $row['uid']);
         return ['now' => time(), 'round' => eh_stm_round_out($r), 'roll' => eh_stm_roll((int) $row['uid']), 'name' => $row['name'], 'attempt' => eh_stm_attempt_out($row, $r)];
     }]);
     register_rest_route('eh/v1', '/stm/start', ['methods' => 'POST', 'permission_callback' => $auth, 'callback' => function (WP_REST_Request $q) {
@@ -192,24 +215,36 @@ add_action('rest_api_init', function () {
         }
         return ['now' => $now, 'attempt' => eh_stm_attempt_out($row, $r)];
     }]);
+    register_rest_route('eh/v1', '/stm/resume', ['methods' => 'POST', 'permission_callback' => $auth, 'callback' => function () {
+        global $wpdb;
+        $r = eh_stm_round(); $row = eh_stm_row($r['id'], get_current_user_id()); $now = time();
+        if (!$row || !$row['started']) return new WP_Error('no', 'no attempt', ['status' => 400]);
+        if ($row['submitted']) return ['now' => $now, 'submitted' => true];
+        $d = eh_stm_eff($r, $row, $now);
+        if ($d < $now - 20) { eh_stm_finish_row($r, $row, $d); return ['now' => $now, 'submitted' => true]; }
+        $wpdb->update(eh_stm_table(), ['deadline' => $d, 'paused' => 0, 'last' => $now], ['id' => $row['id']]);
+        return ['now' => $now, 'deadline' => $d];
+    }]);
     register_rest_route('eh/v1', '/stm/save', ['methods' => 'POST', 'permission_callback' => $auth, 'callback' => function (WP_REST_Request $q) {
         global $wpdb;
         $r = eh_stm_round(); $row = eh_stm_row($r['id'], get_current_user_id()); $now = time();
         if (!$row || !$row['started']) return new WP_Error('no', 'no attempt', ['status' => 400]);
         if ($row['submitted']) return ['ok' => true, 'submitted' => true];
-        if ($now > (int) $row['deadline'] + 20) { eh_stm_finish_row($r, $row, (int) $row['deadline']); return ['ok' => true, 'submitted' => true]; }
+        $d = eh_stm_eff($r, $row, $now);
+        if ($d < $now - 20) { eh_stm_finish_row($r, $row, $d); return ['ok' => true, 'submitted' => true]; }
+        if ($d !== (int) $row['deadline'] || (int) $row['paused']) { $wpdb->update(eh_stm_table(), ['deadline' => $d, 'paused' => 0], ['id' => $row['id']]); $row['deadline'] = $d; $row['paused'] = 0; }
         $ans = eh_stm_clean_map($q['ans'], '/^[ABCD]$/');
         $st = eh_stm_clean_map($q['st'], '/^(na|an|mr|am)$/');
         $tq = array_map('intval', eh_stm_clean_map($q['tq'], '/^\d{1,5}$/'));
         $wpdb->update(eh_stm_table(), ['ans' => wp_json_encode((object) $ans), 'st' => wp_json_encode((object) $st), 'tq' => wp_json_encode((object) $tq),
             'answered' => count($ans), 'cur' => max(0, min(399, (int) $q['cur'])), 'tabs' => max((int) $row['tabs'], min(999, (int) $q['tabs'])), 'last' => $now], ['id' => $row['id']]);
         if (!empty($q['submit'])) { $row = eh_stm_row($r['id'], $row['uid']); eh_stm_finish_row($r, $row, min($now, (int) $row['deadline'])); return ['ok' => true, 'submitted' => true]; }
-        return ['ok' => true, 'now' => $now];
+        return ['ok' => true, 'now' => $now, 'deadline' => (int) $row['deadline']];
     }]);
     register_rest_route('eh/v1', '/stm/result', ['methods' => 'GET', 'permission_callback' => $auth, 'callback' => function () {
         $r = eh_stm_round(); $row = eh_stm_row($r['id'], get_current_user_id());
         if (!$row || !$row['started']) return new WP_Error('no', 'no attempt', ['status' => 404]);
-        if (!$row['submitted']) { if (time() <= (int) $row['deadline'] + 20) return new WP_Error('run', 'running', ['status' => 409]); eh_stm_finish_row($r, $row, (int) $row['deadline']); }
+        if (!$row['submitted']) { $d = eh_stm_eff($r, $row); if (time() <= $d + 20) return new WP_Error('run', 'running', ['status' => 409]); eh_stm_finish_row($r, $row, $d); }
         return eh_stm_result($r, $row);
     }]);
     register_rest_route('eh/v1', '/stm/live', ['methods' => 'GET', 'permission_callback' => $auth, 'callback' => function () {
@@ -251,7 +286,7 @@ function eh_stm_close($id) {
     global $wpdb; $now = time();
     $ctl = get_option('eh_stm_ctl', []); if (!is_array($ctl)) $ctl = [];
     $ctl[$id] = array_merge($ctl[$id] ?? [], ['end' => $now]); update_option('eh_stm_ctl', $ctl, false);
-    $wpdb->query($wpdb->prepare('UPDATE ' . eh_stm_table() . ' SET deadline = %d WHERE round = %s AND started > 0 AND submitted = 0 AND deadline > %d', $now, $id, $now));
+    $wpdb->query($wpdb->prepare('UPDATE ' . eh_stm_table() . ' SET deadline = LEAST(deadline, %d), paused = 0 WHERE round = %s AND started > 0 AND submitted = 0', $now, $id));
 }
 function eh_stm_open($id) {
     $ctl = get_option('eh_stm_ctl', []); if (!is_array($ctl)) $ctl = [];

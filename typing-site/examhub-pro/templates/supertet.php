@@ -619,7 +619,7 @@ function cta(st){let h='',p='',b='';const a=A;
  if(!C.in){h='परीक्षा देने के लिए लॉग-इन करें';p='xlstudy.in का अकाउंट नहीं है तो 1 मिनट में नया अकाउंट बनाएँ।';b=`<a class="b b-wh b-lg" href="${esc(C.signup)}">नया अकाउंट</a><a class="b b-gd b-lg" href="${esc(C.login)}">लॉग-इन करें</a>`}
  else if(!a){h='लोड हो रहा है…'}
  else if(+a.submitted){h=ME.name+', आपका प्रयास '+(a.att||1)+' सबमिट हो चुका है';p='रिज़ल्ट देखें, या दोबारा मॉक दें — रैंक में आपका नया स्कोर गिना जाएगा।';b='<button class="b b-wh b-lg" id="c-re"'+(st==='live'?'':' disabled')+'>↻ दोबारा दें</button><button class="b b-gd b-lg" id="c-go">रिज़ल्ट देखें ›</button>'}
- else if(+a.started){h='आपकी परीक्षा जारी है';p='बचा समय '+fmt(a.deadline-now())+' · आपके उत्तर सर्वर पर सेव हैं।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा जारी रखें ›</button>'}
+ else if(+a.started){h='आपकी परीक्षा जारी है';p='बचा समय '+fmt(a.paused?a.left:a.deadline-now())+' · घड़ी रुकी है, परीक्षा खोलने पर ही चलेगी।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा जारी रखें ›</button>'}
  else if(st==='soon'){h='नमस्ते, '+ME.name;p='लॉग-इन '+tStr(R.login)+' से खुलेगा। तब तक नीचे पैटर्न और निर्देश देख लें।';b='<button class="b b-wh b-lg" disabled>'+tStr(R.login)+' से खुलेगा</button>'}
  else if(st==='over'){h='यह परीक्षा समाप्त हो चुकी है';p='प्रश्न-पत्र और उत्तर-कुंजी डाउनलोड करें।';b='<button class="b b-pr b-lg" id="c-paper">⬇ प्रश्न-पत्र + उत्तर-कुंजी</button>'}
  else {h='नमस्ते, '+ME.name;p=st==='live'?(R.end-now()>=7200?'मॉक खुला है। शुरू करने पर आपको पूरे 120 मिनट मिलेंगे।':'मॉक बंद होने वाला है — अभी शुरू करने पर केवल '+fmt(R.end-now())+' मिलेंगे।'):'विवरण जाँचें और निर्देश पढ़ें। परीक्षा '+tStr(R.start)+' पर शुरू होगी।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा में प्रवेश करें ›</button>'}
@@ -638,13 +638,15 @@ $('begin').onclick=()=>{if(!$('agree').checked){$('ag-err').textContent='आग�
 /* ---------- exam ---------- */
 const secOf=i=>SECS.findIndex(s=>s.q.includes(i));
 const stOf=i=>A.st[i]||'nv';
-function start(){Q=A.q||[];if(!Q.length){location.reload();return}names();go('s-exam');show(+A.cur||0);tick();clearInterval(T);T=setInterval(tick,1000);
+let lastT=Date.now();
+function start(){api('resume',{}).then(j=>{if(j.now)off=j.now*1000-Date.now();if(j.submitted){A.submitted=1;return showResult()}if(j.deadline)A.deadline=j.deadline;A.paused=0;begin()}).catch(()=>begin())}
+function begin(){lastT=Date.now();Q=A.q||[];if(!Q.length){location.reload();return}names();go('s-exam');show(+A.cur||0);tick();clearInterval(T);T=setInterval(tick,1000);
  clearInterval(BG);BG=setInterval(()=>{push().catch(()=>{})},20000);}
-function tick(){const l=A.deadline-now();$('tm').textContent=fmt(l);$('tbox').classList.toggle('low',l<=300&&l>0);if(l<=0&&!+A.submitted)submit(true)}
+function tick(){if(Date.now()-lastT>30000){lastT=Date.now();api('resume',{}).then(j=>{if(j.now)off=j.now*1000-Date.now();if(j.deadline)A.deadline=j.deadline;if(j.submitted&&!+A.submitted){A.submitted=1;clearInterval(T);clearInterval(BG);showResult()}}).catch(()=>{});return}lastT=Date.now();const l=A.deadline-now();$('tm').textContent=fmt(l);$('tbox').classList.toggle('low',l<=300&&l>0);if(l<=0&&!+A.submitted)submit(true)}
 function acc(){const i=A.cur,d=Math.round((Date.now()-qStart)/1000);if(d>0&&d<3600)A.tq[i]=(+A.tq[i]||0)+d;qStart=Date.now()}
 function sv(c,t){const e=$('sv');e.className='sv '+c;e.textContent=t}
 function push(fin,keep){acc();if(saving&&!fin){dirty=true;return Promise.resolve()}saving=true;dirty=false;sv('w','Saving…');
- return api('save',{ans:A.ans,st:A.st,tq:A.tq,cur:A.cur,tabs:A.tabs,submit:fin?1:0},keep).then(j=>{saving=false;sv('','Saved');if(j.now)off=j.now*1000-Date.now();if(j.submitted&&!fin&&!+A.submitted&&!subbing){A.submitted=1;clearInterval(T);clearInterval(BG);modal('परीक्षा समाप्त','<p style="margin:0">मॉक बंद कर दिया गया है, आपका पेपर अपने आप सबमिट हो गया है।</p>');showResult()}return j}).catch(e=>{saving=false;dirty=true;sv('x','Offline');throw e})}
+ return api('save',{ans:A.ans,st:A.st,tq:A.tq,cur:A.cur,tabs:A.tabs,submit:fin?1:0},keep).then(j=>{saving=false;sv('','Saved');if(j.now)off=j.now*1000-Date.now();if(j.deadline)A.deadline=j.deadline;if(j.submitted&&!fin&&!+A.submitted&&!subbing){A.submitted=1;clearInterval(T);clearInterval(BG);modal('परीक्षा समाप्त','<p style="margin:0">मॉक बंद कर दिया गया है, आपका पेपर अपने आप सबमिट हो गया है।</p>');showResult()}return j}).catch(e=>{saving=false;dirty=true;sv('x','Offline');throw e})}
 const LK=()=>'eh_stm_'+R.id+'_'+ME.roll+'_'+(A&&A.att||1);
 function backup(){try{localStorage.setItem(LK(),JSON.stringify({ans:A.ans,st:A.st,tq:A.tq,cur:A.cur,tabs:A.tabs,t:now()}))}catch(e){}}
 let pt=null;function later(){dirty=true;backup();clearTimeout(pt);pt=setTimeout(()=>push().catch(()=>{}),700)}
@@ -846,7 +848,7 @@ if(C.admin){go('s-adm');ME.name='Admin';adm();setInterval(adm,15000);
  $('a-rep').onclick=repDialog;$('a-csv').onclick=()=>{if(RP)repCsv({mask:false,n:0})}}
 else if(C.in){api('state').then(j=>{off=j.now*1000-Date.now();R=j.round;A=j.attempt;ME={name:j.name,roll:j.roll};names();home();
  if(+A.started&&!+A.submitted){try{const b=JSON.parse(localStorage.getItem(LK())||'null');if(b&&b.t>(+A.last||0)+2){A.ans=b.ans||A.ans;A.st=b.st||A.st;A.tq=b.tq||A.tq;A.cur=b.cur;A.tabs=Math.max(+A.tabs||0,+b.tabs||0);dirty=true}}catch(e){}
-  modal('परीक्षा अधूरी है — Resume Test','<p style="margin:0 0 8px;line-height:1.7">आपकी परीक्षा पहले से चल रही है। आपके सभी उत्तर सुरक्षित हैं।</p><p style="margin:0;line-height:1.7">बचा समय: <b class="num">'+fmt(A.deadline-now())+'</b> · उत्तर दिए: <b>'+Object.keys(A.ans||{}).length+'</b> / 120</p><p style="margin:8px 0 0;font-size:13px;color:var(--mu)">ध्यान दें: घड़ी लगातार चल रही है।</p>',[['बाद में','b-wh',close],['Resume Test ›','b-pr',()=>{close();start();if(dirty)push().catch(()=>{})}]])}}).catch(()=>{$('c-h').textContent='लोड नहीं हुआ';$('c-p').textContent='पेज दोबारा खोलें।'})}
+  modal('परीक्षा अधूरी है — Resume Test','<p style="margin:0 0 8px;line-height:1.7">आपकी परीक्षा पहले से चल रही है। आपके सभी उत्तर सुरक्षित हैं।</p><p style="margin:0;line-height:1.7">बचा समय: <b class="num">'+fmt(A.paused?A.left:A.deadline-now())+'</b> · उत्तर दिए: <b>'+Object.keys(A.ans||{}).length+'</b> / 120</p><p style="margin:8px 0 0;font-size:13px;color:var(--mu)">⏸️ आपकी घड़ी रुकी हुई है — Resume Test दबाने पर ही समय चलेगा।</p>',[['बाद में','b-wh',close],['Resume Test ›','b-pr',()=>{close();start();if(dirty)push().catch(()=>{})}]])}}).catch(()=>{$('c-h').textContent='लोड नहीं हुआ';$('c-p').textContent='पेज दोबारा खोलें।'})}
 }
 </script>
 </body>
