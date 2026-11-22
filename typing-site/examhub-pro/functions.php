@@ -20,6 +20,7 @@ require EH_DIR . '/inc/auth.php';
 require EH_DIR . '/inc/stats.php';
 require EH_DIR . '/inc/tgbot.php';
 require EH_DIR . '/inc/mock.php';
+require EH_DIR . '/inc/mock-admin.php';
 
 /* ---------- setup ---------- */
 add_action('after_setup_theme', function () {

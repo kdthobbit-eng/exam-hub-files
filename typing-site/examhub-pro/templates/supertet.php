@@ -287,8 +287,9 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 @media(max-width:760px){
  .mtools{display:flex;gap:8px;padding:6px 12px;border-bottom:1px solid #edf1f5;background:#fafcfe}
  .mtools .b{flex:1;padding:8px 6px;font-size:13px;border-radius:30px}
- #bback,#bclr{display:none!important}
- .acts{grid-template-columns:1fr 1fr!important}
+ .acts{grid-template-columns:1fr 1fr!important;gap:7px!important}
+ #bmark{order:1!important}#bclr{order:2!important}#bback{order:3!important}#bsave{order:4!important}
+ .acts .b{padding:11px 6px!important}
 }
 /* home button */
 .hm{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:40px;width:40px;padding:0;margin-right:4px;border-radius:30px;text-decoration:none;color:#fff;font-weight:700;font-size:13.5px;background:linear-gradient(135deg,#1d63c7,#0f2a4d);box-shadow:0 4px 12px -4px rgba(29,99,199,.6);transition:transform .15s,box-shadow .15s;flex:none}
@@ -509,7 +510,6 @@ table.t td:first-child,table.t th:first-child{text-align:left}
    <div class="qbar"><span class="no" id="qno">Question No. 1</span>
     <span class="r"><span class="sv" id="sv">Saved</span><span class="lang">View in <select id="lsel"><option value="hi">हिंदी</option><option value="en">English</option></select></span><span class="mk"><i class="p">+3</i><i class="n">−1</i></span>
     <button class="pbtn mob" id="popen"><svg viewBox="0 0 16 16"><path d="M1 1h4v4H1zm5 0h4v4H6zm5 0h4v4h-4zM1 6h4v4H1zm5 0h4v4H6zm5 0h4v4h-4zM1 11h4v4H1zm5 0h4v4H6zm5 0h4v4h-4z"/></svg>Palette</button></span></div>
-   <div class="mtools"><button class="b b-wh" id="bback2" type="button">‹ Back</button><button class="b b-wh" id="bclr2" type="button">Clear Response</button></div>
    <div class="qa" id="qa"></div>
    <div class="acts"><div class="l"><button class="b b-mk" id="bmark">Mark for Review &amp; Next</button><button class="b b-wh" id="bclr">Clear Response</button></div>
     <div class="r"><button class="b b-wh" id="bback">‹ Back</button><button class="b b-pr" id="bsave">Save &amp; Next ›</button></div></div>
@@ -638,7 +638,6 @@ function next(){const k=secOf(A.cur),s=SECS[k].q,p=s.indexOf(A.cur);if(p<s.lengt
 $('bsave').onclick=()=>{const i=A.cur;if(sel){A.ans[i]=sel;A.st[i]='an'}else{delete A.ans[i];A.st[i]='na'}next()};
 $('bmark').onclick=()=>{const i=A.cur;if(sel){A.ans[i]=sel;A.st[i]='am'}else{delete A.ans[i];A.st[i]='mr'}next()};
 $('bclr').onclick=()=>{const i=A.cur;sel=null;delete A.ans[i];A.st[i]='na';show(i)};
-$('bback2').onclick=()=>$('bback').click();$('bclr2').onclick=()=>$('bclr').click();
 $('bback').onclick=()=>{const k=secOf(A.cur),s=SECS[k].q,p=s.indexOf(A.cur);if(p>0)show(s[p-1]);else if(k>0){const t=SECS[k-1].q;show(t[t.length-1])}};
 function cnt(list){const c={an:0,na:0,nv:0,mr:0,am:0};list.forEach(i=>c[stOf(i)]++);return c}
 function pal(){const k=secOf(A.cur),s=SECS[k],c=cnt(s.q);
