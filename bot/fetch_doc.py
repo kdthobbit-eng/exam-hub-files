@@ -2,7 +2,7 @@
 import json, os, subprocess, urllib.request
 tok = os.environ["TELEGRAM_BOT_TOKEN"]; API = f"https://api.telegram.org/bot{tok}"
 get = lambda u: json.loads(urllib.request.urlopen(u, timeout=60).read())
-up = get(f"{API}/getUpdates?limit=100")["result"]
+up = get(f"{API}/getUpdates?offset=-50&limit=50")["result"]
 for u in reversed(up):
     m = u.get("message") or {}
     if "document" in m:
