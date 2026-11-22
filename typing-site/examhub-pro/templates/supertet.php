@@ -18,7 +18,7 @@ $eh_cfg = [
 ];
 $eh_logo = esc_url($eh_cfg['logo']);
 $eh_hd = function ($sub = 'Online Examination', $right = '', $out = false, $home = true) use ($eh_logo, $eh_in, $eh_cfg) { ?>
- <header class="hd"><div class="brand"><?php if ($home): ?><a class="hm" href="<?php echo esc_url(home_url('/')); ?>" title="xlstudy.in होम"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5M5.5 9.5V20h5v-6h3v6h5V9.5"/></svg><span>होम</span></a><?php endif; ?><img src="<?php echo $eh_logo; ?>" alt="UPSSSC ALERT" width="44" height="44"><div><b>UPSSSC ALERT</b><span><?php echo esc_html($sub); ?></span></div></div>
+ <header class="hd"><div class="brand"><?php if ($home): ?><a class="hm" href="<?php echo esc_url(home_url('/')); ?>" title="xlstudy.in होम"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5M5.5 9.5V20h5v-6h3v6h5V9.5"/></svg></a><?php endif; ?><img src="<?php echo $eh_logo; ?>" alt="UPSSSC ALERT" width="44" height="44"><div><b>UPSSSC ALERT</b><span><?php echo esc_html($sub); ?></span></div></div>
   <div class="hdr"><?php echo $right; ?><?php if ($out && $eh_in): ?><a class="lo" href="<?php echo esc_url($eh_cfg['logout']); ?>" title="लॉग-आउट"><svg viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11"/></svg><span>लॉग-आउट</span></a><?php endif; ?><div class="xl"><i>XL</i><div><b>XL Study</b><span>xlstudy.in</span></div></div></div></header>
 <?php };
 $eh_ph = '<svg viewBox="0 0 40 40"><circle cx="20" cy="15" r="8"/><path d="M4 40c0-9 7-15 16-15s16 6 16 15z"/></svg>';
@@ -238,7 +238,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 .gauge circle{fill:none;stroke-width:13}
 .gauge .bgc{stroke:#edf2f8}.gauge .fgc{stroke:url(#gg);stroke-linecap:round;transition:stroke-dashoffset 1.2s ease}
 .gauge div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.gauge b{font-family:Poppins,sans-serif;font-size:32px;color:var(--nv);line-height:1}
+.gauge b{font-family:Poppins,sans-serif;font-size:40px;color:var(--nv);line-height:1}
 .gauge span{font-size:12.5px;color:var(--mu);margin-top:4px}
 .kps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .kp{border:1px solid #e8edf3;border-radius:14px;padding:12px;display:flex;align-items:center;gap:12px}
@@ -283,8 +283,15 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 .endb svg{width:13px;height:13px;fill:#fff}
 .endb:hover{background:#c5301f}
 @media(max-width:760px){.endb{height:34px;padding:0 11px;font-size:12px}.ibar .ir{gap:7px}}
+.mtools{display:none}
+@media(max-width:760px){
+ .mtools{display:flex;gap:8px;padding:6px 12px;border-bottom:1px solid #edf1f5;background:#fafcfe}
+ .mtools .b{flex:1;padding:8px 6px;font-size:13px;border-radius:30px}
+ #bback,#bclr{display:none!important}
+ .acts{grid-template-columns:1fr 1fr!important}
+}
 /* home button */
-.hm{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 14px 0 10px;margin-right:4px;border-radius:30px;text-decoration:none;color:#fff;font-weight:700;font-size:13.5px;background:linear-gradient(135deg,#1d63c7,#0f2a4d);box-shadow:0 4px 12px -4px rgba(29,99,199,.6);transition:transform .15s,box-shadow .15s;flex:none}
+.hm{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:40px;width:40px;padding:0;margin-right:4px;border-radius:30px;text-decoration:none;color:#fff;font-weight:700;font-size:13.5px;background:linear-gradient(135deg,#1d63c7,#0f2a4d);box-shadow:0 4px 12px -4px rgba(29,99,199,.6);transition:transform .15s,box-shadow .15s;flex:none}
 .hm:hover{transform:translateY(-1px);box-shadow:0 8px 18px -6px rgba(29,99,199,.7)}
 .brand .hm span{display:inline;color:#fff;font-size:13.5px;white-space:nowrap}
 .hm svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
@@ -500,6 +507,7 @@ table.t td:first-child,table.t th:first-child{text-align:left}
    <div class="qbar"><span class="no" id="qno">Question No. 1</span>
     <span class="r"><span class="sv" id="sv">Saved</span><span class="lang">View in <select id="lsel"><option value="hi">हिंदी</option><option value="en">English</option></select></span><span class="mk"><i class="p">+3</i><i class="n">−1</i></span>
     <button class="pbtn mob" id="popen"><svg viewBox="0 0 16 16"><path d="M1 1h4v4H1zm5 0h4v4H6zm5 0h4v4h-4zM1 6h4v4H1zm5 0h4v4H6zm5 0h4v4h-4zM1 11h4v4H1zm5 0h4v4H6zm5 0h4v4h-4z"/></svg>Palette</button></span></div>
+   <div class="mtools"><button class="b b-wh" id="bback2" type="button">‹ Back</button><button class="b b-wh" id="bclr2" type="button">Clear Response</button></div>
    <div class="qa" id="qa"></div>
    <div class="acts"><div class="l"><button class="b b-mk" id="bmark">Mark for Review &amp; Next</button><button class="b b-wh" id="bclr">Clear Response</button></div>
     <div class="r"><button class="b b-wh" id="bback">‹ Back</button><button class="b b-pr" id="bsave">Save &amp; Next ›</button></div></div>
@@ -629,6 +637,7 @@ function next(){const k=secOf(A.cur),s=SECS[k].q,p=s.indexOf(A.cur);if(p<s.lengt
 $('bsave').onclick=()=>{const i=A.cur;if(sel){A.ans[i]=sel;A.st[i]='an'}else{delete A.ans[i];A.st[i]='na'}next()};
 $('bmark').onclick=()=>{const i=A.cur;if(sel){A.ans[i]=sel;A.st[i]='am'}else{delete A.ans[i];A.st[i]='mr'}next()};
 $('bclr').onclick=()=>{const i=A.cur;sel=null;delete A.ans[i];A.st[i]='na';show(i)};
+$('bback2').onclick=()=>$('bback').click();$('bclr2').onclick=()=>$('bclr').click();
 $('bback').onclick=()=>{const k=secOf(A.cur),s=SECS[k].q,p=s.indexOf(A.cur);if(p>0)show(s[p-1]);else if(k>0){const t=SECS[k-1].q;show(t[t.length-1])}};
 function cnt(list){const c={an:0,na:0,nv:0,mr:0,am:0};list.forEach(i=>c[stOf(i)]++);return c}
 function pal(){const k=secOf(A.cur),s=SECS[k],c=cnt(s.q);
@@ -659,11 +668,11 @@ function renderRes(d){RS=d;close();
  const sk=120-d.correct-d.wrong,att=d.correct+d.wrong,ac=att?Math.round(d.correct*100/att):0,per=perSec(d),tt=Math.max(1,per.reduce((a,p)=>a+p.t,0));
  const C2=2*Math.PI*72;
  let h=`<div class="rhero"><div class="in"><div class="av big">${PH}</div><div><h2>${esc(d.name)}</h2><p>रोल नं. <span class="num">${esc(d.roll)}</span> · UP Super TET 2026 लाइव मॉक · लगा समय ${mins(d.used)}${d.tabs?' · टैब बदले '+d.tabs:''}</p>
- <div class="hstat"><span>प्रयास <b>${d.att||1}</b></span><span>परसेंटाइल <b id="hp">${d.percentile.toFixed(2)}</b></span><span>रैंक <b id="hr">${d.rank}</b> / <span id="ht">${d.total}</span></span><span>अंक <b>${d.score}</b> / 360</span></div></div></div></div>
- <div class="wrap"><div class="rtop"><div class="gauge"><svg viewBox="0 0 170 170"><circle class="bgc" cx="85" cy="85" r="72"/><circle class="fgc" id="gfg" cx="85" cy="85" r="72" stroke-dasharray="${C2.toFixed(1)}" stroke-dashoffset="${C2.toFixed(1)}"/></svg><div><b id="gp">${d.percentile.toFixed(2)}</b><span>परसेंटाइल</span></div></div>
- <div class="kps"><div class="kp"><i class="i1">★</i><div><b>${d.score}<small style="font-size:13px;color:var(--mu)"> / 360</small></b><span>कुल अंक</span></div></div>
+ <div class="hstat"><span>अंक <b>${d.score}</b> / 360</span><span>परसेंटाइल <b id="hp">${d.percentile.toFixed(2)}</b></span><span>रैंक <b id="hr">${d.rank}</b> / <i id="ht" style="font-style:normal">${d.total}</i></span><span>प्रयास <b>${d.att||1}</b></span></div></div></div></div>
+ <div class="wrap"><div class="rtop"><div class="gauge"><svg viewBox="0 0 170 170"><circle class="bgc" cx="85" cy="85" r="72"/><circle class="fgc" id="gfg" cx="85" cy="85" r="72" stroke-dasharray="${C2.toFixed(1)}" stroke-dashoffset="${C2.toFixed(1)}"/></svg><div><b>${d.score}</b><span>कुल अंक / 360</span></div></div>
+ <div class="kps"><div class="kp"><i class="i1">%</i><div><b id="gp">${d.percentile.toFixed(2)}</b><span>परसेंटाइल</span></div></div>
  <div class="kp"><i class="i2">#</i><div><b><span id="kr">${d.rank}</span><small style="font-size:13px;color:var(--mu)"> / <span id="kt">${d.total}</span></small></b><span>रैंक</span></div></div>
- <div class="kp"><i style="background:#f0e9fb;color:var(--pu)">%</i><div><b>${ac}%</b><span>सटीकता</span></div></div>
+ <div class="kp"><i style="background:#f0e9fb;color:var(--pu)">◎</i><div><b>${ac}%</b><span>सटीकता</span></div></div>
  <div class="kp"><i class="i3">✓</i><div><b>${d.correct}</b><span>सही (+${d.correct*3})</span></div></div>
  <div class="kp"><i class="i4">✗</i><div><b>${d.wrong}</b><span>गलत (−${d.wrong})</span></div></div>
  <div class="kp"><i style="background:#eef2f7;color:#5b6675">—</i><div><b>${sk}</b><span>छोड़े</span></div></div></div></div>
@@ -688,7 +697,7 @@ function renderRes(d){RS=d;close();
  $('vsol').onclick=()=>{fl('all');go('s-sol')};
  clearInterval(LT);LT=setInterval(()=>{if(!$('s-res').classList.contains('on'))return;api('live').then(x=>liveUpd(x,false)).catch(()=>{})},20000)}
 function liveUpd(x,first){const d=RS;Object.assign(d,x);
- const C2=2*Math.PI*72;setTimeout(()=>{const g=$('gfg');if(g)g.style.strokeDashoffset=C2*(1-d.percentile/100)},first?80:0);
+ const C2=2*Math.PI*72;setTimeout(()=>{const g=$('gfg');if(g)g.style.strokeDashoffset=C2*(1-Math.max(0,d.score)/360)},first?80:0);
  $('gp').textContent=d.percentile.toFixed(2);$('hp').textContent=d.percentile.toFixed(2);$('hr').textContent=d.rank;$('kr').textContent=d.rank;$('ht').textContent=d.total;$('kt').textContent=d.total;
  $('rnote').innerHTML=d.final?'✅ परीक्षा समाप्त — यह अंतिम रैंक और परसेंटाइल है।':'⏳ परीक्षा अभी चल रही है ('+d.writing+' उम्मीदवार अभी पेपर दे रहे हैं)। रैंक और परसेंटाइल अभी तक सबमिट हुए <b>'+d.total+'</b> उम्मीदवारों के आधार पर है और हर 20 सेकंड में अपडेट होती है।';
  $('lvb').style.display=d.final?'none':'';
@@ -761,7 +770,8 @@ if(C.admin){go('s-adm');ME.name='Admin';adm();setInterval(adm,10000);
  $('a-csv').onclick=()=>{const rows=window._rows||[];const c='name,email,status,device,answered,correct,wrong,score,started,submitted,tabs\n'+rows.map(x=>[x.name,x.email,+x.submitted?'submitted':+x.started?'started':'login',x.dev,x.answered,x.correct,x.wrong,x.score,+x.started?new Date(x.started*1000).toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}):'',+x.submitted?new Date(x.submitted*1000).toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}):'',x.tabs].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+c],{type:'text/csv'}));a.download='super-tet-mock.csv';document.body.appendChild(a);a.click();a.remove()}}
 else if(C.in){api('state').then(j=>{off=j.now*1000-Date.now();R=j.round;A=j.attempt;ME={name:j.name,roll:j.roll};names();home();
- if(+A.started&&!+A.submitted){try{const b=JSON.parse(localStorage.getItem(LK())||'null');if(b&&b.t>(+A.last||0)+2){A.ans=b.ans||A.ans;A.st=b.st||A.st;A.tq=b.tq||A.tq;A.cur=b.cur;A.tabs=Math.max(+A.tabs||0,+b.tabs||0);dirty=true}}catch(e){}start();if(dirty)push().catch(()=>{})}}).catch(()=>{$('c-h').textContent='लोड नहीं हुआ';$('c-p').textContent='पेज दोबारा खोलें।'})}
+ if(+A.started&&!+A.submitted){try{const b=JSON.parse(localStorage.getItem(LK())||'null');if(b&&b.t>(+A.last||0)+2){A.ans=b.ans||A.ans;A.st=b.st||A.st;A.tq=b.tq||A.tq;A.cur=b.cur;A.tabs=Math.max(+A.tabs||0,+b.tabs||0);dirty=true}}catch(e){}
+  modal('परीक्षा अधूरी है — Resume Test','<p style="margin:0 0 8px;line-height:1.7">आपकी परीक्षा पहले से चल रही है। आपके सभी उत्तर सुरक्षित हैं।</p><p style="margin:0;line-height:1.7">बचा समय: <b class="num">'+fmt(A.deadline-now())+'</b> · उत्तर दिए: <b>'+Object.keys(A.ans||{}).length+'</b> / 120</p><p style="margin:8px 0 0;font-size:13px;color:var(--mu)">ध्यान दें: घड़ी लगातार चल रही है।</p>',[['बाद में','b-wh',close],['Resume Test ›','b-pr',()=>{close();start();if(dirty)push().catch(()=>{})}]])}}).catch(()=>{$('c-h').textContent='लोड नहीं हुआ';$('c-p').textContent='पेज दोबारा खोलें।'})}
 }
 </script>
 </body>
