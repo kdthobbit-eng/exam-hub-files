@@ -1,0 +1,19 @@
+name: Transcribe audio (Gemini)
+on: {workflow_dispatch: {inputs: {file: {required: true}}}}
+permissions: {contents: write}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env: {GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}", F: "${{ inputs.file }}"}
+        run: |
+          B64=$(base64 -w0 "$F")
+          for M in gemini-2.5-pro gemini-2.5-flash gemini-2.0-flash; do
+            printf '{"contents":[{"parts":[{"text":"इस ऑडियो का पूरा, शब्दशः हिंदी (देवनागरी) ट्रांसक्रिप्ट लिखो। जो बोला गया वही लिखो, कुछ छोड़ो या सारांश मत करो। हर 30-60 सेकंड पर [mm:ss] टाइमस्टैम्प लगाओ। अंग्रेज़ी शब्द जैसे बोले गए वैसे ही लिखो।"},{"inline_data":{"mime_type":"audio/mpeg","data":"%s"}}]}]}' "$B64" > /tmp/req.json
+            curl -sS -m 300 -H "Content-Type: application/json" -d @/tmp/req.json "https://generativelanguage.googleapis.com/v1beta/models/$M:generateContent?key=$GEMINI_API_KEY" > /tmp/r.json
+            python3 -c "import json;r=json.load(open('/tmp/r.json'));print(''.join(p.get('text','') for p in r['candidates'][0]['content']['parts']))" > "${F%.mp3}.gemini.txt" && [ -s "${F%.mp3}.gemini.txt" ] && echo "ok $M" && break
+            head -c 300 /tmp/r.json
+          done
+          git config user.name Claude; git config user.email noreply@anthropic.com
+          git add transcribe/*.txt; git commit -m "gemini transcript"; git pull --rebase; git push
