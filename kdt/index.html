@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KDT Labs — Telegram Bots, Mini Apps, AI Chatbots, Data Scraping</title>
+<meta name="description" content="KDT Labs builds Telegram bots, Telegram Mini Apps, WhatsApp/Telegram AI chatbots and web scraping pipelines. Fast delivery, hosting included, support in your language.">
+<style>
+:root{--bg:#0b1020;--card:#141b33;--ink:#eef2ff;--mute:#9aa6c7;--acc:#5b8cff;--acc2:#20c997;--line:#232c4d}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans","Noto Sans Devanagari","Noto Sans Ethiopic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+a{color:inherit}.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;background:rgba(11,16,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:5}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.brand{font-weight:800;font-size:20px;letter-spacing:.3px}.brand b{color:var(--acc)}
+select{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-size:14px}
+.hero{padding:64px 0 40px}.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.1;margin:0 0 16px}
+.hero p{color:var(--mute);font-size:18px;max-width:700px;margin:0 0 26px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 20px;border-radius:12px;font-weight:700;text-decoration:none}
+.p{background:var(--acc);color:#fff}.s{border:1px solid var(--line);background:var(--card)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin:10px 0 50px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+.card h3{margin:6px 0 8px;font-size:21px}.card p{color:var(--mute);margin:0 0 12px}
+.card ul{margin:0 0 16px;padding-left:18px;color:var(--ink)}.card li{margin:4px 0}
+.ic{font-size:30px}.price{color:var(--acc2);font-weight:800}
+h2{font-size:28px;margin:10px 0 18px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:50px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}.step b{color:var(--acc)}
+.cta{background:linear-gradient(135deg,#1d2a5a,#13325a);border:1px solid var(--line);border-radius:22px;padding:30px;margin:10px 0 60px;text-align:center}
+footer{color:var(--mute);text-align:center;padding:24px 0 40px;font-size:14px;border-top:1px solid var(--line)}
+[dir=rtl] .card ul{padding-left:0;padding-right:18px}
+</style>
+</head>
+<body>
+<header><div class="wrap nav"><div class="brand">KDT <b>Labs</b></div>
+<select id="lang" aria-label="Language">
+<option value="en">English</option><option value="no">Norsk</option><option value="sv">Svenska</option><option value="da">Dansk</option><option value="fi">Suomi</option><option value="de">Deutsch</option><option value="es">Español</option><option value="ar">العربية</option><option value="hi">हिन्दी</option><option value="ne">नेपाली</option><option value="am">አማርኛ</option>
+</select></div></header>
+
+<main class="wrap">
+<section class="hero">
+<h1 data-t="h1">Bots, Mini Apps & AI chatbots that work for your business 24/7</h1>
+<p data-t="sub">We build Telegram bots, Telegram Mini Apps, WhatsApp/Telegram AI assistants and data-scraping pipelines — hosted on our own servers, delivered fast, supported in your language.</p>
+<div class="btns"><a class="btn p" href="https://t.me/khobbitttt" data-t="cta1">Message us on Telegram</a><a class="btn s" href="#demos" data-t="cta2">Try live demos</a></div>
+</section>
+
+<h2 id="demos" data-t="svc">Services & live demos</h2>
+<div class="grid">
+<div class="card"><div class="ic">🛒</div><h3 data-t="s1">Telegram Mini Apps</h3>
+<p data-t="s1d">A real app inside Telegram — shop, booking, catalogue, quiz or loyalty — no download needed.</p>
+<ul><li data-t="s1a">Catalogue, cart & checkout</li><li data-t="s1b">Telegram login, admin panel</li><li data-t="s1c">Payments & order alerts to your chat</li></ul>
+<a class="btn p" href="shop.html" data-t="demo">Open live demo</a></div>
+
+<div class="card"><div class="ic">🤖</div><h3 data-t="s2">AI chatbots (Telegram / WhatsApp / website)</h3>
+<p data-t="s2d">Answers customers instantly, books appointments and captures leads — trained on your menu, prices and FAQs.</p>
+<ul><li data-t="s2a">Replies in your customers' language</li><li data-t="s2b">Bookings & leads to Google Sheets</li><li data-t="s2c">Hands over to a human when needed</li></ul>
+<a class="btn p" href="chat.html" data-t="demo">Open live demo</a></div>
+
+<div class="card"><div class="ic">📊</div><h3 data-t="s3">Web scraping & data</h3>
+<p data-t="s3d">Prices, listings, jobs, contacts or products collected from websites into clean Excel/Sheets — once or every day.</p>
+<ul><li data-t="s3a">Clean, de-duplicated data</li><li data-t="s3b">Daily auto-updates & alerts</li><li data-t="s3c">CSV, Excel, Google Sheets or API</li></ul>
+<a class="btn p" href="data.html" data-t="demo">Open live demo</a></div>
+</div>
+
+<h2 data-t="how">How we work</h2>
+<div class="steps">
+<div class="step"><b>1.</b> <span data-t="w1">Tell us what you need (any language).</span></div>
+<div class="step"><b>2.</b> <span data-t="w2">Free demo or quote within 24 hours.</span></div>
+<div class="step"><b>3.</b> <span data-t="w3">Delivery in days, hosted on our servers.</span></div>
+<div class="step"><b>4.</b> <span data-t="w4">Support & updates after delivery.</span></div>
+</div>
+
+<div class="cta"><h2 data-t="ctah">Want a free demo for your business?</h2>
+<p data-t="ctap">Send your business name and what you need — we'll build a small working demo first.</p>
+<div class="btns" style="justify-content:center"><a class="btn p" href="https://t.me/khobbitttt">Telegram @khobbitttt</a><a class="btn s" href="mailto:devvkapil@gmail.com">devvkapil@gmail.com</a></div></div>
+</main>
+<footer>© 2026 KDT Labs · India · <span data-t="foot">Also runs Exam Hub (Telegram quizzes, PDFs & live videos for students)</span></footer>
+
+<script>
+const T={
+no:{h1:"Boter, Mini Apps og AI-chatboter som jobber for bedriften din 24/7",sub:"Vi lager Telegram-boter, Telegram Mini Apps, AI-assistenter for WhatsApp/Telegram og datainnsamling (web scraping) — driftet på våre egne servere, levert raskt.",cta1:"Send oss melding på Telegram",cta2:"Prøv demoene",svc:"Tjenester og demoer",s1:"Telegram Mini Apps",s1d:"En ekte app inne i Telegram — butikk, booking, katalog eller quiz — uten nedlasting.",s1a:"Katalog, handlekurv og kasse",s1b:"Telegram-innlogging, adminpanel",s1c:"Betaling og ordrevarsler",s2:"AI-chatboter (Telegram / WhatsApp / nettside)",s2d:"Svarer kunder umiddelbart, tar bestillinger og samler leads.",s2a:"Svarer på kundens språk",s2b:"Bestillinger til Google Sheets",s2c:"Overfører til et menneske ved behov",s3:"Web scraping og data",s3d:"Priser, annonser, jobber eller produkter samlet i ryddige Excel-ark — én gang eller daglig.",s3a:"Rene data uten duplikater",s3b:"Daglige oppdateringer og varsler",s3c:"CSV, Excel, Google Sheets eller API",demo:"Åpne demo",how:"Slik jobber vi",w1:"Fortell oss hva du trenger.",w2:"Gratis demo eller pris innen 24 timer.",w3:"Levering på dager, driftet av oss.",w4:"Support og oppdateringer etterpå.",ctah:"Vil du ha en gratis demo?",ctap:"Send navnet på bedriften og hva du trenger — vi lager en liten demo først.",foot:"Driver også Exam Hub (quiz og PDF for studenter)"},
+sv:{h1:"Botar, Mini Apps och AI-chattbotar som jobbar för ditt företag dygnet runt",sub:"Vi bygger Telegram-botar, Telegram Mini Apps, AI-assistenter för WhatsApp/Telegram och web scraping — på våra egna servrar, snabb leverans.",cta1:"Skriv till oss på Telegram",cta2:"Testa demos",svc:"Tjänster och demos",s1:"Telegram Mini Apps",s1d:"En riktig app i Telegram — butik, bokning, katalog eller quiz — ingen nedladdning.",s1a:"Katalog, varukorg och kassa",s1b:"Telegram-inloggning, adminpanel",s1c:"Betalning och orderaviseringar",s2:"AI-chattbotar (Telegram / WhatsApp / webb)",s2d:"Svarar kunder direkt, tar bokningar och samlar leads.",s2a:"Svarar på kundens språk",s2b:"Bokningar till Google Sheets",s2c:"Lämnar över till en människa vid behov",s3:"Web scraping och data",s3d:"Priser, annonser, jobb eller produkter i snygga Excel-ark — en gång eller dagligen.",s3a:"Ren data utan dubbletter",s3b:"Dagliga uppdateringar",s3c:"CSV, Excel, Google Sheets eller API",demo:"Öppna demo",how:"Så jobbar vi",w1:"Berätta vad du behöver.",w2:"Gratis demo eller offert inom 24 timmar.",w3:"Leverans på några dagar.",w4:"Support och uppdateringar efteråt.",ctah:"Vill du ha en gratis demo?",ctap:"Skicka företagets namn och vad du behöver — vi bygger en liten demo först.",foot:"Driver även Exam Hub (quiz och PDF för studenter)"},
+da:{h1:"Bots, Mini Apps og AI-chatbots, der arbejder for din virksomhed døgnet rundt",sub:"Vi bygger Telegram-bots, Telegram Mini Apps, AI-assistenter til WhatsApp/Telegram og web scraping — på vores egne servere, hurtig levering.",cta1:"Skriv til os på Telegram",cta2:"Prøv demoerne",svc:"Ydelser og demoer",s1:"Telegram Mini Apps",s1d:"En rigtig app i Telegram — butik, booking, katalog eller quiz — uden download.",s1a:"Katalog, kurv og betaling",s1b:"Telegram-login, adminpanel",s1c:"Betaling og ordrebeskeder",s2:"AI-chatbots (Telegram / WhatsApp / web)",s2d:"Svarer kunder med det samme, tager bookinger og indsamler leads.",s2a:"Svarer på kundens sprog",s2b:"Bookinger til Google Sheets",s2c:"Overdrager til et menneske ved behov",s3:"Web scraping og data",s3d:"Priser, annoncer, job eller produkter i pæne Excel-ark — én gang eller dagligt.",s3a:"Rene data uden dubletter",s3b:"Daglige opdateringer",s3c:"CSV, Excel, Google Sheets eller API",demo:"Åbn demo",how:"Sådan arbejder vi",w1:"Fortæl os, hvad du har brug for.",w2:"Gratis demo eller tilbud inden 24 timer.",w3:"Levering på få dage.",w4:"Support og opdateringer bagefter.",ctah:"Vil du have en gratis demo?",ctap:"Send virksomhedens navn og behov — vi laver en lille demo først.",foot:"Driver også Exam Hub (quiz og PDF til studerende)"},
+fi:{h1:"Botit, Mini Appit ja AI-chatbotit, jotka palvelevat yritystäsi 24/7",sub:"Teemme Telegram-botteja, Telegram Mini Appeja, AI-avustajia WhatsAppiin/Telegramiin ja web scraping -ratkaisuja — omilla palvelimillamme, nopeasti.",cta1:"Lähetä viesti Telegramissa",cta2:"Kokeile demoja",svc:"Palvelut ja demot",s1:"Telegram Mini Appit",s1d:"Oikea sovellus Telegramin sisällä — kauppa, varaus, katalogi tai visa — ilman latausta.",s1a:"Katalogi, ostoskori ja kassa",s1b:"Telegram-kirjautuminen, hallintapaneeli",s1c:"Maksut ja tilausilmoitukset",s2:"AI-chatbotit (Telegram / WhatsApp / verkkosivu)",s2d:"Vastaa asiakkaille heti, ottaa varauksia ja kerää liidejä.",s2a:"Vastaa asiakkaan kielellä",s2b:"Varaukset Google Sheetsiin",s2c:"Siirtää ihmiselle tarvittaessa",s3:"Web scraping ja data",s3d:"Hinnat, ilmoitukset, työpaikat tai tuotteet siistiin Exceliin — kerran tai päivittäin.",s3a:"Puhdas data ilman kaksoiskappaleita",s3b:"Päivittäiset päivitykset",s3c:"CSV, Excel, Google Sheets tai API",demo:"Avaa demo",how:"Näin toimimme",w1:"Kerro mitä tarvitset.",w2:"Ilmainen demo tai tarjous 24 tunnissa.",w3:"Toimitus muutamassa päivässä.",w4:"Tuki ja päivitykset jälkeenpäin.",ctah:"Haluatko ilmaisen demon?",ctap:"Lähetä yrityksesi nimi ja tarpeesi — teemme ensin pienen demon.",foot:"Ylläpidämme myös Exam Hubia (visoja ja PDF:iä opiskelijoille)"},
+de:{h1:"Bots, Mini Apps und KI-Chatbots, die rund um die Uhr für Ihr Unternehmen arbeiten",sub:"Wir entwickeln Telegram-Bots, Telegram Mini Apps, KI-Assistenten für WhatsApp/Telegram und Web-Scraping — auf eigenen Servern, schnell geliefert.",cta1:"Schreiben Sie uns auf Telegram",cta2:"Live-Demos testen",svc:"Leistungen und Demos",s1:"Telegram Mini Apps",s1d:"Eine echte App in Telegram — Shop, Buchung, Katalog oder Quiz — ohne Download.",s1a:"Katalog, Warenkorb und Checkout",s1b:"Telegram-Login, Admin-Panel",s1c:"Zahlungen und Bestellbenachrichtigungen",s2:"KI-Chatbots (Telegram / WhatsApp / Website)",s2d:"Beantwortet Kunden sofort, nimmt Buchungen an und sammelt Leads.",s2a:"Antwortet in der Sprache Ihrer Kunden",s2b:"Buchungen in Google Sheets",s2c:"Übergibt bei Bedarf an einen Menschen",s3:"Web-Scraping und Daten",s3d:"Preise, Inserate, Jobs oder Produkte sauber in Excel — einmalig oder täglich.",s3a:"Saubere Daten ohne Duplikate",s3b:"Tägliche Updates und Alarme",s3c:"CSV, Excel, Google Sheets oder API",demo:"Demo öffnen",how:"So arbeiten wir",w1:"Sagen Sie uns, was Sie brauchen.",w2:"Kostenlose Demo oder Angebot in 24 Stunden.",w3:"Lieferung in wenigen Tagen.",w4:"Support und Updates danach.",ctah:"Kostenlose Demo für Ihr Unternehmen?",ctap:"Senden Sie Firmennamen und Bedarf — wir bauen zuerst eine kleine Demo.",foot:"Betreibt auch Exam Hub (Quiz und PDFs für Studierende)"},
+es:{h1:"Bots, Mini Apps y chatbots con IA que trabajan para tu negocio 24/7",sub:"Creamos bots de Telegram, Telegram Mini Apps, asistentes con IA para WhatsApp/Telegram y web scraping — en nuestros propios servidores, entrega rápida.",cta1:"Escríbenos por Telegram",cta2:"Probar demos",svc:"Servicios y demos",s1:"Telegram Mini Apps",s1d:"Una app real dentro de Telegram — tienda, reservas, catálogo o quiz — sin descargas.",s1a:"Catálogo, carrito y pago",s1b:"Login con Telegram, panel admin",s1c:"Pagos y avisos de pedidos",s2:"Chatbots con IA (Telegram / WhatsApp / web)",s2d:"Responde al instante, agenda citas y capta clientes.",s2a:"Responde en el idioma del cliente",s2b:"Reservas a Google Sheets",s2c:"Pasa a una persona cuando hace falta",s3:"Web scraping y datos",s3d:"Precios, anuncios, empleos o productos en Excel limpio — una vez o a diario.",s3a:"Datos limpios sin duplicados",s3b:"Actualizaciones diarias",s3c:"CSV, Excel, Google Sheets o API",demo:"Abrir demo",how:"Cómo trabajamos",w1:"Cuéntanos qué necesitas.",w2:"Demo gratis o presupuesto en 24 horas.",w3:"Entrega en pocos días.",w4:"Soporte y actualizaciones después.",ctah:"¿Quieres una demo gratis?",ctap:"Envía el nombre de tu negocio y lo que necesitas — primero hacemos una pequeña demo.",foot:"También gestionamos Exam Hub (quizzes y PDFs para estudiantes)"},
+ar:{h1:"بوتات وتطبيقات مصغّرة وروبوتات محادثة بالذكاء الاصطناعي تعمل لنشاطك على مدار الساعة",sub:"نطوّر بوتات تيليجرام، وتطبيقات تيليجرام المصغّرة، ومساعدين بالذكاء الاصطناعي لواتساب وتيليجرام، وجمع البيانات من المواقع — على خوادمنا وبتسليم سريع.",cta1:"راسلنا على تيليجرام",cta2:"جرّب العروض",svc:"الخدمات والعروض",s1:"تطبيقات تيليجرام المصغّرة",s1d:"تطبيق حقيقي داخل تيليجرام — متجر أو حجز أو كتالوج — بدون تنزيل.",s1a:"كتالوج وسلة ودفع",s1b:"تسجيل دخول بتيليجرام ولوحة تحكم",s1c:"تنبيهات الطلبات والدفع",s2:"روبوتات محادثة بالذكاء الاصطناعي",s2d:"يرد على العملاء فوراً ويأخذ الحجوزات ويجمع العملاء المحتملين.",s2a:"يرد بلغة العميل",s2b:"الحجوزات إلى Google Sheets",s2c:"يحوّل إلى موظف عند الحاجة",s3:"جمع البيانات من المواقع",s3d:"أسعار وإعلانات ووظائف ومنتجات في ملفات Excel مرتبة — مرة أو يومياً.",s3a:"بيانات نظيفة بلا تكرار",s3b:"تحديثات يومية",s3c:"CSV أو Excel أو Google Sheets أو API",demo:"افتح العرض",how:"طريقة عملنا",w1:"أخبرنا بما تحتاجه.",w2:"عرض مجاني أو سعر خلال 24 ساعة.",w3:"تسليم خلال أيام.",w4:"دعم وتحديثات بعد التسليم.",ctah:"هل تريد عرضاً مجانياً لنشاطك؟",ctap:"أرسل اسم نشاطك وما تحتاجه — نبني عرضاً صغيراً أولاً.",foot:"ندير أيضاً Exam Hub (اختبارات وملفات PDF للطلاب)"},
+hi:{h1:"आपके बिज़नेस के लिए 24/7 काम करने वाले बॉट, मिनी ऐप और AI चैटबॉट",sub:"हम Telegram बॉट, Telegram मिनी ऐप, WhatsApp/Telegram AI असिस्टेंट और वेब स्क्रैपिंग बनाते हैं — अपने सर्वर पर, जल्दी डिलीवरी।",cta1:"Telegram पर मैसेज करें",cta2:"लाइव डेमो देखें",svc:"सेवाएँ और डेमो",s1:"Telegram मिनी ऐप",s1d:"Telegram के अंदर असली ऐप — दुकान, बुकिंग, कैटलॉग या क्विज़ — बिना डाउनलोड।",s1a:"कैटलॉग, कार्ट और चेकआउट",s1b:"Telegram लॉगिन, एडमिन पैनल",s1c:"पेमेंट और ऑर्डर अलर्ट",s2:"AI चैटबॉट (Telegram / WhatsApp / वेबसाइट)",s2d:"ग्राहकों को तुरंत जवाब, बुकिंग और लीड।",s2a:"ग्राहक की भाषा में जवाब",s2b:"बुकिंग Google Sheets में",s2c:"ज़रूरत पर इंसान को ट्रांसफ़र",s3:"वेब स्क्रैपिंग और डेटा",s3d:"वेबसाइटों से दाम, लिस्टिंग, नौकरियाँ या प्रोडक्ट साफ़ Excel में — एक बार या रोज़।",s3a:"साफ़ डेटा, कोई डुप्लिकेट नहीं",s3b:"रोज़ अपडेट और अलर्ट",s3c:"CSV, Excel, Google Sheets या API",demo:"डेमो खोलें",how:"हम कैसे काम करते हैं",w1:"बताइए क्या चाहिए।",w2:"24 घंटे में फ्री डेमो या रेट।",w3:"कुछ दिनों में डिलीवरी।",w4:"बाद में सपोर्ट और अपडेट।",ctah:"अपने बिज़नेस का फ्री डेमो चाहिए?",ctap:"बिज़नेस का नाम और ज़रूरत भेजिए — पहले छोटा डेमो बनाएँगे।",foot:"Exam Hub भी चलाते हैं (छात्रों के लिए क्विज़, PDF और लाइव वीडियो)"},
+ne:{h1:"तपाईंको व्यवसायका लागि २४/७ काम गर्ने बट, मिनी एप र AI च्याटबट",sub:"हामी Telegram बट, Telegram मिनी एप, WhatsApp/Telegram AI सहायक र वेब स्क्र्यापिङ बनाउँछौं — आफ्नै सर्भरमा, छिटो डेलिभरी।",cta1:"Telegram मा सम्पर्क गर्नुहोस्",cta2:"लाइभ डेमो हेर्नुहोस्",svc:"सेवा र डेमो",s1:"Telegram मिनी एप",s1d:"Telegram भित्रै वास्तविक एप — पसल, बुकिङ, क्याटलग वा क्विज — डाउनलोड बिना।",s1a:"क्याटलग, कार्ट र चेकआउट",s1b:"Telegram लगइन, एडमिन प्यानल",s1c:"भुक्तानी र अर्डर सूचना",s2:"AI च्याटबट (Telegram / WhatsApp / वेबसाइट)",s2d:"ग्राहकलाई तुरुन्त जवाफ, बुकिङ र लिड सङ्कलन।",s2a:"ग्राहकको भाषामा जवाफ",s2b:"बुकिङ Google Sheets मा",s2c:"आवश्यक परे मानिसलाई हस्तान्तरण",s3:"वेब स्क्र्यापिङ र डाटा",s3d:"वेबसाइटबाट मूल्य, सूची, जागिर वा सामान सफा Excel मा — एक पटक वा दैनिक।",s3a:"दोहोरो नभएको सफा डाटा",s3b:"दैनिक अपडेट",s3c:"CSV, Excel, Google Sheets वा API",demo:"डेमो खोल्नुहोस्",how:"हामी कसरी काम गर्छौं",w1:"के चाहिन्छ भन्नुहोस्।",w2:"२४ घण्टाभित्र निःशुल्क डेमो वा मूल्य।",w3:"केही दिनमै डेलिभरी।",w4:"पछि पनि सहयोग र अपडेट।",ctah:"तपाईंको व्यवसायको निःशुल्क डेमो चाहिन्छ?",ctap:"व्यवसायको नाम र आवश्यकता पठाउनुहोस् — पहिले सानो डेमो बनाइदिन्छौं।",foot:"Exam Hub पनि चलाउँछौं (विद्यार्थीका लागि क्विज र PDF)"},
+am:{h1:"ለንግድዎ 24/7 የሚሰሩ ቦቶች፣ ሚኒ አፖች እና የAI ቻትቦቶች",sub:"የቴሌግራም ቦቶች፣ የቴሌግራም ሚኒ አፖች፣ ለWhatsApp/ቴሌግራም የAI ረዳቶች እና የድረ-ገጽ መረጃ መሰብሰቢያ እንሰራለን — በራሳችን ሰርቨር፣ በፍጥነት።",cta1:"በቴሌግራም ይጻፉልን",cta2:"ናሙናዎችን ይሞክሩ",svc:"አገልግሎቶች እና ናሙናዎች",s1:"የቴሌግራም ሚኒ አፖች",s1d:"በቴሌግራም ውስጥ የሚሰራ እውነተኛ አፕ — ሱቅ፣ ቀጠሮ፣ ካታሎግ ወይም ኩዊዝ — ማውረድ ሳያስፈልግ።",s1a:"ካታሎግ፣ ጋሪ እና ክፍያ",s1b:"በቴሌግራም መግቢያ፣ የአስተዳዳሪ ገጽ",s1c:"የትዕዛዝ ማሳወቂያዎች",s2:"የAI ቻትቦቶች (ቴሌግራም / WhatsApp / ድረ-ገጽ)",s2d:"ደንበኞችን ወዲያውኑ ይመልሳል፣ ቀጠሮ ይይዛል።",s2a:"በደንበኛው ቋንቋ ይመልሳል",s2b:"ቀጠሮዎች ወደ Google Sheets",s2c:"ሲያስፈልግ ወደ ሰው ያስተላልፋል",s3:"የድረ-ገጽ መረጃ መሰብሰብ",s3d:"ዋጋዎች፣ ማስታወቂያዎች፣ ስራዎች ወይም ምርቶች በንጹህ Excel — አንድ ጊዜ ወይም በየቀኑ።",s3a:"ንጹህ መረጃ",s3b:"በየቀኑ ማሻሻያ",s3c:"CSV፣ Excel፣ Google Sheets ወይም API",demo:"ናሙናውን ይክፈቱ",how:"እንዴት እንደምንሰራ",w1:"የሚፈልጉትን ይንገሩን።",w2:"በ24 ሰዓት ውስጥ ነፃ ናሙና ወይም ዋጋ።",w3:"በጥቂት ቀናት ውስጥ ማስረከብ።",w4:"ከዚያ በኋላ ድጋፍ።",ctah:"ለንግድዎ ነፃ ናሙና ይፈልጋሉ?",ctap:"የንግድዎን ስም እና ፍላጎትዎን ይላኩ — መጀመሪያ ትንሽ ናሙና እንሰራለን።",foot:"Exam Hubንም እናስተዳድራለን (ለተማሪዎች ኩዊዝ እና PDF)"}
+};
+const EN={};document.querySelectorAll('[data-t]').forEach(e=>EN[e.dataset.t]=e.textContent);
+function setLang(l){const d=T[l]||{};document.querySelectorAll('[data-t]').forEach(e=>{e.textContent=d[e.dataset.t]||EN[e.dataset.t]});document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';document.querySelectorAll('a[href$=".html"]').forEach(a=>{a.href=a.getAttribute('href').split('?')[0]+'?lang='+l});try{localStorage.setItem('kdt_lang',l)}catch(e){}}
+const sel=document.getElementById('lang');
+let start=new URLSearchParams(location.search).get('lang');
+if(!start){try{start=localStorage.getItem('kdt_lang')}catch(e){}}
+if(!start){const n=(navigator.language||'en').slice(0,2).toLowerCase();start={nb:'no',nn:'no',no:'no',sv:'sv',da:'da',fi:'fi',de:'de',es:'es',ar:'ar',hi:'hi',ne:'ne',am:'am'}[n]||'en'}
+sel.value=start;setLang(start);sel.onchange=()=>setLang(sel.value);
+</script>
+</body>
+</html>

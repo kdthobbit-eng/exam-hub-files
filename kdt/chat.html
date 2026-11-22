@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demo AI Chatbot — Nordlys Dental Clinic · KDT Labs</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",sans-serif;background:#e9eef6;display:flex;justify-content:center}
+.app{width:100%;max-width:480px;height:100vh;display:flex;flex-direction:column;background:#fff}
+.hd{background:#0f5f8c;color:#fff;padding:14px 16px;display:flex;gap:12px;align-items:center}
+.av{width:42px;height:42px;border-radius:50%;background:#fff;color:#0f5f8c;display:grid;place-items:center;font-size:22px}
+.hd b{display:block}.hd small{opacity:.85}.hd select{margin-left:auto;border-radius:8px;border:0;padding:5px}
+.msgs{flex:1;overflow:auto;padding:14px;background:#eef3f8}
+.m{max-width:82%;padding:10px 13px;border-radius:16px;margin:6px 0;line-height:1.45;font-size:15px;white-space:pre-line}
+.bot{background:#fff;border-top-left-radius:4px}.me{background:#d8f1ff;margin-left:auto;border-top-right-radius:4px}
+.q{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;background:#fff;border-top:1px solid #e3e8ef}
+.q button{border:1px solid #0f5f8c;color:#0f5f8c;background:#fff;border-radius:16px;padding:6px 11px;font-size:13px}
+.in{display:flex;gap:8px;padding:10px 12px;background:#fff}
+.in input{flex:1;padding:12px;border-radius:22px;border:1px solid #cfd8e3;font-size:15px}
+.in button{border:0;background:#0f5f8c;color:#fff;border-radius:22px;padding:0 18px;font-weight:700}
+.tag{font-size:11px;text-align:center;color:#7a8699;padding:4px}
+.typing{opacity:.6;font-style:italic}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="hd"><div class="av">🦷</div><div><b>Nordlys Dental — Assistant</b><small id="st">online · replies instantly</small></div>
+<select id="lg"><option value="en">EN</option><option value="no">NO</option><option value="sv">SV</option><option value="de">DE</option><option value="es">ES</option><option value="ar">AR</option><option value="hi">HI</option></select></div>
+<div class="msgs" id="msgs"></div>
+<div class="q" id="q"></div>
+<div class="in"><input id="t" placeholder="Type a message…" autocomplete="off"><button id="s">➤</button></div>
+<div class="tag">DEMO by KDT Labs — the real bot is trained on your own prices, hours & FAQs and runs on Telegram, WhatsApp or your website · t.me/khobbitttt</div>
+</div>
+<script>
+const D={
+en:{hi:"Hi! 👋 I'm the Nordlys Dental assistant. I can tell you prices and opening hours, or book an appointment. How can I help?",q:["Prices","Opening hours","Book appointment","Emergency","Talk to a human"],
+price:"Our prices:\n• Check-up & cleaning — 890 kr\n• Filling — from 1,200 kr\n• Teeth whitening — 2,900 kr\n• Emergency visit — 1,100 kr\nWant me to book a time?",
+hours:"We're open Mon–Fri 08:00–17:00 and Sat 10:00–14:00. Closed on Sundays.",
+book1:"Great! What day suits you? (e.g. Tuesday)",book2:"And which time? Morning or afternoon?",book3:"What's your name and phone number?",
+booked:n=>`✅ Booked! ${n}. You'll get a reminder the day before. (In the real bot this goes straight into the clinic's calendar / Google Sheet and their Telegram.)`,
+emer:"For tooth pain or swelling we keep emergency slots every day at 08:00 and 13:00. Shall I reserve one for you?",
+human:"Sure — I've notified the reception. A staff member will reply here within a few minutes. 🙌",
+unk:"I can help with prices, opening hours, appointments and emergencies. Tap a button below 👇",ph:"Type a message…"},
+no:{hi:"Hei! 👋 Jeg er assistenten til Nordlys Tannklinikk. Jeg kan gi deg priser, åpningstider eller bestille time. Hva kan jeg hjelpe med?",q:["Priser","Åpningstider","Bestill time","Akutt","Snakk med et menneske"],
+price:"Våre priser:\n• Undersøkelse og rens — 890 kr\n• Fylling — fra 1 200 kr\n• Tannbleking — 2 900 kr\n• Akuttime — 1 100 kr\nVil du bestille time?",
+hours:"Vi har åpent man–fre 08:00–17:00 og lør 10:00–14:00. Stengt søndag.",
+book1:"Flott! Hvilken dag passer? (f.eks. tirsdag)",book2:"Og hvilket tidspunkt? Formiddag eller ettermiddag?",book3:"Hva er navnet og telefonnummeret ditt?",
+booked:n=>`✅ Timen er bestilt! ${n}. Du får en påminnelse dagen før.`,
+emer:"Ved tannpine eller hevelse har vi akuttimer hver dag kl. 08:00 og 13:00. Skal jeg reservere en?",
+human:"Selvsagt — resepsjonen er varslet og svarer her om noen minutter. 🙌",
+unk:"Jeg kan hjelpe med priser, åpningstider, timebestilling og akutt. Trykk på en knapp 👇",ph:"Skriv en melding…"},
+sv:{hi:"Hej! 👋 Jag är assistenten på Nordlys Tandklinik. Jag kan ge priser, öppettider eller boka tid. Hur kan jag hjälpa dig?",q:["Priser","Öppettider","Boka tid","Akut","Prata med en människa"],
+price:"Våra priser:\n• Undersökning & rengöring — 890 kr\n• Lagning — från 1 200 kr\n• Tandblekning — 2 900 kr\n• Akutbesök — 1 100 kr\nVill du boka en tid?",
+hours:"Vi har öppet mån–fre 08:00–17:00 och lör 10:00–14:00. Stängt söndag.",
+book1:"Toppen! Vilken dag passar? (t.ex. tisdag)",book2:"Och vilken tid? Förmiddag eller eftermiddag?",book3:"Vad heter du och vilket telefonnummer har du?",
+booked:n=>`✅ Bokat! ${n}. Du får en påminnelse dagen innan.`,
+emer:"Vid tandvärk eller svullnad har vi akuttider varje dag kl. 08:00 och 13:00. Ska jag reservera en?",
+human:"Självklart — receptionen är meddelad och svarar här inom några minuter. 🙌",
+unk:"Jag kan hjälpa med priser, öppettider, bokning och akut. Tryck på en knapp 👇",ph:"Skriv ett meddelande…"},
+de:{hi:"Hallo! 👋 Ich bin der Assistent der Zahnklinik Nordlys. Ich nenne Preise, Öffnungszeiten oder buche einen Termin. Wie kann ich helfen?",q:["Preise","Öffnungszeiten","Termin buchen","Notfall","Mit Menschen sprechen"],
+price:"Unsere Preise:\n• Kontrolle & Reinigung — 890 kr\n• Füllung — ab 1.200 kr\n• Bleaching — 2.900 kr\n• Notfalltermin — 1.100 kr\nSoll ich einen Termin buchen?",
+hours:"Geöffnet Mo–Fr 08:00–17:00 und Sa 10:00–14:00. Sonntag geschlossen.",
+book1:"Super! Welcher Tag passt Ihnen? (z. B. Dienstag)",book2:"Und welche Uhrzeit? Vormittag oder Nachmittag?",book3:"Wie ist Ihr Name und Ihre Telefonnummer?",
+booked:n=>`✅ Gebucht! ${n}. Sie erhalten am Vortag eine Erinnerung.`,
+emer:"Bei Zahnschmerzen haben wir täglich Notfalltermine um 08:00 und 13:00. Soll ich einen reservieren?",
+human:"Natürlich — die Rezeption ist informiert und antwortet hier in wenigen Minuten. 🙌",
+unk:"Ich helfe bei Preisen, Öffnungszeiten, Terminen und Notfällen. Tippen Sie unten 👇",ph:"Nachricht schreiben…"},
+es:{hi:"¡Hola! 👋 Soy el asistente de la Clínica Dental Nordlys. Puedo darte precios, horarios o reservar una cita. ¿En qué te ayudo?",q:["Precios","Horario","Reservar cita","Urgencia","Hablar con una persona"],
+price:"Nuestros precios:\n• Revisión y limpieza — 890 kr\n• Empaste — desde 1.200 kr\n• Blanqueamiento — 2.900 kr\n• Urgencia — 1.100 kr\n¿Te reservo una cita?",
+hours:"Abrimos lun–vie 08:00–17:00 y sáb 10:00–14:00. Domingo cerrado.",
+book1:"¡Genial! ¿Qué día te viene bien? (ej. martes)",book2:"¿Y a qué hora? ¿Mañana o tarde?",book3:"¿Tu nombre y número de teléfono?",
+booked:n=>`✅ ¡Reservado! ${n}. Recibirás un recordatorio el día antes.`,
+emer:"Para dolor o inflamación tenemos citas de urgencia cada día a las 08:00 y 13:00. ¿Te reservo una?",
+human:"Claro — recepción ya está avisada y te responderá aquí en unos minutos. 🙌",
+unk:"Puedo ayudarte con precios, horarios, citas y urgencias. Pulsa un botón 👇",ph:"Escribe un mensaje…"},
+ar:{hi:"مرحباً! 👋 أنا مساعد عيادة نوردليس للأسنان. أستطيع إخبارك بالأسعار والمواعيد أو حجز موعد. كيف أساعدك؟",q:["الأسعار","مواعيد العمل","حجز موعد","حالة طارئة","التحدث مع موظف"],
+price:"أسعارنا:\n• فحص وتنظيف — 890 كرونة\n• حشوة — من 1200 كرونة\n• تبييض — 2900 كرونة\n• زيارة طارئة — 1100 كرونة\nهل أحجز لك موعداً؟",
+hours:"نعمل من الاثنين إلى الجمعة 08:00–17:00 والسبت 10:00–14:00. الأحد مغلق.",
+book1:"ممتاز! أي يوم يناسبك؟",book2:"وأي وقت؟ صباحاً أم مساءً؟",book3:"ما اسمك ورقم هاتفك؟",
+booked:n=>`✅ تم الحجز! ${n}. ستصلك رسالة تذكير قبل يوم.`,
+emer:"لدينا مواعيد طارئة يومياً الساعة 08:00 و13:00. هل أحجز لك واحداً؟",
+human:"بالتأكيد — تم إبلاغ الاستقبال وسيرد عليك هنا خلال دقائق. 🙌",
+unk:"أستطيع المساعدة في الأسعار والمواعيد والحجز والحالات الطارئة. اضغط زراً 👇",ph:"اكتب رسالة…"},
+hi:{hi:"नमस्ते! 👋 मैं Nordlys Dental का असिस्टेंट हूँ। दाम, समय बता सकता हूँ या अपॉइंटमेंट बुक कर सकता हूँ। क्या मदद करूँ?",q:["दाम","खुलने का समय","अपॉइंटमेंट बुक करें","इमरजेंसी","इंसान से बात करें"],
+price:"हमारे दाम:\n• चेकअप और सफ़ाई — 890 kr\n• फ़िलिंग — 1,200 kr से\n• दाँत सफ़ेद करना — 2,900 kr\n• इमरजेंसी — 1,100 kr\nअपॉइंटमेंट बुक कर दूँ?",
+hours:"सोम–शुक्र 08:00–17:00 और शनि 10:00–14:00 खुले हैं। रविवार बंद।",
+book1:"बढ़िया! कौन-सा दिन ठीक रहेगा?",book2:"और समय? सुबह या दोपहर?",book3:"आपका नाम और फ़ोन नंबर?",
+booked:n=>`✅ बुक हो गया! ${n}. एक दिन पहले रिमाइंडर आएगा।`,
+emer:"दर्द या सूजन के लिए रोज़ 08:00 और 13:00 पर इमरजेंसी स्लॉट हैं। एक रिज़र्व करूँ?",
+human:"ज़रूर — रिसेप्शन को बता दिया है, कुछ मिनट में यहीं जवाब आएगा। 🙌",
+unk:"मैं दाम, समय, अपॉइंटमेंट और इमरजेंसी में मदद कर सकता हूँ। नीचे बटन दबाएँ 👇",ph:"मैसेज लिखें…"}};
+const K={price:/pri|pris|preis|precio|cost|कीमत|दाम|سعر|أسعار|kost/i,hours:/hour|open|åpen|öpp|zeit|horar|समय|مواعيد|time/i,book:/book|bestill|boka|termin|cita|reserv|बुक|حجز|appoint/i,emer:/emerg|akut|notfall|urgen|pain|vondt|ont|दर्द|इमरजेंसी|طار/i,human:/human|menneske|människa|mensch|persona|इंसान|موظف|staff/i};
+let L=(new URLSearchParams(location.search).get('lang')||navigator.language||'en').slice(0,2);if(L==='nb'||L==='nn')L='no';if(!D[L])L='en';
+const lg=document.getElementById('lg');lg.value=L;let st=0,bk={};
+function d(){return D[L]}
+function add(t,who){const e=document.createElement('div');e.className='m '+who;e.textContent=t;const m=document.getElementById('msgs');m.appendChild(e);m.scrollTop=m.scrollHeight;return e}
+function bot(t){const e=add('…','bot typing');setTimeout(()=>{e.textContent=t;e.className='m bot'},550)}
+function qs(){document.getElementById('q').innerHTML=d().q.map((x,i)=>`<button onclick="tap(${i})">${x}</button>`).join('');document.getElementById('t').placeholder=d().ph;document.querySelector('.app').dir=L==='ar'?'rtl':'ltr'}
+function tap(i){user(d().q[i],['price','hours','book','emer','human'][i])}
+function user(t,k){add(t,'me');
+if(st===1){bk.day=t;st=2;return bot(d().book2)}if(st===2){bk.time=t;st=3;return bot(d().book3)}if(st===3){st=0;return bot(d().booked(`${bk.day}, ${bk.time} — ${t}`))}
+if(!k)for(const x in K)if(K[x].test(t)){k=x;break}
+if(k==='price')return bot(d().price);if(k==='hours')return bot(d().hours);if(k==='book'){st=1;return bot(d().book1)}if(k==='emer')return bot(d().emer);if(k==='human')return bot(d().human);
+if(/^(yes|ja|sí|si|हाँ|نعم|ok)/i.test(t)){st=1;return bot(d().book1)}
+bot(d().unk)}
+function send(){const i=document.getElementById('t');const v=i.value.trim();if(!v)return;i.value='';user(v)}
+document.getElementById('s').onclick=send;document.getElementById('t').onkeydown=e=>{if(e.key==='Enter')send()};
+lg.onchange=()=>{L=lg.value;st=0;document.getElementById('msgs').innerHTML='';qs();bot(d().hi)};
+qs();bot(d().hi);
+</script>
+</body>
+</html>

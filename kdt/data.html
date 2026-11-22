@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demo Web Scraping Dashboard · KDT Labs</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f5f7fb;color:#18202f}
+.wrap{max-width:1000px;margin:0 auto;padding:18px}
+h1{font-size:24px;margin:4px 0}.sub{color:#5b6680;margin:0 0 14px}
+.badge{display:inline-block;background:#fff3c4;color:#6b4e00;font-size:12px;font-weight:700;padding:3px 9px;border-radius:8px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.k{background:#fff;border:1px solid #e3e8f2;border-radius:14px;padding:12px}.k b{display:block;font-size:22px}.k span{color:#5b6680;font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+input,select{padding:10px;border-radius:10px;border:1px solid #cfd7e6;background:#fff;font-size:14px}
+button{padding:10px 14px;border-radius:10px;border:0;background:#2563eb;color:#fff;font-weight:700}
+.tw{overflow:auto;background:#fff;border:1px solid #e3e8f2;border-radius:14px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:640px}th,td{padding:9px 10px;border-bottom:1px solid #eef1f7;text-align:left}
+th{background:#f0f4fb;cursor:pointer;position:sticky;top:0}tr.new td:first-child::before{content:"NEW ";color:#16a34a;font-weight:800;font-size:11px}
+.down{color:#16a34a;font-weight:700}.alert{background:#ecfdf3;border:1px solid #b7ebcd;border-radius:14px;padding:12px;margin:14px 0}
+pre{background:#0f172a;color:#e2e8f0;padding:14px;border-radius:14px;overflow:auto;font-size:12.5px}
+.foot{color:#5b6680;font-size:13px;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<span class="badge">DEMO · KDT Labs</span>
+<h1>📊 Used-car market tracker — Oslo region</h1>
+<p class="sub">Example of a daily scraping job: listings collected from marketplace sites, cleaned, de-duplicated and delivered as a live table, CSV/Excel and Telegram alerts. <b>Data below is sample data for this demo.</b></p>
+<div class="kpis"><div class="k"><b id="kN">0</b><span>listings today</span></div><div class="k"><b id="kA">0</b><span>average price (NOK)</span></div><div class="k"><b id="kNew">0</b><span>new since yesterday</span></div><div class="k"><b id="kDrop">0</b><span>price drops</span></div></div>
+<div class="alert">🔔 <b>Telegram alert (example):</b> <span id="al"></span></div>
+<div class="bar"><input id="f" placeholder="Search make / model…"><select id="fu"><option value="">All fuel types</option><option>Electric</option><option>Hybrid</option><option>Petrol</option><option>Diesel</option></select><select id="mx"><option value="">Any price</option><option value="150000">≤ 150,000</option><option value="250000">≤ 250,000</option><option value="400000">≤ 400,000</option></select><button id="csv">⬇ Download CSV</button></div>
+<div class="tw"><table><thead><tr><th data-k="title">Car</th><th data-k="year">Year</th><th data-k="km">Km</th><th data-k="fuel">Fuel</th><th data-k="price">Price (NOK)</th><th data-k="chg">Change</th><th data-k="city">Location</th></tr></thead><tbody id="tb"></tbody></table></div>
+<h3>How it runs</h3>
+<pre># runs every morning at 06:00 on our server
+items = []
+for page in range(1, 40):
+    html = fetch(f"https://example-marketplace.no/cars?page={page}")
+    for card in parse(html).select(".listing"):
+        items.append(clean(card))          # price → int, km → int, dedupe by ad id
+diff = compare_with_yesterday(items)       # new ads, price drops, sold
+save_csv(items); push_to_google_sheet(items)
+telegram_alert(diff.price_drops, chat="@client_channel")</pre>
+<p class="foot">We follow each site's terms and robots rules and only collect public data. Your real project: any website, any fields, delivered daily to Sheets, Excel, CSV, API or Telegram. Contact: <a href="https://t.me/khobbitttt">t.me/khobbitttt</a> · devvkapil@gmail.com</p>
+</div>
+<script>
+const mk=[["Tesla","Model 3","Electric"],["Tesla","Model Y","Electric"],["Volkswagen","ID.4","Electric"],["Volkswagen","Golf","Petrol"],["Toyota","RAV4","Hybrid"],["Toyota","Corolla","Hybrid"],["Volvo","XC60","Hybrid"],["Volvo","V60","Diesel"],["BMW","i3","Electric"],["Audi","A4","Diesel"],["Skoda","Octavia","Diesel"],["Nissan","Leaf","Electric"],["Kia","Niro","Electric"],["Hyundai","Kona","Electric"],["Ford","Focus","Petrol"]];
+const ct=["Oslo","Bærum","Lillestrøm","Drammen","Asker","Ski","Moss","Jessheim"];
+let s=7;function r(){s=(s*9301+49297)%233280;return s/233280}
+const D=[];for(let i=0;i<60;i++){const m=mk[Math.floor(r()*mk.length)],y=2014+Math.floor(r()*11),km=Math.round((2026-y)*(9000+r()*9000)/100)*100,base=(m[2]==='Electric'?260000:220000)*Math.pow(.88,2026-y)+r()*60000,p=Math.round(base/1000)*1000,chg=r()<.15?-Math.round(r()*25+5)*1000:0;D.push({id:100000+i,title:m[0]+' '+m[1],year:y,km,fuel:m[2],price:p,chg,city:ct[Math.floor(r()*ct.length)],isNew:r()<.18})}
+let sortK='price',asc=true;
+const fmt=n=>n.toLocaleString('en-US');
+function rows(){const q=document.getElementById('f').value.toLowerCase(),fu=document.getElementById('fu').value,mx=+document.getElementById('mx').value||Infinity;return D.filter(d=>d.title.toLowerCase().includes(q)&&(!fu||d.fuel===fu)&&d.price<=mx).sort((a,b)=>(a[sortK]>b[sortK]?1:-1)*(asc?1:-1))}
+function draw(){const R=rows();document.getElementById('tb').innerHTML=R.map(d=>`<tr class="${d.isNew?'new':''}"><td>${d.title}</td><td>${d.year}</td><td>${fmt(d.km)}</td><td>${d.fuel}</td><td><b>${fmt(d.price)}</b></td><td class="${d.chg?'down':''}">${d.chg?'▼ '+fmt(-d.chg):'—'}</td><td>${d.city}</td></tr>`).join('');
+document.getElementById('kN').textContent=R.length;document.getElementById('kA').textContent=R.length?fmt(Math.round(R.reduce((a,b)=>a+b.price,0)/R.length/1000)*1000):0;document.getElementById('kNew').textContent=R.filter(d=>d.isNew).length;document.getElementById('kDrop').textContent=R.filter(d=>d.chg).length;
+const top=D.filter(d=>d.chg).sort((a,b)=>a.chg-b.chg)[0];document.getElementById('al').textContent=top?`Price drop: ${top.title} ${top.year}, ${fmt(top.km)} km — now ${fmt(top.price)} NOK (▼ ${fmt(-top.chg)}) in ${top.city}`:''}
+document.querySelectorAll('th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;asc=sortK===k?!asc:true;sortK=k;draw()});
+['f','fu','mx'].forEach(i=>document.getElementById(i).oninput=draw);
+document.getElementById('csv').onclick=()=>{const R=rows(),h='id,car,year,km,fuel,price_nok,price_change,location\n'+R.map(d=>[d.id,d.title,d.year,d.km,d.fuel,d.price,d.chg,d.city].join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([h],{type:'text/csv'}));a.download='car_listings_demo.csv';a.click()};
+draw();
+</script>
+</body>
+</html>

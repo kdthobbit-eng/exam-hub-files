@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Demo Telegram Mini App — Fjord Bakery · KDT Labs</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--bg:var(--tg-theme-bg-color,#fff);--ink:var(--tg-theme-text-color,#1a1d29);--mute:var(--tg-theme-hint-color,#7a8199);--acc:var(--tg-theme-button-color,#2f7cf6);--acct:var(--tg-theme-button-text-color,#fff);--card:var(--tg-theme-secondary-bg-color,#f3f5fa)}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+.top{padding:16px 16px 6px;display:flex;justify-content:space-between;align-items:center}
+.top h1{font-size:20px;margin:0}.top small{color:var(--mute);display:block}
+.badge{font-size:11px;background:#ffe9a8;color:#6b4e00;padding:3px 8px;border-radius:8px;font-weight:700}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:8px 16px}
+.tab{border:none;background:var(--card);color:var(--ink);padding:8px 14px;border-radius:20px;font-weight:600;white-space:nowrap}
+.tab.on{background:var(--acc);color:var(--acct)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:8px 16px 110px}
+.it{background:var(--card);border-radius:16px;padding:12px;text-align:center}
+.em{font-size:46px;line-height:1.2}.nm{font-weight:700;margin:6px 0 2px;font-size:15px}.pr{color:var(--mute);font-size:14px}
+.ctl{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:8px}
+.ctl button{width:34px;height:34px;border-radius:50%;border:none;background:var(--acc);color:var(--acct);font-size:20px;font-weight:700}
+.ctl span{min-width:18px;font-weight:800}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px;background:var(--bg);border-top:1px solid rgba(0,0,0,.08)}
+.bar button{width:100%;padding:15px;border:none;border-radius:14px;background:var(--acc);color:var(--acct);font-size:16px;font-weight:800}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end}
+.sheet.on{display:flex}.box{background:var(--bg);width:100%;border-radius:20px 20px 0 0;padding:18px 16px 24px;max-height:90vh;overflow:auto}
+.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(0,0,0,.1)}
+input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.15);background:var(--card);color:var(--ink);font-size:15px;margin-top:8px}
+.ok{text-align:center;padding:30px 10px}.ok .em{font-size:64px}
+.note{font-size:12px;color:var(--mute);text-align:center;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="top"><div><h1>🥐 Fjord Bakery</h1><small id="greet">Order fresh bread & coffee</small></div><span class="badge">DEMO · KDT Labs</span></div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<div class="bar"><button id="go">View order</button></div>
+
+<div class="sheet" id="sheet"><div class="box" id="box"></div></div>
+
+<script>
+const tg=window.Telegram&&Telegram.WebApp;if(tg){tg.ready();tg.expand()}
+const L={en:{cats:["All","Bread","Pastry","Coffee"],view:"View order",empty:"Your cart is empty",order:"Your order",total:"Total",name:"Your name",time:"Pickup time",note:"Note (optional)",place:"Place order",back:"Back",done:"Order received!",doneT:"The bakery got your order instantly in their Telegram chat. You'll get a message when it's ready.",greet:"Order fresh bread & coffee"},
+no:{cats:["Alle","Brød","Bakst","Kaffe"],view:"Se bestilling",empty:"Handlekurven er tom",order:"Din bestilling",total:"Totalt",name:"Ditt navn",time:"Hentetid",note:"Kommentar (valgfritt)",place:"Bestill",back:"Tilbake",done:"Bestilling mottatt!",doneT:"Bakeriet fikk bestillingen din med en gang i sin Telegram-chat. Du får beskjed når den er klar.",greet:"Bestill ferskt brød og kaffe"},
+sv:{cats:["Alla","Bröd","Bakverk","Kaffe"],view:"Visa beställning",empty:"Varukorgen är tom",order:"Din beställning",total:"Totalt",name:"Ditt namn",time:"Upphämtning",note:"Kommentar (valfritt)",place:"Beställ",back:"Tillbaka",done:"Beställning mottagen!",doneT:"Bageriet fick din beställning direkt i sin Telegram-chatt.",greet:"Beställ färskt bröd och kaffe"},
+de:{cats:["Alle","Brot","Gebäck","Kaffee"],view:"Bestellung ansehen",empty:"Warenkorb ist leer",order:"Ihre Bestellung",total:"Summe",name:"Ihr Name",time:"Abholzeit",note:"Notiz (optional)",place:"Bestellen",back:"Zurück",done:"Bestellung erhalten!",doneT:"Die Bäckerei hat Ihre Bestellung sofort in ihrem Telegram-Chat erhalten.",greet:"Frisches Brot und Kaffee bestellen"},
+es:{cats:["Todo","Pan","Bollería","Café"],view:"Ver pedido",empty:"El carrito está vacío",order:"Tu pedido",total:"Total",name:"Tu nombre",time:"Hora de recogida",note:"Nota (opcional)",place:"Hacer pedido",back:"Volver",done:"¡Pedido recibido!",doneT:"La panadería recibió tu pedido al instante en su chat de Telegram.",greet:"Pide pan fresco y café"}};
+let lang=(new URLSearchParams(location.search).get('lang')||(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user&&tg.initDataUnsafe.user.language_code)||navigator.language||'en').slice(0,2);
+if(lang==='nb'||lang==='nn')lang='no';const t=L[lang]||L.en;
+const P=[{id:1,c:1,e:"🍞",n:"Sourdough loaf",p:69},{id:2,c:1,e:"🥖",n:"Baguette",p:39},{id:3,c:1,e:"🫓",n:"Rye crispbread",p:45},{id:4,c:2,e:"🥐",n:"Butter croissant",p:32},{id:5,c:2,e:"🧁",n:"Blueberry muffin",p:35},{id:6,c:2,e:"🍥",n:"Cinnamon bun",p:38},{id:7,c:3,e:"☕",n:"Filter coffee",p:35},{id:8,c:3,e:"🥛",n:"Caffè latte",p:49}];
+const cart={};let cat=0;
+const user=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;if(user)document.getElementById('greet').textContent=(lang==='no'?'Hei ':'Hi ')+user.first_name+' 👋';else document.getElementById('greet').textContent=t.greet;
+function kr(n){return n+' kr'}
+function draw(){document.getElementById('tabs').innerHTML=t.cats.map((c,i)=>`<button class="tab ${i===cat?'on':''}" onclick="cat=${i};draw()">${c}</button>`).join('');
+document.getElementById('grid').innerHTML=P.filter(p=>!cat||p.c===cat).map(p=>`<div class="it"><div class="em">${p.e}</div><div class="nm">${p.n}</div><div class="pr">${kr(p.p)}</div><div class="ctl"><button onclick="add(${p.id},-1)">−</button><span>${cart[p.id]||0}</span><button onclick="add(${p.id},1)">+</button></div></div>`).join('');
+const n=Object.values(cart).reduce((a,b)=>a+b,0),s=sum();document.getElementById('go').textContent=n?`${t.view} · ${n} · ${kr(s)}`:t.view;
+if(tg&&tg.HapticFeedback){} }
+function sum(){return P.reduce((a,p)=>a+(cart[p.id]||0)*p.p,0)}
+function add(id,d){cart[id]=Math.max(0,(cart[id]||0)+d);if(!cart[id])delete cart[id];if(tg&&tg.HapticFeedback)tg.HapticFeedback.selectionChanged();draw()}
+function sheet(h){const s=document.getElementById('sheet');document.getElementById('box').innerHTML=h;s.classList.add('on')}
+function close_(){document.getElementById('sheet').classList.remove('on')}
+document.getElementById('go').onclick=()=>{const items=P.filter(p=>cart[p.id]);if(!items.length){sheet(`<p style="text-align:center">${t.empty}</p><div class="bar" style="position:static;border:0;padding:0"><button onclick="close_()">${t.back}</button></div>`);return}
+sheet(`<h3 style="margin-top:0">${t.order}</h3>${items.map(p=>`<div class="row"><span>${p.e} ${p.n} × ${cart[p.id]}</span><b>${kr(cart[p.id]*p.p)}</b></div>`).join('')}<div class="row"><b>${t.total}</b><b>${kr(sum())}</b></div>
+<input id="nm" placeholder="${t.name}" value="${user?user.first_name:''}"><select id="tm"><option>08:00</option><option>09:00</option><option>12:00</option><option>16:00</option></select><textarea id="nt" rows="2" placeholder="${t.note}"></textarea>
+<div class="bar" style="position:static;border:0;padding:14px 0 0"><button onclick="place()">${t.place}</button></div><p class="note" onclick="close_()" style="cursor:pointer">← ${t.back}</p>`)};
+function place(){const o={items:P.filter(p=>cart[p.id]).map(p=>({n:p.n,q:cart[p.id]})),total:sum(),name:document.getElementById('nm').value,time:document.getElementById('tm').value};
+if(tg&&tg.initData){try{tg.sendData(JSON.stringify(o))}catch(e){}}
+sheet(`<div class="ok"><div class="em">✅</div><h2>${t.done}</h2><p>${t.doneT}</p><p class="note">Demo by KDT Labs · t.me/khobbitttt</p><div class="bar" style="position:static;border:0;padding:0"><button onclick="location.reload()">OK</button></div></div>`);if(tg&&tg.HapticFeedback)tg.HapticFeedback.notificationOccurred('success')}
+draw();
+</script>
+</body>
+</html>
