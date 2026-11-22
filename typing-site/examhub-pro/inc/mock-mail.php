@@ -91,7 +91,7 @@ function eh_stm_mail_html($d) {
 <tr><td>' . $img('hd', 'UPSSSC ALERT — UP Super TET 2026 लाइव मॉक परिणाम', '', '16px 16px 0 0') . '</td></tr>
 <tr><td style="padding:24px 22px 8px;font-family:Arial,\'Noto Sans Devanagari\',sans-serif">
 <p style="margin:0 0 10px;font-size:21px;font-weight:bold;color:#0f2a4d">नमस्ते ' . esc_html($d['name']) . ' जी,</p>
-<p style="margin:0;font-size:16px;line-height:1.8;color:#1f2937">UP Super TET 2026 लाइव मॉक टेस्ट में भाग लेने के लिए <b style="color:#0f2a4d">UPSSSC ALERT</b> की ओर से आपका हार्दिक धन्यवाद। आपकी परीक्षा सफलतापूर्वक सबमिट हो चुकी है। ' . $rk . 'आपका विस्तृत स्कोरकार्ड नीचे है।</p></td></tr>
+<p style="margin:0;font-size:16px;line-height:1.8;color:#1f2937">UP Super TET 2026 लाइव मॉक टेस्ट में भाग लेने के लिए <b style="color:#0f2a4d">UPSSSC ALERT</b> की ओर से आपका हार्दिक धन्यवाद। आपकी परीक्षा सफलतापूर्वक सबमिट हो चुकी है। आपका विस्तृत स्कोरकार्ड नीचे है।</p></td></tr>
 <tr><td style="padding:14px 0 0">' . $img('sc', 'स्कोर ' . $d['score'] . ' / 360 · सही ' . $d['c'] . ' · गलत ' . $d['w'] . ' · छोड़े ' . $d['skip']) . '</td></tr>
 <tr><td>' . $img('se', 'सेक्शन-वार प्रदर्शन') . '</td></tr>
 <tr><td style="padding:10px 0 0">' . $img('ct', 'अपनी लाइव रैंक और परसेंटाइल देखें', home_url('/super-tet-mock/'), '16px') . '</td></tr>
@@ -102,7 +102,6 @@ function eh_stm_mail_html($d) {
 }
 function eh_stm_mail_text($d) {
     return "नमस्ते {$d['name']} जी,\n\nUP Super TET 2026 लाइव मॉक टेस्ट में भाग लेने के लिए UPSSSC ALERT की ओर से धन्यवाद।\n\nस्कोर: {$d['score']} / 360 · प्रयास संख्या: {$d['att']}\nसही {$d['c']} · गलत {$d['w']} · छोड़े {$d['skip']}\n"
-        . ($d['total'] ? "अभी की रैंक: {$d['rank']} / {$d['total']} · परसेंटाइल: {$d['pct']}\n" : '')
         . "\nलाइव रैंक और परसेंटाइल: " . home_url('/super-tet-mock/') . "\nटेलीग्राम: https://t.me/UpssscAlert\n\nटीम UPSSSC ALERT";
 }
 
