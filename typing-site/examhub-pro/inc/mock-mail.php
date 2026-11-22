@@ -9,7 +9,7 @@ define('EH_STM_MAIL_DAILY', 450);
 
 function eh_stm_mail_opt() {
     $o = get_option('eh_stm_mail', []);
-    return array_merge(['from' => '', 'pass' => '', 'on' => 0, 'day' => '', 'sent_today' => 0, 'prio' => 'prateek tiwari'], is_array($o) ? $o : []);
+    return array_merge(['from' => '', 'pass' => '', 'on' => 0, 'day' => '', 'sent_today' => 0, 'from2' => '', 'pass2' => '', 'sent2' => 0, 'bad1' => '', 'bad2' => '', 'prio' => 'prateek tiwari'], is_array($o) ? $o : []);
 }
 function eh_stm_mail_meta() { return 'eh_stm_mail_' . EH_STM_MAIL_ROUND; }
 
@@ -106,8 +106,16 @@ function eh_stm_mail_text($d) {
 }
 
 /* ---------- send ---------- */
-function eh_stm_mail_send($d, $to = '') {
+/* which sender account to use now: 1, 2 or 0 (none left today) */
+function eh_stm_mail_acct($o) {
+    $day = wp_date('Y-m-d');
+    if ($o['from'] && $o['pass'] && $o['bad1'] !== $day && ($o['day'] !== $day || $o['sent_today'] < EH_STM_MAIL_DAILY)) return 1;
+    if ($o['from2'] && $o['pass2'] && $o['bad2'] !== $day && ($o['day'] !== $day || $o['sent2'] < EH_STM_MAIL_DAILY)) return 2;
+    return 0;
+}
+function eh_stm_mail_send($d, $to = '', $acct = 1) {
     $o = eh_stm_mail_opt();
+    if ($acct == 2) { $o['from'] = $o['from2']; $o['pass'] = $o['pass2']; }
     if (!$o['from'] || !$o['pass']) return 'Mail settings खाली हैं';
     require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php'; require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php'; require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
     $m = new PHPMailer\PHPMailer\PHPMailer(true);
@@ -143,19 +151,20 @@ function eh_stm_mail_pending($limit = 0) {
     return $ids;
 }
 add_action('eh_stm_mail_tick', function () {
-    $o = eh_stm_mail_opt(); if (!$o['on'] || !$o['from'] || !$o['pass']) return;
+    $o = eh_stm_mail_opt(); if (!$o['on'] || !eh_stm_mail_acct($o)) return;
     if (get_transient('eh_stm_mail_lock')) return; set_transient('eh_stm_mail_lock', 1, 55);
-    $day = wp_date('Y-m-d'); if ($o['day'] !== $day) { $o['day'] = $day; $o['sent_today'] = 0; }
+    $day = wp_date('Y-m-d'); if ($o['day'] !== $day) { $o['day'] = $day; $o['sent_today'] = 0; $o['sent2'] = 0; }
     $mk = eh_stm_mail_meta(); $n = 0;
     foreach (eh_stm_mail_pending() as $uid) {
-        if ($n >= 8 || $o['sent_today'] >= EH_STM_MAIL_DAILY) break;
+        $ac = eh_stm_mail_acct($o); if ($n >= 8 || !$ac) break;
         if (user_can($uid, 'manage_options')) { update_user_meta($uid, $mk, 'skip:admin'); continue; }
         $d = eh_stm_mail_data($uid); if (!$d || !is_email($d['email'])) { update_user_meta($uid, $mk, 'skip:noemail'); continue; }
         $prev = get_user_meta($uid, $mk, true); update_user_meta($uid, $mk, 'sending');
-        $res = eh_stm_mail_send($d); $n++;
-        if ($res === true) { update_user_meta($uid, $mk, 'sent:' . time()); $o['sent_today']++; }
+        $res = eh_stm_mail_send($d, '', $ac); $n++;
+        if ($res === true) { update_user_meta($uid, $mk, 'sent:' . time()); if ($ac == 2) $o['sent2']++; else $o['sent_today']++; }
         else { update_user_meta($uid, $mk, 'fail:' . (((strpos((string) $prev, 'fail:') === 0) ? (int) substr($prev, 5) : 0) + 1)); $o['last_err'] = mb_substr((string) $res, 0, 200);
-            if (stripos((string) $res, 'authenticate') !== false || stripos((string) $res, 'Username and Password') !== false) { $o['on'] = 0; break; } }
+            if (stripos((string) $res, 'authenticate') !== false || stripos((string) $res, 'Username and Password') !== false) { $o['bad' . $ac] = $day; update_user_meta($uid, $mk, $prev ?: ''); if (!$prev) delete_user_meta($uid, $mk); }
+            elseif (stripos((string) $res, 'limit') !== false || stripos((string) $res, 'quota') !== false || stripos((string) $res, '550') !== false) { $o[$ac == 2 ? 'sent2' : 'sent_today'] = EH_STM_MAIL_DAILY; if (!$prev) delete_user_meta($uid, $mk); else update_user_meta($uid, $mk, $prev); } }
     }
     update_option('eh_stm_mail', $o, false); delete_transient('eh_stm_mail_lock');
 });
@@ -176,12 +185,15 @@ add_action('admin_post_eh_stm_mail', function () {
     if ($do === 'save') {
         $o['from'] = sanitize_email(wp_unslash($_POST['from'] ?? ''));
         $p = trim(wp_unslash($_POST['pass'] ?? '')); if ($p !== '') $o['pass'] = $p;
+        $o['from2'] = sanitize_email(wp_unslash($_POST['from2'] ?? ''));
+        $p = trim(wp_unslash($_POST['pass2'] ?? '')); if ($p !== '') $o['pass2'] = $p;
+        $o['bad1'] = $o['bad2'] = '';
         $msg = 'saved';
     } elseif ($do === 'test') {
         $me = wp_get_current_user(); $d = eh_stm_mail_data($me->ID) ?: ['name' => $me->display_name ?: 'Kapil', 'email' => $me->user_email, 'roll' => 'XL26000001', 'att' => 2, 'score' => 212, 'c' => 79, 'w' => 25, 'skip' => 16, 'acc' => 76, 'mins' => 108, 'rank' => 12, 'total' => 340, 'pct' => 96.76,
             'secs' => [['q' => 25, 'c' => 15, 'w' => 6], ['q' => 5, 'c' => 4, 'w' => 1], ['q' => 30, 'c' => 20, 'w' => 6], ['q' => 8, 'c' => 5, 'w' => 2], ['q' => 16, 'c' => 10, 'w' => 3], ['q' => 8, 'c' => 6, 'w' => 1], ['q' => 8, 'c' => 6, 'w' => 2], ['q' => 8, 'c' => 6, 'w' => 1], ['q' => 8, 'c' => 4, 'w' => 2], ['q' => 4, 'c' => 3, 'w' => 1]]];
         $to = sanitize_email(wp_unslash($_POST['to'] ?? '')) ?: $me->user_email;
-        $res = eh_stm_mail_send($d, $to); $msg = $res === true ? 'test_ok' : 'test_fail'; if ($res !== true) $o['last_err'] = mb_substr((string) $res, 0, 200);
+        $res = eh_stm_mail_send($d, $to, (int) ($_POST['acct'] ?? 1) === 2 ? 2 : 1); $msg = $res === true ? 'test_ok' : 'test_fail'; if ($res !== true) $o['last_err'] = mb_substr((string) $res, 0, 200);
     } elseif ($do === 'on') { $o['on'] = 1; $msg = 'on'; }
     elseif ($do === 'off') { $o['on'] = 0; $msg = 'off'; }
     update_option('eh_stm_mail', $o, false);
@@ -195,16 +207,19 @@ function eh_stm_mail_page() {
     echo '<div class="wrap"><h1>📧 Mock Mail Settings</h1>';
     if ($note) echo '<div class="notice notice-' . $note[0] . '"><p>' . $note[1] . '</p></div>';
     echo '<div style="display:flex;gap:12px;margin:14px 0">';
-    foreach ([['स्थिति', $o['on'] ? '🟢 चालू' : '⚪ बंद'], ['भेजे गए', $c['sent']], ['बाकी (queue)', $c['pending']], ['फेल', $c['fail']], ['आज भेजे', ($o['day'] === wp_date('Y-m-d') ? $o['sent_today'] : 0) . ' / ' . EH_STM_MAIL_DAILY]] as $k)
+    foreach ([['स्थिति', $o['on'] ? '🟢 चालू' : '⚪ बंद'], ['भेजे गए', $c['sent']], ['बाकी (queue)', $c['pending']], ['फेल', $c['fail']], ['आज Gmail 1', ($o['day'] === wp_date('Y-m-d') ? $o['sent_today'] : 0) . ' / ' . EH_STM_MAIL_DAILY], ['आज Gmail 2', ($o['day'] === wp_date('Y-m-d') ? $o['sent2'] : 0) . ' / ' . EH_STM_MAIL_DAILY]] as $k)
         echo '<div style="background:#fff;border:1px solid #dcdcde;border-radius:8px;padding:12px 18px;min-width:110px"><div style="font-size:22px;font-weight:700">' . $k[1] . '</div><div style="color:#646970">' . $k[0] . '</div></div>';
     echo '</div>';
     if (!empty($o['last_err'])) echo '<p style="color:#b32d2e">आखिरी error: ' . esc_html($o['last_err']) . '</p>';
     echo '<h2>1. Gmail और App Password</h2><form method="post" action="' . esc_url(admin_url('admin-post.php')) . '">' . wp_nonce_field('eh_stm_mail', '_wpnonce', true, false) . '<input type="hidden" name="action" value="eh_stm_mail"><input type="hidden" name="do" value="save">
 <table class="form-table"><tr><th>भेजने वाला Gmail</th><td><input type="email" name="from" class="regular-text" value="' . esc_attr($o['from']) . '" placeholder="example@gmail.com"></td></tr>
-<tr><th>App Password (16 अक्षर)</th><td><input type="password" name="pass" class="regular-text" autocomplete="new-password" placeholder="' . ($o['pass'] ? '•••• सेव है — बदलना हो तो नया डालें' : 'abcd efgh ijkl mnop') . '"><p class="description">Gmail → Security → 2-Step Verification ON → App passwords से बनाएँ। यह पासवर्ड यहाँ दोबारा नहीं दिखेगा।</p></td></tr></table>
+<tr><th>App Password (16 अक्षर)</th><td><input type="password" name="pass" class="regular-text" autocomplete="new-password" placeholder="' . ($o['pass'] ? '•••• सेव है — बदलना हो तो नया डालें' : 'abcd efgh ijkl mnop') . '"><p class="description">Gmail → Security → 2-Step Verification ON → App passwords से बनाएँ। यह पासवर्ड यहाँ दोबारा नहीं दिखेगा।</p></td></tr>
+<tr><th colspan="2" style="padding-top:18px">दूसरा Gmail (पहले की आज की लिमिट पूरी होने पर इससे जाएगा)</th></tr>
+<tr><th>दूसरा Gmail</th><td><input type="email" name="from2" class="regular-text" value="' . esc_attr($o['from2']) . '" placeholder="second@gmail.com"></td></tr>
+<tr><th>दूसरे का App Password</th><td><input type="password" name="pass2" class="regular-text" autocomplete="new-password" placeholder="' . ($o['pass2'] ? '•••• सेव है — बदलना हो तो नया डालें' : 'abcd efgh ijkl mnop') . '"></td></tr></table>
 <p><button class="button button-primary">Save</button></p></form>';
     echo '<h2>2. Test mail</h2><form method="post" action="' . esc_url(admin_url('admin-post.php')) . '">' . wp_nonce_field('eh_stm_mail', '_wpnonce', true, false) . '<input type="hidden" name="action" value="eh_stm_mail"><input type="hidden" name="do" value="test">
-<input type="email" name="to" class="regular-text" placeholder="' . esc_attr(wp_get_current_user()->user_email) . '"> <button class="button">Test mail भेजो</button></form>';
-    echo '<h2>3. चालू / बंद</h2><p>चालू होने पर हर candidate को <b>पहली बार submit करने के बाद एक ही बार</b> mail जाता है (हर मिनट 8 तक, दिन में ' . EH_STM_MAIL_DAILY . ' तक)। एडमिन को mail नहीं जाता।</p>'
+<input type="email" name="to" class="regular-text" placeholder="' . esc_attr(wp_get_current_user()->user_email) . '"> <select name="acct"><option value="1">Gmail 1 से</option><option value="2">Gmail 2 से</option></select> <button class="button">Test mail भेजो</button></form>';
+    echo '<h2>3. चालू / बंद</h2><p>चालू होने पर हर candidate को <b>पहली बार submit करने के बाद एक ही बार</b> mail जाता है (हर मिनट 8 तक, हर Gmail से दिन में ' . EH_STM_MAIL_DAILY . ' तक — पहले Gmail 1, फिर Gmail 2)। एडमिन को mail नहीं जाता।</p>'
         . ($o['on'] ? $f('off', '⏸ Mail बंद करो') : $f('on', '▶️ Mail चालू करो', 'button button-primary')) . '</div>';
 }
