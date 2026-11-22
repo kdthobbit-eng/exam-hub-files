@@ -13,8 +13,8 @@ function eh_stm_rounds() {
     $ts = function ($s) use ($tz) { return (new DateTime($s, $tz))->getTimestamp(); };
     $o = get_option('eh_stm_rounds');
     $list = is_array($o) && $o ? $o : [
-        ['id' => 't2', 'name' => 'Super TET Mock 2026 — ट्रायल', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 09:30', 'paper' => 'supertet-mock1'],
-        ['id' => 'm1', 'name' => 'Super TET Mock 2026 — लाइव', 'login' => '2026-11-22 09:30', 'start' => '2026-11-22 10:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
+        ['id' => 't2', 'name' => 'Super TET Mock 2026 — ट्रायल', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 08:40', 'paper' => 'supertet-mock1'],
+        ['id' => 'm1', 'name' => 'Super TET Mock 2026 — लाइव', 'login' => '2026-11-22 08:40', 'start' => '2026-11-22 09:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
     ];
     $ctl = get_option('eh_stm_ctl', []); if (!is_array($ctl)) $ctl = [];
     return array_map(function ($r) use ($ts, $ctl) {
@@ -105,8 +105,9 @@ function eh_stm_finish_row($r, $row, $when) {
     global $wpdb;
     $ans = json_decode($row['ans'] ?: '{}', true) ?: [];
     [$c, $w, $s] = eh_stm_score($r, $ans);
-    $wpdb->query($wpdb->prepare('UPDATE ' . eh_stm_table() . ' SET counted = 0 WHERE round = %s AND uid = %d AND att < %d', $row['round'], $row['uid'], $row['att']));
-    $wpdb->update(eh_stm_table(), ['submitted' => $when, 'correct' => $c, 'wrong' => $w, 'score' => $s, 'counted' => 1], ['id' => $row['id']]);
+    $adm = user_can((int) $row['uid'], 'manage_options');
+    if (!$adm) $wpdb->query($wpdb->prepare('UPDATE ' . eh_stm_table() . ' SET counted = 0 WHERE round = %s AND uid = %d AND att < %d', $row['round'], $row['uid'], $row['att']));
+    $wpdb->update(eh_stm_table(), ['submitted' => $when, 'correct' => $c, 'wrong' => $w, 'score' => $s, 'counted' => $adm ? 0 : 1], ['id' => $row['id']]);
 }
 /* Attempts whose time ran out without a submit are submitted at their deadline. */
 function eh_stm_expire($r) {
@@ -145,7 +146,7 @@ function eh_stm_result($r, $row) {
         'started' => (int) $row['started'], 'used' => max(0, (int) $row['submitted'] - (int) $row['started']), 'tabs' => (int) $row['tabs'],
         'ans' => (object) (json_decode($row['ans'] ?: '{}', true) ?: []), 'tq' => (object) (json_decode($row['tq'] ?: '{}', true) ?: []),
         'key' => array_map(function ($q) { return $q['a']; }, $Q), 'exp' => array_map(function ($q) { return $q['e'] ?? ''; }, $Q),
-        'q' => eh_stm_public_q($r), 'att' => (int) $row['att'],
+        'q' => eh_stm_public_q($r), 'att' => (int) $row['att'], 'admin_test' => user_can((int) $row['uid'], 'manage_options'),
         'hist' => array_map(function ($x) { return [(int) $x['att'], (int) $x['score'], (int) $x['submitted']]; }, $GLOBALS['wpdb']->get_results($GLOBALS['wpdb']->prepare('SELECT att, score, submitted FROM ' . eh_stm_table() . ' WHERE round = %s AND uid = %d AND submitted > 0 ORDER BY att', $r['id'], $row['uid']), ARRAY_A)),
     ], eh_stm_live($r, (int) $row['score']));
 }
