@@ -9,7 +9,7 @@ define('EH_STM_MAIL_DAILY', 450);
 
 function eh_stm_mail_opt() {
     $o = get_option('eh_stm_mail', []);
-    return array_merge(['from' => '', 'pass' => '', 'on' => 0, 'day' => '', 'sent_today' => 0], is_array($o) ? $o : []);
+    return array_merge(['from' => '', 'pass' => '', 'on' => 0, 'day' => '', 'sent_today' => 0, 'prio' => 'prateek tiwari'], is_array($o) ? $o : []);
 }
 function eh_stm_mail_meta() { return 'eh_stm_mail_' . EH_STM_MAIL_ROUND; }
 
@@ -132,7 +132,15 @@ function eh_stm_mail_pending($limit = 0) {
     $sql = $wpdb->prepare("SELECT DISTINCT m.uid FROM $t m LEFT JOIN {$wpdb->usermeta} um ON um.user_id = m.uid AND um.meta_key = %s
         WHERE m.round = %s AND m.submitted > 0 AND m.counted = 1 AND (um.meta_value IS NULL OR um.meta_value LIKE 'fail:%%') ORDER BY m.submitted ASC", $mk, EH_STM_MAIL_ROUND);
     $ids = array_map('intval', $wpdb->get_col($sql));
-    return array_values(array_filter($ids, function ($u) use ($mk) { $v = get_user_meta($u, $mk, true); return !$v || (strpos($v, 'fail:') === 0 && (int) substr($v, 5) < 3); }));
+    $ids = array_values(array_filter($ids, function ($u) use ($mk) { $v = get_user_meta($u, $mk, true); return !$v || (strpos($v, 'fail:') === 0 && (int) substr($v, 5) < 3); }));
+    /* names/emails to mail first */
+    $pr = array_filter(array_map('trim', explode(',', strtolower(eh_stm_mail_opt()['prio'] ?? 'prateek tiwari'))));
+    if ($pr && $ids) {
+        $first = $wpdb->get_col("SELECT DISTINCT uid FROM $t WHERE round = '" . esc_sql(EH_STM_MAIL_ROUND) . "' AND (" . implode(' OR ', array_map(function ($p) { $l = '%' . esc_sql($GLOBALS['wpdb']->esc_like($p)) . '%'; return "LOWER(name) LIKE '$l' OR LOWER(email) LIKE '$l'"; }, $pr)) . ")");
+        $first = array_map('intval', $first);
+        usort($ids, function ($a, $b) use ($first) { return (int) !in_array($a, $first, true) <=> (int) !in_array($b, $first, true); });
+    }
+    return $ids;
 }
 add_action('eh_stm_mail_tick', function () {
     $o = eh_stm_mail_opt(); if (!$o['on'] || !$o['from'] || !$o['pass']) return;
