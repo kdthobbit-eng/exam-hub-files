@@ -1,0 +1,31 @@
+name: Transcribe audio (Hindi)
+on:
+  workflow_dispatch:
+  push:
+    paths: ["transcribe/*.mp3"]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q faster-whisper
+      - run: |
+          cat > /tmp/t.py <<'PY'
+          import glob, os
+          from faster_whisper import WhisperModel
+          m = WhisperModel("large-v3", device="cpu", compute_type="int8", cpu_threads=4)
+          for f in sorted(glob.glob("transcribe/*.mp3")):
+              out = f[:-4] + ".txt"
+              if os.path.exists(out): continue
+              segs, info = m.transcribe(f, language="hi", beam_size=5, vad_filter=True)
+              with open(out, "w") as o:
+                  for s in segs:
+                      o.write(f"[{int(s.start//60):02d}:{int(s.start%60):02d}] {s.text.strip()}\n")
+          PY
+          python3 /tmp/t.py
+      - run: |
+          git config user.name "Claude"; git config user.email noreply@anthropic.com
+          git add transcribe/*.txt && git commit -m "transcript" && git pull --rebase && git push || true
