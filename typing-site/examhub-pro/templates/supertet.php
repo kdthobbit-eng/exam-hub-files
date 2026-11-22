@@ -185,7 +185,12 @@ table.t td:first-child,table.t th:first-child{text-align:left}
 .qa{flex:1;overflow:auto;padding:16px 20px 24px;-webkit-overflow-scrolling:touch}
 .pass{border:1px solid var(--ln);background:#f8fafc;border-radius:12px;padding:12px 14px;margin-bottom:14px;line-height:1.8;font-size:14.5px;max-height:40vh;overflow:auto}
 .pass b{display:block;font-size:12.5px;color:var(--mu);margin-bottom:4px}
-.qt{font-size:16.5px;line-height:1.85;margin-bottom:14px}
+.qt{font-size:16.5px;line-height:1.85;margin-bottom:14px;white-space:pre-line}
+.sol>div:nth-child(2),.sol>div:nth-child(3){white-space:pre-line}
+table.mt{border-collapse:collapse;width:100%;margin:8px 0 6px;font-size:15px;white-space:normal;line-height:1.5}
+table.mt th,table.mt td{border:1px solid #cfd9e5;padding:6px 10px;text-align:left;vertical-align:top}
+table.mt th{background:#eef3f9;font-weight:600}
+#pdfStage table.mt{font-size:13.5px}
 .op{display:flex;gap:12px;align-items:flex-start;padding:11px 14px;margin-bottom:9px;line-height:1.65;cursor:pointer;font-size:15.5px;border:1px solid #e1e8f0;border-radius:12px;background:#fff;position:relative}
 .op:hover{border-color:#b9cde6}
 .op.sel{background:#eaf2fd;border-color:var(--pr);box-shadow:inset 0 0 0 1px var(--pr)}
@@ -561,6 +566,8 @@ const SECS=[["सामान्य ज्ञान एवं समसामय
 const L=['A','B','C','D'],$=id=>document.getElementById(id);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let off=C.now*1000-Date.now(),R=C.round,A=null,Q=[],ME={name:'',roll:''},sel=null,T=null,BG=null,dirty=false,saving=false,qStart=Date.now(),subbing=false,RS=null,AR='',hidAt=0,LANG='hi';try{LANG=localStorage.getItem('eh_stm_lang')||'hi'}catch(e){}
+function qh(t){t=String(t||'');const ls=t.split('\n');let A1=null,A2=null;const pre=[],post=[];ls.forEach(l=>{const m2=l.match(/^(सूची-II|List-II)\s*:\s*(.*)$/),m1=l.match(/^(सूची-I|List-I)\s*:\s*(.*)$/);if(m2)A2=[m2[1],m2[2].split(/\s{2,}/)];else if(m1)A1=[m1[1],m1[2].split(/\s{2,}/)];else (A1?post:pre).push(l)});
+ if(!A1||!A2)return esc(t);const n=Math.max(A1[1].length,A2[1].length);let tb='<table class="mt"><tr><th>'+esc(A1[0])+'</th><th>'+esc(A2[0])+'</th></tr>';for(let i=0;i<n;i++)tb+='<tr><td>'+esc(A1[1][i]||'')+'</td><td>'+esc(A2[1][i]||'')+'</td></tr>';return esc(pre.join('\n'))+tb+'</table>'+esc(post.join('\n'))}
 const QT=q=>LANG==='en'&&q.qe?q.qe:q.q,QO=q=>LANG==='en'&&q.oe?q.oe:q.o;
 function setLang(v){LANG=v==='en'?'en':'hi';try{localStorage.setItem('eh_stm_lang',LANG)}catch(e){}['lsel','lsel0'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=LANG})}
 const now=()=>Math.floor((Date.now()+off)/1000);
@@ -631,7 +638,7 @@ $('secs').onclick=e=>{const b=e.target.closest('[data-s]');if(b)show(SECS[+b.dat
 function show(i){if(A.cur!==i)acc();A.cur=i;qStart=Date.now();if(stOf(i)==='nv')A.st[i]='na';sel=A.ans[i]||null;const q=Q[i];
  $('qno').textContent='Question No. '+(i+1);
  let h='';if(q.p)h+='<div class="pass"><b>गद्यांश / Passage</b>'+esc(q.p.replace(/^(निर्देश|Direction)[^:]*:\s*/,''))+'</div>';
- h+='<div class="qt">'+esc(QT(q))+'</div>'+QO(q).map((o,k)=>`<label class="op${sel===L[k]?' sel':''}"><input type="radio" name="op" value="${L[k]}"${sel===L[k]?' checked':''}><span class="k">${k+1}</span><span>${esc(o)}</span></label>`).join('');
+ h+='<div class="qt">'+qh(QT(q))+'</div>'+QO(q).map((o,k)=>`<label class="op${sel===L[k]?' sel':''}"><input type="radio" name="op" value="${L[k]}"${sel===L[k]?' checked':''}><span class="k">${k+1}</span><span>${esc(o)}</span></label>`).join('');
  $('qa').innerHTML=h;$('qa').scrollTop=0;secs();pal();later()}
 $('qa').onchange=e=>{if(e.target.name==='op'){sel=e.target.value;document.querySelectorAll('.op').forEach(o=>o.classList.toggle('sel',o.querySelector('input').checked))}};
 function next(){const k=secOf(A.cur),s=SECS[k].q,p=s.indexOf(A.cur);if(p<s.length-1)show(s[p+1]);else if(k<SECS.length-1)show(SECS[k+1].q[0]);else{secs();pal();later()}}
@@ -716,14 +723,14 @@ $('filt').onclick=e=>{const b=e.target.closest('[data-f]');if(b)fl(b.dataset.f)}
 $('solback').onclick=()=>go('s-res');$('lsel2').onchange=e=>{setLang(e.target.value);sols(FL)};
 function solHTML(d,i,f){const ans=d.ans||{},q=d.q[i],a=ans[i],k=!a?'s':(a===d.key[i]?'c':'w');if(f&&f!=='all'&&f!==k)return '';
  const tg={s:'<span class="tg s">छोड़ा</span>',c:'<span class="tg c">सही +3</span>',w:'<span class="tg w">गलत −1</span>'}[k];
- return `<div class="sol"><div class="h"><span>प्रश्न ${i+1} · ${esc(SECS[secOf(i)].n)}</span>${tg}</div>${q.p?'<div style="color:var(--mu);font-size:13px">[गद्यांश आधारित]</div>':''}<div>${esc(QT(q))}</div>${QO(q).map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">${j+1}. ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ (आपका उत्तर)':'')}</div>`).join('')}${d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`}
+ return `<div class="sol"><div class="h"><span>प्रश्न ${i+1} · ${esc(SECS[secOf(i)].n)}</span>${tg}</div>${q.p?'<div style="color:var(--mu);font-size:13px">[गद्यांश आधारित]</div>':''}<div>${qh(QT(q))}</div>${QO(q).map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">${j+1}. ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ (आपका उत्तर)':'')}</div>`).join('')}${d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`}
 function sols(f){$('sols').innerHTML=RS.q.map((q,i)=>solHTML(RS,i,f)).join('')||'<p style="text-align:center;color:var(--mu);padding:30px">कोई प्रश्न नहीं</p>'}
 
 /* ---------- PDF (one click download, with details + watermark + join links) ---------- */
 function libs(){return new Promise((ok,no)=>{let n=0;const t=setInterval(()=>{if(window.html2canvas&&window.jspdf){clearInterval(t);ok()}else if(++n>150){clearInterval(t);no()}},100)})}
 async function makePdf(d){const W=$('pdfwait'),M=$('pdfmsg');W.classList.add('on');M.textContent='PDF बन रही है…';
  try{await libs();if(document.fonts&&document.fonts.ready)await document.fonts.ready;
-  const st=$('pdfStage'),blocks=[],css=`<style>#pdfStage *{box-sizing:border-box}#pdfStage .pb{padding:10px 26px}#pdfStage h1{font-size:22px;margin:0;color:#0f2a4d}#pdfStage table{width:100%;border-collapse:collapse;font-size:14px}#pdfStage td,#pdfStage th{border:1px solid #dbe3ec;padding:6px 9px;text-align:left}#pdfStage th{background:#f2f5f9}#pdfStage .qq{font-size:14.5px;line-height:1.65;border:1px solid #e3e9f0;border-radius:10px;padding:10px 12px}#pdfStage .o{padding:2px 8px;border-radius:6px}#pdfStage .ok{background:#e3f5e6;color:#14532d;font-weight:700}#pdfStage .bad{background:#fde6e2;color:#8a1c0c}#pdfStage .ex{background:#f4f8fc;border-left:3px solid #1d63c7;padding:5px 9px;margin-top:5px;font-size:13px}#pdfStage .jb{display:inline-block;padding:12px 18px;border-radius:12px;color:#fff;font-weight:700;font-size:15px;margin-right:10px}</style>`;
+  const st=$('pdfStage'),blocks=[],css=`<style>#pdfStage *{box-sizing:border-box}#pdfStage .pb{padding:10px 26px}#pdfStage h1{font-size:22px;margin:0;color:#0f2a4d}#pdfStage table{width:100%;border-collapse:collapse;font-size:14px}#pdfStage td,#pdfStage th{border:1px solid #dbe3ec;padding:6px 9px;text-align:left}#pdfStage th{background:#f2f5f9}#pdfStage .qq{white-space:pre-line;font-size:14.5px;line-height:1.65;border:1px solid #e3e9f0;border-radius:10px;padding:10px 12px}#pdfStage .o{padding:2px 8px;border-radius:6px}#pdfStage .ok{background:#e3f5e6;color:#14532d;font-weight:700}#pdfStage .bad{background:#fde6e2;color:#8a1c0c}#pdfStage .ex{background:#f4f8fc;border-left:3px solid #1d63c7;padding:5px 9px;margin-top:5px;font-size:13px}#pdfStage .jb{display:inline-block;padding:12px 18px;border-radius:12px;color:#fff;font-weight:700;font-size:15px;margin-right:10px}</style>`;
   const mk=h=>{const e=document.createElement('div');e.className='pb';e.innerHTML=h;st.appendChild(e);blocks.push(e);return e};
   st.innerHTML=css;
   const head=`<div style="display:flex;align-items:center;gap:14px;border-bottom:3px solid #0f2a4d;padding-bottom:10px"><img src="${esc(C.logo.replace('.svg','.png'))}" style="width:62px;height:62px;border-radius:50%"><div style="flex:1"><h1>UPSSSC ALERT</h1><div style="font-size:13px;color:#5f6b7a">UP Super TET 2026 — लाइव मॉक टेस्ट · xlstudy.in</div></div><div style="text-align:right;font-size:13px;color:#0f2a4d;font-weight:700">XL Study<br><span style="font-weight:400;color:#5f6b7a">xlstudy.in</span></div></div>`;
@@ -732,7 +739,7 @@ async function makePdf(d){const W=$('pdfwait'),M=$('pdfmsg');W.classList.add('on
    <table style="margin-top:10px"><tr><th>सेक्शन</th><th>प्रश्न</th><th>सही</th><th>गलत</th><th>अंक</th></tr>${per.map(p=>`<tr><td>${esc(p.n)}</td><td>${p.len}</td><td>${p.c}</td><td>${p.w}</td><td><b>${p.m}</b></td></tr>`).join('')}</table>`)}
   else mk(head+'<p style="font-size:14px;margin:10px 0 0">120 प्रश्न · 360 अंक · 120 मिनट · सही +3 · गलत −1</p>');
   const ans=d.ans||{};
-  d.q.forEach((q,i)=>{const a=ans[i];mk(`<div class="qq"><b>प्रश्न ${i+1}.</b> ${q.p&&!(d.q[i-1]&&d.q[i-1].p===q.p)?'<div style="color:#5f6b7a;font-size:13px">'+esc(q.p)+'</div>':''}${esc(QT(q))}${QO(q).map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">(${j+1}) ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ आपका उत्तर':'')}</div>`).join('')}${d.name!=null&&!a?'<div style="font-size:12.5px;color:#5f6b7a">आपने यह प्रश्न छोड़ा</div>':''}${d.exp&&d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`)});
+  d.q.forEach((q,i)=>{const a=ans[i];mk(`<div class="qq"><b>प्रश्न ${i+1}.</b> ${q.p&&!(d.q[i-1]&&d.q[i-1].p===q.p)?'<div style="color:#5f6b7a;font-size:13px">'+esc(q.p)+'</div>':''}${qh(QT(q))}${QO(q).map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">(${j+1}) ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ आपका उत्तर':'')}</div>`).join('')}${d.name!=null&&!a?'<div style="font-size:12.5px;color:#5f6b7a">आपने यह प्रश्न छोड़ा</div>':''}${d.exp&&d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`)});
   const jb=mk(`<div style="border:2px solid #0f2a4d;border-radius:16px;padding:16px;text-align:center"><div style="font-size:17px;font-weight:700;color:#0f2a4d;margin-bottom:10px">रोज़ाना क्विज, नोट्स और मॉक टेस्ट के लिए जुड़ें</div><span class="jb" id="pj1" style="background:#229ed9">टेलीग्राम चैनल ज्वाइन करें</span><span class="jb" id="pj2" style="background:#0f2a4d">टेलीग्राम ग्रुप ज्वाइन करें</span><div style="font-size:13px;color:#5f6b7a;margin-top:10px">आचार्य 2.0 Super TET बैच ₹199 · UP SUPER TET बुक ₹429 · xlstudy.in</div></div>`);
   await Promise.all([...st.querySelectorAll('img')].map(im=>im.complete?1:new Promise(r=>{im.onload=im.onerror=r})));
   const {jsPDF}=window.jspdf,pdf=new jsPDF({unit:'pt',format:'a4',compress:true}),PW=pdf.internal.pageSize.getWidth(),PH2=pdf.internal.pageSize.getHeight(),mg=22,sc=(PW-2*mg)/760,cap=(PH2-2*mg-14)/sc;
