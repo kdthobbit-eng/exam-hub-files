@@ -289,10 +289,10 @@ function eh_default_menu() {
 
 /* login redirect: normal users go to dashboard */
 add_filter('login_redirect', function ($to, $req, $user) {
-    if ($user instanceof WP_User && !user_can($user, 'edit_posts')) return home_url('/my-dashboard/');
+    if ($user instanceof WP_User && !user_can($user, 'edit_posts')) return ($req && !preg_match('#/wp-admin/?$#', $req)) ? $req : eh_safe_redirect_target();
     return $to;
 }, 10, 3);
-add_filter('registration_redirect', function () { return wp_login_url(home_url('/my-dashboard/')); });
+add_filter('registration_redirect', function () { return wp_login_url(eh_safe_redirect_target()); });
 
 /* login page branding */
 add_action('login_enqueue_scripts', function () {

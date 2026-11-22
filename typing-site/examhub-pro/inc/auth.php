@@ -19,16 +19,23 @@ add_filter('register_url', function () { return eh_signup_page_url(); });
 
 function eh_safe_redirect_target() {
     $r = isset($_REQUEST['redirect_to']) ? rawurldecode(wp_unslash($_REQUEST['redirect_to'])) : '';
-    $r = wp_validate_redirect($r, home_url('/my-dashboard/'));
-    return $r ?: home_url('/my-dashboard/');
+    if (!$r && !empty($_COOKIE['eh_back'])) $r = rawurldecode(wp_unslash($_COOKIE['eh_back']));
+    if ($r && preg_match('#/(login|signup|wp-login\.php)(/|\?|$)#', $r)) $r = '';
+    $r = wp_validate_redirect($r, home_url('/'));
+    return $r ?: home_url('/');
 }
 
 /* Form handling */
 add_action('template_redirect', function () {
     $view = get_query_var('eh_view');
     if (!in_array($view, ['login', 'signup'], true)) return;
-    if (is_user_logged_in()) { wp_safe_redirect(home_url('/my-dashboard/')); exit; }
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
+    if (is_user_logged_in()) { wp_safe_redirect(eh_safe_redirect_target()); exit; }
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        /* Remember the page the visitor came from, so login/signup sends them back there (else home). */
+        $ref = wp_get_referer(); $home = wp_parse_url(home_url(), PHP_URL_HOST);
+        if ($ref && wp_parse_url($ref, PHP_URL_HOST) === $home && !preg_match('#/(login|signup|wp-login\.php)(/|\?|$)#', $ref)) { setcookie('eh_back', rawurlencode($ref), time() + 1800, COOKIEPATH ?: '/', '', is_ssl(), true); $_COOKIE['eh_back'] = rawurlencode($ref); }
+        return;
+    }
     if (!wp_verify_nonce($_POST['_eh'] ?? '', 'eh_auth')) { $GLOBALS['eh_auth_error'] = 'Page expired. Please try again.'; return; }
 
     $ip = substr(hash('sha256', ($_SERVER['REMOTE_ADDR'] ?? '') . 'auth'), 0, 16);
@@ -72,7 +79,7 @@ add_action('template_redirect', function () {
     if (is_wp_error($uid)) { $GLOBALS['eh_auth_error'] = 'Could not create the account. Please try again.'; return; }
     if ($mo) update_user_meta($uid, 'eh_mobile', $mo);
     wp_set_current_user($uid); wp_set_auth_cookie($uid, true, is_ssl());
-    wp_safe_redirect(!empty($_REQUEST['redirect_to']) ? eh_safe_redirect_target() : home_url('/my-dashboard/?welcome=1')); exit;
+    wp_safe_redirect(eh_safe_redirect_target()); exit;
 }, 0);
 
 function eh_unique_login($email) {
