@@ -67,18 +67,24 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
       <a class="uh-btn" href="#batches"><?php echo eh_t('See running batches', 'चल रहे बैच देखें'); ?><?php echo $arrow; ?></a>
       <a class="uh-btn" href="<?php echo esc_url(home_url('/live-typing/')); ?>"><?php echo eh_t('Junior Assistant Live Typing', 'जूनियर असिस्टेंट लाइव टाइपिंग'); ?><?php echo $arrow; ?></a>
     </div>
-    <?php if (function_exists('eh_stm_round')): $stm = eh_stm_round('m1'); if ($stm && time() < $stm['end_ts']): ?>
+    <?php if (function_exists('eh_stm_round')): $stm = eh_stm_round('m1'); if ($stm && time() < $stm['end_ts']):
+      $ik = new DateTimeZone('Asia/Kolkata'); $sd = (new DateTime('@' . $stm['start_ts']))->setTimezone($ik); $ed = (new DateTime('@' . $stm['end_ts']))->setTimezone($ik);
+      $hm = ['', 'जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'];
+      $ring = function ($l) { return '<span class="uh-stm-ring"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" class="bg"/><circle cx="32" cy="32" r="28" class="fg"/></svg><b>00</b><i>' . $l . '</i></span>'; }; ?>
     <a class="uh-stm" id="uh-stm" href="<?php echo esc_url(home_url('/super-tet-mock/')); ?>" data-start="<?php echo (int) $stm['start_ts']; ?>" data-end="<?php echo (int) $stm['end_ts']; ?>" data-now="<?php echo time(); ?>">
-      <span class="uh-stm-l"><img src="<?php echo esc_url(EH_URI . '/assets/upsssc-alert-logo.svg'); ?>" alt="UPSSSC ALERT" width="54" height="54">
-        <span><span class="uh-stm-chip" id="uh-stm-chip"><i></i><span>फ्री लाइव मॉक</span></span><b>UP Super TET 2026 — लाइव मॉक टेस्ट</b>
-        <?php $ik = new DateTimeZone('Asia/Kolkata'); $sd = (new DateTime('@' . $stm['start_ts']))->setTimezone($ik); $ed = (new DateTime('@' . $stm['end_ts']))->setTimezone($ik); $hm = ['', 'जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर']; ?>
-        <small><?php echo esc_html($sd->format('j') . ' ' . $hm[(int) $sd->format('n')]); ?> · सुबह <?php echo esc_html($sd->format('g:i')); ?> से रात <?php echo esc_html($ed->format('g:i')); ?> तक · 120 प्रश्न · 360 अंक · रैंक + परसेंटाइल</small></span></span>
-      <span class="uh-stm-r"><span class="uh-stm-lbl" id="uh-stm-lbl">शुरू होने में</span><span class="uh-stm-cd" id="uh-stm-cd"><span><b>00</b><i>घंटे</i></span><span><b>00</b><i>मिनट</i></span><span><b>00</b><i>सेकंड</i></span></span><span class="uh-stm-go" id="uh-stm-go">अभी रजिस्टर करें →</span></span>
+      <span class="uh-stm-glow"></span>
+      <span class="uh-stm-top"><img src="<?php echo esc_url(EH_URI . '/assets/upsssc-alert-logo.svg'); ?>" alt="UPSSSC ALERT" width="62" height="62">
+        <span><span class="uh-stm-chip" id="uh-stm-chip"><i></i><span>फ्री लाइव मॉक · UPSSSC ALERT</span></span>
+        <b class="uh-stm-t">UP Super TET 2026 <em>लाइव मॉक टेस्ट</em></b></span></span>
+      <span class="uh-stm-meta"><span>📅 <?php echo esc_html($sd->format('j') . ' ' . $hm[(int) $sd->format('n')]); ?></span><span>⏰ सुबह <?php echo esc_html($sd->format('g:i')); ?> – रात <?php echo esc_html($ed->format('g:i')); ?></span><span>📝 120 प्रश्न · 360 अंक</span><span>🏆 रैंक + परसेंटाइल</span><span>🌐 हिंदी + English</span></span>
+      <span class="uh-stm-bot"><span class="uh-stm-cdw"><span class="uh-stm-lbl" id="uh-stm-lbl">शुरू होने में</span><span class="uh-stm-cd" id="uh-stm-cd"><?php echo $ring('घंटे') . $ring('मिनट') . $ring('सेकंड'); ?></span></span>
+        <span class="uh-stm-go" id="uh-stm-go">अभी रजिस्टर करें →</span></span>
     </a>
-    <script>(function(){var e=document.getElementById('uh-stm');if(!e)return;var s=+e.dataset.start,en=+e.dataset.end,off=+e.dataset.now*1000-Date.now(),cd=document.getElementById('uh-stm-cd'),l=document.getElementById('uh-stm-lbl'),g=document.getElementById('uh-stm-go'),c=document.getElementById('uh-stm-chip');
-    function p(n){return (n<10?'0':'')+n}function t(){var n=Math.floor((Date.now()+off)/1000),live=n>=s,x=Math.max(0,(live?en:s)-n);if(n>=en){e.style.display='none';return}
-    e.classList.toggle('live',live);l.textContent=live?'मॉक बंद होने में':'शुरू होने में';g.textContent=live?'अभी मॉक दें →':'अभी रजिस्टर करें →';c.lastChild.textContent=live?'LIVE · अभी चल रहा है':'फ्री लाइव मॉक';
-    var b=cd.querySelectorAll('b');b[0].textContent=p(Math.floor(x/3600));b[1].textContent=p(Math.floor(x%3600/60));b[2].textContent=p(x%60)}t();setInterval(t,1000)})();</script>
+    <script>(function(){var e=document.getElementById('uh-stm');if(!e)return;var s=+e.dataset.start,en=+e.dataset.end,off=+e.dataset.now*1000-Date.now(),cd=e.querySelectorAll('.uh-stm-ring'),l=document.getElementById('uh-stm-lbl'),g=document.getElementById('uh-stm-go'),c=document.getElementById('uh-stm-chip'),C=2*Math.PI*28;
+    function p(n){return (n<10?'0':'')+n}function set(k,v,m){cd[k].querySelector('b').textContent=p(v);cd[k].querySelector('.fg').style.strokeDashoffset=C*(1-v/m)}
+    function t(){var n=Math.floor((Date.now()+off)/1000),live=n>=s,x=Math.max(0,(live?en:s)-n);if(n>=en){e.style.display='none';return}
+    e.classList.toggle('live',live);l.textContent=live?'मॉक बंद होने में':'शुरू होने में';g.textContent=live?'अभी मॉक दें →':'अभी रजिस्टर करें →';c.lastChild.textContent=live?'LIVE · अभी चल रहा है · UPSSSC ALERT':'फ्री लाइव मॉक · UPSSSC ALERT';
+    set(0,Math.min(99,Math.floor(x/3600)),24);set(1,Math.floor(x%3600/60),60);set(2,x%60,60)}cd.forEach(function(r){r.querySelector('.fg').style.strokeDasharray=C});t();setInterval(t,1000)})();</script>
     <?php endif; endif; ?>
     <ul class="uh-stats">
       <li><b data-count="60000" data-suffix="+">60,000+</b><span><?php echo eh_t('students with us', 'विद्यार्थी हमारे साथ'); ?></span></li>

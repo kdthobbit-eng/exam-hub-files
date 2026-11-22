@@ -86,6 +86,7 @@ function eh_self_update($sha = '') {
     update_option('eh_deployed_sha', $sha, false);
     delete_option('eh_rewrite_ver');
     if (function_exists('opcache_reset')) @opcache_reset();
+    if (function_exists('wp_cache_flush')) wp_cache_flush(); do_action('litespeed_purge_all'); if (function_exists('rocket_clean_domain')) rocket_clean_domain(); if (function_exists('w3tc_flush_all')) w3tc_flush_all(); if (function_exists('wp_cache_clear_cache')) wp_cache_clear_cache();
     return 'OK ' . substr($sha, 0, 7);
 }
 

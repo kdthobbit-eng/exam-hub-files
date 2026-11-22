@@ -39,21 +39,7 @@
   <div class="wrap eh-copy">© <?php echo wp_date('Y'); ?> <?php echo esc_html(eh_opt('brand')); ?> · <?php echo esc_html(wp_parse_url(home_url(), PHP_URL_HOST)); ?> · 100% Free</div>
   <button type="button" class="eh-totop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 </footer>
-<?php if (is_front_page()): $U = eh_upcoming(); $cn = count($U['confirmed']) + count($U['next']); ?>
-<button type="button" class="eh-upc-pill" data-drawer="eh-upc">📣 Upcoming Exams (<?php echo (int) $cn; ?>) <i></i></button>
-<aside id="eh-upc" class="eh-upc" hidden><div class="eh-upc-box">
-  <div class="eh-upc-h"><b><?php echo esc_html(eh_opt('brand')); ?></b><small>Live practice updates</small><button type="button" data-close>✕</button></div>
-  <div class="eh-upc-tabs"><button type="button" class="on" data-t="c">📅 Confirmed Dates (<?php echo count($U['confirmed']); ?>)</button><button type="button" data-t="n">⚡ What Next? (<?php echo count($U['next']); ?>)</button></div>
-  <div class="eh-upc-list" data-t="c">
-    <?php if (!$U['confirmed']): ?><p class="muted small">No confirmed typing test dates yet. We will post new dates on Telegram.</p><?php endif; ?>
-    <?php foreach ($U['confirmed'] as $x): ?><div class="eh-upc-card"><span class="tag"><?php echo esc_html($x['tag'] ?? ''); ?></span><b><?php echo esc_html($x['name'] ?? ''); ?></b><small><?php echo esc_html($x['sub'] ?? ''); ?></small><em>● <?php echo esc_html(!empty($x['date']) ? wp_date('d M Y', strtotime($x['date'])) : ''); ?></em><?php if (!empty($x['slug'])): ?><a href="<?php echo esc_url(home_url('/typing/' . $x['slug'] . '/')); ?>">Practice ↗</a><?php endif; ?></div><?php endforeach; ?>
-  </div>
-  <div class="eh-upc-list" data-t="n" hidden>
-    <?php foreach ($U['next'] as $x): ?><div class="eh-upc-card"><span class="tag"><?php echo esc_html($x['tag'] ?? ''); ?></span><b><?php echo esc_html($x['name'] ?? ''); ?></b><small><?php echo esc_html($x['sub'] ?? ''); ?></small><em class="st">○ <?php echo esc_html($x['status'] ?? ''); ?></em><?php if (!empty($x['url'])): ?><a href="<?php echo esc_url(home_url($x['url'])); ?>">Practice ↗</a><?php endif; ?></div><?php endforeach; ?>
-  </div>
-  <a class="eh-upc-tg" href="<?php echo esc_url(eh_opt('tg_channel')); ?>" target="_blank" rel="noopener">✈ Join Telegram for the Live Typing schedule</a>
-</div></aside>
-<?php endif; ?>
+
 <?php wp_footer(); ?>
 </body>
 </html>
