@@ -45,6 +45,7 @@ add_action('template_redirect', function () {
         }
         $user = wp_signon(['user_login' => $id, 'user_password' => $pw, 'remember' => true], is_ssl());
         if (is_wp_error($user)) { $GLOBALS['eh_auth_error'] = 'Wrong email/mobile or password.'; return; }
+        if (user_can($user, 'manage_options') && function_exists('eh_stm_round')) { wp_safe_redirect(home_url('/super-tet-mock/?admin=1')); exit; }
         wp_safe_redirect(eh_safe_redirect_target()); exit;
     }
 
@@ -106,7 +107,7 @@ add_action('rest_api_init', function () {
         update_user_meta($user->ID, 'eh_google_sub', sanitize_text_field($d['sub'] ?? ''));
         if (!empty($d['picture'])) update_user_meta($user->ID, 'eh_avatar', esc_url_raw($d['picture']));
         wp_set_current_user($user->ID); wp_set_auth_cookie($user->ID, true, is_ssl());
-        return ['ok' => true, 'redirect' => eh_safe_redirect_target()];
+        return ['ok' => true, 'redirect' => (user_can($user, 'manage_options') && function_exists('eh_stm_round')) ? home_url('/super-tet-mock/?admin=1') : eh_safe_redirect_target()];
     }]);
 });
 

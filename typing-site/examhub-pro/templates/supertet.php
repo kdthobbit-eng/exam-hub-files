@@ -8,7 +8,7 @@ $eh_admin = $eh_in && current_user_can('manage_options') && isset($_GET['admin']
 $eh_self = home_url('/super-tet-mock/');
 $eh_cfg = [
     'rest' => esc_url_raw(rest_url('eh/v1/stm/')), 'nonce' => $eh_in ? wp_create_nonce('wp_rest') : '',
-    'in' => $eh_in, 'admin' => $eh_admin, 'now' => time(),
+    'in' => $eh_in, 'admin' => $eh_admin, 'isadm' => $eh_in && current_user_can('manage_options'), 'now' => time(),
     'round' => eh_stm_round_out(eh_stm_round()),
     'login' => eh_login_page_url($eh_self), 'signup' => add_query_arg('redirect_to', rawurlencode($eh_self), home_url('/signup/')),
     'logo' => get_template_directory_uri() . '/assets/upsssc-alert-logo.svg',
@@ -275,6 +275,17 @@ table.mt th{background:#eef3f9;font-weight:600}
 .tg.c{background:#dcfce7;color:#166534}.tg.w{background:#fee2e2;color:#991b1b}.tg.s{background:#eef2f7;color:#475569}
 
 /* admin */
+.ahero{background:radial-gradient(520px 300px at 92% 0,rgba(255,196,84,.3),transparent 62%),linear-gradient(125deg,#0a1b3f,#123a86 55%,#1764c8);color:#fff;padding:22px 0 70px}
+.ahead{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.ahead h2{margin:10px 0 2px;font-family:Poppins,'Noto Sans Devanagari',sans-serif;font-size:26px}.ahead p{margin:0;opacity:.85;font-size:13.5px}
+.abtn{display:flex;gap:8px;flex-wrap:wrap}.abtn select{padding:10px;border-radius:10px;border:0;font-family:inherit}
+.ahero+.adm{margin-top:-56px}
+.ak b{font-size:24px}
+.atabs{display:flex;gap:8px;margin:14px 0 10px;flex-wrap:wrap}.atabs button{border:1px solid var(--ln);background:#fff;border-radius:30px;padding:9px 16px;font-size:14px;font-weight:600}.atabs button.on{background:var(--nv);color:#fff;border-color:var(--nv)}
+.medal{display:inline-flex;width:26px;height:26px;border-radius:50%;align-items:center;justify-content:center;font-weight:700;font-family:Poppins,sans-serif;font-size:12px;background:#eef3f8}
+.frm label{display:block;font-size:13.5px;color:var(--mu);margin:12px 0 5px}.frm input[type=text],.frm select{width:100%;padding:10px 12px;border:1px solid var(--ln);border-radius:10px;font:inherit;font-size:15px}
+.frm .opt{display:flex;gap:10px;flex-wrap:wrap}.frm .opt label{display:flex;gap:8px;align-items:center;border:1px solid var(--ln);border-radius:12px;padding:10px 14px;margin:0;color:var(--tx);cursor:pointer;flex:1;min-width:180px}
+.frm .opt input{accent-color:var(--pr);width:18px;height:18px}
 .adm{max-width:1200px;margin:16px auto;padding:0 14px 40px}
 .ak{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:14px}
 .ak div{background:#fff;border:1px solid var(--ln);border-radius:14px;padding:14px;text-align:center}
@@ -545,9 +556,16 @@ table.mt th{background:#eef3f9;font-weight:600}
 
 <!-- ===== admin ===== -->
 <section class="scr" id="s-adm">
- <?php $eh_hd('Admin · Live Monitor'); ?>
- <div class="adm"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px"><h2 style="margin:0;color:var(--nv);font-size:19px" id="a-t"></h2><div style="display:flex;gap:8px;align-items:center"><select id="a-r" style="padding:8px 10px;border-radius:8px;border:1px solid var(--ln);font-family:inherit"></select><button class="b b-wh" id="a-csv">⬇ CSV</button></div></div>
- <div class="ak" id="a-k"></div><div class="card"><div class="tw"><table class="t" id="a-tb"></table></div><p style="font-size:12px;color:var(--mu);margin:10px 0 0">हर 10 सेकंड में अपने आप अपडेट · "दे रहे" = पिछले 2 मिनट में सक्रिय</p></div></div>
+ <?php $eh_hd('Admin Panel', '', true); ?>
+ <div class="ahero"><div class="adm" style="margin:0 auto;padding:0 14px">
+  <div class="ahead"><div><span class="chip live" style="background:rgba(255,255,255,.14)"><span class="dot"></span><span id="a-st">Admin Panel</span></span><h2 id="a-t">Super TET Mock</h2><p id="a-tm"></p></div>
+   <div class="abtn"><select id="a-r"></select><button class="b b-gd" id="a-rep">⬇ मेरिट रिपोर्ट (PDF)</button><button class="b b-wh" id="a-csv">⬇ Excel (CSV)</button><a class="b b-wh" href="<?php echo esc_url(admin_url('admin.php?page=eh-stm')); ?>">WP-Admin ↗</a><a class="b b-wh" href="<?php echo esc_url($eh_self); ?>">🛠️ टेस्ट मॉक दें</a></div></div>
+ </div></div>
+ <div class="adm">
+  <div class="ak" id="a-k"></div>
+  <div class="atabs" id="a-tabs"><button class="on" data-t="live">🟢 लाइव / सभी प्रयास</button><button data-t="merit">🏆 मेरिट लिस्ट</button><button data-t="sec">📊 सेक्शन-वार औसत</button></div>
+  <div class="card"><div class="tw" id="a-body"></div><p style="font-size:12px;color:var(--mu);margin:10px 0 0">हर 15 सेकंड में अपने आप अपडेट · एडमिन के प्रयास मेरिट में नहीं गिने जाते · "दे रहे" = पिछले 2 मिनट में सक्रिय</p></div>
+ </div>
 </section>
 
 <div class="mdl" id="mdl"><div class="bx"><h3><span id="mt"></span><button id="mx" aria-label="बंद करें">×</button></h3><div class="in" id="mb"></div><div class="ftr" id="mf"></div></div></div>
@@ -605,6 +623,7 @@ function cta(st){let h='',p='',b='';const a=A;
  else if(st==='soon'){h='नमस्ते, '+ME.name;p='लॉग-इन '+tStr(R.login)+' से खुलेगा। तब तक नीचे पैटर्न और निर्देश देख लें।';b='<button class="b b-wh b-lg" disabled>'+tStr(R.login)+' से खुलेगा</button>'}
  else if(st==='over'){h='यह परीक्षा समाप्त हो चुकी है';p='प्रश्न-पत्र और उत्तर-कुंजी डाउनलोड करें।';b='<button class="b b-pr b-lg" id="c-paper">⬇ प्रश्न-पत्र + उत्तर-कुंजी</button>'}
  else {h='नमस्ते, '+ME.name;p=st==='live'?(R.end-now()>=7200?'मॉक खुला है। शुरू करने पर आपको पूरे 120 मिनट मिलेंगे।':'मॉक बंद होने वाला है — अभी शुरू करने पर केवल '+fmt(R.end-now())+' मिलेंगे।'):'विवरण जाँचें और निर्देश पढ़ें। परीक्षा '+tStr(R.start)+' पर शुरू होगी।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा में प्रवेश करें ›</button>'}
+ if(C.isadm)b='<a class="b b-wh b-lg" href="?admin=1">🛠️ Admin Panel</a>'+b;
  if($('c-h').textContent!==h)$('c-h').textContent=h;if($('c-p').textContent!==p)$('c-p').textContent=p;
  if($('c-bt').dataset.k!==b){$('c-bt').innerHTML=b;$('c-bt').dataset.k=b;const g=$('c-go');if(g)g.onclick=enter;const re=$('c-re');if(re)re.onclick=retry;const pp=$('c-paper');if(pp)pp.onclick=paper}}
 let RETRY=0;function retry(){if(status()!=='live')return;RETRY=1;$('agree').checked=false;clearInterval(LT);go('s-conf')}
@@ -759,23 +778,72 @@ function paper(){api('paper').then(j=>makePdf({q:j.q,key:j.key,exp:j.exp,name:nu
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('mf').children.length){close()}if(e.key==='Escape')side(0)});
 
 /* ---------- admin ---------- */
-function adm(){api('admin'+(AR?'?round='+AR:'')).then(d=>{off=d.now*1000-Date.now();const n=d.now,rows=d.rows;
- $('a-t').textContent=d.round.name;const ro=d.rounds.map(x=>`<option value="${x.id}"${x.id===d.round.id?' selected':''}>${esc(x.name)}</option>`).join('');if($('a-r').dataset.k!==ro){$('a-r').innerHTML=ro;$('a-r').dataset.k=ro}
- const live=rows.filter(x=>+x.started&&!+x.submitted&&n-x.last<120).length,st=rows.filter(x=>+x.started).length,dn=rows.filter(x=>+x.submitted&&+x.counted),av=dn.length?Math.round(dn.reduce((a,x)=>a+ +x.score,0)/dn.length):0,tp=dn.length?Math.max(...dn.map(x=>+x.score)):0;
- const uu=new Set(rows.map(x=>x.uid)).size;$('a-k').innerHTML=[[uu,'लॉग-इन करके पेज खोला'],[live,'अभी पेपर दे रहे'],[st,'पेपर शुरू किया'],[dn.length,'सबमिट किया'],[av+' / '+tp,'औसत / टॉप स्कोर']].map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
- const ago=t=>{t=n-t;return t<60?t+' से पहले':t<3600?Math.floor(t/60)+' मि पहले':Math.floor(t/3600)+' घं पहले'};
- $('a-tb').innerHTML='<thead><tr><th>नाम</th><th>ईमेल</th><th>प्रयास</th><th>स्थिति</th><th>डिवाइस</th><th>किए</th><th>स्कोर</th><th>शुरू</th><th>आखिरी बार</th><th>टैब</th><th></th></tr></thead>'+rows.map(x=>{const s=+x.submitted?'<span class="pill p-o">सबमिट</span>':+x.started?(n-x.last<120?'<span class="pill p-l">दे रहे</span>':'<span class="pill p-i">रुके हैं</span>'):'<span class="pill p-s">केवल लॉग-इन</span>';
-  return `<tr style="${+x.submitted&&!+x.counted?'opacity:.55':''}"><td>${esc(x.name)}</td><td>${esc(x.email)}</td><td>${x.att}${+x.counted?' ★':''}</td><td>${s}</td><td>${esc(x.dev)}</td><td>${x.answered}</td><td><b>${+x.submitted?x.score:'—'}</b></td><td>${+x.started?tStr(+x.started):'—'}</td><td>${ago(+x.last)}</td><td>${x.tabs}</td><td><button class="b b-wh" style="padding:4px 10px;font-size:12px" data-rs="${x.id}">रीसेट</button></td></tr>`}).join('');
- window._rows=rows}).catch(()=>{})}
+let AT='live',AD=null,RP=null;
+const ago=(n,t)=>{t=n-t;return t<60?t+' से पहले':t<3600?Math.floor(t/60)+' मि पहले':Math.floor(t/3600)+' घं पहले'};
+function adm(){Promise.all([api('admin'+(AR?'?round='+AR:'')),api('report'+(AR?'?round='+AR:''))]).then(([d,r])=>{AD=d;RP=r;off=d.now*1000-Date.now();
+ $('a-t').textContent=d.round.name;$('a-tm').textContent=ist(d.round.start,{day:'numeric',month:'long',year:'numeric'})+' · '+tStr(d.round.start)+' – '+tStr(d.round.end);
+ $('a-st').textContent={soon:'अभी खुला नहीं',login:'लॉग-इन खुला',live:'LIVE — चल रहा है',over:'बंद'}[d.round.status]||'';
+ const ro=d.rounds.map(x=>`<option value="${x.id}"${x.id===d.round.id?' selected':''}>${esc(x.name)}</option>`).join('');if($('a-r').dataset.k!==ro){$('a-r').innerHTML=ro;$('a-r').dataset.k=ro}
+ const S=r.stats;$('a-k').innerHTML=[[S.users,'लॉग-इन करके पेज खोला'],[S.live,'अभी पेपर दे रहे'],[S.started,'पेपर शुरू किया'],[S.attempts,'कुल प्रयास'],[S.merit,'मेरिट में (सबमिट)'],[S.max,'सबसे ज़्यादा अंक'],[S.avg,'औसत अंक'],[S.median,'मीडियन'],[S.min,'सबसे कम अंक'],[S.avgc+' / '+S.avgw,'औसत सही / गलत']].map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join('');
+ admTab()}).catch(()=>{})}
+function admTab(){if(!AD||!RP)return;const n=AD.now;let h='';
+ if(AT==='live'){const rows=AD.rows.slice().sort((a,b)=>b.last-a.last);
+  h='<table class="t"><thead><tr><th>नाम</th><th>ईमेल</th><th>प्रयास</th><th>स्थिति</th><th>किए</th><th>अंक</th><th>शुरू</th><th>आखिरी बार</th><th>टैब</th><th>डिवाइस</th><th></th></tr></thead>'+rows.map(x=>{const s=+x.submitted?(+x.counted?'<span class="pill p-o">सबमिट ★</span>':'<span class="pill p-o" style="opacity:.6">सबमिट (पुराना/एडमिन)</span>'):+x.started?(n-x.last<120?'<span class="pill p-l">दे रहे</span>':'<span class="pill p-i">रुके हैं</span>'):'<span class="pill p-s">केवल लॉग-इन</span>';
+   return `<tr><td>${esc(x.name)}</td><td>${esc(x.email)}</td><td>${x.att}</td><td>${s}</td><td>${x.answered}</td><td><b>${+x.submitted?x.score:'—'}</b></td><td>${+x.started?tStr(+x.started):'—'}</td><td>${ago(n,+x.last)}</td><td>${x.tabs}</td><td>${esc(x.dev)}</td><td><button class="b b-wh" style="padding:4px 10px;font-size:12px" data-rs="${x.id}">रीसेट</button></td></tr>`}).join('')+'</table>'}
+ else if(AT==='merit'){h='<table class="t"><thead><tr><th>रैंक</th><th>नाम</th><th>ईमेल</th><th>रोल नं.</th><th>अंक</th><th>सही</th><th>गलत</th><th>परसेंटाइल</th><th>समय</th><th>प्रयास</th><th>टैब</th></tr></thead>'+(RP.rows.map(x=>`<tr><td><span class="medal" style="${x.rank<=3?'background:'+['#ffe08a','#e3e8ef','#f3cfb0'][x.rank-1]:''}">${x.rank}</span></td><td>${esc(x.name)}</td><td>${esc(x.email)}</td><td>${esc(x.roll)}</td><td><b>${x.score}</b></td><td>${x.c}</td><td>${x.w}</td><td>${x.pct.toFixed(2)}</td><td>${x.min} मि</td><td>${x.att}</td><td>${x.tabs}</td></tr>`).join('')||'<tr><td colspan="11">अभी कोई नहीं</td></tr>')+'</table>'}
+ else{h='<table class="t"><thead><tr><th>सेक्शन</th><th>प्रश्न</th><th>पूर्णांक</th><th>औसत अंक</th><th>औसत %</th></tr></thead>'+RP.sections.map(x=>`<tr><td>${esc(x.n)}</td><td>${x.q}</td><td>${x.q*3}</td><td><b>${x.avg}</b></td><td>${(x.avg*100/(x.q*3)).toFixed(1)}%</td></tr>`).join('')+'</table>'}
+ $('a-body').innerHTML=h}
+function repDialog(){if(!RP)return;modal('मेरिट रिपोर्ट डाउनलोड',`<div class="frm"><label>रिपोर्ट का शीर्षक</label><input type="text" id="r-title" value="UP Super TET 2026 लाइव मॉक — मेरिट सूची">
+ <label>ईमेल दिखाएँ?</label><div class="opt"><label><input type="radio" name="r-m" value="mask" checked> Masked — ईमेल हटाकर (पब्लिक के लिए)</label><label><input type="radio" name="r-m" value="full"> Unmasked — ईमेल सहित (सिर्फ़ टीम के लिए)</label></div>
+ <label>कितने उम्मीदवार</label><select id="r-n"><option value="0">सभी (${RP.rows.length})</option><option value="10">टॉप 10</option><option value="50">टॉप 50</option><option value="100">टॉप 100</option></select>
+ <label>फ़ॉर्मेट</label><div class="opt"><label><input type="radio" name="r-f" value="pdf" checked> PDF (ब्रांडिंग सहित)</label><label><input type="radio" name="r-f" value="csv"> Excel (CSV)</label></div></div>`,
+ [['रद्द','b-wh',close],['⬇ डाउनलोड करें','b-pr',()=>{const o={title:$('r-title').value.trim()||'मेरिट सूची',mask:document.querySelector('[name=r-m]:checked').value==='mask',n:+$('r-n').value,f:document.querySelector('[name=r-f]:checked').value};close();o.f==='csv'?repCsv(o):repPdf(o)}]])}
+function repRows(o){return o.n?RP.rows.slice(0,o.n):RP.rows}
+function repCsv(o){const rows=repRows(o);const H=['Rank','Name'].concat(o.mask?[]:['Email']).concat(['Roll No','Score (/360)','Correct','Wrong','Percentile','Time (min)','Attempts']);
+ const c=H.join(',')+'\n'+rows.map(x=>[x.rank,x.name].concat(o.mask?[]:[x.email]).concat([x.roll,x.score,x.c,x.w,x.pct,x.min,x.att]).map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+c],{type:'text/csv'}));a.download='SuperTET-Merit-'+(o.mask?'masked':'full')+'.csv';document.body.appendChild(a);a.click();a.remove()}
+async function blocksToPdf(blocks,links,fname,M){const {jsPDF}=window.jspdf,pdf=new jsPDF({unit:'pt',format:'a4',compress:true}),PW=pdf.internal.pageSize.getWidth(),PH2=pdf.internal.pageSize.getHeight(),mg=22,sc=(PW-2*mg)/760,cap=(PH2-2*mg-14)/sc,st=$('pdfStage');
+ const pages=[];let cur=[],hh=0;blocks.forEach(b=>{const h=b.offsetHeight+6;if(hh+h>cap&&cur.length){pages.push(cur);cur=[];hh=0}cur.push(b);hh+=h});if(cur.length)pages.push(cur);
+ for(let n=0;n<pages.length;n++){M.textContent='PDF बन रही है… '+Math.round(n*100/pages.length)+'%';const pd=document.createElement('div');pd.style.cssText='width:760px;background:#fff';pages[n].forEach(b=>{b.style.marginBottom='6px';pd.appendChild(b)});st.appendChild(pd);
+  const cv=await html2canvas(pd,{scale:1.6,backgroundColor:'#ffffff',useCORS:true,logging:false,ignoreElements:e=>e.classList&&(e.classList.contains('scr')||e.classList.contains('mdl'))});
+  if(n)pdf.addPage();pdf.addImage(cv.toDataURL('image/jpeg',.82),'JPEG',mg,mg,PW-2*mg,pd.offsetHeight*sc);
+  const pr=pd.getBoundingClientRect();links.forEach(([el,u])=>{if(pd.contains(el)){const r=el.getBoundingClientRect();pdf.link(mg+(r.left-pr.left)*sc,mg+(r.top-pr.top)*sc,r.width*sc,r.height*sc,{url:u})}});
+  pd.remove();await new Promise(r=>setTimeout(r,0))}
+ const np=pdf.internal.getNumberOfPages();for(let p=1;p<=np;p++){pdf.setPage(p);pdf.saveGraphicsState();pdf.setGState(new pdf.GState({opacity:.06}));pdf.setTextColor(15,42,77);pdf.setFont('helvetica','bold');pdf.setFontSize(64);pdf.text('UPSSSC ALERT',PW/2,PH2/2,{align:'center',angle:35});pdf.restoreGraphicsState();
+  pdf.setFontSize(8.5);pdf.setTextColor(120);pdf.setFont('helvetica','normal');pdf.text('UPSSSC ALERT  x  XL Study  ·  xlstudy.in  ·  t.me/upssscalert',mg,PH2-10);pdf.text(p+' / '+np,PW-mg,PH2-10,{align:'right'})}
+ pdf.save(fname)}
+async function repPdf(o){const W=$('pdfwait'),M=$('pdfmsg');W.classList.add('on');M.textContent='PDF बन रही है…';
+ try{await libs();if(document.fonts&&document.fonts.ready)await document.fonts.ready;const st=$('pdfStage'),blocks=[],R2=RP,S=R2.stats,rows=repRows(o);
+  st.innerHTML=`<style>#pdfStage *{box-sizing:border-box}#pdfStage .pb{padding:10px 26px}#pdfStage table{width:100%;border-collapse:collapse;font-size:13px}#pdfStage td,#pdfStage th{border:1px solid #d5dee9;padding:6px 8px;text-align:left}#pdfStage th{background:#0f2a4d;color:#fff;font-weight:600}#pdfStage tr:nth-child(even) td{background:#f6f9fc}#pdfStage .kk{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}#pdfStage .kk div{border:1px solid #d5dee9;border-radius:12px;padding:10px;text-align:center}#pdfStage .kk b{display:block;font-size:22px;color:#0f2a4d;font-family:Poppins,sans-serif}#pdfStage .kk span{font-size:11.5px;color:#5f6b7a}#pdfStage h3{margin:0 0 8px;color:#0f2a4d;font-size:16px;border-left:4px solid #c9a24a;padding-left:8px}</style>`;
+  const mk=h=>{const e=document.createElement('div');e.className='pb';e.innerHTML=h;st.appendChild(e);blocks.push(e);return e};
+  const rd=R2.round,dt=ist(rd.start,{day:'numeric',month:'long',year:'numeric'});
+  mk(`<div style="border-radius:18px;overflow:hidden;background:linear-gradient(125deg,#0a1b3f,#123a86 60%,#1764c8);color:#fff;padding:22px 24px;position:relative">
+   <div style="display:flex;align-items:center;gap:14px"><img src="${esc(C.logo.replace('.svg','.png'))}" style="width:70px;height:70px;border-radius:50%;background:#fff"><div style="flex:1"><div style="font:700 26px Poppins,sans-serif;letter-spacing:.5px">UPSSSC ALERT</div><div style="opacity:.85;font-size:13px">Online Examination · xlstudy.in</div></div><div style="text-align:right;font:700 15px Poppins,sans-serif">XL Study<div style="font-weight:400;font-size:11px;opacity:.8">xlstudy.in</div></div></div>
+   <div style="margin-top:16px;font-size:24px;font-weight:700;line-height:1.3">${esc(o.title)}</div>
+   <div style="margin-top:6px;opacity:.9;font-size:13.5px">${esc(rd.name)} · ${dt} · ${tStr(rd.start)} – ${tStr(rd.end)}</div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">${['120 प्रश्न','360 अंक','120 मिनट','सही +3','गलत −1','10 सेक्शन'].map(x=>`<span style="background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:3px 12px;font-size:12px">${x}</span>`).join('')}</div>
+   <div style="position:absolute;right:20px;bottom:14px;font-size:11px;opacity:.8">रिपोर्ट तैयार: ${ist(now(),{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'})}${o.mask?'':' · आंतरिक (ईमेल सहित)'}</div></div>`);
+  mk(`<h3>परीक्षा सारांश</h3><div class="kk">${[[S.started,'कुल उम्मीदवार'],[S.merit,'मेरिट में (सबमिट)'],[S.attempts,'कुल प्रयास'],[S.users,'लॉग-इन'],[S.max,'सर्वोच्च अंक'],[S.avg,'औसत अंक'],[S.median,'मीडियन'],[S.min,'न्यूनतम अंक'],[S.avgc,'औसत सही'],[S.avgw,'औसत गलत'],[(S.merit?(S.avg*100/360).toFixed(1):0)+'%','औसत प्रतिशत'],[rows.length,'इस सूची में']].map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}</div>`);
+  const B={};R2.rows.forEach(x=>{const b=Math.floor(x.score/30)*30;B[b]=(B[b]||0)+1});const ks=Object.keys(B).map(Number).sort((a,b)=>a-b),bm=Math.max(1,...Object.values(B));
+  mk(`<div style="display:grid;grid-template-columns:1.1fr 1fr;gap:14px"><div><h3>सेक्शन-वार औसत</h3><table><tr><th>सेक्शन</th><th>प्रश्न</th><th>औसत अंक</th></tr>${R2.sections.map(x=>`<tr><td>${esc(x.n)}</td><td>${x.q}</td><td><b>${x.avg}</b> / ${x.q*3}</td></tr>`).join('')}</table></div>
+   <div><h3>अंक वितरण</h3><div style="display:flex;align-items:flex-end;gap:6px;height:220px;border-bottom:2px solid #d5dee9;padding-top:10px">${ks.map(b=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%"><b style="font-size:11px;color:#0f2a4d">${B[b]}</b><i style="display:block;width:100%;height:${B[b]*180/bm}px;background:linear-gradient(180deg,#7fa8e0,#1d63c7);border-radius:6px 6px 0 0"></i></div>`).join('')||'<span style="color:#5f6b7a">—</span>'}</div><div style="display:flex;gap:6px">${ks.map(b=>`<span style="flex:1;text-align:center;font-size:10px;color:#5f6b7a">${b}+</span>`).join('')}</div>
+   <h3 style="margin-top:14px">टॉप 3</h3>${R2.rows.slice(0,3).map((x,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #eef2f6"><span style="width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;background:${['#ffe08a','#e3e8ef','#f3cfb0'][i]}">${i+1}</span><span style="flex:1">${esc(x.name)}</span><b style="font-family:Poppins">${x.score}</b></div>`).join('')}</div></div>`);
+  const H=`<tr><th>रैंक</th><th>नाम</th>${o.mask?'':'<th>ईमेल</th>'}<th>रोल नं.</th><th>अंक</th><th>सही</th><th>गलत</th><th>परसेंटाइल</th><th>समय</th></tr>`;
+  for(let i=0;i<rows.length;i+=22){mk((i?'':'<h3>मेरिट सूची</h3>')+'<table>'+H+rows.slice(i,i+22).map(x=>`<tr><td><b>${x.rank}</b></td><td>${esc(x.name)}</td>${o.mask?'':`<td style="font-size:11.5px">${esc(x.email)}</td>`}<td>${esc(x.roll)}</td><td><b>${x.score}</b></td><td>${x.c}</td><td>${x.w}</td><td>${x.pct.toFixed(2)}</td><td>${x.min} मि</td></tr>`).join('')+'</table>')}
+  if(!rows.length)mk('<p style="color:#5f6b7a">अभी कोई सबमिट नहीं हुआ।</p>');
+  const jb=mk(`<div style="border:2px solid #0f2a4d;border-radius:16px;padding:16px;text-align:center"><div style="font-size:17px;font-weight:700;color:#0f2a4d;margin-bottom:6px">अगला मॉक, रोज़ाना क्विज़ और नोट्स के लिए जुड़ें</div><div style="font-size:13px;color:#5f6b7a;margin-bottom:10px">टेलीग्राम: t.me/upssscalert (ग्रुप) · t.me/upssscalertt (चैनल) · वेबसाइट: xlstudy.in</div><span id="rj1" style="display:inline-block;padding:11px 20px;border-radius:12px;color:#fff;font-weight:700;background:#229ed9;margin:0 6px">टेलीग्राम ग्रुप ज्वाइन करें</span><span id="rj2" style="display:inline-block;padding:11px 20px;border-radius:12px;color:#fff;font-weight:700;background:#0f2a4d;margin:0 6px">टेलीग्राम चैनल ज्वाइन करें</span></div>`);
+  await Promise.all([...st.querySelectorAll('img')].map(im=>im.complete?1:new Promise(r=>{im.onload=im.onerror=r})));
+  await blocksToPdf(blocks,[[jb.querySelector('#rj1'),C.tgg],[jb.querySelector('#rj2'),C.tgc]],'SuperTET-Merit-'+(o.mask?'Masked':'Full')+'.pdf',M);
+  st.innerHTML='';W.classList.remove('on')}catch(e){W.classList.remove('on');$('pdfStage').innerHTML='';modal('PDF नहीं बनी','<p style="margin:0">दोबारा कोशिश करें।</p>')}}
 
 /* ---------- boot ---------- */
 home();waitTick();
 setInterval(()=>{if($('s-home').classList.contains('on'))home();if($('s-ins2').classList.contains('on'))waitTick()},1000);
-if(C.admin){go('s-adm');ME.name='Admin';adm();setInterval(adm,10000);
+if(C.admin){go('s-adm');ME.name='Admin';adm();setInterval(adm,15000);
  $('a-r').onchange=e=>{AR=e.target.value;adm()};
- $('a-tb').onclick=e=>{const b=e.target.closest('[data-rs]');if(b)modal('रीसेट करें?','<p style="margin:0">इस उम्मीदवार का प्रयास मिट जाएगा और वह दोबारा दे सकेगा।</p>',[['नहीं','b-wh',close],['हाँ, रीसेट','b-pr',()=>{close();api('reset',{id:+b.dataset.rs}).then(adm)}]])};
- $('a-csv').onclick=()=>{const rows=window._rows||[];const c='name,email,status,device,answered,correct,wrong,score,started,submitted,tabs\n'+rows.map(x=>[x.name,x.email,+x.submitted?'submitted':+x.started?'started':'login',x.dev,x.answered,x.correct,x.wrong,x.score,+x.started?new Date(x.started*1000).toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}):'',+x.submitted?new Date(x.submitted*1000).toLocaleString('en-IN',{timeZone:'Asia/Kolkata'}):'',x.tabs].map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+c],{type:'text/csv'}));a.download='super-tet-mock.csv';document.body.appendChild(a);a.click();a.remove()}}
+ $('a-tabs').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;AT=b.dataset.t;$('a-tabs').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));admTab()};
+ $('a-body').onclick=e=>{const b=e.target.closest('[data-rs]');if(b)modal('रीसेट करें?','<p style="margin:0">इस उम्मीदवार का यह प्रयास मिट जाएगा।</p>',[['नहीं','b-wh',close],['हाँ, रीसेट','b-pr',()=>{close();api('reset',{id:+b.dataset.rs}).then(adm)}]])};
+ $('a-rep').onclick=repDialog;$('a-csv').onclick=()=>{if(RP)repCsv({mask:false,n:0})}}
 else if(C.in){api('state').then(j=>{off=j.now*1000-Date.now();R=j.round;A=j.attempt;ME={name:j.name,roll:j.roll};names();home();
  if(+A.started&&!+A.submitted){try{const b=JSON.parse(localStorage.getItem(LK())||'null');if(b&&b.t>(+A.last||0)+2){A.ans=b.ans||A.ans;A.st=b.st||A.st;A.tq=b.tq||A.tq;A.cur=b.cur;A.tabs=Math.max(+A.tabs||0,+b.tabs||0);dirty=true}}catch(e){}
   modal('परीक्षा अधूरी है — Resume Test','<p style="margin:0 0 8px;line-height:1.7">आपकी परीक्षा पहले से चल रही है। आपके सभी उत्तर सुरक्षित हैं।</p><p style="margin:0;line-height:1.7">बचा समय: <b class="num">'+fmt(A.deadline-now())+'</b> · उत्तर दिए: <b>'+Object.keys(A.ans||{}).length+'</b> / 120</p><p style="margin:8px 0 0;font-size:13px;color:var(--mu)">ध्यान दें: घड़ी लगातार चल रही है।</p>',[['बाद में','b-wh',close],['Resume Test ›','b-pr',()=>{close();start();if(dirty)push().catch(()=>{})}]])}}).catch(()=>{$('c-h').textContent='लोड नहीं हुआ';$('c-p').textContent='पेज दोबारा खोलें।'})}

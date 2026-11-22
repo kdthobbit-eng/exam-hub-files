@@ -273,3 +273,41 @@ function eh_stm_bot_view($confirm = false) {
     $kb[] = [['text' => '🔄 Refresh', 'callback_data' => 'mock'], ['text' => '☰ Menu', 'callback_data' => 'menu']];
     return [$t, ['inline_keyboard' => $kb]];
 }
+
+/* Admin report: summary, section averages, full merit list. */
+function eh_stm_secmap() {
+    $r = function ($a, $b) { return range($a - 1, $b - 1); };
+    return [['सामान्य ज्ञान एवं समसामयिकी', $r(1, 25)], ['तार्किक ज्ञान', $r(26, 30)], ['हिंदी, संस्कृत एवं अंग्रेजी', $r(31, 60)], ['विज्ञान', $r(61, 68)], ['गणित', $r(69, 84)], ['पर्यावरण एवं सामाजिक अध्ययन', $r(85, 92)], ['शिक्षण कौशल', $r(93, 100)], ['बाल मनोविज्ञान', $r(101, 108)], ['सूचना तकनीक (ICT)', array_merge($r(109, 112), $r(117, 120))], ['जीवन कौशल / प्रबंधन', $r(113, 116)]];
+}
+add_action('rest_api_init', function () {
+    register_rest_route('eh/v1', '/stm/report', ['methods' => 'GET', 'permission_callback' => function () { return current_user_can('manage_options'); }, 'callback' => function (WP_REST_Request $q) {
+        global $wpdb; $t = eh_stm_table();
+        $r = eh_stm_round(sanitize_key($q['round'] ?? '')); eh_stm_expire($r);
+        $Q = eh_stm_paper($r); $S = eh_stm_secmap();
+        $all = $wpdb->get_results($wpdb->prepare("SELECT uid, att, counted, name, email, started, submitted, last, correct, wrong, score, tabs, dev, ans FROM $t WHERE round = %s", $r['id']), ARRAY_A);
+        $att = []; foreach ($all as $x) if ($x['started']) $att[$x['uid']] = ($att[$x['uid']] ?? 0) + 1;
+        $m = array_values(array_filter($all, function ($x) { return $x['submitted'] > 0 && $x['counted']; }));
+        usort($m, function ($a, $b) { return $b['score'] <=> $a['score'] ?: (($a['submitted'] - $a['started']) <=> ($b['submitted'] - $b['started'])); });
+        $sc = array_map(function ($x) { return (int) $x['score']; }, $m); $n = count($sc);
+        $sorted = $sc; sort($sorted);
+        $secTot = array_fill(0, count($S), 0);
+        $rows = [];
+        foreach ($m as $x) {
+            $s = (int) $x['score']; $a = json_decode($x['ans'] ?: '{}', true) ?: [];
+            foreach ($S as $k => $sec) { $c = 0; $w = 0; foreach ($sec[1] as $i) { if (!isset($a[$i])) continue; if ($a[$i] === $Q[$i]['a']) $c++; else $w++; } $secTot[$k] += $c * 3 - $w; }
+            $rows[] = ['rank' => count(array_filter($sc, function ($v) use ($s) { return $v > $s; })) + 1,
+                'pct' => $n ? round(count(array_filter($sc, function ($v) use ($s) { return $v <= $s; })) * 100 / $n, 2) : 0,
+                'name' => $x['name'], 'email' => $x['email'], 'roll' => eh_stm_roll((int) $x['uid']), 'score' => $s, 'c' => (int) $x['correct'], 'w' => (int) $x['wrong'],
+                'min' => round(($x['submitted'] - $x['started']) / 60), 'att' => (int) ($att[$x['uid']] ?? 1), 'tabs' => (int) $x['tabs'], 'dev' => $x['dev']];
+        }
+        $users = count(array_unique(array_column($all, 'uid')));
+        return ['round' => eh_stm_round_out($r), 'rounds' => array_map('eh_stm_round_out', eh_stm_rounds()), 'now' => time(),
+            'stats' => ['users' => $users, 'started' => count($att), 'attempts' => array_sum($att), 'merit' => $n,
+                'live' => count(array_filter($all, function ($x) { return $x['started'] && !$x['submitted'] && time() - $x['last'] < 120; })),
+                'avg' => $n ? round(array_sum($sc) / $n, 2) : 0, 'max' => $n ? max($sc) : 0, 'min' => $n ? min($sc) : 0,
+                'median' => $n ? ($n % 2 ? $sorted[intdiv($n, 2)] : ($sorted[$n / 2 - 1] + $sorted[$n / 2]) / 2) : 0,
+                'avgc' => $n ? round(array_sum(array_column($m, 'correct')) / $n, 1) : 0, 'avgw' => $n ? round(array_sum(array_column($m, 'wrong')) / $n, 1) : 0],
+            'sections' => array_map(function ($sec, $k) use ($secTot, $n) { return ['n' => $sec[0], 'q' => count($sec[1]), 'avg' => $n ? round($secTot[$k] / $n, 2) : 0]; }, $S, array_keys($S)),
+            'rows' => $rows];
+    }]);
+});
