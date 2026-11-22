@@ -102,8 +102,7 @@ add_action('rest_api_init', function () {
             if (is_wp_error($uid)) return new WP_REST_Response(['ok' => false], 500);
             $user = get_user_by('id', $uid);
         }
-        $eh_ok_admin = function_exists('eh_extra_admin_emails') && in_array(strtolower($email), eh_extra_admin_emails(), true);
-        if (user_can($user, 'edit_posts') && !$eh_ok_admin) return new WP_REST_Response(['ok' => false, 'msg' => 'Admin account ke liye wp-admin se login karein'], 403);
+        /* Google has verified this email, so admins may sign in with it too. */
         update_user_meta($user->ID, 'eh_google_sub', sanitize_text_field($d['sub'] ?? ''));
         if (!empty($d['picture'])) update_user_meta($user->ID, 'eh_avatar', esc_url_raw($d['picture']));
         wp_set_current_user($user->ID); wp_set_auth_cookie($user->ID, true, is_ssl());
