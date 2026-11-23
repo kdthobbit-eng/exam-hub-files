@@ -298,7 +298,8 @@ function eh_stm_bot_view($confirm = false) {
     $sl = ['soon' => '⏳ अभी खुला नहीं', 'login' => '🟡 लॉग-इन खुला, पेपर जल्द', 'live' => '🟢 LIVE — चल रहा है', 'over' => '🔴 बंद'][$st];
     $t = '📝 <b>' . esc_html($r['name']) . "</b>\n" . $sl . "\n" . $f($r['start_ts']) . ' → ' . $f($r['end_ts'])
         . "\n\n👤 पेज खोला (लॉग-इन)   " . $m['seen'] . "\n🟢 अभी पेपर दे रहे   " . $m['live'] . "\n▶️ पेपर शुरू किया   " . $m['started'] . "\n✅ सबमिट किया   " . $m['done'] . "\n🏆 टॉप स्कोर   " . $m['top'] . ' / 360';
-    if (function_exists('eh_stm_mail_counts')) { $mc = eh_stm_mail_counts(); $mo = eh_stm_mail_opt(); $t .= "\n\n📧 Mail " . ($mo['on'] ? 'चालू' : 'बंद') . " · भेजे " . $mc['sent'] . " · बाकी " . $mc['pending'] . " · फेल " . $mc['fail'] . ($mo['day'] === wp_date('Y-m-d') ? "\n   आज: Gmail 1 → " . $mo['sent_today'] . ($mo['from2'] ? " · Gmail 2 → " . $mo['sent2'] : '') : ''); }
+    if (function_exists('eh_stm_mail_counts')) { $mc = eh_stm_mail_counts(); $mo = eh_stm_mail_opt(); $t .= "\n\n📧 Mail " . ($mo['on'] ? 'चालू' : 'बंद') . " · भेजे " . $mc['sent'] . " · बाकी " . $mc['pending'] . " · फेल " . $mc['fail'] . (function () use ($mo) { $c = eh_stm_mail_24h(); $p = function ($a) use ($mo) { return (int) ($mo['pause' . $a] ?? 0) > time() ? ' ⏸' : ''; };
+        return "\n   24 घंटे: Gmail 1 → " . $c[1] . '/' . EH_STM_MAIL_DAILY . $p(1) . ($mo['from2'] ? " · Gmail 2 → " . $c[2] . '/' . EH_STM_MAIL_DAILY . $p(2) : ''); })(); }
     if ($confirm) {
         $t .= "\n\n⚠️ <b>मॉक अभी बंद करना है?</b>\nजो पेपर दे रहे हैं उनका पेपर अपने आप सबमिट हो जाएगा और कोई नया शुरू नहीं कर पाएगा।";
         return [$t, ['inline_keyboard' => [[['text' => '✅ हाँ, बंद करो', 'callback_data' => 'stm:close:go'], ['text' => '❌ नहीं', 'callback_data' => 'mock']]]]];

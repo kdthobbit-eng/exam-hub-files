@@ -106,11 +106,20 @@ function eh_stm_mail_text($d) {
 }
 
 /* ---------- send ---------- */
-/* which sender account to use now: 1, 2 or 0 (none left today) */
-function eh_stm_mail_acct($o) {
-    $day = wp_date('Y-m-d');
-    if ($o['from'] && $o['pass'] && $o['bad1'] !== $day && ($o['day'] !== $day || $o['sent_today'] < EH_STM_MAIL_DAILY)) return 1;
-    if ($o['from2'] && $o['pass2'] && $o['bad2'] !== $day && ($o['day'] !== $day || $o['sent2'] < EH_STM_MAIL_DAILY)) return 2;
+/* Sends per account in the last 24 hours (Gmail counts a rolling 24h window), read from each candidate's record. */
+function eh_stm_mail_24h() {
+    global $wpdb; static $c = null; if ($c !== null) return $c;
+    $c = [1 => 0, 2 => 0]; $since = time() - DAY_IN_SECONDS;
+    foreach ($wpdb->get_col($wpdb->prepare("SELECT meta_value FROM {$wpdb->usermeta} WHERE meta_key = %s AND meta_value LIKE 'sent:%%'", eh_stm_mail_meta())) as $v) {
+        $p = explode(':', $v); if ((int) ($p[1] ?? 0) >= $since) $c[(int) ($p[2] ?? 1) === 2 ? 2 : 1]++;
+    }
+    return $c;
+}
+/* which sender account to use now: 1, 2 or 0 (none free right now) */
+function eh_stm_mail_acct($o, $c = null) {
+    $c = $c ?: eh_stm_mail_24h(); $now = time();
+    foreach ([1 => ['from', 'pass'], 2 => ['from2', 'pass2']] as $a => $k)
+        if ($o[$k[0]] && $o[$k[1]] && (int) ($o['pause' . $a] ?? 0) < $now && $c[$a] < EH_STM_MAIL_DAILY) return $a;
     return 0;
 }
 function eh_stm_mail_send($d, $to = '', $acct = 1) {
@@ -151,22 +160,25 @@ function eh_stm_mail_pending($limit = 0) {
     return $ids;
 }
 add_action('eh_stm_mail_tick', function () {
-    $o = eh_stm_mail_opt(); if (!$o['on'] || !eh_stm_mail_acct($o)) return;
-    if (get_transient('eh_stm_mail_lock')) return; set_transient('eh_stm_mail_lock', 1, 55);
-    $day = wp_date('Y-m-d'); if ($o['day'] !== $day) { $o['day'] = $day; $o['sent_today'] = 0; $o['sent2'] = 0; }
-    $mk = eh_stm_mail_meta(); $n = 0;
+    $o = eh_stm_mail_opt(); if (!$o['on']) return;
+    $c = eh_stm_mail_24h(); if (!eh_stm_mail_acct($o, $c)) return;
+    if (get_transient('eh_stm_mail_lock')) return; set_transient('eh_stm_mail_lock', 1, 300);
+    $mk = eh_stm_mail_meta(); $n = 0; $set = [];
     foreach (eh_stm_mail_pending() as $uid) {
-        $ac = eh_stm_mail_acct($o); if ($n >= 8 || !$ac) break;
+        $ac = eh_stm_mail_acct(array_merge($o, $set), $c); if ($n >= 8 || !$ac) break;
         if (user_can($uid, 'manage_options')) { update_user_meta($uid, $mk, 'skip:admin'); continue; }
         $d = eh_stm_mail_data($uid); if (!$d || !is_email($d['email'])) { update_user_meta($uid, $mk, 'skip:noemail'); continue; }
         $prev = get_user_meta($uid, $mk, true); update_user_meta($uid, $mk, 'sending');
         $res = eh_stm_mail_send($d, '', $ac); $n++;
-        if ($res === true) { update_user_meta($uid, $mk, 'sent:' . time()); if ($ac == 2) $o['sent2']++; else $o['sent_today']++; }
-        else { update_user_meta($uid, $mk, 'fail:' . (((strpos((string) $prev, 'fail:') === 0) ? (int) substr($prev, 5) : 0) + 1)); $o['last_err'] = mb_substr((string) $res, 0, 200);
-            if (stripos((string) $res, 'authenticate') !== false || stripos((string) $res, 'Username and Password') !== false) { $o['bad' . $ac] = $day; update_user_meta($uid, $mk, $prev ?: ''); if (!$prev) delete_user_meta($uid, $mk); }
-            elseif (stripos((string) $res, 'limit') !== false || stripos((string) $res, 'quota') !== false || stripos((string) $res, '550') !== false) { $o[$ac == 2 ? 'sent2' : 'sent_today'] = EH_STM_MAIL_DAILY; if (!$prev) delete_user_meta($uid, $mk); else update_user_meta($uid, $mk, $prev); } }
+        if ($res === true) { update_user_meta($uid, $mk, 'sent:' . time() . ':' . $ac); $c[$ac]++; continue; }
+        $e = (string) $res; $set['last_err'] = 'Gmail ' . $ac . ': ' . mb_substr($e, 0, 200);
+        $restore = function () use ($uid, $mk, $prev) { if ($prev) update_user_meta($uid, $mk, $prev); else delete_user_meta($uid, $mk); };
+        if (stripos($e, 'authenticate') !== false || stripos($e, 'Username and Password') !== false) { $set['pause' . $ac] = time() + 6 * HOUR_IN_SECONDS; $restore(); }
+        elseif (preg_match('/limit|quota|550|421|rate/i', $e)) { $set['pause' . $ac] = time() + HOUR_IN_SECONDS; $restore(); }
+        else update_user_meta($uid, $mk, 'fail:' . (((strpos((string) $prev, 'fail:') === 0) ? (int) substr($prev, 5) : 0) + 1));
     }
-    update_option('eh_stm_mail', $o, false); delete_transient('eh_stm_mail_lock');
+    if ($set) { $fresh = eh_stm_mail_opt(); update_option('eh_stm_mail', array_merge($fresh, $set), false); }
+    delete_transient('eh_stm_mail_lock');
 });
 function eh_stm_mail_counts() {
     global $wpdb; $mk = eh_stm_mail_meta();
@@ -187,7 +199,7 @@ add_action('admin_post_eh_stm_mail', function () {
         $p = trim(wp_unslash($_POST['pass'] ?? '')); if ($p !== '') $o['pass'] = $p;
         $o['from2'] = sanitize_email(wp_unslash($_POST['from2'] ?? ''));
         $p = trim(wp_unslash($_POST['pass2'] ?? '')); if ($p !== '') $o['pass2'] = $p;
-        $o['bad1'] = $o['bad2'] = '';
+        $o['pause1'] = $o['pause2'] = 0;
         $msg = 'saved';
     } elseif ($do === 'test') {
         $me = wp_get_current_user(); $d = eh_stm_mail_data($me->ID) ?: ['name' => $me->display_name ?: 'Kapil', 'email' => $me->user_email, 'roll' => 'XL26000001', 'att' => 2, 'score' => 212, 'c' => 79, 'w' => 25, 'skip' => 16, 'acc' => 76, 'mins' => 108, 'rank' => 12, 'total' => 340, 'pct' => 96.76,
@@ -207,7 +219,7 @@ function eh_stm_mail_page() {
     echo '<div class="wrap"><h1>📧 Mock Mail Settings</h1>';
     if ($note) echo '<div class="notice notice-' . $note[0] . '"><p>' . $note[1] . '</p></div>';
     echo '<div style="display:flex;gap:12px;margin:14px 0">';
-    foreach ([['स्थिति', $o['on'] ? '🟢 चालू' : '⚪ बंद'], ['भेजे गए', $c['sent']], ['बाकी (queue)', $c['pending']], ['फेल', $c['fail']], ['आज Gmail 1', ($o['day'] === wp_date('Y-m-d') ? $o['sent_today'] : 0) . ' / ' . EH_STM_MAIL_DAILY], ['आज Gmail 2', ($o['day'] === wp_date('Y-m-d') ? $o['sent2'] : 0) . ' / ' . EH_STM_MAIL_DAILY]] as $k)
+    foreach ([['स्थिति', $o['on'] ? '🟢 चालू' : '⚪ बंद'], ['भेजे गए', $c['sent']], ['बाकी (queue)', $c['pending']], ['फेल', $c['fail']], ['Gmail 1 (24 घंटे)', eh_stm_mail_24h()[1] . ' / ' . EH_STM_MAIL_DAILY . ((int) ($o['pause1'] ?? 0) > time() ? ' ⏸' : '')], ['Gmail 2 (24 घंटे)', eh_stm_mail_24h()[2] . ' / ' . EH_STM_MAIL_DAILY . ((int) ($o['pause2'] ?? 0) > time() ? ' ⏸' : '')]] as $k)
         echo '<div style="background:#fff;border:1px solid #dcdcde;border-radius:8px;padding:12px 18px;min-width:110px"><div style="font-size:22px;font-weight:700">' . $k[1] . '</div><div style="color:#646970">' . $k[0] . '</div></div>';
     echo '</div>';
     if (!empty($o['last_err'])) echo '<p style="color:#b32d2e">आखिरी error: ' . esc_html($o['last_err']) . '</p>';
