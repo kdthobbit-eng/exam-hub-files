@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exam Hub Mini App</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;600;700&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: friendly exam-prep app, quick and clear
+   IDEA: a phone app screen inside Telegram — like a coaching notice board
+   PICTURE: bold header card with today's test + grid of big tap tiles
+   COLOUR/TYPE: Telegram blue #2a9df4 lead, deep ink, saffron accent; Baloo 2 + Hind
+   LAYOUT: single 480px column, header, live test card, tiles, quiz panel, bottom nav */
+:root{color-scheme:light dark;--bg:light-dark(#eef4fa,#0f1720);--card:light-dark(#fff,#18222e);--ink:light-dark(#0f1b2a,#e9f1f8);--mut:light-dark(#5b6b7c,#94a6b8);--blue:#2a9df4;--deep:light-dark(#1769b8,#3aa6f7);--sa:#ff8a1f;--ok:#1fa463;--bad:#e5484d;--line:light-dark(#dde6ef,#263342)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Hind,system-ui,sans-serif;overflow-x:clip}
+.app{max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:84px}
+.top{background:linear-gradient(160deg,#2a9df4,#1769b8);color:#fff;padding:18px 16px 70px;border-radius:0 0 26px 26px}
+.top .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo b{font:800 24px/1 'Baloo 2',sans-serif}
+.logo svg{width:40px;height:40px}
+.top p{margin:6px 0 0;opacity:.9;font-size:15px}
+.pill{background:rgba(255,255,255,.18);border-radius:99px;padding:6px 12px;font-size:13px;white-space:nowrap}
+.live{margin:-52px 14px 0;background:var(--card);border-radius:20px;padding:16px;box-shadow:0 10px 30px rgba(15,40,70,.15);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}
+.live h2{margin:0;font:700 20px/1.2 'Baloo 2',sans-serif}
+.live small{color:var(--mut);font-size:14px}
+.tag{display:inline-block;background:#ffefe0;color:#c45a00;font-weight:700;font-size:13px;border-radius:8px;padding:2px 8px;margin-bottom:4px}
+.btn{border:0;border-radius:14px;background:var(--sa);color:#fff;font:700 16px Hind,sans-serif;min-height:44px;padding:0 18px;cursor:pointer}
+.btn:focus-visible,.tile:focus-visible,.opt:focus-visible,.nav button:focus-visible{outline:3px solid var(--deep);outline-offset:2px}
+h3{font:700 19px 'Baloo 2',sans-serif;margin:22px 16px 10px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0 14px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 6px 10px;text-align:center;color:var(--ink);font:600 14px/1.3 Hind,sans-serif;cursor:pointer;min-height:96px}
+.tile i{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;margin:0 auto 6px}
+.tile svg{width:26px;height:26px}
+.list{margin:0 14px;background:var(--card);border-radius:18px;border:1px solid var(--line);overflow:hidden}
+.list a{display:flex;gap:12px;align-items:center;padding:12px 14px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.list a:last-child{border:0}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--blue);flex:none}
+.list span{flex:1}.list em{font-style:normal;color:var(--mut);font-size:13px;white-space:nowrap}
+.quiz{margin:0 14px;background:var(--card);border-radius:18px;border:1px solid var(--line);padding:16px}
+.quiz .q{font-weight:700;font-size:17px;margin:0 0 12px}
+.bar{height:6px;background:var(--line);border-radius:9px;margin-bottom:12px}.bar div{height:100%;background:var(--blue);border-radius:9px;transition:width .3s}
+.opt{display:block;width:100%;text-align:start;border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:12px;padding:10px 12px;margin-bottom:8px;font:16px Hind,sans-serif;min-height:44px;cursor:pointer}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.opt.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px;color:var(--mut);font-size:14px}
+.note{color:var(--mut);font-size:13px;text-align:center;margin:18px 16px 0}
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:center}
+.nav div{display:grid;grid-template-columns:repeat(4,1fr);width:100%;max-width:480px}
+.nav button{background:none;border:0;color:var(--mut);font:600 12px Hind,sans-serif;padding:8px 0 10px;min-height:56px;cursor:pointer}
+.nav button.on{color:var(--deep)}
+.nav svg{width:22px;height:22px;display:block;margin:0 auto 2px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#0f1b2a;color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .25s;pointer-events:none}
+.toast.show{opacity:1}
+@media(prefers-reduced-motion:reduce){.bar div,.toast{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="row">
+      <div class="logo">
+        <svg viewBox="0 0 40 40"><rect width="40" height="40" rx="12" fill="#fff"/><path d="M10 12h20v4H15v3h12v4H15v3h15v4H10z" fill="#1769b8"/></svg>
+        <div><b>Exam Hub</b></div>
+      </div>
+      <span class="pill">👋 नमस्ते, <span id="uname">दोस्त</span></span>
+    </div>
+    <p>मॉक टेस्ट, आंसर की, नोट्स — सब एक जगह</p>
+  </header>
+
+  <section class="live">
+    <div>
+      <span class="tag">आज का टेस्ट</span>
+      <h2>Super TET फ्री मॉक टेस्ट</h2>
+      <small>150 प्रश्न · 150 मिनट</small>
+    </div>
+    <button class="btn" data-t="टेस्ट जल्द शुरू होगा (डेमो)">शुरू करें</button>
+  </section>
+
+  <h3>क्या देखना है?</h3>
+  <div class="grid" id="tiles"></div>
+
+  <h3>⚡ 1 मिनट क्विज़</h3>
+  <div class="quiz">
+    <div class="bar"><div id="prog" style="width:0"></div></div>
+    <p class="q" id="q"></p>
+    <div id="opts"></div>
+    <div class="foot"><span id="score">स्कोर: 0</span><button class="btn" id="next" style="background:var(--blue)">अगला</button></div>
+  </div>
+
+  <h3>📢 ताज़ा अपडेट</h3>
+  <div class="list" id="news"></div>
+  <p class="note">ये डिज़ाइन डेमो है — अपडेट और टेस्ट के नाम उदाहरण हैं।</p>
+</div>
+
+<nav class="nav"><div id="nav"></div></nav>
+<div class="toast" id="toast"></div>
+
+<script>
+{
+const tiles=[
+ ['मॉक टेस्ट','#e6f3fe','#2a9df4','<path d="M6 3h9l4 4v14H6z M9 11h7M9 15h7M9 7h4" fill="none" stroke="currentColor" stroke-width="2"/>'],
+ ['आंसर की','#e7f7ee','#1fa463','<path d="M5 12l4 4 10-10" fill="none" stroke="currentColor" stroke-width="2.4"/>'],
+ ['नोट्स PDF','#fff0e3','#ff8a1f','<path d="M5 4h10l4 4v12H5z M9 13h6M9 17h4" fill="none" stroke="currentColor" stroke-width="2"/>'],
+ ['टाइपिंग टेस्ट','#f0ecfe','#6d4fe0','<rect x="3" y="7" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 11h1M11 11h1M15 11h1M8 15h8" stroke="currentColor" stroke-width="2"/>'],
+ ['पुराने पेपर','#fdeaea','#e5484d','<path d="M4 5h7v14H4zM13 5h7v14h-7z" fill="none" stroke="currentColor" stroke-width="2"/>'],
+ ['ग्रुप ज्वाइन','#e6f3fe','#1769b8','<path d="M3 11l18-7-4 16-5-5-3 4v-5l8-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>']
+];
+const T=document.getElementById('tiles');
+T.innerHTML=tiles.map(t=>`<button class="tile" data-t="${t[0]} — जल्द (डेमो)"><i style="background:${t[1]};color:${t[2]}"><svg viewBox="0 0 24 24">${t[3]}</svg></i>${t[0]}</button>`).join('');
+
+const news=[['UP PET 2026 आंसर की PDF','आज'],['Super TET मॉक टेस्ट 5 जारी','कल'],['SCI JCA फॉर्म — ज़रूरी बातें','2 दिन'],['रोज़ का पेपर कटिंग','2 दिन']];
+document.getElementById('news').innerHTML=news.map(n=>`<a href="#" data-t="खुलेगा (डेमो)"><i class="dot"></i><span>${n[0]}</span><em>${n[1]}</em></a>`).join('');
+
+const Q=[
+ ['भारत के संविधान में मौलिक अधिकार किस भाग में हैं?',['भाग 2','भाग 3','भाग 4','भाग 5'],1],
+ ['"नेत्र" शब्द का पर्यायवाची क्या है?',['लोचन','कर्ण','नासिका','कपोल'],0],
+ ['12 × 15 = ?',['160','170','180','190'],2]
+];
+let i=0,score=0,done=false;
+const qEl=document.getElementById('q'),oEl=document.getElementById('opts'),pEl=document.getElementById('prog'),sEl=document.getElementById('score');
+function show(){
+  done=false;const [q,o]=Q[i];
+  qEl.textContent=(i+1)+'. '+q;
+  oEl.innerHTML=o.map((x,k)=>`<button class="opt" data-k="${k}">${String.fromCharCode(65+k)}. ${x}</button>`).join('');
+  pEl.style.width=(i/Q.length*100)+'%';
+}
+oEl.addEventListener('click',e=>{
+  const b=e.target.closest('.opt');if(!b||done)return;done=true;
+  const k=+b.dataset.k,c=Q[i][2];
+  oEl.children[c].classList.add('ok');
+  if(k===c){score++;}else b.classList.add('no');
+  sEl.textContent='स्कोर: '+score+'/'+Q.length;
+  pEl.style.width=((i+1)/Q.length*100)+'%';
+});
+document.getElementById('next').addEventListener('click',()=>{
+  if(!done){toast('पहले एक उत्तर चुनें');return}
+  i=(i+1)%Q.length;if(i===0){score=0;sEl.textContent='स्कोर: 0'}show();
+});
+show();
+
+const navs=[['होम','<path d="M3 11l9-7 9 7v9h-6v-6H9v6H3z" fill="currentColor"/>'],['टेस्ट','<path d="M6 3h12v18H6z M9 8h6M9 12h6M9 16h3" fill="none" stroke="currentColor" stroke-width="2"/>'],['नोट्स','<path d="M4 4h16v16H4z M8 9h8M8 13h8" fill="none" stroke="currentColor" stroke-width="2"/>'],['प्रोफ़ाइल','<circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 21c1-5 15-5 16 0" fill="currentColor"/>']];
+const N=document.getElementById('nav');
+N.innerHTML=navs.map((n,k)=>`<button class="${k?'':'on'}"><svg viewBox="0 0 24 24">${n[1]}</svg>${n[0]}</button>`).join('');
+N.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;[...N.children].forEach(x=>x.classList.remove('on'));b.classList.add('on')});
+
+const tt=document.getElementById('toast');let tm;
+function toast(m){tt.textContent=m;tt.classList.add('show');clearTimeout(tm);tm=setTimeout(()=>tt.classList.remove('show'),1800)}
+document.addEventListener('click',e=>{const d=e.target.closest('[data-t]');if(d){e.preventDefault();toast(d.dataset.t)}});
+
+try{const u=window.Telegram&&Telegram.WebApp&&Telegram.WebApp.initDataUnsafe&&Telegram.WebApp.initDataUnsafe.user;if(u&&u.first_name)document.getElementById('uname').textContent=u.first_name;if(window.Telegram&&Telegram.WebApp)Telegram.WebApp.expand()}catch(e){}
+}
+</script>
+</body>
+</html>
