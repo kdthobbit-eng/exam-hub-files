@@ -376,6 +376,7 @@ function eh_tgb_hook(WP_REST_Request $req) {
     elseif ($txt === '/all') $send(eh_tgb_stats('all'), eh_tgb_back_kb('r:all'));
     elseif ($txt === '/3284') $send(eh_tgb_3284(), eh_tgb_back_kb('p3284'));
     elseif ($txt === '/mock' && $role === 'owner' && function_exists('eh_stm_bot_view')) { [$mt, $mk] = eh_stm_bot_view(); $send($mt . "\n\n" . wp_date('d M, h:i:s A'), $mk); }
+    elseif (($txt === '/remind_on' || $txt === '/remind_off') && $role === 'owner') { update_option('eh_stm_rem', ['on' => $txt === '/remind_on' ? 1 : 0], false); $send(eh_stm_remind_report(), eh_tgb_back_kb('menu')); }
     elseif ($txt === '/remind' && $role === 'owner' && function_exists('eh_stm_remind_report')) $send(eh_stm_remind_report(), eh_tgb_back_kb('menu'));
     elseif ($txt === '/glitch' && $role === 'owner') $send(eh_tgb_glitch(), eh_tgb_back_kb('menu'));
     elseif (preg_match('#^/fix\s+(\d+)$#', $txt, $fm) && $role === 'owner') { $x = eh_kfix((int) $fm[1]); $send($x ? '✅ #' . (int) $fm[1] . ' ठीक: ' . $x[0] . ' → <b>' . $x[1] . ' WPM</b>' : '⚠️ #' . (int) $fm[1] . ' नहीं मिला।', eh_tgb_back_kb('menu')); }

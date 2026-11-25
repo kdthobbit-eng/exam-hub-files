@@ -5,7 +5,7 @@
 if (!defined('ABSPATH')) exit;
 
 define('EH_STM_MAIL_ROUND', 'm2');
-define('EH_STM_MAIL_DAILY', 450);
+define('EH_STM_MAIL_DAILY', 500);
 
 function eh_stm_mail_opt() {
     $o = get_option('eh_stm_mail', []);
@@ -110,7 +110,7 @@ function eh_stm_mail_text($d) {
 function eh_stm_mail_24h() {
     global $wpdb; static $c = null; if ($c !== null) return $c;
     $c = [1 => 0, 2 => 0]; $since = time() - DAY_IN_SECONDS;
-    foreach ($wpdb->get_col($wpdb->prepare("SELECT meta_value FROM {$wpdb->usermeta} WHERE meta_key = %s AND meta_value LIKE 'sent:%%'", eh_stm_mail_meta())) as $v) {
+    foreach ($wpdb->get_col($wpdb->prepare("SELECT meta_value FROM {$wpdb->usermeta} WHERE meta_key IN (%s, 'eh_stm_rem_m2') AND meta_value LIKE 'sent:%%'", eh_stm_mail_meta())) as $v) {
         $p = explode(':', $v); if ((int) ($p[1] ?? 0) >= $since) $c[(int) ($p[2] ?? 1) === 2 ? 2 : 1]++;
     }
     return $c;
@@ -177,6 +177,7 @@ add_action('eh_stm_mail_tick', function () {
         elseif (preg_match('/limit|quota|550|421|rate/i', $e)) { $set['pause' . $ac] = time() + HOUR_IN_SECONDS; $restore(); }
         else update_user_meta($uid, $mk, 'fail:' . (((strpos((string) $prev, 'fail:') === 0) ? (int) substr($prev, 5) : 0) + 1));
     }
+    eh_stm_rem_tick($o, $c, $set);
     if ($set) { $fresh = eh_stm_mail_opt(); update_option('eh_stm_mail', array_merge($fresh, $set), false); }
     delete_transient('eh_stm_mail_lock');
 });
@@ -250,5 +251,86 @@ function eh_stm_remind_report() {
     $both = (int) $wpdb->get_var("SELECT COUNT(DISTINCT uid) FROM $t WHERE round = 'm1' AND submitted > 0 AND uid IN (SELECT uid FROM $t WHERE round = 'm2' AND started > 0)");
     $l = eh_stm_remind_list(); $c = eh_stm_mail_24h();
     return "📊 Reminder ginti\nMock 1 submit: $m1\nजिन्होंने Mock 2 दे दिया/शुरू किया: $both\nबचे (admin हटाकर, सही email): " . count($l)
-        . "\n\nपिछले 24 घंटे में भेजे गए: Gmail 1 = {$c[1]}, Gmail 2 = {$c[2]} (हर एक की हद " . EH_STM_MAIL_DAILY . ")";
+        . "\n\nपिछले 24 घंटे में भेजे गए: Gmail 1 = {$c[1]}, Gmail 2 = {$c[2]} (हर एक की हद " . EH_STM_MAIL_DAILY . ")
+
+" . eh_stm_rem_stats();
+}
+
+
+/* ---------- Mock 2 reminder: one mail to Mock 1 takers who have not started Mock 2 (runs only while Mock 2 is open) ---------- */
+function eh_stm_rem_queue() {
+    global $wpdb; $t = eh_stm_table();
+    $ids = $wpdb->get_col("SELECT uid FROM $t WHERE round = 'm1' AND submitted > 0 GROUP BY uid ORDER BY MAX(score) DESC");
+    $ids = array_values(array_filter(array_map('intval', $ids), function ($u) { $v = get_user_meta($u, 'eh_stm_rem_m2', true); return !$v || (strpos($v, 'fail:') === 0 && (int) substr($v, 5) < 3); }));
+    $pr = array_filter(array_map('trim', explode(',', strtolower(eh_stm_mail_opt()['prio'] ?? ''))));
+    if ($pr && $ids) {
+        $first = array_map('intval', $wpdb->get_col("SELECT DISTINCT uid FROM $t WHERE round = 'm1' AND (" . implode(' OR ', array_map(function ($p) { $l = '%' . esc_sql($GLOBALS['wpdb']->esc_like($p)) . '%'; return "LOWER(name) LIKE '$l' OR LOWER(email) LIKE '$l'"; }, $pr)) . ")"));
+        usort($ids, function ($a, $b) use ($first) { return (int) !in_array($a, $first, true) <=> (int) !in_array($b, $first, true); });
+        return [$ids, $first];
+    }
+    return [$ids, []];
+}
+function eh_stm_rem_html($name) {
+    $img = function ($cid, $alt, $link = '', $rad = '0') {
+        $i = '<img src="cid:' . $cid . '" width="600" alt="' . esc_attr($alt) . '" style="display:block;width:100%;height:auto;border:0;border-radius:' . $rad . '">';
+        return $link ? '<a href="' . esc_url($link) . '">' . $i . '</a>' : $i;
+    };
+    $u = home_url('/super-tet-mock/');
+    return '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:16px 0">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%">
+<tr><td>' . $img('rh', 'UPSSSC ALERT — UP Super TET 2026 मॉक-2 अभी लाइव', '', '16px 16px 0 0') . '</td></tr>
+<tr><td style="padding:24px 22px 8px;font-family:Arial,\'Noto Sans Devanagari\',sans-serif">
+<p style="margin:0 0 10px;font-size:21px;font-weight:bold;color:#0f2a4d">नमस्ते ' . esc_html($name) . ' जी,</p>
+<p style="margin:0;font-size:16px;line-height:1.8;color:#1f2937">UP Super TET 2026 का <b style="color:#0f2a4d">लाइव मॉक टेस्ट – 2</b> अभी चालू है और आज रात 11:59 बजे तक खुला है। अगर आपने अभी तक अटेम्प्ट नहीं किया है, तो अभी अटेम्प्ट कर लें।</p></td></tr>
+<tr><td style="padding:14px 0 0">' . $img('rc', 'अभी मॉक दें', $u, '16px') . '</td></tr>
+<tr><td style="padding:18px 22px 4px;font-family:Arial,\'Noto Sans Devanagari\',sans-serif;font-size:15px;line-height:1.7;color:#1f2937">From –<br><b style="color:#0f2a4d;font-size:17px">प्रतीक तिवारी</b><br>Owner – UPSSSC ALERT</td></tr>
+<tr><td style="padding:12px 0 0">' . $img('tg', 'टेलीग्राम पर जुड़ें', 'https://t.me/UpssscAlert', '16px') . '</td></tr>
+<tr><td style="padding:12px 0 0">' . $img('ft', 'टीम UPSSSC ALERT · XL Study', '', '0 0 16px 16px') . '</td></tr>
+<tr><td style="padding:14px 22px;font-family:Arial,sans-serif;font-size:11.5px;line-height:1.7;color:#6b7280;text-align:center">यह ईमेल आपको इसलिए मिला है क्योंकि आपने xlstudy.in पर UP Super TET 2026 लाइव मॉक टेस्ट – 1 दिया था। आगे ऐसे ईमेल नहीं चाहिए तो “STOP” लिखकर उत्तर दें।<br><a href="' . esc_url(home_url('/')) . '" style="color:#1d4ed8">xlstudy.in</a> · <a href="https://t.me/UpssscAlert" style="color:#1d4ed8">Telegram</a></td></tr>
+</table></td></tr></table>';
+}
+function eh_stm_rem_send($name, $to, $acct) {
+    $o = eh_stm_mail_opt();
+    if ($acct == 2) { $o['from'] = $o['from2']; $o['pass'] = $o['pass2']; }
+    if (!$o['from'] || !$o['pass']) return 'Mail settings खाली हैं';
+    require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php'; require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php'; require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
+    $m = new PHPMailer\PHPMailer\PHPMailer(true);
+    try {
+        $m->isSMTP(); $m->Host = 'smtp.gmail.com'; $m->SMTPAuth = true; $m->Username = $o['from']; $m->Password = str_replace(' ', '', $o['pass']);
+        $m->SMTPSecure = 'tls'; $m->Port = 587; $m->Timeout = 20; $m->CharSet = 'UTF-8';
+        $m->setFrom($o['from'], 'UPSSSC ALERT'); $m->addReplyTo($o['from'], 'UPSSSC ALERT'); $m->addAddress($to, $name);
+        $m->Subject = '⏰ लाइव मॉक टेस्ट – 2 चालू है, अभी अटेम्प्ट करें — UP Super TET 2026 | UPSSSC ALERT';
+        $dir = EH_DIR . '/assets/mail/';
+        foreach (['rh', 'rc', 'tg', 'ft'] as $k) $m->addEmbeddedImage($dir . $k . '.jpg', $k, $k . '.jpg', 'base64', 'image/jpeg');
+        $m->isHTML(true); $m->Body = eh_stm_rem_html($name);
+        $m->AltBody = "नमस्ते $name जी,\n\nUP Super TET 2026 का लाइव मॉक टेस्ट – 2 अभी चालू है और आज रात 11:59 बजे तक खुला है। अगर आपने अभी तक अटेम्प्ट नहीं किया है, तो अभी अटेम्प्ट कर लें।\n\nमॉक दें: " . home_url('/super-tet-mock/') . "\n\nFrom –\nप्रतीक तिवारी\nOwner – UPSSSC ALERT";
+        $m->send(); return true;
+    } catch (\Throwable $e) { return $m->ErrorInfo ?: $e->getMessage(); }
+}
+function eh_stm_rem_tick($o, &$c, &$set) {
+    $rem = get_option('eh_stm_rem', []); if (empty($rem['on'])) return;
+    $r = eh_stm_round('m2'); if (!$r || time() >= (int) $r['end_ts']) return;
+    global $wpdb; $t = eh_stm_table(); $mk = 'eh_stm_rem_m2'; $n = 0;
+    [$ids, $first] = eh_stm_rem_queue();
+    foreach ($ids as $uid) {
+        $ac = eh_stm_mail_acct(array_merge($o, $set), $c); if ($n >= 8 || !$ac) break;
+        $u = get_userdata($uid); $isFirst = in_array($uid, $first, true);
+        if (!$u || !is_email($u->user_email)) { update_user_meta($uid, $mk, 'skip:noemail'); continue; }
+        if (!$isFirst && user_can($u, 'manage_options')) { update_user_meta($uid, $mk, 'skip:admin'); continue; }
+        if (!$isFirst && $wpdb->get_var($wpdb->prepare("SELECT 1 FROM $t WHERE round = 'm2' AND uid = %d AND started > 0 LIMIT 1", $uid))) { update_user_meta($uid, $mk, 'skip:gave'); continue; }
+        $name = $wpdb->get_var($wpdb->prepare("SELECT name FROM $t WHERE round = 'm1' AND uid = %d AND name <> '' ORDER BY att DESC LIMIT 1", $uid)) ?: ($u->display_name ?: 'अभ्यर्थी');
+        $prev = get_user_meta($uid, $mk, true); update_user_meta($uid, $mk, 'sending');
+        $res = eh_stm_rem_send($name, $u->user_email, $ac); $n++;
+        if ($res === true) { update_user_meta($uid, $mk, 'sent:' . time() . ':' . $ac); $c[$ac]++; continue; }
+        $e = (string) $res; $set['last_err'] = 'Gmail ' . $ac . ' (reminder): ' . mb_substr($e, 0, 200);
+        if ($prev) update_user_meta($uid, $mk, $prev); else delete_user_meta($uid, $mk);
+        if (stripos($e, 'authenticate') !== false || stripos($e, 'Username and Password') !== false) $set['pause' . $ac] = time() + 6 * HOUR_IN_SECONDS;
+        elseif (preg_match('/limit|quota|550|421|rate/i', $e)) $set['pause' . $ac] = time() + HOUR_IN_SECONDS;
+        else update_user_meta($uid, $mk, 'fail:' . (((strpos((string) $prev, 'fail:') === 0) ? (int) substr($prev, 5) : 0) + 1));
+    }
+}
+function eh_stm_rem_stats() {
+    global $wpdb;
+    $g = function ($like) use ($wpdb) { return (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->usermeta} WHERE meta_key = 'eh_stm_rem_m2' AND meta_value LIKE %s", $like)); };
+    return "⏰ Reminder mail: " . (empty(get_option('eh_stm_rem', [])['on']) ? 'बंद' : 'चालू') . "\nभेजे: " . $g('sent:%') . " · Mock 2 दे चुके (छोड़े): " . $g('skip:gave%') . " · फेल: " . $g('fail:%') . "\nबाकी: " . count(eh_stm_rem_queue()[0]);
 }
