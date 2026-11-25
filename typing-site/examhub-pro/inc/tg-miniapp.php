@@ -40,6 +40,8 @@ add_action('rest_api_init', function () {
         $d['cur'] = eh_stm_round()['id'];
         if (function_exists('eh_stm_mail_counts')) { $d['mail'] = eh_stm_mail_counts(); $d['mail']['on'] = (int) eh_stm_mail_opt()['on']; }
         $d['me'] = eh_tgapp_user()['first_name'] ?? '';
+        $rm = get_option('eh_stm_removed', []); $d['removed'] = [];
+        foreach ((array) ($rm[$d['round']['id']] ?? []) as $uid => $x) $d['removed'][] = ['uid' => (int) $uid, 'name' => $x['name'], 'email' => $x['email'], 'score' => $x['score'], 'by' => $x['by'], 'at' => $x['at']];
         global $wpdb; $r = eh_stm_round($d['round']['id']); $now = time();
         $td = wp_date('Y-m-d'); $off = (int) round((float) get_option('gmt_offset') * HOUR_IN_SECONDS);
         $since = function ($ts) use ($wpdb, $off) { return (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->users} WHERE user_registered >= %s", gmdate('Y-m-d H:i:s', $ts - $off))); };
@@ -50,6 +52,24 @@ add_action('rest_api_init', function () {
         $d['writing'] = array_map(function ($x) use ($r, $now) { return ['name' => $x['name'], 'email' => $x['email'], 'roll' => eh_stm_roll((int) $x['uid']), 'att' => (int) $x['att'], 'answered' => (int) $x['answered'],
             'left' => max(0, eh_stm_eff($r, $x, $now) - $now), 'tabs' => (int) $x['tabs'], 'dev' => $x['dev']]; }, $w);
         return $d;
+    }]);
+    /* Remove a candidate from the merit list (reversible): their counted attempt is set to not counted and remembered. */
+    register_rest_route('eh/v1', '/tgapp/remove', ['methods' => 'POST', 'permission_callback' => $ok, 'callback' => function (WP_REST_Request $q) {
+        global $wpdb; $t = eh_stm_table(); $p = $q->get_json_params() ?: [];
+        $r = eh_stm_round(sanitize_key($p['round'] ?? '')); $uid = (int) ($p['uid'] ?? 0); if (!$uid) return ['ok' => false];
+        $rm = get_option('eh_stm_removed', []); if (!is_array($rm)) $rm = [];
+        if (!empty($p['undo'])) {
+            $id = (int) ($rm[$r['id']][$uid]['id'] ?? 0);
+            if ($id) $wpdb->update($t, ['counted' => 1], ['id' => $id]);
+            unset($rm[$r['id']][$uid]);
+        } else {
+            $row = $wpdb->get_row($wpdb->prepare("SELECT id, name, email, score FROM $t WHERE round = %s AND uid = %d AND counted = 1 AND submitted > 0 ORDER BY att DESC LIMIT 1", $r['id'], $uid), ARRAY_A);
+            if (!$row) return ['ok' => false];
+            $wpdb->update($t, ['counted' => 0], ['id' => $row['id']]);
+            $rm[$r['id']][$uid] = ['id' => (int) $row['id'], 'name' => $row['name'], 'email' => $row['email'], 'score' => (int) $row['score'], 'by' => eh_tgapp_user()['first_name'] ?? '', 'at' => time()];
+        }
+        update_option('eh_stm_removed', $rm, false);
+        return ['ok' => true];
     }]);
     register_rest_route('eh/v1', '/tgapp/top', ['methods' => 'POST', 'permission_callback' => $ok, 'callback' => function (WP_REST_Request $q) {
         $u = eh_tgapp_user(); $p = $q->get_json_params() ?: [];
@@ -110,6 +130,7 @@ input[type=search]{width:100%;border:1.5px solid #d6deea;border-radius:12px;padd
 .btn{display:block;width:100%;border:0;border-radius:14px;padding:13px;font:inherit;font-size:16px;font-weight:800;margin-top:8px;background:#0f2a4d;color:#fff}.btn.gd{background:linear-gradient(135deg,#ffe29a,#f5b53f);color:#2a1e00}.btn.ln{background:#fff;color:#0f2a4d;border:1.5px solid #c9d3e3}
 .f{display:flex;gap:8px;align-items:center;font-size:14px;margin:6px 0}.f select{flex:1;border:1.5px solid #d6deea;border-radius:10px;padding:8px;font:inherit}
 .msg{text-align:center;padding:40px 16px;color:#5a6b8c}.note{font-size:12.5px;color:#5a6b8c;margin-top:8px}
+.btn.rm{background:#fdecec;color:#b42318;border:1.5px solid #f5c2c0;margin:10px 0 4px}.mini{flex:none;border:1.5px solid #c9d3e3;background:#fff;border-radius:10px;padding:7px 10px;font:inherit;font-size:13px;font-weight:700;color:#0f2a4d}
 .su{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 2px 8px rgba(15,42,77,.06)}.su>b{font-size:14px}.su div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:6px}.su span{text-align:center;font-size:11.5px;color:#5a6b8c;background:#f3f6fb;border-radius:10px;padding:6px 2px}.su span b{display:block;font-size:18px;color:#0f2a4d}
 .sum{background:#fff8e6;border:1px solid #f5d590;border-radius:14px;padding:10px 12px;font-size:15px;line-height:1.5;margin-bottom:10px}
 .k em{display:block;font-style:normal;font-size:10.5px;color:#8a97ad;line-height:1.25;margin-top:2px}.k2{grid-template-columns:repeat(3,minmax(0,1fr));margin:10px 0}
@@ -136,9 +157,11 @@ function rowH(x,i){return '<div class="row r'+x.rank+'" data-i="'+i+'"><div clas
 function detail(i){var x=D.rows[i],S=D.sections;if(!x)return;OPEN=i;
 var h='<div class="md" id="md"><div class="mb"><button class="mx" id="mx" aria-label="बंद करें">✕</button><div class="dh"><div class="rk big">'+x.rank+'</div><div><b>'+esc(x.name)+'</b><small>'+esc(x.email)+'<br>रोल नं. '+esc(x.roll)+'</small></div></div>'+
 '<div class="k k2"><div><b>'+x.score+'</b><span>अंक / 360</span></div><div><b>'+x.pct+'</b><span>परसेंटाइल</span></div><div class="g"><b>'+x.c+'</b><span>सही</span></div><div class="o"><b>'+x.w+'</b><span>गलत</span></div><div><b>'+(120-x.c-x.w)+'</b><span>छोड़े</span></div><div><b>'+x.min+'</b><span>मिनट लगे</span></div></div>'+
-'<p class="note">कुल प्रयास: <b>'+x.att+'</b> (मेरिट में पहला) · '+dv(x.dev)+' · टैब/ऐप बदला: <b>'+x.tabs+'</b> बार'+(x.tabs>=5?' ⚠️':'')+'</p><div class="card flat"><b>सेक्शन-वार</b>'+
+'<button class="btn rm" id="rmv">🚫 इसे मेरिट / रैंक से हटाओ</button><p class="note">कुल प्रयास: <b>'+x.att+'</b> (मेरिट में पहला) · '+dv(x.dev)+' · टैब/ऐप बदला: <b>'+x.tabs+'</b> बार'+(x.tabs>=5?' ⚠️':'')+'</p><div class="card flat"><b>सेक्शन-वार</b>'+
 (x.secs||[]).map(function(p,k){var q=S[k]?S[k].q:0,mx=q*3,sc=p[0]*3-p[1],pc=mx?Math.max(0,sc)*100/mx:0;return '<div class="sec"><div class="l"><span>'+esc(S[k]?S[k].n:'')+'</span><b>'+sc+' / '+mx+'</b></div><div class="bar"><i style="width:'+pc+'%"></i></div><small class="sm">सही '+p[0]+' · गलत '+p[1]+' · छोड़े '+(q-p[0]-p[1])+'</small></div>'}).join('')+'</div></div></div>';
-document.body.insertAdjacentHTML('beforeend',h);$('mx').onclick=close;$('md').onclick=function(e){if(e.target.id==='md')close()};if(T&&T.BackButton){T.BackButton.show();T.BackButton.onClick(close)}}
+document.body.insertAdjacentHTML('beforeend',h);$('mx').onclick=close;
+$('rmv').onclick=function(){var go=function(){$('rmv').disabled=true;api('remove',{round:RID,uid:x.uid}).then(function(j){close();if(j.ok){if(T&&T.showAlert)T.showAlert(x.name+' को मेरिट से हटा दिया। वापस जोड़ना हो तो ⬇ रिपोर्ट टैब में "हटाए गए" देखें।');load()}})};
+var msg=x.name+' (रैंक '+x.rank+', '+x.score+' अंक) को मेरिट लिस्ट और रैंक से हटाना है?';if(T&&T.showConfirm)T.showConfirm(msg,function(ok){if(ok)go()});else if(confirm(msg))go()};$('md').onclick=function(e){if(e.target.id==='md')close()};if(T&&T.BackButton){T.BackButton.show();T.BackButton.onClick(close)}}
 function close(){OPEN=-1;var m=$('md');if(m)m.remove();if(T&&T.BackButton){T.BackButton.hide();T.BackButton.offClick(close)}}
 function draw(){var d=D,s=d.stats,now=d.now,live=now>=d.round.start&&now<d.round.end;$('who').textContent='नमस्ते '+(d.me||'')+' · Super TET Mock';
 $('rs').innerHTML=d.rounds.map(function(r,i){var lv=now>=r.start&&now<r.end,past=now>=r.end;return '<button class="'+(r.id===d.round.id?'on':'')+'" data-r="'+r.id+'"><b>मॉक '+(i+1)+'</b> · '+dt(r.start)+'<small>'+(lv?'🟢 लाइव':past?'समाप्त':'आगामी')+'</small></button>'}).join('');
@@ -152,7 +175,7 @@ if(TAB==='merit'){var rows=[];d.rows.forEach(function(x,i){if(!Q||(x.name+' '+x.
 h+='<div class="card"><input type="search" id="q" placeholder="नाम, ईमेल या रोल नं. खोजें" value="'+esc(Q)+'"><p class="note tip">👆 किसी नाम पर टैप करें — पूरी जानकारी और सेक्शन-वार अंक दिखेंगे।</p>'+(rows.length?rows.slice(0,200).map(function(p){return rowH(p[0],p[1])}).join(''):'<div class="msg">अभी कोई नहीं</div>')+'</div>'+(rows.length>200?'<p class="note">पहले 200 दिखाए गए हैं — पूरी सूची रिपोर्ट से मँगाएँ।</p>':'')}
 else if(TAB==='now'){var w=d.writing||[];h+='<div class="card">'+(w.length?'<p class="note tip">इस समय पेपर दे रहे उम्मीदवार (पिछले 2 मिनट में सक्रिय)</p>'+w.map(function(x){return '<div class="row"><div class="rk live">●</div><div class="nm"><b>'+esc(x.name)+'</b><small>'+esc(x.email)+' · '+dv(x.dev)+(x.att>1?' · प्रयास '+x.att:'')+'</small></div><div class="sc"><b>'+x.answered+'<span class="u">/120</span></b><small>⏱ '+mm(x.left)+' बचे'+(x.tabs?' · टैब '+x.tabs:'')+'</small></div></div>'}).join(''):'<div class="msg">'+(live?'इस समय कोई पेपर नहीं दे रहा।':'मॉक लाइव नहीं है।')+'</div>')+'</div>'}
 else if(TAB==='sec'){h+='<div class="card">'+d.sections.map(function(x){var mx=x.q*3,p=Math.max(0,Math.min(100,x.avg*100/mx));return '<div class="sec"><div class="l"><span>'+esc(x.n)+'</span><b>'+x.avg+' / '+mx+'</b></div><div class="bar"><i style="width:'+p+'%"></i></div></div>'}).join('')+'</div><p class="note">मेरिट में शामिल ('+s.merit+') उम्मीदवारों का औसत · औसत सही '+s.avgc+' · औसत गलत '+s.avgw+' · मीडियन '+s.median+'</p>'}
-else{var m=d.mail;h+='<div class="card"><b>🏆 टॉप-10 पोस्ट</b><p class="note">टॉप 10 का तैयार संदेश इसी बॉट चैट में आएगा — वहीं से UPSSSC ALERT चैनल पर फ़ॉरवर्ड कर दें (ईमेल नहीं होंगे)।</p><button class="btn gd" id="top10">🏆 टॉप-10 पोस्ट बनाओ</button><p class="note" id="tn"></p></div>'+
+else{var m=d.mail,rmv=d.removed||[];h+=(rmv.length?'<div class="card"><b>🚫 मेरिट से हटाए गए ('+rmv.length+')</b>'+rmv.map(function(x){return '<div class="row"><div class="nm"><b>'+esc(x.name)+'</b><small>'+esc(x.email)+' · '+x.score+' अंक'+(x.by?' · हटाया: '+esc(x.by):'')+'</small></div><button class="mini" data-undo="'+x.uid+'">↩ वापस जोड़ो</button></div>'}).join('')+'</div>':'')+'<div class="card"><b>🏆 टॉप-10 पोस्ट</b><p class="note">टॉप 10 का तैयार संदेश इसी बॉट चैट में आएगा — वहीं से UPSSSC ALERT चैनल पर फ़ॉरवर्ड कर दें (ईमेल नहीं होंगे)।</p><button class="btn gd" id="top10">🏆 टॉप-10 पोस्ट बनाओ</button><p class="note" id="tn"></p></div>'+
 '<div class="card"><b>मेरिट लिस्ट Telegram पर मँगाएँ (CSV — Excel में खुलेगी)</b><div class="f">टॉप<select id="top"><option value="0">सभी</option><option value="10">10</option><option value="50">50</option><option value="100">100</option></select></div>'+
 '<button class="btn ln" data-m="1">🔒 Masked भेजो (ईमेल छिपे)</button><button class="btn" data-m="0">📋 Unmasked भेजो (ईमेल सहित)</button><p class="note" id="sn">फ़ाइल इसी बॉट चैट में आएगी।</p></div>'+
 '<div class="card"><b>PDF रिपोर्ट (ब्रांडिंग सहित)</b><p class="note">पूरी PDF मेरिट रिपोर्ट वेबसाइट के Admin Panel से बनती है।</p><button class="btn ln" id="web">🌐 वेबसाइट Admin Panel खोलें</button></div>'+
@@ -163,6 +186,7 @@ $('app').innerHTML=h;
 var q=$('q');if(q){q.oninput=function(){Q=q.value.trim().toLowerCase();var p=q.selectionStart;draw();var n=$('q');n.focus();try{n.setSelectionRange(p,p)}catch(e){}}}
 var t1=$('top10');if(t1)t1.onclick=function(){t1.disabled=true;$('tn').textContent='बना रहे हैं…';api('top',{round:RID}).then(function(j){$('tn').textContent=j.ok?'✅ पोस्ट बॉट चैट में आ गई — फ़ॉरवर्ड कर दें।':'❌ नहीं बनी, दोबारा कोशिश करें।'}).catch(function(){$('tn').textContent='❌ नहीं बनी।'}).then(function(){t1.disabled=false})};
 [].forEach.call(document.querySelectorAll('[data-m]'),function(b){b.onclick=function(){b.disabled=true;$('sn').textContent='भेज रहे हैं…';api('send',{round:RID,masked:b.dataset.m==='1',top:+$('top').value}).then(function(j){$('sn').textContent=j.ok?'✅ भेज दी — बॉट चैट देखें।':'❌ नहीं भेज पाए, दोबारा कोशिश करें।';if(j.ok&&T&&T.HapticFeedback)T.HapticFeedback.notificationOccurred('success')}).catch(function(){$('sn').textContent='❌ नहीं भेज पाए।'}).then(function(){b.disabled=false})}});
+[].forEach.call(document.querySelectorAll('[data-undo]'),function(b){b.onclick=function(){b.disabled=true;api('remove',{round:RID,uid:+b.dataset.undo,undo:1}).then(function(){load()})}});
 var w2=$('web');if(w2)w2.onclick=function(){if(T)T.openLink(SITE);else location.href=SITE}}
 load();setInterval(function(){if(TAB!=='rep'&&OPEN<0&&!document.hidden&&!(document.activeElement&&document.activeElement.id==='q'))load()},20000);
 })();

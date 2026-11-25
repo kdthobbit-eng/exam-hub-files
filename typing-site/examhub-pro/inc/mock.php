@@ -353,7 +353,7 @@ function eh_stm_report_data($rid = '') {
             $ps = []; foreach ($S as $k => $sec) { $c = 0; $w = 0; foreach ($sec[1] as $i) { if (!isset($a[$i])) continue; if ($a[$i] === $Q[$i]['a']) $c++; else $w++; } $secTot[$k] += $c * 3 - $w; $ps[] = [$c, $w]; }
             $rows[] = ['rank' => count(array_filter($sc, function ($v) use ($s) { return $v > $s; })) + 1,
                 'pct' => $n ? round(count(array_filter($sc, function ($v) use ($s) { return $v <= $s; })) * 100 / $n, 2) : 0,
-                'name' => $x['name'], 'email' => $x['email'], 'roll' => eh_stm_roll((int) $x['uid']), 'score' => $s, 'c' => (int) $x['correct'], 'w' => (int) $x['wrong'],
+                'uid' => (int) $x['uid'], 'name' => $x['name'], 'email' => $x['email'], 'roll' => eh_stm_roll((int) $x['uid']), 'score' => $s, 'c' => (int) $x['correct'], 'w' => (int) $x['wrong'],
                 'min' => round(($x['submitted'] - $x['started']) / 60), 'att' => (int) ($att[$x['uid']] ?? 1), 'tabs' => (int) $x['tabs'], 'dev' => $x['dev'], 'secs' => $ps];
         }
         $users = count(array_unique(array_column($all, 'uid')));
