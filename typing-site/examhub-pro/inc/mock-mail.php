@@ -4,7 +4,7 @@
    so the exam itself is never slowed down. Images: static parts are pre-made, the score parts are filled in with GD. */
 if (!defined('ABSPATH')) exit;
 
-define('EH_STM_MAIL_ROUND', 'm1');
+define('EH_STM_MAIL_ROUND', 'm2');
 define('EH_STM_MAIL_DAILY', 450);
 
 function eh_stm_mail_opt() {
@@ -21,7 +21,7 @@ function eh_stm_mail_data($uid) {
     $sc = array_map('intval', $wpdb->get_col($wpdb->prepare("SELECT score FROM $t WHERE round = %s AND submitted > 0 AND counted = 1", $r['id'])));
     $s = (int) $row['score']; $n = count($sc);
     $Q = eh_stm_paper($r); $a = json_decode($row['ans'] ?: '{}', true) ?: []; $secs = [];
-    foreach (eh_stm_secmap() as $sec) { $c = 0; $w = 0; foreach ($sec[1] as $i) { if (!isset($a[$i])) continue; if (isset($Q[$i]) && $a[$i] === $Q[$i]['a']) $c++; else $w++; } $secs[] = ['q' => count($sec[1]), 'c' => $c, 'w' => $w]; }
+    foreach (eh_stm_secmap($r) as $sec) { $c = 0; $w = 0; foreach ($sec[1] as $i) { if (!isset($a[$i])) continue; if (isset($Q[$i]) && $a[$i] === $Q[$i]['a']) $c++; else $w++; } $secs[] = ['q' => count($sec[1]), 'c' => $c, 'w' => $w]; }
     $c = (int) $row['correct']; $w = (int) $row['wrong'];
     $used = (int) ($row['used'] ?? 0) ?: max(0, (int) $row['submitted'] - (int) $row['started']);
     return ['name' => $row['name'], 'email' => $row['email'], 'roll' => eh_stm_roll((int) $row['uid']), 'att' => (int) $row['att'],

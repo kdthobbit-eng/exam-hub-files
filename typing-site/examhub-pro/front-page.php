@@ -66,7 +66,7 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
     <div class="uh-cta">
       <a class="uh-btn" href="<?php echo esc_url(home_url('/live-typing/')); ?>"><?php echo eh_t('Junior Assistant Live Typing', 'जूनियर असिस्टेंट लाइव टाइपिंग'); ?><?php echo $arrow; ?></a>
     </div>
-    <?php if (function_exists('eh_stm_round')): $stm = eh_stm_round('m1'); if ($stm && time() < $stm['end_ts']):
+    <?php if (function_exists('eh_stm_round')): $stm = eh_stm_round('m2'); if ($stm && time() < $stm['end_ts']):
       $ik = new DateTimeZone('Asia/Kolkata'); $sd = (new DateTime('@' . $stm['start_ts']))->setTimezone($ik); $ed = (new DateTime('@' . $stm['end_ts']))->setTimezone($ik);
       $hm = ['', 'जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'];
       $ring = function ($l) { return '<span class="uh-stm-ring"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" class="bg"/><circle cx="32" cy="32" r="28" class="fg"/></svg><b>00</b><i>' . $l . '</i></span>'; }; ?>

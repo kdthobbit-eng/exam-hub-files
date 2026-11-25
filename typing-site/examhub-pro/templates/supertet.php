@@ -9,7 +9,7 @@ $eh_self = home_url('/super-tet-mock/');
 $eh_cfg = [
     'rest' => esc_url_raw(rest_url('eh/v1/stm/')), 'nonce' => $eh_in ? wp_create_nonce('wp_rest') : '',
     'in' => $eh_in, 'admin' => $eh_admin, 'isadm' => $eh_in && current_user_can('manage_options'), 'now' => time(),
-    'round' => eh_stm_round_out(eh_stm_round()),
+    'round' => eh_stm_round_out(eh_stm_round()), 'paper' => eh_stm_round()['paper'],
     'login' => eh_login_page_url($eh_self), 'signup' => add_query_arg('redirect_to', rawurlencode($eh_self), home_url('/signup/')),
     'logo' => get_template_directory_uri() . '/assets/upsssc-alert-logo.svg',
     'logout' => wp_logout_url($eh_self), 'tgc' => eh_opt('tg_channel'), 'tgg' => eh_opt('tg_group'), 'tgj' => eh_opt('tg_join'),
@@ -580,7 +580,7 @@ table.mt th{background:#eef3f9;font-weight:600}
 const C=<?php echo wp_json_encode($eh_cfg); ?>;
 const PH=<?php echo wp_json_encode($eh_ph); ?>;
 const r=(a,b)=>Array.from({length:b-a+1},(_,i)=>a-1+i);
-const SECS=[["सामान्य ज्ञान एवं समसामयिकी",r(1,25)],["तार्किक ज्ञान",r(26,30)],["हिंदी, संस्कृत एवं अंग्रेजी",r(31,60)],["विज्ञान",r(61,68)],["गणित",r(69,84)],["पर्यावरण एवं सामाजिक अध्ययन",r(85,92)],["शिक्षण कौशल",r(93,100)],["बाल मनोविज्ञान",r(101,108)],["सूचना तकनीक (ICT)",r(109,112).concat(r(117,120))],["जीवन कौशल / प्रबंधन",r(113,116)]].map(x=>({n:x[0],q:x[1]}));
+const SECS=[["सामान्य ज्ञान एवं समसामयिकी",r(1,25)],["तार्किक ज्ञान",r(26,30)],["हिंदी, संस्कृत एवं अंग्रेजी",r(31,60)],["विज्ञान",r(61,68)],["गणित",r(69,84)],["पर्यावरण एवं सामाजिक अध्ययन",r(85,92)],["शिक्षण कौशल",r(93,100)],["बाल मनोविज्ञान",r(101,108)],...(C.paper==="supertet-mock1"?[["सूचना तकनीक (ICT)",r(109,112).concat(r(117,120))],["जीवन कौशल / प्रबंधन",r(113,116)]]:[["सूचना तकनीक (ICT)",r(109,112)],["जीवन कौशल, प्रबंधन एवं अभिवृत्ति",r(113,120)]])].map(x=>({n:x[0],q:x[1]}));
 const L=['A','B','C','D'],$=id=>document.getElementById(id);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let off=C.now*1000-Date.now(),R=C.round,A=null,Q=[],ME={name:'',roll:''},sel=null,T=null,BG=null,dirty=false,saving=false,qStart=Date.now(),subbing=false,RS=null,AR='',hidAt=0,LANG='hi';try{LANG=localStorage.getItem('eh_stm_lang')||'hi'}catch(e){}

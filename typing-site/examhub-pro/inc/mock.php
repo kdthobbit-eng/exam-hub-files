@@ -15,6 +15,7 @@ function eh_stm_rounds() {
     $list = is_array($o) && $o ? $o : [
         ['id' => 't2', 'name' => 'Super TET Mock 2026 — ट्रायल', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 08:40', 'paper' => 'supertet-mock1'],
         ['id' => 'm1', 'name' => 'Super TET Mock 2026 — लाइव', 'login' => '2026-11-22 08:40', 'start' => '2026-11-22 09:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
+        ['id' => 'm2', 'name' => 'Super TET Mock 2 — लाइव', 'login' => '2026-11-25 09:10', 'start' => '2026-11-25 09:30', 'end' => '2026-11-25 23:59', 'paper' => 'supertet-mock2'],
     ];
     $ctl = get_option('eh_stm_ctl', []); if (!is_array($ctl)) $ctl = [];
     return array_map(function ($r) use ($ts, $ctl) {
@@ -312,15 +313,17 @@ function eh_stm_bot_view($confirm = false) {
 }
 
 /* Admin report: summary, section averages, full merit list. */
-function eh_stm_secmap() {
+function eh_stm_secmap($rd = null) {
     $r = function ($a, $b) { return range($a - 1, $b - 1); };
+    $rd = $rd ?: eh_stm_round();
+    if (($rd['paper'] ?? '') !== 'supertet-mock1') return [['सामान्य ज्ञान एवं समसामयिकी', $r(1, 25)], ['तार्किक ज्ञान', $r(26, 30)], ['हिंदी, संस्कृत एवं अंग्रेजी', $r(31, 60)], ['विज्ञान', $r(61, 68)], ['गणित', $r(69, 84)], ['पर्यावरण एवं सामाजिक अध्ययन', $r(85, 92)], ['शिक्षण कौशल', $r(93, 100)], ['बाल मनोविज्ञान', $r(101, 108)], ['सूचना तकनीक (ICT)', $r(109, 112)], ['जीवन कौशल, प्रबंधन एवं अभिवृत्ति', $r(113, 120)]];
     return [['सामान्य ज्ञान एवं समसामयिकी', $r(1, 25)], ['तार्किक ज्ञान', $r(26, 30)], ['हिंदी, संस्कृत एवं अंग्रेजी', $r(31, 60)], ['विज्ञान', $r(61, 68)], ['गणित', $r(69, 84)], ['पर्यावरण एवं सामाजिक अध्ययन', $r(85, 92)], ['शिक्षण कौशल', $r(93, 100)], ['बाल मनोविज्ञान', $r(101, 108)], ['सूचना तकनीक (ICT)', array_merge($r(109, 112), $r(117, 120))], ['जीवन कौशल / प्रबंधन', $r(113, 116)]];
 }
 add_action('rest_api_init', function () {
     register_rest_route('eh/v1', '/stm/report', ['methods' => 'GET', 'permission_callback' => function () { return current_user_can('manage_options'); }, 'callback' => function (WP_REST_Request $q) {
         global $wpdb; $t = eh_stm_table();
         $r = eh_stm_round(sanitize_key($q['round'] ?? '')); eh_stm_expire($r);
-        $Q = eh_stm_paper($r); $S = eh_stm_secmap();
+        $Q = eh_stm_paper($r); $S = eh_stm_secmap($r);
         $all = $wpdb->get_results($wpdb->prepare("SELECT uid, att, counted, name, email, started, submitted, last, correct, wrong, score, tabs, dev, ans FROM $t WHERE round = %s", $r['id']), ARRAY_A);
         $att = []; foreach ($all as $x) if ($x['started']) $att[$x['uid']] = ($att[$x['uid']] ?? 0) + 1;
         $m = array_values(array_filter($all, function ($x) { return $x['submitted'] > 0 && $x['counted']; }));
