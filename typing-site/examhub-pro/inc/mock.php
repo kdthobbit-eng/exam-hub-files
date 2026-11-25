@@ -130,8 +130,11 @@ function eh_stm_finish_row($r, $row, $when) {
     $ans = json_decode($row['ans'] ?: '{}', true) ?: [];
     [$c, $w, $s] = eh_stm_score($r, $ans);
     $adm = user_can((int) $row['uid'], 'manage_options');
-    if (!$adm) $wpdb->query($wpdb->prepare('UPDATE ' . eh_stm_table() . ' SET counted = 0 WHERE round = %s AND uid = %d AND att < %d', $row['round'], $row['uid'], $row['att']));
-    $wpdb->update(eh_stm_table(), ['submitted' => $when, 'correct' => $c, 'wrong' => $w, 'score' => $s, 'counted' => $adm ? 0 : 1, 'used' => $used, 'paused' => 0], ['id' => $row['id']]);
+    /* Mock 1: the latest attempt counted. From Mock 2 on: only the FIRST submitted attempt counts in the merit list; re-attempts are practice. */
+    $cnt = $adm ? 0 : 1;
+    if (!$adm && $row['round'] === 'm1') $wpdb->query($wpdb->prepare('UPDATE ' . eh_stm_table() . ' SET counted = 0 WHERE round = %s AND uid = %d AND att < %d', $row['round'], $row['uid'], $row['att']));
+    elseif (!$adm && (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_stm_table() . ' WHERE round = %s AND uid = %d AND att < %d AND submitted > 0', $row['round'], $row['uid'], $row['att']))) $cnt = 0;
+    $wpdb->update(eh_stm_table(), ['submitted' => $when, 'correct' => $c, 'wrong' => $w, 'score' => $s, 'counted' => $cnt, 'used' => $used, 'paused' => 0], ['id' => $row['id']]);
 }
 /* Attempts whose time ran out without a submit are submitted at their deadline. */
 function eh_stm_expire($r) {
@@ -171,7 +174,7 @@ function eh_stm_result($r, $row) {
         'started' => (int) $row['started'], 'used' => (int) ($row['used'] ?? 0) ?: max(0, min(EH_STM_SECS, (int) $row['submitted'] - (int) $row['started'])), 'tabs' => (int) $row['tabs'],
         'ans' => (object) (json_decode($row['ans'] ?: '{}', true) ?: []), 'tq' => (object) (json_decode($row['tq'] ?: '{}', true) ?: []),
         'key' => array_map(function ($q) { return $q['a']; }, $Q), 'exp' => array_map(function ($q) { return $q['e'] ?? ''; }, $Q),
-        'q' => eh_stm_public_q($r), 'att' => (int) $row['att'], 'admin_test' => user_can((int) $row['uid'], 'manage_options'),
+        'q' => eh_stm_public_q($r), 'att' => (int) $row['att'], 'admin_test' => user_can((int) $row['uid'], 'manage_options'), 'practice' => !user_can((int) $row['uid'], 'manage_options') && !(int) $row['counted'] && $row['submitted'] > 0,
         'hist' => array_map(function ($x) { return [(int) $x['att'], (int) $x['score'], (int) $x['submitted']]; }, $GLOBALS['wpdb']->get_results($GLOBALS['wpdb']->prepare('SELECT att, score, submitted FROM ' . eh_stm_table() . ' WHERE round = %s AND uid = %d AND submitted > 0 ORDER BY att', $r['id'], $row['uid']), ARRAY_A)),
     ], eh_stm_live($r, (int) $row['score']));
 }

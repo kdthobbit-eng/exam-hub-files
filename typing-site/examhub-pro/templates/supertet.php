@@ -457,7 +457,7 @@ table.mt th{background:#eef3f9;font-weight:600}
    <div class="card"><h2>प्रश्न-पत्र का स्वरूप</h2><div class="tw"><table class="t"><thead><tr><th>विषय</th><th>प्रश्न</th><th>अंक</th></tr></thead><tbody id="pat"></tbody></table></div></div>
   </div>
   <div class="card" style="margin-bottom:16px"><h2>महत्वपूर्ण निर्देश</h2><ol class="rules">
-   <li>परीक्षा देने के लिए xlstudy.in पर लॉग-इन ज़रूरी है। जितनी बार चाहें दोबारा दे सकते हैं — रैंक में आपका सबसे नया प्रयास गिना जाएगा।</li>
+   <li>परीक्षा देने के लिए xlstudy.in पर लॉग-इन ज़रूरी है। जितनी बार चाहें दोबारा दे सकते हैं, पर मेरिट लिस्ट और रैंक में केवल आपका <b>पहला प्रयास</b> गिना जाएगा; दोबारा दिए गए प्रयास केवल अभ्यास के लिए होंगे।</li>
    <li>मॉक सुबह 10 बजे से रात 11:59 तक खुला है — इस बीच कभी भी शुरू करें, शुरू करने के बाद पूरे 120 मिनट मिलेंगे। अंतिम रैंक रात 11:59 के बाद।</li>
    <li>हर उत्तर सर्वर पर सेव होता है। नेट जाने या फ़ोन बंद होने पर दोबारा खोलें — परीक्षा वहीं से चलेगी।</li>
    <li>समय पूरा होते ही परीक्षा अपने आप सबमिट हो जाएगी।</li>
@@ -623,7 +623,7 @@ function home(){const n=now(),st=status();
 function cta(st){let h='',p='',b='';const a=A;
  if(!C.in){h='परीक्षा देने के लिए लॉग-इन करें';p='xlstudy.in का अकाउंट नहीं है तो 1 मिनट में नया अकाउंट बनाएँ।';b=`<a class="b b-wh b-lg" href="${esc(C.signup)}">नया अकाउंट</a><a class="b b-gd b-lg" href="${esc(C.login)}">लॉग-इन करें</a>`}
  else if(!a){h='लोड हो रहा है…'}
- else if(+a.submitted){h=ME.name+', आपका प्रयास '+(a.att||1)+' सबमिट हो चुका है';p='रिज़ल्ट देखें, या दोबारा मॉक दें — रैंक में आपका नया स्कोर गिना जाएगा।';b='<button class="b b-wh b-lg" id="c-re"'+(st==='live'?'':' disabled')+'>↻ दोबारा दें</button><button class="b b-gd b-lg" id="c-go">रिज़ल्ट देखें ›</button>'}
+ else if(+a.submitted){h=ME.name+', आपका प्रयास '+(a.att||1)+' सबमिट हो चुका है';p='रिज़ल्ट देखें, या अभ्यास के लिए दोबारा दें — मेरिट में केवल पहला प्रयास गिना जाएगा।';b='<button class="b b-wh b-lg" id="c-re"'+(st==='live'?'':' disabled')+'>↻ दोबारा दें</button><button class="b b-gd b-lg" id="c-go">रिज़ल्ट देखें ›</button>'}
  else if(+a.started){h='आपकी परीक्षा जारी है';p='बचा समय '+fmt(a.paused?a.left:a.deadline-now())+' · घड़ी रुकी है, परीक्षा खोलने पर ही चलेगी।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा जारी रखें ›</button>'}
  else if(st==='soon'){h='नमस्ते, '+ME.name;p='लॉग-इन '+tStr(R.login)+' से खुलेगा। तब तक नीचे पैटर्न और निर्देश देख लें।';b='<button class="b b-wh b-lg" disabled>'+tStr(R.login)+' से खुलेगा</button>'}
  else if(st==='over'){h='यह परीक्षा समाप्त हो चुकी है';p='प्रश्न-पत्र और उत्तर-कुंजी डाउनलोड करें।';b='<button class="b b-pr b-lg" id="c-paper">⬇ प्रश्न-पत्र + उत्तर-कुंजी</button>'}
@@ -732,7 +732,7 @@ function renderRes(d){RS=d;close();
 function liveUpd(x,first){const d=RS;Object.assign(d,x);
  const C2=2*Math.PI*72;setTimeout(()=>{const g=$('gfg');if(g)g.style.strokeDashoffset=C2*(1-Math.max(0,d.score)/360)},first?80:0);
  $('gp').textContent=d.percentile.toFixed(2);$('hp').textContent=d.percentile.toFixed(2);$('hr').textContent=d.rank;$('kr').textContent=d.rank;$('ht').textContent=d.total;$('kt').textContent=d.total;
- $('rnote').innerHTML=(d.admin_test?'🛠️ <b>एडमिन टेस्ट</b> — यह प्रयास मेरिट लिस्ट, रैंक और परसेंटाइल में नहीं गिना जाता। ':'')+(d.final?'✅ परीक्षा समाप्त — यह अंतिम रैंक और परसेंटाइल है।':'⏳ परीक्षा अभी चल रही है ('+d.writing+' उम्मीदवार अभी पेपर दे रहे हैं)। रैंक और परसेंटाइल अभी तक सबमिट हुए <b>'+d.total+'</b> उम्मीदवारों के आधार पर है और हर 20 सेकंड में अपडेट होती है।');
+ $('rnote').innerHTML=(d.practice?'🔁 <b>अभ्यास प्रयास</b> — मेरिट लिस्ट में केवल आपका पहला प्रयास गिना जाता है; यहाँ दिखी रैंक केवल अनुमान है। ':'')+(d.admin_test?'🛠️ <b>एडमिन टेस्ट</b> — यह प्रयास मेरिट लिस्ट, रैंक और परसेंटाइल में नहीं गिना जाता। ':'')+(d.final?'✅ परीक्षा समाप्त — यह अंतिम रैंक और परसेंटाइल है।':'⏳ परीक्षा अभी चल रही है ('+d.writing+' उम्मीदवार अभी पेपर दे रहे हैं)। रैंक और परसेंटाइल अभी तक सबमिट हुए <b>'+d.total+'</b> उम्मीदवारों के आधार पर है और हर 20 सेकंड में अपडेट होती है।');
  $('lvb').style.display=d.final?'none':'';
  const mx=Math.max(1,d.topper,d.score);$('cmp').innerHTML=[['आपका स्कोर',d.score,'var(--pr)'],['औसत स्कोर',d.avg,'#9aa8b8'],['टॉपर',d.topper,'var(--gd)']].map(x=>`<div class="row"><span>${x[0]}</span><div class="track"><i style="width:${Math.max(0,x[1])*100/mx}%;background:${x[2]}"></i></div><b class="num" style="text-align:right">${x[1]}</b></div>`).join('');
  $('top').innerHTML=(d.top||[]).map((x,i)=>`<li><i>${i+1}</i><span>${esc(x.n)}</span><b>${x.s}</b></li>`).join('')||'<li>अभी कोई नहीं</li>';
