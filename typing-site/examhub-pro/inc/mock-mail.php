@@ -235,3 +235,20 @@ function eh_stm_mail_page() {
     echo '<h2>3. चालू / बंद</h2><p>चालू होने पर हर candidate को <b>पहली बार submit करने के बाद एक ही बार</b> mail जाता है (हर मिनट 8 तक, हर Gmail से दिन में ' . EH_STM_MAIL_DAILY . ' तक — पहले Gmail 1, फिर Gmail 2)। एडमिन को mail नहीं जाता।</p>'
         . ($o['on'] ? $f('off', '⏸ Mail बंद करो') : $f('on', '▶️ Mail चालू करो', 'button button-primary')) . '</div>';
 }
+
+/* ---------- Mock 2 reminder: count only (read-only) ---------- */
+function eh_stm_remind_list() {
+    global $wpdb; $t = eh_stm_table();
+    $ids = $wpdb->get_col("SELECT DISTINCT uid FROM $t WHERE round = 'm1' AND submitted > 0 AND uid NOT IN (SELECT uid FROM $t WHERE round = 'm2' AND started > 0)");
+    $out = [];
+    foreach ($ids as $id) { $u = get_userdata((int) $id); if ($u && !user_can($u, 'manage_options') && is_email($u->user_email)) $out[] = (int) $id; }
+    return $out;
+}
+function eh_stm_remind_report() {
+    global $wpdb; $t = eh_stm_table();
+    $m1 = (int) $wpdb->get_var("SELECT COUNT(DISTINCT uid) FROM $t WHERE round = 'm1' AND submitted > 0");
+    $both = (int) $wpdb->get_var("SELECT COUNT(DISTINCT uid) FROM $t WHERE round = 'm1' AND submitted > 0 AND uid IN (SELECT uid FROM $t WHERE round = 'm2' AND started > 0)");
+    $l = eh_stm_remind_list(); $c = eh_stm_mail_24h();
+    return "📊 Reminder ginti\nMock 1 submit: $m1\nजिन्होंने Mock 2 दे दिया/शुरू किया: $both\nबचे (admin हटाकर, सही email): " . count($l)
+        . "\n\nपिछले 24 घंटे में भेजे गए: Gmail 1 = {$c[1]}, Gmail 2 = {$c[2]} (हर एक की हद " . EH_STM_MAIL_DAILY . ")";
+}
