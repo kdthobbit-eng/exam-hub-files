@@ -168,21 +168,26 @@ function eh_tgb_users() {
 
 /* ---------- menus ---------- */
 function eh_tgb_menu_kb($role) {
-    $kb = [
+    $kb = [];
+    if ($role && function_exists('eh_tgapp_url')) $kb[] = [['text' => '🛠️ Admin Panel (Mini App)', 'web_app' => ['url' => eh_tgapp_url()]]];
+    $kb = array_merge($kb, [
         [['text' => '📊 Today', 'callback_data' => 'r:today'], ['text' => '⏱ Last 1 hour', 'callback_data' => 'r:hour']],
         [['text' => '📅 Yesterday', 'callback_data' => 'r:yday'], ['text' => '🗓 Last 7 days', 'callback_data' => 'r:7d']],
         [['text' => '📆 This month', 'callback_data' => 'r:month'], ['text' => '🌐 Full (All time)', 'callback_data' => 'r:all']],
         [['text' => '⚡ Live Typing', 'callback_data' => 'live'], ['text' => '🏆 Top exams', 'callback_data' => 'top']],
         [['text' => '🔴 3284 Pattern Passage', 'callback_data' => 'p3284']],
         [['text' => '👤 Sign-ups', 'callback_data' => 'users'], ['text' => '👥 Admins', 'callback_data' => 'admins']],
-    ];
-    if ($role && function_exists('eh_tgapp_url')) $kb[] = [['text' => '🛠️ Admin Panel (Mini App)', 'web_app' => ['url' => eh_tgapp_url()]]];
+    ]);
     if ($role) $kb[] = [['text' => '📝 पैसेज जोड़ें', 'callback_data' => 'pa'], ['text' => '📋 मेरे पैसेज', 'callback_data' => 'pl']];
     if ($role === 'owner') $kb[] = [['text' => '➕ Add admin', 'callback_data' => 'add'], ['text' => '🔄 Update theme', 'callback_data' => 'upd']];
     if ($role === 'owner' && function_exists('eh_stm_bot_view')) $kb[] = [['text' => '📝 Super TET Mock (चालू / बंद)', 'callback_data' => 'mock']];
     return ['inline_keyboard' => $kb];
 }
-function eh_tgb_back_kb($again) { return ['inline_keyboard' => [[['text' => '🔄 Refresh', 'callback_data' => $again], ['text' => '☰ Menu', 'callback_data' => 'menu']]]]; }
+function eh_tgb_back_kb($again) {
+    $kb = [[['text' => '🔄 Refresh', 'callback_data' => $again], ['text' => '☰ Menu', 'callback_data' => 'menu']]];
+    if (function_exists('eh_tgapp_url')) $kb[] = [['text' => '🛠️ Admin Panel (Mini App)', 'web_app' => ['url' => eh_tgapp_url()]]];
+    return ['inline_keyboard' => $kb];
+}
 function eh_tgb_menu_text() { return '📋 <b>' . esc_html(eh_opt('brand_typing') ?: get_bloginfo('name')) . ' — Stats Bot</b>' . "\nक्या देखना है? नीचे बटन दबाइए।"; }
 
 function eh_tgb_admins_view($role) {
