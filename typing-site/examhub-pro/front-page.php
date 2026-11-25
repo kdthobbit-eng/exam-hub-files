@@ -79,6 +79,9 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
       <span class="uh-stm-bot"><span class="uh-stm-cdw"><span class="uh-stm-lbl" id="uh-stm-lbl">शुरू होने में</span><span class="uh-stm-cd" id="uh-stm-cd"><?php echo $ring('घंटे') . $ring('मिनट') . $ring('सेकंड'); ?></span></span>
         <span class="uh-stm-go" id="uh-stm-go">अभी रजिस्टर करें →</span></span>
     </a>
+    <?php $m1 = eh_stm_round('m1'); if ($m1 && $m1['id'] === 'm1' && time() >= $m1['end_ts']): ?>
+    <div class="uh-mtabs"><a class="on" href="<?php echo esc_url(home_url('/super-tet-mock/')); ?>"><b>मॉक 2 · 25 नवंबर</b><small>आज · लाइव मॉक दें →</small></a><a href="<?php echo esc_url(home_url('/super-tet-mock/?r=m1')); ?>"><b>मॉक 1 · 22 नवंबर</b><small>समाप्त · परिणाम / उत्तर-कुंजी देखें →</small></a></div>
+    <?php endif; ?>
     <script>(function(){var e=document.getElementById('uh-stm');if(!e)return;var s=+e.dataset.start,en=+e.dataset.end,off=+e.dataset.now*1000-Date.now(),cd=e.querySelectorAll('.uh-stm-ring'),l=document.getElementById('uh-stm-lbl'),g=document.getElementById('uh-stm-go'),c=document.getElementById('uh-stm-chip'),C=2*Math.PI*28;
     function p(n){return (n<10?'0':'')+n}function set(k,v,m){cd[k].querySelector('b').textContent=p(v);cd[k].querySelector('.fg').style.strokeDashoffset=C*(1-v/m)}
     function t(){var n=Math.floor((Date.now()+off)/1000),live=n>=s,x=Math.max(0,(live?en:s)-n);if(n>=en){e.style.display='none';return}
