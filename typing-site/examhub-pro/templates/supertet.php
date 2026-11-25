@@ -9,7 +9,8 @@ $eh_self = home_url('/super-tet-mock/');
 $eh_cfg = [
     'rest' => esc_url_raw(rest_url('eh/v1/stm/')), 'nonce' => $eh_in ? wp_create_nonce('wp_rest') : '',
     'in' => $eh_in, 'admin' => $eh_admin, 'isadm' => $eh_in && current_user_can('manage_options'), 'now' => time(),
-    'round' => eh_stm_round_out(eh_stm_round()), 'paper' => eh_stm_round()['paper'],
+    'round' => eh_stm_round_out(eh_stm_view_round()), 'paper' => eh_stm_view_round()['paper'], 'view' => eh_stm_view_round()['id'] !== eh_stm_round()['id'] ? eh_stm_view_round()['id'] : '',
+    'mocks' => array_values(array_map(function ($x) { return ['id' => $x['id'], 'name' => $x['name'], 'start' => $x['start_ts'], 'end' => $x['end_ts']]; }, array_filter(eh_stm_rounds(), function ($x) { return $x['id'][0] === 'm'; }))), 'cur' => eh_stm_round()['id'],
     'login' => eh_login_page_url($eh_self), 'signup' => add_query_arg('redirect_to', rawurlencode($eh_self), home_url('/signup/')),
     'logo' => get_template_directory_uri() . '/assets/upsssc-alert-logo.svg',
     'logout' => wp_logout_url($eh_self), 'tgc' => eh_opt('tg_channel'), 'tgg' => eh_opt('tg_group'), 'tgj' => eh_opt('tg_join'),
@@ -427,6 +428,7 @@ table.mt th{background:#eef3f9;font-weight:600}
  .ak{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.mtabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 14px}.mtabs a{display:flex;flex-direction:column;gap:1px;padding:8px 14px;border-radius:12px;border:1.5px solid rgba(255,255,255,.35);color:#fff;text-decoration:none;font-size:14px;line-height:1.25;background:rgba(255,255,255,.06)}.mtabs a small{font-size:11.5px;opacity:.85}.mtabs a.on{background:#f5b53f;border-color:#f5b53f;color:#2a1e00}.mtabs a.past:not(.on){opacity:.85}
 </style>
 </head>
 <body>
@@ -436,7 +438,7 @@ table.mt th{background:#eef3f9;font-weight:600}
 <section class="scr on" id="s-home">
  <?php $eh_hd('Online Examination', '', true); ?>
  <div class="hero"><div class="hin">
-  <div><span class="chip" id="h-chip"><span class="dot"></span><span id="h-chipt">लाइव मॉक टेस्ट</span></span>
+  <div><nav class="mtabs" id="mtabs" aria-label="मॉक टेस्ट"></nav><span class="chip" id="h-chip"><span class="dot"></span><span id="h-chipt">लाइव मॉक टेस्ट</span></span>
    <h1>UP Super TET <em>2026</em></h1>
    <p class="st">सहायक अध्यापक भर्ती परीक्षा · प्राथमिक स्तर (कक्षा 1–5) · ऑनलाइन लाइव मॉक</p>
    <div class="when"><span>📅 <b id="h-date"></b></span><span>⏰ <b id="h-time"></b></span></div></div>
@@ -578,6 +580,9 @@ table.mt th{background:#eef3f9;font-weight:600}
 <script>
 {
 const C=<?php echo wp_json_encode($eh_cfg); ?>;
+(function(){var n=document.getElementById('mtabs');if(!n||!C.mocks||C.mocks.length<2)return;var M=['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'],now=C.now,base=location.pathname;
+n.innerHTML=C.mocks.map(function(m,i){var d=new Date(m.start*1000),past=now>=m.end,on=(C.view||C.cur)===m.id,dt=d.getDate()+' '+M[d.getMonth()];
+var tag=past?'समाप्त · परिणाम देखें':(now>=m.start?'लाइव':'आज/आगामी');return '<a class="'+(on?'on':'')+(past?' past':'')+'" href="'+base+(m.id===C.cur?'':'?r='+m.id)+'"><b>मॉक '+(i+1)+'</b> · '+dt+'<small>'+tag+'</small></a>'}).join('')})();
 const PH=<?php echo wp_json_encode($eh_ph); ?>;
 const r=(a,b)=>Array.from({length:b-a+1},(_,i)=>a-1+i);
 const SECS=[["सामान्य ज्ञान एवं समसामयिकी",r(1,25)],["तार्किक ज्ञान",r(26,30)],["हिंदी, संस्कृत एवं अंग्रेजी",r(31,60)],["विज्ञान",r(61,68)],["गणित",r(69,84)],["पर्यावरण एवं सामाजिक अध्ययन",r(85,92)],["शिक्षण कौशल",r(93,100)],["बाल मनोविज्ञान",r(101,108)],...(C.paper==="supertet-mock1"?[["सूचना तकनीक (ICT)",r(109,112).concat(r(117,120))],["जीवन कौशल / प्रबंधन",r(113,116)]]:[["सूचना तकनीक (ICT)",r(109,112)],["जीवन कौशल, प्रबंधन एवं अभिवृत्ति",r(113,120)]])].map(x=>({n:x[0],q:x[1]}));
@@ -593,7 +598,7 @@ const ist=(t,o)=>new Date(t*1000).toLocaleString('hi-IN',Object.assign({timeZone
 const tStr=t=>new Date(t*1000).toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit'}).toUpperCase();
 const fmt=s=>{s=Math.max(0,s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return h+':'+String(m).padStart(2,'0')+':'+String(x).padStart(2,'0')};
 const mins=s=>{s=Math.round(s);const m=Math.floor(s/60);return m?m+' मिनट '+(s%60)+' सेकंड':s+' सेकंड'};
-function api(p,body,keep){return fetch(C.rest+p,{method:body?'POST':'GET',credentials:'same-origin',keepalive:!!keep,headers:Object.assign({'X-WP-Nonce':C.nonce},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined}).then(x=>x.json().then(j=>{if(!x.ok)throw j;return j}))}
+function api(p,body,keep){return fetch(C.rest+p+(C.view?'?r='+C.view:''),{method:body?'POST':'GET',credentials:'same-origin',keepalive:!!keep,headers:Object.assign({'X-WP-Nonce':C.nonce},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined}).then(x=>x.json().then(j=>{if(!x.ok)throw j;return j}))}
 function go(id){document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id===id));window.scrollTo(0,0)}
 function modal(t,body,btns){$('mt').textContent=t;$('mb').innerHTML=body;$('mf').innerHTML='';(btns||[['ठीक है','b-pr',close]]).forEach(b=>{const e=document.createElement('button');e.className='b '+b[1];e.textContent=b[0];e.onclick=b[2];$('mf').appendChild(e)});$('mx').style.display=btns&&!btns.length?'none':'';$('mdl').classList.add('on')}
 function close(){$('mdl').classList.remove('on')}
