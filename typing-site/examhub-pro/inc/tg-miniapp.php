@@ -41,6 +41,11 @@ add_action('rest_api_init', function () {
         if (function_exists('eh_stm_mail_counts')) { $d['mail'] = eh_stm_mail_counts(); $d['mail']['on'] = (int) eh_stm_mail_opt()['on']; }
         $d['me'] = eh_tgapp_user()['first_name'] ?? '';
         global $wpdb; $r = eh_stm_round($d['round']['id']); $now = time();
+        $td = wp_date('Y-m-d'); $off = (int) round((float) get_option('gmt_offset') * HOUR_IN_SECONDS);
+        $since = function ($ts) use ($wpdb, $off) { return (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->users} WHERE user_registered >= %s", gmdate('Y-m-d H:i:s', $ts - $off))); };
+        $d0 = strtotime($td . ' 00:00:00 UTC') ;
+        $d['signups'] = ['total' => (int) $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->users}"), 'today' => $since($d0), 'week' => $since($d0 - 6 * DAY_IN_SECONDS),
+            'mock' => (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->users} WHERE user_registered >= %s", gmdate('Y-m-d H:i:s', $r['login_ts'] ?? $r['start_ts'])))];
         $w = $wpdb->get_results($wpdb->prepare('SELECT * FROM ' . eh_stm_table() . ' WHERE round = %s AND started > 0 AND submitted = 0 AND last > %d ORDER BY started ASC', $r['id'], $now - 120), ARRAY_A);
         $d['writing'] = array_map(function ($x) use ($r, $now) { return ['name' => $x['name'], 'email' => $x['email'], 'roll' => eh_stm_roll((int) $x['uid']), 'att' => (int) $x['att'], 'answered' => (int) $x['answered'],
             'left' => max(0, eh_stm_eff($r, $x, $now) - $now), 'tabs' => (int) $x['tabs'], 'dev' => $x['dev']]; }, $w);
@@ -105,6 +110,7 @@ input[type=search]{width:100%;border:1.5px solid #d6deea;border-radius:12px;padd
 .btn{display:block;width:100%;border:0;border-radius:14px;padding:13px;font:inherit;font-size:16px;font-weight:800;margin-top:8px;background:#0f2a4d;color:#fff}.btn.gd{background:linear-gradient(135deg,#ffe29a,#f5b53f);color:#2a1e00}.btn.ln{background:#fff;color:#0f2a4d;border:1.5px solid #c9d3e3}
 .f{display:flex;gap:8px;align-items:center;font-size:14px;margin:6px 0}.f select{flex:1;border:1.5px solid #d6deea;border-radius:10px;padding:8px;font:inherit}
 .msg{text-align:center;padding:40px 16px;color:#5a6b8c}.note{font-size:12.5px;color:#5a6b8c;margin-top:8px}
+.su{background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:10px;box-shadow:0 2px 8px rgba(15,42,77,.06)}.su>b{font-size:14px}.su div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:6px}.su span{text-align:center;font-size:11.5px;color:#5a6b8c;background:#f3f6fb;border-radius:10px;padding:6px 2px}.su span b{display:block;font-size:18px;color:#0f2a4d}
 .sum{background:#fff8e6;border:1px solid #f5d590;border-radius:14px;padding:10px 12px;font-size:15px;line-height:1.5;margin-bottom:10px}
 .k em{display:block;font-style:normal;font-size:10.5px;color:#8a97ad;line-height:1.25;margin-top:2px}.k2{grid-template-columns:repeat(3,minmax(0,1fr));margin:10px 0}
 .row[data-i]{cursor:pointer}.ar{color:#9aa7bd;font-size:22px;margin-left:2px}.tip{margin:0 0 4px}.rk.live{color:#16a34a;background:#e8f7ed;font-size:18px}.u{font-size:12px;color:#5a6b8c}
@@ -139,7 +145,7 @@ $('rs').innerHTML=d.rounds.map(function(r,i){var lv=now>=r.start&&now<r.end,past
 [].forEach.call($('rs').querySelectorAll('button'),function(b){b.onclick=function(){RID=b.dataset.r;TAB='merit';load()}});
 $('st').hidden=false;$('stt').textContent=live?'लाइव — रात '+new Date(d.round.end*1000).toLocaleTimeString('hi-IN',{hour:'numeric',minute:'2-digit'})+' तक खुला':(now<d.round.start?'अभी शुरू नहीं हुआ':'मॉक समाप्त — अंतिम परिणाम');$('st').querySelector('i').style.background=live?'#22c55e':'#94a3b8';
 var sum=live?'अभी <b>'+s.live+'</b> लोग पेपर दे रहे हैं, <b>'+s.merit+'</b> ने सबमिट कर दिया है। अब तक का टॉप स्कोर <b>'+s.max+'</b> और औसत <b>'+s.avg+'</b> अंक है।':(s.merit?'कुल <b>'+s.merit+'</b> उम्मीदवार मेरिट में रहे। टॉप स्कोर <b>'+s.max+'</b>, औसत <b>'+s.avg+'</b> अंक।':'अभी कोई सबमिशन नहीं है।');
-var h='<div class="sum">📌 '+sum+'</div><div class="k"><div><b>'+s.users+'</b><span>पेज खोला</span><em>लॉग-इन करके मॉक पेज देखा</em></div><div class="g"><b>'+s.live+'</b><span>अभी दे रहे</span><em>पिछले 2 मिनट में सक्रिय</em></div><div><b>'+s.merit+'</b><span>मेरिट में</span><em>पहला प्रयास सबमिट</em></div>'+
+var g=d.signups,h='<div class="sum">📌 '+sum+'</div>'+(g?'<div class="su"><b>👤 वेबसाइट साइन-अप</b><div><span><b>'+g.total+'</b>कुल</span><span><b>'+g.today+'</b>आज</span><span><b>'+g.week+'</b>7 दिन</span><span><b>'+g.mock+'</b>इस मॉक से</span></div></div>':'')+'<div class="k"><div><b>'+s.users+'</b><span>पेज खोला</span><em>लॉग-इन करके मॉक पेज देखा</em></div><div class="g"><b>'+s.live+'</b><span>अभी दे रहे</span><em>पिछले 2 मिनट में सक्रिय</em></div><div><b>'+s.merit+'</b><span>मेरिट में</span><em>पहला प्रयास सबमिट</em></div>'+
 '<div><b>'+s.max+'</b><span>टॉप स्कोर</span><em>360 में से</em></div><div><b>'+s.avg+'</b><span>औसत अंक</span><em>मेरिट वालों का</em></div><div class="o"><b>'+s.attempts+'</b><span>कुल प्रयास</span><em>दोबारा वाले मिलाकर</em></div></div>';
 h+='<div class="tb"><button data-t="merit" class="'+(TAB==='merit'?'on':'')+'">🏆 मेरिट</button><button data-t="now" class="'+(TAB==='now'?'on':'')+'">🟢 अभी ('+(d.writing||[]).length+')</button><button data-t="sec" class="'+(TAB==='sec'?'on':'')+'">📊 सेक्शन</button><button data-t="rep" class="'+(TAB==='rep'?'on':'')+'">⬇ रिपोर्ट</button></div>';
 if(TAB==='merit'){var rows=[];d.rows.forEach(function(x,i){if(!Q||(x.name+' '+x.email+' '+x.roll).toLowerCase().indexOf(Q)>=0)rows.push([x,i])});
