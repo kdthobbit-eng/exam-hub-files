@@ -22,6 +22,7 @@ require EH_DIR . '/inc/tgbot.php';
 require EH_DIR . '/inc/mock.php';
 require EH_DIR . '/inc/mock-admin.php';
 require EH_DIR . '/inc/mock-mail.php';
+require EH_DIR . '/inc/tg-miniapp.php';
 require EH_DIR . '/inc/extra-admins.php';
 
 /* ---------- setup ---------- */

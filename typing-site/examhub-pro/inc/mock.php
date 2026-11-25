@@ -320,6 +320,7 @@ function eh_stm_bot_view($confirm = false) {
     $kb = [];
     if ($st === 'live') $kb[] = [['text' => '⏹ मॉक अभी बंद करो', 'callback_data' => 'stm:close']];
     else $kb[] = [['text' => '▶️ मॉक अभी खोलो', 'callback_data' => 'stm:open']];
+    if (function_exists('eh_tgapp_url')) $kb[] = [['text' => '🛠️ Admin Panel (Mini App)', 'web_app' => ['url' => eh_tgapp_url()]]];
     $kb[] = [['text' => '🔄 Refresh', 'callback_data' => 'mock'], ['text' => '☰ Menu', 'callback_data' => 'menu']];
     return [$t, ['inline_keyboard' => $kb]];
 }
@@ -332,9 +333,12 @@ function eh_stm_secmap($rd = null) {
     return [['सामान्य ज्ञान एवं समसामयिकी', $r(1, 25)], ['तार्किक ज्ञान', $r(26, 30)], ['हिंदी, संस्कृत एवं अंग्रेजी', $r(31, 60)], ['विज्ञान', $r(61, 68)], ['गणित', $r(69, 84)], ['पर्यावरण एवं सामाजिक अध्ययन', $r(85, 92)], ['शिक्षण कौशल', $r(93, 100)], ['बाल मनोविज्ञान', $r(101, 108)], ['सूचना तकनीक (ICT)', array_merge($r(109, 112), $r(117, 120))], ['जीवन कौशल / प्रबंधन', $r(113, 116)]];
 }
 add_action('rest_api_init', function () {
-    register_rest_route('eh/v1', '/stm/report', ['methods' => 'GET', 'permission_callback' => function () { return current_user_can('manage_options'); }, 'callback' => function (WP_REST_Request $q) {
+    register_rest_route('eh/v1', '/stm/report', ['methods' => 'GET', 'permission_callback' => function () { return current_user_can('manage_options'); }, 'callback' => function (WP_REST_Request $q) { return eh_stm_report_data(sanitize_key($q['round'] ?? '')); }]);
+});
+/* Full merit/report data for a round — used by the website Admin Panel and the Telegram Mini App. */
+function eh_stm_report_data($rid = '') {
         global $wpdb; $t = eh_stm_table();
-        $r = eh_stm_round(sanitize_key($q['round'] ?? '')); eh_stm_expire($r);
+        $r = eh_stm_round($rid); eh_stm_expire($r);
         $Q = eh_stm_paper($r); $S = eh_stm_secmap($r);
         $all = $wpdb->get_results($wpdb->prepare("SELECT uid, att, counted, name, email, started, submitted, last, correct, wrong, score, tabs, dev, ans FROM $t WHERE round = %s", $r['id']), ARRAY_A);
         $att = []; foreach ($all as $x) if ($x['started']) $att[$x['uid']] = ($att[$x['uid']] ?? 0) + 1;
@@ -361,5 +365,5 @@ add_action('rest_api_init', function () {
                 'avgc' => $n ? round(array_sum(array_column($m, 'correct')) / $n, 1) : 0, 'avgw' => $n ? round(array_sum(array_column($m, 'wrong')) / $n, 1) : 0],
             'sections' => array_map(function ($sec, $k) use ($secTot, $n) { return ['n' => $sec[0], 'q' => count($sec[1]), 'avg' => $n ? round($secTot[$k] / $n, 2) : 0]; }, $S, array_keys($S)),
             'rows' => $rows];
-    }]);
-});
+}
+

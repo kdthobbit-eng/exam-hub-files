@@ -176,6 +176,7 @@ function eh_tgb_menu_kb($role) {
         [['text' => '🔴 3284 Pattern Passage', 'callback_data' => 'p3284']],
         [['text' => '👤 Sign-ups', 'callback_data' => 'users'], ['text' => '👥 Admins', 'callback_data' => 'admins']],
     ];
+    if ($role && function_exists('eh_tgapp_url')) $kb[] = [['text' => '🛠️ Admin Panel (Mini App)', 'web_app' => ['url' => eh_tgapp_url()]]];
     if ($role) $kb[] = [['text' => '📝 पैसेज जोड़ें', 'callback_data' => 'pa'], ['text' => '📋 मेरे पैसेज', 'callback_data' => 'pl']];
     if ($role === 'owner') $kb[] = [['text' => '➕ Add admin', 'callback_data' => 'add'], ['text' => '🔄 Update theme', 'callback_data' => 'upd']];
     if ($role === 'owner' && function_exists('eh_stm_bot_view')) $kb[] = [['text' => '📝 Super TET Mock (चालू / बंद)', 'callback_data' => 'mock']];
