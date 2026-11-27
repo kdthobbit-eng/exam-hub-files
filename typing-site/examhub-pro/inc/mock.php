@@ -17,6 +17,8 @@ function eh_stm_rounds() {
         ['id' => 'm1', 'name' => 'Super TET Mock 2026 — लाइव', 'login' => '2026-11-22 08:40', 'start' => '2026-11-22 09:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
         ['id' => 'm2', 'name' => 'Super TET Mock 2 — लाइव', 'login' => '2026-11-25 09:10', 'start' => '2026-11-25 09:30', 'end' => '2026-11-25 23:59', 'paper' => 'supertet-mock2'],
     ];
+    $list = array_map(function ($r) { $r['series'] = $r['series'] ?? 'stet'; return $r; }, $list);
+    if (function_exists('eh_tp_rounds')) $list = array_merge($list, eh_tp_rounds());
     $ctl = get_option('eh_stm_ctl', []); if (!is_array($ctl)) $ctl = [];
     return array_map(function ($r) use ($ts, $ctl) {
         $r['login_ts'] = $ts($r['login']); $r['start_ts'] = $ts($r['start']); $r['end_ts'] = $ts($r['end']);
@@ -30,19 +32,24 @@ function eh_stm_rounds() {
 function eh_stm_round($id = '') {
     $all = eh_stm_rounds(); $now = time();
     if ($id) { foreach ($all as $r) if ($r['id'] === $id) return $r; }
+    $all = array_values(array_filter($all, function ($r) { return $r['series'] === 'stet'; }));
     foreach ($all as $r) if ($now < $r['end_ts']) return $r;
     return end($all);
 }
 /* A past (finished) live mock can still be opened read-only with ?r=<id> — results, solutions, rank. */
 function eh_stm_view_round() {
+    if (function_exists('eh_tp_req_round') && ($t = eh_tp_req_round())) return $t;
     $id = sanitize_key($_GET['r'] ?? '');
     if ($id && $id[0] === 'm') { $r = eh_stm_round($id); if ($r && $r['id'] === $id && time() >= $r['end_ts']) return $r; }
     return eh_stm_round();
 }
 function eh_stm_paper($r) {
     static $c = [];
-    $k = preg_replace('/[^a-z0-9-]/', '', $r['paper']);
-    if (!isset($c[$k])) { $c[$k] = json_decode((string) @file_get_contents(EH_DIR . '/data/' . $k . '.json'), true) ?: []; }
+    $k = preg_replace('#[^a-z0-9/-]#', '', $r['paper']);
+    if (!isset($c[$k])) {
+        $rd = function ($f) { return json_decode((string) @file_get_contents(EH_DIR . '/data/' . $f . '.json'), true) ?: []; };
+        $c[$k] = !empty($r['gs']) ? array_merge($rd(preg_replace('#[^a-z0-9/-]#', '', $r['gs'])), $rd(preg_replace('#[^a-z0-9/-]#', '', $r['paper']))) : $rd($k);
+    }
     return $c[$k];
 }
 
@@ -147,6 +154,7 @@ function eh_stm_public_q($r) {
 }
 function eh_stm_status($r) {
     $n = time();
+    if (function_exists('eh_tp_is') && eh_tp_is($r) && !eh_tp_ready($r)) return 'soon';
     if ($n < $r['login_ts']) return 'soon';
     if ($n < $r['start_ts']) return 'login';
     if ($n < $r['end_ts']) return 'live';
@@ -154,7 +162,7 @@ function eh_stm_status($r) {
 }
 function eh_stm_roll($uid) { return 'XL26' . str_pad((string) $uid, 6, '0', STR_PAD_LEFT); }
 function eh_stm_round_out($r) {
-    return ['id' => $r['id'], 'name' => $r['name'], 'login' => $r['login_ts'], 'start' => $r['start_ts'], 'end' => $r['end_ts'], 'status' => eh_stm_status($r)];
+    return ['id' => $r['id'], 'name' => $r['name'], 'login' => $r['login_ts'], 'start' => $r['start_ts'], 'end' => $r['end_ts'], 'status' => eh_stm_status($r), 'series' => $r['series'] ?? 'stet', 'sub' => $r['sub'] ?? ''];
 }
 function eh_stm_attempt_out($row, $r) {
     $ps = eh_stm_pause_from($row, time());
@@ -211,9 +219,10 @@ add_action('rest_api_init', function () {
         return ['now' => time(), 'round' => eh_stm_round_out($r), 'roll' => eh_stm_roll((int) $row['uid']), 'name' => $row['name'], 'attempt' => eh_stm_attempt_out($row, $r)];
     }]);
     register_rest_route('eh/v1', '/stm/start', ['methods' => 'POST', 'permission_callback' => $auth, 'callback' => function (WP_REST_Request $q) {
-        if (!empty($_GET['r']) && sanitize_key($_GET['r']) !== eh_stm_round()['id']) return new WP_Error('past', 'यह मॉक समाप्त हो चुका है', ['status' => 403]);
+        $tp = function_exists('eh_tp_req_round') ? eh_tp_req_round() : null;
+        if (!$tp && !empty($_GET['r']) && sanitize_key($_GET['r']) !== eh_stm_round()['id']) return new WP_Error('past', 'यह मॉक समाप्त हो चुका है', ['status' => 403]);
         global $wpdb;
-        $r = eh_stm_round(); $row = eh_stm_touch($r); $now = time();
+        $r = $tp ?: eh_stm_round(); $row = eh_stm_touch($r); $now = time();
         if (eh_stm_status($r) !== 'live') return new WP_Error('closed', 'परीक्षा अभी खुली नहीं है', ['status' => 403]);
         if ($row['submitted'] && !empty($q['retry'])) {
             $u = wp_get_current_user();
@@ -227,9 +236,10 @@ add_action('rest_api_init', function () {
         return ['now' => $now, 'attempt' => eh_stm_attempt_out($row, $r)];
     }]);
     register_rest_route('eh/v1', '/stm/resume', ['methods' => 'POST', 'permission_callback' => $auth, 'callback' => function () {
-        if (!empty($_GET['r']) && sanitize_key($_GET['r']) !== eh_stm_round()['id']) return new WP_Error('past', 'यह मॉक समाप्त हो चुका है', ['status' => 403]);
+        $tp = function_exists('eh_tp_req_round') ? eh_tp_req_round() : null;
+        if (!$tp && !empty($_GET['r']) && sanitize_key($_GET['r']) !== eh_stm_round()['id']) return new WP_Error('past', 'यह मॉक समाप्त हो चुका है', ['status' => 403]);
         global $wpdb;
-        $r = eh_stm_round(); $row = eh_stm_row($r['id'], get_current_user_id()); $now = time();
+        $r = $tp ?: eh_stm_round(); $row = eh_stm_row($r['id'], get_current_user_id()); $now = time();
         if (!$row || !$row['started']) return new WP_Error('no', 'no attempt', ['status' => 400]);
         if ($row['submitted']) return ['now' => $now, 'submitted' => true];
         $d = eh_stm_eff($r, $row, $now);
@@ -238,9 +248,10 @@ add_action('rest_api_init', function () {
         return ['now' => $now, 'deadline' => $d];
     }]);
     register_rest_route('eh/v1', '/stm/save', ['methods' => 'POST', 'permission_callback' => $auth, 'callback' => function (WP_REST_Request $q) {
-        if (!empty($_GET['r']) && sanitize_key($_GET['r']) !== eh_stm_round()['id']) return new WP_Error('past', 'यह मॉक समाप्त हो चुका है', ['status' => 403]);
+        $tp = function_exists('eh_tp_req_round') ? eh_tp_req_round() : null;
+        if (!$tp && !empty($_GET['r']) && sanitize_key($_GET['r']) !== eh_stm_round()['id']) return new WP_Error('past', 'यह मॉक समाप्त हो चुका है', ['status' => 403]);
         global $wpdb;
-        $r = eh_stm_round(); $row = eh_stm_row($r['id'], get_current_user_id()); $now = time();
+        $r = $tp ?: eh_stm_round(); $row = eh_stm_row($r['id'], get_current_user_id()); $now = time();
         if (!$row || !$row['started']) return new WP_Error('no', 'no attempt', ['status' => 400]);
         if ($row['submitted']) return ['ok' => true, 'submitted' => true];
         $d = eh_stm_eff($r, $row, $now);
@@ -329,6 +340,7 @@ function eh_stm_bot_view($confirm = false) {
 function eh_stm_secmap($rd = null) {
     $r = function ($a, $b) { return range($a - 1, $b - 1); };
     $rd = $rd ?: eh_stm_round();
+    if (function_exists('eh_tp_is') && eh_tp_is($rd)) return [['सामान्य अध्ययन', $r(1, 30)], [$rd['sub'], $r(31, 120)]];
     if (($rd['paper'] ?? '') !== 'supertet-mock1') return [['सामान्य ज्ञान एवं समसामयिकी', $r(1, 25)], ['तार्किक ज्ञान', $r(26, 30)], ['हिंदी, संस्कृत एवं अंग्रेजी', $r(31, 60)], ['विज्ञान', $r(61, 68)], ['गणित', $r(69, 84)], ['पर्यावरण एवं सामाजिक अध्ययन', $r(85, 92)], ['शिक्षण कौशल', $r(93, 100)], ['बाल मनोविज्ञान', $r(101, 108)], ['सूचना तकनीक (ICT)', $r(109, 112)], ['जीवन कौशल, प्रबंधन एवं अभिवृत्ति', $r(113, 120)]];
     return [['सामान्य ज्ञान एवं समसामयिकी', $r(1, 25)], ['तार्किक ज्ञान', $r(26, 30)], ['हिंदी, संस्कृत एवं अंग्रेजी', $r(31, 60)], ['विज्ञान', $r(61, 68)], ['गणित', $r(69, 84)], ['पर्यावरण एवं सामाजिक अध्ययन', $r(85, 92)], ['शिक्षण कौशल', $r(93, 100)], ['बाल मनोविज्ञान', $r(101, 108)], ['सूचना तकनीक (ICT)', array_merge($r(109, 112), $r(117, 120))], ['जीवन कौशल / प्रबंधन', $r(113, 116)]];
 }

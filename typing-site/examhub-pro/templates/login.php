@@ -12,6 +12,7 @@ get_header(); ?>
     <form method="post" class="eh-auth2-form" novalidate>
       <?php wp_nonce_field('eh_auth', '_eh'); ?>
       <input type="hidden" name="redirect_to" value="<?php echo esc_attr(eh_safe_redirect_target()); ?>">
+      <?php if (function_exists('eh_tp_auth_select')) echo eh_tp_auth_select(); ?>
       <label for="eh-id">Email or mobile number</label>
       <input id="eh-id" name="id" type="text" required autocomplete="username" placeholder="e.g. rahul@gmail.com or 9876543210" value="<?php echo esc_attr(wp_unslash($_POST['id'] ?? '')); ?>">
       <label for="eh-pw">Password</label>

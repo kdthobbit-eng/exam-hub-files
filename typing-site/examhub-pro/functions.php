@@ -19,6 +19,7 @@ require EH_DIR . '/inc/admin.php';
 require EH_DIR . '/inc/auth.php';
 require EH_DIR . '/inc/stats.php';
 require EH_DIR . '/inc/tgbot.php';
+require EH_DIR . '/inc/mock-tp.php';
 require EH_DIR . '/inc/mock.php';
 require EH_DIR . '/inc/mock-admin.php';
 require EH_DIR . '/inc/mock-mail.php';
@@ -87,8 +88,9 @@ add_action('init', function () {
     add_rewrite_rule('^exam-based-result/?$', 'index.php?eh_view=results', 'top');
     add_rewrite_rule('^stet-mock-x9k4/?$', 'index.php?eh_view=stetmock', 'top');
     add_rewrite_rule('^super-tet-mock/?$', 'index.php?eh_view=supertet', 'top');
+    add_rewrite_rule('^mock-test/?$', 'index.php?eh_view=mockhub', 'top');
     add_rewrite_rule('^(faqs|about-us|declaration|terms-of-service|privacy-policy|contact-us)/?$', 'index.php?eh_view=info&eh_slug=$matches[1]', 'top');
-    if (get_option('eh_rewrite_ver') !== '5') { flush_rewrite_rules(false); update_option('eh_rewrite_ver', '5'); }
+    if (get_option('eh_rewrite_ver') !== '6') { flush_rewrite_rules(false); update_option('eh_rewrite_ver', '6'); }
 });
 add_filter('query_vars', function ($v) { $v[] = 'eh_view'; $v[] = 'eh_slug'; return $v; });
 
@@ -127,6 +129,7 @@ function eh_doc_title($t) {
         case 'examhall': return 'Exam Hall Typing — ' . $b;
         case 'download': return 'Free Typing Passage PDF Download — ' . $b;
         case 'insight': return 'Typing Insight — ' . $b;
+        case 'mockhub': return 'Mock Test — Super TET, TGT, PGT — ' . $b;
         case 'blog': return 'Exam Typing Tips and Rules — ' . $b;
         case 'info': $I = eh_info_pages(); return ($I[$slug]['title'] ?? 'Info') . ' — ' . $b;
     }
@@ -262,7 +265,7 @@ function eh_tg_buttons($class = '') {
 /* default menu if none set */
 function eh_member_links() {
     return [
-        'mock' => ['/super-tet-mock/', '📝 Super TET Mock'], 'live' => ['/live-typing/', '⚡ Live Typing'], 'exams' => ['/exams/', 'All Exams Typing'], 'history' => ['/my-dashboard/', 'Typing History'],
+        'mock' => ['/mock-test/', '📝 Mock Test'], 'live' => ['/live-typing/', '⚡ Live Typing'], 'exams' => ['/exams/', 'All Exams Typing'], 'history' => ['/my-dashboard/', 'Typing History'],
         'hall' => ['/exam-hall-typing/', 'Exam Hall Typing'], 'download' => ['/download-passages/', 'Download Passages'], 'insight' => ['/typing-insight/', '📈 Typing Insight'],
     ];
 }
@@ -275,15 +278,17 @@ function eh_member_nav($active = '') {
 }
 /* custom WP menus also get the Super TET mock link */
 add_filter('wp_nav_menu_items', function ($items, $args) {
-    if (($args->theme_location ?? '') !== 'primary' || strpos($items, 'super-tet-mock') !== false) return $items;
-    $li = '<li class="menu-item eh-mock-li"><a href="' . esc_url(home_url('/super-tet-mock/')) . '">' . (is_user_logged_in() ? '📝 Super TET Mock' : 'Super TET Mock') . '</a></li>';
+    if (($args->theme_location ?? '') !== 'primary') return $items;
+    if (strpos($items, 'super-tet-mock') !== false || strpos($items, 'mock-test') !== false)
+        return str_replace([esc_url(home_url('/super-tet-mock/')), '📝 Super TET Mock', 'Super TET Mock'], [esc_url(home_url('/mock-test/')), '📝 Mock Test', 'Mock Test'], $items);
+    $li = '<li class="menu-item eh-mock-li"><a href="' . esc_url(home_url('/mock-test/')) . '">' . (is_user_logged_in() ? '📝 Mock Test' : 'Mock Test') . '</a></li>';
     $p = strpos($items, '</li>');
     return $p === false ? $li . $items : substr($items, 0, $p + 5) . $li . substr($items, $p + 5);
 }, 10, 2);
 function eh_default_menu() {
     $items = is_user_logged_in()
         ? array_merge([['/', '🏠 Home']], array_values(eh_member_links()))
-        : [['/', 'Home'], ['/super-tet-mock/', 'Super TET Mock'], ['/exams/', 'Exams'], ['/demo-typing/', 'Demo Typing'], ['/live-typing/', 'Live Typing'], ['/exam-based-result/', 'Result'], ['/blog/', 'Typing Tips']];
+        : [['/', 'Home'], ['/mock-test/', 'Mock Test'], ['/exams/', 'Exams'], ['/demo-typing/', 'Demo Typing'], ['/live-typing/', 'Live Typing'], ['/exam-based-result/', 'Result'], ['/blog/', 'Typing Tips']];
     echo '<ul class="eh-menu">';
     foreach ($items as $i) echo '<li><a href="' . esc_url(home_url($i[0])) . '">' . esc_html($i[1]) . '</a></li>';
     echo '</ul>';
