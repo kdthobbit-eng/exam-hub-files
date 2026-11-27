@@ -324,6 +324,12 @@ function eh_stm_bot_view($confirm = false) {
         . "\n\n👤 पेज खोला (लॉग-इन)   " . $m['seen'] . "\n🟢 अभी पेपर दे रहे   " . $m['live'] . "\n▶️ पेपर शुरू किया   " . $m['started'] . "\n✅ सबमिट किया   " . $m['done'] . "\n🏆 टॉप स्कोर   " . $m['top'] . ' / 360';
     if (function_exists('eh_stm_mail_counts')) { $mc = eh_stm_mail_counts(); $mo = eh_stm_mail_opt(); $t .= "\n\n📧 Mail " . ($mo['on'] ? 'चालू' : 'बंद') . " · भेजे " . $mc['sent'] . " · बाकी " . $mc['pending'] . " · फेल " . $mc['fail'] . (function () use ($mo) { $c = eh_stm_mail_24h(); $p = function ($a) use ($mo) { return (int) ($mo['pause' . $a] ?? 0) > time() ? ' ⏸' : ''; };
         return "\n   24 घंटे: Gmail 1 → " . $c[1] . '/' . EH_STM_MAIL_DAILY . $p(1) . ($mo['from2'] ? " · Gmail 2 → " . $c[2] . '/' . EH_STM_MAIL_DAILY . $p(2) : ''); })(); }
+    if (function_exists('eh_tp_rounds')) { global $wpdb; $tt = eh_stm_table(); $now2 = time();
+        foreach (['tgt' => 'tg', 'pgt' => 'pg'] as $sr => $px) {
+            $lv = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $tt WHERE round LIKE %s AND started > 0 AND submitted = 0 AND last > %d", $px . '%', $now2 - 120));
+            $dn = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $tt WHERE round LIKE %s AND submitted > 0 AND counted = 1", $px . '%'));
+            $rdy = count(array_filter(eh_tp_rounds(), function ($x) use ($sr) { return $x['series'] === $sr && eh_tp_ready($x); }));
+            $t .= "\n\n📚 <b>UP " . strtoupper($sr) . "</b> (" . $rdy . " विषय लाइव)\n🟢 अभी दे रहे " . $lv . " · ✅ सबमिट " . $dn; } }
     if ($confirm) {
         $t .= "\n\n⚠️ <b>मॉक अभी बंद करना है?</b>\nजो पेपर दे रहे हैं उनका पेपर अपने आप सबमिट हो जाएगा और कोई नया शुरू नहीं कर पाएगा।";
         return [$t, ['inline_keyboard' => [[['text' => '✅ हाँ, बंद करो', 'callback_data' => 'stm:close:go'], ['text' => '❌ नहीं', 'callback_data' => 'mock']]]]];

@@ -1,0 +1,992 @@
+[
+{
+"q": "Choose the correct form: She ____ to school every day.",
+"o": [
+"go",
+"gone",
+"goes",
+"going"
+],
+"a": "C",
+"e": "Simple present, third person singular."
+},
+{
+"q": "Choose the correct option: I ____ him since 2015.",
+"o": [
+"knew",
+"am knowing",
+"have known",
+"know"
+],
+"a": "C",
+"e": "'Since' with present perfect."
+},
+{
+"q": "By the time we reached the station, the train ____.",
+"o": [
+"left",
+"was leaving",
+"has left",
+"had left"
+],
+"a": "D",
+"e": "Past perfect for the earlier of two past actions."
+},
+{
+"q": "Choose the correct passive: 'They are building a bridge.'",
+"o": [
+"A bridge has been built by them.",
+"A bridge is built by them.",
+"A bridge was being built by them.",
+"A bridge is being built by them."
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "Choose the correct passive: 'Who wrote this letter?'",
+"o": [
+"Who has written this letter?",
+"By whom was this letter written?",
+"By whom this letter was written?",
+"Who was this letter written?"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Change into indirect speech: He said, \"I am tired.\"",
+"o": [
+"He said that he was tired.",
+"He said that I was tired.",
+"He said that he is tired.",
+"He told that he was tired."
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Change into indirect speech: She said to me, \"Please help me.\"",
+"o": [
+"She said me to help her.",
+"She told me to please help her.",
+"She requested me to help her.",
+"She requested that I help me."
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Identify the part of speech of the word 'fast' in: He runs fast.",
+"o": [
+"Verb",
+"Adjective",
+"Noun",
+"Adverb"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "Identify the part of speech of 'beauty' in 'Her beauty is rare.'",
+"o": [
+"Verb",
+"Noun",
+"Adverb",
+"Adjective"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Fill in with the correct article: He is ____ honest man.",
+"o": [
+"a",
+"an",
+"no article",
+"the"
+],
+"a": "B",
+"e": "'Honest' begins with a vowel sound."
+},
+{
+"q": "Fill in with the correct article: ____ Ganga is a holy river.",
+"o": [
+"The",
+"An",
+"A",
+"No article"
+],
+"a": "A",
+"e": "Names of rivers take 'the'."
+},
+{
+"q": "Choose the correct preposition: He is good ____ mathematics.",
+"o": [
+"at",
+"in",
+"with",
+"on"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Choose the correct preposition: She has been ill ____ Monday.",
+"o": [
+"for",
+"by",
+"from",
+"since"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "Choose the correct preposition: The book is ____ the table.",
+"o": [
+"at",
+"over",
+"on",
+"in"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Choose the correct conjunction: Work hard ____ you will fail.",
+"o": [
+"but",
+"or",
+"so",
+"and"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Neither Ram nor his friends ____ present.",
+"o": [
+"is",
+"has been",
+"were",
+"was"
+],
+"a": "C",
+"e": "Verb agrees with the nearer subject (friends)."
+},
+{
+"q": "Each of the boys ____ a prize.",
+"o": [
+"get",
+"have got",
+"gets",
+"are getting"
+],
+"a": "C",
+"e": "'Each' takes a singular verb."
+},
+{
+"q": "The news ____ good.",
+"o": [
+"is",
+"are",
+"were",
+"have been"
+],
+"a": "A",
+"e": "'News' is singular."
+},
+{
+"q": "If I ____ a bird, I would fly.",
+"o": [
+"am",
+"had been",
+"was",
+"were"
+],
+"a": "D",
+"e": "Subjunctive mood."
+},
+{
+"q": "He did not come, ____?",
+"o": [
+"does he",
+"didn't he",
+"did he",
+"was he"
+],
+"a": "C",
+"e": "Negative statement takes a positive tag."
+},
+{
+"q": "Let us go for a walk, ____?",
+"o": [
+"don't we",
+"shall we",
+"will we",
+"won't you"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Choose the correct degree: This is the ____ book I have ever read.",
+"o": [
+"most good",
+"good",
+"best",
+"better"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "He is senior ____ me.",
+"o": [
+"from",
+"over",
+"than",
+"to"
+],
+"a": "D",
+"e": "Latin comparatives take 'to'."
+},
+{
+"q": "Choose the correct sentence.",
+"o": [
+"One should do your duty.",
+"One should do one's duty.",
+"One should do his duty.",
+"One should do their duty."
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Choose the correct sentence.",
+"o": [
+"I look forward to meet you.",
+"I look forward to meeting you.",
+"I am look forward to meet you.",
+"I looking forward to meet you."
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Choose the correct sentence.",
+"o": [
+"He has been working here since five years.",
+"He is working here for five years.",
+"He works here since five years.",
+"He has been working here for five years."
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "Choose the synonym of 'ABANDON'.",
+"o": [
+"Adopt",
+"Desert",
+"Keep",
+"Cherish"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Choose the synonym of 'CANDID'.",
+"o": [
+"Secretive",
+"Rude",
+"Shy",
+"Frank"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "Choose the synonym of 'DILIGENT'.",
+"o": [
+"Clever",
+"Hardworking",
+"Careless",
+"Lazy"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Choose the synonym of 'OBSOLETE'.",
+"o": [
+"Outdated",
+"Useful",
+"Modern",
+"Rare"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Choose the antonym of 'ANCIENT'.",
+"o": [
+"Old",
+"Antique",
+"Modern",
+"Aged"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Choose the antonym of 'GENEROUS'.",
+"o": [
+"Noble",
+"Liberal",
+"Kind",
+"Miserly"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "Choose the antonym of 'TRANSPARENT'.",
+"o": [
+"Visible",
+"Opaque",
+"Bright",
+"Clear"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Choose the antonym of 'HUMBLE'.",
+"o": [
+"Polite",
+"Modest",
+"Arrogant",
+"Simple"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "One word for 'a person who cannot read or write':",
+"o": [
+"Ignorant",
+"Illiterate",
+"Innocent",
+"Infant"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "One word for 'a speech made without preparation':",
+"o": [
+"Monologue",
+"Dialogue",
+"Soliloquy",
+"Extempore"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "One word for 'one who loves mankind':",
+"o": [
+"Philanthropist",
+"Patriot",
+"Misanthrope",
+"Optimist"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "One word for 'that which cannot be seen':",
+"o": [
+"Inaudible",
+"Illegible",
+"Incredible",
+"Invisible"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "Meaning of the idiom 'A piece of cake':",
+"o": [
+"Very easy",
+"A sweet dish",
+"A small part",
+"Very costly"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Meaning of the idiom 'To burn the midnight oil':",
+"o": [
+"To work late into the night",
+"To sleep early",
+"To set fire",
+"To waste oil"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Meaning of the idiom 'To let the cat out of the bag':",
+"o": [
+"To reveal a secret",
+"To escape",
+"To set an animal free",
+"To make a mistake"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Meaning of the idiom 'Once in a blue moon':",
+"o": [
+"Every night",
+"Very rarely",
+"Very often",
+"At midnight"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Choose the correctly spelt word.",
+"o": [
+"Acommodation",
+"Accomodation",
+"Accommadation",
+"Accommodation"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "Choose the correctly spelt word.",
+"o": [
+"Necessary",
+"Neccesary",
+"Necesary",
+"Neccessary"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Choose the correctly spelt word.",
+"o": [
+"Commitete",
+"Commitee",
+"Comittee",
+"Committee"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "The plural of 'criterion' is:",
+"o": [
+"criteria",
+"criterions",
+"criterium",
+"criterias"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "The plural of 'mother-in-law' is:",
+"o": [
+"mother-ins-law",
+"mothers-in-laws",
+"mothers-in-law",
+"mother-in-laws"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Which of these is a collective noun?",
+"o": [
+"Gold",
+"Flock",
+"Honesty",
+"Delhi"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Bread and butter ____ my favourite breakfast.'",
+"o": [
+"are",
+"were",
+"have",
+"is"
+],
+"a": "D",
+"e": "Two nouns expressing one idea take a singular verb."
+},
+{
+"q": "Which sentence is in the future perfect tense?",
+"o": [
+"She finishes the work by noon.",
+"She will have finished the work by noon.",
+"She will be finishing the work at noon.",
+"She will finish the work by noon."
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Choose the correct question tag: I am right, ____?",
+"o": [
+"aren't I",
+"am not I",
+"don't I",
+"isn't it"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'The sun rises in the east' is an example of:",
+"o": [
+"Simple present for universal truth",
+"Present perfect",
+"Past simple",
+"Present continuous"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Which is a complex sentence?",
+"o": [
+"I know that he is honest.",
+"Be honest.",
+"He is honest and hardworking.",
+"He is honest."
+],
+"a": "A",
+"e": "Contains a subordinate clause."
+},
+{
+"q": "Identify the type of sentence: 'What a beautiful day it is!'",
+"o": [
+"Imperative",
+"Exclamatory",
+"Interrogative",
+"Assertive"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Choose the gerund in: 'Swimming is good exercise.'",
+"o": [
+"exercise",
+"good",
+"Swimming",
+"is"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Which word is an infinitive in: 'I want to learn English.'",
+"o": [
+"to learn",
+"English",
+"I",
+"want"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Change into negative without changing meaning: 'He is always late.'",
+"o": [
+"He is not late.",
+"He is never in time.",
+"He is never late.",
+"He is not always late."
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Choose the correct reported question: He asked me, \"Where do you live?\"",
+"o": [
+"He asked me where I lived.",
+"He asked me that where I lived.",
+"He asked me where do I live.",
+"He asked me where did I live."
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Who wrote 'Paradise Lost'?",
+"o": [
+"John Keats",
+"William Shakespeare",
+"John Milton",
+"William Wordsworth"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Ode to a Nightingale' was written by:",
+"o": [
+"Lord Byron",
+"S. T. Coleridge",
+"John Keats",
+"P. B. Shelley"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Who is known as the 'Father of English Poetry'?",
+"o": [
+"Edmund Spenser",
+"William Shakespeare",
+"Geoffrey Chaucer",
+"John Milton"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'The Rime of the Ancient Mariner' is a poem by:",
+"o": [
+"Alfred Tennyson",
+"S. T. Coleridge",
+"William Wordsworth",
+"John Keats"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Lyrical Ballads' (1798) was jointly published by Wordsworth and:",
+"o": [
+"Coleridge",
+"Keats",
+"Shelley",
+"Byron"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Who wrote the novel 'Pride and Prejudice'?",
+"o": [
+"Charlotte Brontë",
+"Virginia Woolf",
+"George Eliot",
+"Jane Austen"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Hamlet' is a play by:",
+"o": [
+"John Webster",
+"Christopher Marlowe",
+"Ben Jonson",
+"William Shakespeare"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Gitanjali' won the Nobel Prize for Rabindranath Tagore in the year:",
+"o": [
+"1913",
+"1905",
+"1930",
+"1921"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Who wrote 'The Guide'?",
+"o": [
+"Ruskin Bond",
+"R. K. Narayan",
+"Raja Rao",
+"Mulk Raj Anand"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Untouchable' is a novel by:",
+"o": [
+"Raja Rao",
+"Kamala Das",
+"Mulk Raj Anand",
+"R. K. Narayan"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'The Waste Land' was written by:",
+"o": [
+"W. B. Yeats",
+"T. S. Eliot",
+"Ezra Pound",
+"W. H. Auden"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Which poet is called 'The Nightingale of India'?",
+"o": [
+"Kamala Das",
+"Sarojini Naidu",
+"Toru Dutt",
+"Mahadevi Verma"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "A poem of fourteen lines is called a:",
+"o": [
+"Sonnet",
+"Elegy",
+"Ballad",
+"Ode"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "A poem mourning the death of someone is called:",
+"o": [
+"Epic",
+"Ode",
+"Elegy",
+"Lyric"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Her cheeks were red roses' contains which figure of speech?",
+"o": [
+"Personification",
+"Hyperbole",
+"Simile",
+"Metaphor"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'The wind whispered through the trees' is an example of:",
+"o": [
+"Irony",
+"Simile",
+"Alliteration",
+"Personification"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'As brave as a lion' is an example of:",
+"o": [
+"Hyperbole",
+"Metaphor",
+"Simile",
+"Oxymoron"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Sweet sorrow' is an example of:",
+"o": [
+"Pun",
+"Oxymoron",
+"Alliteration",
+"Simile"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Peter Piper picked a peck of pickled peppers' illustrates:",
+"o": [
+"Alliteration",
+"Assonance",
+"Metaphor",
+"Onomatopoeia"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "How many vowel sounds (monophthongs and diphthongs) are there in standard British English (RP)?",
+"o": [
+"26",
+"24",
+"20",
+"12"
+],
+"a": "C",
+"e": "12 pure vowels + 8 diphthongs."
+},
+{
+"q": "The word 'photograph' has stress on which syllable?",
+"o": [
+"First",
+"Third",
+"No stress",
+"Second"
+],
+"a": "A",
+"e": "PHO-to-graph."
+},
+{
+"q": "Which method of teaching English uses the mother tongue for translation?",
+"o": [
+"Communicative Approach",
+"Audio-Lingual Method",
+"Direct Method",
+"Grammar-Translation Method"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "The Direct Method of teaching English stresses:",
+"o": [
+"Translation into the mother tongue",
+"Reading literature only",
+"Teaching through the target language without translation",
+"Memorising grammar rules"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "LSRW in language teaching stands for:",
+"o": [
+"Listening, Speaking, Reading, Writing",
+"Learning, Speaking, Reading, Writing",
+"Listening, Spelling, Reading, Writing",
+"Language, Speech, Reading, Writing"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Which skill is generally acquired first by a child?",
+"o": [
+"Writing",
+"Reading",
+"Speaking",
+"Listening"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Reading for the main idea quickly' is called:",
+"o": [
+"Scanning",
+"Loud reading",
+"Intensive reading",
+"Skimming"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Reading quickly to find a specific piece of information' is called:",
+"o": [
+"Skimming",
+"Scanning",
+"Extensive reading",
+"Silent reading"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "The 'Communicative Approach' focuses mainly on:",
+"o": [
+"Translation",
+"Rote memorisation",
+"Ability to use language in real situations",
+"Correct grammar rules only"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Which is a productive skill?",
+"o": [
+"Viewing",
+"Writing",
+"Reading",
+"Listening"
+],
+"a": "B",
+"e": "Speaking and writing are productive skills."
+},
+{
+"q": "Choose the correct order to form a sentence: (P) is the / (Q) honesty / (R) best / (S) policy",
+"o": [
+"QRPS",
+"SPQR",
+"PQRS",
+"QPRS"
+],
+"a": "D",
+"e": "Honesty is the best policy."
+},
+{
+"q": "Choose the word that is NOT a pronoun.",
+"o": [
+"Quickly",
+"Those",
+"Himself",
+"Whom"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Choose the correctly punctuated sentence.",
+"o": [
+"\"Where are you going.\" she asked?",
+"Where are you going? she asked.",
+"\"Where are you going?\" she asked.",
+"\"Where are you going\" she asked?"
+],
+"a": "C",
+"e": ""
+}
+]
