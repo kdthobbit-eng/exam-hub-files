@@ -1,0 +1,1622 @@
+[
+{
+"q": "हड़प्पा सभ्यता की खोज किस वर्ष हुई?",
+"o": [
+"1921",
+"1922",
+"1931",
+"1911"
+],
+"a": "A",
+"e": "दयाराम साहनी द्वारा।",
+"qe": "In which year was the Harappan civilisation discovered?",
+"oe": [
+"1921",
+"1922",
+"1931",
+"1911"
+]
+},
+{
+"q": "मोहनजोदड़ो का 'विशाल स्नानागार' किस वर्तमान देश में है?",
+"o": [
+"अफ़गानिस्तान",
+"बांग्लादेश",
+"पाकिस्तान",
+"भारत"
+],
+"a": "C",
+"e": "",
+"qe": "The Great Bath of Mohenjo-daro is in present-day",
+"oe": [
+"Afghanistan",
+"Bangladesh",
+"Pakistan",
+"India"
+]
+},
+{
+"q": "ऋग्वेद में कितने मंडल हैं?",
+"o": [
+"12",
+"10",
+"9",
+"8"
+],
+"a": "B",
+"e": "",
+"qe": "How many mandalas does the Rigveda have?",
+"oe": [
+"12",
+"10",
+"9",
+"8"
+]
+},
+{
+"q": "महावीर स्वामी जैन धर्म के कौन-से तीर्थंकर थे?",
+"o": [
+"24वें",
+"1वें",
+"22वें",
+"23वें"
+],
+"a": "A",
+"e": "",
+"qe": "Mahavira was which Tirthankara of Jainism?",
+"oe": [
+"24th",
+"1st",
+"22nd",
+"23rd"
+]
+},
+{
+"q": "बौद्ध धर्म के 'त्रिरत्न' में कौन शामिल नहीं है?",
+"o": [
+"वेद",
+"संघ",
+"धम्म",
+"बुद्ध"
+],
+"a": "A",
+"e": "",
+"qe": "Which is NOT part of the 'Triratna' of Buddhism?",
+"oe": [
+"Veda",
+"Sangha",
+"Dhamma",
+"Buddha"
+]
+},
+{
+"q": "16 महाजनपदों में सबसे शक्तिशाली कौन-सा बना?",
+"o": [
+"कोसल",
+"मगध",
+"वत्स",
+"अवंति"
+],
+"a": "B",
+"e": "",
+"qe": "Which of the 16 Mahajanapadas became the most powerful?",
+"oe": [
+"Kosala",
+"Magadha",
+"Vatsa",
+"Avanti"
+]
+},
+{
+"q": "मौर्य वंश का संस्थापक कौन था?",
+"o": [
+"अशोक",
+"बिंदुसार",
+"बृहद्रथ",
+"चंद्रगुप्त मौर्य"
+],
+"a": "D",
+"e": "",
+"qe": "Who founded the Maurya dynasty?",
+"oe": [
+"Ashoka",
+"Bindusara",
+"Brihadratha",
+"Chandragupta Maurya"
+]
+},
+{
+"q": "'अर्थशास्त्र' के लेखक कौन हैं?",
+"o": [
+"कौटिल्य",
+"पाणिनि",
+"मेगस्थनीज़",
+"कालिदास"
+],
+"a": "A",
+"e": "",
+"qe": "Who wrote the 'Arthashastra'?",
+"oe": [
+"Kautilya",
+"Panini",
+"Megasthenes",
+"Kalidasa"
+]
+},
+{
+"q": "'इंडिका' किसने लिखी?",
+"o": [
+"अल-बरूनी",
+"ह्वेनसांग",
+"फ़ाह्यान",
+"मेगस्थनीज़"
+],
+"a": "D",
+"e": "",
+"qe": "Who wrote 'Indica'?",
+"oe": [
+"Al-Biruni",
+"Hiuen Tsang",
+"Fa-Hien",
+"Megasthenes"
+]
+},
+{
+"q": "अशोक ने किस युद्ध के बाद बौद्ध धर्म अपनाया?",
+"o": [
+"हाइडेस्पीज़ युद्ध",
+"कलिंग युद्ध",
+"पानीपत युद्ध",
+"तराइन युद्ध"
+],
+"a": "B",
+"e": "",
+"qe": "After which war did Ashoka adopt Buddhism?",
+"oe": [
+"Battle of Hydaspes",
+"Kalinga War",
+"Battle of Panipat",
+"Battle of Tarain"
+]
+},
+{
+"q": "गुप्त काल को किस नाम से जाना जाता है?",
+"o": [
+"लौह युग",
+"अंधकार युग",
+"वैदिक युग",
+"भारत का स्वर्ण युग"
+],
+"a": "D",
+"e": "",
+"qe": "The Gupta period is known as",
+"oe": [
+"Iron Age",
+"Dark Age",
+"Vedic Age",
+"Golden Age of India"
+]
+},
+{
+"q": "चीनी यात्री ह्वेनसांग किस शासक के समय भारत आया?",
+"o": [
+"हर्षवर्धन",
+"चंद्रगुप्त द्वितीय",
+"कनिष्क",
+"अशोक"
+],
+"a": "A",
+"e": "",
+"qe": "Chinese traveller Hiuen Tsang visited India during the reign of",
+"oe": [
+"Harshavardhana",
+"Chandragupta II",
+"Kanishka",
+"Ashoka"
+]
+},
+{
+"q": "तराइन का दूसरा युद्ध (1192) किनके बीच हुआ?",
+"o": [
+"महमूद गज़नवी और जयपाल",
+"अकबर और हेमू",
+"मुहम्मद गौरी और पृथ्वीराज चौहान",
+"बाबर और राणा सांगा"
+],
+"a": "C",
+"e": "",
+"qe": "The Second Battle of Tarain (1192) was fought between",
+"oe": [
+"Mahmud of Ghazni and Jayapala",
+"Akbar and Hemu",
+"Muhammad Ghori and Prithviraj Chauhan",
+"Babur and Rana Sanga"
+]
+},
+{
+"q": "दिल्ली सल्तनत का संस्थापक कौन था?",
+"o": [
+"इल्तुतमिश",
+"अलाउद्दीन खिलजी",
+"बलबन",
+"कुतुबुद्दीन ऐबक"
+],
+"a": "D",
+"e": "",
+"qe": "Who founded the Delhi Sultanate?",
+"oe": [
+"Iltutmish",
+"Alauddin Khalji",
+"Balban",
+"Qutbuddin Aibak"
+]
+},
+{
+"q": "बाज़ार नियंत्रण नीति किस सुल्तान ने लागू की?",
+"o": [
+"फ़िरोज़ शाह तुगलक",
+"अलाउद्दीन खिलजी",
+"बलबन",
+"मुहम्मद बिन तुगलक"
+],
+"a": "B",
+"e": "",
+"qe": "Which Sultan introduced market control reforms?",
+"oe": [
+"Firoz Shah Tughlaq",
+"Alauddin Khalji",
+"Balban",
+"Muhammad bin Tughlaq"
+]
+},
+{
+"q": "राजधानी दिल्ली से दौलताबाद किसने स्थानांतरित की?",
+"o": [
+"इल्तुतमिश",
+"सिकंदर लोदी",
+"अलाउद्दीन खिलजी",
+"मुहम्मद बिन तुगलक"
+],
+"a": "D",
+"e": "",
+"qe": "Who shifted the capital from Delhi to Daulatabad?",
+"oe": [
+"Iltutmish",
+"Sikandar Lodi",
+"Alauddin Khalji",
+"Muhammad bin Tughlaq"
+]
+},
+{
+"q": "आगरा शहर की स्थापना किसने की?",
+"o": [
+"बाबर",
+"सिकंदर लोदी",
+"इब्राहिम लोदी",
+"अकबर"
+],
+"a": "B",
+"e": "",
+"qe": "The city of Agra was founded by",
+"oe": [
+"Babur",
+"Sikandar Lodi",
+"Ibrahim Lodi",
+"Akbar"
+]
+},
+{
+"q": "अकबर ने 'दीन-ए-इलाही' की स्थापना कब की?",
+"o": [
+"1556",
+"1576",
+"1582",
+"1605"
+],
+"a": "C",
+"e": "",
+"qe": "When did Akbar found 'Din-i-Ilahi'?",
+"oe": [
+"1556",
+"1576",
+"1582",
+"1605"
+]
+},
+{
+"q": "हल्दीघाटी का युद्ध (1576) किनके बीच हुआ?",
+"o": [
+"शेरशाह और हुमायूँ",
+"औरंगज़ेब और शिवाजी",
+"अकबर और महाराणा प्रताप",
+"बाबर और राणा सांगा"
+],
+"a": "C",
+"e": "",
+"qe": "The Battle of Haldighati (1576) was fought between",
+"oe": [
+"Sher Shah and Humayun",
+"Aurangzeb and Shivaji",
+"Akbar and Maharana Pratap",
+"Babur and Rana Sanga"
+]
+},
+{
+"q": "'ग्रैंड ट्रंक रोड' का निर्माण/पुनर्निर्माण किसने करवाया?",
+"o": [
+"अशोक",
+"अकबर",
+"शेरशाह सूरी",
+"शाहजहाँ"
+],
+"a": "C",
+"e": "",
+"qe": "Who built/rebuilt the 'Grand Trunk Road'?",
+"oe": [
+"Ashoka",
+"Akbar",
+"Sher Shah Suri",
+"Shah Jahan"
+]
+},
+{
+"q": "शिवाजी का राज्याभिषेक कहाँ हुआ?",
+"o": [
+"सतारा",
+"पुणे",
+"पुरंदर",
+"रायगढ़"
+],
+"a": "D",
+"e": "",
+"qe": "Where was Shivaji crowned?",
+"oe": [
+"Satara",
+"Pune",
+"Purandar",
+"Raigad"
+]
+},
+{
+"q": "प्लासी का युद्ध कब हुआ?",
+"o": [
+"1761",
+"1857",
+"1764",
+"1757"
+],
+"a": "D",
+"e": "",
+"qe": "When was the Battle of Plassey fought?",
+"oe": [
+"1761",
+"1857",
+"1764",
+"1757"
+]
+},
+{
+"q": "बक्सर के युद्ध (1764) के बाद अंग्रेज़ों को बंगाल की दीवानी किस संधि से मिली?",
+"o": [
+"इलाहाबाद की संधि (1765)",
+"सालबाई की संधि",
+"बेसिन की संधि",
+"मद्रास की संधि"
+],
+"a": "A",
+"e": "",
+"qe": "After Buxar (1764), the British got the Diwani of Bengal by the",
+"oe": [
+"Treaty of Allahabad (1765)",
+"Treaty of Salbai",
+"Treaty of Bassein",
+"Treaty of Madras"
+]
+},
+{
+"q": "'व्यपगत का सिद्धांत' (Doctrine of Lapse) किसने लागू किया?",
+"o": [
+"लॉर्ड डलहौज़ी",
+"लॉर्ड रिपन",
+"लॉर्ड वेलेज़ली",
+"लॉर्ड कर्ज़न"
+],
+"a": "A",
+"e": "",
+"qe": "The Doctrine of Lapse was introduced by",
+"oe": [
+"Lord Dalhousie",
+"Lord Ripon",
+"Lord Wellesley",
+"Lord Curzon"
+]
+},
+{
+"q": "'सहायक संधि' प्रणाली किसने शुरू की?",
+"o": [
+"लॉर्ड डलहौज़ी",
+"लॉर्ड वेलेज़ली",
+"वॉरेन हेस्टिंग्स",
+"कॉर्नवालिस"
+],
+"a": "B",
+"e": "",
+"qe": "The Subsidiary Alliance system was started by",
+"oe": [
+"Lord Dalhousie",
+"Lord Wellesley",
+"Warren Hastings",
+"Cornwallis"
+]
+},
+{
+"q": "1857 के विद्रोह की शुरुआत कहाँ से हुई?",
+"o": [
+"लखनऊ",
+"दिल्ली",
+"कानपुर",
+"मेरठ"
+],
+"a": "D",
+"e": "",
+"qe": "Where did the Revolt of 1857 begin?",
+"oe": [
+"Lucknow",
+"Delhi",
+"Kanpur",
+"Meerut"
+]
+},
+{
+"q": "भारतीय राष्ट्रीय कांग्रेस की स्थापना (1885) किसने की?",
+"o": [
+"ए. ओ. ह्यूम",
+"सुरेंद्रनाथ बनर्जी",
+"दादाभाई नौरोजी",
+"बाल गंगाधर तिलक"
+],
+"a": "A",
+"e": "",
+"qe": "The Indian National Congress (1885) was founded by",
+"oe": [
+"A. O. Hume",
+"Surendranath Banerjee",
+"Dadabhai Naoroji",
+"Bal Gangadhar Tilak"
+]
+},
+{
+"q": "बंगाल विभाजन किस वर्ष हुआ?",
+"o": [
+"1911",
+"1906",
+"1905",
+"1919"
+],
+"a": "C",
+"e": "",
+"qe": "In which year was Bengal partitioned?",
+"oe": [
+"1911",
+"1906",
+"1905",
+"1919"
+]
+},
+{
+"q": "जलियाँवाला बाग हत्याकांड कब हुआ?",
+"o": [
+"26 जनवरी 1930",
+"9 अगस्त 1942",
+"13 अप्रैल 1920",
+"13 अप्रैल 1919"
+],
+"a": "D",
+"e": "",
+"qe": "When did the Jallianwala Bagh massacre take place?",
+"oe": [
+"26 January 1930",
+"9 August 1942",
+"13 April 1920",
+"13 April 1919"
+]
+},
+{
+"q": "दांडी यात्रा (नमक सत्याग्रह) कब शुरू हुई?",
+"o": [
+"12 मार्च 1930",
+"8 अगस्त 1942",
+"6 अप्रैल 1930",
+"1 अगस्त 1920"
+],
+"a": "A",
+"e": "",
+"qe": "When did the Dandi March (Salt Satyagraha) begin?",
+"oe": [
+"12 March 1930",
+"8 August 1942",
+"6 April 1930",
+"1 August 1920"
+]
+},
+{
+"q": "'करो या मरो' का नारा किस आंदोलन से जुड़ा है?",
+"o": [
+"असहयोग आंदोलन",
+"सविनय अवज्ञा आंदोलन",
+"भारत छोड़ो आंदोलन",
+"स्वदेशी आंदोलन"
+],
+"a": "C",
+"e": "",
+"qe": "The slogan 'Do or Die' is linked to the",
+"oe": [
+"Non-Cooperation Movement",
+"Civil Disobedience Movement",
+"Quit India Movement",
+"Swadeshi Movement"
+]
+},
+{
+"q": "'आज़ाद हिंद फ़ौज' का नेतृत्व किसने किया?",
+"o": [
+"रास बिहारी बोस",
+"चंद्रशेखर आज़ाद",
+"भगत सिंह",
+"सुभाष चंद्र बोस"
+],
+"a": "D",
+"e": "स्थापना रास बिहारी बोस से जुड़ी, नेतृत्व सुभाष चंद्र बोस ने किया।",
+"qe": "Who led the Azad Hind Fauj?",
+"oe": [
+"Rash Behari Bose",
+"Chandrashekhar Azad",
+"Bhagat Singh",
+"Subhas Chandra Bose"
+]
+},
+{
+"q": "फ़्रांसीसी क्रांति किस वर्ष शुरू हुई?",
+"o": [
+"1815",
+"1789",
+"1848",
+"1776"
+],
+"a": "B",
+"e": "",
+"qe": "In which year did the French Revolution begin?",
+"oe": [
+"1815",
+"1789",
+"1848",
+"1776"
+]
+},
+{
+"q": "'स्वतंत्रता, समानता, बंधुत्व' का नारा किस क्रांति से जुड़ा है?",
+"o": [
+"फ़्रांसीसी क्रांति",
+"अमेरिकी क्रांति",
+"रूसी क्रांति",
+"औद्योगिक क्रांति"
+],
+"a": "A",
+"e": "",
+"qe": "'Liberty, Equality, Fraternity' is linked to the",
+"oe": [
+"French Revolution",
+"American Revolution",
+"Russian Revolution",
+"Industrial Revolution"
+]
+},
+{
+"q": "रूसी क्रांति (बोल्शेविक) किस वर्ष हुई?",
+"o": [
+"1905",
+"1917",
+"1914",
+"1922"
+],
+"a": "B",
+"e": "",
+"qe": "In which year did the Russian (Bolshevik) Revolution occur?",
+"oe": [
+"1905",
+"1917",
+"1914",
+"1922"
+]
+},
+{
+"q": "औद्योगिक क्रांति सबसे पहले किस देश में हुई?",
+"o": [
+"फ़्रांस",
+"जर्मनी",
+"अमेरिका",
+"ब्रिटेन"
+],
+"a": "D",
+"e": "",
+"qe": "The Industrial Revolution first began in",
+"oe": [
+"France",
+"Germany",
+"USA",
+"Britain"
+]
+},
+{
+"q": "पृथ्वी की सबसे बाहरी परत कहलाती है—",
+"o": [
+"आंतरिक क्रोड",
+"मैंटल",
+"भूपर्पटी",
+"बाह्य क्रोड"
+],
+"a": "C",
+"e": "",
+"qe": "The outermost layer of the Earth is the",
+"oe": [
+"Inner core",
+"Mantle",
+"Crust",
+"Outer core"
+]
+},
+{
+"q": "कर्क रेखा भारत के कितने राज्यों से गुज़रती है?",
+"o": [
+"8",
+"9",
+"7",
+"6"
+],
+"a": "A",
+"e": "",
+"qe": "Through how many Indian states does the Tropic of Cancer pass?",
+"oe": [
+"8",
+"9",
+"7",
+"6"
+]
+},
+{
+"q": "भारत का सबसे दक्षिणी बिंदु है—",
+"o": [
+"इंदिरा पॉइंट",
+"कन्याकुमारी",
+"रामेश्वरम",
+"कावारत्ती"
+],
+"a": "A",
+"e": "",
+"qe": "The southernmost point of India is",
+"oe": [
+"Indira Point",
+"Kanyakumari",
+"Rameswaram",
+"Kavaratti"
+]
+},
+{
+"q": "भारत की सबसे लंबी नदी (देश के भीतर) है—",
+"o": [
+"ब्रह्मपुत्र",
+"यमुना",
+"गंगा",
+"गोदावरी"
+],
+"a": "C",
+"e": "",
+"qe": "The longest river within India is the",
+"oe": [
+"Brahmaputra",
+"Yamuna",
+"Ganga",
+"Godavari"
+]
+},
+{
+"q": "'दक्षिण गंगा' किस नदी को कहते हैं?",
+"o": [
+"महानदी",
+"गोदावरी",
+"कावेरी",
+"कृष्णा"
+],
+"a": "B",
+"e": "",
+"qe": "Which river is called the 'Dakshin Ganga'?",
+"oe": [
+"Mahanadi",
+"Godavari",
+"Kaveri",
+"Krishna"
+]
+},
+{
+"q": "भारत में सर्वाधिक वर्षा वाला स्थान है—",
+"o": [
+"चेरापूँजी",
+"मासिनराम",
+"मुंबई",
+"शिलांग"
+],
+"a": "B",
+"e": "",
+"qe": "The place with the highest rainfall in India is",
+"oe": [
+"Cherrapunji",
+"Mawsynram",
+"Mumbai",
+"Shillong"
+]
+},
+{
+"q": "काली मिट्टी किस फ़सल के लिए सर्वाधिक उपयुक्त है?",
+"o": [
+"चाय",
+"चावल",
+"कपास",
+"गेहूँ"
+],
+"a": "C",
+"e": "",
+"qe": "Black soil is most suitable for",
+"oe": [
+"Tea",
+"Rice",
+"Cotton",
+"Wheat"
+]
+},
+{
+"q": "रबी की फ़सल है—",
+"o": [
+"कपास",
+"मक्का",
+"गेहूँ",
+"धान"
+],
+"a": "C",
+"e": "",
+"qe": "Which is a Rabi crop?",
+"oe": [
+"Cotton",
+"Maize",
+"Wheat",
+"Paddy"
+]
+},
+{
+"q": "भाखड़ा नांगल बाँध किस नदी पर है?",
+"o": [
+"चिनाब",
+"सतलुज",
+"ब्यास",
+"रावी"
+],
+"a": "B",
+"e": "",
+"qe": "The Bhakra Nangal Dam is on the",
+"oe": [
+"Chenab",
+"Sutlej",
+"Beas",
+"Ravi"
+]
+},
+{
+"q": "भारत का सबसे बड़ा राज्य (क्षेत्रफल में) है—",
+"o": [
+"मध्य प्रदेश",
+"उत्तर प्रदेश",
+"राजस्थान",
+"महाराष्ट्र"
+],
+"a": "C",
+"e": "",
+"qe": "The largest Indian state by area is",
+"oe": [
+"Madhya Pradesh",
+"Uttar Pradesh",
+"Rajasthan",
+"Maharashtra"
+]
+},
+{
+"q": "भारत की जनगणना कितने वर्षों के अंतराल पर होती है?",
+"o": [
+"10",
+"12",
+"15",
+"5"
+],
+"a": "A",
+"e": "",
+"qe": "India's census is held every how many years?",
+"oe": [
+"10",
+"12",
+"15",
+"5"
+]
+},
+{
+"q": "विश्व का सबसे बड़ा महासागर है—",
+"o": [
+"आर्कटिक महासागर",
+"प्रशांत महासागर",
+"अटलांटिक महासागर",
+"हिंद महासागर"
+],
+"a": "B",
+"e": "",
+"qe": "The largest ocean in the world is the",
+"oe": [
+"Arctic Ocean",
+"Pacific Ocean",
+"Atlantic Ocean",
+"Indian Ocean"
+]
+},
+{
+"q": "विश्व की सबसे लंबी नदी है—",
+"o": [
+"अमेज़न",
+"यांग्त्सी",
+"मिसिसिपी",
+"नील"
+],
+"a": "D",
+"e": "",
+"qe": "The longest river in the world is the",
+"oe": [
+"Amazon",
+"Yangtze",
+"Mississippi",
+"Nile"
+]
+},
+{
+"q": "विश्व का सबसे बड़ा गर्म मरुस्थल है—",
+"o": [
+"गोबी",
+"कालाहारी",
+"सहारा",
+"थार"
+],
+"a": "C",
+"e": "",
+"qe": "The largest hot desert in the world is the",
+"oe": [
+"Gobi",
+"Kalahari",
+"Sahara",
+"Thar"
+]
+},
+{
+"q": "वायुमंडल की किस परत में ओज़ोन परत पाई जाती है?",
+"o": [
+"क्षोभ मंडल",
+"आयन मंडल",
+"समताप मंडल",
+"मध्य मंडल"
+],
+"a": "C",
+"e": "",
+"qe": "In which layer of the atmosphere is the ozone layer found?",
+"oe": [
+"Troposphere",
+"Ionosphere",
+"Stratosphere",
+"Mesosphere"
+]
+},
+{
+"q": "मौसम संबंधी सभी घटनाएँ वायुमंडल की किस परत में होती हैं?",
+"o": [
+"बाह्य मंडल",
+"आयन मंडल",
+"समताप मंडल",
+"क्षोभ मंडल"
+],
+"a": "D",
+"e": "",
+"qe": "All weather phenomena occur in the",
+"oe": [
+"Exosphere",
+"Ionosphere",
+"Stratosphere",
+"Troposphere"
+]
+},
+{
+"q": "ज्वार-भाटा मुख्यतः किसके कारण आता है?",
+"o": [
+"भूकंप",
+"पृथ्वी के घूर्णन",
+"चंद्रमा के गुरुत्वाकर्षण",
+"पवनों"
+],
+"a": "C",
+"e": "",
+"qe": "Tides are mainly caused by the",
+"oe": [
+"Earthquakes",
+"Earth's rotation",
+"Moon's gravity",
+"Winds"
+]
+},
+{
+"q": "सूर्य से सबसे निकट ग्रह है—",
+"o": [
+"पृथ्वी",
+"बुध",
+"शुक्र",
+"मंगल"
+],
+"a": "B",
+"e": "",
+"qe": "The planet nearest to the Sun is",
+"oe": [
+"Earth",
+"Mercury",
+"Venus",
+"Mars"
+]
+},
+{
+"q": "'लाल ग्रह' किसे कहा जाता है?",
+"o": [
+"मंगल",
+"शनि",
+"शुक्र",
+"बृहस्पति"
+],
+"a": "A",
+"e": "",
+"qe": "Which planet is called the 'Red Planet'?",
+"oe": [
+"Mars",
+"Saturn",
+"Venus",
+"Jupiter"
+]
+},
+{
+"q": "भारत का मानक समय ग्रीनविच से कितना आगे है?",
+"o": [
+"5 घंटे 30 मिनट",
+"6 घंटे",
+"5 घंटे",
+"4 घंटे 30 मिनट"
+],
+"a": "A",
+"e": "",
+"qe": "Indian Standard Time is ahead of Greenwich by",
+"oe": [
+"5 h 30 min",
+"6 h",
+"5 h",
+"4 h 30 min"
+]
+},
+{
+"q": "पृथ्वी अपने अक्ष पर कितने अंश झुकी है?",
+"o": [
+"23½°",
+"90°",
+"66½°",
+"45°"
+],
+"a": "A",
+"e": "",
+"qe": "The Earth's axis is tilted by",
+"oe": [
+"23½°",
+"90°",
+"66½°",
+"45°"
+]
+},
+{
+"q": "भारत में सबसे अधिक कोयला किस राज्य में पाया जाता है?",
+"o": [
+"पश्चिम बंगाल",
+"ओडिशा",
+"छत्तीसगढ़",
+"झारखंड"
+],
+"a": "D",
+"e": "",
+"qe": "Which state has the largest coal reserves in India?",
+"oe": [
+"West Bengal",
+"Odisha",
+"Chhattisgarh",
+"Jharkhand"
+]
+},
+{
+"q": "'सुंदरबन डेल्टा' किस नदी तंत्र से बना है?",
+"o": [
+"कृष्णा",
+"गोदावरी",
+"महानदी",
+"गंगा-ब्रह्मपुत्र"
+],
+"a": "D",
+"e": "",
+"qe": "The Sundarbans delta is formed by the",
+"oe": [
+"Krishna",
+"Godavari",
+"Mahanadi",
+"Ganga-Brahmaputra"
+]
+},
+{
+"q": "भारतीय संविधान कब लागू हुआ?",
+"o": [
+"15 अगस्त 1947",
+"26 जनवरी 1949",
+"26 जनवरी 1950",
+"26 नवंबर 1949"
+],
+"a": "C",
+"e": "",
+"qe": "When did the Constitution of India come into force?",
+"oe": [
+"15 August 1947",
+"26 January 1949",
+"26 January 1950",
+"26 November 1949"
+]
+},
+{
+"q": "संविधान सभा के स्थायी अध्यक्ष कौन थे?",
+"o": [
+"डॉ. राजेंद्र प्रसाद",
+"डॉ. बी. आर. आंबेडकर",
+"जवाहरलाल नेहरू",
+"सच्चिदानंद सिन्हा"
+],
+"a": "A",
+"e": "",
+"qe": "The permanent President of the Constituent Assembly was",
+"oe": [
+"Dr. Rajendra Prasad",
+"Dr. B. R. Ambedkar",
+"Jawaharlal Nehru",
+"Sachchidananda Sinha"
+]
+},
+{
+"q": "संविधान की प्रारूप समिति के अध्यक्ष थे—",
+"o": [
+"सरदार पटेल",
+"डॉ. बी. आर. आंबेडकर",
+"डॉ. राजेंद्र प्रसाद",
+"के. एम. मुंशी"
+],
+"a": "B",
+"e": "",
+"qe": "The Chairman of the Drafting Committee was",
+"oe": [
+"Sardar Patel",
+"Dr. B. R. Ambedkar",
+"Dr. Rajendra Prasad",
+"K. M. Munshi"
+]
+},
+{
+"q": "'संविधान की आत्मा' आंबेडकर ने किस अनुच्छेद को कहा?",
+"o": [
+"अनुच्छेद 14",
+"अनुच्छेद 21",
+"अनुच्छेद 32",
+"अनुच्छेद 19"
+],
+"a": "C",
+"e": "संवैधानिक उपचारों का अधिकार।",
+"qe": "Which Article did Ambedkar call the 'heart and soul' of the Constitution?",
+"oe": [
+"Article 14",
+"Article 21",
+"Article 32",
+"Article 19"
+]
+},
+{
+"q": "'समाजवादी', 'पंथनिरपेक्ष' शब्द प्रस्तावना में किस संशोधन से जोड़े गए?",
+"o": [
+"44वाँ",
+"42वाँ",
+"86वाँ",
+"1वाँ"
+],
+"a": "B",
+"e": "",
+"qe": "'Socialist' and 'Secular' were added to the Preamble by the",
+"oe": [
+"44th Amendment",
+"42nd Amendment",
+"86th Amendment",
+"1st Amendment"
+]
+},
+{
+"q": "मूल संविधान में कितने मौलिक अधिकार थे?",
+"o": [
+"5",
+"7",
+"6",
+"8"
+],
+"a": "B",
+"e": "संपत्ति का अधिकार 44वें संशोधन से हटा।",
+"qe": "How many Fundamental Rights were there in the original Constitution?",
+"oe": [
+"5",
+"7",
+"6",
+"8"
+]
+},
+{
+"q": "राष्ट्रपति का निर्वाचन कौन करता है?",
+"o": [
+"जनता सीधे",
+"राज्यसभा",
+"लोकसभा",
+"निर्वाचक मंडल"
+],
+"a": "D",
+"e": "",
+"qe": "The President of India is elected by an",
+"oe": [
+"Direct public vote",
+"Rajya Sabha",
+"Lok Sabha",
+"Electoral college"
+]
+},
+{
+"q": "लोकसभा के सदस्यों की अधिकतम संख्या (संविधान में) है—",
+"o": [
+"250",
+"552",
+"550",
+"545"
+],
+"a": "B",
+"e": "",
+"qe": "The maximum strength of the Lok Sabha as per the Constitution is",
+"oe": [
+"250",
+"552",
+"550",
+"545"
+]
+},
+{
+"q": "राज्यपाल की नियुक्ति कौन करता है?",
+"o": [
+"मुख्यमंत्री",
+"मुख्य न्यायाधीश",
+"प्रधानमंत्री",
+"राष्ट्रपति"
+],
+"a": "D",
+"e": "",
+"qe": "The Governor of a state is appointed by the",
+"oe": [
+"Chief Minister",
+"Chief Justice",
+"Prime Minister",
+"President"
+]
+},
+{
+"q": "धन विधेयक किस सदन में प्रस्तुत किया जाता है?",
+"o": [
+"केवल लोकसभा",
+"केवल राज्यसभा",
+"दोनों में",
+"विधान परिषद"
+],
+"a": "A",
+"e": "",
+"qe": "A Money Bill can be introduced in",
+"oe": [
+"Lok Sabha only",
+"Rajya Sabha only",
+"Both Houses",
+"Legislative Council"
+]
+},
+{
+"q": "उच्चतम न्यायालय के न्यायाधीश किस आयु तक पद पर रहते हैं?",
+"o": [
+"60 वर्ष",
+"62 वर्ष",
+"65 वर्ष",
+"70 वर्ष"
+],
+"a": "C",
+"e": "",
+"qe": "Supreme Court judges hold office up to the age of",
+"oe": [
+"60 years",
+"62 years",
+"65 years",
+"70 years"
+]
+},
+{
+"q": "मतदान की न्यूनतम आयु 21 से 18 वर्ष किस संशोधन से हुई?",
+"o": [
+"61वाँ",
+"73वाँ",
+"52वाँ",
+"42वाँ"
+],
+"a": "A",
+"e": "",
+"qe": "Voting age was reduced from 21 to 18 by the",
+"oe": [
+"61st Amendment",
+"73rd Amendment",
+"52nd Amendment",
+"42nd Amendment"
+]
+},
+{
+"q": "नगर निकायों (नगरपालिका) को संवैधानिक दर्जा किस संशोधन से मिला?",
+"o": [
+"75वाँ",
+"73वाँ",
+"72वाँ",
+"74वाँ"
+],
+"a": "D",
+"e": "",
+"qe": "Urban local bodies got constitutional status by the",
+"oe": [
+"75th Amendment",
+"73rd Amendment",
+"72nd Amendment",
+"74th Amendment"
+]
+},
+{
+"q": "भारत का निर्वाचन आयोग किस प्रकार की संस्था है?",
+"o": [
+"कार्यकारी",
+"गैर-सरकारी",
+"वैधानिक",
+"संवैधानिक"
+],
+"a": "D",
+"e": "",
+"qe": "The Election Commission of India is a",
+"oe": [
+"Executive body",
+"Non-government body",
+"Statutory body",
+"Constitutional body"
+]
+},
+{
+"q": "'दल-बदल विरोधी कानून' संविधान की किस अनुसूची में है?",
+"o": [
+"बारहवीं",
+"दसवीं",
+"आठवीं",
+"नौवीं"
+],
+"a": "B",
+"e": "",
+"qe": "The anti-defection law is in which Schedule?",
+"oe": [
+"Twelfth",
+"Tenth",
+"Eighth",
+"Ninth"
+]
+},
+{
+"q": "संविधान की आठवीं अनुसूची में कितनी भाषाएँ हैं?",
+"o": [
+"24",
+"18",
+"22",
+"14"
+],
+"a": "C",
+"e": "",
+"qe": "How many languages are listed in the Eighth Schedule?",
+"oe": [
+"24",
+"18",
+"22",
+"14"
+]
+},
+{
+"q": "भारत में पंचवर्षीय योजनाएँ किस वर्ष शुरू हुईं?",
+"o": [
+"1947",
+"1951",
+"1956",
+"1950"
+],
+"a": "B",
+"e": "",
+"qe": "In which year did Five-Year Plans begin in India?",
+"oe": [
+"1947",
+"1951",
+"1956",
+"1950"
+]
+},
+{
+"q": "'हरित क्रांति' का संबंध मुख्यतः किससे है?",
+"o": [
+"दुग्ध उत्पादन",
+"तिलहन",
+"मत्स्य पालन",
+"कृषि उत्पादन"
+],
+"a": "D",
+"e": "",
+"qe": "The Green Revolution is mainly related to",
+"oe": [
+"Milk production",
+"Oilseeds",
+"Fisheries",
+"Agricultural production"
+]
+},
+{
+"q": "'श्वेत क्रांति' के जनक कौन माने जाते हैं?",
+"o": [
+"एम. एस. स्वामीनाथन",
+"सी. सुब्रमण्यम",
+"वर्गीज़ कुरियन",
+"नॉर्मन बोरलॉग"
+],
+"a": "C",
+"e": "",
+"qe": "The father of the White Revolution is",
+"oe": [
+"M. S. Swaminathan",
+"C. Subramaniam",
+"Verghese Kurien",
+"Norman Borlaug"
+]
+},
+{
+"q": "भारतीय रिज़र्व बैंक की स्थापना कब हुई?",
+"o": [
+"1949",
+"1935",
+"1969",
+"1947"
+],
+"a": "B",
+"e": "",
+"qe": "When was the Reserve Bank of India established?",
+"oe": [
+"1949",
+"1935",
+"1969",
+"1947"
+]
+},
+{
+"q": "14 बड़े बैंकों का राष्ट्रीयकरण किस वर्ष हुआ?",
+"o": [
+"1991",
+"1969",
+"1955",
+"1980"
+],
+"a": "B",
+"e": "",
+"qe": "In which year were 14 major banks nationalised?",
+"oe": [
+"1991",
+"1969",
+"1955",
+"1980"
+]
+},
+{
+"q": "भारत में नई आर्थिक नीति (LPG) कब अपनाई गई?",
+"o": [
+"1985",
+"2000",
+"1995",
+"1991"
+],
+"a": "D",
+"e": "",
+"qe": "When was the New Economic Policy (LPG) adopted in India?",
+"oe": [
+"1985",
+"2000",
+"1995",
+"1991"
+]
+},
+{
+"q": "GDP का पूरा नाम है—",
+"o": [
+"सकल घरेलू उत्पाद",
+"सकल राष्ट्रीय उत्पाद",
+"शुद्ध घरेलू उत्पाद",
+"सकल विकास उत्पाद"
+],
+"a": "A",
+"e": "",
+"qe": "GDP stands for",
+"oe": [
+"Gross Domestic Product",
+"Gross National Product",
+"Net Domestic Product",
+"Gross Development Product"
+]
+},
+{
+"q": "मुद्रास्फीति का अर्थ है—",
+"o": [
+"निर्यात में वृद्धि",
+"मुद्रा का अवमूल्यन",
+"कीमतों में गिरावट",
+"कीमतों के सामान्य स्तर में लगातार वृद्धि"
+],
+"a": "D",
+"e": "",
+"qe": "Inflation means",
+"oe": [
+"a rise in exports",
+"devaluation of currency",
+"a fall in prices",
+"a sustained rise in the general price level"
+]
+},
+{
+"q": "भारत की अर्थव्यवस्था किस प्रकार की है?",
+"o": [
+"पूँजीवादी",
+"साम्यवादी",
+"मिश्रित",
+"समाजवादी"
+],
+"a": "C",
+"e": "",
+"qe": "India's economy is a",
+"oe": [
+"Capitalist economy",
+"Communist economy",
+"Mixed economy",
+"Socialist economy"
+]
+},
+{
+"q": "मनरेगा (MGNREGA) में एक परिवार को वर्ष में कितने दिन रोज़गार की गारंटी है?",
+"o": [
+"150 दिन",
+"100 दिन",
+"200 दिन",
+"50 दिन"
+],
+"a": "B",
+"e": "",
+"qe": "MGNREGA guarantees how many days of employment per household per year?",
+"oe": [
+"150 days",
+"100 days",
+"200 days",
+"50 days"
+]
+},
+{
+"q": "उपभोक्ता संरक्षण अधिनियम पहली बार किस वर्ष पारित हुआ?",
+"o": [
+"1991",
+"1976",
+"1986",
+"2019"
+],
+"a": "C",
+"e": "नया अधिनियम 2019 में आया।",
+"qe": "The Consumer Protection Act was first passed in",
+"oe": [
+"1991",
+"1976",
+"1986",
+"2019"
+]
+},
+{
+"q": "सामाजिक विज्ञान शिक्षण में 'स्रोत विधि' का अधिक प्रयोग किस विषय में होता है?",
+"o": [
+"इतिहास",
+"रसायन",
+"भौतिकी",
+"गणित"
+],
+"a": "A",
+"e": "",
+"qe": "The source method in social science teaching is used mostly in",
+"oe": [
+"History",
+"Chemistry",
+"Physics",
+"Mathematics"
+]
+},
+{
+"q": "'गीता रहस्य' पुस्तक किसने लिखी?",
+"o": [
+"बाल गंगाधर तिलक",
+"विवेकानंद",
+"अरविंद घोष",
+"महात्मा गांधी"
+],
+"a": "A",
+"e": "",
+"qe": "Who wrote 'Gita Rahasya'?",
+"oe": [
+"Bal Gangadhar Tilak",
+"Vivekananda",
+"Aurobindo Ghosh",
+"Mahatma Gandhi"
+]
+},
+{
+"q": "भारत में सबसे लंबी तटरेखा वाला राज्य है—",
+"o": [
+"गुजरात",
+"महाराष्ट्र",
+"आंध्र प्रदेश",
+"तमिलनाडु"
+],
+"a": "A",
+"e": "",
+"qe": "The Indian state with the longest coastline is",
+"oe": [
+"Gujarat",
+"Maharashtra",
+"Andhra Pradesh",
+"Tamil Nadu"
+]
+},
+{
+"q": "राज्यसभा में अधिकतम कितने सदस्य हो सकते हैं?",
+"o": [
+"552",
+"250",
+"238",
+"245"
+],
+"a": "B",
+"e": "",
+"qe": "The maximum number of members in the Rajya Sabha is",
+"oe": [
+"552",
+"250",
+"238",
+"245"
+]
+}
+]

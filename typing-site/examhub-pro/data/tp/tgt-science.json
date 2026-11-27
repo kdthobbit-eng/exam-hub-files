@@ -1,0 +1,1622 @@
+[
+{
+"q": "बल का SI मात्रक है—",
+"o": [
+"जूल",
+"पास्कल",
+"न्यूटन",
+"वाट"
+],
+"a": "C",
+"e": "",
+"qe": "The SI unit of force is",
+"oe": [
+"Joule",
+"Pascal",
+"Newton",
+"Watt"
+]
+},
+{
+"q": "1 किलोवाट-घंटा (kWh) बराबर है—",
+"o": [
+"1000 जूल",
+"3600 जूल",
+"3.6 × 10⁶ जूल",
+"3.6 × 10³ जूल"
+],
+"a": "C",
+"e": "",
+"qe": "1 kilowatt-hour (kWh) equals",
+"oe": [
+"1000 J",
+"3600 J",
+"3.6 × 10⁶ J",
+"3.6 × 10³ J"
+]
+},
+{
+"q": "न्यूटन का गति का दूसरा नियम है—",
+"o": [
+"F = m/a",
+"F = mgh",
+"F = mv",
+"F = ma"
+],
+"a": "D",
+"e": "",
+"qe": "Newton's second law of motion is",
+"oe": [
+"F = m/a",
+"F = mgh",
+"F = mv",
+"F = ma"
+]
+},
+{
+"q": "जड़त्व का माप है—",
+"o": [
+"वेग",
+"बल",
+"भार",
+"द्रव्यमान"
+],
+"a": "D",
+"e": "",
+"qe": "The measure of inertia is",
+"oe": [
+"Velocity",
+"Force",
+"Weight",
+"Mass"
+]
+},
+{
+"q": "रॉकेट का उड़ना न्यूटन के किस नियम पर आधारित है?",
+"o": [
+"गुरुत्वाकर्षण नियम",
+"तीसरे नियम",
+"दूसरे नियम",
+"पहले नियम"
+],
+"a": "B",
+"e": "क्रिया-प्रतिक्रिया।",
+"qe": "The launching of a rocket is based on Newton's",
+"oe": [
+"Law of gravitation",
+"Third law",
+"Second law",
+"First law"
+]
+},
+{
+"q": "पृथ्वी पर गुरुत्वीय त्वरण g का मान लगभग है—",
+"o": [
+"9.8 मी/से²",
+"8.9 मी/से²",
+"1.6 मी/से²",
+"98 मी/से²"
+],
+"a": "A",
+"e": "",
+"qe": "The value of g on Earth is about",
+"oe": [
+"9.8 m/s²",
+"8.9 m/s²",
+"1.6 m/s²",
+"98 m/s²"
+]
+},
+{
+"q": "चंद्रमा पर किसी वस्तु का भार पृथ्वी की तुलना में लगभग होता है—",
+"o": [
+"6 गुना",
+"1/2",
+"1/6",
+"समान"
+],
+"a": "C",
+"e": "",
+"qe": "On the Moon, the weight of an object compared to Earth is about",
+"oe": [
+"6 times",
+"1/2",
+"1/6",
+"the same"
+]
+},
+{
+"q": "स्थितिज ऊर्जा का सूत्र है—",
+"o": [
+"ma",
+"½mv²",
+"mv",
+"mgh"
+],
+"a": "D",
+"e": "",
+"qe": "The formula of potential energy is",
+"oe": [
+"ma",
+"½mv²",
+"mv",
+"mgh"
+]
+},
+{
+"q": "ध्वनि की चाल सबसे अधिक किसमें होती है?",
+"o": [
+"निर्वात",
+"ठोस",
+"गैस",
+"द्रव"
+],
+"a": "B",
+"e": "",
+"qe": "Sound travels fastest in",
+"oe": [
+"Vacuum",
+"Solids",
+"Gases",
+"Liquids"
+]
+},
+{
+"q": "मनुष्य के लिए श्रव्य ध्वनि की आवृत्ति सीमा है—",
+"o": [
+"2 Hz से 2,000 Hz",
+"20 Hz से 20,000 Hz",
+"20,000 Hz से अधिक",
+"200 Hz से 2 लाख Hz"
+],
+"a": "B",
+"e": "",
+"qe": "The audible frequency range for humans is",
+"oe": [
+"2 Hz to 2,000 Hz",
+"20 Hz to 20,000 Hz",
+"above 20,000 Hz",
+"200 Hz to 2 lakh Hz"
+]
+},
+{
+"q": "चमगादड़ किस ध्वनि का उपयोग करते हैं?",
+"o": [
+"पराश्रव्य",
+"श्रव्य",
+"अवश्रव्य",
+"कोई नहीं"
+],
+"a": "A",
+"e": "",
+"qe": "Bats use",
+"oe": [
+"Ultrasonic sound",
+"Audible sound",
+"Infrasonic sound",
+"No sound"
+]
+},
+{
+"q": "प्रकाश का अपवर्तन होने का कारण है—",
+"o": [
+"माध्यम बदलने पर चाल में परिवर्तन",
+"प्रकाश का परावर्तन",
+"प्रकाश का ध्रुवण",
+"प्रकाश का अवशोषण"
+],
+"a": "A",
+"e": "",
+"qe": "Refraction of light occurs due to",
+"oe": [
+"change in speed on changing medium",
+"reflection of light",
+"polarisation of light",
+"absorption of light"
+]
+},
+{
+"q": "इंद्रधनुष बनने का कारण है—",
+"o": [
+"केवल परावर्तन",
+"ध्रुवण",
+"विवर्तन",
+"वर्ण-विक्षेपण, अपवर्तन व आंतरिक परावर्तन"
+],
+"a": "D",
+"e": "",
+"qe": "A rainbow is formed due to",
+"oe": [
+"reflection only",
+"polarisation",
+"diffraction",
+"dispersion, refraction and internal reflection"
+]
+},
+{
+"q": "आकाश का रंग नीला दिखने का कारण है—",
+"o": [
+"प्रकाश का परावर्तन",
+"प्रकाश का अवशोषण",
+"प्रकाश का प्रकीर्णन",
+"प्रकाश का अपवर्तन"
+],
+"a": "C",
+"e": "",
+"qe": "The sky appears blue due to",
+"oe": [
+"reflection of light",
+"absorption of light",
+"scattering of light",
+"refraction of light"
+]
+},
+{
+"q": "निकट-दृष्टि दोष को दूर करने के लिए किस लेंस का उपयोग होता है?",
+"o": [
+"बेलनाकार लेंस",
+"अवतल लेंस",
+"द्विफोकसी लेंस",
+"उत्तल लेंस"
+],
+"a": "B",
+"e": "",
+"qe": "Myopia is corrected by using a",
+"oe": [
+"Cylindrical lens",
+"Concave lens",
+"Bifocal lens",
+"Convex lens"
+]
+},
+{
+"q": "2 मीटर फोकस दूरी वाले उत्तल लेंस की क्षमता है—",
+"o": [
+"−0.5 D",
+"−2 D",
+"+0.5 D",
+"+2 D"
+],
+"a": "C",
+"e": "P = 1/f",
+"qe": "The power of a convex lens of focal length 2 m is",
+"oe": [
+"−0.5 D",
+"−2 D",
+"+0.5 D",
+"+2 D"
+]
+},
+{
+"q": "वाहनों में पीछे का दृश्य देखने के लिए कौन-सा दर्पण प्रयुक्त होता है?",
+"o": [
+"अवतल दर्पण",
+"परवलयिक दर्पण",
+"उत्तल दर्पण",
+"समतल दर्पण"
+],
+"a": "C",
+"e": "",
+"qe": "Which mirror is used as a rear-view mirror in vehicles?",
+"oe": [
+"Concave mirror",
+"Parabolic mirror",
+"Convex mirror",
+"Plane mirror"
+]
+},
+{
+"q": "विद्युत धारा का SI मात्रक है—",
+"o": [
+"एम्पियर",
+"वोल्ट",
+"ओम",
+"कूलॉम"
+],
+"a": "A",
+"e": "",
+"qe": "The SI unit of electric current is",
+"oe": [
+"Ampere",
+"Volt",
+"Ohm",
+"Coulomb"
+]
+},
+{
+"q": "ओम का नियम है—",
+"o": [
+"P = VI",
+"R = V × I",
+"V = I/R",
+"V = IR"
+],
+"a": "D",
+"e": "",
+"qe": "Ohm's law is",
+"oe": [
+"P = VI",
+"R = V × I",
+"V = I/R",
+"V = IR"
+]
+},
+{
+"q": "दो 6 Ω प्रतिरोधों को समांतर क्रम में जोड़ने पर तुल्य प्रतिरोध है—",
+"o": [
+"6 Ω",
+"12 Ω",
+"3 Ω",
+"1.5 Ω"
+],
+"a": "C",
+"e": "",
+"qe": "The equivalent resistance of two 6 Ω resistors in parallel is",
+"oe": [
+"6 Ω",
+"12 Ω",
+"3 Ω",
+"1.5 Ω"
+]
+},
+{
+"q": "घरेलू विद्युत परिपथ में फ्यूज़ को किस क्रम में जोड़ा जाता है?",
+"o": [
+"मिश्रित क्रम",
+"श्रेणी क्रम",
+"समांतर क्रम",
+"कहीं भी"
+],
+"a": "B",
+"e": "",
+"qe": "In a household circuit, a fuse is connected in",
+"oe": [
+"Mixed",
+"Series",
+"Parallel",
+"Anywhere"
+]
+},
+{
+"q": "विद्युत मोटर किस ऊर्जा को किसमें बदलती है?",
+"o": [
+"ऊष्मा को विद्युत में",
+"रासायनिक को विद्युत में",
+"विद्युत को यांत्रिक में",
+"यांत्रिक को विद्युत में"
+],
+"a": "C",
+"e": "",
+"qe": "An electric motor converts",
+"oe": [
+"heat into electrical energy",
+"chemical into electrical energy",
+"electrical into mechanical energy",
+"mechanical into electrical energy"
+]
+},
+{
+"q": "विद्युत-चुंबकीय प्रेरण की खोज किसने की?",
+"o": [
+"मैक्सवेल",
+"एडिसन",
+"ओस्टेड",
+"फैराडे"
+],
+"a": "D",
+"e": "",
+"qe": "Electromagnetic induction was discovered by",
+"oe": [
+"Maxwell",
+"Edison",
+"Oersted",
+"Faraday"
+]
+},
+{
+"q": "भारत में घरेलू AC विद्युत की आवृत्ति है—",
+"o": [
+"100 Hz",
+"50 Hz",
+"60 Hz",
+"220 Hz"
+],
+"a": "B",
+"e": "",
+"qe": "The frequency of domestic AC supply in India is",
+"oe": [
+"100 Hz",
+"50 Hz",
+"60 Hz",
+"220 Hz"
+]
+},
+{
+"q": "परम शून्य ताप का मान है—",
+"o": [
+"0 °C",
+"−273.15 °C",
+"−100 °C",
+"−459 °C"
+],
+"a": "B",
+"e": "",
+"qe": "Absolute zero temperature is",
+"oe": [
+"0 °C",
+"−273.15 °C",
+"−100 °C",
+"−459 °C"
+]
+},
+{
+"q": "ऊष्मा का संचरण निर्वात में किस विधि से होता है?",
+"o": [
+"तीनों",
+"चालन",
+"संवहन",
+"विकिरण"
+],
+"a": "D",
+"e": "",
+"qe": "Heat transfer in vacuum occurs by",
+"oe": [
+"All three",
+"Conduction",
+"Convection",
+"Radiation"
+]
+},
+{
+"q": "जल का रासायनिक सूत्र है—",
+"o": [
+"HO",
+"H₂O",
+"H₂O₂",
+"H₃O"
+],
+"a": "B",
+"e": "",
+"qe": "The chemical formula of water is",
+"oe": [
+"HO",
+"H₂O",
+"H₂O₂",
+"H₃O"
+]
+},
+{
+"q": "खाने का सोडा (बेकिंग सोडा) का रासायनिक नाम है—",
+"o": [
+"सोडियम कार्बोनेट",
+"कैल्शियम कार्बोनेट",
+"सोडियम क्लोराइड",
+"सोडियम हाइड्रोजन कार्बोनेट"
+],
+"a": "D",
+"e": "",
+"qe": "The chemical name of baking soda is",
+"oe": [
+"Sodium carbonate",
+"Calcium carbonate",
+"Sodium chloride",
+"Sodium hydrogen carbonate"
+]
+},
+{
+"q": "धोने का सोडा का सूत्र है—",
+"o": [
+"CaCO₃",
+"Na₂CO₃·10H₂O",
+"NaOH",
+"NaHCO₃"
+],
+"a": "B",
+"e": "",
+"qe": "The formula of washing soda is",
+"oe": [
+"CaCO₃",
+"Na₂CO₃·10H₂O",
+"NaOH",
+"NaHCO₃"
+]
+},
+{
+"q": "प्लास्टर ऑफ़ पेरिस का रासायनिक सूत्र है—",
+"o": [
+"CaSO₄·½H₂O",
+"CaCO₃",
+"CaSO₄·2H₂O",
+"CaO"
+],
+"a": "A",
+"e": "",
+"qe": "The chemical formula of Plaster of Paris is",
+"oe": [
+"CaSO₄·½H₂O",
+"CaCO₃",
+"CaSO₄·2H₂O",
+"CaO"
+]
+},
+{
+"q": "ब्लीचिंग पाउडर का सूत्र है—",
+"o": [
+"CaCl₂",
+"NaOCl",
+"CaOCl₂",
+"Ca(OH)₂"
+],
+"a": "C",
+"e": "",
+"qe": "The formula of bleaching powder is",
+"oe": [
+"CaCl₂",
+"NaOCl",
+"CaOCl₂",
+"Ca(OH)₂"
+]
+},
+{
+"q": "शुद्ध जल का pH मान है—",
+"o": [
+"1",
+"14",
+"0",
+"7"
+],
+"a": "D",
+"e": "",
+"qe": "The pH of pure water is",
+"oe": [
+"1",
+"14",
+"0",
+"7"
+]
+},
+{
+"q": "नींबू के रस में कौन-सा अम्ल होता है?",
+"o": [
+"लैक्टिक अम्ल",
+"सिट्रिक अम्ल",
+"टार्टरिक अम्ल",
+"एसीटिक अम्ल"
+],
+"a": "B",
+"e": "",
+"qe": "Lemon juice contains",
+"oe": [
+"Lactic acid",
+"Citric acid",
+"Tartaric acid",
+"Acetic acid"
+]
+},
+{
+"q": "सिरके में कौन-सा अम्ल होता है?",
+"o": [
+"ऑक्सैलिक अम्ल",
+"सिट्रिक अम्ल",
+"एसीटिक अम्ल",
+"मेथेनोइक अम्ल"
+],
+"a": "C",
+"e": "",
+"qe": "Vinegar contains",
+"oe": [
+"Oxalic acid",
+"Citric acid",
+"Acetic acid",
+"Methanoic acid"
+]
+},
+{
+"q": "चींटी के डंक में कौन-सा अम्ल होता है?",
+"o": [
+"एसीटिक अम्ल",
+"फ़ॉर्मिक (मेथेनोइक) अम्ल",
+"सिट्रिक अम्ल",
+"लैक्टिक अम्ल"
+],
+"a": "B",
+"e": "",
+"qe": "An ant's sting contains",
+"oe": [
+"Acetic acid",
+"Formic (methanoic) acid",
+"Citric acid",
+"Lactic acid"
+]
+},
+{
+"q": "अम्ल नीले लिटमस को किस रंग में बदलता है?",
+"o": [
+"नीला ही रहता है",
+"हरा",
+"पीला",
+"लाल"
+],
+"a": "D",
+"e": "",
+"qe": "An acid turns blue litmus",
+"oe": [
+"unchanged blue",
+"green",
+"yellow",
+"red"
+]
+},
+{
+"q": "सबसे अधिक क्रियाशील धातु कौन-सी है?",
+"o": [
+"पोटैशियम",
+"ताँबा",
+"सोना",
+"लोहा"
+],
+"a": "A",
+"e": "",
+"qe": "Which is the most reactive metal among these?",
+"oe": [
+"Potassium",
+"Copper",
+"Gold",
+"Iron"
+]
+},
+{
+"q": "कमरे के ताप पर द्रव अवस्था में रहने वाली धातु है—",
+"o": [
+"एल्युमिनियम",
+"सोडियम",
+"जस्ता",
+"पारा"
+],
+"a": "D",
+"e": "",
+"qe": "The metal that is liquid at room temperature is",
+"oe": [
+"Aluminium",
+"Sodium",
+"Zinc",
+"Mercury"
+]
+},
+{
+"q": "लोहे पर जस्ते की परत चढ़ाने को कहते हैं—",
+"o": [
+"यशदलेपन (गैल्वनीकरण)",
+"विद्युत-लेपन",
+"मिश्रातु बनाना",
+"निस्तापन"
+],
+"a": "A",
+"e": "",
+"qe": "Coating iron with zinc is called",
+"oe": [
+"Galvanisation",
+"Electroplating",
+"Alloying",
+"Calcination"
+]
+},
+{
+"q": "पीतल किन धातुओं का मिश्रण है?",
+"o": [
+"ताँबा और जस्ता",
+"ताँबा और निकल",
+"लोहा और कार्बन",
+"ताँबा और टिन"
+],
+"a": "A",
+"e": "",
+"qe": "Brass is an alloy of",
+"oe": [
+"Copper and zinc",
+"Copper and nickel",
+"Iron and carbon",
+"Copper and tin"
+]
+},
+{
+"q": "कांसा किन धातुओं का मिश्रण है?",
+"o": [
+"ताँबा और टिन",
+"सीसा और टिन",
+"ताँबा और जस्ता",
+"लोहा और निकल"
+],
+"a": "A",
+"e": "",
+"qe": "Bronze is an alloy of",
+"oe": [
+"Copper and tin",
+"Lead and tin",
+"Copper and zinc",
+"Iron and nickel"
+]
+},
+{
+"q": "आवर्त सारणी के जनक कौन माने जाते हैं?",
+"o": [
+"मोसले",
+"मेंडलीफ़",
+"रदरफ़ोर्ड",
+"डाल्टन"
+],
+"a": "B",
+"e": "",
+"qe": "The father of the periodic table is",
+"oe": [
+"Moseley",
+"Mendeleev",
+"Rutherford",
+"Dalton"
+]
+},
+{
+"q": "आधुनिक आवर्त सारणी किस पर आधारित है?",
+"o": [
+"न्यूट्रॉन संख्या",
+"परमाणु द्रव्यमान",
+"संयोजकता",
+"परमाणु क्रमांक"
+],
+"a": "D",
+"e": "",
+"qe": "The modern periodic table is based on",
+"oe": [
+"Number of neutrons",
+"Atomic mass",
+"Valency",
+"Atomic number"
+]
+},
+{
+"q": "इलेक्ट्रॉन की खोज किसने की?",
+"o": [
+"जे. जे. थॉमसन",
+"बोर",
+"चैडविक",
+"रदरफ़ोर्ड"
+],
+"a": "A",
+"e": "",
+"qe": "The electron was discovered by",
+"oe": [
+"J. J. Thomson",
+"Bohr",
+"Chadwick",
+"Rutherford"
+]
+},
+{
+"q": "न्यूट्रॉन की खोज किसने की?",
+"o": [
+"गोल्डस्टीन",
+"थॉमसन",
+"रदरफ़ोर्ड",
+"चैडविक"
+],
+"a": "D",
+"e": "",
+"qe": "The neutron was discovered by",
+"oe": [
+"Goldstein",
+"Thomson",
+"Rutherford",
+"Chadwick"
+]
+},
+{
+"q": "कार्बन का परमाणु क्रमांक है—",
+"o": [
+"6",
+"12",
+"14",
+"8"
+],
+"a": "A",
+"e": "",
+"qe": "The atomic number of carbon is",
+"oe": [
+"6",
+"12",
+"14",
+"8"
+]
+},
+{
+"q": "सोडियम (परमाणु क्रमांक 11) का इलेक्ट्रॉनिक विन्यास है—",
+"o": [
+"2, 7, 2",
+"2, 8, 2",
+"2, 8, 1",
+"2, 9"
+],
+"a": "C",
+"e": "",
+"qe": "The electronic configuration of sodium (atomic number 11) is",
+"oe": [
+"2, 7, 2",
+"2, 8, 2",
+"2, 8, 1",
+"2, 9"
+]
+},
+{
+"q": "हीरा और ग्रेफ़ाइट किस तत्व के अपरूप हैं?",
+"o": [
+"फ़ॉस्फ़ोरस",
+"कार्बन",
+"सिलिकॉन",
+"सल्फ़र"
+],
+"a": "B",
+"e": "",
+"qe": "Diamond and graphite are allotropes of",
+"oe": [
+"Phosphorus",
+"Carbon",
+"Silicon",
+"Sulphur"
+]
+},
+{
+"q": "जंग लगना किस प्रकार की अभिक्रिया है?",
+"o": [
+"अपचयन",
+"उदासीनीकरण",
+"अपघटन",
+"ऑक्सीकरण"
+],
+"a": "D",
+"e": "",
+"qe": "Rusting is a type of",
+"oe": [
+"Reduction",
+"Neutralisation",
+"Decomposition",
+"Oxidation"
+]
+},
+{
+"q": "अम्ल और क्षार की अभिक्रिया से लवण और जल बनना कहलाता है—",
+"o": [
+"अपघटन",
+"उदासीनीकरण",
+"विस्थापन",
+"संयोजन"
+],
+"a": "B",
+"e": "",
+"qe": "Formation of salt and water from an acid and a base is called",
+"oe": [
+"Decomposition",
+"Neutralisation",
+"Displacement",
+"Combination"
+]
+},
+{
+"q": "मोल की अवधारणा में आवोगाद्रो संख्या का मान है—",
+"o": [
+"6.022 × 10²³",
+"6.022 × 10²²",
+"1.6 × 10⁻¹⁹",
+"3 × 10⁸"
+],
+"a": "A",
+"e": "",
+"qe": "The value of Avogadro's number is",
+"oe": [
+"6.022 × 10²³",
+"6.022 × 10²²",
+"1.6 × 10⁻¹⁹",
+"3 × 10⁸"
+]
+},
+{
+"q": "साबुन किसके सोडियम या पोटैशियम लवण होते हैं?",
+"o": [
+"लंबी शृंखला वाले वसा अम्लों के",
+"कार्बोनिक अम्ल के",
+"एसीटिक अम्ल के",
+"खनिज अम्लों के"
+],
+"a": "A",
+"e": "",
+"qe": "Soaps are sodium or potassium salts of",
+"oe": [
+"long-chain fatty acids",
+"carbonic acid",
+"acetic acid",
+"mineral acids"
+]
+},
+{
+"q": "ओज़ोन परत को सबसे अधिक हानि पहुँचाने वाले यौगिक हैं—",
+"o": [
+"क्लोरोफ़्लोरोकार्बन (CFC)",
+"नाइट्रोजन",
+"कार्बन डाइऑक्साइड",
+"मीथेन"
+],
+"a": "A",
+"e": "",
+"qe": "The compounds that most damage the ozone layer are",
+"oe": [
+"Chlorofluorocarbons (CFCs)",
+"Nitrogen",
+"Carbon dioxide",
+"Methane"
+]
+},
+{
+"q": "वायु में सबसे अधिक मात्रा में कौन-सी गैस है?",
+"o": [
+"कार्बन डाइऑक्साइड",
+"नाइट्रोजन",
+"ऑक्सीजन",
+"आर्गन"
+],
+"a": "B",
+"e": "",
+"qe": "The most abundant gas in air is",
+"oe": [
+"Carbon dioxide",
+"Nitrogen",
+"Oxygen",
+"Argon"
+]
+},
+{
+"q": "कोशिका की खोज किसने की?",
+"o": [
+"श्लाइडेन",
+"रॉबर्ट ब्राउन",
+"रॉबर्ट हुक",
+"ल्यूवेनहॉक"
+],
+"a": "C",
+"e": "",
+"qe": "The cell was discovered by",
+"oe": [
+"Schleiden",
+"Robert Brown",
+"Robert Hooke",
+"Leeuwenhoek"
+]
+},
+{
+"q": "कोशिका का 'ऊर्जा घर' (पावरहाउस) किसे कहते हैं?",
+"o": [
+"माइटोकॉन्ड्रिया",
+"गॉल्जीकाय",
+"लाइसोसोम",
+"राइबोसोम"
+],
+"a": "A",
+"e": "",
+"qe": "Which is called the 'powerhouse' of the cell?",
+"oe": [
+"Mitochondria",
+"Golgi body",
+"Lysosome",
+"Ribosome"
+]
+},
+{
+"q": "कोशिका की 'आत्मघाती थैली' किसे कहा जाता है?",
+"o": [
+"रिक्तिका",
+"लाइसोसोम",
+"माइटोकॉन्ड्रिया",
+"केंद्रक"
+],
+"a": "B",
+"e": "",
+"qe": "Which is called the 'suicide bag' of the cell?",
+"oe": [
+"Vacuole",
+"Lysosome",
+"Mitochondria",
+"Nucleus"
+]
+},
+{
+"q": "पादप कोशिका में कौन-सा भाग होता है जो जंतु कोशिका में नहीं होता?",
+"o": [
+"कोशिका भित्ति",
+"कोशिका झिल्ली",
+"माइटोकॉन्ड्रिया",
+"केंद्रक"
+],
+"a": "A",
+"e": "",
+"qe": "Which part is present in a plant cell but not in an animal cell?",
+"oe": [
+"Cell wall",
+"Cell membrane",
+"Mitochondria",
+"Nucleus"
+]
+},
+{
+"q": "प्रकाश-संश्लेषण में कौन-सी गैस निकलती है?",
+"o": [
+"नाइट्रोजन",
+"कार्बन डाइऑक्साइड",
+"ऑक्सीजन",
+"हाइड्रोजन"
+],
+"a": "C",
+"e": "",
+"qe": "Which gas is released in photosynthesis?",
+"oe": [
+"Nitrogen",
+"Carbon dioxide",
+"Oxygen",
+"Hydrogen"
+]
+},
+{
+"q": "पत्तियों का हरा रंग किस कारण होता है?",
+"o": [
+"ज़ैंथोफ़िल",
+"एंथोसायनिन",
+"क्लोरोफ़िल",
+"कैरोटीन"
+],
+"a": "C",
+"e": "",
+"qe": "Leaves are green because of",
+"oe": [
+"Xanthophyll",
+"Anthocyanin",
+"Chlorophyll",
+"Carotene"
+]
+},
+{
+"q": "पौधों में जल का परिवहन किस ऊतक से होता है?",
+"o": [
+"फ्लोएम",
+"दृढ़ोतक",
+"जाइलम",
+"मृदूतक"
+],
+"a": "C",
+"e": "",
+"qe": "Water is transported in plants through",
+"oe": [
+"Phloem",
+"Sclerenchyma",
+"Xylem",
+"Parenchyma"
+]
+},
+{
+"q": "मानव शरीर की सबसे बड़ी ग्रंथि कौन-सी है?",
+"o": [
+"पीयूष",
+"यकृत",
+"अग्न्याशय",
+"थायरॉइड"
+],
+"a": "B",
+"e": "",
+"qe": "The largest gland in the human body is",
+"oe": [
+"Pituitary",
+"Liver",
+"Pancreas",
+"Thyroid"
+]
+},
+{
+"q": "'मास्टर ग्रंथि' किसे कहा जाता है?",
+"o": [
+"पीयूष ग्रंथि",
+"अधिवृक्क ग्रंथि",
+"थायरॉइड ग्रंथि",
+"पीनियल ग्रंथि"
+],
+"a": "A",
+"e": "",
+"qe": "Which is called the 'master gland'?",
+"oe": [
+"Pituitary gland",
+"Adrenal gland",
+"Thyroid gland",
+"Pineal gland"
+]
+},
+{
+"q": "मानव हृदय में कितने कक्ष होते हैं?",
+"o": [
+"3",
+"5",
+"2",
+"4"
+],
+"a": "D",
+"e": "",
+"qe": "How many chambers does the human heart have?",
+"oe": [
+"3",
+"5",
+"2",
+"4"
+]
+},
+{
+"q": "सामान्य मनुष्य का रक्तचाप होता है—",
+"o": [
+"100/60 mm Hg",
+"80/120 mm Hg",
+"140/100 mm Hg",
+"120/80 mm Hg"
+],
+"a": "D",
+"e": "",
+"qe": "Normal human blood pressure is",
+"oe": [
+"100/60 mm Hg",
+"80/120 mm Hg",
+"140/100 mm Hg",
+"120/80 mm Hg"
+]
+},
+{
+"q": "सर्वदाता रक्त समूह कौन-सा है?",
+"o": [
+"O",
+"AB",
+"B",
+"A"
+],
+"a": "A",
+"e": "",
+"qe": "The universal donor blood group is",
+"oe": [
+"O",
+"AB",
+"B",
+"A"
+]
+},
+{
+"q": "रक्त का थक्का बनने में कौन-सा विटामिन सहायक है?",
+"o": [
+"विटामिन D",
+"विटामिन K",
+"विटामिन C",
+"विटामिन A"
+],
+"a": "B",
+"e": "",
+"qe": "Which vitamin helps in blood clotting?",
+"oe": [
+"Vitamin D",
+"Vitamin K",
+"Vitamin C",
+"Vitamin A"
+]
+},
+{
+"q": "सूर्य के प्रकाश से त्वचा में कौन-सा विटामिन बनता है?",
+"o": [
+"विटामिन B₁₂",
+"विटामिन E",
+"विटामिन D",
+"विटामिन A"
+],
+"a": "C",
+"e": "",
+"qe": "Which vitamin is formed in the skin by sunlight?",
+"oe": [
+"Vitamin B₁₂",
+"Vitamin E",
+"Vitamin D",
+"Vitamin A"
+]
+},
+{
+"q": "आयोडीन की कमी से कौन-सा रोग होता है?",
+"o": [
+"रिकेट्स",
+"घेंघा",
+"एनीमिया",
+"स्कर्वी"
+],
+"a": "B",
+"e": "",
+"qe": "Deficiency of iodine causes",
+"oe": [
+"Rickets",
+"Goitre",
+"Anaemia",
+"Scurvy"
+]
+},
+{
+"q": "मलेरिया रोग का कारक है—",
+"o": [
+"विषाणु",
+"प्लाज़्मोडियम (प्रोटोज़ोआ)",
+"जीवाणु",
+"कवक"
+],
+"a": "B",
+"e": "",
+"qe": "Malaria is caused by",
+"oe": [
+"Virus",
+"Plasmodium (protozoa)",
+"Bacteria",
+"Fungus"
+]
+},
+{
+"q": "मलेरिया किस मच्छर से फैलता है?",
+"o": [
+"मादा एनाफ़िलीज़",
+"क्यूलेक्स",
+"एडीज़",
+"नर एनाफ़िलीज़"
+],
+"a": "A",
+"e": "",
+"qe": "Malaria is spread by",
+"oe": [
+"female Anopheles mosquito",
+"Culex mosquito",
+"Aedes mosquito",
+"male Anopheles mosquito"
+]
+},
+{
+"q": "डेंगू रोग का कारक है—",
+"o": [
+"कवक",
+"जीवाणु",
+"विषाणु",
+"प्रोटोज़ोआ"
+],
+"a": "C",
+"e": "",
+"qe": "Dengue is caused by a",
+"oe": [
+"Fungus",
+"Bacterium",
+"Virus",
+"Protozoan"
+]
+},
+{
+"q": "क्षय रोग (TB) किस अंग को मुख्यतः प्रभावित करता है?",
+"o": [
+"हृदय",
+"वृक्क",
+"यकृत",
+"फेफड़े"
+],
+"a": "D",
+"e": "",
+"qe": "Tuberculosis mainly affects the",
+"oe": [
+"Heart",
+"Kidneys",
+"Liver",
+"Lungs"
+]
+},
+{
+"q": "मानव में गुणसूत्रों की संख्या है—",
+"o": [
+"23",
+"44",
+"48",
+"46 (23 जोड़े)"
+],
+"a": "D",
+"e": "",
+"qe": "The number of chromosomes in humans is",
+"oe": [
+"23",
+"44",
+"48",
+"46 (23 pairs)"
+]
+},
+{
+"q": "आनुवंशिकता के जनक कौन हैं?",
+"o": [
+"लैमार्क",
+"डार्विन",
+"ग्रेगर मेंडल",
+"ह्यूगो डी व्रीज़"
+],
+"a": "C",
+"e": "",
+"qe": "The father of genetics is",
+"oe": [
+"Lamarck",
+"Darwin",
+"Gregor Mendel",
+"Hugo de Vries"
+]
+},
+{
+"q": "'प्राकृतिक वरण' का सिद्धांत किसने दिया?",
+"o": [
+"लैमार्क",
+"चार्ल्स डार्विन",
+"वाट्सन",
+"मेंडल"
+],
+"a": "B",
+"e": "",
+"qe": "The theory of natural selection was given by",
+"oe": [
+"Lamarck",
+"Charles Darwin",
+"Watson",
+"Mendel"
+]
+},
+{
+"q": "DNA का द्विकुंडलित मॉडल किसने दिया?",
+"o": [
+"वाट्सन और क्रिक",
+"मेंडल",
+"रॉबर्ट हुक",
+"डार्विन"
+],
+"a": "A",
+"e": "",
+"qe": "The double helix model of DNA was given by",
+"oe": [
+"Watson and Crick",
+"Mendel",
+"Robert Hooke",
+"Darwin"
+]
+},
+{
+"q": "मनुष्य में लिंग-निर्धारण किस गुणसूत्र से होता है?",
+"o": [
+"माता के X गुणसूत्र से",
+"दोनों के X से",
+"पिता के Y गुणसूत्र से",
+"दोनों के Y से"
+],
+"a": "C",
+"e": "",
+"qe": "In humans, sex is determined by the",
+"oe": [
+"X chromosome from the mother",
+"X from both",
+"Y chromosome from the father",
+"Y from both"
+]
+},
+{
+"q": "मनुष्य में भोजन का सर्वाधिक पाचन व अवशोषण कहाँ होता है?",
+"o": [
+"छोटी आँत",
+"बड़ी आँत",
+"ग्रासनली",
+"आमाशय"
+],
+"a": "A",
+"e": "",
+"qe": "Most digestion and absorption of food in humans occurs in the",
+"oe": [
+"Small intestine",
+"Large intestine",
+"Oesophagus",
+"Stomach"
+]
+},
+{
+"q": "मानव शरीर में वृक्क की क्रियात्मक इकाई है—",
+"o": [
+"विलाई",
+"एल्वियोलाई",
+"न्यूरॉन",
+"नेफ़्रॉन"
+],
+"a": "D",
+"e": "",
+"qe": "The functional unit of the kidney is the",
+"oe": [
+"Villus",
+"Alveolus",
+"Neuron",
+"Nephron"
+]
+},
+{
+"q": "तंत्रिका तंत्र की संरचनात्मक इकाई है—",
+"o": [
+"नेफ़्रॉन",
+"सिनैप्स",
+"न्यूरॉन",
+"कोशिका भित्ति"
+],
+"a": "C",
+"e": "",
+"qe": "The structural unit of the nervous system is the",
+"oe": [
+"Nephron",
+"Synapse",
+"Neuron",
+"Cell wall"
+]
+},
+{
+"q": "आहार शृंखला में ऊर्जा का प्रवाह होता है—",
+"o": [
+"एकदिशीय",
+"द्विदिशीय",
+"चक्रीय",
+"अनियमित"
+],
+"a": "A",
+"e": "",
+"qe": "Energy flow in a food chain is",
+"oe": [
+"Unidirectional",
+"Bidirectional",
+"Cyclic",
+"Irregular"
+]
+},
+{
+"q": "एक पोषी स्तर से अगले स्तर तक लगभग कितनी ऊर्जा पहुँचती है?",
+"o": [
+"90%",
+"1%",
+"50%",
+"10%"
+],
+"a": "D",
+"e": "लिंडमैन का 10% नियम।",
+"qe": "About how much energy passes from one trophic level to the next?",
+"oe": [
+"90%",
+"1%",
+"50%",
+"10%"
+]
+},
+{
+"q": "राइज़ोबियम जीवाणु किस पौधे की जड़ों में पाए जाते हैं?",
+"o": [
+"गेहूँ",
+"गन्ना",
+"धान",
+"दलहनी पौधे"
+],
+"a": "D",
+"e": "नाइट्रोजन स्थिरीकरण।",
+"qe": "Rhizobium bacteria are found in the roots of",
+"oe": [
+"Wheat",
+"Sugarcane",
+"Paddy",
+"Leguminous plants"
+]
+},
+{
+"q": "पेनिसिलिन की खोज किसने की?",
+"o": [
+"लुई पाश्चर",
+"अलेक्ज़ेंडर फ़्लेमिंग",
+"एडवर्ड जेनर",
+"रॉबर्ट कोच"
+],
+"a": "B",
+"e": "",
+"qe": "Penicillin was discovered by",
+"oe": [
+"Louis Pasteur",
+"Alexander Fleming",
+"Edward Jenner",
+"Robert Koch"
+]
+},
+{
+"q": "चेचक का टीका किसने खोजा?",
+"o": [
+"फ़्लेमिंग",
+"रॉबर्ट कोच",
+"एडवर्ड जेनर",
+"लुई पाश्चर"
+],
+"a": "C",
+"e": "",
+"qe": "The smallpox vaccine was discovered by",
+"oe": [
+"Fleming",
+"Robert Koch",
+"Edward Jenner",
+"Louis Pasteur"
+]
+},
+{
+"q": "पौधों में वृद्धि को बढ़ावा देने वाला हॉर्मोन है—",
+"o": [
+"इंसुलिन",
+"ऑक्सिन",
+"एथिलीन",
+"एब्सिसिक अम्ल"
+],
+"a": "B",
+"e": "",
+"qe": "A plant hormone that promotes growth is",
+"oe": [
+"Insulin",
+"Auxin",
+"Ethylene",
+"Abscisic acid"
+]
+},
+{
+"q": "फलों को पकाने वाला पादप हॉर्मोन है—",
+"o": [
+"जिबरेलिन",
+"साइटोकाइनिन",
+"ऑक्सिन",
+"एथिलीन"
+],
+"a": "D",
+"e": "",
+"qe": "The plant hormone that ripens fruits is",
+"oe": [
+"Gibberellin",
+"Cytokinin",
+"Auxin",
+"Ethylene"
+]
+},
+{
+"q": "विज्ञान शिक्षण में 'प्रयोगशाला विधि' का मुख्य लाभ है—",
+"o": [
+"करके सीखना",
+"समय की बचत",
+"रटकर याद करना",
+"केवल व्याख्यान सुनना"
+],
+"a": "A",
+"e": "",
+"qe": "The main advantage of the laboratory method in science teaching is",
+"oe": [
+"learning by doing",
+"saving time",
+"rote memorisation",
+"listening to lectures only"
+]
+},
+{
+"q": "'ह्यूरिस्टिक विधि' (अन्वेषण विधि) के प्रवर्तक कौन हैं?",
+"o": [
+"फ्रोबेल",
+"किलपैट्रिक",
+"एच. ई. आर्मस्ट्रांग",
+"जॉन डीवी"
+],
+"a": "C",
+"e": "",
+"qe": "The heuristic method was introduced by",
+"oe": [
+"Froebel",
+"Kilpatrick",
+"H. E. Armstrong",
+"John Dewey"
+]
+}
+]
