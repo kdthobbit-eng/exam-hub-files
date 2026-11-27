@@ -89,3 +89,26 @@ function eh_mock_cards() {
         . $c(add_query_arg('x', 'pgt', home_url('/mock-test/')), 'प्रवक्ता · ' . count($T['pgt']) . ' विषय', 'UP <em>PGT</em>', 'प्रवक्ता (स्नातकोत्तर) · विज्ञापन 06/2026', ['<b>30</b> सामान्य अध्ययन + <b>90</b> विषय', 'हर विषय का अलग मॉक', '<b>' . $ready['pgt'] . '</b> विषय लाइव · बाकी जल्द'], $ready['pgt'] > 0, 'विषय चुनें', 'mx-c3')
         . '</div>';
 }
+
+/* home hero: the old Super TET style navy boxes, one each for Super TET, UP TGT, UP PGT */
+function eh_home_live_boxes() {
+    $logo = esc_url(EH_URI . '/assets/upsssc-alert-logo.svg');
+    $stet = eh_stm_round(); $sl = eh_stm_status($stet) === 'live';
+    $T = eh_tp_subjects(); $ready = ['tgt' => 0, 'pgt' => 0];
+    foreach (eh_tp_rounds() as $r) if (eh_tp_ready($r)) $ready[$r['series']]++;
+    $end = (new DateTime(EH_TP_END, new DateTimeZone('Asia/Kolkata')));
+    $hm = ['', 'जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'];
+    $endt = $end->format('j') . ' ' . $hm[(int) $end->format('n')];
+    $box = function ($href, $live, $chip, $t1, $t2, $meta, $left, $btn) use ($logo) {
+        $h = '<a class="uh-stm uh-lb' . ($live ? ' live' : '') . '" href="' . esc_url($href) . '"><span class="uh-stm-glow"></span>'
+            . '<span class="uh-stm-top"><img src="' . $logo . '" alt="UPSSSC ALERT" width="62" height="62"><span><span class="uh-stm-chip"><i></i><span>' . esc_html($chip) . '</span></span>'
+            . '<b class="uh-stm-t">' . esc_html($t1) . ' <em>' . esc_html($t2) . '</em></b></span></span><span class="uh-stm-meta">';
+        foreach ($meta as $m) $h .= '<span>' . esc_html($m) . '</span>';
+        return $h . '</span><span class="uh-stm-bot"><span class="uh-lb-l">' . $left . '</span><span class="uh-stm-go">' . esc_html($btn) . '</span></span></a>';
+    };
+    return '<div class="uh-lbs">'
+        . $box(add_query_arg('x', 'tgt', home_url('/mock-test/')), $ready['tgt'] > 0, 'LIVE · फ्री विषयवार मॉक', 'UP TGT 2026', 'लाइव मॉक टेस्ट', ['📚 ' . count($T['tgt']) . ' विषय', '📝 30 GS + 90 विषय', '🎯 360 अंक · +3/−1', '🏆 रैंक + परसेंटाइल'], '<b>' . $ready['tgt'] . '</b> विषय लाइव · ' . esc_html($endt) . ' तक खुला', 'विषय चुनें →')
+        . $box(add_query_arg('x', 'pgt', home_url('/mock-test/')), $ready['pgt'] > 0, ($ready['pgt'] ? 'LIVE' : 'जल्द') . ' · फ्री विषयवार मॉक', 'UP PGT 2026', 'लाइव मॉक टेस्ट', ['📚 ' . count($T['pgt']) . ' विषय', '📝 30 GS + 90 विषय', '🎯 360 अंक · +3/−1', '🏆 रैंक + परसेंटाइल'], '<b>' . $ready['pgt'] . '</b> विषय लाइव · बाकी जल्द', 'विषय चुनें →')
+        . $box(home_url('/super-tet-mock/'), $sl, $sl ? 'LIVE · अभी चल रहा है' : 'मॉक 1 व मॉक 2 · परिणाम', 'UP Super TET 2026', 'लाइव मॉक टेस्ट', ['📝 120 प्रश्न · 360 अंक', '⏱ 2 घंटे', '📘 उत्तर-कुंजी + व्याख्या', '🌐 हिंदी + English'], $sl ? 'मॉक अभी खुला है' : 'रैंक, उत्तर-कुंजी और व्याख्या देखें', $sl ? 'अभी मॉक दें →' : 'परिणाम देखें →')
+        . '</div>';
+}

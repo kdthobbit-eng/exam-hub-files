@@ -67,6 +67,7 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
       <a class="uh-btn" href="<?php echo esc_url(home_url('/mock-test/')); ?>"><?php echo eh_t('Live Mock Test', 'लाइव मॉक टेस्ट'); ?><?php echo $arrow; ?></a>
       <a class="uh-btn uh-btn-o" href="<?php echo esc_url(home_url('/live-typing/')); ?>"><?php echo eh_t('Live Typing', 'लाइव टाइपिंग'); ?><?php echo $arrow; ?></a>
     </div>
+    <?php if (function_exists('eh_home_live_boxes')) echo eh_home_live_boxes(); ?>
     <ul class="uh-stats">
       <li><b data-count="60000" data-suffix="+">60,000+</b><span><?php echo eh_t('students with us', 'विद्यार्थी हमारे साथ'); ?></span></li>
       <li><b data-count="6000" data-suffix="+">6,000+</b><span><?php echo eh_t('students joined our batches', 'विद्यार्थी हमारे बैच से जुड़े'); ?></span></li>
@@ -76,12 +77,6 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
   </div>
 </section>
 
-<?php if (function_exists('eh_mock_cards')): ?>
-<section class="mx mx-home"><div class="mx-wrap">
-  <div class="mx-head"><div><span class="mx-kick"><i></i>Live Mock Test</span><h2>UP Super TET · <em>TGT</em> · <em>PGT</em> — लाइव मॉक</h2><p>असली परीक्षा जैसा टेस्ट, तुरंत स्कोर, रैंक और परसेंटाइल। बिल्कुल फ्री।</p></div><a class="mx-all" href="<?php echo esc_url(home_url('/mock-test/')); ?>">सभी मॉक देखें →</a></div>
-  <?php echo eh_mock_cards(); ?>
-</div></section>
-<?php endif; ?>
 <div class="uh-marq" aria-hidden="true"><div class="uh-marq-in">
   <?php $mq = ['UPSSSC JE', 'VDO / VPO', 'UP Police Computer Operator', 'UP TGT / PGT', 'Super TET', 'AHC RO / ARO', 'Lekhpal', 'Stenographer', 'Junior Assistant', 'UPSI'];
   for ($k = 0; $k < 2; $k++) foreach ($mq as $m) echo '<span>' . esc_html($m) . '</span><i>✦</i>'; ?>

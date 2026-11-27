@@ -29,16 +29,18 @@ $hub = home_url('/mock-test/');
  <section class="mx-body"><div class="mx-wrap">
   <div class="mx-head"><div><h2>अपना विषय चुनें</h2><p>विषय पर क्लिक करें, फिर लॉग-इन करके मॉक शुरू करें। लॉग-इन पेज पर भी विषय बदल सकते हैं।</p></div>
    <label class="mx-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="mx-q" placeholder="विषय खोजें — जैसे गणित, English"></label></div>
+  <div class="mx-subs-wrap"><div class="mx-tabs" id="mx-tabs"><button class="on" data-f="all">सभी विषय (<?php echo count($rounds); ?>)</button><button data-f="on">लाइव (<?php echo $ready; ?>)</button><button data-f="soon">जल्द आने वाले (<?php echo count($rounds) - $ready; ?>)</button></div>
   <div class="mx-subs" id="mx-subs"><?php $i = 0; foreach ($rounds as $r): $i++; $ok = eh_tp_ready($r); ?>
-   <a class="mx-s<?php echo $ok ? '' : ' soon'; ?>" href="<?php echo esc_url(eh_tp_url($r)); ?>" data-k="<?php echo esc_attr(mb_strtolower($r['sub'] . ' ' . $r['sub_en'])); ?>"><span class="ix"><?php echo str_pad((string) $i, 2, '0', STR_PAD_LEFT); ?></span><span class="tx"><b><?php echo esc_html($r['sub']); ?></b><small><?php echo esc_html($r['sub_en']); ?></small></span><span class="mx-st <?php echo $ok ? 'on' : 'soon'; ?>"><?php echo $ok ? 'LIVE' : 'जल्द'; ?></span></a>
+   <a class="mx-s<?php echo $ok ? '' : ' soon'; ?>" href="<?php echo esc_url(eh_tp_url($r)); ?>" data-k="<?php echo esc_attr(mb_strtolower($r['sub'] . ' ' . $r['sub_en'])); ?>"><span class="ix"><?php echo str_pad((string) $i, 2, '0', STR_PAD_LEFT); ?></span><span class="tx"><b><?php echo esc_html($r['sub']); ?></b><small><?php echo esc_html($r['sub_en']); ?></small></span><span class="rt"><span class="mx-st <?php echo $ok ? 'on' : 'soon'; ?>"><?php echo $ok ? 'LIVE' : 'जल्द'; ?></span></span><span class="go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
   <?php endforeach; ?></div>
-  <div class="mx-empty" id="mx-empty">कोई विषय नहीं मिला।</div>
+  <div class="mx-empty" id="mx-empty">कोई विषय नहीं मिला।</div></div>
   <div class="mx-pat">
    <div class="mx-box"><h3>प्रश्न-पत्र का स्वरूप</h3><table><tr><th>भाग</th><th>प्रश्न</th><th>अंक</th></tr><tr><td>सामान्य अध्ययन</td><td>30</td><td>90</td></tr><tr><td>संबंधित विषय</td><td>90</td><td>270</td></tr><tr><td>कुल</td><td>120</td><td>360</td></tr></table></div>
    <div class="mx-box"><h3>ज़रूरी बातें</h3><ol><li>हर सही उत्तर पर +3, गलत पर −1 अंक।</li><li>शुरू करने के बाद पूरे 120 मिनट मिलेंगे; घड़ी तभी चलती है जब परीक्षा खुली हो।</li><li>मेरिट में केवल पहला प्रयास गिना जाएगा, बाकी अभ्यास के लिए।</li><li>सबमिट के बाद स्कोर, रैंक, परसेंटाइल और व्याख्या तुरंत।</li></ol></div>
   </div>
  </div></section>
- <script>(function(){var q=document.getElementById('mx-q'),L=[].slice.call(document.querySelectorAll('#mx-subs .mx-s')),E=document.getElementById('mx-empty');q.addEventListener('input',function(){var v=q.value.trim().toLowerCase(),n=0;L.forEach(function(a){var s=!v||a.dataset.k.indexOf(v)>-1;a.style.display=s?'':'none';if(s)n++});E.style.display=n?'none':'block'})})();</script>
+ <script>(function(){var q=document.getElementById('mx-q'),L=[].slice.call(document.querySelectorAll('#mx-subs .mx-s')),E=document.getElementById('mx-empty');F='all',run=function(){var v=q.value.trim().toLowerCase(),n=0;L.forEach(function(a){var s=(!v||a.dataset.k.indexOf(v)>-1)&&(F==='all'||(F==='soon')===a.classList.contains('soon'));a.style.display=s?'':'none';if(s)n++});E.style.display=n?'none':'block'};q.addEventListener('input',run);
+[].forEach.call(document.querySelectorAll('#mx-tabs button'),function(b){b.onclick=function(){F=b.dataset.f;[].forEach.call(document.querySelectorAll('#mx-tabs button'),function(x){x.classList.toggle('on',x===b)});run()}})})();</script>
 <?php endif; ?>
 </main>
 <?php get_footer();

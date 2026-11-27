@@ -340,3 +340,10 @@ body.home{animation:uhfade .6s ease both}
 .uh-mtabs a:not(.on) small{color:#ffd277;opacity:1}
 .uh-btn.uh-btn-o{background:transparent;color:var(--ink);border-color:var(--ink)}
 .uh-btn.uh-btn-o:hover{background:var(--ink);color:#fff}
+/* three live-mock boxes in the hero */
+.uh-lbs{display:grid;gap:14px;max-width:760px;margin-top:18px}
+.uh-lbs .uh-stm{margin-top:0}
+.uh-lb-l{font-size:14px;opacity:.9}.uh-lb-l b{color:#ffd277;font-size:17px}
+.uh-lbs .uh-stm:nth-child(2){background:linear-gradient(125deg,#1d0b3d,#4b1d8f 60%,#7c3aed)}
+.uh-lbs .uh-stm:nth-child(3){background:linear-gradient(125deg,#032b22,#0b6b4f 60%,#16a34a)}
+@media(max-width:640px){.uh-lbs .uh-stm-bot{flex-direction:row;align-items:center}.uh-lbs .uh-stm-go{padding:12px 16px}}
