@@ -1,0 +1,1622 @@
+[
+{
+"q": "'राजनीति विज्ञान का जनक' किसे कहा जाता है?",
+"o": [
+"प्लेटो",
+"हॉब्स",
+"अरस्तू",
+"मैकियावेली"
+],
+"a": "C",
+"e": "",
+"qe": "Who is called the 'Father of Political Science'?",
+"oe": [
+"Plato",
+"Hobbes",
+"Aristotle",
+"Machiavelli"
+]
+},
+{
+"q": "'रिपब्लिक' ग्रंथ के लेखक हैं—",
+"o": [
+"सिसरो",
+"प्लेटो",
+"रूसो",
+"अरस्तू"
+],
+"a": "B",
+"e": "",
+"qe": "'The Republic' was written by",
+"oe": [
+"Cicero",
+"Plato",
+"Rousseau",
+"Aristotle"
+]
+},
+{
+"q": "'मनुष्य स्वभाव से एक सामाजिक/राजनीतिक प्राणी है' — किसने कहा?",
+"o": [
+"अरस्तू",
+"हॉब्स",
+"लॉक",
+"प्लेटो"
+],
+"a": "A",
+"e": "",
+"qe": "'Man is by nature a political animal' — who said it?",
+"oe": [
+"Aristotle",
+"Hobbes",
+"Locke",
+"Plato"
+]
+},
+{
+"q": "'द प्रिंस' के लेखक हैं—",
+"o": [
+"मैकियावेली",
+"बोदाँ",
+"मॉन्टेस्क्यू",
+"हॉब्स"
+],
+"a": "A",
+"e": "",
+"qe": "'The Prince' was written by",
+"oe": [
+"Machiavelli",
+"Bodin",
+"Montesquieu",
+"Hobbes"
+]
+},
+{
+"q": "'लेवियाथन' किसकी रचना है?",
+"o": [
+"बेंथम",
+"रूसो",
+"जॉन लॉक",
+"थॉमस हॉब्स"
+],
+"a": "D",
+"e": "",
+"qe": "'Leviathan' was written by",
+"oe": [
+"Bentham",
+"Rousseau",
+"John Locke",
+"Thomas Hobbes"
+]
+},
+{
+"q": "'सामान्य इच्छा' (General Will) का सिद्धांत किसका है?",
+"o": [
+"लॉक",
+"रूसो",
+"हॉब्स",
+"हीगल"
+],
+"a": "B",
+"e": "",
+"qe": "The theory of the 'General Will' belongs to",
+"oe": [
+"Locke",
+"Rousseau",
+"Hobbes",
+"Hegel"
+]
+},
+{
+"q": "'शक्ति पृथक्करण सिद्धांत' किसने दिया?",
+"o": [
+"मॉन्टेस्क्यू",
+"लॉक",
+"रूसो",
+"बोदाँ"
+],
+"a": "A",
+"e": "'द स्पिरिट ऑफ़ लॉज़'।",
+"qe": "The theory of separation of powers was given by",
+"oe": [
+"Montesquieu",
+"Locke",
+"Rousseau",
+"Bodin"
+]
+},
+{
+"q": "'अधिकतम लोगों का अधिकतम सुख' — यह सिद्धांत किसका है?",
+"o": [
+"मार्क्स",
+"जे. एस. मिल",
+"हीगल",
+"जेरेमी बेंथम"
+],
+"a": "D",
+"e": "",
+"qe": "'The greatest happiness of the greatest number' is associated with",
+"oe": [
+"Marx",
+"J. S. Mill",
+"Hegel",
+"Jeremy Bentham"
+]
+},
+{
+"q": "'ऑन लिबर्टी' (1859) के लेखक हैं—",
+"o": [
+"ग्रीन",
+"जे. एस. मिल",
+"लॉक",
+"बेंथम"
+],
+"a": "B",
+"e": "",
+"qe": "'On Liberty' (1859) was written by",
+"oe": [
+"Green",
+"J. S. Mill",
+"Locke",
+"Bentham"
+]
+},
+{
+"q": "'दास कैपिटल' किसकी रचना है?",
+"o": [
+"लेनिन",
+"कार्ल मार्क्स",
+"माओ",
+"एंगेल्स"
+],
+"a": "B",
+"e": "",
+"qe": "'Das Kapital' was written by",
+"oe": [
+"Lenin",
+"Karl Marx",
+"Mao",
+"Engels"
+]
+},
+{
+"q": "'संप्रभुता' का आधुनिक सिद्धांत किसने दिया?",
+"o": [
+"हॉब्स",
+"ऑस्टिन",
+"लास्की",
+"ज्यां बोदाँ"
+],
+"a": "D",
+"e": "",
+"qe": "The modern theory of sovereignty was given by",
+"oe": [
+"Hobbes",
+"Austin",
+"Laski",
+"Jean Bodin"
+]
+},
+{
+"q": "'ए थ्योरी ऑफ़ जस्टिस' (1971) के लेखक हैं—",
+"o": [
+"रॉबर्ट नॉज़िक",
+"माइकल सैंडेल",
+"अमर्त्य सेन",
+"जॉन रॉल्स"
+],
+"a": "D",
+"e": "",
+"qe": "'A Theory of Justice' (1971) was written by",
+"oe": [
+"Robert Nozick",
+"Michael Sandel",
+"Amartya Sen",
+"John Rawls"
+]
+},
+{
+"q": "राज्य के चार आवश्यक तत्व हैं—",
+"o": [
+"जनसंख्या, सेना, सरकार, धर्म",
+"जनसंख्या, भू-भाग, सरकार, संप्रभुता",
+"सरकार, कर, पुलिस, भू-भाग",
+"भू-भाग, संविधान, न्यायपालिका, सेना"
+],
+"a": "B",
+"e": "",
+"qe": "The four essential elements of a State are",
+"oe": [
+"population, army, government, religion",
+"population, territory, government, sovereignty",
+"government, taxes, police, territory",
+"territory, constitution, judiciary, army"
+]
+},
+{
+"q": "'लोकतंत्र जनता का, जनता द्वारा और जनता के लिए शासन है' — किसने कहा?",
+"o": [
+"अब्राहम लिंकन",
+"जॉर्ज वाशिंगटन",
+"लास्की",
+"डायसी"
+],
+"a": "A",
+"e": "",
+"qe": "'Democracy is government of the people, by the people, for the people' — who said it?",
+"oe": [
+"Abraham Lincoln",
+"George Washington",
+"Laski",
+"Dicey"
+]
+},
+{
+"q": "'विधि का शासन' (Rule of Law) की अवधारणा किससे जुड़ी है?",
+"o": [
+"ए. वी. डायसी",
+"मिल",
+"ऑस्टिन",
+"बेंथम"
+],
+"a": "A",
+"e": "",
+"qe": "The concept of 'Rule of Law' is associated with",
+"oe": [
+"A. V. Dicey",
+"Mill",
+"Austin",
+"Bentham"
+]
+},
+{
+"q": "संविधान सभा का गठन किस योजना के अंतर्गत हुआ?",
+"o": [
+"माउंटबेटन योजना",
+"वेवेल योजना",
+"कैबिनेट मिशन योजना (1946)",
+"क्रिप्स प्रस्ताव"
+],
+"a": "C",
+"e": "",
+"qe": "The Constituent Assembly was formed under the",
+"oe": [
+"Mountbatten Plan",
+"Wavell Plan",
+"Cabinet Mission Plan (1946)",
+"Cripps Proposal"
+]
+},
+{
+"q": "संविधान सभा की पहली बैठक कब हुई?",
+"o": [
+"26 नवंबर 1949",
+"24 जनवरी 1950",
+"9 दिसंबर 1946",
+"15 अगस्त 1947"
+],
+"a": "C",
+"e": "",
+"qe": "The first meeting of the Constituent Assembly was held on",
+"oe": [
+"26 November 1949",
+"24 January 1950",
+"9 December 1946",
+"15 August 1947"
+]
+},
+{
+"q": "'उद्देश्य प्रस्ताव' (Objectives Resolution) किसने प्रस्तुत किया?",
+"o": [
+"जवाहरलाल नेहरू",
+"आंबेडकर",
+"राजेंद्र प्रसाद",
+"पटेल"
+],
+"a": "A",
+"e": "",
+"qe": "The Objectives Resolution was moved by",
+"oe": [
+"Jawaharlal Nehru",
+"Ambedkar",
+"Rajendra Prasad",
+"Patel"
+]
+},
+{
+"q": "भारतीय संविधान का कौन-सा भाग 'नीति-निदेशक तत्व' से संबंधित है?",
+"o": [
+"भाग 4A",
+"भाग 5",
+"भाग 4",
+"भाग 3"
+],
+"a": "C",
+"e": "",
+"qe": "Which Part of the Constitution deals with Directive Principles?",
+"oe": [
+"Part IVA",
+"Part V",
+"Part IV",
+"Part III"
+]
+},
+{
+"q": "नीति-निदेशक तत्व किस देश के संविधान से प्रेरित हैं?",
+"o": [
+"आयरलैंड",
+"ब्रिटेन",
+"अमेरिका",
+"कनाडा"
+],
+"a": "A",
+"e": "",
+"qe": "Directive Principles were borrowed from the constitution of",
+"oe": [
+"Ireland",
+"Britain",
+"USA",
+"Canada"
+]
+},
+{
+"q": "'न्यायिक पुनरावलोकन' की अवधारणा किस देश से ली गई?",
+"o": [
+"फ़्रांस",
+"ब्रिटेन",
+"अमेरिका",
+"जापान"
+],
+"a": "C",
+"e": "",
+"qe": "Judicial review was borrowed from",
+"oe": [
+"France",
+"Britain",
+"USA",
+"Japan"
+]
+},
+{
+"q": "'संघ की संरचना (अर्ध-संघीय) व अवशिष्ट शक्तियाँ केंद्र को' — किस देश से प्रेरित है?",
+"o": [
+"आयरलैंड",
+"अमेरिका",
+"कनाडा",
+"ऑस्ट्रेलिया"
+],
+"a": "C",
+"e": "",
+"qe": "The quasi-federal structure with residuary powers to the Centre is from",
+"oe": [
+"Ireland",
+"USA",
+"Canada",
+"Australia"
+]
+},
+{
+"q": "'समवर्ती सूची' किस देश के संविधान से ली गई?",
+"o": [
+"अमेरिका",
+"जर्मनी",
+"कनाडा",
+"ऑस्ट्रेलिया"
+],
+"a": "D",
+"e": "",
+"qe": "The Concurrent List was borrowed from",
+"oe": [
+"USA",
+"Germany",
+"Canada",
+"Australia"
+]
+},
+{
+"q": "आपातकाल में मौलिक अधिकारों का निलंबन किस देश से प्रेरित है?",
+"o": [
+"रूस",
+"अमेरिका",
+"जर्मनी (वाइमर)",
+"ब्रिटेन"
+],
+"a": "C",
+"e": "",
+"qe": "Suspension of Fundamental Rights during emergency is from",
+"oe": [
+"Russia",
+"USA",
+"Germany (Weimar)",
+"Britain"
+]
+},
+{
+"q": "'केशवानंद भारती वाद' (1973) किस सिद्धांत के लिए प्रसिद्ध है?",
+"o": [
+"विधि का शासन",
+"सामूहिक उत्तरदायित्व",
+"मूल ढाँचा सिद्धांत",
+"संसदीय संप्रभुता"
+],
+"a": "C",
+"e": "",
+"qe": "The Kesavananda Bharati case (1973) is famous for the",
+"oe": [
+"Rule of Law",
+"Collective responsibility",
+"Basic Structure doctrine",
+"Parliamentary sovereignty"
+]
+},
+{
+"q": "'मेनका गांधी वाद' (1978) किस अनुच्छेद की व्याख्या से जुड़ा है?",
+"o": [
+"अनुच्छेद 21",
+"अनुच्छेद 32",
+"अनुच्छेद 14",
+"अनुच्छेद 19"
+],
+"a": "A",
+"e": "",
+"qe": "The Maneka Gandhi case (1978) relates to the interpretation of",
+"oe": [
+"Article 21",
+"Article 32",
+"Article 14",
+"Article 19"
+]
+},
+{
+"q": "'इंदिरा साहनी वाद' (1992) किससे संबंधित है?",
+"o": [
+"दल-बदल",
+"आपातकाल",
+"OBC आरक्षण",
+"राज्यपाल"
+],
+"a": "C",
+"e": "",
+"qe": "The Indra Sawhney case (1992) relates to",
+"oe": [
+"Defection",
+"Emergency",
+"OBC reservation",
+"Governor"
+]
+},
+{
+"q": "'एस. आर. बोम्मई वाद' (1994) किससे संबंधित है?",
+"o": [
+"मौलिक अधिकार",
+"अनुच्छेद 356 (राष्ट्रपति शासन)",
+"न्यायाधीशों की नियुक्ति",
+"चुनाव"
+],
+"a": "B",
+"e": "",
+"qe": "The S. R. Bommai case (1994) relates to",
+"oe": [
+"Fundamental Rights",
+"Article 356 (President's Rule)",
+"Appointment of judges",
+"Elections"
+]
+},
+{
+"q": "अस्पृश्यता का अंत किस अनुच्छेद में है?",
+"o": [
+"अनुच्छेद 16",
+"अनुच्छेद 17",
+"अनुच्छेद 18",
+"अनुच्छेद 15"
+],
+"a": "B",
+"e": "",
+"qe": "Abolition of untouchability is in",
+"oe": [
+"Article 16",
+"Article 17",
+"Article 18",
+"Article 15"
+]
+},
+{
+"q": "उपाधियों का अंत किस अनुच्छेद में है?",
+"o": [
+"अनुच्छेद 14",
+"अनुच्छेद 17",
+"अनुच्छेद 20",
+"अनुच्छेद 18"
+],
+"a": "D",
+"e": "",
+"qe": "Abolition of titles is in",
+"oe": [
+"Article 14",
+"Article 17",
+"Article 20",
+"Article 18"
+]
+},
+{
+"q": "'बंदी प्रत्यक्षीकरण' (Habeas Corpus) रिट का अर्थ है—",
+"o": [
+"हम आदेश देते हैं",
+"किस अधिकार से",
+"रोकना",
+"शरीर प्रस्तुत करो"
+],
+"a": "D",
+"e": "",
+"qe": "The writ of Habeas Corpus means",
+"oe": [
+"we command",
+"by what authority",
+"to prohibit",
+"to have the body"
+]
+},
+{
+"q": "'परमादेश' (Mandamus) रिट का अर्थ है—",
+"o": [
+"प्रमाणित करो",
+"किस अधिकार से",
+"शरीर प्रस्तुत करो",
+"हम आदेश देते हैं"
+],
+"a": "D",
+"e": "",
+"qe": "The writ of Mandamus means",
+"oe": [
+"to be certified",
+"by what authority",
+"to have the body",
+"we command"
+]
+},
+{
+"q": "'अधिकार पृच्छा' (Quo Warranto) रिट का अर्थ है—",
+"o": [
+"रोकना",
+"किस अधिकार से",
+"शरीर प्रस्तुत करो",
+"हम आदेश देते हैं"
+],
+"a": "B",
+"e": "",
+"qe": "The writ of Quo Warranto means",
+"oe": [
+"to prohibit",
+"by what authority",
+"to have the body",
+"we command"
+]
+},
+{
+"q": "राष्ट्रपति पर महाभियोग किस अनुच्छेद में है?",
+"o": [
+"अनुच्छेद 72",
+"अनुच्छेद 61",
+"अनुच्छेद 56",
+"अनुच्छेद 74"
+],
+"a": "B",
+"e": "",
+"qe": "Impeachment of the President is in",
+"oe": [
+"Article 72",
+"Article 61",
+"Article 56",
+"Article 74"
+]
+},
+{
+"q": "राष्ट्रपति की क्षमादान शक्ति किस अनुच्छेद में है?",
+"o": [
+"अनुच्छेद 123",
+"अनुच्छेद 72",
+"अनुच्छेद 161",
+"अनुच्छेद 143"
+],
+"a": "B",
+"e": "",
+"qe": "The President's pardoning power is in",
+"oe": [
+"Article 123",
+"Article 72",
+"Article 161",
+"Article 143"
+]
+},
+{
+"q": "राष्ट्रपति की अध्यादेश जारी करने की शक्ति किस अनुच्छेद में है?",
+"o": [
+"अनुच्छेद 213",
+"अनुच्छेद 72",
+"अनुच्छेद 123",
+"अनुच्छेद 352"
+],
+"a": "C",
+"e": "",
+"qe": "The President's ordinance-making power is in",
+"oe": [
+"Article 213",
+"Article 72",
+"Article 123",
+"Article 352"
+]
+},
+{
+"q": "राष्ट्रीय आपातकाल किस अनुच्छेद में है?",
+"o": [
+"अनुच्छेद 365",
+"अनुच्छेद 356",
+"अनुच्छेद 352",
+"अनुच्छेद 360"
+],
+"a": "C",
+"e": "",
+"qe": "National Emergency is under",
+"oe": [
+"Article 365",
+"Article 356",
+"Article 352",
+"Article 360"
+]
+},
+{
+"q": "वित्तीय आपातकाल किस अनुच्छेद में है?",
+"o": [
+"अनुच्छेद 356",
+"अनुच्छेद 352",
+"अनुच्छेद 280",
+"अनुच्छेद 360"
+],
+"a": "D",
+"e": "",
+"qe": "Financial Emergency is under",
+"oe": [
+"Article 356",
+"Article 352",
+"Article 280",
+"Article 360"
+]
+},
+{
+"q": "भारत में अब तक वित्तीय आपातकाल कितनी बार लगाया गया?",
+"o": [
+"कभी नहीं",
+"एक बार",
+"दो बार",
+"तीन बार"
+],
+"a": "A",
+"e": "",
+"qe": "How many times has Financial Emergency been declared in India?",
+"oe": [
+"Never",
+"Once",
+"Twice",
+"Thrice"
+]
+},
+{
+"q": "वित्त आयोग का गठन किस अनुच्छेद के अंतर्गत होता है?",
+"o": [
+"अनुच्छेद 148",
+"अनुच्छेद 315",
+"अनुच्छेद 280",
+"अनुच्छेद 324"
+],
+"a": "C",
+"e": "",
+"qe": "The Finance Commission is constituted under",
+"oe": [
+"Article 148",
+"Article 315",
+"Article 280",
+"Article 324"
+]
+},
+{
+"q": "नियंत्रक एवं महालेखा परीक्षक (CAG) का उल्लेख किस अनुच्छेद में है?",
+"o": [
+"अनुच्छेद 148",
+"अनुच्छेद 280",
+"अनुच्छेद 76",
+"अनुच्छेद 165"
+],
+"a": "A",
+"e": "",
+"qe": "The CAG is provided for in",
+"oe": [
+"Article 148",
+"Article 280",
+"Article 76",
+"Article 165"
+]
+},
+{
+"q": "भारत के महान्यायवादी (Attorney General) का उल्लेख किस अनुच्छेद में है?",
+"o": [
+"अनुच्छेद 165",
+"अनुच्छेद 124",
+"अनुच्छेद 76",
+"अनुच्छेद 148"
+],
+"a": "C",
+"e": "",
+"qe": "The Attorney General is provided for in",
+"oe": [
+"Article 165",
+"Article 124",
+"Article 76",
+"Article 148"
+]
+},
+{
+"q": "संसद के दोनों सदनों की संयुक्त बैठक की अध्यक्षता कौन करता है?",
+"o": [
+"उपराष्ट्रपति",
+"राष्ट्रपति",
+"लोकसभा अध्यक्ष",
+"प्रधानमंत्री"
+],
+"a": "C",
+"e": "",
+"qe": "A joint sitting of both Houses is presided over by the",
+"oe": [
+"Vice-President",
+"President",
+"Speaker of Lok Sabha",
+"Prime Minister"
+]
+},
+{
+"q": "संविधान संशोधन की प्रक्रिया किस अनुच्छेद में है?",
+"o": [
+"अनुच्छेद 360",
+"अनुच्छेद 356",
+"अनुच्छेद 368",
+"अनुच्छेद 370"
+],
+"a": "C",
+"e": "",
+"qe": "The procedure for amending the Constitution is in",
+"oe": [
+"Article 360",
+"Article 356",
+"Article 368",
+"Article 370"
+]
+},
+{
+"q": "'शून्य काल' (Zero Hour) की प्रथा किस देश की देन है?",
+"o": [
+"भारत",
+"कनाडा",
+"ब्रिटेन",
+"अमेरिका"
+],
+"a": "A",
+"e": "",
+"qe": "'Zero Hour' is an innovation of",
+"oe": [
+"India",
+"Canada",
+"Britain",
+"USA"
+]
+},
+{
+"q": "राज्यसभा किसी विषय को राष्ट्रीय महत्व का घोषित कर संसद को कानून बनाने का अधिकार किस अनुच्छेद से देती है?",
+"o": [
+"अनुच्छेद 249",
+"अनुच्छेद 250",
+"अनुच्छेद 253",
+"अनुच्छेद 252"
+],
+"a": "A",
+"e": "",
+"qe": "Under which Article can the Rajya Sabha empower Parliament to legislate on a State subject in national interest?",
+"oe": [
+"Article 249",
+"Article 250",
+"Article 253",
+"Article 252"
+]
+},
+{
+"q": "उच्च न्यायालय की रिट अधिकारिता किस अनुच्छेद में है?",
+"o": [
+"अनुच्छेद 226",
+"अनुच्छेद 227",
+"अनुच्छेद 136",
+"अनुच्छेद 32"
+],
+"a": "A",
+"e": "",
+"qe": "The writ jurisdiction of High Courts is under",
+"oe": [
+"Article 226",
+"Article 227",
+"Article 136",
+"Article 32"
+]
+},
+{
+"q": "राज्य लोक सेवा आयोग के सदस्यों को कौन हटा सकता है?",
+"o": [
+"मुख्य न्यायाधीश",
+"राष्ट्रपति",
+"राज्यपाल",
+"मुख्यमंत्री"
+],
+"a": "B",
+"e": "",
+"qe": "Members of a State PSC can be removed by the",
+"oe": [
+"Chief Justice",
+"President",
+"Governor",
+"Chief Minister"
+]
+},
+{
+"q": "'लोकपाल और लोकायुक्त अधिनियम' किस वर्ष पारित हुआ?",
+"o": [
+"2011",
+"2005",
+"2016",
+"2013"
+],
+"a": "D",
+"e": "",
+"qe": "The Lokpal and Lokayuktas Act was passed in",
+"oe": [
+"2011",
+"2005",
+"2016",
+"2013"
+]
+},
+{
+"q": "सूचना का अधिकार अधिनियम (RTI) कब लागू हुआ?",
+"o": [
+"26 जनवरी 2006",
+"12 अक्टूबर 2005",
+"1 अप्रैल 2010",
+"15 जून 2005"
+],
+"a": "B",
+"e": "",
+"qe": "The Right to Information Act came into force on",
+"oe": [
+"26 January 2006",
+"12 October 2005",
+"1 April 2010",
+"15 June 2005"
+]
+},
+{
+"q": "RTI के अंतर्गत सामान्यतः सूचना कितने दिनों में दी जानी चाहिए?",
+"o": [
+"30 दिन",
+"15 दिन",
+"60 दिन",
+"45 दिन"
+],
+"a": "A",
+"e": "जीवन/स्वतंत्रता के मामले में 48 घंटे।",
+"qe": "Under RTI, information should normally be provided within",
+"oe": [
+"30 days",
+"15 days",
+"60 days",
+"45 days"
+]
+},
+{
+"q": "राष्ट्रीय मानवाधिकार आयोग की स्थापना कब हुई?",
+"o": [
+"2000",
+"1985",
+"1990",
+"1993"
+],
+"a": "D",
+"e": "",
+"qe": "The National Human Rights Commission was set up in",
+"oe": [
+"2000",
+"1985",
+"1990",
+"1993"
+]
+},
+{
+"q": "मानवाधिकारों की सार्वभौमिक घोषणा (UDHR) कब हुई?",
+"o": [
+"10 दिसंबर 1948",
+"1 जनवरी 1950",
+"24 अक्टूबर 1945",
+"26 जून 1945"
+],
+"a": "A",
+"e": "",
+"qe": "The Universal Declaration of Human Rights was adopted on",
+"oe": [
+"10 December 1948",
+"1 January 1950",
+"24 October 1945",
+"26 June 1945"
+]
+},
+{
+"q": "संयुक्त राष्ट्र सुरक्षा परिषद में स्थायी सदस्य कितने हैं?",
+"o": [
+"5",
+"15",
+"10",
+"7"
+],
+"a": "A",
+"e": "",
+"qe": "How many permanent members does the UN Security Council have?",
+"oe": [
+"5",
+"15",
+"10",
+"7"
+]
+},
+{
+"q": "संयुक्त राष्ट्र का मुख्यालय कहाँ है?",
+"o": [
+"वियना",
+"न्यूयॉर्क",
+"पेरिस",
+"जेनेवा"
+],
+"a": "B",
+"e": "",
+"qe": "The UN headquarters is in",
+"oe": [
+"Vienna",
+"New York",
+"Paris",
+"Geneva"
+]
+},
+{
+"q": "अंतर्राष्ट्रीय न्यायालय कहाँ स्थित है?",
+"o": [
+"हेग",
+"न्यूयॉर्क",
+"रोम",
+"जेनेवा"
+],
+"a": "A",
+"e": "",
+"qe": "The International Court of Justice is at",
+"oe": [
+"The Hague",
+"New York",
+"Rome",
+"Geneva"
+]
+},
+{
+"q": "गुटनिरपेक्ष आंदोलन का प्रथम शिखर सम्मेलन (1961) कहाँ हुआ?",
+"o": [
+"काहिरा",
+"बांडुंग",
+"नई दिल्ली",
+"बेलग्रेड"
+],
+"a": "D",
+"e": "",
+"qe": "The first NAM summit (1961) was held at",
+"oe": [
+"Cairo",
+"Bandung",
+"New Delhi",
+"Belgrade"
+]
+},
+{
+"q": "'पंचशील' समझौता (1954) भारत और किस देश के बीच हुआ?",
+"o": [
+"श्रीलंका",
+"नेपाल",
+"चीन",
+"पाकिस्तान"
+],
+"a": "C",
+"e": "",
+"qe": "The Panchsheel Agreement (1954) was between India and",
+"oe": [
+"Sri Lanka",
+"Nepal",
+"China",
+"Pakistan"
+]
+},
+{
+"q": "'शिमला समझौता' (1972) भारत और किस देश के बीच हुआ?",
+"o": [
+"चीन",
+"बांग्लादेश",
+"पाकिस्तान",
+"श्रीलंका"
+],
+"a": "C",
+"e": "",
+"qe": "The Simla Agreement (1972) was between India and",
+"oe": [
+"China",
+"Bangladesh",
+"Pakistan",
+"Sri Lanka"
+]
+},
+{
+"q": "SAARC की स्थापना कब हुई?",
+"o": [
+"1991",
+"1985",
+"1995",
+"1967"
+],
+"a": "B",
+"e": "ढाका में।",
+"qe": "SAARC was established in",
+"oe": [
+"1991",
+"1985",
+"1995",
+"1967"
+]
+},
+{
+"q": "ASEAN का मुख्यालय कहाँ है?",
+"o": [
+"बैंकॉक",
+"मनीला",
+"जकार्ता",
+"सिंगापुर"
+],
+"a": "C",
+"e": "",
+"qe": "ASEAN's headquarters is in",
+"oe": [
+"Bangkok",
+"Manila",
+"Jakarta",
+"Singapore"
+]
+},
+{
+"q": "'शीत युद्ध' मुख्यतः किन दो गुटों के बीच था?",
+"o": [
+"जर्मनी और जापान",
+"भारत और चीन",
+"ब्रिटेन और फ़्रांस",
+"अमेरिका और सोवियत संघ"
+],
+"a": "D",
+"e": "",
+"qe": "The Cold War was mainly between",
+"oe": [
+"Germany and Japan",
+"India and China",
+"Britain and France",
+"USA and USSR"
+]
+},
+{
+"q": "सोवियत संघ का विघटन कब हुआ?",
+"o": [
+"1985",
+"1989",
+"1991",
+"1993"
+],
+"a": "C",
+"e": "",
+"qe": "The USSR disintegrated in",
+"oe": [
+"1985",
+"1989",
+"1991",
+"1993"
+]
+},
+{
+"q": "बर्लिन की दीवार कब गिरी?",
+"o": [
+"1991",
+"1990",
+"1961",
+"1989"
+],
+"a": "D",
+"e": "",
+"qe": "The Berlin Wall fell in",
+"oe": [
+"1991",
+"1990",
+"1961",
+"1989"
+]
+},
+{
+"q": "यूरोपीय संघ की स्थापना किस संधि से हुई?",
+"o": [
+"लिस्बन संधि",
+"मास्ट्रिख्ट संधि (1992)",
+"रोम संधि",
+"वर्साय संधि"
+],
+"a": "B",
+"e": "",
+"qe": "The European Union was established by the",
+"oe": [
+"Treaty of Lisbon",
+"Maastricht Treaty (1992)",
+"Treaty of Rome",
+"Treaty of Versailles"
+]
+},
+{
+"q": "भारत में 'एक दलीय प्रभुत्व' (कांग्रेस प्रणाली) शब्द किसने दिया?",
+"o": [
+"रजनी कोठारी",
+"मॉरिस जोन्स",
+"आंद्रे बेते",
+"पॉल ब्रास"
+],
+"a": "A",
+"e": "",
+"qe": "The term 'Congress system' (one-party dominance) was given by",
+"oe": [
+"Rajni Kothari",
+"Morris-Jones",
+"André Béteille",
+"Paul Brass"
+]
+},
+{
+"q": "भारत में आपातकाल (राष्ट्रीय) 1975 में किस आधार पर घोषित हुआ?",
+"o": [
+"आंतरिक अशांति",
+"सशस्त्र विद्रोह",
+"बाहरी आक्रमण",
+"युद्ध"
+],
+"a": "A",
+"e": "44वें संशोधन से 'आंतरिक अशांति' की जगह 'सशस्त्र विद्रोह' हुआ।",
+"qe": "The 1975 National Emergency was declared on the ground of",
+"oe": [
+"internal disturbance",
+"armed rebellion",
+"external aggression",
+"war"
+]
+},
+{
+"q": "राज्य पुनर्गठन आयोग (1953) के अध्यक्ष थे—",
+"o": [
+"फ़ज़ल अली",
+"एच. एन. कुंजरू",
+"पोट्टी श्रीरामुलु",
+"के. एम. पणिक्कर"
+],
+"a": "A",
+"e": "",
+"qe": "The States Reorganisation Commission (1953) was chaired by",
+"oe": [
+"Fazl Ali",
+"H. N. Kunzru",
+"Potti Sriramulu",
+"K. M. Panikkar"
+]
+},
+{
+"q": "भाषा के आधार पर बनने वाला पहला राज्य था—",
+"o": [
+"गुजरात",
+"महाराष्ट्र",
+"केरल",
+"आंध्र प्रदेश"
+],
+"a": "D",
+"e": "1953।",
+"qe": "The first state formed on linguistic basis was",
+"oe": [
+"Gujarat",
+"Maharashtra",
+"Kerala",
+"Andhra Pradesh"
+]
+},
+{
+"q": "केंद्र-राज्य संबंधों पर 'सरकारिया आयोग' कब गठित हुआ?",
+"o": [
+"2007",
+"1988",
+"1969",
+"1983"
+],
+"a": "D",
+"e": "",
+"qe": "The Sarkaria Commission on Centre–State relations was set up in",
+"oe": [
+"2007",
+"1988",
+"1969",
+"1983"
+]
+},
+{
+"q": "'बलवंत राय मेहता समिति' किससे संबंधित है?",
+"o": [
+"पुलिस सुधार",
+"पंचायती राज",
+"भाषा",
+"चुनाव सुधार"
+],
+"a": "B",
+"e": "",
+"qe": "The Balwant Rai Mehta Committee relates to",
+"oe": [
+"Police reforms",
+"Panchayati Raj",
+"Language",
+"Electoral reforms"
+]
+},
+{
+"q": "त्रिस्तरीय पंचायती राज सबसे पहले किस राज्य में लागू हुआ?",
+"o": [
+"गुजरात",
+"आंध्र प्रदेश",
+"उत्तर प्रदेश",
+"राजस्थान"
+],
+"a": "D",
+"e": "नागौर, 2 अक्टूबर 1959।",
+"qe": "Three-tier Panchayati Raj was first implemented in",
+"oe": [
+"Gujarat",
+"Andhra Pradesh",
+"Uttar Pradesh",
+"Rajasthan"
+]
+},
+{
+"q": "पंचायतों में महिलाओं के लिए न्यूनतम आरक्षण (संविधान) है—",
+"o": [
+"एक-तिहाई",
+"एक-चौथाई",
+"दो-तिहाई",
+"आधा"
+],
+"a": "A",
+"e": "",
+"qe": "The minimum reservation for women in Panchayats (Constitution) is",
+"oe": [
+"one-third",
+"one-fourth",
+"two-thirds",
+"one-half"
+]
+},
+{
+"q": "'नारी शक्ति वंदन अधिनियम' (2023) किससे संबंधित है?",
+"o": [
+"मातृत्व अवकाश",
+"लोकसभा व विधानसभाओं में महिलाओं को 33% आरक्षण",
+"पंचायत आरक्षण",
+"महिला सुरक्षा"
+],
+"a": "B",
+"e": "",
+"qe": "The 'Nari Shakti Vandan Adhiniyam' (2023) relates to",
+"oe": [
+"maternity leave",
+"33% reservation for women in Lok Sabha and Assemblies",
+"Panchayat reservation",
+"women's safety"
+]
+},
+{
+"q": "भारत में दबाव समूह का उदाहरण है—",
+"o": [
+"नीति आयोग",
+"निर्वाचन आयोग",
+"FICCI",
+"संसद"
+],
+"a": "C",
+"e": "",
+"qe": "An example of a pressure group in India is",
+"oe": [
+"NITI Aayog",
+"Election Commission",
+"FICCI",
+"Parliament"
+]
+},
+{
+"q": "'राजनीतिक समाजीकरण' का अर्थ है—",
+"o": [
+"चुनाव लड़ना",
+"सरकार बनाना",
+"दल बदलना",
+"राजनीतिक मूल्य व दृष्टिकोण सीखने की प्रक्रिया"
+],
+"a": "D",
+"e": "",
+"qe": "'Political socialisation' means",
+"oe": [
+"contesting elections",
+"forming a government",
+"changing parties",
+"the process of learning political values and attitudes"
+]
+},
+{
+"q": "राजनीति को 'मूल्यों का आधिकारिक आवंटन' किसने कहा?",
+"o": [
+"लासवेल",
+"आमंड",
+"डेविड ईस्टन",
+"रॉबर्ट डाल"
+],
+"a": "C",
+"e": "",
+"qe": "Who defined politics as the 'authoritative allocation of values'?",
+"oe": [
+"Lasswell",
+"Almond",
+"David Easton",
+"Robert Dahl"
+]
+},
+{
+"q": "'कौन क्या, कब और कैसे पाता है' — राजनीति की यह परिभाषा किसकी है?",
+"o": [
+"हेरोल्ड लासवेल",
+"डेविड ईस्टन",
+"पॉवेल",
+"आमंड"
+],
+"a": "A",
+"e": "",
+"qe": "'Who gets what, when, how' — whose definition of politics?",
+"oe": [
+"Harold Lasswell",
+"David Easton",
+"Powell",
+"Almond"
+]
+},
+{
+"q": "सत्ता (Authority) के तीन प्रकार — पारंपरिक, करिश्माई और विधिक-तार्किक — किसने बताए?",
+"o": [
+"मैक्स वेबर",
+"दुर्खीम",
+"पैरेटो",
+"मार्क्स"
+],
+"a": "A",
+"e": "",
+"qe": "The three types of authority — traditional, charismatic, legal-rational — were given by",
+"oe": [
+"Max Weber",
+"Durkheim",
+"Pareto",
+"Marx"
+]
+},
+{
+"q": "'अभिजन वर्ग सिद्धांत' (Elite theory) से कौन जुड़ा है?",
+"o": [
+"मिल, बेंथम",
+"पैरेटो, मोस्का, मिशेल्स",
+"लॉक, रूसो",
+"मार्क्स, एंगेल्स"
+],
+"a": "B",
+"e": "",
+"qe": "Elite theory is associated with",
+"oe": [
+"Mill, Bentham",
+"Pareto, Mosca, Michels",
+"Locke, Rousseau",
+"Marx, Engels"
+]
+},
+{
+"q": "'कुलीनतंत्र का लौह नियम' (Iron law of oligarchy) किसने दिया?",
+"o": [
+"मोस्का",
+"रॉबर्ट मिशेल्स",
+"वेबर",
+"पैरेटो"
+],
+"a": "B",
+"e": "",
+"qe": "The 'Iron Law of Oligarchy' was given by",
+"oe": [
+"Mosca",
+"Robert Michels",
+"Weber",
+"Pareto"
+]
+},
+{
+"q": "'सर्वोदय' की अवधारणा किससे जुड़ी है?",
+"o": [
+"नेहरू",
+"आंबेडकर",
+"लोहिया",
+"महात्मा गांधी"
+],
+"a": "D",
+"e": "",
+"qe": "The concept of 'Sarvodaya' is associated with",
+"oe": [
+"Nehru",
+"Ambedkar",
+"Lohia",
+"Mahatma Gandhi"
+]
+},
+{
+"q": "'संपूर्ण क्रांति' का नारा किसने दिया?",
+"o": [
+"चरण सिंह",
+"जयप्रकाश नारायण",
+"विनोबा भावे",
+"राम मनोहर लोहिया"
+],
+"a": "B",
+"e": "",
+"qe": "The slogan 'Total Revolution' was given by",
+"oe": [
+"Charan Singh",
+"Jayaprakash Narayan",
+"Vinoba Bhave",
+"Ram Manohar Lohia"
+]
+},
+{
+"q": "'भूदान आंदोलन' किसने शुरू किया?",
+"o": [
+"जयप्रकाश नारायण",
+"नेहरू",
+"गांधी",
+"विनोबा भावे"
+],
+"a": "D",
+"e": "",
+"qe": "The Bhoodan movement was started by",
+"oe": [
+"Jayaprakash Narayan",
+"Nehru",
+"Gandhi",
+"Vinoba Bhave"
+]
+},
+{
+"q": "'चौखंभा राज्य' की अवधारणा किसने दी?",
+"o": [
+"जयप्रकाश नारायण",
+"राम मनोहर लोहिया",
+"गांधी",
+"एम. एन. रॉय"
+],
+"a": "B",
+"e": "",
+"qe": "The concept of the 'Four-Pillar State' (Chaukhamba Raj) was given by",
+"oe": [
+"Jayaprakash Narayan",
+"Ram Manohar Lohia",
+"Gandhi",
+"M. N. Roy"
+]
+},
+{
+"q": "'एनिहिलेशन ऑफ़ कास्ट' किसकी रचना है?",
+"o": [
+"पेरियार",
+"गांधी",
+"ज्योतिबा फुले",
+"बी. आर. आंबेडकर"
+],
+"a": "D",
+"e": "",
+"qe": "'Annihilation of Caste' was written by",
+"oe": [
+"Periyar",
+"Gandhi",
+"Jyotiba Phule",
+"B. R. Ambedkar"
+]
+},
+{
+"q": "भारत का पहला लोकसभा आम चुनाव कब हुआ?",
+"o": [
+"1957",
+"1947",
+"1950",
+"1951–52"
+],
+"a": "D",
+"e": "",
+"qe": "India's first general election to the Lok Sabha was held in",
+"oe": [
+"1957",
+"1947",
+"1950",
+"1951–52"
+]
+},
+{
+"q": "मुख्य निर्वाचन आयुक्त को पद से कैसे हटाया जाता है?",
+"o": [
+"प्रधानमंत्री द्वारा",
+"सर्वोच्च न्यायालय के न्यायाधीश की तरह",
+"लोकसभा के साधारण बहुमत से",
+"राष्ट्रपति की इच्छा से"
+],
+"a": "B",
+"e": "",
+"qe": "The Chief Election Commissioner can be removed",
+"oe": [
+"by the Prime Minister",
+"like a Supreme Court judge",
+"by a simple majority of Lok Sabha",
+"at the President's pleasure"
+]
+},
+{
+"q": "EVM का पहली बार प्रयोग किस राज्य के उपचुनाव (1982) में हुआ?",
+"o": [
+"गोवा",
+"केरल",
+"तमिलनाडु",
+"कर्नाटक"
+],
+"a": "B",
+"e": "पारूर विधानसभा क्षेत्र।",
+"qe": "EVMs were first used in a 1982 by-election in",
+"oe": [
+"Goa",
+"Kerala",
+"Tamil Nadu",
+"Karnataka"
+]
+},
+{
+"q": "NOTA विकल्प किस वर्ष से उपलब्ध हुआ?",
+"o": [
+"2004",
+"2014",
+"2013",
+"2009"
+],
+"a": "C",
+"e": "",
+"qe": "The NOTA option became available from",
+"oe": [
+"2004",
+"2014",
+"2013",
+"2009"
+]
+}
+]

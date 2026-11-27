@@ -1,0 +1,1622 @@
+[
+{
+"q": "'अर्थशास्त्र के जनक' किसे कहा जाता है?",
+"o": [
+"मार्शल",
+"एडम स्मिथ",
+"रिकार्डो",
+"कीन्स"
+],
+"a": "B",
+"e": "",
+"qe": "Who is called the 'Father of Economics'?",
+"oe": [
+"Marshall",
+"Adam Smith",
+"Ricardo",
+"Keynes"
+]
+},
+{
+"q": "'द वेल्थ ऑफ़ नेशंस' (1776) के लेखक हैं—",
+"o": [
+"माल्थस",
+"एडम स्मिथ",
+"जे. एस. मिल",
+"डेविड रिकार्डो"
+],
+"a": "B",
+"e": "",
+"qe": "'The Wealth of Nations' (1776) was written by",
+"oe": [
+"Malthus",
+"Adam Smith",
+"J. S. Mill",
+"David Ricardo"
+]
+},
+{
+"q": "अर्थशास्त्र की 'कल्याण संबंधी परिभाषा' किसने दी?",
+"o": [
+"रॉबिंस",
+"सैमुअल्सन",
+"अल्फ्रेड मार्शल",
+"एडम स्मिथ"
+],
+"a": "C",
+"e": "",
+"qe": "The welfare definition of economics was given by",
+"oe": [
+"Robbins",
+"Samuelson",
+"Alfred Marshall",
+"Adam Smith"
+]
+},
+{
+"q": "अर्थशास्त्र की 'दुर्लभता संबंधी परिभाषा' किसने दी?",
+"o": [
+"लियोनेल रॉबिंस",
+"पीगू",
+"कीन्स",
+"मार्शल"
+],
+"a": "A",
+"e": "",
+"qe": "The scarcity definition of economics was given by",
+"oe": [
+"Lionel Robbins",
+"Pigou",
+"Keynes",
+"Marshall"
+]
+},
+{
+"q": "'जनरल थ्योरी ऑफ़ एम्प्लॉयमेंट, इंटरेस्ट एंड मनी' (1936) के लेखक हैं—",
+"o": [
+"पीगू",
+"फ्रीडमैन",
+"हिक्स",
+"जे. एम. कीन्स"
+],
+"a": "D",
+"e": "",
+"qe": "'The General Theory of Employment, Interest and Money' (1936) was written by",
+"oe": [
+"Pigou",
+"Friedman",
+"Hicks",
+"J. M. Keynes"
+]
+},
+{
+"q": "व्यष्टि अर्थशास्त्र (Microeconomics) अध्ययन करता है—",
+"o": [
+"व्यक्तिगत इकाइयों का",
+"राष्ट्रीय आय का",
+"सामान्य कीमत स्तर का",
+"रोज़गार स्तर का"
+],
+"a": "A",
+"e": "",
+"qe": "Microeconomics studies",
+"oe": [
+"individual units",
+"national income",
+"the general price level",
+"employment level"
+]
+},
+{
+"q": "माँग का नियम बताता है कि अन्य बातें समान रहने पर—",
+"o": [
+"कीमत बढ़ने पर माँग घटती है",
+"माँग कीमत से स्वतंत्र है",
+"कीमत बढ़ने पर माँग बढ़ती है",
+"आय बढ़ने पर माँग घटती है"
+],
+"a": "A",
+"e": "",
+"qe": "The law of demand states that, other things being equal,",
+"oe": [
+"demand falls when price rises",
+"demand is independent of price",
+"demand rises when price rises",
+"demand falls when income rises"
+]
+},
+{
+"q": "'गिफ़ेन वस्तु' के लिए माँग वक्र होता है—",
+"o": [
+"ऊर्ध्वाधर",
+"नीचे की ओर ढलान वाला",
+"क्षैतिज",
+"ऊपर की ओर ढलान वाला"
+],
+"a": "D",
+"e": "",
+"qe": "For a Giffen good, the demand curve is",
+"oe": [
+"vertical",
+"downward sloping",
+"horizontal",
+"upward sloping"
+]
+},
+{
+"q": "यदि माँग की कीमत लोच इकाई से अधिक हो, तो माँग कहलाती है—",
+"o": [
+"इकाई लोचदार",
+"पूर्णतः बेलोचदार",
+"लोचदार",
+"बेलोचदार"
+],
+"a": "C",
+"e": "",
+"qe": "If price elasticity of demand is greater than one, demand is",
+"oe": [
+"unitary elastic",
+"perfectly inelastic",
+"elastic",
+"inelastic"
+]
+},
+{
+"q": "'घटती सीमांत उपयोगिता का नियम' किसने प्रतिपादित किया?",
+"o": [
+"रिकार्डो",
+"हिक्स",
+"गोसेन (मार्शल ने विकसित किया)",
+"कीन्स"
+],
+"a": "C",
+"e": "",
+"qe": "The law of diminishing marginal utility was propounded by",
+"oe": [
+"Ricardo",
+"Hicks",
+"Gossen (developed by Marshall)",
+"Keynes"
+]
+},
+{
+"q": "उदासीनता वक्र विश्लेषण किसने विकसित किया?",
+"o": [
+"सैमुअल्सन",
+"हिक्स और एलन",
+"मार्शल",
+"पीगू"
+],
+"a": "B",
+"e": "",
+"qe": "Indifference curve analysis was developed by",
+"oe": [
+"Samuelson",
+"Hicks and Allen",
+"Marshall",
+"Pigou"
+]
+},
+{
+"q": "'प्रकट अधिमान सिद्धांत' किसने दिया?",
+"o": [
+"हिक्स",
+"कीन्स",
+"पॉल सैमुअल्सन",
+"मार्शल"
+],
+"a": "C",
+"e": "",
+"qe": "The Revealed Preference theory was given by",
+"oe": [
+"Hicks",
+"Keynes",
+"Paul Samuelson",
+"Marshall"
+]
+},
+{
+"q": "उदासीनता वक्र सामान्यतः मूल बिंदु की ओर होता है—",
+"o": [
+"नतोदर (Concave)",
+"उन्नतोदर (Convex)",
+"ऊर्ध्वाधर",
+"सीधी रेखा"
+],
+"a": "B",
+"e": "घटती सीमांत प्रतिस्थापन दर।",
+"qe": "An indifference curve is normally",
+"oe": [
+"concave to the origin",
+"convex to the origin",
+"vertical",
+"a straight line"
+]
+},
+{
+"q": "उत्पादन के साधन हैं—",
+"o": [
+"भूमि, श्रम, पूँजी, उद्यम",
+"भूमि, धन, बाज़ार, श्रम",
+"श्रम, उपभोग, बचत, निवेश",
+"पूँजी, कर, श्रम, भूमि"
+],
+"a": "A",
+"e": "",
+"qe": "The factors of production are",
+"oe": [
+"land, labour, capital, enterprise",
+"land, money, market, labour",
+"labour, consumption, saving, investment",
+"capital, tax, labour, land"
+]
+},
+{
+"q": "'परिवर्ती अनुपात का नियम' किस अवधि में लागू होता है?",
+"o": [
+"अति दीर्घकाल",
+"सभी अवधियों में समान",
+"अल्पकाल",
+"दीर्घकाल"
+],
+"a": "C",
+"e": "",
+"qe": "The law of variable proportions applies in the",
+"oe": [
+"very long run",
+"all periods equally",
+"short run",
+"long run"
+]
+},
+{
+"q": "जब औसत लागत न्यूनतम होती है, तब सीमांत लागत—",
+"o": [
+"अधिकतम होती है",
+"औसत लागत के बराबर होती है",
+"ऋणात्मक होती है",
+"शून्य होती है"
+],
+"a": "B",
+"e": "",
+"qe": "When average cost is minimum, marginal cost",
+"oe": [
+"is maximum",
+"equals average cost",
+"is negative",
+"is zero"
+]
+},
+{
+"q": "पूर्ण प्रतियोगिता में फ़र्म होती है—",
+"o": [
+"कीमत स्वीकारक (Price taker)",
+"कीमत निर्धारक",
+"अल्पाधिकारी",
+"एकाधिकारी"
+],
+"a": "A",
+"e": "",
+"qe": "Under perfect competition, a firm is a",
+"oe": [
+"price taker",
+"price maker",
+"oligopolist",
+"monopolist"
+]
+},
+{
+"q": "फ़र्म के संतुलन की शर्त है—",
+"o": [
+"MR = MC (MC ऊपर उठती हुई)",
+"AR = AC",
+"TR = TC",
+"MR = AR"
+],
+"a": "A",
+"e": "",
+"qe": "The equilibrium condition of a firm is",
+"oe": [
+"MR = MC (with MC rising)",
+"AR = AC",
+"TR = TC",
+"MR = AR"
+]
+},
+{
+"q": "'कीमत विभेद' किस बाज़ार में संभव है?",
+"o": [
+"पूर्ण बाज़ार",
+"कोई नहीं",
+"एकाधिकार",
+"पूर्ण प्रतियोगिता"
+],
+"a": "C",
+"e": "",
+"qe": "Price discrimination is possible under",
+"oe": [
+"a perfect market",
+"none",
+"Monopoly",
+"Perfect competition"
+]
+},
+{
+"q": "'एकाधिकारी प्रतियोगिता' का सिद्धांत किसने दिया?",
+"o": [
+"चैम्बरलिन",
+"मार्शल",
+"जोन रॉबिन्सन",
+"स्वीज़ी"
+],
+"a": "A",
+"e": "",
+"qe": "The theory of monopolistic competition was given by",
+"oe": [
+"Chamberlin",
+"Marshall",
+"Joan Robinson",
+"Sweezy"
+]
+},
+{
+"q": "'विकुंचित माँग वक्र' (Kinked demand curve) किस बाज़ार से संबंधित है?",
+"o": [
+"पूर्ण प्रतियोगिता",
+"एकाधिकार",
+"द्वयाधिकार",
+"अल्पाधिकार"
+],
+"a": "D",
+"e": "स्वीज़ी मॉडल।",
+"qe": "The kinked demand curve relates to",
+"oe": [
+"Perfect competition",
+"Monopoly",
+"Duopoly",
+"Oligopoly"
+]
+},
+{
+"q": "'लगान का सिद्धांत' (Theory of Rent) किसने दिया?",
+"o": [
+"मार्शल",
+"माल्थस",
+"एडम स्मिथ",
+"डेविड रिकार्डो"
+],
+"a": "D",
+"e": "",
+"qe": "The (classical) theory of rent was given by",
+"oe": [
+"Marshall",
+"Malthus",
+"Adam Smith",
+"David Ricardo"
+]
+},
+{
+"q": "'जनसंख्या का सिद्धांत' (1798) किसने दिया?",
+"o": [
+"माल्थस",
+"मिल",
+"मार्क्स",
+"रिकार्डो"
+],
+"a": "A",
+"e": "",
+"qe": "The Theory of Population (1798) was given by",
+"oe": [
+"Malthus",
+"Mill",
+"Marx",
+"Ricardo"
+]
+},
+{
+"q": "'तुलनात्मक लागत सिद्धांत' (अंतरराष्ट्रीय व्यापार) किसने दिया?",
+"o": [
+"ओहलिन",
+"एडम स्मिथ",
+"हेक्शर",
+"डेविड रिकार्डो"
+],
+"a": "D",
+"e": "",
+"qe": "The comparative cost theory of trade was given by",
+"oe": [
+"Ohlin",
+"Adam Smith",
+"Heckscher",
+"David Ricardo"
+]
+},
+{
+"q": "'मुद्रा परिमाण सिद्धांत' का समीकरण MV = PT किसने दिया?",
+"o": [
+"कीन्स",
+"इरविंग फ़िशर",
+"मार्शल",
+"पीगू"
+],
+"a": "B",
+"e": "",
+"qe": "The equation MV = PT was given by",
+"oe": [
+"Keynes",
+"Irving Fisher",
+"Marshall",
+"Pigou"
+]
+},
+{
+"q": "'बुरी मुद्रा अच्छी मुद्रा को चलन से बाहर कर देती है' — किसका नियम है?",
+"o": [
+"ग्रेशम",
+"से (Say)",
+"फ़िशर",
+"कीन्स"
+],
+"a": "A",
+"e": "",
+"qe": "'Bad money drives out good money' is whose law?",
+"oe": [
+"Gresham",
+"Say",
+"Fisher",
+"Keynes"
+]
+},
+{
+"q": "'पूर्ति अपनी माँग स्वयं उत्पन्न करती है' — किसका नियम है?",
+"o": [
+"मार्शल",
+"कीन्स",
+"जे. बी. से",
+"रिकार्डो"
+],
+"a": "C",
+"e": "",
+"qe": "'Supply creates its own demand' is whose law?",
+"oe": [
+"Marshall",
+"Keynes",
+"J. B. Say",
+"Ricardo"
+]
+},
+{
+"q": "कीन्स के अनुसार बेरोज़गारी का मुख्य कारण है—",
+"o": [
+"प्रभावी माँग की कमी",
+"अधिक मज़दूरी",
+"अधिक बचत न होना",
+"पूर्ति की कमी"
+],
+"a": "A",
+"e": "",
+"qe": "According to Keynes, unemployment is mainly due to",
+"oe": [
+"deficiency of effective demand",
+"high wages",
+"insufficient saving",
+"shortage of supply"
+]
+},
+{
+"q": "'गुणक' (Multiplier) का मान किस पर निर्भर करता है?",
+"o": [
+"सीमांत उपभोग प्रवृत्ति (MPC)",
+"कर दर केवल",
+"मुद्रा पूर्ति",
+"ब्याज दर"
+],
+"a": "A",
+"e": "k = 1/(1 − MPC)",
+"qe": "The value of the multiplier depends on the",
+"oe": [
+"marginal propensity to consume (MPC)",
+"tax rate only",
+"money supply",
+"interest rate"
+]
+},
+{
+"q": "यदि MPC = 0.8 हो, तो निवेश गुणक का मान है—",
+"o": [
+"1.25",
+"8",
+"5",
+"0.2"
+],
+"a": "C",
+"e": "1/(1 − 0.8)",
+"qe": "If MPC = 0.8, the investment multiplier is",
+"oe": [
+"1.25",
+"8",
+"5",
+"0.2"
+]
+},
+{
+"q": "'तरलता अधिमान सिद्धांत' (ब्याज का) किसने दिया?",
+"o": [
+"फ़िशर",
+"कीन्स",
+"मार्शल",
+"हिक्स"
+],
+"a": "B",
+"e": "",
+"qe": "The liquidity preference theory of interest was given by",
+"oe": [
+"Fisher",
+"Keynes",
+"Marshall",
+"Hicks"
+]
+},
+{
+"q": "IS-LM मॉडल किसने विकसित किया?",
+"o": [
+"सैमुअल्सन",
+"फ्रीडमैन",
+"कीन्स",
+"जे. आर. हिक्स"
+],
+"a": "D",
+"e": "",
+"qe": "The IS-LM model was developed by",
+"oe": [
+"Samuelson",
+"Friedman",
+"Keynes",
+"J. R. Hicks"
+]
+},
+{
+"q": "'फ़िलिप्स वक्र' किसके बीच संबंध दर्शाता है?",
+"o": [
+"बचत और निवेश",
+"कीमत और माँग",
+"मुद्रास्फीति और बेरोज़गारी",
+"आय और उपभोग"
+],
+"a": "C",
+"e": "",
+"qe": "The Phillips curve shows the relation between",
+"oe": [
+"saving and investment",
+"price and demand",
+"inflation and unemployment",
+"income and consumption"
+]
+},
+{
+"q": "'लाफ़र वक्र' किससे संबंधित है?",
+"o": [
+"मुद्रा और कीमत",
+"मज़दूरी और रोज़गार",
+"आयात और निर्यात",
+"कर दर और कर राजस्व"
+],
+"a": "D",
+"e": "",
+"qe": "The Laffer curve relates",
+"oe": [
+"money and prices",
+"wages and employment",
+"imports and exports",
+"tax rate and tax revenue"
+]
+},
+{
+"q": "'लॉरेंज़ वक्र' किसे मापने के लिए प्रयुक्त होता है?",
+"o": [
+"मुद्रास्फीति",
+"बेरोज़गारी",
+"विकास दर",
+"आय की असमानता"
+],
+"a": "D",
+"e": "",
+"qe": "The Lorenz curve is used to measure",
+"oe": [
+"inflation",
+"unemployment",
+"growth rate",
+"income inequality"
+]
+},
+{
+"q": "'गिनी गुणांक' का मान शून्य होने का अर्थ है—",
+"o": [
+"पूर्ण असमानता",
+"मध्यम असमानता",
+"पूर्ण समानता",
+"शून्य आय"
+],
+"a": "C",
+"e": "",
+"qe": "A Gini coefficient of zero means",
+"oe": [
+"perfect inequality",
+"moderate inequality",
+"perfect equality",
+"zero income"
+]
+},
+{
+"q": "'स्टैगफ़्लेशन' (Stagflation) का अर्थ है—",
+"o": [
+"उच्च मुद्रास्फीति और उच्च बेरोज़गारी साथ-साथ",
+"मुद्रा का अवमूल्यन",
+"कीमतों में गिरावट",
+"तेज़ आर्थिक वृद्धि"
+],
+"a": "A",
+"e": "",
+"qe": "'Stagflation' means",
+"oe": [
+"high inflation with high unemployment",
+"currency devaluation",
+"falling prices",
+"rapid growth"
+]
+},
+{
+"q": "राष्ट्रीय आय = ?",
+"o": [
+"NNP (साधन लागत पर)",
+"GNP (बाज़ार कीमत पर)",
+"GDP (बाज़ार कीमत पर)",
+"NDP (बाज़ार कीमत पर)"
+],
+"a": "A",
+"e": "",
+"qe": "National income equals",
+"oe": [
+"NNP at factor cost",
+"GNP at market price",
+"GDP at market price",
+"NDP at market price"
+]
+},
+{
+"q": "GNP − मूल्यह्रास = ?",
+"o": [
+"GDP",
+"NDP",
+"NNP",
+"व्यक्तिगत आय"
+],
+"a": "C",
+"e": "",
+"qe": "GNP − depreciation =",
+"oe": [
+"GDP",
+"NDP",
+"NNP",
+"Personal income"
+]
+},
+{
+"q": "भारत में राष्ट्रीय आय का पहला अनुमान किसने लगाया?",
+"o": [
+"आर. सी. दत्त",
+"महालनोबिस",
+"दादाभाई नौरोजी",
+"वी. के. आर. वी. राव"
+],
+"a": "C",
+"e": "1867–68 के लिए।",
+"qe": "The first estimate of India's national income was made by",
+"oe": [
+"R. C. Dutt",
+"Mahalanobis",
+"Dadabhai Naoroji",
+"V. K. R. V. Rao"
+]
+},
+{
+"q": "भारत में राष्ट्रीय आय का पहला वैज्ञानिक अनुमान किसने लगाया?",
+"o": [
+"वी. के. आर. वी. राव",
+"डी. आर. गाडगिल",
+"दादाभाई नौरोजी",
+"महालनोबिस"
+],
+"a": "A",
+"e": "",
+"qe": "The first scientific estimate of national income in India was by",
+"oe": [
+"V. K. R. V. Rao",
+"D. R. Gadgil",
+"Dadabhai Naoroji",
+"Mahalanobis"
+]
+},
+{
+"q": "मानव विकास सूचकांक (HDI) किस संस्था द्वारा जारी किया जाता है?",
+"o": [
+"UNDP",
+"विश्व बैंक",
+"WTO",
+"IMF"
+],
+"a": "A",
+"e": "",
+"qe": "The Human Development Index is published by",
+"oe": [
+"UNDP",
+"World Bank",
+"WTO",
+"IMF"
+]
+},
+{
+"q": "HDI की अवधारणा में किस अर्थशास्त्री का प्रमुख योगदान है?",
+"o": [
+"कीन्स",
+"एडम स्मिथ",
+"महबूब-उल-हक़ (अमर्त्य सेन के साथ)",
+"रोस्टो"
+],
+"a": "C",
+"e": "",
+"qe": "The HDI was mainly developed by",
+"oe": [
+"Keynes",
+"Adam Smith",
+"Mahbub ul Haq (with Amartya Sen)",
+"Rostow"
+]
+},
+{
+"q": "'आर्थिक विकास की अवस्थाएँ' (Stages of Growth) किसने बताईं?",
+"o": [
+"हैरोड",
+"डब्ल्यू. डब्ल्यू. रोस्टो",
+"नर्कसे",
+"लुईस"
+],
+"a": "B",
+"e": "",
+"qe": "'The Stages of Economic Growth' was given by",
+"oe": [
+"Harrod",
+"W. W. Rostow",
+"Nurkse",
+"Lewis"
+]
+},
+{
+"q": "'गरीबी का दुष्चक्र' की अवधारणा किससे जुड़ी है?",
+"o": [
+"मिर्डल",
+"रैगनर नर्कसे",
+"रोस्टो",
+"शुम्पीटर"
+],
+"a": "B",
+"e": "",
+"qe": "The 'vicious circle of poverty' is associated with",
+"oe": [
+"Myrdal",
+"Ragnar Nurkse",
+"Rostow",
+"Schumpeter"
+]
+},
+{
+"q": "'नवप्रवर्तन' (Innovation) को विकास का आधार किसने माना?",
+"o": [
+"कीन्स",
+"रिकार्डो",
+"जोसेफ़ शुम्पीटर",
+"मार्क्स"
+],
+"a": "C",
+"e": "",
+"qe": "Who considered innovation the basis of development?",
+"oe": [
+"Keynes",
+"Ricardo",
+"Joseph Schumpeter",
+"Marx"
+]
+},
+{
+"q": "'एशियन ड्रामा' के लेखक हैं—",
+"o": [
+"लुईस",
+"रोस्टो",
+"गुन्नार मिर्डल",
+"अमर्त्य सेन"
+],
+"a": "C",
+"e": "",
+"qe": "'Asian Drama' was written by",
+"oe": [
+"Lewis",
+"Rostow",
+"Gunnar Myrdal",
+"Amartya Sen"
+]
+},
+{
+"q": "'असीमित श्रम पूर्ति के साथ विकास' मॉडल किसने दिया?",
+"o": [
+"रोस्टो",
+"नर्कसे",
+"हिर्शमैन",
+"आर्थर लुईस"
+],
+"a": "D",
+"e": "",
+"qe": "The model of 'development with unlimited supply of labour' was given by",
+"oe": [
+"Rostow",
+"Nurkse",
+"Hirschman",
+"Arthur Lewis"
+]
+},
+{
+"q": "भारत की दूसरी पंचवर्षीय योजना किस मॉडल पर आधारित थी?",
+"o": [
+"हैरोड-डोमर मॉडल",
+"महालनोबिस मॉडल",
+"गांधीवादी मॉडल",
+"रोलिंग योजना"
+],
+"a": "B",
+"e": "",
+"qe": "India's Second Five-Year Plan was based on the",
+"oe": [
+"Harrod-Domar model",
+"Mahalanobis model",
+"Gandhian model",
+"Rolling plan"
+]
+},
+{
+"q": "पहली पंचवर्षीय योजना किस मॉडल पर आधारित थी?",
+"o": [
+"सोलो",
+"लुईस",
+"हैरोड-डोमर",
+"महालनोबिस"
+],
+"a": "C",
+"e": "",
+"qe": "The First Five-Year Plan was based on the",
+"oe": [
+"Solow model",
+"Lewis model",
+"Harrod-Domar model",
+"Mahalanobis model"
+]
+},
+{
+"q": "भारत में 'योजना अवकाश' (Plan Holiday) कब रहा?",
+"o": [
+"1978–80",
+"1961–63",
+"1990–92",
+"1966–69"
+],
+"a": "D",
+"e": "",
+"qe": "When was the 'Plan Holiday' in India?",
+"oe": [
+"1978–80",
+"1961–63",
+"1990–92",
+"1966–69"
+]
+},
+{
+"q": "'रोलिंग प्लान' किस सरकार ने अपनाया?",
+"o": [
+"इंदिरा सरकार (1966)",
+"जनता सरकार (1978–80)",
+"राजीव सरकार",
+"नेहरू सरकार"
+],
+"a": "B",
+"e": "",
+"qe": "The Rolling Plan was adopted by the",
+"oe": [
+"Indira Government (1966)",
+"Janata Government (1978–80)",
+"Rajiv Government",
+"Nehru Government"
+]
+},
+{
+"q": "12वीं पंचवर्षीय योजना की अवधि थी—",
+"o": [
+"2012–2017",
+"2002–2007",
+"2007–2012",
+"2017–2022"
+],
+"a": "A",
+"e": "",
+"qe": "The period of the 12th Five-Year Plan was",
+"oe": [
+"2012–2017",
+"2002–2007",
+"2007–2012",
+"2017–2022"
+]
+},
+{
+"q": "भारत में कृषि लागत एवं मूल्य आयोग (CACP) क्या सुझाता है?",
+"o": [
+"आयकर दर",
+"रेपो दर",
+"न्यूनतम समर्थन मूल्य (MSP)",
+"GST दर"
+],
+"a": "C",
+"e": "",
+"qe": "The CACP in India recommends",
+"oe": [
+"income tax rates",
+"the repo rate",
+"Minimum Support Price (MSP)",
+"GST rates"
+]
+},
+{
+"q": "'नाबार्ड' (NABARD) की स्थापना कब हुई?",
+"o": [
+"1991",
+"1982",
+"1975",
+"1969"
+],
+"a": "B",
+"e": "",
+"qe": "NABARD was established in",
+"oe": [
+"1991",
+"1982",
+"1975",
+"1969"
+]
+},
+{
+"q": "भारत में 'क्षेत्रीय ग्रामीण बैंक' कब स्थापित हुए?",
+"o": [
+"1982",
+"1990",
+"1975",
+"1969"
+],
+"a": "C",
+"e": "",
+"qe": "Regional Rural Banks were set up in",
+"oe": [
+"1982",
+"1990",
+"1975",
+"1969"
+]
+},
+{
+"q": "'नकद आरक्षित अनुपात' (CRR) बढ़ाने से—",
+"o": [
+"बैंकों की ऋण देने की क्षमता घटती है",
+"ब्याज दरें घटती हैं",
+"ऋण क्षमता बढ़ती है",
+"मुद्रा पूर्ति बढ़ती है"
+],
+"a": "A",
+"e": "",
+"qe": "Raising the Cash Reserve Ratio (CRR)",
+"oe": [
+"reduces banks' lending capacity",
+"lowers interest rates",
+"raises lending capacity",
+"raises money supply"
+]
+},
+{
+"q": "'खुले बाज़ार की क्रियाएँ' (OMO) में RBI करता है—",
+"o": [
+"बजट बनाना",
+"कर वसूली",
+"विदेशी मुद्रा छापना",
+"सरकारी प्रतिभूतियों का क्रय-विक्रय"
+],
+"a": "D",
+"e": "",
+"qe": "In open market operations, the RBI",
+"oe": [
+"prepares the budget",
+"collects taxes",
+"prints foreign currency",
+"buys and sells government securities"
+]
+},
+{
+"q": "भारत में मौद्रिक नीति समिति (MPC) में कितने सदस्य होते हैं?",
+"o": [
+"6",
+"7",
+"5",
+"9"
+],
+"a": "A",
+"e": "",
+"qe": "How many members are in India's Monetary Policy Committee?",
+"oe": [
+"6",
+"7",
+"5",
+"9"
+]
+},
+{
+"q": "RBI का मुद्रास्फीति लक्ष्य (CPI) है—",
+"o": [
+"6% (±2%)",
+"4% (±2%)",
+"5% (±1%)",
+"2% (±1%)"
+],
+"a": "B",
+"e": "",
+"qe": "RBI's inflation target (CPI) is",
+"oe": [
+"6% (±2%)",
+"4% (±2%)",
+"5% (±1%)",
+"2% (±1%)"
+]
+},
+{
+"q": "भारत में मुद्रास्फीति का मुख्य मापक (RBI हेतु) है—",
+"o": [
+"थोक मूल्य सूचकांक (WPI)",
+"सेंसेक्स",
+"GDP डिफ़्लेटर",
+"उपभोक्ता मूल्य सूचकांक (CPI)"
+],
+"a": "D",
+"e": "",
+"qe": "The main inflation measure for the RBI is the",
+"oe": [
+"Wholesale Price Index (WPI)",
+"Sensex",
+"GDP deflator",
+"Consumer Price Index (CPI)"
+]
+},
+{
+"q": "'राजकोषीय घाटा' का अर्थ है—",
+"o": [
+"कुल ऋण",
+"राजस्व व्यय − राजस्व प्राप्ति",
+"आयात − निर्यात",
+"कुल व्यय − (राजस्व प्राप्ति + गैर-ऋण पूँजी प्राप्ति)"
+],
+"a": "D",
+"e": "",
+"qe": "Fiscal deficit means",
+"oe": [
+"total debt",
+"revenue expenditure − revenue receipts",
+"imports − exports",
+"total expenditure − (revenue receipts + non-debt capital receipts)"
+]
+},
+{
+"q": "'प्राथमिक घाटा' = ?",
+"o": [
+"राजकोषीय घाटा + ब्याज",
+"राजकोषीय घाटा − ब्याज भुगतान",
+"राजस्व घाटा − ब्याज",
+"बजट घाटा − ऋण"
+],
+"a": "B",
+"e": "",
+"qe": "Primary deficit =",
+"oe": [
+"fiscal deficit + interest",
+"fiscal deficit − interest payments",
+"revenue deficit − interest",
+"budget deficit − borrowing"
+]
+},
+{
+"q": "FRBM अधिनियम किस वर्ष पारित हुआ?",
+"o": [
+"2003",
+"1991",
+"2016",
+"2008"
+],
+"a": "A",
+"e": "",
+"qe": "The FRBM Act was passed in",
+"oe": [
+"2003",
+"1991",
+"2016",
+"2008"
+]
+},
+{
+"q": "आयकर किस प्रकार का कर है?",
+"o": [
+"सीमा शुल्क",
+"अप्रत्यक्ष कर",
+"आनुपातिक व्यय कर",
+"प्रत्यक्ष कर"
+],
+"a": "D",
+"e": "",
+"qe": "Income tax is a",
+"oe": [
+"customs duty",
+"indirect tax",
+"proportional expenditure tax",
+"direct tax"
+]
+},
+{
+"q": "GST परिषद का अध्यक्ष कौन होता है?",
+"o": [
+"केंद्रीय वित्त मंत्री",
+"प्रधानमंत्री",
+"राष्ट्रपति",
+"RBI गवर्नर"
+],
+"a": "A",
+"e": "",
+"qe": "The GST Council is chaired by the",
+"oe": [
+"Union Finance Minister",
+"Prime Minister",
+"President",
+"RBI Governor"
+]
+},
+{
+"q": "'प्रगतिशील कर' का अर्थ है—",
+"o": [
+"केवल वस्तुओं पर कर",
+"आय बढ़ने के साथ कर दर बढ़ना",
+"आय बढ़ने पर दर घटना",
+"सबके लिए समान दर"
+],
+"a": "B",
+"e": "",
+"qe": "A progressive tax means",
+"oe": [
+"tax on goods only",
+"tax rate rises as income rises",
+"rate falls as income rises",
+"same rate for all"
+]
+},
+{
+"q": "भुगतान संतुलन के 'चालू खाते' में शामिल है—",
+"o": [
+"बाहरी ऋण",
+"पोर्टफ़ोलियो निवेश",
+"वस्तुओं व सेवाओं का व्यापार",
+"विदेशी प्रत्यक्ष निवेश"
+],
+"a": "C",
+"e": "",
+"qe": "The current account of the balance of payments includes",
+"oe": [
+"external borrowing",
+"portfolio investment",
+"trade in goods and services",
+"foreign direct investment"
+]
+},
+{
+"q": "भारत में रुपये का अवमूल्यन बड़े पैमाने पर किस वर्ष हुआ (आर्थिक संकट)?",
+"o": [
+"1985",
+"2000",
+"1975",
+"1991"
+],
+"a": "D",
+"e": "",
+"qe": "In which year was the rupee devalued sharply during the economic crisis?",
+"oe": [
+"1985",
+"2000",
+"1975",
+"1991"
+]
+},
+{
+"q": "विश्व व्यापार संगठन (WTO) की स्थापना कब हुई?",
+"o": [
+"1991",
+"1947",
+"2001",
+"1 जनवरी 1995"
+],
+"a": "D",
+"e": "",
+"qe": "The WTO was established on",
+"oe": [
+"1991",
+"1947",
+"2001",
+"1 January 1995"
+]
+},
+{
+"q": "IMF और विश्व बैंक की स्थापना किस सम्मेलन से हुई?",
+"o": [
+"हवाना",
+"ब्रेटन वुड्स (1944)",
+"जेनेवा",
+"पेरिस"
+],
+"a": "B",
+"e": "",
+"qe": "The IMF and World Bank were created at the",
+"oe": [
+"Havana conference",
+"Bretton Woods conference (1944)",
+"Geneva conference",
+"Paris conference"
+]
+},
+{
+"q": "'SDR' (विशेष आहरण अधिकार) किस संस्था से संबंधित है?",
+"o": [
+"ADB",
+"विश्व बैंक",
+"WTO",
+"IMF"
+],
+"a": "D",
+"e": "",
+"qe": "'SDR' is associated with the",
+"oe": [
+"ADB",
+"World Bank",
+"WTO",
+"IMF"
+]
+},
+{
+"q": "BRICS में कौन-सा देश मूल सदस्य नहीं था?",
+"o": [
+"इंडोनेशिया",
+"रूस",
+"दक्षिण अफ़्रीका",
+"ब्राज़ील"
+],
+"a": "A",
+"e": "",
+"qe": "Which country was NOT an original BRICS member?",
+"oe": [
+"Indonesia",
+"Russia",
+"South Africa",
+"Brazil"
+]
+},
+{
+"q": "'प्रच्छन्न बेरोज़गारी' (Disguised unemployment) मुख्यतः किस क्षेत्र में पाई जाती है?",
+"o": [
+"IT",
+"उद्योग",
+"कृषि",
+"सेवा"
+],
+"a": "C",
+"e": "",
+"qe": "Disguised unemployment is mainly found in",
+"oe": [
+"IT",
+"Industry",
+"Agriculture",
+"Services"
+]
+},
+{
+"q": "भारत में गरीबी रेखा के आकलन हेतु 'तेंदुलकर समिति' ने किस आधार को अपनाया?",
+"o": [
+"कैलोरी केवल",
+"उपभोग व्यय (MRP)",
+"आय",
+"संपत्ति"
+],
+"a": "B",
+"e": "",
+"qe": "The Tendulkar Committee estimated poverty based on",
+"oe": [
+"calories only",
+"consumption expenditure (MRP)",
+"income",
+"assets"
+]
+},
+{
+"q": "'बहुआयामी गरीबी सूचकांक' (MPI) में कितने आयाम होते हैं?",
+"o": [
+"4",
+"2",
+"5",
+"3"
+],
+"a": "D",
+"e": "स्वास्थ्य, शिक्षा, जीवन स्तर।",
+"qe": "How many dimensions does the Multidimensional Poverty Index have?",
+"oe": [
+"4",
+"2",
+"5",
+"3"
+]
+},
+{
+"q": "'प्रधानमंत्री जन धन योजना' का मुख्य उद्देश्य है—",
+"o": [
+"आवास",
+"वित्तीय समावेशन",
+"कौशल विकास",
+"स्वास्थ्य बीमा"
+],
+"a": "B",
+"e": "",
+"qe": "The main objective of PM Jan Dhan Yojana is",
+"oe": [
+"housing",
+"financial inclusion",
+"skill development",
+"health insurance"
+]
+},
+{
+"q": "भारत में 'हरित क्रांति' के जनक माने जाते हैं—",
+"o": [
+"वर्गीज़ कुरियन",
+"महालनोबिस",
+"सी. वी. रमन",
+"एम. एस. स्वामीनाथन"
+],
+"a": "D",
+"e": "",
+"qe": "The father of the Green Revolution in India is",
+"oe": [
+"Verghese Kurien",
+"Mahalanobis",
+"C. V. Raman",
+"M. S. Swaminathan"
+]
+},
+{
+"q": "'सेंसेक्स' किस स्टॉक एक्सचेंज का सूचकांक है?",
+"o": [
+"कलकत्ता स्टॉक एक्सचेंज",
+"बॉम्बे स्टॉक एक्सचेंज",
+"MCX",
+"नेशनल स्टॉक एक्सचेंज"
+],
+"a": "B",
+"e": "",
+"qe": "The Sensex is the index of the",
+"oe": [
+"Calcutta Stock Exchange",
+"Bombay Stock Exchange",
+"MCX",
+"National Stock Exchange"
+]
+},
+{
+"q": "SEBI को वैधानिक दर्जा कब मिला?",
+"o": [
+"1992",
+"2000",
+"1995",
+"1988"
+],
+"a": "A",
+"e": "",
+"qe": "SEBI got statutory status in",
+"oe": [
+"1992",
+"2000",
+"1995",
+"1988"
+]
+},
+{
+"q": "'केंद्रीय सांख्यिकी संगठन' व 'NSSO' को मिलाकर बना—",
+"o": [
+"नीति आयोग",
+"CAG",
+"राष्ट्रीय सांख्यिकी कार्यालय (NSO)",
+"वित्त आयोग"
+],
+"a": "C",
+"e": "",
+"qe": "CSO and NSSO were merged to form the",
+"oe": [
+"NITI Aayog",
+"CAG",
+"National Statistical Office (NSO)",
+"Finance Commission"
+]
+},
+{
+"q": "भारत में 'आधार वर्ष' 2011–12 किस आँकड़े के लिए प्रयुक्त है?",
+"o": [
+"जनगणना",
+"CPI-AL",
+"सेंसेक्स",
+"GDP/राष्ट्रीय लेखा"
+],
+"a": "D",
+"e": "",
+"qe": "The base year 2011–12 is used for",
+"oe": [
+"Census",
+"CPI-AL",
+"Sensex",
+"GDP/national accounts"
+]
+},
+{
+"q": "'सापेक्ष आय परिकल्पना' (उपभोग) किसने दी?",
+"o": [
+"कीन्स",
+"ड्यूज़ेनबरी",
+"मोदिग्लियानी",
+"फ्रीडमैन"
+],
+"a": "B",
+"e": "",
+"qe": "The relative income hypothesis of consumption was given by",
+"oe": [
+"Keynes",
+"Duesenberry",
+"Modigliani",
+"Friedman"
+]
+},
+{
+"q": "'स्थायी आय परिकल्पना' किसने दी?",
+"o": [
+"मिल्टन फ्रीडमैन",
+"ड्यूज़ेनबरी",
+"कुज़नेट्स",
+"कीन्स"
+],
+"a": "A",
+"e": "",
+"qe": "The permanent income hypothesis was given by",
+"oe": [
+"Milton Friedman",
+"Duesenberry",
+"Kuznets",
+"Keynes"
+]
+},
+{
+"q": "'जीवन-चक्र परिकल्पना' (उपभोग) किसने दी?",
+"o": [
+"फ्रीडमैन",
+"मोदिग्लियानी",
+"ड्यूज़ेनबरी",
+"हिक्स"
+],
+"a": "B",
+"e": "",
+"qe": "The life-cycle hypothesis was given by",
+"oe": [
+"Friedman",
+"Modigliani",
+"Duesenberry",
+"Hicks"
+]
+},
+{
+"q": "'कुज़नेट्स वक्र' किसके बीच संबंध दर्शाता है?",
+"o": [
+"कर और राजस्व",
+"बचत और निवेश",
+"आय असमानता और प्रति व्यक्ति आय",
+"मुद्रास्फीति और बेरोज़गारी"
+],
+"a": "C",
+"e": "",
+"qe": "The Kuznets curve relates",
+"oe": [
+"tax and revenue",
+"saving and investment",
+"income inequality and per-capita income",
+"inflation and unemployment"
+]
+},
+{
+"q": "'उपभोक्ता की बचत' (Consumer's surplus) की अवधारणा किसने लोकप्रिय की?",
+"o": [
+"कीन्स",
+"पीगू",
+"हिक्स",
+"मार्शल"
+],
+"a": "D",
+"e": "",
+"qe": "The concept of consumer's surplus was popularised by",
+"oe": [
+"Keynes",
+"Pigou",
+"Hicks",
+"Marshall"
+]
+},
+{
+"q": "'सार्वजनिक वस्तु' की विशेषता है—",
+"o": [
+"केवल निजी उपयोग",
+"अप्रतिस्पर्धी और अपवर्जन-रहित",
+"बाज़ार में ऊँची कीमत",
+"प्रतिस्पर्धी और अपवर्जनीय"
+],
+"a": "B",
+"e": "",
+"qe": "A public good is",
+"oe": [
+"for private use only",
+"non-rival and non-excludable",
+"highly priced in the market",
+"rival and excludable"
+]
+},
+{
+"q": "अमर्त्य सेन को अर्थशास्त्र का नोबेल पुरस्कार किस वर्ष मिला?",
+"o": [
+"2019",
+"2001",
+"1995",
+"1998"
+],
+"a": "D",
+"e": "",
+"qe": "Amartya Sen won the Nobel Prize in Economics in",
+"oe": [
+"2019",
+"2001",
+"1995",
+"1998"
+]
+},
+{
+"q": "2019 का अर्थशास्त्र नोबेल पुरस्कार पाने वाले भारतीय मूल के अर्थशास्त्री हैं—",
+"o": [
+"जगदीश भगवती",
+"अभिजीत बनर्जी",
+"कौशिक बसु",
+"रघुराम राजन"
+],
+"a": "B",
+"e": "",
+"qe": "The Indian-origin economist who won the 2019 Economics Nobel is",
+"oe": [
+"Jagdish Bhagwati",
+"Abhijit Banerjee",
+"Kaushik Basu",
+"Raghuram Rajan"
+]
+}
+]
