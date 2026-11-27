@@ -18,7 +18,7 @@ function eh_stm_rounds() {
         ['id' => 'm2', 'name' => 'Super TET Mock 2 — लाइव', 'login' => '2026-11-25 09:10', 'start' => '2026-11-25 09:30', 'end' => '2026-11-25 23:59', 'paper' => 'supertet-mock2'],
     ];
     $list = array_map(function ($r) { $r['series'] = $r['series'] ?? 'stet'; return $r; }, $list);
-    if (function_exists('eh_tp_rounds')) $list = array_merge($list, eh_tp_rounds());
+    if (function_exists('eh_tp_rounds_all')) $list = array_merge($list, eh_tp_rounds_all());
     $ctl = get_option('eh_stm_ctl', []); if (!is_array($ctl)) $ctl = [];
     return array_map(function ($r) use ($ts, $ctl) {
         $r['login_ts'] = $ts($r['login']); $r['start_ts'] = $ts($r['start']); $r['end_ts'] = $ts($r['end']);
@@ -132,7 +132,7 @@ function eh_stm_eff($r, $row, $now = null) {
 }
 function eh_stm_finish_row($r, $row, $when) {
     global $wpdb;
-    $allot = min(EH_STM_SECS, max(0, (int) $r['end_ts'] - (int) $row['started']));
+    $allot = min(eh_stm_secs($r), max(0, (int) $r['end_ts'] - (int) $row['started']));
     $used = max(0, min($allot, $allot - max(0, eh_stm_eff($r, $row, $when) - $when)));
     $ans = json_decode($row['ans'] ?: '{}', true) ?: [];
     [$c, $w, $s] = eh_stm_score($r, $ans);
@@ -162,7 +162,7 @@ function eh_stm_status($r) {
 }
 function eh_stm_roll($uid) { return 'XL26' . str_pad((string) $uid, 6, '0', STR_PAD_LEFT); }
 function eh_stm_round_out($r) {
-    return ['id' => $r['id'], 'name' => $r['name'], 'login' => $r['login_ts'], 'start' => $r['start_ts'], 'end' => $r['end_ts'], 'status' => eh_stm_status($r), 'series' => $r['series'] ?? 'stet', 'sub' => $r['sub'] ?? ''];
+    return ['id' => $r['id'], 'name' => $r['name'], 'login' => $r['login_ts'], 'start' => $r['start_ts'], 'end' => $r['end_ts'], 'status' => eh_stm_status($r), 'series' => $r['series'] ?? 'stet', 'sub' => $r['sub'] ?? '', 'kind' => $r['kind'] ?? ''];
 }
 function eh_stm_attempt_out($row, $r) {
     $ps = eh_stm_pause_from($row, time());
@@ -179,7 +179,7 @@ function eh_stm_result($r, $row) {
     return array_merge([
         'ok' => true, 'name' => $row['name'], 'email' => $row['email'], 'roll' => eh_stm_roll((int) $row['uid']),
         'score' => (int) $row['score'], 'correct' => (int) $row['correct'], 'wrong' => (int) $row['wrong'],
-        'started' => (int) $row['started'], 'used' => (int) ($row['used'] ?? 0) ?: max(0, min(EH_STM_SECS, (int) $row['submitted'] - (int) $row['started'])), 'tabs' => (int) $row['tabs'],
+        'started' => (int) $row['started'], 'used' => (int) ($row['used'] ?? 0) ?: max(0, min(eh_stm_secs($r), (int) $row['submitted'] - (int) $row['started'])), 'tabs' => (int) $row['tabs'],
         'ans' => (object) (json_decode($row['ans'] ?: '{}', true) ?: []), 'tq' => (object) (json_decode($row['tq'] ?: '{}', true) ?: []),
         'key' => array_map(function ($q) { return $q['a']; }, $Q), 'exp' => array_map(function ($q) { return $q['e'] ?? ''; }, $Q),
         'q' => eh_stm_public_q($r), 'att' => (int) $row['att'], 'admin_test' => user_can((int) $row['uid'], 'manage_options'), 'practice' => !user_can((int) $row['uid'], 'manage_options') && !(int) $row['counted'] && $row['submitted'] > 0,
@@ -230,7 +230,7 @@ add_action('rest_api_init', function () {
             $row = eh_stm_row($r['id'], $u->ID);
         }
         if (!$row['started']) {
-            $wpdb->update(eh_stm_table(), ['started' => $now, 'deadline' => min($now + EH_STM_SECS, $r['end_ts']), 'last' => $now, 'dev' => wp_is_mobile() ? 'mobile' : 'pc'], ['id' => $row['id']]);
+            $wpdb->update(eh_stm_table(), ['started' => $now, 'deadline' => min($now + eh_stm_secs($r), $r['end_ts']), 'last' => $now, 'dev' => wp_is_mobile() ? 'mobile' : 'pc'], ['id' => $row['id']]);
             $row = eh_stm_row($r['id'], $row['uid']);
         }
         return ['now' => $now, 'attempt' => eh_stm_attempt_out($row, $r)];
@@ -346,7 +346,11 @@ function eh_stm_bot_view($confirm = false) {
 function eh_stm_secmap($rd = null) {
     $r = function ($a, $b) { return range($a - 1, $b - 1); };
     $rd = $rd ?: eh_stm_round();
-    if (function_exists('eh_tp_is') && eh_tp_is($rd)) return [['सामान्य अध्ययन', $r(1, 30)], [$rd['sub'], $r(31, 120)]];
+    if (function_exists('eh_tp_is') && eh_tp_is($rd)) {
+        if (($rd['kind'] ?? '') === 'sec') return [[$rd['sub'], $r(1, 90)]];
+        if (($rd['kind'] ?? '') === 'gs') return [['सामान्य अध्ययन', $r(1, 30)]];
+        return [['सामान्य अध्ययन', $r(1, 30)], [$rd['sub'], $r(31, 120)]];
+    }
     if (($rd['paper'] ?? '') !== 'supertet-mock1') return [['सामान्य ज्ञान एवं समसामयिकी', $r(1, 25)], ['तार्किक ज्ञान', $r(26, 30)], ['हिंदी, संस्कृत एवं अंग्रेजी', $r(31, 60)], ['विज्ञान', $r(61, 68)], ['गणित', $r(69, 84)], ['पर्यावरण एवं सामाजिक अध्ययन', $r(85, 92)], ['शिक्षण कौशल', $r(93, 100)], ['बाल मनोविज्ञान', $r(101, 108)], ['सूचना तकनीक (ICT)', $r(109, 112)], ['जीवन कौशल, प्रबंधन एवं अभिवृत्ति', $r(113, 120)]];
     return [['सामान्य ज्ञान एवं समसामयिकी', $r(1, 25)], ['तार्किक ज्ञान', $r(26, 30)], ['हिंदी, संस्कृत एवं अंग्रेजी', $r(31, 60)], ['विज्ञान', $r(61, 68)], ['गणित', $r(69, 84)], ['पर्यावरण एवं सामाजिक अध्ययन', $r(85, 92)], ['शिक्षण कौशल', $r(93, 100)], ['बाल मनोविज्ञान', $r(101, 108)], ['सूचना तकनीक (ICT)', array_merge($r(109, 112), $r(117, 120))], ['जीवन कौशल / प्रबंधन', $r(113, 116)]];
 }

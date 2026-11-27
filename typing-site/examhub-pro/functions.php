@@ -23,6 +23,7 @@ require EH_DIR . '/inc/mock-tp.php';
 require EH_DIR . '/inc/mock.php';
 require EH_DIR . '/inc/mock-admin.php';
 require EH_DIR . '/inc/mock-mail.php';
+require EH_DIR . '/inc/dash-mock.php';
 require EH_DIR . '/inc/tg-miniapp.php';
 require EH_DIR . '/inc/extra-admins.php';
 
@@ -40,7 +41,7 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('eh-style', get_stylesheet_uri(), [], EH_VER);
     wp_enqueue_script('eh-site', EH_URI . '/assets/eh-site.js', [], EH_VER, true);
     wp_enqueue_style('eh-brand-fonts', 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Serif:ital@1&display=swap', [], null);
-    if (is_front_page() || get_query_var('eh_view') === 'mockhub') {
+    if (is_front_page() || in_array(get_query_var('eh_view'), ['mockhub', 'dashboard'], true)) {
         wp_enqueue_style('eh-mock', EH_URI . '/assets/eh-mock.css', ['eh-style'], EH_VER);
         if (!is_front_page()) wp_enqueue_style('eh-mock-fonts', 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Mukta:wght@400;500;600;700;800&display=swap', [], null);
     }
@@ -245,7 +246,8 @@ function eh_t($en, $hi) { return '<span class="l-en">' . $en . '</span><span cla
 function eh_wa_url($text = '') { return 'https://wa.me/' . preg_replace('/\D/', '', (string) eh_opt('whatsapp')) . ($text !== '' ? '?text=' . rawurlencode($text) : ''); }
 function eh_last_em($s) { $s = esc_html(trim((string) $s)); $p = strrpos($s, ' '); return $p === false ? $s : substr($s, 0, $p) . ' <em>' . substr($s, $p + 1) . '</em>'; }
 function eh_logo() {
-    $name = is_front_page() ? eh_opt('brand') : (eh_opt('brand_typing') ?: eh_opt('brand'));
+    $v = function_exists('get_query_var') ? get_query_var('eh_view') : '';
+    $name = is_front_page() || $v === 'dashboard' ? eh_opt('brand') : ($v === 'mockhub' ? 'MOCK ALERT' : 'TYPING ALERT');
     return '<span class="eh-logo-mark"><img src="' . esc_url(EH_URI . '/assets/logo-mark.png') . '" alt="" width="64" height="64"></span><span class="eh-logo-txt"><span class="eh-logo-name">' . eh_last_em($name) . '</span>' . (eh_opt('brand_sub') ? '<small>' . esc_html(eh_opt('brand_sub')) . '</small>' : '') . '</span>';
 }
 /* UPSSSC Junior Assistant typing tests go first in every exam list */

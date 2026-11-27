@@ -11,7 +11,8 @@ $n = (int) $agg['n']; $nq = (int) $agg['q'];
 $ps = []; foreach (eh_passages() as $p) $ps[$p['id']] = $p;
 get_header(); ?>
 <?php echo eh_member_nav('history'); ?>
-<section class="wrap eh-section">
+<?php if (function_exists('eh_dash_render')): ?><section class="wrap eh-section dk-wrap"><?php echo eh_dash_render($uid); ?></section><?php endif; ?>
+<section class="wrap eh-section" id="dk-typing-full">
   <div class="eh-hist-stats">
     <div><b><?php echo number_format_i18n($n); ?><?php echo $n ? ' +' : ''; ?></b><span>Tests taken</span></div>
     <div><b><?php echo (int) round((float) $agg['g']); ?> wpm</b><span>Avg. Gross Speed</span></div>
