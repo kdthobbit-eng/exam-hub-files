@@ -433,6 +433,16 @@ table.mt th{background:#eef3f9;font-weight:600}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 .subsel{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-size:14px;font-weight:600}.subsel select{padding:8px 12px;border-radius:10px;border:0;font:inherit;font-size:15px;color:#0f2a4d;max-width:260px}
+.pmk{background:#fff;border:1px solid var(--ln);border-radius:18px;padding:18px 18px 16px;margin:18px 0 16px;box-shadow:0 8px 24px -16px rgba(15,42,77,.25)}
+.pmk-h b{display:block;font-size:18px;color:var(--nv)}.pmk-h span{font-size:13.5px;color:var(--mu)}
+.pmk-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:14px}
+.pmk-c{display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:auto auto;align-items:center;gap:4px 12px;padding:14px;border:1.5px solid var(--ln);border-radius:14px;text-decoration:none;color:var(--tx);background:#fbfcfe;transition:border-color .2s,box-shadow .2s,transform .2s}
+.pmk-c:hover{border-color:#e8590c;box-shadow:0 10px 22px -14px rgba(232,89,12,.6);transform:translateY(-2px)}
+.pmk-c.on{border-color:#e8590c;background:#fff7f1}
+.pmk-c .n{grid-row:1/3;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0f2a4d,#1d63c7);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif;font-weight:700}
+.pmk-c .t b{display:block;font-size:15.5px;color:var(--nv)}.pmk-c .t small{font-size:12.5px;color:var(--mu)}
+.pmk-c em{font-style:normal;font-size:11.5px;font-weight:700;border-radius:20px;padding:3px 9px;justify-self:end}.pmk-c em.x{background:#eef2f7;color:#475569}.pmk-c em.l{background:#dcfce7;color:#15803d}.pmk-c em.u{background:#fff4d6;color:#8a5a00}
+.pmk-c .go{grid-column:2/4;justify-self:start;font-size:13.5px;font-weight:700;color:#fff;background:#e8590c;border-radius:9px;padding:6px 12px;margin-top:6px}
 .mtabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 14px}.mtabs a{display:flex;flex-direction:column;gap:1px;padding:8px 14px;border-radius:12px;border:1.5px solid rgba(255,255,255,.35);color:#fff;text-decoration:none;font-size:14px;line-height:1.25;background:rgba(255,255,255,.06)}.mtabs a small{font-size:11.5px;opacity:.85}.mtabs a.on{background:#f5b53f;border-color:#f5b53f;color:#2a1e00}.mtabs a.past:not(.on){opacity:.85}
 </style>
 </head>
@@ -443,7 +453,7 @@ table.mt th{background:#eef3f9;font-weight:600}
 <section class="scr on" id="s-home">
  <?php $eh_hd('Online Examination', '', true); ?>
  <div class="hero"><div class="hin">
-  <div><nav class="mtabs" id="mtabs" aria-label="मॉक टेस्ट"></nav><span class="chip" id="h-chip"><span class="dot"></span><span id="h-chipt">लाइव मॉक टेस्ट</span></span>
+  <div><span class="chip" id="h-chip"><span class="dot"></span><span id="h-chipt">लाइव मॉक टेस्ट</span></span>
 <?php if ($eh_tp): $eh_sib = array_values(array_filter(eh_stm_rounds(), function ($x) use ($eh_vr) { return ($x['series'] ?? '') === $eh_vr['series']; })); ?>
    <p class="st" style="margin:0 0 6px"><a href="<?php echo esc_url(home_url('/mock-test/')); ?>" style="color:#fff">मॉक टेस्ट</a> › <a href="<?php echo esc_url(add_query_arg('x', $eh_vr['series'], home_url('/mock-test/'))); ?>" style="color:#fff"><?php echo esc_html($eh_tp['short']); ?></a></p>
    <h1><?php echo esc_html($eh_tp['title']); ?> <em><?php echo esc_html($eh_vr['sub']); ?></em></h1>
@@ -458,6 +468,7 @@ table.mt th{background:#eef3f9;font-weight:600}
  </div></div>
  <div class="wrap">
   <div class="cta"><div class="av big"><?php echo $eh_ph; ?></div><div class="txt"><h3 id="c-h"></h3><p id="c-p"></p></div><div class="bt" id="c-bt"></div></div>
+  <section class="pmk" id="pmk" hidden><div class="pmk-h"><div><b>सभी मॉक टेस्ट</b><span>पिछले मॉक के परिणाम, रैंक, उत्तर-कुंजी और व्याख्या देखें</span></div></div><nav class="pmk-g" id="mtabs" aria-label="मॉक टेस्ट"></nav></section>
   <div class="facts">
    <div class="fact"><i class="i1">120</i><b>प्रश्न</b><span>बहुविकल्पीय (MCQ)</span></div>
    <div class="fact"><i class="i2">360</i><b>पूर्णांक</b><span>प्रत्येक प्रश्न 3 अंक</span></div>
@@ -592,9 +603,9 @@ table.mt th{background:#eef3f9;font-weight:600}
 <script>
 {
 const C=<?php echo wp_json_encode($eh_cfg); ?>;
-(function(){var n=document.getElementById('mtabs');if(!n||!C.mocks||C.mocks.length<2)return;var M=['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'],now=C.now,base=location.pathname;
-n.innerHTML=C.mocks.map(function(m,i){var d=new Date(m.start*1000),past=now>=m.end,on=(C.view||C.cur)===m.id,dt=d.getDate()+' '+M[d.getMonth()];
-var tag=past?'समाप्त · परिणाम देखें':(now>=m.start?'लाइव':'आज/आगामी');return '<a class="'+(on?'on':'')+(past?' past':'')+'" href="'+base+(m.id===C.cur?'':'?r='+m.id)+'"><b>मॉक '+(i+1)+'</b> · '+dt+'<small>'+tag+'</small></a>'}).join('')})();
+(function(){var n=document.getElementById('mtabs');if(!n||!C.mocks||C.mocks.length<2)return;document.getElementById('pmk').hidden=false;var M=['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'],now=C.now,base=location.pathname;
+n.innerHTML=C.mocks.map(function(m,i){var d=new Date(m.start*1000),past=now>=m.end,live=!past&&now>=m.start,on=(C.view||C.cur)===m.id,dt=d.getDate()+' '+M[d.getMonth()]+' '+d.getFullYear();
+var st=past?'<em class="x">समाप्त</em>':live?'<em class="l">● LIVE</em>':'<em class="u">आगामी</em>';return '<a class="pmk-c'+(on?' on':'')+'" href="'+base+(m.id===C.cur?'':'?r='+m.id)+'"><span class="n">'+String(i+1).padStart(2,'0')+'</span><span class="t"><b>Super TET मॉक '+(i+1)+'</b><small>📅 '+dt+'</small></span>'+st+'<span class="go">'+(past?'परिणाम देखें':live?'मॉक दें':'देखें')+' →</span></a>'}).join('')})();
 const PH=<?php echo wp_json_encode($eh_ph); ?>;
 const r=(a,b)=>Array.from({length:b-a+1},(_,i)=>a-1+i);
 const SECS=(C.secs&&C.secs.length?C.secs:[["सामान्य ज्ञान एवं समसामयिकी",r(1,25)],["तार्किक ज्ञान",r(26,30)],["हिंदी, संस्कृत एवं अंग्रेजी",r(31,60)],["विज्ञान",r(61,68)],["गणित",r(69,84)],["पर्यावरण एवं सामाजिक अध्ययन",r(85,92)],["शिक्षण कौशल",r(93,100)],["बाल मनोविज्ञान",r(101,108)],...(C.paper==="supertet-mock1"?[["सूचना तकनीक (ICT)",r(109,112).concat(r(117,120))],["जीवन कौशल / प्रबंधन",r(113,116)]]:[["सूचना तकनीक (ICT)",r(109,112)],["जीवन कौशल, प्रबंधन एवं अभिवृत्ति",r(113,120)]])]).map(x=>({n:x[0],q:x[1]}));

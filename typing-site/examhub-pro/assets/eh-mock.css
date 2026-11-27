@@ -99,3 +99,6 @@
 .mx-subs{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 .mx-s .tx b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media(max-width:560px){.mx-subs{grid-template-columns:1fr}}
+/* one button style everywhere: saffron */
+.mx-go{background:var(--saf)}
+.mx-card:hover .mx-go{background:#c94a06}

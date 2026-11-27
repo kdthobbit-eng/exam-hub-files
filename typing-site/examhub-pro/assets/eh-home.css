@@ -347,3 +347,5 @@ body.home{animation:uhfade .6s ease both}
 .uh-lbs .uh-stm:nth-child(2){background:linear-gradient(125deg,#1d0b3d,#4b1d8f 60%,#7c3aed)}
 .uh-lbs .uh-stm:nth-child(3){background:linear-gradient(125deg,#032b22,#0b6b4f 60%,#16a34a)}
 @media(max-width:640px){.uh-lbs .uh-stm-bot{flex-direction:row;align-items:center}.uh-lbs .uh-stm-go{padding:12px 16px}}
+.uh-btn.uh-btn-o{background:var(--saf);color:#fff;border-color:var(--saf)}
+.uh-btn.uh-btn-o:hover{background:#c94a06;border-color:#c94a06;color:#fff}
