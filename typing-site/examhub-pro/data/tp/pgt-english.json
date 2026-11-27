@@ -1,0 +1,992 @@
+[
+{
+"q": "'The Canterbury Tales' was written by:",
+"o": [
+"William Langland",
+"Edmund Spenser",
+"Geoffrey Chaucer",
+"John Gower"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'The Faerie Queene' is an allegorical epic by:",
+"o": [
+"Philip Sidney",
+"Christopher Marlowe",
+"Edmund Spenser",
+"John Milton"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Doctor Faustus' was written by:",
+"o": [
+"Thomas Kyd",
+"John Webster",
+"Ben Jonson",
+"Christopher Marlowe"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'The Spanish Tragedy' is a revenge play by:",
+"o": [
+"Cyril Tourneur",
+"John Ford",
+"Christopher Marlowe",
+"Thomas Kyd"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "Which of these is NOT a tragedy by Shakespeare?",
+"o": [
+"Macbeth",
+"The Tempest",
+"King Lear",
+"Othello"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'To be, or not to be: that is the question' is spoken by:",
+"o": [
+"Hamlet",
+"Macbeth",
+"Othello",
+"Brutus"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Shylock is a character in:",
+"o": [
+"Twelfth Night",
+"As You Like It",
+"The Merchant of Venice",
+"Much Ado About Nothing"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Ben Jonson is known for the 'Comedy of':",
+"o": [
+"Menace",
+"Manners",
+"Errors",
+"Humours"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'An Apology for Poetry' (The Defence of Poesy) was written by:",
+"o": [
+"Francis Bacon",
+"Philip Sidney",
+"Ben Jonson",
+"John Dryden"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Who is called the 'Father of English Essay'?",
+"o": [
+"Charles Lamb",
+"Francis Bacon",
+"Richard Steele",
+"Joseph Addison"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "The leading figure of the Metaphysical poets is:",
+"o": [
+"John Donne",
+"Andrew Marvell",
+"George Herbert",
+"Henry Vaughan"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Paradise Lost' is divided into how many books (final edition)?",
+"o": [
+"12",
+"10",
+"9",
+"24"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Samson Agonistes' was written by:",
+"o": [
+"John Dryden",
+"Alexander Pope",
+"John Bunyan",
+"John Milton"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'The Pilgrim's Progress' was written by:",
+"o": [
+"John Milton",
+"Jonathan Swift",
+"John Bunyan",
+"Daniel Defoe"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Absalom and Achitophel' is a political satire by:",
+"o": [
+"Jonathan Swift",
+"John Dryden",
+"Samuel Butler",
+"Alexander Pope"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'The Rape of the Lock' is a mock-epic by:",
+"o": [
+"Thomas Gray",
+"Oliver Goldsmith",
+"Alexander Pope",
+"John Dryden"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Gulliver's Travels' was written by:",
+"o": [
+"Daniel Defoe",
+"Samuel Richardson",
+"Jonathan Swift",
+"Henry Fielding"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Robinson Crusoe' was written by:",
+"o": [
+"Daniel Defoe",
+"Jonathan Swift",
+"Laurence Sterne",
+"Tobias Smollett"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Pamela' is an epistolary novel by:",
+"o": [
+"Daniel Defoe",
+"Fanny Burney",
+"Henry Fielding",
+"Samuel Richardson"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Elegy Written in a Country Churchyard' was written by:",
+"o": [
+"Oliver Goldsmith",
+"William Collins",
+"Thomas Gray",
+"William Cowper"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'A Dictionary of the English Language' (1755) was compiled by:",
+"o": [
+"James Boswell",
+"Samuel Johnson",
+"Noah Webster",
+"Joseph Addison"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'She Stoops to Conquer' was written by:",
+"o": [
+"John Gay",
+"William Congreve",
+"Oliver Goldsmith",
+"R. B. Sheridan"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'The School for Scandal' was written by:",
+"o": [
+"William Congreve",
+"George Farquhar",
+"Oliver Goldsmith",
+"R. B. Sheridan"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "The Preface to 'Lyrical Ballads' defines poetry as:",
+"o": [
+"the best words in the best order",
+"the spontaneous overflow of powerful feelings",
+"a criticism of life",
+"an imitation of an action"
+],
+"a": "B",
+"e": "Wordsworth."
+},
+{
+"q": "'Poetry is a criticism of life' was said by:",
+"o": [
+"T. S. Eliot",
+"Matthew Arnold",
+"S. T. Coleridge",
+"Walter Pater"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Biographia Literaria' was written by:",
+"o": [
+"William Hazlitt",
+"William Wordsworth",
+"Charles Lamb",
+"S. T. Coleridge"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Ode to the West Wind' was written by:",
+"o": [
+"Lord Byron",
+"P. B. Shelley",
+"John Keats",
+"William Wordsworth"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'A thing of beauty is a joy for ever' is the opening line of:",
+"o": [
+"Hyperion",
+"Lamia",
+"Isabella",
+"Endymion"
+],
+"a": "D",
+"e": "Keats."
+},
+{
+"q": "'Don Juan' is a satirical poem by:",
+"o": [
+"Robert Southey",
+"Lord Byron",
+"John Keats",
+"P. B. Shelley"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Essays of Elia' were written by:",
+"o": [
+"Charles Lamb",
+"Thomas De Quincey",
+"William Hazlitt",
+"Leigh Hunt"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Confessions of an English Opium-Eater' was written by:",
+"o": [
+"Charles Lamb",
+"S. T. Coleridge",
+"Thomas De Quincey",
+"William Hazlitt"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Emma' and 'Persuasion' were written by:",
+"o": [
+"Fanny Burney",
+"Mary Shelley",
+"Maria Edgeworth",
+"Jane Austen"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Frankenstein' was written by:",
+"o": [
+"Jane Austen",
+"Mary Shelley",
+"Ann Radcliffe",
+"Emily Brontë"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'In Memoriam A.H.H.' was written by:",
+"o": [
+"Matthew Arnold",
+"Robert Browning",
+"Alfred Tennyson",
+"A. C. Swinburne"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Robert Browning is best known for which poetic form?",
+"o": [
+"Sonnet sequence",
+"Dramatic monologue",
+"Epic",
+"Ode"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'My Last Duchess' is a poem by:",
+"o": [
+"Alfred Tennyson",
+"D. G. Rossetti",
+"Matthew Arnold",
+"Robert Browning"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Dover Beach' was written by:",
+"o": [
+"Matthew Arnold",
+"G. M. Hopkins",
+"Alfred Tennyson",
+"Thomas Hardy"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Great Expectations' and 'David Copperfield' were written by:",
+"o": [
+"George Eliot",
+"W. M. Thackeray",
+"Thomas Hardy",
+"Charles Dickens"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Vanity Fair' was written by:",
+"o": [
+"W. M. Thackeray",
+"Charles Dickens",
+"Anthony Trollope",
+"George Meredith"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Middlemarch' was written by:",
+"o": [
+"George Eliot",
+"Jane Austen",
+"Charlotte Brontë",
+"Elizabeth Gaskell"
+],
+"a": "A",
+"e": "Pen name of Mary Ann Evans."
+},
+{
+"q": "'Wuthering Heights' was written by:",
+"o": [
+"Emily Brontë",
+"George Eliot",
+"Charlotte Brontë",
+"Anne Brontë"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Tess of the d'Urbervilles' was written by:",
+"o": [
+"George Eliot",
+"Thomas Hardy",
+"D. H. Lawrence",
+"Charles Dickens"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Sprung rhythm' is associated with:",
+"o": [
+"A. E. Housman",
+"Robert Bridges",
+"Thomas Hardy",
+"G. M. Hopkins"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'The Importance of Being Earnest' was written by:",
+"o": [
+"Oscar Wilde",
+"Noel Coward",
+"J. M. Synge",
+"G. B. Shaw"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Pygmalion' and 'Arms and the Man' were written by:",
+"o": [
+"J. M. Barrie",
+"Oscar Wilde",
+"John Galsworthy",
+"G. B. Shaw"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Murder in the Cathedral' is a verse play by:",
+"o": [
+"T. S. Eliot",
+"W. B. Yeats",
+"W. H. Auden",
+"Christopher Fry"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'The Second Coming' is a poem by:",
+"o": [
+"Ted Hughes",
+"Dylan Thomas",
+"W. B. Yeats",
+"T. S. Eliot"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Ulysses' (1922) novel was written by:",
+"o": [
+"E. M. Forster",
+"James Joyce",
+"Virginia Woolf",
+"D. H. Lawrence"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Mrs Dalloway' is a 'stream of consciousness' novel by:",
+"o": [
+"James Joyce",
+"Dorothy Richardson",
+"Katherine Mansfield",
+"Virginia Woolf"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'A Passage to India' was written by:",
+"o": [
+"Joseph Conrad",
+"E. M. Forster",
+"George Orwell",
+"Rudyard Kipling"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Heart of Darkness' was written by:",
+"o": [
+"Joseph Conrad",
+"E. M. Forster",
+"H. G. Wells",
+"Graham Greene"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Animal Farm' and 'Nineteen Eighty-Four' were written by:",
+"o": [
+"George Orwell",
+"H. G. Wells",
+"William Golding",
+"Aldous Huxley"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Lord of the Flies' was written by:",
+"o": [
+"William Golding",
+"Iris Murdoch",
+"George Orwell",
+"Graham Greene"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Waiting for Godot' was written by:",
+"o": [
+"John Osborne",
+"Samuel Beckett",
+"Harold Pinter",
+"Tom Stoppard"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Look Back in Anger' (1956) was written by:",
+"o": [
+"Samuel Beckett",
+"Arnold Wesker",
+"John Osborne",
+"Harold Pinter"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Which Indian writer won the Booker Prize for 'The God of Small Things'?",
+"o": [
+"Arundhati Roy",
+"Anita Desai",
+"Jhumpa Lahiri",
+"Kiran Desai"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Midnight's Children' was written by:",
+"o": [
+"Amitav Ghosh",
+"Salman Rushdie",
+"Vikram Seth",
+"Rohinton Mistry"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'A Suitable Boy' was written by:",
+"o": [
+"Vikram Seth",
+"Upamanyu Chatterjee",
+"Shashi Tharoor",
+"Amitav Ghosh"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Kanthapura' was written by:",
+"o": [
+"Mulk Raj Anand",
+"R. K. Narayan",
+"Raja Rao",
+"Bhabani Bhattacharya"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Night of the Scorpion' is a poem by:",
+"o": [
+"Jayanta Mahapatra",
+"Kamala Das",
+"Nissim Ezekiel",
+"A. K. Ramanujan"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Things Fall Apart' was written by:",
+"o": [
+"Wole Soyinka",
+"V. S. Naipaul",
+"Chinua Achebe",
+"Ngũgĩ wa Thiong'o"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'A House for Mr Biswas' was written by:",
+"o": [
+"Chinua Achebe",
+"V. S. Naipaul",
+"Derek Walcott",
+"Salman Rushdie"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'The Old Man and the Sea' was written by:",
+"o": [
+"Ernest Hemingway",
+"John Steinbeck",
+"William Faulkner",
+"F. Scott Fitzgerald"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'The Great Gatsby' was written by:",
+"o": [
+"Ernest Hemingway",
+"Henry James",
+"Mark Twain",
+"F. Scott Fitzgerald"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Death of a Salesman' was written by:",
+"o": [
+"Edward Albee",
+"Tennessee Williams",
+"Eugene O'Neill",
+"Arthur Miller"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Leaves of Grass' was written by:",
+"o": [
+"Walt Whitman",
+"Robert Frost",
+"Edgar Allan Poe",
+"Emily Dickinson"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'The Road Not Taken' was written by:",
+"o": [
+"Wallace Stevens",
+"Robert Frost",
+"Carl Sandburg",
+"Walt Whitman"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Aristotle's concept of 'catharsis' is discussed in:",
+"o": [
+"Republic",
+"Ars Poetica",
+"Poetics",
+"Rhetoric"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "'Tradition and the Individual Talent' was written by:",
+"o": [
+"I. A. Richards",
+"T. S. Eliot",
+"F. R. Leavis",
+"Matthew Arnold"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "The term 'objective correlative' was popularised by:",
+"o": [
+"Cleanth Brooks",
+"T. S. Eliot",
+"I. A. Richards",
+"Northrop Frye"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Practical Criticism' (1929) was written by:",
+"o": [
+"I. A. Richards",
+"T. S. Eliot",
+"F. R. Leavis",
+"William Empson"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'Seven Types of Ambiguity' was written by:",
+"o": [
+"Allen Tate",
+"I. A. Richards",
+"William Empson",
+"Cleanth Brooks"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "A fourteen-line poem with rhyme scheme abba abba cdecde is a:",
+"o": [
+"Spenserian sonnet",
+"Terza rima",
+"Shakespearean sonnet",
+"Petrarchan sonnet"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "A line of verse with five iambic feet is called:",
+"o": [
+"Hexameter",
+"Iambic tetrameter",
+"Trochaic pentameter",
+"Iambic pentameter"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "An unrhymed iambic pentameter is called:",
+"o": [
+"Heroic couplet",
+"Free verse",
+"Blank verse",
+"Ballad metre"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "The repetition of vowel sounds within nearby words is called:",
+"o": [
+"Alliteration",
+"Assonance",
+"Onomatopoeia",
+"Consonance"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "'Buzz', 'hiss' and 'murmur' are examples of:",
+"o": [
+"Onomatopoeia",
+"Oxymoron",
+"Litotes",
+"Synecdoche"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'All hands on deck' is an example of:",
+"o": [
+"Metonymy",
+"Simile",
+"Synecdoche",
+"Hyperbole"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "A literary work that ridicules human folly is called:",
+"o": [
+"Satire",
+"Ode",
+"Pastoral",
+"Elegy"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Choose the correct sentence.",
+"o": [
+"Hardly he arrived when it started raining.",
+"Hardly had he arrived than it started raining.",
+"Hardly he had arrived when it started raining.",
+"Hardly had he arrived when it started raining."
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "Choose the correct sentence.",
+"o": [
+"No sooner he saw the police than he ran away.",
+"No sooner did he saw the police than he ran away.",
+"No sooner did he see the police than he ran away.",
+"No sooner did he see the police when he ran away."
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Choose the correct form: 'It is high time we ____ the work.'",
+"o": [
+"finished",
+"finish",
+"have finished",
+"will finish"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "Choose the correct form: 'He insisted that she ____ present.'",
+"o": [
+"will be",
+"was",
+"is",
+"be"
+],
+"a": "D",
+"e": "Subjunctive."
+},
+{
+"q": "Choose the correct passive: 'Let him do it.'",
+"o": [
+"Let it is done by him.",
+"Let it done by him.",
+"It be done by him.",
+"Let it be done by him."
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "The word 'misanthrope' means:",
+"o": [
+"one who loves mankind",
+"one who hates mankind",
+"one who hates women",
+"one who loves books"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "Choose the word closest in meaning to 'EPHEMERAL'.",
+"o": [
+"Heavenly",
+"Evident",
+"Short-lived",
+"Eternal"
+],
+"a": "C",
+"e": ""
+},
+{
+"q": "Choose the word opposite in meaning to 'VERBOSE'.",
+"o": [
+"Lengthy",
+"Concise",
+"Verbal",
+"Wordy"
+],
+"a": "B",
+"e": ""
+},
+{
+"q": "The 'Krashen Input Hypothesis' in language acquisition emphasises:",
+"o": [
+"translation",
+"error correction",
+"grammar drills",
+"comprehensible input (i + 1)"
+],
+"a": "D",
+"e": ""
+},
+{
+"q": "'Pride and Prejudice' opens with the line beginning:",
+"o": [
+"It is a truth universally acknowledged",
+"Happy families are all alike",
+"Call me Ishmael",
+"It was the best of times"
+],
+"a": "A",
+"e": ""
+},
+{
+"q": "'The Prelude' is an autobiographical poem by:",
+"o": [
+"John Keats",
+"Lord Byron",
+"William Wordsworth",
+"S. T. Coleridge"
+],
+"a": "C",
+"e": ""
+}
+]
