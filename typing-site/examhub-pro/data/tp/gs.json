@@ -1,0 +1,542 @@
+[
+{
+"q": "सिंधु घाटी सभ्यता का कौन-सा स्थल 'गोदीबाड़ा' (डॉकयार्ड) के लिए प्रसिद्ध है?",
+"o": [
+"हड़प्पा",
+"लोथल",
+"कालीबंगा",
+"मोहनजोदड़ो"
+],
+"a": "B",
+"e": "लोथल (गुजरात) में ईंटों से बना गोदीबाड़ा मिला है।",
+"qe": "Which Indus Valley site is famous for its dockyard?",
+"oe": [
+"Harappa",
+"Lothal",
+"Kalibangan",
+"Mohenjo-daro"
+]
+},
+{
+"q": "गौतम बुद्ध ने अपना पहला उपदेश कहाँ दिया था?",
+"o": [
+"कुशीनगर",
+"लुंबिनी",
+"बोधगया",
+"सारनाथ"
+],
+"a": "D",
+"e": "सारनाथ (वाराणसी) में पहला उपदेश 'धर्मचक्र प्रवर्तन' कहलाता है।",
+"qe": "Where did Gautama Buddha deliver his first sermon?",
+"oe": [
+"Kushinagar",
+"Lumbini",
+"Bodh Gaya",
+"Sarnath"
+]
+},
+{
+"q": "'इलाहाबाद स्तंभ लेख' (प्रयाग प्रशस्ति) किस शासक की उपलब्धियों का वर्णन करता है?",
+"o": [
+"समुद्रगुप्त",
+"अशोक",
+"हर्षवर्धन",
+"चंद्रगुप्त मौर्य"
+],
+"a": "A",
+"e": "इसकी रचना हरिषेण ने की थी।",
+"qe": "The Allahabad Pillar Inscription (Prayag Prashasti) describes the achievements of which ruler?",
+"oe": [
+"Samudragupta",
+"Ashoka",
+"Harshavardhana",
+"Chandragupta Maurya"
+]
+},
+{
+"q": "पानीपत का प्रथम युद्ध (1526 ई.) किनके बीच हुआ था?",
+"o": [
+"बाबर और राणा सांगा",
+"हुमायूँ और शेरशाह",
+"बाबर और इब्राहिम लोदी",
+"अकबर और हेमू"
+],
+"a": "C",
+"e": "इस युद्ध से भारत में मुगल वंश की नींव पड़ी।",
+"qe": "The First Battle of Panipat (1526) was fought between",
+"oe": [
+"Babur and Rana Sanga",
+"Humayun and Sher Shah",
+"Babur and Ibrahim Lodi",
+"Akbar and Hemu"
+]
+},
+{
+"q": "1857 के विद्रोह में लखनऊ से नेतृत्व किसने किया था?",
+"o": [
+"कुँवर सिंह",
+"नाना साहब",
+"बेगम हज़रत महल",
+"रानी लक्ष्मीबाई"
+],
+"a": "C",
+"e": "बेगम हज़रत महल ने अवध (लखनऊ) में नेतृत्व किया।",
+"qe": "Who led the Revolt of 1857 at Lucknow?",
+"oe": [
+"Kunwar Singh",
+"Nana Sahib",
+"Begum Hazrat Mahal",
+"Rani Lakshmibai"
+]
+},
+{
+"q": "चौरी-चौरा घटना (1922) के बाद गांधीजी ने कौन-सा आंदोलन वापस ले लिया था?",
+"o": [
+"असहयोग आंदोलन",
+"सविनय अवज्ञा आंदोलन",
+"भारत छोड़ो आंदोलन",
+"खिलाफत आंदोलन"
+],
+"a": "A",
+"e": "चौरी-चौरा गोरखपुर (उ.प्र.) में है।",
+"qe": "After the Chauri Chaura incident (1922), Gandhiji withdrew which movement?",
+"oe": [
+"Non-Cooperation Movement",
+"Civil Disobedience Movement",
+"Quit India Movement",
+"Khilafat Movement"
+]
+},
+{
+"q": "काकोरी ट्रेन कांड (1925) से जुड़े क्रांतिकारी कौन थे?",
+"o": [
+"सुखदेव",
+"भगत सिंह",
+"बटुकेश्वर दत्त",
+"राम प्रसाद बिस्मिल"
+],
+"a": "D",
+"e": "बिस्मिल, अशफ़ाक उल्ला खाँ आदि इस कांड में शामिल थे।",
+"qe": "Which revolutionary is associated with the Kakori Train Action (1925)?",
+"oe": [
+"Sukhdev",
+"Bhagat Singh",
+"Batukeshwar Dutt",
+"Ram Prasad Bismil"
+]
+},
+{
+"q": "उत्तर प्रदेश की सीमा कितने राज्यों से लगती है?",
+"o": [
+"6",
+"7",
+"9",
+"8"
+],
+"a": "D",
+"e": "उत्तराखंड, हिमाचल, हरियाणा, राजस्थान, मध्य प्रदेश, छत्तीसगढ़, झारखंड, बिहार — 8 राज्य, साथ में दिल्ली (केंद्रशासित) भी।",
+"qe": "Uttar Pradesh shares its border with how many states?",
+"oe": [
+"6",
+"7",
+"9",
+"8"
+]
+},
+{
+"q": "गंगा और यमुना का संगम किस नगर में है?",
+"o": [
+"मिर्ज़ापुर",
+"कानपुर",
+"वाराणसी",
+"प्रयागराज"
+],
+"a": "D",
+"e": "प्रयागराज में त्रिवेणी संगम है।",
+"qe": "The confluence of the Ganga and the Yamuna is at",
+"oe": [
+"Mirzapur",
+"Kanpur",
+"Varanasi",
+"Prayagraj"
+]
+},
+{
+"q": "भारत की मानक समय रेखा (82½° पूर्व देशांतर) उत्तर प्रदेश के किस जिले से होकर गुज़रती है?",
+"o": [
+"प्रयागराज",
+"सोनभद्र",
+"मिर्ज़ापुर",
+"वाराणसी"
+],
+"a": "C",
+"e": "IST रेखा मिर्ज़ापुर के पास से गुज़रती है।",
+"qe": "India's Standard Meridian (82½° E) passes through which district of Uttar Pradesh?",
+"oe": [
+"Prayagraj",
+"Sonbhadra",
+"Mirzapur",
+"Varanasi"
+]
+},
+{
+"q": "भारत में सबसे अधिक क्षेत्रफल में पाई जाने वाली मिट्टी कौन-सी है?",
+"o": [
+"जलोढ़ मिट्टी",
+"लाल मिट्टी",
+"काली मिट्टी",
+"लैटेराइट मिट्टी"
+],
+"a": "A",
+"e": "जलोढ़ मिट्टी उत्तरी मैदानों में फैली है।",
+"qe": "Which soil covers the largest area in India?",
+"oe": [
+"Alluvial soil",
+"Red soil",
+"Black soil",
+"Laterite soil"
+]
+},
+{
+"q": "दुधवा राष्ट्रीय उद्यान किस जिले में है?",
+"o": [
+"लखीमपुर खीरी",
+"बहराइच",
+"महाराजगंज",
+"पीलीभीत"
+],
+"a": "A",
+"e": "दुधवा उत्तर प्रदेश का प्रमुख राष्ट्रीय उद्यान है।",
+"qe": "Dudhwa National Park is located in which district?",
+"oe": [
+"Lakhimpur Kheri",
+"Bahraich",
+"Maharajganj",
+"Pilibhit"
+]
+},
+{
+"q": "भारतीय संविधान के किस अनुच्छेद में 'शिक्षा का अधिकार' (6–14 वर्ष) दिया गया है?",
+"o": [
+"अनुच्छेद 19",
+"अनुच्छेद 51A",
+"अनुच्छेद 21A",
+"अनुच्छेद 45"
+],
+"a": "C",
+"e": "86वें संशोधन (2002) से अनुच्छेद 21A जोड़ा गया।",
+"qe": "Which Article of the Constitution provides the Right to Education (6–14 years)?",
+"oe": [
+"Article 19",
+"Article 51A",
+"Article 21A",
+"Article 45"
+]
+},
+{
+"q": "राज्यसभा के पदेन सभापति कौन होते हैं?",
+"o": [
+"राष्ट्रपति",
+"लोकसभा अध्यक्ष",
+"प्रधानमंत्री",
+"उपराष्ट्रपति"
+],
+"a": "D",
+"e": "अनुच्छेद 64 के अनुसार उपराष्ट्रपति राज्यसभा के सभापति होते हैं।",
+"qe": "Who is the ex-officio Chairman of the Rajya Sabha?",
+"oe": [
+"President",
+"Speaker of Lok Sabha",
+"Prime Minister",
+"Vice-President"
+]
+},
+{
+"q": "पंचायती राज व्यवस्था को संवैधानिक दर्जा किस संशोधन से मिला?",
+"o": [
+"73वाँ संशोधन",
+"42वाँ संशोधन",
+"61वाँ संशोधन",
+"74वाँ संशोधन"
+],
+"a": "A",
+"e": "73वाँ संशोधन 1992 में पारित हुआ, 1993 से लागू।",
+"qe": "Which amendment gave constitutional status to Panchayati Raj?",
+"oe": [
+"73rd Amendment",
+"42nd Amendment",
+"61st Amendment",
+"74th Amendment"
+]
+},
+{
+"q": "मौलिक कर्तव्य भारतीय संविधान में किस देश के संविधान से प्रेरित हैं?",
+"o": [
+"ब्रिटेन",
+"पूर्व सोवियत संघ (USSR)",
+"आयरलैंड",
+"अमेरिका"
+],
+"a": "B",
+"e": "42वें संशोधन (1976) से भाग 4A जोड़ा गया।",
+"qe": "Fundamental Duties in the Indian Constitution were inspired by the constitution of",
+"oe": [
+"Britain",
+"former USSR",
+"Ireland",
+"USA"
+]
+},
+{
+"q": "उत्तर प्रदेश विधान परिषद के सदस्यों का कार्यकाल कितना होता है?",
+"o": [
+"5 वर्ष",
+"3 वर्ष",
+"6 वर्ष",
+"4 वर्ष"
+],
+"a": "C",
+"e": "हर 2 वर्ष में एक-तिहाई सदस्य सेवानिवृत्त होते हैं।",
+"qe": "What is the term of a member of the UP Legislative Council?",
+"oe": [
+"5 years",
+"3 years",
+"6 years",
+"4 years"
+]
+},
+{
+"q": "भारत में राष्ट्रीय आय का आकलन करने वाली संस्था कौन-सी है?",
+"o": [
+"राष्ट्रीय सांख्यिकी कार्यालय (NSO)",
+"भारतीय रिज़र्व बैंक",
+"नीति आयोग",
+"वित्त आयोग"
+],
+"a": "A",
+"e": "NSO (पहले CSO) राष्ट्रीय आय के आँकड़े जारी करता है।",
+"qe": "Which body estimates national income in India?",
+"oe": [
+"National Statistical Office (NSO)",
+"Reserve Bank of India",
+"NITI Aayog",
+"Finance Commission"
+]
+},
+{
+"q": "योजना आयोग के स्थान पर 'नीति आयोग' का गठन कब हुआ?",
+"o": [
+"26 जनवरी 2016",
+"1 जनवरी 2015",
+"1 अप्रैल 2015",
+"15 अगस्त 2014"
+],
+"a": "B",
+"e": "प्रधानमंत्री नीति आयोग के अध्यक्ष होते हैं।",
+"qe": "When was NITI Aayog formed in place of the Planning Commission?",
+"oe": [
+"26 January 2016",
+"1 January 2015",
+"1 April 2015",
+"15 August 2014"
+]
+},
+{
+"q": "'रेपो दर' किसके द्वारा तय की जाती है?",
+"o": [
+"भारतीय रिज़र्व बैंक",
+"SEBI",
+"वित्त मंत्रालय",
+"स्टेट बैंक ऑफ़ इंडिया"
+],
+"a": "A",
+"e": "RBI की मौद्रिक नीति समिति (MPC) रेपो दर तय करती है।",
+"qe": "The 'repo rate' is decided by",
+"oe": [
+"Reserve Bank of India",
+"SEBI",
+"Ministry of Finance",
+"State Bank of India"
+]
+},
+{
+"q": "GST (वस्तु एवं सेवा कर) भारत में कब लागू हुआ?",
+"o": [
+"8 नवंबर 2016",
+"1 जुलाई 2017",
+"1 अप्रैल 2017",
+"1 जनवरी 2018"
+],
+"a": "B",
+"e": "GST 101वें संविधान संशोधन से लागू हुआ।",
+"qe": "GST came into force in India on",
+"oe": [
+"8 November 2016",
+"1 July 2017",
+"1 April 2017",
+"1 January 2018"
+]
+},
+{
+"q": "प्रकाश का वेग किस माध्यम में सबसे अधिक होता है?",
+"o": [
+"हीरा",
+"निर्वात",
+"काँच",
+"जल"
+],
+"a": "B",
+"e": "निर्वात में प्रकाश का वेग लगभग 3 × 10⁸ मी/से है।",
+"qe": "The speed of light is the highest in",
+"oe": [
+"diamond",
+"vacuum",
+"glass",
+"water"
+]
+},
+{
+"q": "मानव शरीर में 'इंसुलिन' हार्मोन कौन-सा अंग बनाता है?",
+"o": [
+"वृक्क",
+"अग्न्याशय",
+"थायरॉइड",
+"यकृत"
+],
+"a": "B",
+"e": "अग्न्याशय की लैंगरहैंस द्वीपिकाओं की β-कोशिकाएँ इंसुलिन बनाती हैं।",
+"qe": "Which organ produces insulin in the human body?",
+"oe": [
+"Kidney",
+"Pancreas",
+"Thyroid",
+"Liver"
+]
+},
+{
+"q": "खाना पकाने वाली LPG गैस का मुख्य घटक क्या है?",
+"o": [
+"हाइड्रोजन",
+"मीथेन",
+"ब्यूटेन",
+"एथिलीन"
+],
+"a": "C",
+"e": "LPG में मुख्यतः ब्यूटेन और प्रोपेन होते हैं।",
+"qe": "The main component of LPG (cooking gas) is",
+"oe": [
+"Hydrogen",
+"Methane",
+"Butane",
+"Ethylene"
+]
+},
+{
+"q": "विटामिन C की कमी से कौन-सा रोग होता है?",
+"o": [
+"रिकेट्स",
+"रतौंधी",
+"बेरी-बेरी",
+"स्कर्वी"
+],
+"a": "D",
+"e": "स्कर्वी में मसूड़ों से खून आता है।",
+"qe": "Deficiency of Vitamin C causes",
+"oe": [
+"Rickets",
+"Night blindness",
+"Beri-beri",
+"Scurvy"
+]
+},
+{
+"q": "कंप्यूटर में 1 किलोबाइट (KB) बराबर होता है—",
+"o": [
+"512 बाइट",
+"1024 बाइट",
+"1000 बाइट",
+"1024 बिट"
+],
+"a": "B",
+"e": "1 KB = 2¹⁰ = 1024 बाइट।",
+"qe": "In computers, 1 kilobyte (KB) equals",
+"oe": [
+"512 bytes",
+"1024 bytes",
+"1000 bytes",
+"1024 bits"
+]
+},
+{
+"q": "उत्तर प्रदेश का राजकीय पक्षी कौन-सा है?",
+"o": [
+"कोयल",
+"मोर",
+"बुलबुल",
+"सारस"
+],
+"a": "D",
+"e": "सारस क्रेन उ.प्र. का राजकीय पक्षी है।",
+"qe": "The state bird of Uttar Pradesh is",
+"oe": [
+"Koel",
+"Peacock",
+"Bulbul",
+"Sarus Crane"
+]
+},
+{
+"q": "'कथक' नृत्य का लखनऊ घराना किस नवाब के संरक्षण में फला-फूला?",
+"o": [
+"आसफ़ुद्दौला",
+"सआदत अली खाँ",
+"वाजिद अली शाह",
+"शुजाउद्दौला"
+],
+"a": "C",
+"e": "वाजिद अली शाह स्वयं कथक के संरक्षक व कलाकार थे।",
+"qe": "The Lucknow gharana of Kathak flourished under which Nawab?",
+"oe": [
+"Asaf-ud-Daula",
+"Saadat Ali Khan",
+"Wajid Ali Shah",
+"Shuja-ud-Daula"
+]
+},
+{
+"q": "'एक जनपद एक उत्पाद' (ODOP) योजना में भदोही जिला किस उत्पाद के लिए जाना जाता है?",
+"o": [
+"कालीन (दरी)",
+"चिकनकारी",
+"काँच का सामान",
+"पीतल के बर्तन"
+],
+"a": "A",
+"e": "भदोही कालीन नगरी कहलाता है; पीतल — मुरादाबाद, चिकन — लखनऊ, काँच — फ़िरोज़ाबाद।",
+"qe": "Under the ODOP scheme, Bhadohi district is known for",
+"oe": [
+"Carpets (durries)",
+"Chikankari",
+"Glassware",
+"Brassware"
+]
+},
+{
+"q": "ताजमहल का निर्माण किस मुगल बादशाह ने करवाया था?",
+"o": [
+"जहाँगीर",
+"शाहजहाँ",
+"अकबर",
+"औरंगज़ेब"
+],
+"a": "B",
+"e": "शाहजहाँ ने मुमताज़ महल की याद में आगरा में बनवाया।",
+"qe": "The Taj Mahal was built by which Mughal emperor?",
+"oe": [
+"Jahangir",
+"Shah Jahan",
+"Akbar",
+"Aurangzeb"
+]
+}
+]
