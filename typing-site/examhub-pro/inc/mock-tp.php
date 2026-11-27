@@ -129,14 +129,14 @@ function eh_home_live_boxes() {
 
 /* ---------- student's chosen subject (saved on the server, changeable any time) ---------- */
 function eh_tp_pref($uid, $series) {
-    $v = $uid ? (string) get_user_meta($uid, 'eh_tp_pref_' . $series, true) : '';
+    $v = $uid ? (string) get_user_meta($uid, 'eh_tpsub_' . $series, true) : '';
     return isset(eh_tp_subjects()[$series][$v]) ? $v : '';
 }
 add_action('rest_api_init', function () {
     register_rest_route('eh/v1', '/tp/pref', ['methods' => 'POST', 'permission_callback' => function () { return is_user_logged_in(); }, 'callback' => function (WP_REST_Request $q) {
         $s = sanitize_key($q['series'] ?? ''); $sub = sanitize_key($q['sub'] ?? '');
         if (!isset(eh_tp_subjects()[$s][$sub])) return new WP_Error('bad', 'bad subject', ['status' => 400]);
-        update_user_meta(get_current_user_id(), 'eh_tp_pref_' . $s, $sub);
+        update_user_meta(get_current_user_id(), 'eh_tpsub_' . $s, $sub);
         return ['ok' => true];
     }]);
 });
@@ -186,17 +186,17 @@ function eh_tp_picker() {
 </div></div>
 <script>(function(){var C=<?php echo wp_json_encode($cfg); ?>,M=document.getElementById('tpk'),G=document.getElementById('tpk-g'),Q=document.getElementById('tpk-q'),S='';
 function zone(s,sub){return C.hub+'?x='+s+'&s='+sub}
-function local(s){try{return localStorage.getItem('eh_tp_'+s)||''}catch(e){return ''}}
+function local(s){try{return localStorage.getItem('eh_tps_'+s)||''}catch(e){return ''}}
 function draw(){var d=C.d[S],v=(Q.value||'').trim().toLowerCase(),cur=d.p||local(S);document.getElementById('tpk-k').textContent=d.t;
  G.innerHTML=d.l.filter(function(x){return !v||(x[1]+' '+x[2]).toLowerCase().indexOf(v)>-1}).map(function(x,i){return '<button type="button" class="tpk-o'+(x[0]===cur?' on':'')+(x[3]?'':' soon')+'" data-s="'+x[0]+'"><b>'+x[1]+'</b><small>'+x[2]+'</small><em>'+(x[0]===cur?'✓ आपका विषय':(x[3]?'● LIVE':'जल्द'))+'</em></button>'}).join('')||'<p class="tpk-e">कोई विषय नहीं मिला।</p>';
  document.getElementById('tpk-ft').innerHTML=C.in?'':'💡 <a href="'+'<?php echo esc_js(eh_login_page_url($hub)); ?>'+'">लॉग-इन</a> करने पर आपका विषय अकाउंट में सेव रहेगा।'}
 function open(s){S=s;Q.value='';draw();M.hidden=false;document.documentElement.style.overflow='hidden';setTimeout(function(){try{Q.focus({preventScroll:true})}catch(e){}},50)}
 function close(){M.hidden=true;document.documentElement.style.overflow=''}
-function pick(sub){try{localStorage.setItem('eh_tp_'+S,sub)}catch(e){}var go=function(){location.href=zone(S,sub)};
+function pick(sub){try{localStorage.setItem('eh_tps_'+S,sub)}catch(e){}var go=function(){location.href=zone(S,sub)};
  if(C.in){fetch(C.rest,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-WP-Nonce':C.nonce},body:JSON.stringify({series:S,sub:sub})}).then(go,go)}else go()}
 G.addEventListener('click',function(e){var b=e.target.closest('[data-s]');if(b)pick(b.dataset.s)});Q.addEventListener('input',draw);
 [].forEach.call(M.querySelectorAll('[data-x]'),function(x){x.onclick=close});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!M.hidden)close()});
-document.addEventListener('click',function(e){var a=e.target.closest('[data-tp]');if(!a)return;var s=a.dataset.tp,p=C.d[s].p||local(s);
+document.addEventListener('click',function(e){var k=e.target.closest('[data-tp-pick]');if(k){e.preventDefault();S=k.dataset.tpPick;pick(k.dataset.sub);return}var a=e.target.closest('[data-tp]');if(!a)return;var s=a.dataset.tp,p=C.d[s].p||local(s);
  if(p&&!a.hasAttribute('data-tp-change')){a.href=zone(s,p);return}e.preventDefault();open(s)},true);
 window.ehTpOpen=open;var m=location.search.match(/[?&]pick=(tgt|pgt)/);if(m)open(m[1])})();</script>
 <?php return ob_get_clean();

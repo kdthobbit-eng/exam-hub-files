@@ -9,7 +9,6 @@ $sub = $x ? sanitize_key($_GET['s'] ?? '') : '';
 if ($sub && !isset(eh_tp_subjects()[$x][$sub])) $sub = '';
 $uid = get_current_user_id();
 if ($x && !$sub && empty($_GET['all']) && ($p = eh_tp_pref($uid, $x))) { wp_safe_redirect(add_query_arg(['x' => $x, 's' => $p], home_url('/mock-test/'))); exit; }
-if ($x && $sub && $uid) update_user_meta($uid, 'eh_tp_pref_' . $x, $sub);
 $info = $x ? eh_tp_info($x) : null;
 $rounds = $x ? array_values(array_filter(eh_tp_rounds(), function ($r) use ($x) { return $r['series'] === $x; })) : [];
 $hub = home_url('/mock-test/');
@@ -35,13 +34,12 @@ $hub = home_url('/mock-test/');
  <section class="mx-body"><div class="mx-wrap">
   <div class="mx-subs-wrap"><div class="mx-tabs" id="mx-tabs"><button class="on" data-f="all">सभी विषय (<?php echo count($rounds); ?>)</button><button data-f="on">लाइव (<?php echo $ready; ?>)</button><button data-f="soon">जल्द आने वाले (<?php echo count($rounds) - $ready; ?>)</button></div>
   <div class="mx-subs" id="mx-subs"><?php $i = 0; $pf = eh_tp_pref($uid, $x); foreach ($rounds as $r): $i++; $ok = eh_tp_ready($r); ?>
-   <a class="mx-s<?php echo $ok ? '' : ' soon'; ?><?php echo $pf === $r['slug'] ? ' mine' : ''; ?>" data-sub="<?php echo esc_attr($r['slug']); ?>" href="<?php echo esc_url(add_query_arg(['x' => $x, 's' => $r['slug']], $hub)); ?>" data-k="<?php echo esc_attr(mb_strtolower($r['sub'] . ' ' . $r['sub_en'])); ?>"><span class="ix"><?php echo str_pad((string) $i, 2, '0', STR_PAD_LEFT); ?></span><span class="tx"><b><?php echo esc_html($r['sub']); ?></b><small><?php echo esc_html($r['sub_en']); ?></small></span><span class="rt"><span class="mx-st <?php echo $ok ? 'on' : 'soon'; ?>"><?php echo $pf === $r['slug'] ? 'आपका विषय' : ($ok ? 'LIVE' : 'जल्द'); ?></span></span><span class="go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+   <a class="mx-s<?php echo $ok ? '' : ' soon'; ?><?php echo $pf === $r['slug'] ? ' mine' : ''; ?>" data-sub="<?php echo esc_attr($r['slug']); ?>" data-tp-pick="<?php echo esc_attr($x); ?>" href="<?php echo esc_url(add_query_arg(['x' => $x, 's' => $r['slug']], $hub)); ?>" data-k="<?php echo esc_attr(mb_strtolower($r['sub'] . ' ' . $r['sub_en'])); ?>"><span class="ix"><?php echo str_pad((string) $i, 2, '0', STR_PAD_LEFT); ?></span><span class="tx"><b><?php echo esc_html($r['sub']); ?></b><small><?php echo esc_html($r['sub_en']); ?></small></span><span class="rt"><span class="mx-st <?php echo $ok ? 'on' : 'soon'; ?>"><?php echo $pf === $r['slug'] ? 'आपका विषय' : ($ok ? 'LIVE' : 'जल्द'); ?></span></span><span class="go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
   <?php endforeach; ?></div>
   <div class="mx-empty" id="mx-empty">कोई विषय नहीं मिला।</div></div>
  </div></section>
  <script>(function(){var X=<?php echo wp_json_encode($x); ?>,ALL=/[?&]all=1/.test(location.search),IN=<?php echo $uid ? 'true' : 'false'; ?>;
- try{var p=localStorage.getItem('eh_tp_'+X);if(p&&!ALL&&!IN){location.replace(location.pathname+'?x='+X+'&s='+p);return}}catch(e){}
- [].forEach.call(document.querySelectorAll('#mx-subs .mx-s'),function(a){a.addEventListener('click',function(){try{localStorage.setItem('eh_tp_'+X,a.dataset.sub)}catch(e){}})});
+ try{var p=localStorage.getItem('eh_tps_'+X);if(p&&!ALL&&!IN){location.replace(location.pathname+'?x='+X+'&s='+p);return}}catch(e){}
  var q=document.getElementById('mx-q'),L=[].slice.call(document.querySelectorAll('#mx-subs .mx-s')),E=document.getElementById('mx-empty'),F='all',run=function(){var v=q.value.trim().toLowerCase(),n=0;L.forEach(function(a){var s=(!v||a.dataset.k.indexOf(v)>-1)&&(F==='all'||(F==='soon')===a.classList.contains('soon'));a.style.display=s?'':'none';if(s)n++});E.style.display=n?'none':'block'};q.addEventListener('input',run);
  [].forEach.call(document.querySelectorAll('#mx-tabs button'),function(b){b.onclick=function(){F=b.dataset.f;[].forEach.call(document.querySelectorAll('#mx-tabs button'),function(x){x.classList.toggle('on',x===b)});run()}})})();</script>
 <?php else:
@@ -60,7 +58,7 @@ $hub = home_url('/mock-test/');
   <div class="mz-p" data-p="topic"><div class="mz-empty"><b>📚 टॉपिक-वाइज सेट जल्द आ रहे हैं</b><p><?php echo esc_html($nm[0]); ?> के हर टॉपिक पर 50-50 प्रश्नों के सेट, विस्तृत हल के साथ।</p></div></div>
   <div class="mz-p" data-p="pyq"><div class="mz-empty"><b>🗂️ पिछले वर्ष के प्रश्न-पत्र जल्द आ रहे हैं</b><p>UPESSC / UPSESSB के असली पिछले प्रश्न-पत्र, उत्तर-कुंजी और व्याख्या के साथ।</p></div></div>
  </div></section>
- <script>(function(){try{localStorage.setItem('eh_tp_'+<?php echo wp_json_encode($x); ?>,<?php echo wp_json_encode($sub); ?>)}catch(e){}
+ <script>(function(){
  var B=[].slice.call(document.querySelectorAll('#mz-tabs button')),P=[].slice.call(document.querySelectorAll('.mz-p'));B.forEach(function(b){b.onclick=function(){B.forEach(function(x){x.classList.toggle('on',x===b)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.t)})}})})();</script>
 <?php endif; ?>
 </main>
