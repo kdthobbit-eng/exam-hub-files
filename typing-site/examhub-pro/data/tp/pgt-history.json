@@ -1,0 +1,1622 @@
+[
+{
+"q": "भारत में सबसे प्राचीन पाषाणकालीन उपकरण कहाँ से मिले हैं?",
+"o": [
+"भीमबेटका",
+"मेहरगढ़",
+"पल्लवरम (मद्रास)",
+"बुर्जहोम"
+],
+"a": "C",
+"e": "रॉबर्ट ब्रूस फ़ुट (1863)।",
+"qe": "Where were the earliest Palaeolithic tools in India first found?",
+"oe": [
+"Bhimbetka",
+"Mehrgarh",
+"Pallavaram (Madras)",
+"Burzahom"
+]
+},
+{
+"q": "भीमबेटका के शैलाश्रय किस राज्य में हैं?",
+"o": [
+"छत्तीसगढ़",
+"राजस्थान",
+"मध्य प्रदेश",
+"उत्तर प्रदेश"
+],
+"a": "C",
+"e": "",
+"qe": "The Bhimbetka rock shelters are in",
+"oe": [
+"Chhattisgarh",
+"Rajasthan",
+"Madhya Pradesh",
+"Uttar Pradesh"
+]
+},
+{
+"q": "मेहरगढ़ किसके लिए प्रसिद्ध है?",
+"o": [
+"विशाल स्नानागार",
+"अग्निकुंड",
+"गोदीबाड़ा",
+"प्राचीनतम कृषि के साक्ष्य"
+],
+"a": "D",
+"e": "",
+"qe": "Mehrgarh is famous for",
+"oe": [
+"the Great Bath",
+"fire altars",
+"a dockyard",
+"earliest evidence of agriculture"
+]
+},
+{
+"q": "सिंधु सभ्यता का कौन-सा स्थल 'जुते हुए खेत' के साक्ष्य के लिए प्रसिद्ध है?",
+"o": [
+"धोलावीरा",
+"राखीगढ़ी",
+"लोथल",
+"कालीबंगा"
+],
+"a": "D",
+"e": "",
+"qe": "Which Indus site gives evidence of a ploughed field?",
+"oe": [
+"Dholavira",
+"Rakhigarhi",
+"Lothal",
+"Kalibangan"
+]
+},
+{
+"q": "सिंधु सभ्यता का कौन-सा स्थल तीन भागों में विभाजित था?",
+"o": [
+"चन्हूदड़ो",
+"धोलावीरा",
+"मोहनजोदड़ो",
+"हड़प्पा"
+],
+"a": "B",
+"e": "",
+"qe": "Which Indus site was divided into three parts?",
+"oe": [
+"Chanhudaro",
+"Dholavira",
+"Mohenjo-daro",
+"Harappa"
+]
+},
+{
+"q": "'गायत्री मंत्र' ऋग्वेद के किस मंडल में है?",
+"o": [
+"तीसरे",
+"पहले",
+"सातवें",
+"दसवें"
+],
+"a": "A",
+"e": "",
+"qe": "The Gayatri Mantra is in which mandala of the Rigveda?",
+"oe": [
+"Third",
+"First",
+"Seventh",
+"Tenth"
+]
+},
+{
+"q": "ऋग्वेद का 'पुरुष सूक्त' किस मंडल में है जिसमें चार वर्णों का उल्लेख है?",
+"o": [
+"तीसरे",
+"पहले",
+"दसवें",
+"नौवें"
+],
+"a": "C",
+"e": "",
+"qe": "The Purusha Sukta mentioning four varnas is in which mandala?",
+"oe": [
+"Third",
+"First",
+"Tenth",
+"Ninth"
+]
+},
+{
+"q": "'दस राजाओं का युद्ध' (दाशराज्ञ) किस नदी के तट पर हुआ?",
+"o": [
+"वितस्ता",
+"सरस्वती",
+"सिंधु",
+"परुष्णी (रावी)"
+],
+"a": "D",
+"e": "",
+"qe": "The Battle of Ten Kings was fought on the banks of",
+"oe": [
+"Vitasta",
+"Saraswati",
+"Indus",
+"Parushni (Ravi)"
+]
+},
+{
+"q": "जैन धर्म के प्रथम तीर्थंकर कौन थे?",
+"o": [
+"नेमिनाथ",
+"ऋषभदेव",
+"महावीर",
+"पार्श्वनाथ"
+],
+"a": "B",
+"e": "",
+"qe": "Who was the first Tirthankara of Jainism?",
+"oe": [
+"Neminath",
+"Rishabhadeva",
+"Mahavira",
+"Parshvanath"
+]
+},
+{
+"q": "प्रथम बौद्ध संगीति कहाँ हुई?",
+"o": [
+"वैशाली",
+"राजगृह",
+"कश्मीर (कुंडलवन)",
+"पाटलिपुत्र"
+],
+"a": "B",
+"e": "",
+"qe": "Where was the First Buddhist Council held?",
+"oe": [
+"Vaishali",
+"Rajagriha",
+"Kashmir (Kundalvana)",
+"Pataliputra"
+]
+},
+{
+"q": "चतुर्थ बौद्ध संगीति किस शासक के काल में हुई?",
+"o": [
+"कनिष्क",
+"कालाशोक",
+"अशोक",
+"अजातशत्रु"
+],
+"a": "A",
+"e": "",
+"qe": "The Fourth Buddhist Council was held under",
+"oe": [
+"Kanishka",
+"Kalashoka",
+"Ashoka",
+"Ajatashatru"
+]
+},
+{
+"q": "मगध की प्रारंभिक राजधानी कौन-सी थी?",
+"o": [
+"राजगृह",
+"पाटलिपुत्र",
+"चंपा",
+"वैशाली"
+],
+"a": "A",
+"e": "",
+"qe": "The early capital of Magadha was",
+"oe": [
+"Rajagriha",
+"Pataliputra",
+"Champa",
+"Vaishali"
+]
+},
+{
+"q": "सिकंदर ने भारत पर आक्रमण कब किया?",
+"o": [
+"321 ई.पू.",
+"273 ई.पू.",
+"305 ई.पू.",
+"326 ई.पू."
+],
+"a": "D",
+"e": "",
+"qe": "When did Alexander invade India?",
+"oe": [
+"321 BC",
+"273 BC",
+"305 BC",
+"326 BC"
+]
+},
+{
+"q": "अशोक के शिलालेखों को सबसे पहले किसने पढ़ा?",
+"o": [
+"विलियम जोन्स",
+"मार्शल",
+"जेम्स प्रिंसेप",
+"कनिंघम"
+],
+"a": "C",
+"e": "1837 में।",
+"qe": "Who first deciphered Ashoka's inscriptions?",
+"oe": [
+"William Jones",
+"Marshall",
+"James Prinsep",
+"Cunningham"
+]
+},
+{
+"q": "अशोक का कौन-सा शिलालेख कलिंग युद्ध का वर्णन करता है?",
+"o": [
+"7वाँ स्तंभलेख",
+"13वाँ वृहद् शिलालेख",
+"रुम्मिनदेई लेख",
+"1ला वृहद् शिलालेख"
+],
+"a": "B",
+"e": "",
+"qe": "Which edict of Ashoka describes the Kalinga war?",
+"oe": [
+"Pillar Edict VII",
+"Major Rock Edict XIII",
+"Rummindei inscription",
+"Major Rock Edict I"
+]
+},
+{
+"q": "शक संवत् कब से प्रारंभ हुआ?",
+"o": [
+"320 ई.",
+"606 ई.",
+"78 ई.",
+"57 ई.पू."
+],
+"a": "C",
+"e": "",
+"qe": "The Saka era began in",
+"oe": [
+"320 AD",
+"606 AD",
+"78 AD",
+"57 BC"
+]
+},
+{
+"q": "गुप्त संवत् किसने आरंभ किया?",
+"o": [
+"समुद्रगुप्त",
+"स्कंदगुप्त",
+"चंद्रगुप्त प्रथम",
+"श्रीगुप्त"
+],
+"a": "C",
+"e": "320 ई. से।",
+"qe": "The Gupta era was started by",
+"oe": [
+"Samudragupta",
+"Skandagupta",
+"Chandragupta I",
+"Sri Gupta"
+]
+},
+{
+"q": "'नवरत्न' किस गुप्त शासक के दरबार से जुड़े माने जाते हैं?",
+"o": [
+"चंद्रगुप्त द्वितीय (विक्रमादित्य)",
+"समुद्रगुप्त",
+"कुमारगुप्त",
+"स्कंदगुप्त"
+],
+"a": "A",
+"e": "",
+"qe": "The 'Navaratnas' are associated with the court of",
+"oe": [
+"Chandragupta II (Vikramaditya)",
+"Samudragupta",
+"Kumaragupta",
+"Skandagupta"
+]
+},
+{
+"q": "नालंदा विश्वविद्यालय की स्थापना किसने की?",
+"o": [
+"धर्मपाल",
+"अशोक",
+"हर्षवर्धन",
+"कुमारगुप्त प्रथम"
+],
+"a": "D",
+"e": "",
+"qe": "Nalanda University was founded by",
+"oe": [
+"Dharmapala",
+"Ashoka",
+"Harshavardhana",
+"Kumaragupta I"
+]
+},
+{
+"q": "विक्रमशिला विश्वविद्यालय की स्थापना किसने की?",
+"o": [
+"गोपाल",
+"देवपाल",
+"धर्मपाल",
+"कुमारगुप्त"
+],
+"a": "C",
+"e": "",
+"qe": "Vikramashila University was founded by",
+"oe": [
+"Gopala",
+"Devapala",
+"Dharmapala",
+"Kumaragupta"
+]
+},
+{
+"q": "'हर्षचरित' के लेखक हैं—",
+"o": [
+"कल्हण",
+"बाणभट्ट",
+"हर्ष",
+"बिल्हण"
+],
+"a": "B",
+"e": "",
+"qe": "'Harshacharita' was written by",
+"oe": [
+"Kalhana",
+"Banabhatta",
+"Harsha",
+"Bilhana"
+]
+},
+{
+"q": "'राजतरंगिणी' किसका इतिहास है?",
+"o": [
+"नेपाल",
+"गुजरात",
+"कश्मीर",
+"बंगाल"
+],
+"a": "C",
+"e": "कल्हण कृत।",
+"qe": "'Rajatarangini' is a history of",
+"oe": [
+"Nepal",
+"Gujarat",
+"Kashmir",
+"Bengal"
+]
+},
+{
+"q": "एलोरा का कैलाश मंदिर किस वंश ने बनवाया?",
+"o": [
+"पल्लव",
+"चोल",
+"चालुक्य",
+"राष्ट्रकूट"
+],
+"a": "D",
+"e": "कृष्ण प्रथम।",
+"qe": "The Kailasa temple at Ellora was built by the",
+"oe": [
+"Pallavas",
+"Cholas",
+"Chalukyas",
+"Rashtrakutas"
+]
+},
+{
+"q": "महाबलीपुरम के रथ मंदिर किस वंश से संबंधित हैं?",
+"o": [
+"चेर",
+"पल्लव",
+"चोल",
+"पांड्य"
+],
+"a": "B",
+"e": "",
+"qe": "The Rathas of Mahabalipuram belong to the",
+"oe": [
+"Cheras",
+"Pallavas",
+"Cholas",
+"Pandyas"
+]
+},
+{
+"q": "तंजौर का बृहदेश्वर मंदिर किसने बनवाया?",
+"o": [
+"राजेंद्र प्रथम",
+"राजराज प्रथम",
+"कुलोत्तुंग",
+"परांतक"
+],
+"a": "B",
+"e": "",
+"qe": "The Brihadeshwara temple at Thanjavur was built by",
+"oe": [
+"Rajendra I",
+"Rajaraja I",
+"Kulottunga",
+"Parantaka"
+]
+},
+{
+"q": "'गंगैकोंडचोल' की उपाधि किसने धारण की?",
+"o": [
+"विजयालय",
+"राजराज प्रथम",
+"करिकाल",
+"राजेंद्र प्रथम"
+],
+"a": "D",
+"e": "",
+"qe": "Who assumed the title 'Gangaikondachola'?",
+"oe": [
+"Vijayalaya",
+"Rajaraja I",
+"Karikala",
+"Rajendra I"
+]
+},
+{
+"q": "उत्तरमेरूर अभिलेख किससे संबंधित है?",
+"o": [
+"गुप्त भूमि दान",
+"चोल ग्राम प्रशासन",
+"मौर्य कर व्यवस्था",
+"पल्लव युद्ध"
+],
+"a": "B",
+"e": "",
+"qe": "The Uttaramerur inscription relates to",
+"oe": [
+"Gupta land grants",
+"Chola village administration",
+"Mauryan taxation",
+"Pallava wars"
+]
+},
+{
+"q": "महमूद गज़नवी ने सोमनाथ मंदिर पर आक्रमण कब किया?",
+"o": [
+"1000 ई.",
+"1192 ई.",
+"1018 ई.",
+"1025 ई."
+],
+"a": "D",
+"e": "",
+"qe": "When did Mahmud of Ghazni attack Somnath?",
+"oe": [
+"1000 AD",
+"1192 AD",
+"1018 AD",
+"1025 AD"
+]
+},
+{
+"q": "'किताब-उल-हिंद' किसने लिखी?",
+"o": [
+"अमीर खुसरो",
+"अल-बरूनी",
+"मिनहाज-उस-सिराज",
+"इब्न बतूता"
+],
+"a": "B",
+"e": "",
+"qe": "Who wrote 'Kitab-ul-Hind'?",
+"oe": [
+"Amir Khusrau",
+"Al-Biruni",
+"Minhaj-us-Siraj",
+"Ibn Battuta"
+]
+},
+{
+"q": "'तबकात-ए-नासिरी' के लेखक हैं—",
+"o": [
+"मिनहाज-उस-सिराज",
+"अमीर खुसरो",
+"ज़ियाउद्दीन बरनी",
+"फ़रिश्ता"
+],
+"a": "A",
+"e": "",
+"qe": "'Tabaqat-i-Nasiri' was written by",
+"oe": [
+"Minhaj-us-Siraj",
+"Amir Khusrau",
+"Ziauddin Barani",
+"Ferishta"
+]
+},
+{
+"q": "'इक्ता' व्यवस्था किसने संगठित रूप में लागू की?",
+"o": [
+"बलबन",
+"अलाउद्दीन खिलजी",
+"इल्तुतमिश",
+"कुतुबुद्दीन ऐबक"
+],
+"a": "C",
+"e": "",
+"qe": "Who organised the Iqta system?",
+"oe": [
+"Balban",
+"Alauddin Khalji",
+"Iltutmish",
+"Qutbuddin Aibak"
+]
+},
+{
+"q": "'सिजदा' और 'पैबोस' की प्रथा किसने शुरू की?",
+"o": [
+"रज़िया",
+"अलाउद्दीन खिलजी",
+"इल्तुतमिश",
+"बलबन"
+],
+"a": "D",
+"e": "",
+"qe": "Who introduced 'Sijda' and 'Paibos'?",
+"oe": [
+"Razia",
+"Alauddin Khalji",
+"Iltutmish",
+"Balban"
+]
+},
+{
+"q": "सांकेतिक मुद्रा (ताँबे के सिक्के) किस सुल्तान ने चलाई?",
+"o": [
+"अलाउद्दीन खिलजी",
+"मुहम्मद बिन तुगलक",
+"बहलोल लोदी",
+"फ़िरोज़ शाह तुगलक"
+],
+"a": "B",
+"e": "",
+"qe": "Which Sultan introduced token currency?",
+"oe": [
+"Alauddin Khalji",
+"Muhammad bin Tughlaq",
+"Bahlol Lodi",
+"Firoz Shah Tughlaq"
+]
+},
+{
+"q": "इब्न बतूता किसके शासनकाल में भारत आया?",
+"o": [
+"फ़िरोज़ तुगलक",
+"अलाउद्दीन खिलजी",
+"मुहम्मद बिन तुगलक",
+"सिकंदर लोदी"
+],
+"a": "C",
+"e": "",
+"qe": "Ibn Battuta came to India during the reign of",
+"oe": [
+"Firoz Tughlaq",
+"Alauddin Khalji",
+"Muhammad bin Tughlaq",
+"Sikandar Lodi"
+]
+},
+{
+"q": "विजयनगर साम्राज्य की स्थापना कब हुई?",
+"o": [
+"1347 ई.",
+"1336 ई.",
+"1526 ई.",
+"1565 ई."
+],
+"a": "B",
+"e": "",
+"qe": "The Vijayanagara Empire was founded in",
+"oe": [
+"1347 AD",
+"1336 AD",
+"1526 AD",
+"1565 AD"
+]
+},
+{
+"q": "तालीकोटा का युद्ध (1565) किसके पतन का कारण बना?",
+"o": [
+"बहमनी",
+"मराठा",
+"मुगल",
+"विजयनगर"
+],
+"a": "D",
+"e": "",
+"qe": "The Battle of Talikota (1565) led to the decline of",
+"oe": [
+"Bahmani",
+"Marathas",
+"Mughals",
+"Vijayanagara"
+]
+},
+{
+"q": "'आमुक्तमाल्यदा' किसकी रचना है?",
+"o": [
+"कृष्णदेव राय",
+"बुक्का",
+"देवराय द्वितीय",
+"हरिहर"
+],
+"a": "A",
+"e": "",
+"qe": "'Amuktamalyada' was written by",
+"oe": [
+"Krishnadeva Raya",
+"Bukka",
+"Devaraya II",
+"Harihara"
+]
+},
+{
+"q": "'बाबरनामा' मूलतः किस भाषा में लिखा गया?",
+"o": [
+"अरबी",
+"फ़ारसी",
+"उर्दू",
+"तुर्की"
+],
+"a": "D",
+"e": "",
+"qe": "'Baburnama' was originally written in",
+"oe": [
+"Arabic",
+"Persian",
+"Urdu",
+"Turkish"
+]
+},
+{
+"q": "खानवा का युद्ध (1527) किनके बीच हुआ?",
+"o": [
+"बाबर और राणा सांगा",
+"बाबर और इब्राहिम लोदी",
+"हुमायूँ और शेरशाह",
+"अकबर और हेमू"
+],
+"a": "A",
+"e": "",
+"qe": "The Battle of Khanwa (1527) was fought between",
+"oe": [
+"Babur and Rana Sanga",
+"Babur and Ibrahim Lodi",
+"Humayun and Sher Shah",
+"Akbar and Hemu"
+]
+},
+{
+"q": "'अकबरनामा' के लेखक हैं—",
+"o": [
+"अबुल फ़ज़ल",
+"फ़ैज़ी",
+"निज़ामुद्दीन अहमद",
+"बदायूँनी"
+],
+"a": "A",
+"e": "",
+"qe": "'Akbarnama' was written by",
+"oe": [
+"Abul Fazl",
+"Faizi",
+"Nizamuddin Ahmad",
+"Badauni"
+]
+},
+{
+"q": "मनसबदारी प्रथा किसने शुरू की?",
+"o": [
+"अकबर",
+"जहाँगीर",
+"बाबर",
+"शेरशाह"
+],
+"a": "A",
+"e": "",
+"qe": "The Mansabdari system was introduced by",
+"oe": [
+"Akbar",
+"Jahangir",
+"Babur",
+"Sher Shah"
+]
+},
+{
+"q": "'ज़ब्ती' (दहसाला) भू-राजस्व व्यवस्था किससे जुड़ी है?",
+"o": [
+"बीरबल",
+"राजा टोडरमल",
+"अबुल फ़ज़ल",
+"मानसिंह"
+],
+"a": "B",
+"e": "",
+"qe": "The Zabti (Dahsala) land revenue system is linked with",
+"oe": [
+"Birbal",
+"Raja Todar Mal",
+"Abul Fazl",
+"Man Singh"
+]
+},
+{
+"q": "ब्रिटिश दूत सर टॉमस रो किस मुगल बादशाह के दरबार में आया?",
+"o": [
+"शाहजहाँ",
+"अकबर",
+"औरंगज़ेब",
+"जहाँगीर"
+],
+"a": "D",
+"e": "",
+"qe": "Sir Thomas Roe came to the court of",
+"oe": [
+"Shah Jahan",
+"Akbar",
+"Aurangzeb",
+"Jahangir"
+]
+},
+{
+"q": "'तख़्त-ए-ताऊस' (मयूर सिंहासन) किसने बनवाया?",
+"o": [
+"शाहजहाँ",
+"अकबर",
+"औरंगज़ेब",
+"जहाँगीर"
+],
+"a": "A",
+"e": "",
+"qe": "The Peacock Throne was made for",
+"oe": [
+"Shah Jahan",
+"Akbar",
+"Aurangzeb",
+"Jahangir"
+]
+},
+{
+"q": "नादिरशाह ने भारत पर आक्रमण कब किया?",
+"o": [
+"1757",
+"1761",
+"1707",
+"1739"
+],
+"a": "D",
+"e": "",
+"qe": "When did Nadir Shah invade India?",
+"oe": [
+"1757",
+"1761",
+"1707",
+"1739"
+]
+},
+{
+"q": "पानीपत का तीसरा युद्ध (1761) किनके बीच हुआ?",
+"o": [
+"मराठे और अहमदशाह अब्दाली",
+"अकबर और हेमू",
+"मराठे और अंग्रेज़",
+"बाबर और इब्राहिम लोदी"
+],
+"a": "A",
+"e": "",
+"qe": "The Third Battle of Panipat (1761) was fought between",
+"oe": [
+"Marathas and Ahmad Shah Abdali",
+"Akbar and Hemu",
+"Marathas and the British",
+"Babur and Ibrahim Lodi"
+]
+},
+{
+"q": "'स्थायी बंदोबस्त' (1793) किसने लागू किया?",
+"o": [
+"लॉर्ड हेस्टिंग्स",
+"वॉरेन हेस्टिंग्स",
+"लॉर्ड कॉर्नवालिस",
+"लॉर्ड वेलेज़ली"
+],
+"a": "C",
+"e": "",
+"qe": "The Permanent Settlement (1793) was introduced by",
+"oe": [
+"Lord Hastings",
+"Warren Hastings",
+"Lord Cornwallis",
+"Lord Wellesley"
+]
+},
+{
+"q": "'रैयतवाड़ी व्यवस्था' मुख्यतः किससे जुड़ी है?",
+"o": [
+"डलहौज़ी",
+"थॉमस मुनरो",
+"कॉर्नवालिस",
+"होल्ट मैकेंज़ी"
+],
+"a": "B",
+"e": "",
+"qe": "The Ryotwari system is mainly linked with",
+"oe": [
+"Dalhousie",
+"Thomas Munro",
+"Cornwallis",
+"Holt Mackenzie"
+]
+},
+{
+"q": "'रेगुलेटिंग एक्ट' किस वर्ष पारित हुआ?",
+"o": [
+"1784",
+"1813",
+"1833",
+"1773"
+],
+"a": "D",
+"e": "",
+"qe": "The Regulating Act was passed in",
+"oe": [
+"1784",
+"1813",
+"1833",
+"1773"
+]
+},
+{
+"q": "सती प्रथा का अंत (1829) किस गवर्नर-जनरल के समय हुआ?",
+"o": [
+"लॉर्ड हार्डिंग",
+"लॉर्ड विलियम बेंटिंक",
+"लॉर्ड कैनिंग",
+"लॉर्ड डलहौज़ी"
+],
+"a": "B",
+"e": "",
+"qe": "Sati was abolished (1829) under",
+"oe": [
+"Lord Hardinge",
+"Lord William Bentinck",
+"Lord Canning",
+"Lord Dalhousie"
+]
+},
+{
+"q": "'वुड्स डिस्पैच' (1854) किससे संबंधित है?",
+"o": [
+"शिक्षा",
+"रेलवे",
+"सेना",
+"भू-राजस्व"
+],
+"a": "A",
+"e": "",
+"qe": "Wood's Despatch (1854) relates to",
+"oe": [
+"Education",
+"Railways",
+"Army",
+"Land revenue"
+]
+},
+{
+"q": "भारत में पहली रेल (1853) कहाँ से कहाँ चली?",
+"o": [
+"बंबई से ठाणे",
+"मद्रास से अर्कोनम",
+"दिल्ली से आगरा",
+"कलकत्ता से हुगली"
+],
+"a": "A",
+"e": "",
+"qe": "India's first train (1853) ran from",
+"oe": [
+"Bombay to Thane",
+"Madras to Arkonam",
+"Delhi to Agra",
+"Calcutta to Hooghly"
+]
+},
+{
+"q": "'ब्रह्म समाज' की स्थापना किसने की?",
+"o": [
+"राजा राममोहन राय",
+"दयानंद सरस्वती",
+"देवेंद्रनाथ टैगोर",
+"केशव चंद्र सेन"
+],
+"a": "A",
+"e": "",
+"qe": "The Brahmo Samaj was founded by",
+"oe": [
+"Raja Rammohan Roy",
+"Dayanand Saraswati",
+"Debendranath Tagore",
+"Keshab Chandra Sen"
+]
+},
+{
+"q": "'सत्यार्थ प्रकाश' के लेखक हैं—",
+"o": [
+"राममोहन राय",
+"स्वामी दयानंद सरस्वती",
+"विवेकानंद",
+"रामकृष्ण परमहंस"
+],
+"a": "B",
+"e": "",
+"qe": "'Satyarth Prakash' was written by",
+"oe": [
+"Rammohan Roy",
+"Swami Dayanand Saraswati",
+"Vivekananda",
+"Ramakrishna Paramhansa"
+]
+},
+{
+"q": "'सत्यशोधक समाज' की स्थापना किसने की?",
+"o": [
+"पेरियार",
+"नारायण गुरु",
+"ज्योतिबा फुले",
+"बी. आर. आंबेडकर"
+],
+"a": "C",
+"e": "",
+"qe": "The Satyashodhak Samaj was founded by",
+"oe": [
+"Periyar",
+"Narayana Guru",
+"Jyotiba Phule",
+"B. R. Ambedkar"
+]
+},
+{
+"q": "'धन-निकासी सिद्धांत' (Drain Theory) किसने दिया?",
+"o": [
+"दादाभाई नौरोजी",
+"गोखले",
+"रानाडे",
+"आर. सी. दत्त"
+],
+"a": "A",
+"e": "",
+"qe": "The Drain Theory was given by",
+"oe": [
+"Dadabhai Naoroji",
+"Gokhale",
+"Ranade",
+"R. C. Dutt"
+]
+},
+{
+"q": "कांग्रेस का प्रथम अधिवेशन (1885) कहाँ हुआ?",
+"o": [
+"मद्रास",
+"बंबई",
+"कलकत्ता",
+"पूना"
+],
+"a": "B",
+"e": "",
+"qe": "Where was the first session of the INC (1885) held?",
+"oe": [
+"Madras",
+"Bombay",
+"Calcutta",
+"Poona"
+]
+},
+{
+"q": "कांग्रेस का 'सूरत विभाजन' कब हुआ?",
+"o": [
+"1907",
+"1911",
+"1916",
+"1905"
+],
+"a": "A",
+"e": "",
+"qe": "When did the Surat Split in the Congress occur?",
+"oe": [
+"1907",
+"1911",
+"1916",
+"1905"
+]
+},
+{
+"q": "मुस्लिम लीग की स्थापना कब हुई?",
+"o": [
+"1916",
+"1909",
+"1906",
+"1940"
+],
+"a": "C",
+"e": "ढाका में।",
+"qe": "When was the Muslim League founded?",
+"oe": [
+"1916",
+"1909",
+"1906",
+"1940"
+]
+},
+{
+"q": "लखनऊ समझौता (1916) किनके बीच हुआ?",
+"o": [
+"गांधी और आंबेडकर",
+"नरम दल और गरम दल",
+"कांग्रेस और मुस्लिम लीग",
+"गांधी और इरविन"
+],
+"a": "C",
+"e": "",
+"qe": "The Lucknow Pact (1916) was between",
+"oe": [
+"Gandhi and Ambedkar",
+"Moderates and Extremists",
+"Congress and the Muslim League",
+"Gandhi and Irwin"
+]
+},
+{
+"q": "'होम रूल लीग' (1916) किसने शुरू की?",
+"o": [
+"गांधी और नेहरू",
+"लाला लाजपत राय",
+"तिलक और एनी बेसेंट",
+"गोखले और रानाडे"
+],
+"a": "C",
+"e": "",
+"qe": "The Home Rule League (1916) was started by",
+"oe": [
+"Gandhi and Nehru",
+"Lala Lajpat Rai",
+"Tilak and Annie Besant",
+"Gokhale and Ranade"
+]
+},
+{
+"q": "गांधीजी का भारत में पहला सत्याग्रह कौन-सा था?",
+"o": [
+"बारदोली (1928)",
+"चंपारण (1917)",
+"खेड़ा (1918)",
+"अहमदाबाद मिल (1918)"
+],
+"a": "B",
+"e": "",
+"qe": "Gandhiji's first satyagraha in India was",
+"oe": [
+"Bardoli (1928)",
+"Champaran (1917)",
+"Kheda (1918)",
+"Ahmedabad Mill (1918)"
+]
+},
+{
+"q": "'पूर्ण स्वराज' का प्रस्ताव कांग्रेस के किस अधिवेशन में पारित हुआ?",
+"o": [
+"लाहौर (1929)",
+"कलकत्ता (1928)",
+"कराची (1931)",
+"हरिपुरा (1938)"
+],
+"a": "A",
+"e": "",
+"qe": "The 'Purna Swaraj' resolution was passed at",
+"oe": [
+"Lahore (1929)",
+"Calcutta (1928)",
+"Karachi (1931)",
+"Haripura (1938)"
+]
+},
+{
+"q": "'पूना समझौता' (1932) किनके बीच हुआ?",
+"o": [
+"गांधी और इरविन",
+"पटेल और आंबेडकर",
+"नेहरू और जिन्ना",
+"गांधी और आंबेडकर"
+],
+"a": "D",
+"e": "",
+"qe": "The Poona Pact (1932) was between",
+"oe": [
+"Gandhi and Irwin",
+"Patel and Ambedkar",
+"Nehru and Jinnah",
+"Gandhi and Ambedkar"
+]
+},
+{
+"q": "साइमन कमीशन भारत कब आया?",
+"o": [
+"1919",
+"1927",
+"1930",
+"1928"
+],
+"a": "D",
+"e": "नियुक्ति 1927, आगमन फ़रवरी 1928।",
+"qe": "When did the Simon Commission arrive in India?",
+"oe": [
+"1919",
+"1927",
+"1930",
+"1928"
+]
+},
+{
+"q": "'कैबिनेट मिशन' भारत कब आया?",
+"o": [
+"1946",
+"1942",
+"1947",
+"1945"
+],
+"a": "A",
+"e": "",
+"qe": "When did the Cabinet Mission come to India?",
+"oe": [
+"1946",
+"1942",
+"1947",
+"1945"
+]
+},
+{
+"q": "'क्रिप्स मिशन' किस वर्ष भारत आया?",
+"o": [
+"1946",
+"1942",
+"1945",
+"1940"
+],
+"a": "B",
+"e": "",
+"qe": "In which year did the Cripps Mission come?",
+"oe": [
+"1946",
+"1942",
+"1945",
+"1940"
+]
+},
+{
+"q": "भारतीय स्वतंत्रता अधिनियम ब्रिटिश संसद में कब पारित हुआ?",
+"o": [
+"जून 1947",
+"जनवरी 1948",
+"जुलाई 1947",
+"अगस्त 1947"
+],
+"a": "C",
+"e": "",
+"qe": "The Indian Independence Act was passed in",
+"oe": [
+"June 1947",
+"January 1948",
+"July 1947",
+"August 1947"
+]
+},
+{
+"q": "'माउंटबेटन योजना' को किस नाम से भी जाना जाता है?",
+"o": [
+"अगस्त प्रस्ताव",
+"3 जून योजना",
+"वेवेल योजना",
+"राजगोपालाचारी फ़ॉर्मूला"
+],
+"a": "B",
+"e": "",
+"qe": "The Mountbatten Plan is also known as the",
+"oe": [
+"August Offer",
+"3 June Plan",
+"Wavell Plan",
+"Rajagopalachari Formula"
+]
+},
+{
+"q": "'गदर पार्टी' की स्थापना कहाँ हुई?",
+"o": [
+"बर्लिन",
+"सैन फ़्रांसिस्को (अमेरिका)",
+"लंदन",
+"टोक्यो"
+],
+"a": "B",
+"e": "",
+"qe": "The Ghadar Party was founded in",
+"oe": [
+"Berlin",
+"San Francisco (USA)",
+"London",
+"Tokyo"
+]
+},
+{
+"q": "'हिंदुस्तान सोशलिस्ट रिपब्लिकन एसोसिएशन' (1928) से कौन जुड़े थे?",
+"o": [
+"भगत सिंह और चंद्रशेखर आज़ाद",
+"अरविंद घोष",
+"खुदीराम बोस",
+"सावरकर बंधु"
+],
+"a": "A",
+"e": "",
+"qe": "The HSRA (1928) was associated with",
+"oe": [
+"Bhagat Singh and Chandrashekhar Azad",
+"Aurobindo Ghosh",
+"Khudiram Bose",
+"Savarkar brothers"
+]
+},
+{
+"q": "मैग्ना कार्टा किस देश से संबंधित है?",
+"o": [
+"जर्मनी",
+"फ़्रांस",
+"इंग्लैंड",
+"अमेरिका"
+],
+"a": "C",
+"e": "1215 ई.।",
+"qe": "The Magna Carta is related to",
+"oe": [
+"Germany",
+"France",
+"England",
+"USA"
+]
+},
+{
+"q": "अमेरिकी स्वतंत्रता की घोषणा कब हुई?",
+"o": [
+"1783",
+"1787",
+"14 जुलाई 1789",
+"4 जुलाई 1776"
+],
+"a": "D",
+"e": "",
+"qe": "The American Declaration of Independence was made on",
+"oe": [
+"1783",
+"1787",
+"14 July 1789",
+"4 July 1776"
+]
+},
+{
+"q": "'बास्तील का पतन' कब हुआ?",
+"o": [
+"1815",
+"4 जुलाई 1776",
+"1799",
+"14 जुलाई 1789"
+],
+"a": "D",
+"e": "",
+"qe": "The fall of the Bastille took place on",
+"oe": [
+"1815",
+"4 July 1776",
+"1799",
+"14 July 1789"
+]
+},
+{
+"q": "वाटरलू का युद्ध (1815) किससे संबंधित है?",
+"o": [
+"क्रीमिया युद्ध",
+"जर्मनी का एकीकरण",
+"नेपोलियन की पराजय",
+"इटली का एकीकरण"
+],
+"a": "C",
+"e": "",
+"qe": "The Battle of Waterloo (1815) is linked with",
+"oe": [
+"Crimean War",
+"German unification",
+"Napoleon's defeat",
+"Italian unification"
+]
+},
+{
+"q": "इटली के एकीकरण से कौन संबंधित नहीं है?",
+"o": [
+"मेज़िनी",
+"बिस्मार्क",
+"कावूर",
+"गैरीबाल्डी"
+],
+"a": "B",
+"e": "",
+"qe": "Who was NOT associated with the unification of Italy?",
+"oe": [
+"Mazzini",
+"Bismarck",
+"Cavour",
+"Garibaldi"
+]
+},
+{
+"q": "'रक्त और लौह' की नीति किसकी थी?",
+"o": [
+"बिस्मार्क",
+"मेटरनिख",
+"कावूर",
+"नेपोलियन"
+],
+"a": "A",
+"e": "",
+"qe": "The policy of 'Blood and Iron' belonged to",
+"oe": [
+"Bismarck",
+"Metternich",
+"Cavour",
+"Napoleon"
+]
+},
+{
+"q": "प्रथम विश्व युद्ध का तात्कालिक कारण था—",
+"o": [
+"पोलैंड पर आक्रमण",
+"वर्साय की संधि",
+"आर्कड्यूक फ़र्डिनेंड की हत्या",
+"पर्ल हार्बर पर हमला"
+],
+"a": "C",
+"e": "",
+"qe": "The immediate cause of the First World War was",
+"oe": [
+"invasion of Poland",
+"Treaty of Versailles",
+"assassination of Archduke Ferdinand",
+"attack on Pearl Harbor"
+]
+},
+{
+"q": "वर्साय की संधि (1919) किस युद्ध के बाद हुई?",
+"o": [
+"प्रथम विश्व युद्ध",
+"क्रीमिया युद्ध",
+"बोअर युद्ध",
+"द्वितीय विश्व युद्ध"
+],
+"a": "A",
+"e": "",
+"qe": "The Treaty of Versailles (1919) followed the",
+"oe": [
+"First World War",
+"Crimean War",
+"Boer War",
+"Second World War"
+]
+},
+{
+"q": "राष्ट्र संघ (League of Nations) की स्थापना कब हुई?",
+"o": [
+"1918",
+"1945",
+"1919",
+"1920"
+],
+"a": "D",
+"e": "",
+"qe": "The League of Nations was established in",
+"oe": [
+"1918",
+"1945",
+"1919",
+"1920"
+]
+},
+{
+"q": "द्वितीय विश्व युद्ध किस घटना से शुरू हुआ?",
+"o": [
+"पर्ल हार्बर",
+"स्टालिनग्राद",
+"जर्मनी का पोलैंड पर आक्रमण",
+"म्यूनिख समझौता"
+],
+"a": "C",
+"e": "",
+"qe": "The Second World War began with",
+"oe": [
+"Pearl Harbor",
+"Stalingrad",
+"Germany's invasion of Poland",
+"the Munich Agreement"
+]
+},
+{
+"q": "संयुक्त राष्ट्र संघ की स्थापना कब हुई?",
+"o": [
+"24 अक्टूबर 1945",
+"1 जनवरी 1942",
+"26 जून 1945",
+"10 दिसंबर 1948"
+],
+"a": "A",
+"e": "",
+"qe": "The United Nations was established on",
+"oe": [
+"24 October 1945",
+"1 January 1942",
+"26 June 1945",
+"10 December 1948"
+]
+},
+{
+"q": "चीन में 'लॉन्ग मार्च' (1934–35) का नेतृत्व किसने किया?",
+"o": [
+"चाऊ एन-लाई",
+"च्यांग काई-शेक",
+"सुन यात-सेन",
+"माओ त्से-तुंग"
+],
+"a": "D",
+"e": "",
+"qe": "The Long March (1934–35) in China was led by",
+"oe": [
+"Zhou Enlai",
+"Chiang Kai-shek",
+"Sun Yat-sen",
+"Mao Zedong"
+]
+},
+{
+"q": "जापान में 'मेइजी पुनर्स्थापना' कब हुई?",
+"o": [
+"1853",
+"1889",
+"1905",
+"1868"
+],
+"a": "D",
+"e": "",
+"qe": "The Meiji Restoration in Japan took place in",
+"oe": [
+"1853",
+"1889",
+"1905",
+"1868"
+]
+},
+{
+"q": "'इतिहास के जनक' किसे कहा जाता है?",
+"o": [
+"थ्यूसीडाइडीज़",
+"हेरोडोटस",
+"प्लेटो",
+"अरस्तू"
+],
+"a": "B",
+"e": "",
+"qe": "Who is called the 'Father of History'?",
+"oe": [
+"Thucydides",
+"Herodotus",
+"Plato",
+"Aristotle"
+]
+},
+{
+"q": "'इतिहास अतीत और वर्तमान के बीच एक अनवरत संवाद है' — किसने कहा?",
+"o": [
+"कॉलिंगवुड",
+"टॉयनबी",
+"ई. एच. कार",
+"रैंके"
+],
+"a": "C",
+"e": "",
+"qe": "'History is an unending dialogue between the present and the past' — who said it?",
+"oe": [
+"Collingwood",
+"Toynbee",
+"E. H. Carr",
+"Ranke"
+]
+},
+{
+"q": "'डिस्कवरी ऑफ़ इंडिया' किसने लिखी?",
+"o": [
+"राधाकृष्णन",
+"जवाहरलाल नेहरू",
+"आंबेडकर",
+"महात्मा गांधी"
+],
+"a": "B",
+"e": "",
+"qe": "Who wrote 'The Discovery of India'?",
+"oe": [
+"Radhakrishnan",
+"Jawaharlal Nehru",
+"Ambedkar",
+"Mahatma Gandhi"
+]
+},
+{
+"q": "'हिंद स्वराज' (1909) किसकी रचना है?",
+"o": [
+"अरविंद",
+"सावरकर",
+"तिलक",
+"महात्मा गांधी"
+],
+"a": "D",
+"e": "",
+"qe": "'Hind Swaraj' (1909) was written by",
+"oe": [
+"Aurobindo",
+"Savarkar",
+"Tilak",
+"Mahatma Gandhi"
+]
+},
+{
+"q": "भारत में यूरोपीय कंपनियों के आगमन का सही क्रम है—",
+"o": [
+"पुर्तगाली, डच, अंग्रेज़, फ़्रांसीसी",
+"पुर्तगाली, अंग्रेज़, फ़्रांसीसी, डच",
+"डच, पुर्तगाली, फ़्रांसीसी, अंग्रेज़",
+"अंग्रेज़, डच, पुर्तगाली, फ़्रांसीसी"
+],
+"a": "A",
+"e": "",
+"qe": "The correct order of arrival of European companies in India is",
+"oe": [
+"Portuguese, Dutch, English, French",
+"Portuguese, English, French, Dutch",
+"Dutch, Portuguese, French, English",
+"English, Dutch, Portuguese, French"
+]
+},
+{
+"q": "वास्को द गामा कालीकट कब पहुँचा?",
+"o": [
+"1600",
+"1510",
+"1498",
+"1492"
+],
+"a": "C",
+"e": "",
+"qe": "When did Vasco da Gama reach Calicut?",
+"oe": [
+"1600",
+"1510",
+"1498",
+"1492"
+]
+}
+]

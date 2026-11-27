@@ -1,0 +1,1622 @@
+[
+{
+"q": "'भूगोल' (Geography) शब्द का प्रयोग सबसे पहले किसने किया?",
+"o": [
+"हेरोडोटस",
+"इरेटोस्थनीज़",
+"स्ट्रैबो",
+"टॉलमी"
+],
+"a": "B",
+"e": "",
+"qe": "Who first used the term 'Geography'?",
+"oe": [
+"Herodotus",
+"Eratosthenes",
+"Strabo",
+"Ptolemy"
+]
+},
+{
+"q": "'कॉसमॉस' ग्रंथ के लेखक हैं—",
+"o": [
+"रैटज़ेल",
+"अलेक्ज़ेंडर वॉन हम्बोल्ट",
+"विडाल डी ला ब्लाश",
+"कार्ल रिटर"
+],
+"a": "B",
+"e": "",
+"qe": "'Kosmos' was written by",
+"oe": [
+"Ratzel",
+"Alexander von Humboldt",
+"Vidal de la Blache",
+"Carl Ritter"
+]
+},
+{
+"q": "'संभववाद' (Possibilism) के प्रवर्तक कौन हैं?",
+"o": [
+"सेम्पल",
+"हंटिंगटन",
+"विडाल डी ला ब्लाश",
+"रैटज़ेल"
+],
+"a": "C",
+"e": "",
+"qe": "Who is the founder of Possibilism?",
+"oe": [
+"Semple",
+"Huntington",
+"Vidal de la Blache",
+"Ratzel"
+]
+},
+{
+"q": "'नव-निश्चयवाद' (Stop-and-go determinism) किसने दिया?",
+"o": [
+"ग्रिफ़िथ टेलर",
+"ब्लाश",
+"हार्टशोर्न",
+"रैटज़ेल"
+],
+"a": "A",
+"e": "",
+"qe": "Neo-determinism (stop-and-go) was given by",
+"oe": [
+"Griffith Taylor",
+"Blache",
+"Hartshorne",
+"Ratzel"
+]
+},
+{
+"q": "'महाद्वीपीय विस्थापन सिद्धांत' किसने दिया?",
+"o": [
+"डेली",
+"आर्थर होम्स",
+"हैरी हेस",
+"अल्फ्रेड वेगनर"
+],
+"a": "D",
+"e": "",
+"qe": "The Continental Drift theory was given by",
+"oe": [
+"Daly",
+"Arthur Holmes",
+"Harry Hess",
+"Alfred Wegener"
+]
+},
+{
+"q": "वेगनर के अनुसार प्राचीन विशाल महाद्वीप का नाम था—",
+"o": [
+"पैंजिया",
+"पैंथालासा",
+"गोंडवानालैंड",
+"लॉरेशिया"
+],
+"a": "A",
+"e": "",
+"qe": "According to Wegener, the ancient supercontinent was",
+"oe": [
+"Pangaea",
+"Panthalassa",
+"Gondwanaland",
+"Laurasia"
+]
+},
+{
+"q": "'सागर-नितल प्रसरण' (Sea-floor spreading) की संकल्पना किसने दी?",
+"o": [
+"हैरी हेस",
+"होम्स",
+"वेगनर",
+"जेफ़रीज़"
+],
+"a": "A",
+"e": "",
+"qe": "The concept of sea-floor spreading was given by",
+"oe": [
+"Harry Hess",
+"Holmes",
+"Wegener",
+"Jeffreys"
+]
+},
+{
+"q": "पृथ्वी की पर्पटी में सर्वाधिक पाया जाने वाला तत्व है—",
+"o": [
+"लोहा",
+"सिलिकॉन",
+"एल्युमिनियम",
+"ऑक्सीजन"
+],
+"a": "D",
+"e": "",
+"qe": "The most abundant element in the Earth's crust is",
+"oe": [
+"Iron",
+"Silicon",
+"Aluminium",
+"Oxygen"
+]
+},
+{
+"q": "भूपर्पटी और मैंटल के बीच की असंबद्धता कहलाती है—",
+"o": [
+"लेहमैन असंबद्धता",
+"कोनराड असंबद्धता",
+"मोहो असंबद्धता",
+"गुटेनबर्ग असंबद्धता"
+],
+"a": "C",
+"e": "",
+"qe": "The discontinuity between crust and mantle is the",
+"oe": [
+"Lehmann discontinuity",
+"Conrad discontinuity",
+"Moho discontinuity",
+"Gutenberg discontinuity"
+]
+},
+{
+"q": "भूकंप की कौन-सी तरंगें द्रव माध्यम से नहीं गुज़रतीं?",
+"o": [
+"P तरंगें",
+"सभी गुज़रती हैं",
+"S तरंगें",
+"L तरंगें"
+],
+"a": "C",
+"e": "",
+"qe": "Which seismic waves cannot pass through liquids?",
+"oe": [
+"P waves",
+"All pass",
+"S waves",
+"L waves"
+]
+},
+{
+"q": "भूकंप की तीव्रता मापने का पैमाना है—",
+"o": [
+"मोह्स पैमाना",
+"रिक्टर पैमाना",
+"ब्यूफ़ोर्ट पैमाना",
+"केल्विन पैमाना"
+],
+"a": "B",
+"e": "",
+"qe": "Earthquake magnitude is measured on the",
+"oe": [
+"Mohs scale",
+"Richter scale",
+"Beaufort scale",
+"Kelvin scale"
+]
+},
+{
+"q": "'प्रशांत अग्नि वलय' (Ring of Fire) किससे संबंधित है?",
+"o": [
+"प्रवाल भित्ति",
+"मरुस्थल",
+"ज्वालामुखी व भूकंप क्षेत्र",
+"गर्म जलधारा"
+],
+"a": "C",
+"e": "",
+"qe": "The Pacific 'Ring of Fire' is related to",
+"oe": [
+"coral reefs",
+"deserts",
+"volcanic and earthquake zones",
+"warm currents"
+]
+},
+{
+"q": "डेविस का 'अपरदन चक्र' किस अवस्था-क्रम में है?",
+"o": [
+"प्रौढ़, युवा, जीर्ण",
+"युवा, प्रौढ़, जीर्ण",
+"युवा, जीर्ण, प्रौढ़",
+"जीर्ण, युवा, प्रौढ़"
+],
+"a": "B",
+"e": "",
+"qe": "Davis's cycle of erosion follows the stages",
+"oe": [
+"maturity, youth, old age",
+"youth, maturity, old age",
+"youth, old age, maturity",
+"old age, youth, maturity"
+]
+},
+{
+"q": "'V' आकार की घाटी किसके द्वारा बनती है?",
+"o": [
+"नदी",
+"हिमनद",
+"सागरीय तरंग",
+"पवन"
+],
+"a": "A",
+"e": "",
+"qe": "A V-shaped valley is formed by",
+"oe": [
+"a river",
+"a glacier",
+"sea waves",
+"wind"
+]
+},
+{
+"q": "'U' आकार की घाटी किसके द्वारा बनती है?",
+"o": [
+"पवन",
+"भूमिगत जल",
+"हिमनद",
+"नदी"
+],
+"a": "C",
+"e": "",
+"qe": "A U-shaped valley is formed by",
+"oe": [
+"wind",
+"groundwater",
+"a glacier",
+"a river"
+]
+},
+{
+"q": "'बरखान' किस अपरदन कारक से बनने वाली स्थलाकृति है?",
+"o": [
+"हिमनद",
+"पवन",
+"सागरीय तरंग",
+"नदी"
+],
+"a": "B",
+"e": "",
+"qe": "A 'barchan' is a landform made by",
+"oe": [
+"a glacier",
+"wind",
+"sea waves",
+"a river"
+]
+},
+{
+"q": "चूना-पत्थर क्षेत्रों में बनने वाली स्थलाकृति को कहते हैं—",
+"o": [
+"कार्स्ट स्थलाकृति",
+"हिमानी स्थलाकृति",
+"ज्वालामुखीय",
+"मरुस्थलीय"
+],
+"a": "A",
+"e": "",
+"qe": "Landforms in limestone regions are called",
+"oe": [
+"Karst topography",
+"Glacial topography",
+"Volcanic topography",
+"Desert topography"
+]
+},
+{
+"q": "वायुमंडल में आयतन के अनुसार ऑक्सीजन लगभग कितनी है?",
+"o": [
+"21%",
+"78%",
+"0.93%",
+"1%"
+],
+"a": "A",
+"e": "",
+"qe": "Oxygen forms about what percentage of the atmosphere by volume?",
+"oe": [
+"21%",
+"78%",
+"0.93%",
+"1%"
+]
+},
+{
+"q": "क्षोभ मंडल में ऊँचाई के साथ तापमान घटने की सामान्य दर है—",
+"o": [
+"10 °C प्रति किमी",
+"3 °C प्रति किमी",
+"6.5 °C प्रति किमी",
+"1 °C प्रति किमी"
+],
+"a": "C",
+"e": "",
+"qe": "The normal lapse rate in the troposphere is",
+"oe": [
+"10 °C per km",
+"3 °C per km",
+"6.5 °C per km",
+"1 °C per km"
+]
+},
+{
+"q": "'कोरिऑलिस बल' का कारण है—",
+"o": [
+"पृथ्वी का घूर्णन",
+"चंद्रमा का आकर्षण",
+"पृथ्वी की परिक्रमा",
+"सूर्य का ताप"
+],
+"a": "A",
+"e": "",
+"qe": "The Coriolis force is due to the",
+"oe": [
+"Earth's rotation",
+"Moon's attraction",
+"Earth's revolution",
+"Sun's heat"
+]
+},
+{
+"q": "'गरजता चालीसा' (Roaring Forties) किससे संबंधित है?",
+"o": [
+"ध्रुवीय पवनें",
+"व्यापारिक पवनें",
+"मानसूनी पवनें",
+"पछुआ पवनें (दक्षिणी गोलार्ध)"
+],
+"a": "D",
+"e": "",
+"qe": "The 'Roaring Forties' are related to",
+"oe": [
+"Polar winds",
+"Trade winds",
+"Monsoon winds",
+"Westerlies (Southern Hemisphere)"
+]
+},
+{
+"q": "'चिनूक' स्थानीय पवन कहाँ चलती है?",
+"o": [
+"हिमालय",
+"सहारा",
+"आल्प्स",
+"रॉकी पर्वत (उत्तरी अमेरिका)"
+],
+"a": "D",
+"e": "",
+"qe": "The local wind 'Chinook' blows in the",
+"oe": [
+"Himalayas",
+"Sahara",
+"Alps",
+"Rockies (North America)"
+]
+},
+{
+"q": "'लू' किस प्रकार की पवन है?",
+"o": [
+"गर्म व शुष्क स्थानीय पवन",
+"आर्द्र पवन",
+"व्यापारिक पवन",
+"ठंडी पवन"
+],
+"a": "A",
+"e": "",
+"qe": "'Loo' is a",
+"oe": [
+"hot, dry local wind",
+"humid wind",
+"trade wind",
+"cold wind"
+]
+},
+{
+"q": "उष्णकटिबंधीय चक्रवात को अटलांटिक में क्या कहते हैं?",
+"o": [
+"टॉरनेडो",
+"टाइफ़ून",
+"विली-विली",
+"हरिकेन"
+],
+"a": "D",
+"e": "",
+"qe": "Tropical cyclones in the Atlantic are called",
+"oe": [
+"Tornadoes",
+"Typhoons",
+"Willy-willies",
+"Hurricanes"
+]
+},
+{
+"q": "कोपेन का जलवायु वर्गीकरण किस पर आधारित है?",
+"o": [
+"केवल पवन",
+"तापमान और वर्षा (वनस्पति)",
+"केवल ऊँचाई",
+"मृदा"
+],
+"a": "B",
+"e": "",
+"qe": "Köppen's climate classification is based on",
+"oe": [
+"wind only",
+"temperature and rainfall (vegetation)",
+"altitude only",
+"soil"
+]
+},
+{
+"q": "सबसे अधिक लवणता वाला सागर/झील है—",
+"o": [
+"मृत सागर (Dead Sea)",
+"काला सागर",
+"लाल सागर",
+"भूमध्य सागर"
+],
+"a": "A",
+"e": "",
+"qe": "The water body with very high salinity is the",
+"oe": [
+"Dead Sea",
+"Black Sea",
+"Red Sea",
+"Mediterranean Sea"
+]
+},
+{
+"q": "'गल्फ़ स्ट्रीम' किस प्रकार की धारा है?",
+"o": [
+"स्थानीय पवन",
+"ठंडी जलधारा",
+"गर्म जलधारा",
+"ज्वारीय धारा"
+],
+"a": "C",
+"e": "",
+"qe": "The Gulf Stream is a",
+"oe": [
+"local wind",
+"cold ocean current",
+"warm ocean current",
+"tidal current"
+]
+},
+{
+"q": "'लैब्राडोर धारा' किस प्रकार की धारा है?",
+"o": [
+"ठंडी",
+"गर्म",
+"मिश्रित",
+"स्थानीय"
+],
+"a": "A",
+"e": "",
+"qe": "The Labrador Current is a",
+"oe": [
+"cold current",
+"warm current",
+"mixed current",
+"local current"
+]
+},
+{
+"q": "विश्व का सबसे गहरा बिंदु 'मेरियाना गर्त' किस महासागर में है?",
+"o": [
+"प्रशांत",
+"हिंद",
+"आर्कटिक",
+"अटलांटिक"
+],
+"a": "A",
+"e": "",
+"qe": "The Mariana Trench is in the",
+"oe": [
+"Pacific Ocean",
+"Indian Ocean",
+"Arctic Ocean",
+"Atlantic Ocean"
+]
+},
+{
+"q": "'ग्रेट बैरियर रीफ़' किस देश के तट पर है?",
+"o": [
+"इंडोनेशिया",
+"न्यूज़ीलैंड",
+"ऑस्ट्रेलिया",
+"फ़िलीपींस"
+],
+"a": "C",
+"e": "",
+"qe": "The Great Barrier Reef is off the coast of",
+"oe": [
+"Indonesia",
+"New Zealand",
+"Australia",
+"Philippines"
+]
+},
+{
+"q": "'सेल्वा' किस प्रदेश के वनों को कहते हैं?",
+"o": [
+"साइबेरिया",
+"अमेज़न (भूमध्यरेखीय)",
+"सहारा",
+"भूमध्यसागरीय"
+],
+"a": "B",
+"e": "",
+"qe": "'Selva' refers to the forests of the",
+"oe": [
+"Siberia",
+"Amazon (equatorial)",
+"Sahara",
+"Mediterranean"
+]
+},
+{
+"q": "'टैगा' वन किस प्रकार के हैं?",
+"o": [
+"सवाना",
+"मैंग्रोव",
+"उष्णकटिबंधीय वर्षा वन",
+"शंकुधारी वन"
+],
+"a": "D",
+"e": "",
+"qe": "Taiga forests are",
+"oe": [
+"Savanna",
+"Mangroves",
+"Tropical rainforests",
+"Coniferous forests"
+]
+},
+{
+"q": "'प्रेयरी' घास के मैदान कहाँ हैं?",
+"o": [
+"अफ़्रीका",
+"ऑस्ट्रेलिया",
+"उत्तरी अमेरिका",
+"दक्षिण अमेरिका"
+],
+"a": "C",
+"e": "",
+"qe": "The Prairies are in",
+"oe": [
+"Africa",
+"Australia",
+"North America",
+"South America"
+]
+},
+{
+"q": "'पंपास' घास के मैदान किस देश में हैं?",
+"o": [
+"दक्षिण अफ़्रीका",
+"रूस",
+"ऑस्ट्रेलिया",
+"अर्जेंटीना"
+],
+"a": "D",
+"e": "",
+"qe": "The Pampas are in",
+"oe": [
+"South Africa",
+"Russia",
+"Australia",
+"Argentina"
+]
+},
+{
+"q": "'वेल्ड' घास के मैदान कहाँ हैं?",
+"o": [
+"ऑस्ट्रेलिया",
+"हंगरी",
+"उत्तरी अमेरिका",
+"दक्षिण अफ़्रीका"
+],
+"a": "D",
+"e": "",
+"qe": "The Veld grasslands are in",
+"oe": [
+"Australia",
+"Hungary",
+"North America",
+"South Africa"
+]
+},
+{
+"q": "'डाउन्स' घास के मैदान कहाँ हैं?",
+"o": [
+"न्यूज़ीलैंड",
+"दक्षिण अफ़्रीका",
+"ऑस्ट्रेलिया",
+"अर्जेंटीना"
+],
+"a": "C",
+"e": "",
+"qe": "The Downs grasslands are in",
+"oe": [
+"New Zealand",
+"South Africa",
+"Australia",
+"Argentina"
+]
+},
+{
+"q": "बुशमैन जनजाति कहाँ रहती है?",
+"o": [
+"कालाहारी मरुस्थल",
+"टुंड्रा",
+"सहारा",
+"अमेज़न"
+],
+"a": "A",
+"e": "",
+"qe": "The Bushmen live in the",
+"oe": [
+"Kalahari Desert",
+"Tundra",
+"Sahara",
+"Amazon"
+]
+},
+{
+"q": "'एस्किमो' (इनुइट) मुख्यतः किस प्रदेश में रहते हैं?",
+"o": [
+"टुंड्रा",
+"मरुस्थल",
+"भूमध्यरेखीय",
+"मानसूनी"
+],
+"a": "A",
+"e": "",
+"qe": "Eskimos (Inuit) mainly live in the",
+"oe": [
+"Tundra",
+"Desert",
+"Equatorial region",
+"Monsoon region"
+]
+},
+{
+"q": "'जनांकिकीय संक्रमण सिद्धांत' जनसंख्या के किस परिवर्तन को बताता है?",
+"o": [
+"प्रवास",
+"लिंगानुपात",
+"जन्म व मृत्यु दर में बदलाव के चरण",
+"साक्षरता"
+],
+"a": "C",
+"e": "",
+"qe": "The Demographic Transition theory explains",
+"oe": [
+"migration",
+"sex ratio",
+"stages of change in birth and death rates",
+"literacy"
+]
+},
+{
+"q": "जनगणना 2011 के अनुसार भारत का लिंगानुपात था—",
+"o": [
+"927",
+"940",
+"943",
+"933"
+],
+"a": "C",
+"e": "",
+"qe": "As per Census 2011, India's sex ratio was",
+"oe": [
+"927",
+"940",
+"943",
+"933"
+]
+},
+{
+"q": "जनगणना 2011 के अनुसार सर्वाधिक जनसंख्या वाला राज्य—",
+"o": [
+"उत्तर प्रदेश",
+"पश्चिम बंगाल",
+"महाराष्ट्र",
+"बिहार"
+],
+"a": "A",
+"e": "",
+"qe": "As per Census 2011, the most populous state was",
+"oe": [
+"Uttar Pradesh",
+"West Bengal",
+"Maharashtra",
+"Bihar"
+]
+},
+{
+"q": "जनगणना 2011 के अनुसार सर्वाधिक जनघनत्व वाला राज्य—",
+"o": [
+"बिहार",
+"पश्चिम बंगाल",
+"उत्तर प्रदेश",
+"केरल"
+],
+"a": "A",
+"e": "",
+"qe": "As per Census 2011, the state with the highest population density was",
+"oe": [
+"Bihar",
+"West Bengal",
+"Uttar Pradesh",
+"Kerala"
+]
+},
+{
+"q": "'केंद्रीय स्थान सिद्धांत' किसने दिया?",
+"o": [
+"अल्फ्रेड वेबर",
+"वॉन थ्यूनेन",
+"वाल्टर क्रिस्टालर",
+"लॉश"
+],
+"a": "C",
+"e": "",
+"qe": "The Central Place Theory was given by",
+"oe": [
+"Alfred Weber",
+"von Thünen",
+"Walter Christaller",
+"Lösch"
+]
+},
+{
+"q": "'कृषि अवस्थिति सिद्धांत' (Isolated State) किसने दिया?",
+"o": [
+"मैल्थस",
+"वॉन थ्यूनेन",
+"वेबर",
+"क्रिस्टालर"
+],
+"a": "B",
+"e": "",
+"qe": "The agricultural location theory (Isolated State) was given by",
+"oe": [
+"Malthus",
+"von Thünen",
+"Weber",
+"Christaller"
+]
+},
+{
+"q": "'औद्योगिक अवस्थिति सिद्धांत' (1909) किसने दिया?",
+"o": [
+"डेविस",
+"अल्फ्रेड वेबर",
+"वॉन थ्यूनेन",
+"क्रिस्टालर"
+],
+"a": "B",
+"e": "",
+"qe": "The industrial location theory (1909) was given by",
+"oe": [
+"Davis",
+"Alfred Weber",
+"von Thünen",
+"Christaller"
+]
+},
+{
+"q": "'हृदय-स्थल सिद्धांत' (Heartland theory) किसने दिया?",
+"o": [
+"स्पाइकमैन",
+"हॉशोफ़र",
+"मैकिंडर",
+"महान"
+],
+"a": "C",
+"e": "",
+"qe": "The Heartland theory was given by",
+"oe": [
+"Spykman",
+"Haushofer",
+"Mackinder",
+"Mahan"
+]
+},
+{
+"q": "भारत का क्षेत्रफल विश्व के क्षेत्रफल का लगभग कितना है?",
+"o": [
+"1.2%",
+"17%",
+"2.4%",
+"4.2%"
+],
+"a": "C",
+"e": "",
+"qe": "India's area is about what share of the world's area?",
+"oe": [
+"1.2%",
+"17%",
+"2.4%",
+"4.2%"
+]
+},
+{
+"q": "भारत की स्थलीय सीमा सबसे अधिक किस देश से लगती है?",
+"o": [
+"नेपाल",
+"चीन",
+"पाकिस्तान",
+"बांग्लादेश"
+],
+"a": "D",
+"e": "",
+"qe": "India shares its longest land border with",
+"oe": [
+"Nepal",
+"China",
+"Pakistan",
+"Bangladesh"
+]
+},
+{
+"q": "भारत को श्रीलंका से कौन अलग करता है?",
+"o": [
+"दस डिग्री चैनल",
+"पाक जलडमरूमध्य",
+"आठ डिग्री चैनल",
+"डंकन पास"
+],
+"a": "B",
+"e": "",
+"qe": "India is separated from Sri Lanka by the",
+"oe": [
+"Ten Degree Channel",
+"Palk Strait",
+"Eight Degree Channel",
+"Duncan Passage"
+]
+},
+{
+"q": "अंडमान को निकोबार से अलग करने वाला चैनल है—",
+"o": [
+"पाक स्ट्रेट",
+"नौ डिग्री चैनल",
+"दस डिग्री चैनल",
+"आठ डिग्री चैनल"
+],
+"a": "C",
+"e": "",
+"qe": "The channel separating Andaman from Nicobar is the",
+"oe": [
+"Palk Strait",
+"Nine Degree Channel",
+"Ten Degree Channel",
+"Eight Degree Channel"
+]
+},
+{
+"q": "भारत का एकमात्र सक्रिय ज्वालामुखी है—",
+"o": [
+"नारकोंडम",
+"मौना लोआ",
+"धिनोधर",
+"बैरन द्वीप"
+],
+"a": "D",
+"e": "",
+"qe": "India's only active volcano is",
+"oe": [
+"Narcondam",
+"Mauna Loa",
+"Dhinodhar",
+"Barren Island"
+]
+},
+{
+"q": "हिमालय की सबसे बाहरी (दक्षिणी) श्रेणी है—",
+"o": [
+"हिमाचल",
+"शिवालिक",
+"ट्रांस हिमालय",
+"हिमाद्रि"
+],
+"a": "B",
+"e": "",
+"qe": "The outermost (southern) range of the Himalayas is the",
+"oe": [
+"Himachal",
+"Shivalik",
+"Trans-Himalaya",
+"Himadri"
+]
+},
+{
+"q": "'दून' घाटियाँ किस श्रेणी से संबंधित हैं?",
+"o": [
+"शिवालिक और लघु हिमालय के बीच",
+"अरावली",
+"ट्रांस हिमालय",
+"पूर्वांचल"
+],
+"a": "A",
+"e": "",
+"qe": "'Duns' are found",
+"oe": [
+"between the Shivalik and Lesser Himalaya",
+"in the Aravalli",
+"in the Trans-Himalaya",
+"in the Purvanchal"
+]
+},
+{
+"q": "भारत की सबसे पुरानी पर्वत शृंखला है—",
+"o": [
+"विंध्य",
+"हिमालय",
+"अरावली",
+"सतपुड़ा"
+],
+"a": "C",
+"e": "",
+"qe": "The oldest mountain range in India is the",
+"oe": [
+"Vindhya",
+"Himalaya",
+"Aravalli",
+"Satpura"
+]
+},
+{
+"q": "पश्चिमी घाट की सबसे ऊँची चोटी है—",
+"o": [
+"गुरुशिखर",
+"अनाईमुडी",
+"महेंद्रगिरि",
+"डोडाबेटा"
+],
+"a": "B",
+"e": "",
+"qe": "The highest peak of the Western Ghats is",
+"oe": [
+"Guru Shikhar",
+"Anamudi",
+"Mahendragiri",
+"Doddabetta"
+]
+},
+{
+"q": "नर्मदा नदी किस दिशा में बहती है?",
+"o": [
+"उत्तर की ओर",
+"दक्षिण की ओर",
+"पश्चिम की ओर (भ्रंश घाटी में)",
+"पूर्व की ओर"
+],
+"a": "C",
+"e": "",
+"qe": "The Narmada flows",
+"oe": [
+"northward",
+"southward",
+"westward (through a rift valley)",
+"eastward"
+]
+},
+{
+"q": "ब्रह्मपुत्र नदी को तिब्बत में किस नाम से जाना जाता है?",
+"o": [
+"सांगपो",
+"जमुना",
+"दिहांग",
+"लोहित"
+],
+"a": "A",
+"e": "",
+"qe": "The Brahmaputra is known in Tibet as the",
+"oe": [
+"Tsangpo",
+"Jamuna",
+"Dihang",
+"Lohit"
+]
+},
+{
+"q": "'होगेनक्कल' जलप्रपात किस नदी पर है?",
+"o": [
+"शरावती",
+"गोदावरी",
+"कृष्णा",
+"कावेरी"
+],
+"a": "D",
+"e": "",
+"qe": "Hogenakkal Falls is on the",
+"oe": [
+"Sharavati",
+"Godavari",
+"Krishna",
+"Kaveri"
+]
+},
+{
+"q": "'जोग' (गरसोप्पा) जलप्रपात किस नदी पर है?",
+"o": [
+"शरावती",
+"तुंगभद्रा",
+"कावेरी",
+"पेरियार"
+],
+"a": "A",
+"e": "",
+"qe": "Jog Falls is on the",
+"oe": [
+"Sharavati",
+"Tungabhadra",
+"Kaveri",
+"Periyar"
+]
+},
+{
+"q": "भारत की सबसे बड़ी खारे पानी की झील है—",
+"o": [
+"पुलिकट",
+"चिल्का",
+"वुलर",
+"सांभर"
+],
+"a": "B",
+"e": "",
+"qe": "India's largest brackish water lake is",
+"oe": [
+"Pulicat",
+"Chilika",
+"Wular",
+"Sambhar"
+]
+},
+{
+"q": "भारत की सबसे बड़ी मीठे पानी की प्राकृतिक झील है—",
+"o": [
+"डल",
+"चिल्का",
+"लोकटक",
+"वुलर"
+],
+"a": "D",
+"e": "",
+"qe": "India's largest natural freshwater lake is",
+"oe": [
+"Dal",
+"Chilika",
+"Loktak",
+"Wular"
+]
+},
+{
+"q": "भारत में दक्षिण-पश्चिम मानसून सबसे पहले कहाँ पहुँचता है?",
+"o": [
+"अंडमान-निकोबार",
+"तमिलनाडु",
+"मुंबई",
+"केरल"
+],
+"a": "D",
+"e": "मुख्य भूमि पर पहले केरल; द्वीपों में अंडमान पहले।",
+"qe": "The south-west monsoon first reaches",
+"oe": [
+"Andaman–Nicobar",
+"Tamil Nadu",
+"Mumbai",
+"Kerala (mainland)"
+]
+},
+{
+"q": "शीतकाल में तमिलनाडु तट पर वर्षा किस कारण होती है?",
+"o": [
+"पश्चिमी विक्षोभ",
+"उत्तर-पूर्वी (लौटता) मानसून",
+"दक्षिण-पश्चिम मानसून",
+"काल बैसाखी"
+],
+"a": "B",
+"e": "",
+"qe": "Winter rain on the Tamil Nadu coast is due to the",
+"oe": [
+"western disturbances",
+"north-east (retreating) monsoon",
+"south-west monsoon",
+"Kal Baisakhi"
+]
+},
+{
+"q": "'पश्चिमी विक्षोभ' से शीतकाल में वर्षा कहाँ होती है?",
+"o": [
+"उत्तर-पश्चिम भारत",
+"तमिलनाडु",
+"केरल",
+"पूर्वोत्तर"
+],
+"a": "A",
+"e": "",
+"qe": "Western disturbances bring winter rain to",
+"oe": [
+"north-west India",
+"Tamil Nadu",
+"Kerala",
+"the north-east"
+]
+},
+{
+"q": "'काल बैसाखी' किस राज्य से संबंधित है?",
+"o": [
+"राजस्थान",
+"कर्नाटक",
+"पंजाब",
+"पश्चिम बंगाल"
+],
+"a": "D",
+"e": "",
+"qe": "'Kal Baisakhi' is associated with",
+"oe": [
+"Rajasthan",
+"Karnataka",
+"Punjab",
+"West Bengal"
+]
+},
+{
+"q": "'आम्र वर्षा' (Mango showers) किस राज्य में होती है?",
+"o": [
+"केरल और कर्नाटक",
+"पंजाब",
+"गुजरात",
+"असम"
+],
+"a": "A",
+"e": "",
+"qe": "Mango showers occur in",
+"oe": [
+"Kerala and Karnataka",
+"Punjab",
+"Gujarat",
+"Assam"
+]
+},
+{
+"q": "लैटेराइट मिट्टी किस प्रक्रिया से बनती है?",
+"o": [
+"हिमानी अपरदन",
+"निक्षालन (Leaching)",
+"पवन निक्षेपण",
+"जलोढ़ निक्षेपण"
+],
+"a": "B",
+"e": "",
+"qe": "Laterite soil is formed by",
+"oe": [
+"Glacial erosion",
+"Leaching",
+"Wind deposition",
+"Alluvial deposition"
+]
+},
+{
+"q": "'रेगुर' किस मिट्टी को कहते हैं?",
+"o": [
+"जलोढ़ मिट्टी",
+"मरुस्थलीय मिट्टी",
+"काली मिट्टी",
+"लाल मिट्टी"
+],
+"a": "C",
+"e": "",
+"qe": "'Regur' is",
+"oe": [
+"Alluvial soil",
+"Desert soil",
+"Black soil",
+"Red soil"
+]
+},
+{
+"q": "'खादर' किसे कहते हैं?",
+"o": [
+"पुरानी जलोढ़ मिट्टी",
+"लाल मिट्टी",
+"पर्वतीय मिट्टी",
+"नवीन जलोढ़ मिट्टी"
+],
+"a": "D",
+"e": "",
+"qe": "'Khadar' is",
+"oe": [
+"old alluvium",
+"red soil",
+"mountain soil",
+"new alluvium"
+]
+},
+{
+"q": "भारत में मैंग्रोव वनों का सबसे बड़ा क्षेत्र है—",
+"o": [
+"पिचावरम",
+"भितरकनिका",
+"कच्छ",
+"सुंदरबन"
+],
+"a": "D",
+"e": "",
+"qe": "India's largest mangrove area is the",
+"oe": [
+"Pichavaram",
+"Bhitarkanika",
+"Kutch",
+"Sundarbans"
+]
+},
+{
+"q": "भारत में सर्वाधिक वनावरण (क्षेत्रफल) वाला राज्य है—",
+"o": [
+"ओडिशा",
+"मध्य प्रदेश",
+"छत्तीसगढ़",
+"अरुणाचल प्रदेश"
+],
+"a": "B",
+"e": "",
+"qe": "The Indian state with the largest forest cover (area) is",
+"oe": [
+"Odisha",
+"Madhya Pradesh",
+"Chhattisgarh",
+"Arunachal Pradesh"
+]
+},
+{
+"q": "'काज़ीरंगा' राष्ट्रीय उद्यान किसके लिए प्रसिद्ध है?",
+"o": [
+"हाथी",
+"बाघ",
+"शेर",
+"एक सींग वाला गैंडा"
+],
+"a": "D",
+"e": "",
+"qe": "Kaziranga National Park is famous for the",
+"oe": [
+"elephant",
+"tiger",
+"lion",
+"one-horned rhinoceros"
+]
+},
+{
+"q": "एशियाई शेरों का एकमात्र प्राकृतिक आवास है—",
+"o": [
+"गिर राष्ट्रीय उद्यान",
+"रणथंभौर",
+"सुंदरबन",
+"कॉर्बेट"
+],
+"a": "A",
+"e": "",
+"qe": "The only natural home of Asiatic lions is",
+"oe": [
+"Gir National Park",
+"Ranthambore",
+"Sundarbans",
+"Corbett"
+]
+},
+{
+"q": "भारत का प्रथम राष्ट्रीय उद्यान है—",
+"o": [
+"कान्हा",
+"काज़ीरंगा",
+"जिम कॉर्बेट (हैली)",
+"गिर"
+],
+"a": "C",
+"e": "1936।",
+"qe": "India's first national park is",
+"oe": [
+"Kanha",
+"Kaziranga",
+"Jim Corbett (Hailey)",
+"Gir"
+]
+},
+{
+"q": "भारत में 'काली क्रांति' (Black revolution) किससे संबंधित है?",
+"o": [
+"चमड़ा",
+"पेट्रोलियम उत्पादन",
+"कोयला",
+"मछली"
+],
+"a": "B",
+"e": "",
+"qe": "The 'Black Revolution' in India relates to",
+"oe": [
+"leather",
+"petroleum production",
+"coal",
+"fish"
+]
+},
+{
+"q": "'नीली क्रांति' किससे संबंधित है?",
+"o": [
+"दुग्ध",
+"उर्वरक",
+"तिलहन",
+"मत्स्य पालन"
+],
+"a": "D",
+"e": "",
+"qe": "The 'Blue Revolution' relates to",
+"oe": [
+"Milk",
+"Fertilisers",
+"Oilseeds",
+"Fisheries"
+]
+},
+{
+"q": "'पीली क्रांति' किससे संबंधित है?",
+"o": [
+"अंडे",
+"तिलहन",
+"फल",
+"शहद"
+],
+"a": "B",
+"e": "",
+"qe": "The 'Yellow Revolution' relates to",
+"oe": [
+"Eggs",
+"Oilseeds",
+"Fruits",
+"Honey"
+]
+},
+{
+"q": "भारत में सबसे पहला तेल कुआँ कहाँ खोदा गया?",
+"o": [
+"अंकलेश्वर",
+"नहरकटिया",
+"बॉम्बे हाई",
+"डिगबोई (असम)"
+],
+"a": "D",
+"e": "",
+"qe": "India's first oil well was drilled at",
+"oe": [
+"Ankleshwar",
+"Naharkatiya",
+"Bombay High",
+"Digboi (Assam)"
+]
+},
+{
+"q": "'मैंगनीज़' के उत्पादन में अग्रणी राज्य (परंपरागत रूप से) है—",
+"o": [
+"पंजाब",
+"ओडिशा",
+"बिहार",
+"केरल"
+],
+"a": "B",
+"e": "",
+"qe": "A leading producer of manganese in India is",
+"oe": [
+"Punjab",
+"Odisha",
+"Bihar",
+"Kerala"
+]
+},
+{
+"q": "भारत का पहला लौह-इस्पात कारखाना (TISCO) कहाँ स्थापित हुआ?",
+"o": [
+"जमशेदपुर",
+"बोकारो",
+"राउरकेला",
+"भिलाई"
+],
+"a": "A",
+"e": "1907।",
+"qe": "India's first steel plant (TISCO) was set up at",
+"oe": [
+"Jamshedpur",
+"Bokaro",
+"Rourkela",
+"Bhilai"
+]
+},
+{
+"q": "'भारत का मैनचेस्टर' किसे कहा जाता है?",
+"o": [
+"कानपुर",
+"कोयंबटूर",
+"अहमदाबाद",
+"मुंबई"
+],
+"a": "C",
+"e": "",
+"qe": "Which city is called the 'Manchester of India'?",
+"oe": [
+"Kanpur",
+"Coimbatore",
+"Ahmedabad",
+"Mumbai"
+]
+},
+{
+"q": "'स्वर्णिम चतुर्भुज' राजमार्ग किन चार महानगरों को जोड़ता है?",
+"o": [
+"दिल्ली, लखनऊ, पटना, कोलकाता",
+"मुंबई, पुणे, बेंगलुरु, चेन्नई",
+"दिल्ली, जयपुर, अहमदाबाद, मुंबई",
+"दिल्ली, मुंबई, चेन्नई, कोलकाता"
+],
+"a": "D",
+"e": "",
+"qe": "The Golden Quadrilateral connects",
+"oe": [
+"Delhi, Lucknow, Patna, Kolkata",
+"Mumbai, Pune, Bengaluru, Chennai",
+"Delhi, Jaipur, Ahmedabad, Mumbai",
+"Delhi, Mumbai, Chennai, Kolkata"
+]
+},
+{
+"q": "मानचित्र पर 1 : 50,000 मापक का अर्थ है—",
+"o": [
+"1 सेमी = 50 मीटर",
+"मानचित्र का 1 सेमी = धरातल पर 500 मीटर",
+"1 सेमी = 5 किमी",
+"1 सेमी = 50 किमी"
+],
+"a": "B",
+"e": "",
+"qe": "On a map, the scale 1 : 50,000 means",
+"oe": [
+"1 cm = 50 m",
+"1 cm on map = 500 m on ground",
+"1 cm = 5 km",
+"1 cm = 50 km"
+]
+},
+{
+"q": "समान ऊँचाई वाले स्थानों को मिलाने वाली रेखाएँ हैं—",
+"o": [
+"समोच्च रेखाएँ",
+"समताप रेखाएँ",
+"समवर्षा रेखाएँ",
+"समदाब रेखाएँ"
+],
+"a": "A",
+"e": "",
+"qe": "Lines joining places of equal height are",
+"oe": [
+"Contour lines",
+"Isotherms",
+"Isohyets",
+"Isobars"
+]
+},
+{
+"q": "समान वायुदाब वाले स्थानों को मिलाने वाली रेखाएँ हैं—",
+"o": [
+"समताप रेखाएँ",
+"समदाब रेखाएँ",
+"समोच्च रेखाएँ",
+"समलवण रेखाएँ"
+],
+"a": "B",
+"e": "",
+"qe": "Lines joining places of equal pressure are",
+"oe": [
+"Isotherms",
+"Isobars",
+"Contours",
+"Isohalines"
+]
+},
+{
+"q": "भारत में 'सुदूर संवेदन' उपग्रहों की शृंखला है—",
+"o": [
+"GSAT",
+"NAVIC",
+"IRS",
+"INSAT"
+],
+"a": "C",
+"e": "",
+"qe": "India's remote sensing satellite series is",
+"oe": [
+"GSAT",
+"NAVIC",
+"IRS",
+"INSAT"
+]
+},
+{
+"q": "GPS का पूरा नाम है—",
+"o": [
+"जनरल पोज़िशन सर्वे",
+"ग्लोबल प्लानिंग सर्विस",
+"जियोग्राफ़िक प्लानिंग सिस्टम",
+"ग्लोबल पोज़िशनिंग सिस्टम"
+],
+"a": "D",
+"e": "",
+"qe": "GPS stands for",
+"oe": [
+"General Position Survey",
+"Global Planning Service",
+"Geographic Planning System",
+"Global Positioning System"
+]
+},
+{
+"q": "भारत की कुल तटरेखा (द्वीपों सहित) लगभग है—",
+"o": [
+"15,200 किमी",
+"7,516 किमी",
+"3,214 किमी",
+"6,100 किमी"
+],
+"a": "B",
+"e": "",
+"qe": "India's total coastline (including islands) is about",
+"oe": [
+"15,200 km",
+"7,516 km",
+"3,214 km",
+"6,100 km"
+]
+},
+{
+"q": "सूर्य की किरणें वर्ष में दो बार किस अक्षांश पर लंबवत पड़ती हैं?",
+"o": [
+"आर्कटिक वृत्त",
+"कर्क रेखा",
+"मकर रेखा",
+"भूमध्य रेखा"
+],
+"a": "D",
+"e": "21 मार्च और 23 सितंबर (विषुव)।",
+"qe": "Twice a year, the Sun's rays fall vertically on the",
+"oe": [
+"Arctic Circle",
+"Tropic of Cancer",
+"Tropic of Capricorn",
+"Equator"
+]
+},
+{
+"q": "21 जून को उत्तरी गोलार्ध में—",
+"o": [
+"सूर्य ग्रहण होता है",
+"सबसे लंबा दिन होता है",
+"दिन-रात बराबर होते हैं",
+"सबसे छोटा दिन होता है"
+],
+"a": "B",
+"e": "",
+"qe": "On 21 June, in the Northern Hemisphere,",
+"oe": [
+"there is a solar eclipse",
+"the day is the longest",
+"day and night are equal",
+"the day is the shortest"
+]
+}
+]
