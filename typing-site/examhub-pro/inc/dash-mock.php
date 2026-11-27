@@ -43,7 +43,7 @@ function eh_dash_render($uid) {
 <div class="dk">
  <div class="dk-hi"><div><span class="dk-k">मेरा डैशबोर्ड</span><h1>नमस्ते, <em><?php echo esc_html($u->display_name ?: $u->user_login); ?></em></h1><p>आपके सभी मॉक टेस्ट और टाइपिंग टेस्ट की प्रगति एक जगह।</p></div>
   <div class="dk-subs"><?php foreach (['tgt' => 'TGT', 'pgt' => 'PGT'] as $sr => $lb): $pf = eh_tp_pref($uid, $sr); ?>
-   <a href="<?php echo esc_url($pf ? add_query_arg(['x' => $sr, 's' => $pf], $hub) : add_query_arg(['x' => $sr, 'all' => 1], $hub)); ?>"><span><?php echo $lb; ?> विषय</span><b><?php echo $pf ? esc_html(eh_tp_subjects()[$sr][$pf][0]) : 'अभी नहीं चुना'; ?></b><em><?php echo $pf ? 'टेस्ट देखें →' : 'चुनें →'; ?></em></a>
+   <a data-tp="<?php echo $sr; ?>" href="<?php echo esc_url($pf ? add_query_arg(['x' => $sr, 's' => $pf], $hub) : add_query_arg(['x' => $sr, 'all' => 1], $hub)); ?>"><span><?php echo $lb; ?> विषय</span><b><?php echo $pf ? esc_html(eh_tp_subjects()[$sr][$pf][0]) : 'अभी नहीं चुना'; ?></b><em><?php echo $pf ? 'टेस्ट देखें →' : 'चुनें →'; ?></em></a>
   <?php endforeach; ?></div></div>
  <nav class="dk-tabs" id="dk-tabs"><button class="on" data-t="m">📝 मॉक टेस्ट <i><?php echo $n; ?></i></button><button data-t="t">⌨️ टाइपिंग <i><?php echo (int) $tyAgg['n']; ?></i></button></nav>
 
@@ -78,5 +78,5 @@ function eh_dash_render($uid) {
 <script>document.addEventListener('DOMContentLoaded',function(){var B=[].slice.call(document.querySelectorAll('#dk-tabs button')),P=[].slice.call(document.querySelectorAll('.dk-p')),H=document.getElementById('dk-typing-full');
 function go(t){B.forEach(function(x){x.classList.toggle('on',x.dataset.t===t)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===t)});if(H)H.style.display=t==='t'?'':'none';try{localStorage.setItem('eh_dk_tab',t)}catch(e){}}
 B.forEach(function(b){b.onclick=function(){go(b.dataset.t)}});var s=/[?&](f|pg)=/.test(location.search)?'t':null;try{s=s||localStorage.getItem('eh_dk_tab')}catch(e){}go(s||'m')});</script>
-<?php return ob_get_clean();
+<?php return ob_get_clean() . (function_exists('eh_tp_picker') ? eh_tp_picker() : '');
 }

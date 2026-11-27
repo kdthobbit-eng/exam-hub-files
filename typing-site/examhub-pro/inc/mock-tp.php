@@ -91,7 +91,8 @@ function eh_mock_cards() {
     $T = eh_tp_subjects(); $ready = ['tgt' => 0, 'pgt' => 0];
     foreach (eh_tp_rounds() as $r) if (eh_tp_ready($r)) $ready[$r['series']]++;
     $c = function ($href, $tag, $title, $sub, $rows, $live, $btn, $mod) {
-        $h = '<a class="mx-card ' . $mod . '" href="' . esc_url($href) . '"><div class="mx-card-top"><span class="mx-tag">' . esc_html($tag) . '</span>'
+        $tp = strpos($mod, 'mx-c2') !== false ? 'tgt' : (strpos($mod, 'mx-c3') !== false ? 'pgt' : '');
+        $h = '<a class="mx-card ' . $mod . '" href="' . esc_url($href) . '"' . ($tp ? ' data-tp="' . $tp . '"' : '') . '><div class="mx-card-top"><span class="mx-tag">' . esc_html($tag) . '</span>'
             . ($live ? '<span class="mx-live"><i></i>LIVE</span>' : '') . '</div><h3>' . $title . '</h3><p class="mx-sub">' . esc_html($sub) . '</p><ul>';
         foreach ($rows as $x) $h .= '<li>' . $x . '</li>';
         return $h . '</ul><span class="mx-go">' . esc_html($btn) . ' <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>';
@@ -100,7 +101,7 @@ function eh_mock_cards() {
         . $c(home_url('/super-tet-mock/'), 'प्राथमिक · कक्षा 1–5', 'UP Super <em>TET</em>', 'सहायक अध्यापक भर्ती परीक्षा 2026', ['<b>120</b> प्रश्न · <b>360</b> अंक · <b>2</b> घंटे', '10 सेक्शन, नए पैटर्न पर', 'पिछले मॉक के परिणाम व उत्तर-कुंजी'], $sl, $sl ? 'मॉक दें' : 'मॉक देखें', 'mx-c1')
         . $c(add_query_arg('x', 'tgt', home_url('/mock-test/')), 'स्नातक श्रेणी · ' . count($T['tgt']) . ' विषय', 'UP <em>TGT</em>', 'सहायक अध्यापक · विज्ञापन 07/2026', ['<b>30</b> सामान्य अध्ययन + <b>90</b> विषय', 'हर विषय का अलग मॉक', '<b>' . $ready['tgt'] . '</b> विषय लाइव · बाकी जल्द'], $ready['tgt'] > 0, 'विषय चुनें', 'mx-c2')
         . $c(add_query_arg('x', 'pgt', home_url('/mock-test/')), 'प्रवक्ता · ' . count($T['pgt']) . ' विषय', 'UP <em>PGT</em>', 'प्रवक्ता (स्नातकोत्तर) · विज्ञापन 06/2026', ['<b>30</b> सामान्य अध्ययन + <b>90</b> विषय', 'हर विषय का अलग मॉक', '<b>' . $ready['pgt'] . '</b> विषय लाइव · बाकी जल्द'], $ready['pgt'] > 0, 'विषय चुनें', 'mx-c3')
-        . '</div>';
+        . '</div>' . eh_tp_picker();
 }
 
 /* home hero: the old Super TET style navy boxes, one each for Super TET, UP TGT, UP PGT */
@@ -164,4 +165,39 @@ function eh_tp_test_card($r, $my, $title, $sub, $tag = '') {
     else $h .= '<a class="mt-btn" href="' . esc_url($u) . '">मॉक शुरू करें →</a>';
     if ($m && $m['n']) { $pc = max(0, min(100, round($m['last'] * 100 / $max))); $h .= '<div class="mt-done"><div class="mt-bar"><i style="width:' . $pc . '%"></i></div><span>✓ दिया · <b>' . $m['last'] . '</b> / ' . $max . ($m['n'] > 1 ? ' · ' . $m['n'] . ' प्रयास · सर्वश्रेष्ठ ' . $m['best'] : '') . '</span></div>'; }
     return $h . '</div>';
+}
+
+/* Subject picker popup: opens when a student clicks UP TGT / UP PGT for the first time (or on "बदलें").
+   The choice is saved to the account (server) and in the browser, and the student lands on that subject's test zone. */
+function eh_tp_picker() {
+    static $done = false; if ($done) return ''; $done = true;
+    $uid = get_current_user_id(); $hub = home_url('/mock-test/'); $data = [];
+    foreach (eh_tp_subjects() as $s => $list) {
+        $i = 0; $data[$s] = ['t' => eh_tp_info($s)['title'], 'p' => eh_tp_pref($uid, $s), 'l' => []];
+        foreach ($list as $slug => $nm) { $i++; $r = ['paper' => 'tp/' . $s . '-' . $slug, 'gs' => 'tp/gs']; $data[$s]['l'][] = [$slug, $nm[0], $nm[1], eh_tp_ready($r) ? 1 : 0]; }
+    }
+    $cfg = ['hub' => $hub, 'in' => (bool) $uid, 'rest' => esc_url_raw(rest_url('eh/v1/tp/pref')), 'nonce' => $uid ? wp_create_nonce('wp_rest') : '', 'd' => $data];
+    ob_start(); ?>
+<div class="tpk" id="tpk" hidden><div class="tpk-bg" data-x></div><div class="tpk-box" role="dialog" aria-modal="true" aria-labelledby="tpk-t">
+ <div class="tpk-hd"><div><span class="tpk-k" id="tpk-k">UP TGT 2026</span><h3 id="tpk-t">आप किस विषय की तैयारी कर रहे हैं?</h3><p>एक बार चुनें — आपका विषय आपके अकाउंट में सेव रहेगा और अगली बार सीधे आपके विषय के टेस्ट खुलेंगे। कभी भी बदल सकते हैं।</p></div><button class="tpk-x" data-x aria-label="बंद करें">×</button></div>
+ <label class="tpk-s"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="tpk-q" placeholder="विषय खोजें — जैसे गणित, English"></label>
+ <div class="tpk-g" id="tpk-g"></div>
+ <div class="tpk-ft" id="tpk-ft"></div>
+</div></div>
+<script>(function(){var C=<?php echo wp_json_encode($cfg); ?>,M=document.getElementById('tpk'),G=document.getElementById('tpk-g'),Q=document.getElementById('tpk-q'),S='';
+function zone(s,sub){return C.hub+'?x='+s+'&s='+sub}
+function local(s){try{return localStorage.getItem('eh_tp_'+s)||''}catch(e){return ''}}
+function draw(){var d=C.d[S],v=(Q.value||'').trim().toLowerCase(),cur=d.p||local(S);document.getElementById('tpk-k').textContent=d.t;
+ G.innerHTML=d.l.filter(function(x){return !v||(x[1]+' '+x[2]).toLowerCase().indexOf(v)>-1}).map(function(x,i){return '<button type="button" class="tpk-o'+(x[0]===cur?' on':'')+(x[3]?'':' soon')+'" data-s="'+x[0]+'"><b>'+x[1]+'</b><small>'+x[2]+'</small><em>'+(x[0]===cur?'✓ आपका विषय':(x[3]?'● LIVE':'जल्द'))+'</em></button>'}).join('')||'<p class="tpk-e">कोई विषय नहीं मिला।</p>';
+ document.getElementById('tpk-ft').innerHTML=C.in?'':'💡 <a href="'+'<?php echo esc_js(eh_login_page_url($hub)); ?>'+'">लॉग-इन</a> करने पर आपका विषय अकाउंट में सेव रहेगा।'}
+function open(s){S=s;Q.value='';draw();M.hidden=false;document.documentElement.style.overflow='hidden';setTimeout(function(){try{Q.focus({preventScroll:true})}catch(e){}},50)}
+function close(){M.hidden=true;document.documentElement.style.overflow=''}
+function pick(sub){try{localStorage.setItem('eh_tp_'+S,sub)}catch(e){}var go=function(){location.href=zone(S,sub)};
+ if(C.in){fetch(C.rest,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-WP-Nonce':C.nonce},body:JSON.stringify({series:S,sub:sub})}).then(go,go)}else go()}
+G.addEventListener('click',function(e){var b=e.target.closest('[data-s]');if(b)pick(b.dataset.s)});Q.addEventListener('input',draw);
+[].forEach.call(M.querySelectorAll('[data-x]'),function(x){x.onclick=close});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!M.hidden)close()});
+document.addEventListener('click',function(e){var a=e.target.closest('[data-tp]');if(!a)return;var s=a.dataset.tp,p=C.d[s].p||local(s);
+ if(p&&!a.hasAttribute('data-tp-change')){a.href=zone(s,p);return}e.preventDefault();open(s)},true);
+window.ehTpOpen=open;var m=location.search.match(/[?&]pick=(tgt|pgt)/);if(m)open(m[1])})();</script>
+<?php return ob_get_clean();
 }

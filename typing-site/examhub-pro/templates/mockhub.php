@@ -51,7 +51,7 @@ $hub = home_url('/mock-test/');
   <div class="mz-crumb"><a href="<?php echo esc_url($hub); ?>">← Live Mock</a></div>
   <div class="mz-head"><div><span class="mx-kick"><i></i><?php echo esc_html($info['title'] . ' · ' . $info['adv']); ?></span><h1><?php echo esc_html($info['short']); ?> <em><?php echo esc_html($nm[0]); ?></em></h1>
    <p><?php echo esc_html($info['post']); ?> · <?php echo esc_html($nm[1]); ?></p></div>
-   <a class="mz-chip" href="<?php echo esc_url(add_query_arg(['x' => $x, 'all' => 1], $hub)); ?>"><span>आपका विषय</span><b>📘 <?php echo esc_html($nm[0]); ?></b><em>बदलें ✎</em></a></div>
+   <a class="mz-chip" data-tp="<?php echo esc_attr($x); ?>" data-tp-change href="<?php echo esc_url(add_query_arg(['x' => $x, 'all' => 1], $hub)); ?>"><span>आपका विषय</span><b>📘 <?php echo esc_html($nm[0]); ?></b><em>बदलें ✎</em></a></div>
   <nav class="mz-tabs" id="mz-tabs"><button class="on" data-t="full">फुल मॉक</button><button data-t="sec">सेक्शनल मॉक</button><button data-t="topic">टॉपिक-वाइज</button><button data-t="pyq">पिछले वर्ष के पेपर</button></nav>
  </div></section>
  <section class="mx-body"><div class="mx-wrap">
@@ -64,4 +64,5 @@ $hub = home_url('/mock-test/');
  var B=[].slice.call(document.querySelectorAll('#mz-tabs button')),P=[].slice.call(document.querySelectorAll('.mz-p'));B.forEach(function(b){b.onclick=function(){B.forEach(function(x){x.classList.toggle('on',x===b)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.t)})}})})();</script>
 <?php endif; ?>
 </main>
+<?php echo eh_tp_picker(); if ($x && !$sub): ?><script>if(window.ehTpOpen)ehTpOpen(<?php echo wp_json_encode($x); ?>)</script><?php endif; ?>
 <?php get_footer();
