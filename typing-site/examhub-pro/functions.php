@@ -40,6 +40,10 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('eh-style', get_stylesheet_uri(), [], EH_VER);
     wp_enqueue_script('eh-site', EH_URI . '/assets/eh-site.js', [], EH_VER, true);
     wp_enqueue_style('eh-brand-fonts', 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Serif:ital@1&display=swap', [], null);
+    if (is_front_page() || get_query_var('eh_view') === 'mockhub') {
+        wp_enqueue_style('eh-mock', EH_URI . '/assets/eh-mock.css', ['eh-style'], EH_VER);
+        if (!is_front_page()) wp_enqueue_style('eh-mock-fonts', 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Mukta:wght@400;500;600;700;800&display=swap', [], null);
+    }
     if (is_front_page()) {
         wp_enqueue_style('eh-home-fonts', 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Mukta:wght@400;500;600;700;800&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap', [], null);
         wp_enqueue_style('eh-home', EH_URI . '/assets/eh-home.css', ['eh-style'], EH_VER);
@@ -265,7 +269,7 @@ function eh_tg_buttons($class = '') {
 /* default menu if none set */
 function eh_member_links() {
     return [
-        'mock' => ['/mock-test/', '📝 Mock Test'], 'live' => ['/live-typing/', '⚡ Live Typing'], 'exams' => ['/exams/', 'All Exams Typing'], 'history' => ['/my-dashboard/', 'Typing History'],
+        'mock' => ['/mock-test/', 'Live Mock'], 'live' => ['/live-typing/', '⚡ Live Typing'], 'exams' => ['/exams/', 'All Exams Typing'], 'history' => ['/my-dashboard/', 'Typing History'],
         'hall' => ['/exam-hall-typing/', 'Exam Hall Typing'], 'download' => ['/download-passages/', 'Download Passages'], 'insight' => ['/typing-insight/', '📈 Typing Insight'],
     ];
 }
@@ -280,15 +284,15 @@ function eh_member_nav($active = '') {
 add_filter('wp_nav_menu_items', function ($items, $args) {
     if (($args->theme_location ?? '') !== 'primary') return $items;
     if (strpos($items, 'super-tet-mock') !== false || strpos($items, 'mock-test') !== false)
-        return str_replace([esc_url(home_url('/super-tet-mock/')), '📝 Super TET Mock', 'Super TET Mock'], [esc_url(home_url('/mock-test/')), '📝 Mock Test', 'Mock Test'], $items);
-    $li = '<li class="menu-item eh-mock-li"><a href="' . esc_url(home_url('/mock-test/')) . '">' . (is_user_logged_in() ? '📝 Mock Test' : 'Mock Test') . '</a></li>';
+        return str_replace([esc_url(home_url('/super-tet-mock/')), '📝 Super TET Mock', 'Super TET Mock'], [esc_url(home_url('/mock-test/')), eh_live_label(), eh_live_label()], $items);
+    $li = '<li class="menu-item eh-mock-li"><a href="' . esc_url(home_url('/mock-test/')) . '">' . eh_live_label() . '</a></li>';
     $p = strpos($items, '</li>');
     return $p === false ? $li . $items : substr($items, 0, $p + 5) . $li . substr($items, $p + 5);
 }, 10, 2);
 function eh_default_menu() {
     $items = is_user_logged_in()
         ? array_merge([['/', '🏠 Home']], array_values(eh_member_links()))
-        : [['/', 'Home'], ['/mock-test/', 'Mock Test'], ['/exams/', 'Exams'], ['/demo-typing/', 'Demo Typing'], ['/live-typing/', 'Live Typing'], ['/exam-based-result/', 'Result'], ['/blog/', 'Typing Tips']];
+        : [['/', 'Home'], ['/mock-test/', 'Live Mock'], ['/exams/', 'Exams'], ['/demo-typing/', 'Demo Typing'], ['/live-typing/', 'Live Typing'], ['/exam-based-result/', 'Result'], ['/blog/', 'Typing Tips']];
     echo '<ul class="eh-menu">';
     foreach ($items as $i) echo '<li><a href="' . esc_url(home_url($i[0])) . '">' . esc_html($i[1]) . '</a></li>';
     echo '</ul>';
@@ -317,6 +321,7 @@ function eh_initials($name) {
 
 /* Top ticker: notice + latest typing-tips posts */
 function eh_ticker_items() {
+    return []; /* top ticker removed */
     $items = [];
     $n = eh_opt('notice'); if ($n) $items[] = [$n, home_url('/live-typing/'), 'Live Typing →'];
     $ps = get_posts(['numberposts' => 10, 'category_name' => 'typing-tips', 'post_status' => 'publish']);

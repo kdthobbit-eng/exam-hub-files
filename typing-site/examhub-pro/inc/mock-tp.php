@@ -70,3 +70,22 @@ function eh_tp_auth_select() {
     foreach (eh_stm_rounds() as $r) if (($r['series'] ?? '') === $cur['series']) $h .= '<option value="' . esc_attr(eh_tp_url($r)) . '"' . selected($r['id'], $cur['id'], false) . '>' . esc_html($r['sub'] . ' (' . $r['sub_en'] . ')') . '</option>';
     return $h . '</select>';
 }
+function eh_live_label() { return 'Live Mock'; }
+
+/* the three exam cards — used on /mock-test/ and on the home page */
+function eh_mock_cards() {
+    $stet = eh_stm_round(); $sl = eh_stm_status($stet) === 'live';
+    $T = eh_tp_subjects(); $ready = ['tgt' => 0, 'pgt' => 0];
+    foreach (eh_tp_rounds() as $r) if (eh_tp_ready($r)) $ready[$r['series']]++;
+    $c = function ($href, $tag, $title, $sub, $rows, $live, $btn, $mod) {
+        $h = '<a class="mx-card ' . $mod . '" href="' . esc_url($href) . '"><div class="mx-card-top"><span class="mx-tag">' . esc_html($tag) . '</span>'
+            . ($live ? '<span class="mx-live"><i></i>LIVE</span>' : '') . '</div><h3>' . $title . '</h3><p class="mx-sub">' . esc_html($sub) . '</p><ul>';
+        foreach ($rows as $x) $h .= '<li>' . $x . '</li>';
+        return $h . '</ul><span class="mx-go">' . esc_html($btn) . ' <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>';
+    };
+    return '<div class="mx-cards">'
+        . $c(home_url('/super-tet-mock/'), 'प्राथमिक · कक्षा 1–5', 'UP Super <em>TET</em>', 'सहायक अध्यापक भर्ती परीक्षा 2026', ['<b>120</b> प्रश्न · <b>360</b> अंक · <b>2</b> घंटे', '10 सेक्शन, नए पैटर्न पर', 'पिछले मॉक के परिणाम व उत्तर-कुंजी'], $sl, $sl ? 'मॉक दें' : 'मॉक देखें', 'mx-c1')
+        . $c(add_query_arg('x', 'tgt', home_url('/mock-test/')), 'स्नातक श्रेणी · ' . count($T['tgt']) . ' विषय', 'UP <em>TGT</em>', 'सहायक अध्यापक · विज्ञापन 07/2026', ['<b>30</b> सामान्य अध्ययन + <b>90</b> विषय', 'हर विषय का अलग मॉक', '<b>' . $ready['tgt'] . '</b> विषय लाइव · बाकी जल्द'], $ready['tgt'] > 0, 'विषय चुनें', 'mx-c2')
+        . $c(add_query_arg('x', 'pgt', home_url('/mock-test/')), 'प्रवक्ता · ' . count($T['pgt']) . ' विषय', 'UP <em>PGT</em>', 'प्रवक्ता (स्नातकोत्तर) · विज्ञापन 06/2026', ['<b>30</b> सामान्य अध्ययन + <b>90</b> विषय', 'हर विषय का अलग मॉक', '<b>' . $ready['pgt'] . '</b> विषय लाइव · बाकी जल्द'], $ready['pgt'] > 0, 'विषय चुनें', 'mx-c3')
+        . '</div>';
+}

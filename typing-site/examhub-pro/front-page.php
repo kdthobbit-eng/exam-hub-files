@@ -64,30 +64,9 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
     <h1 class="uh-h1"><?php echo eh_t('<span>Your home</span> <span><em>before the job.</em></span>', '<span>नौकरी लगने से</span> <span>पहले का <em>घर।</em></span>'); ?></h1>
     <p class="uh-lead"><?php echo eh_t('Notes, daily quiz, mock tests and exam-style typing practice for UPSSSC and other UP exams. All in one place.', 'UPSSSC और UP की बाकी भर्तियों के लिए नोट्स, रोज़ क्विज, मॉक टेस्ट और एग्जाम जैसी टाइपिंग प्रैक्टिस। सब एक जगह।'); ?></p>
     <div class="uh-cta">
-      <a class="uh-btn" href="<?php echo esc_url(home_url('/live-typing/')); ?>"><?php echo eh_t('Junior Assistant Live Typing', 'जूनियर असिस्टेंट लाइव टाइपिंग'); ?><?php echo $arrow; ?></a>
+      <a class="uh-btn" href="<?php echo esc_url(home_url('/mock-test/')); ?>"><?php echo eh_t('Live Mock Test', 'लाइव मॉक टेस्ट'); ?><?php echo $arrow; ?></a>
+      <a class="uh-btn uh-btn-o" href="<?php echo esc_url(home_url('/live-typing/')); ?>"><?php echo eh_t('Live Typing', 'लाइव टाइपिंग'); ?><?php echo $arrow; ?></a>
     </div>
-    <?php if (function_exists('eh_stm_round')): $stm = eh_stm_round('m2'); if ($stm && time() < $stm['end_ts']):
-      $ik = new DateTimeZone('Asia/Kolkata'); $sd = (new DateTime('@' . $stm['start_ts']))->setTimezone($ik); $ed = (new DateTime('@' . $stm['end_ts']))->setTimezone($ik);
-      $hm = ['', 'जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'];
-      $ring = function ($l) { return '<span class="uh-stm-ring"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" class="bg"/><circle cx="32" cy="32" r="28" class="fg"/></svg><b>00</b><i>' . $l . '</i></span>'; }; ?>
-    <a class="uh-stm" id="uh-stm" href="<?php echo esc_url(home_url('/super-tet-mock/')); ?>" data-start="<?php echo (int) $stm['start_ts']; ?>" data-end="<?php echo (int) $stm['end_ts']; ?>" data-now="<?php echo time(); ?>">
-      <span class="uh-stm-glow"></span>
-      <span class="uh-stm-top"><img src="<?php echo esc_url(EH_URI . '/assets/upsssc-alert-logo.svg'); ?>" alt="UPSSSC ALERT" width="62" height="62">
-        <span><span class="uh-stm-chip" id="uh-stm-chip"><i></i><span>फ्री लाइव मॉक · UPSSSC ALERT</span></span>
-        <b class="uh-stm-t">UP Super TET 2026 <em>लाइव मॉक टेस्ट</em></b></span></span>
-      <span class="uh-stm-meta"><span>📅 <?php echo esc_html($sd->format('j') . ' ' . $hm[(int) $sd->format('n')]); ?></span><span>⏰ सुबह <?php echo esc_html($sd->format('g:i')); ?> – रात <?php echo esc_html($ed->format('g:i')); ?></span><span>📝 120 प्रश्न · 360 अंक</span><span>🏆 रैंक + परसेंटाइल</span><span>🌐 हिंदी + English</span></span>
-      <span class="uh-stm-bot"><span class="uh-stm-cdw"><span class="uh-stm-lbl" id="uh-stm-lbl">शुरू होने में</span><span class="uh-stm-cd" id="uh-stm-cd"><?php echo $ring('घंटे') . $ring('मिनट') . $ring('सेकंड'); ?></span></span>
-        <span class="uh-stm-go" id="uh-stm-go">अभी रजिस्टर करें →</span></span>
-    </a>
-    <?php $m1 = eh_stm_round('m1'); if ($m1 && $m1['id'] === 'm1' && time() >= $m1['end_ts']): ?>
-    <div class="uh-mtabs"><a class="on" href="<?php echo esc_url(home_url('/super-tet-mock/')); ?>"><b>मॉक 2 · 25 नवंबर</b><small>आज · लाइव मॉक दें →</small></a><a href="<?php echo esc_url(home_url('/super-tet-mock/?r=m1')); ?>"><b>मॉक 1 · 22 नवंबर</b><small>समाप्त · परिणाम / उत्तर-कुंजी देखें →</small></a></div>
-    <?php endif; ?>
-    <script>(function(){var e=document.getElementById('uh-stm');if(!e)return;var s=+e.dataset.start,en=+e.dataset.end,off=+e.dataset.now*1000-Date.now(),cd=e.querySelectorAll('.uh-stm-ring'),l=document.getElementById('uh-stm-lbl'),g=document.getElementById('uh-stm-go'),c=document.getElementById('uh-stm-chip'),C=2*Math.PI*28;
-    function p(n){return (n<10?'0':'')+n}function set(k,v,m){cd[k].querySelector('b').textContent=p(v);cd[k].querySelector('.fg').style.strokeDashoffset=C*(1-v/m)}
-    function t(){var n=Math.floor((Date.now()+off)/1000),live=n>=s,x=Math.max(0,(live?en:s)-n);if(n>=en){e.style.display='none';return}
-    e.classList.toggle('live',live);l.textContent=live?'मॉक बंद होने में':'शुरू होने में';g.textContent=live?'अभी मॉक दें →':'अभी रजिस्टर करें →';c.lastChild.textContent=live?'LIVE · अभी चल रहा है · UPSSSC ALERT':'फ्री लाइव मॉक · UPSSSC ALERT';
-    set(0,Math.min(99,Math.floor(x/3600)),24);set(1,Math.floor(x%3600/60),60);set(2,x%60,60)}cd.forEach(function(r){r.querySelector('.fg').style.strokeDasharray=C});t();setInterval(t,1000)})();</script>
-    <?php endif; endif; ?>
     <ul class="uh-stats">
       <li><b data-count="60000" data-suffix="+">60,000+</b><span><?php echo eh_t('students with us', 'विद्यार्थी हमारे साथ'); ?></span></li>
       <li><b data-count="6000" data-suffix="+">6,000+</b><span><?php echo eh_t('students joined our batches', 'विद्यार्थी हमारे बैच से जुड़े'); ?></span></li>
@@ -97,6 +76,12 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
   </div>
 </section>
 
+<?php if (function_exists('eh_mock_cards')): ?>
+<section class="mx mx-home"><div class="mx-wrap">
+  <div class="mx-head"><div><span class="mx-kick"><i></i>Live Mock Test</span><h2>UP Super TET · <em>TGT</em> · <em>PGT</em> — लाइव मॉक</h2><p>असली परीक्षा जैसा टेस्ट, तुरंत स्कोर, रैंक और परसेंटाइल। बिल्कुल फ्री।</p></div><a class="mx-all" href="<?php echo esc_url(home_url('/mock-test/')); ?>">सभी मॉक देखें →</a></div>
+  <?php echo eh_mock_cards(); ?>
+</div></section>
+<?php endif; ?>
 <div class="uh-marq" aria-hidden="true"><div class="uh-marq-in">
   <?php $mq = ['UPSSSC JE', 'VDO / VPO', 'UP Police Computer Operator', 'UP TGT / PGT', 'Super TET', 'AHC RO / ARO', 'Lekhpal', 'Stenographer', 'Junior Assistant', 'UPSI'];
   for ($k = 0; $k < 2; $k++) foreach ($mq as $m) echo '<span>' . esc_html($m) . '</span><i>✦</i>'; ?>
@@ -189,7 +174,7 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
   <div class="wrap">
     <div class="uh-type-top">
       <div data-rv>
-        <p class="uh-kick"><?php echo eh_t('Junior Assistant Live Typing', 'जूनियर असिस्टेंट लाइव टाइपिंग'); ?></p>
+        <p class="uh-kick"><?php echo eh_t('Live Typing', 'लाइव टाइपिंग'); ?></p>
         <h2 class="uh-h2"><?php echo eh_t('The exam screen, <em>before the exam.</em>', 'एग्जाम वाली स्क्रीन, <em>एग्जाम से पहले।</em>'); ?></h2>
         <p class="uh-sub"><?php echo eh_t('English and Hindi (Krutidev, Mangal, Remington). Time, target and error rules are set for each exam. Your result comes the moment you submit.', 'English और हिंदी (Krutidev, Mangal, Remington)। हर एग्जाम का समय, टारगेट और गलती के नियम सेट हैं। सबमिट करते ही रिजल्ट।'); ?></p>
         <div class="uh-cta">
