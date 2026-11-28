@@ -36,7 +36,7 @@ add_action('rest_api_init', function () {
     $ok = function () { return (bool) eh_tgapp_user(); };
     register_rest_route('eh/v1', '/tgapp/report', ['methods' => 'GET', 'permission_callback' => $ok, 'callback' => function (WP_REST_Request $q) {
         $d = eh_stm_report_data(sanitize_key($q['round'] ?? ''));
-        $d['rounds'] = array_values(array_filter($d['rounds'], function ($x) { return $x['id'][0] === 'm' || in_array($x['series'] ?? '', ['tgt', 'pgt'], true); }));
+        $d['rounds'] = array_values(array_filter($d['rounds'], function ($x) { return $x['id'][0] === 'm' || ($x['kind'] ?? '') === 'practice' || in_array($x['series'] ?? '', ['tgt', 'pgt'], true); }));
         if (function_exists('eh_tp_ready')) { $rd = []; foreach (eh_tp_rounds_all() as $x) $rd[$x['id']] = eh_tp_ready($x); foreach ($d['rounds'] as &$x) if (isset($rd[$x['id']])) $x['ready'] = $rd[$x['id']]; unset($x); }
         $d['cur'] = eh_stm_round()['id'];
         if (function_exists('eh_stm_mail_counts')) { $d['mail'] = eh_stm_mail_counts(); $d['mail']['on'] = (int) eh_stm_mail_opt()['on']; }
@@ -168,12 +168,13 @@ function close(){OPEN=-1;var m=$('md');if(m)m.remove();if(T&&T.BackButton){T.Bac
 function draw(){var d=D,s=d.stats,now=d.now,live=now>=d.round.start&&now<d.round.end;var ser=d.round.series||'stet',SN={stet:'Super TET',tgt:'UP TGT',pgt:'UP PGT'};$('who').textContent='नमस्ते '+(d.me||'')+' · '+SN[ser]+' Mock'+(d.round.sub?' · '+d.round.sub:'');
 var first=function(sr){var l=d.rounds.filter(function(r){return (r.series||'stet')===sr});if(sr==='stet')return d.cur;var x=l.filter(function(r){return r.ready})[0]||l[0];return x?x.id:''};
 var h='<div class="sr">'+['stet','tgt','pgt'].map(function(sr){return '<button class="'+(sr===ser?'on':'')+'" data-s="'+sr+'">'+SN[sr]+'</button>'}).join('')+'</div>';
-if(ser==='stet')h+=d.rounds.filter(function(r){return (r.series||'stet')==='stet'}).map(function(r,i){var lv=now>=r.start&&now<r.end,past=now>=r.end;return '<button class="'+(r.id===d.round.id?'on':'')+'" data-r="'+r.id+'"><b>मॉक '+(i+1)+'</b> · '+dt(r.start)+'<small>'+(lv?'🟢 लाइव':past?'समाप्त':'आगामी')+'</small></button>'}).join('');
+if(ser==='stet')h+=d.rounds.filter(function(r){return (r.series||'stet')==='stet'&&r.kind!=='practice'}).map(function(r,i){var lv=now>=r.start&&now<r.end,past=now>=r.end;return '<button class="'+(r.id===d.round.id?'on':'')+'" data-r="'+r.id+'"><b>मॉक '+(i+1)+'</b> · '+dt(r.start)+'<small>'+(lv?'🟢 लाइव':past?'समाप्त':'आगामी')+'</small></button>'}).join('');
+if(ser==='stet'){var fl=d.rounds.filter(function(r){return (r.series||'stet')==='stet'&&r.kind==='practice'});if(fl.length)h+='<select id="rsel"><option value="">📘 Full Length Mock चुनें ('+fl.length+')</option>'+fl.map(function(r){return '<option value="'+r.id+'"'+(r.id===d.round.id?' selected':'')+'>'+esc(String(r.name).replace(/^SUPER TET - /,''))+'</option>'}).join('')+'</select>'}
 else h+='<select id="rsel">'+d.rounds.filter(function(r){return r.series===ser}).map(function(r){return '<option value="'+r.id+'"'+(r.id===d.round.id?' selected':'')+'>'+esc(r.sub)+(r.kind==='sec'?' (सेक्शनल)':'')+(r.ready?' — लाइव':' — Coming Soon')+'</option>'}).join('')+'</select>';
 $('rs').innerHTML=h;
 [].forEach.call($('rs').querySelectorAll('[data-r]'),function(b){b.onclick=function(){RID=b.dataset.r;TAB='merit';load()}});
 [].forEach.call($('rs').querySelectorAll('[data-s]'),function(b){b.onclick=function(){var x=first(b.dataset.s);if(x){RID=x;TAB='merit';load()}}});
-if($('rsel'))$('rsel').onchange=function(){RID=this.value;TAB='merit';load()};
+if($('rsel'))$('rsel').onchange=function(){if(!this.value)return;RID=this.value;TAB='merit';load()};
 $('st').hidden=false;$('stt').textContent=live?'लाइव — रात '+new Date(d.round.end*1000).toLocaleTimeString('hi-IN',{hour:'numeric',minute:'2-digit'})+' तक खुला':(now<d.round.start?'अभी शुरू नहीं हुआ':'मॉक समाप्त — अंतिम परिणाम');$('st').querySelector('i').style.background=live?'#22c55e':'#94a3b8';
 var sum=live?'अभी <b>'+s.live+'</b> लोग पेपर दे रहे हैं, <b>'+s.merit+'</b> ने सबमिट कर दिया है। अब तक का टॉप स्कोर <b>'+s.max+'</b> और औसत <b>'+s.avg+'</b> अंक है।':(s.merit?'कुल <b>'+s.merit+'</b> उम्मीदवार मेरिट में रहे। टॉप स्कोर <b>'+s.max+'</b>, औसत <b>'+s.avg+'</b> अंक।':'अभी कोई सबमिशन नहीं है।');
 var g=d.signups,h='<div class="sum">📌 '+sum+'</div>'+(g?'<div class="su"><b>👤 वेबसाइट साइन-अप</b><div><span><b>'+g.total+'</b>कुल</span><span><b>'+g.today+'</b>आज</span><span><b>'+g.week+'</b>7 दिन</span><span><b>'+g.mock+'</b>इस मॉक से</span></div></div>':'')+'<div class="k"><div><b>'+s.users+'</b><span>पेज खोला</span><em>लॉग-इन करके मॉक पेज देखा</em></div><div class="g"><b>'+s.live+'</b><span>अभी दे रहे</span><em>पिछले 2 मिनट में सक्रिय</em></div><div><b>'+s.merit+'</b><span>मेरिट में</span><em>पहला प्रयास सबमिट</em></div>'+

@@ -181,6 +181,7 @@ function eh_tgb_menu_kb($role) {
     if ($role) $kb[] = [['text' => '📝 पैसेज जोड़ें', 'callback_data' => 'pa'], ['text' => '📋 मेरे पैसेज', 'callback_data' => 'pl']];
     if ($role === 'owner') $kb[] = [['text' => '➕ Add admin', 'callback_data' => 'add'], ['text' => '🔄 Update theme', 'callback_data' => 'upd']];
     if ($role === 'owner' && function_exists('eh_stm_bot_view')) $kb[] = [['text' => '📝 Super TET Mock (चालू / बंद)', 'callback_data' => 'mock']];
+    if ($role && function_exists('eh_stm_rounds')) $kb[] = [['text' => '📘 Super TET Full Length Mock', 'callback_data' => 'flm']];
     return ['inline_keyboard' => $kb];
 }
 function eh_tgb_back_kb($again) {
@@ -298,6 +299,13 @@ function eh_tgb_hook(WP_REST_Request $req) {
             $did = substr($data, 4); $bot = get_option('eh_bot_passages', []); if (!is_array($bot)) $bot = [];
             $bot = array_values(array_filter($bot, function ($p) use ($did, $role, $id) { return ($p['id'] ?? '') !== $did || ($role !== 'owner' && (string) ($p['by'] ?? '') !== (string) $id); })); update_option('eh_bot_passages', $bot, false); eh_tgb_purge();
             $note = 'हटा दिया'; [$text, $kb] = eh_tgb_plist_view($id, $role);
+        } elseif ($data === 'flm' && $role && function_exists('eh_stm_rounds')) {
+            global $wpdb; $tb = eh_stm_table(); $text = '📘 <b>Super TET — Full Length Mock</b>' . "\n<pre>";
+            foreach (eh_stm_rounds() as $r) { if (($r['kind'] ?? '') !== 'practice' || ($r['series'] ?? 'stet') !== 'stet') continue;
+                $c = $wpdb->get_row($wpdb->prepare("SELECT COUNT(DISTINCT uid) u, SUM(submitted > 0) s, SUM(started > 0 AND submitted = 0 AND last > %d) w, MAX(IF(submitted > 0, score, NULL)) mx FROM $tb WHERE round = %s", time() - 120, $r['id']), ARRAY_A) ?: [];
+                $text .= str_pad(preg_replace('/^SUPER TET - FULL LENGTH /', '', $r['name']), 8) . "\n  छात्र " . (int) ($c['u'] ?? 0) . ' · सबमिट ' . (int) ($c['s'] ?? 0) . ' · अभी ' . (int) ($c['w'] ?? 0) . ' · टॉप ' . (isset($c['mx']) ? round((float) $c['mx'], 2) : '-') . "\n"; }
+            $text .= '</pre>पूरी मेरिट: 🛠️ Admin Panel → Super TET → 📘 Full Length Mock';
+            $kb = eh_tgb_back_kb('flm');
         } elseif ($data === 'upd' && $role === 'owner') {
             $cur = substr((string) get_option('eh_deployed_sha', '-'), 0, 7);
             $api = wp_remote_get('https://api.github.com/repos/kdthobbit-eng/exam-hub-files/commits/main', ['timeout' => 15, 'headers' => ['User-Agent' => 'exam-hub-updater', 'Accept' => 'application/vnd.github+json']]);
