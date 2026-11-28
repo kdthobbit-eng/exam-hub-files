@@ -1,0 +1,552 @@
+[
+{
+"q": "Choose the correct sentence:",
+"o": [
+"Hardly he had reached the station when the train left.",
+"Hardly he reached the station when the train had left.",
+"Hardly had he reached the station than the train left.",
+"Hardly had he reached the station when the train left."
+],
+"a": "D",
+"e": "(Hardly had … when): inversion after 'hardly'; 'than' goes with 'no sooner'."
+},
+{
+"q": "Fill in the blank: No sooner did the bell ring ___ the students rushed out.",
+"o": [
+"then",
+"as",
+"when",
+"than"
+],
+"a": "D",
+"e": "(than)"
+},
+{
+"q": "Fill in the blank: 'Not only the teacher but also the students ___ present.'",
+"o": [
+"were",
+"is",
+"has been",
+"was"
+],
+"a": "A",
+"e": "(were): the verb agrees with the nearer subject."
+},
+{
+"q": "Choose the correct form: The committee ___ divided in their opinions.",
+"o": [
+"has",
+"are",
+"was being",
+"is"
+],
+"a": "B",
+"e": "(are): a collective noun takes a plural verb when members act individually."
+},
+{
+"q": "Choose the correct passive: 'Let him do the work.'",
+"o": [
+"Let the work be done by him.",
+"Let the work be did by him.",
+"Let the work is done by him.",
+"The work is let to be done by him."
+],
+"a": "A",
+"e": "(Let the work be done by him)"
+},
+{
+"q": "Change into indirect speech: He said, \"Alas! I have lost my purse.\"",
+"o": [
+"He exclaimed sadly that he had lost his purse.",
+"He said that alas he has lost his purse.",
+"He exclaimed that I had lost my purse.",
+"He said sadly that he lost his purse alas."
+],
+"a": "A",
+"e": "(exclaimed sadly that he had lost his purse)"
+},
+{
+"q": "Choose the correct article usage:",
+"o": [
+"He is the M.A. in English.",
+"He is an M.A. in English.",
+"He is a M.A. in English.",
+"He is M.A. in English."
+],
+"a": "B",
+"e": "(an M.A.): 'M' is pronounced with a vowel sound."
+},
+{
+"q": "Fill in the blank: I would rather you ___ now.",
+"o": [
+"left",
+"have left",
+"leave",
+"will leave"
+],
+"a": "A",
+"e": "(left): 'would rather + subject' takes the past subjunctive."
+},
+{
+"q": "Fill in the blank: It is high time we ___ the problem seriously.",
+"o": [
+"have taken",
+"will take",
+"took",
+"take"
+],
+"a": "C",
+"e": "(took): 'it is high time' + past tense."
+},
+{
+"q": "Choose the correct preposition: He was accused ___ theft.",
+"o": [
+"for",
+"about",
+"with",
+"of"
+],
+"a": "D",
+"e": "(accused of)"
+},
+{
+"q": "Choose the correct preposition: She is averse ___ hard work.",
+"o": [
+"against",
+"from",
+"to",
+"of"
+],
+"a": "C",
+"e": "(averse to)"
+},
+{
+"q": "Choose the correct preposition: The patient is now ___ danger.",
+"o": [
+"out from",
+"out of",
+"off",
+"outside of"
+],
+"a": "B",
+"e": "(out of danger)"
+},
+{
+"q": "Identify the type of sentence: 'Had I known it, I would have helped you.'",
+"o": [
+"Imperative",
+"Conditional (third)",
+"Simple present",
+"Exclamatory"
+],
+"a": "B",
+"e": "(Third conditional, inverted)"
+},
+{
+"q": "Choose the word that is correctly spelt:",
+"o": [
+"Embarassment",
+"Embarasment",
+"Embarrassment",
+"Embarrasment"
+],
+"a": "C",
+"e": "(Embarrassment)"
+},
+{
+"q": "Choose the correct plural:",
+"o": [
+"Phenomenas",
+"Phenomena",
+"Phenomenum",
+"Phenomenons"
+],
+"a": "B",
+"e": "(Phenomena)"
+},
+{
+"q": "Choose the correct plural of 'son-in-law':",
+"o": [
+"sons-in-laws",
+"sons-in-law",
+"son-ins-law",
+"son-in-laws"
+],
+"a": "B",
+"e": "(sons-in-law)"
+},
+{
+"q": "The synonym of 'OBSTINATE' is—",
+"o": [
+"Obedient",
+"Stubborn",
+"Timid",
+"Flexible"
+],
+"a": "B",
+"e": "(Stubborn)"
+},
+{
+"q": "The synonym of 'EPHEMERAL' is—",
+"o": [
+"Eternal",
+"Heavenly",
+"Strong",
+"Short-lived"
+],
+"a": "D",
+"e": "(Short-lived)"
+},
+{
+"q": "The antonym of 'PROLIFIC' is—",
+"o": [
+"Abundant",
+"Fruitful",
+"Fertile",
+"Unproductive"
+],
+"a": "D",
+"e": "(Unproductive)"
+},
+{
+"q": "The antonym of 'MAGNANIMOUS' is—",
+"o": [
+"Mean-spirited",
+"Noble",
+"Generous",
+"Kind"
+],
+"a": "A",
+"e": "(Mean-spirited)"
+},
+{
+"q": "One-word substitute: 'One who hates mankind'",
+"o": [
+"Misogynist",
+"Philanthropist",
+"Misogamist",
+"Misanthrope"
+],
+"a": "D",
+"e": "(Misanthrope): misogynist — hates women; misogamist — hates marriage."
+},
+{
+"q": "One-word substitute: 'A government by the few'",
+"o": [
+"Oligarchy",
+"Theocracy",
+"Plutocracy",
+"Autocracy"
+],
+"a": "A",
+"e": "(Oligarchy): plutocracy — by the rich."
+},
+{
+"q": "One-word substitute: 'Words written on a tomb'",
+"o": [
+"Epilogue",
+"Epithet",
+"Epitaph",
+"Epigram"
+],
+"a": "C",
+"e": "(Epitaph)"
+},
+{
+"q": "Meaning of the idiom 'to burn the midnight oil':",
+"o": [
+"to be very angry",
+"to waste money",
+"to work or study late into the night",
+"to start a fire"
+],
+"a": "C",
+"e": "(study late)"
+},
+{
+"q": "Meaning of the idiom 'a white elephant':",
+"o": [
+"a rare animal",
+"a peaceful person",
+"a great achievement",
+"a costly possession that is of little use"
+],
+"a": "D",
+"e": "(costly but useless)"
+},
+{
+"q": "Meaning of the idiom 'to call a spade a spade':",
+"o": [
+"to tell a lie",
+"to dig a hole",
+"to speak plainly",
+"to insult someone"
+],
+"a": "C",
+"e": "(speak plainly)"
+},
+{
+"q": "Identify the part of speech of 'well' in: 'She sings well.'",
+"o": [
+"Adverb",
+"Noun",
+"Adjective",
+"Verb"
+],
+"a": "A",
+"e": "(Adverb)"
+},
+{
+"q": "Identify the part of speech of 'well' in: 'I am not well today.'",
+"o": [
+"Adverb",
+"Noun",
+"Adjective",
+"Interjection"
+],
+"a": "C",
+"e": "(Adjective)"
+},
+{
+"q": "Identify the clause: 'The book THAT YOU GAVE ME is interesting.'",
+"o": [
+"Adverb clause",
+"Principal clause",
+"Adjective clause",
+"Noun clause"
+],
+"a": "C",
+"e": "(Adjective clause)"
+},
+{
+"q": "Identify the clause: 'He came WHEN I WAS SLEEPING.'",
+"o": [
+"Adverb clause of time",
+"Adjective clause",
+"Noun clause",
+"Principal clause"
+],
+"a": "A",
+"e": "(Adverb clause of time)"
+},
+{
+"q": "'Gerund' is a verb form ending in -ing that functions as a—",
+"o": [
+"adjective",
+"adverb",
+"conjunction",
+"noun"
+],
+"a": "D",
+"e": "(noun): e.g., Swimming is good exercise."
+},
+{
+"q": "In 'I saw him RUNNING', the word in capitals is a—",
+"o": [
+"participle",
+"finite verb",
+"infinitive",
+"gerund"
+],
+"a": "A",
+"e": "(participle)"
+},
+{
+"q": "Choose the correct question tag: 'Let's go for a walk, ___?'",
+"o": [
+"don't we",
+"won't we",
+"will you",
+"shall we"
+],
+"a": "D",
+"e": "(shall we)"
+},
+{
+"q": "Choose the correct question tag: 'Nobody came, ___?'",
+"o": [
+"did he",
+"didn't they",
+"did they",
+"didn't he"
+],
+"a": "C",
+"e": "(did they)"
+},
+{
+"q": "Choose the correct degree: 'He is ___ than his brother.'",
+"o": [
+"elder",
+"older",
+"eldest",
+"oldest"
+],
+"a": "B",
+"e": "(older): 'elder' is not followed by 'than'."
+},
+{
+"q": "Choose the correct form: 'This is the ___ of the two plans.'",
+"o": [
+"better",
+"best",
+"good",
+"more better"
+],
+"a": "A",
+"e": "(better): comparative for two."
+},
+{
+"q": "Choose the correctly punctuated sentence:",
+"o": [
+"Where are you going? she asked.",
+"\"Where are you going?\" she asked.",
+"\"Where are you going\" she asked?",
+"\"Where are you going,\" she asked?"
+],
+"a": "B",
+"e": "(first)"
+},
+{
+"q": "The word 'bibliography' is formed by—",
+"o": [
+"French word for library",
+"Greek roots meaning 'book' and 'writing'",
+"Latin roots meaning 'life' and 'study'",
+"Sanskrit roots"
+],
+"a": "B",
+"e": "(Greek biblion + graphia)"
+},
+{
+"q": "Which word is an example of a 'portmanteau' word?",
+"o": [
+"Table",
+"Water",
+"Smog",
+"Running"
+],
+"a": "C",
+"e": "(Smog = smoke + fog)"
+},
+{
+"q": "Choose the correct sentence:",
+"o": [
+"One should keep your promise.",
+"One should keep their promise.",
+"One should keep one's promise.",
+"One should keep his promise."
+],
+"a": "C",
+"e": "(one's): formal agreement with 'one'."
+},
+{
+"q": "Fill in the blank with the correct modal: You ___ not have bought it; I already had one.",
+"o": [
+"need",
+"can",
+"must",
+"should be"
+],
+"a": "A",
+"e": "(need not have): unnecessary past action."
+},
+{
+"q": "Fill in the blank: He has been ill ___ last Monday.",
+"o": [
+"for",
+"since",
+"by",
+"from"
+],
+"a": "B",
+"e": "(since)"
+},
+{
+"q": "Choose the correct form: 'The news ___ good.'",
+"o": [
+"were",
+"are",
+"have been",
+"is"
+],
+"a": "D",
+"e": "(is)"
+},
+{
+"q": "Choose the correct verb: 'Bread and butter ___ my favourite breakfast.'",
+"o": [
+"is",
+"have",
+"were",
+"are"
+],
+"a": "A",
+"e": "(is): treated as a single idea."
+},
+{
+"q": "Fill in the blank: He is one of the best players who ___ ever played for India.",
+"o": [
+"was",
+"have",
+"has",
+"had been"
+],
+"a": "B",
+"e": "(have): the relative pronoun refers to 'players' (plural)."
+},
+{
+"q": "Choose the correct antonym of 'ABUNDANT':",
+"o": [
+"Plentiful",
+"Scarce",
+"Copious",
+"Ample"
+],
+"a": "B",
+"e": "(Scarce)"
+},
+{
+"q": "Choose the word closest in meaning to 'CANDOUR':",
+"o": [
+"Pride",
+"Fear",
+"Cunning",
+"Frankness"
+],
+"a": "D",
+"e": "(Frankness)"
+},
+{
+"q": "Choose the correct form of the verb: 'If it rains, we ___ the match.'",
+"o": [
+"would have cancelled",
+"would cancel",
+"will cancel",
+"cancelled"
+],
+"a": "C",
+"e": "(will cancel): first conditional."
+},
+{
+"q": "Which of these is a compound sentence?",
+"o": [
+"Because it was raining, I stayed home.",
+"The boy who won is my cousin.",
+"Running fast, he caught the bus.",
+"I wanted to go, but it was raining."
+],
+"a": "D",
+"e": "(coordinating conjunction 'but')"
+},
+{
+"q": "The phonetic symbol /θ/ represents the sound in—",
+"o": [
+"think",
+"chair",
+"sheep",
+"this"
+],
+"a": "A",
+"e": "(think): /ð/ is in 'this'."
+}
+]

@@ -221,6 +221,216 @@
 "साहित्यिक ज्ञान",
 "Literary Knowledge"
 ]
+],
+"social-science": [
+[
+"भौतिक भूगोल",
+"Physical Geography"
+],
+[
+"स्थलमंडल",
+"Lithosphere"
+],
+[
+"वायुमंडल",
+"Atmosphere"
+],
+[
+"जलमंडल",
+"Hydrosphere"
+],
+[
+"जैवमंडल",
+"Biosphere"
+],
+[
+"मानव भूगोल",
+"Human Geography"
+],
+[
+"आर्थिक भूगोल",
+"Economic Geography"
+],
+[
+"भारत का भूगोल",
+"Geography of India"
+],
+[
+"प्रागैतिहासिक संस्कृतियाँ",
+"Pre-Historic Cultures"
+],
+[
+"प्राचीन काल",
+"Ancient Era"
+],
+[
+"धार्मिक आंदोलन",
+"Religious Movements"
+],
+[
+"मौर्य साम्राज्य",
+"Mauryan Empire"
+],
+[
+"मौर्योत्तर काल",
+"Post-Mauryan Period"
+],
+[
+"गुप्त साम्राज्य",
+"Gupta Empire"
+],
+[
+"गुप्तोत्तर काल",
+"Post-Gupta Period"
+],
+[
+"भारत पर मुस्लिम आक्रमण, भारतीय प्रतिरोध एवं प्रभाव",
+"The Muslim invasion in India, Indian resistance, and the impact of Muslim invasion"
+],
+[
+"दिल्ली सल्तनत",
+"Delhi Sultanate"
+],
+[
+"अलाउद्दीन ख़िलजी",
+"Allauddin Khilji"
+],
+[
+"तुगलक वंश",
+"Tughlaq Dynasty"
+],
+[
+"मुगल वंश",
+"Mughal Dynasty"
+],
+[
+"राणा प्रताप एवं छत्रपति शिवाजी का जीवन व उपलब्धियाँ",
+"The life and achievements of Rana Pratap and Chatrapati Shivaji"
+],
+[
+"आधुनिक भारत (1858–1958 ई.)",
+"Modern India (1858–1958 AD)"
+],
+[
+"आर्थिक सिद्धांत",
+"Economic Theory"
+],
+[
+"कीमत निर्धारण के सिद्धांत",
+"Theories of Price Determination"
+],
+[
+"वितरण सिद्धांत",
+"Distribution Theory"
+],
+[
+"मुद्रा एवं अंतरराष्ट्रीय व्यापार",
+"Money and International Trade"
+],
+[
+"राजस्व (लोक वित्त)",
+"Public Finance"
+],
+[
+"रोज़गार का प्रतिष्ठित एवं कीन्सवादी सिद्धांत",
+"Classical and Keynesian Theory of Employment"
+],
+[
+"आर्थिक प्रणालियाँ",
+"Economic Systems"
+],
+[
+"भारतीय अर्थव्यवस्था एवं आर्थिक विकास",
+"Indian Economy and Economic Development"
+],
+[
+"औद्योगीकरण की समस्याएँ",
+"Problems of Industrialisation"
+],
+[
+"विदेशी व्यापार एवं आर्थिक विकास",
+"Foreign Trade and Economic Development"
+],
+[
+"नागरिकशास्त्र",
+"Civics"
+],
+[
+"राज्य",
+"State"
+],
+[
+"राजनीतिक अवधारणाएँ",
+"Political Concepts"
+],
+[
+"लोकतंत्र एवं तानाशाही",
+"Democracy and Dictatorship"
+],
+[
+"राजनीतिक विचारधाराएँ",
+"Political Ideologies"
+],
+[
+"राजनीतिक विचारक",
+"Political Philosophers"
+],
+[
+"सरकार",
+"Government"
+],
+[
+"सरकार के अंग",
+"Organs of Government"
+],
+[
+"निर्वाचन आयोग",
+"Election Commission"
+],
+[
+"भारतीय राष्ट्रीय आंदोलन में योगदान",
+"Contribution to the Indian National Movement"
+],
+[
+"भारतीय संविधान की प्रमुख विशेषताएँ",
+"Salient Features of Indian Constitution"
+],
+[
+"संघ सरकार",
+"Union Government"
+],
+[
+"भारतीय संसद",
+"Indian Parliament"
+],
+[
+"भारतीय न्यायपालिका",
+"Indian Judiciary"
+],
+[
+"राज्य सरकार",
+"State Government"
+],
+[
+"ज़िला प्रशासन",
+"District Administration"
+],
+[
+"लोकतांत्रिक विकेंद्रीकरण एवं पंचायती राज",
+"Democratic Decentralization and Panchayati Raj"
+],
+[
+"भारतीय लोकतंत्र की चुनौतियाँ",
+"Challenges of Indian Democracy"
+],
+[
+"राजनीतिक दल एवं दबाव समूह",
+"Political Party and Pressure Group"
+],
+[
+"भारतीय प्रशासन",
+"Indian Administration"
+]
 ]
 },
 "pgt": {
@@ -516,6 +726,66 @@
 [
 "अंतरराष्ट्रीय व्यापार — तुलनात्मक लागत, स्वतंत्र व्यापार एवं संरक्षण",
 "International Trade"
+]
+],
+"english": [
+[
+"English Language",
+"English Language"
+],
+[
+"English Literature",
+"English Literature"
+],
+[
+"Literary Periods",
+"Literary Periods"
+],
+[
+"Figures of Speech",
+"Figures of Speech"
+],
+[
+"Rhetoric and Prosody",
+"Rhetoric and Prosody"
+],
+[
+"Major Stanza Forms",
+"Major Stanza Forms"
+],
+[
+"Novel and Drama",
+"Novel and Drama"
+],
+[
+"Major Literary Critics",
+"Major Literary Critics"
+],
+[
+"Authors and Their Contributions",
+"Authors and Their Contributions"
+]
+],
+"geography": [
+[
+"भौतिक भूगोल",
+"Physical Geography"
+],
+[
+"मानव एवं आर्थिक भूगोल",
+"Human and Economic Geography"
+],
+[
+"भारत का भूगोल",
+"Indian Geography"
+],
+[
+"भौगोलिक चिंतन",
+"Geographical Thought"
+],
+[
+"मानचित्र कला एवं सुदूर संवेदन",
+"Cartography and Remote Sensing"
 ]
 ]
 }
