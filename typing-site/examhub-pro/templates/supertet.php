@@ -56,7 +56,7 @@ button{font-family:inherit;cursor:pointer}
 .brand img{width:44px;height:44px;border-radius:50%;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.12)}
 .brand b{display:block;font-family:Poppins,sans-serif;font-size:16px;color:var(--nv);letter-spacing:.3px;line-height:1.15}
 .brand span{display:block;font-size:12px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hdr{display:flex;align-items:center;gap:14px}
+.hdr{display:flex;align-items:center;gap:14px}.brand{flex:1 1 auto}.brand>div{min-width:0;flex:1 1 auto}.hdr{flex:none}.xl b{white-space:nowrap}@media(max-width:520px){.xl{padding:0!important;border:0!important;background:none!important}.xl b,.xl span{display:none!important}}.brand>div>span{white-space:normal;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;line-height:1.35;margin-top:1px}
 .xl{display:flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border:1px solid var(--ln);border-radius:30px;background:#fbfcfe}
 .xl i{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--nv),var(--pr));color:#fff;font-style:normal;font-weight:700;font-family:Poppins,sans-serif;font-size:13px;display:flex;align-items:center;justify-content:center}
 .xl b{display:block;font-family:Poppins,sans-serif;font-size:13.5px;color:var(--nv);line-height:1.1}
