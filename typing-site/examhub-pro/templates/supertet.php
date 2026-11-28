@@ -12,7 +12,7 @@ $eh_nq = eh_stm_nq($eh_vr); $eh_max = $eh_nq * 3; $eh_min = (int) round(eh_stm_s
 $eh_exl = $eh_tp ? $eh_tp['title'] . ' · ' . $eh_vr['sub'] . (($eh_vr['kind'] ?? '') === 'full' ? (!empty($eh_vr['fno']) ? ' — Full Length Mock ' . $eh_vr['fno'] : '') : (($eh_vr['kind'] ?? '') === 'topic' ? ' — ' . $eh_vr['topic'] : ' (सेक्शनल' . (!empty($eh_vr['sno']) ? ' ' . $eh_vr['sno'] : (!empty($eh_vr['xno']) ? ' ' . $eh_vr['xno'] : '')) . ')')) : 'UP Super TET 2026';
 $eh_cfg = [
     'rest' => esc_url_raw(rest_url('eh/v1/stm/')), 'nonce' => $eh_in ? wp_create_nonce('wp_rest') : '',
-    'in' => $eh_in, 'admin' => $eh_admin, 'isadm' => $eh_in && current_user_can('manage_options'), 'now' => time(),
+    'in' => $eh_in, 'admin' => $eh_admin, 'isadm' => $eh_in && current_user_can('manage_options'), 'now' => time(), 'bi' => (bool) array_filter(eh_stm_paper($eh_vr ?? eh_stm_round()), function ($q) { return !empty($q['qe']); }),
     'round' => eh_stm_round_out(eh_stm_view_round()), 'paper' => eh_stm_view_round()['paper'], 'view' => $eh_vr['id'] !== eh_stm_round()['id'] ? $eh_vr['id'] : '', 'exl' => $eh_exl, 'zb' => $eh_tp ? ($eh_vr['series'] === 'gs' ? home_url('/mock-test/') : add_query_arg(['x' => $eh_vr['series'], 's' => $eh_vr['slug']], home_url('/mock-test/'))) : add_query_arg('x', 'stet', home_url('/mock-test/')), 'nq' => $eh_nq, 'max' => $eh_max, 'mins' => $eh_min, 'kind' => $eh_vr['kind'] ?? 'full', 'tp' => $eh_tp ? 1 : 0,
     'secs' => array_map(function ($x) { return [$x[0], $x[1]]; }, eh_stm_secmap($eh_vr)),
     'mocks' => $eh_tp ? [] : array_values(array_map(function ($x) { return ['id' => $x['id'], 'name' => $x['name'], 'start' => $x['start_ts'], 'end' => $x['end_ts']]; }, array_filter(eh_stm_rounds(), function ($x) { return $x['id'][0] === 'm'; }))), 'cur' => eh_stm_round()['id'],
@@ -634,6 +634,7 @@ let off=C.now*1000-Date.now(),R=C.round,A=null,Q=[],ME={name:'',roll:''},sel=nul
 function qh(t){t=String(t||'');const ls=t.split('\n');let A1=null,A2=null;const pre=[],post=[];ls.forEach(l=>{const m2=l.match(/^(सूची-II|List-II)\s*:\s*(.*)$/),m1=l.match(/^(सूची-I|List-I)\s*:\s*(.*)$/);if(m2)A2=[m2[1],m2[2].split(/\s{2,}/)];else if(m1)A1=[m1[1],m1[2].split(/\s{2,}/)];else (A1?post:pre).push(l)});
  if(!A1||!A2)return mf(t);const n=Math.max(A1[1].length,A2[1].length);let tb='<table class="mt"><tr><th>'+mf(A1[0])+'</th><th>'+mf(A2[0])+'</th></tr>';for(let i=0;i<n;i++)tb+='<tr><td>'+mf(A1[1][i]||'')+'</td><td>'+mf(A2[1][i]||'')+'</td></tr>';return mf(pre.join('\n'))+tb+'</table>'+mf(post.join('\n'))}
 const QT=q=>LANG==='en'&&q.qe?q.qe:q.q,QO=q=>LANG==='en'&&q.oe?q.oe:q.o;
+if(!C.bi){LANG='hi';document.addEventListener('DOMContentLoaded',()=>{['lsel','lsel0'].forEach(id=>{const e=document.getElementById(id);if(e){const w=e.closest('label')||e.closest('.lang');(w||e).style.display='none'}})});}
 function setLang(v){LANG=v==='en'?'en':'hi';try{localStorage.setItem('eh_stm_lang',LANG)}catch(e){}['lsel','lsel0'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=LANG})}
 const now=()=>Math.floor((Date.now()+off)/1000);
 const ist=(t,o)=>new Date(t*1000).toLocaleString('hi-IN',Object.assign({timeZone:'Asia/Kolkata'},o));
