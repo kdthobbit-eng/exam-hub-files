@@ -71,8 +71,9 @@ $hub = home_url('/mock-test/');
   $RS = eh_tp_find($R['id'] . 's'); $GS = eh_tp_find($R['id'] . 'x'); $my = eh_tp_my($uid); $nm = eh_tp_subjects()[$x][$sub];
   $lang = in_array($sub, ['hindi', 'english', 'sanskrit', 'urdu'], true) ? $nm[0] : 'हिंदी + English';
   $FL = eh_tp_flts($R); $FULL = $FL ?: [$R];
+  $SS = eh_tp_sets($R, 'sno', 's') ?: [$RS]; $GX = eh_tp_sets($R, 'xno', 'x') ?: [$GS];
   $TL = eh_tp_topics()[$x][$sub] ?? []; $GT = eh_tp_gs_topics();
-  $ids = array_merge(array_column($FULL, 'id'), [$RS['id'], $GS['id']]);
+  $ids = array_merge(array_column($FULL, 'id'), array_column($SS, 'id'), array_column($GX, 'id'));
   foreach ($TL as $i => $tn) if (eh_tp_find($R['id'] . 't' . ($i + 1))) $ids[] = $R['id'] . 't' . ($i + 1);
   foreach ($GT as $i => $tn) if (eh_tp_find($R['id'] . 'g' . ($i + 1))) $ids[] = $R['id'] . 'g' . ($i + 1);
   $done = count(array_filter($ids, function ($id) use ($my) { return !empty($my[$id]['n']); })); $tot = count($ids);
@@ -85,15 +86,17 @@ $hub = home_url('/mock-test/');
    <div class="zh-x"><span class="mx-kick"><i></i><?php echo esc_html($info['title'] . ' · ' . $info['adv']); ?></span><h1><?php echo esc_html($info['short']); ?> <em><?php echo esc_html($nm[0]); ?></em> <small>टेस्ट सीरीज़</small></h1></div>
    <div class="zh-r"><a class="zh-chip" data-tp="<?php echo esc_attr($x); ?>" data-tp-change href="<?php echo esc_url(add_query_arg(['x' => $x, 'all' => 1], $hub)); ?>">📘 <?php echo esc_html($info['short'] . ' · ' . $nm[0]); ?> <em>बदलें ✎</em></a><span class="zh-st"><b><?php echo $done; ?></b>/<?php echo $tot; ?> टेस्ट दिए</span></div>
   </div>
-  <nav class="rb" id="mz-tabs"><button class="on" data-t="full"><i>📄</i>फुल मॉक<em><?php echo count($FULL); ?></em></button><button data-t="sec"><i>🧩</i>सेक्शनल<em>2</em></button><button data-t="topic"><i>🎯</i>टॉपिक-वाइज<em><?php echo count($TL) + count($GT); ?></em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>Coming Soon</em></button></nav>
+  <nav class="rb" id="mz-tabs"><button class="on" data-t="full"><i>📄</i>फुल मॉक<em><?php echo count($FULL); ?></em></button><button data-t="sec"><i>🧩</i>सेक्शनल<em><?php echo count($SS) + count($GX); ?></em></button><button data-t="topic"><i>🎯</i>टॉपिक-वाइज<em><?php echo count($TL) + count($GT); ?></em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>Coming Soon</em></button></nav>
  </div></section>
  <section class="mx-body"><div class="mx-wrap">
   <div class="mz-p on" data-p="full"><div class="tl-h"><b>फुल मॉक टेस्ट</b><span>असली परीक्षा जैसा पूरा प्रश्न-पत्र — 30 सामान्य अध्ययन + 90 <?php echo esc_html($nm[0]); ?></span></div>
-   <div class="tl"><?php foreach ($FULL as $i => $F) echo eh_tp_test_row($F, $my, $i + 1, $F['name'], $lang); ?></div></div>
+   <div class="tl"><?php foreach ($FULL as $i => $F) echo eh_tp_test_row($F, $my, $i + 1, $F['name'], $lang === 'हिंदी + English' ? $lang : $lang . ' (GS: हिंदी + English)'); ?></div></div>
   <div class="mz-p" data-p="sec"><div class="tl-h"><b>सेक्शनल मॉक टेस्ट</b><span>एक भाग का अलग अभ्यास, कम समय में</span></div>
-   <div class="tl"><?php echo eh_tp_test_row($RS, $my, 1, $RS['name'], $lang) . eh_tp_test_row($GS, $my, 2, $GS['name'], 'हिंदी + English'); ?></div></div>
+   <div class="tsw" role="tablist"><button class="on" data-s="sub" type="button"><span>📘 <?php echo esc_html($nm[0]); ?></span><em><?php echo count($SS); ?></em></button><button data-s="gs" type="button"><span>🌐 सामान्य अध्ययन</span><em><?php echo count($GX); ?></em></button></div>
+   <div class="tsp on" data-s="sub"><div class="tl"><?php foreach ($SS as $i => $T1) echo eh_tp_test_row($T1, $my, $i + 1, $T1['name'], $lang); ?></div></div>
+   <div class="tsp" data-s="gs"><div class="tl"><?php foreach ($GX as $i => $T1) echo eh_tp_test_row($T1, $my, $i + 1, $T1['name'], 'हिंदी + English'); ?></div></div></div>
   <div class="mz-p" data-p="topic"><div class="tl-h"><b>टॉपिक-वाइज टेस्ट</b><span>आधिकारिक पाठ्यक्रम के हर टॉपिक पर 50 प्रश्नों का सेट, विस्तृत हल के साथ</span></div>
-   <div class="tsw" id="tsw" role="tablist"><button<?php echo $TL ? ' class="on"' : ''; ?> data-s="sub" type="button"><span>📘 <?php echo esc_html($nm[0]); ?></span><em><?php echo count($TL) ?: '—'; ?></em></button><button<?php echo $TL ? '' : ' class="on"'; ?> data-s="gs" type="button"><span>🌐 सामान्य अध्ययन</span><em><?php echo count($GT); ?></em></button></div>
+   <div class="tsw" role="tablist"><button<?php echo $TL ? ' class="on"' : ''; ?> data-s="sub" type="button"><span>📘 <?php echo esc_html($nm[0]); ?></span><em><?php echo count($TL) ?: '—'; ?></em></button><button<?php echo $TL ? '' : ' class="on"'; ?> data-s="gs" type="button"><span>🌐 सामान्य अध्ययन</span><em><?php echo count($GT); ?></em></button></div>
    <div class="tsp<?php echo $TL ? ' on' : ''; ?>" data-s="sub"><?php if ($TL): ?><div class="tl">
    <?php foreach ($TL as $i => $tn): $TR = eh_tp_find($R['id'] . 't' . ($i + 1));
      if ($TR) echo eh_tp_test_row($TR, $my, $i + 1, $TR['name'], $lang);
@@ -108,7 +111,7 @@ $hub = home_url('/mock-test/');
   </div>
   <div class="mz-p" data-p="pyq"><div class="mz-empty"><b>🗂️ पिछले वर्ष के प्रश्न-पत्र — Coming Soon</b><p>UPESSC / UPSESSB के असली पिछले प्रश्न-पत्र, उत्तर-कुंजी और व्याख्या के साथ।</p></div></div>
  </div></section>
- <script>(function(){var W=[].slice.call(document.querySelectorAll('#tsw button')),SP=[].slice.call(document.querySelectorAll('.tsp'));W.forEach(function(b){b.onclick=function(){W.forEach(function(x){x.classList.toggle('on',x===b)});SP.forEach(function(p){p.classList.toggle('on',p.dataset.s===b.dataset.s)})}})})();</script>
+ <script>[].forEach.call(document.querySelectorAll('.tsw'),function(w){var W=[].slice.call(w.querySelectorAll('button')),SP=[].slice.call(w.parentNode.querySelectorAll(':scope>.tsp'));W.forEach(function(b){b.onclick=function(){W.forEach(function(x){x.classList.toggle('on',x===b)});SP.forEach(function(p){p.classList.toggle('on',p.dataset.s===b.dataset.s)})}})});</script>
  <script>(function(){var B=[].slice.call(document.querySelectorAll('#mz-tabs button')),P=[].slice.call(document.querySelectorAll('.mz-p'));B.forEach(function(b){b.onclick=function(){B.forEach(function(x){x.classList.toggle('on',x===b)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.t)});try{b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})}catch(e){}}})})();</script>
 <?php endif; ?>
 </main>

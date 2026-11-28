@@ -9,7 +9,7 @@ $eh_vr = eh_stm_view_round();
 $eh_tp = function_exists('eh_tp_is') && eh_tp_is($eh_vr) ? eh_tp_info($eh_vr['series']) : null;
 $eh_self = $eh_tp ? eh_tp_url($eh_vr) : home_url('/super-tet-mock/');
 $eh_nq = eh_stm_nq($eh_vr); $eh_max = $eh_nq * 3; $eh_min = (int) round(eh_stm_secs($eh_vr) / 60);
-$eh_exl = $eh_tp ? $eh_tp['title'] . ' · ' . $eh_vr['sub'] . (($eh_vr['kind'] ?? '') === 'full' ? (!empty($eh_vr['fno']) ? ' — Full Length Mock ' . $eh_vr['fno'] : '') : (($eh_vr['kind'] ?? '') === 'topic' ? ' — ' . $eh_vr['topic'] : ' (सेक्शनल)')) : 'UP Super TET 2026';
+$eh_exl = $eh_tp ? $eh_tp['title'] . ' · ' . $eh_vr['sub'] . (($eh_vr['kind'] ?? '') === 'full' ? (!empty($eh_vr['fno']) ? ' — Full Length Mock ' . $eh_vr['fno'] : '') : (($eh_vr['kind'] ?? '') === 'topic' ? ' — ' . $eh_vr['topic'] : ' (सेक्शनल' . (!empty($eh_vr['sno']) ? ' ' . $eh_vr['sno'] : (!empty($eh_vr['xno']) ? ' ' . $eh_vr['xno'] : '')) . ')')) : 'UP Super TET 2026';
 $eh_cfg = [
     'rest' => esc_url_raw(rest_url('eh/v1/stm/')), 'nonce' => $eh_in ? wp_create_nonce('wp_rest') : '',
     'in' => $eh_in, 'admin' => $eh_admin, 'isadm' => $eh_in && current_user_can('manage_options'), 'now' => time(),
@@ -467,7 +467,7 @@ table.mt th{background:#eef3f9;font-weight:600}
   <div><span class="chip" id="h-chip"><span class="dot"></span><span id="h-chipt">लाइव मॉक टेस्ट</span></span>
 <?php if ($eh_tp): $eh_sib = array_values(array_filter(eh_stm_rounds(), function ($x) use ($eh_vr) { return ($x['series'] ?? '') === $eh_vr['series'] && ($x['kind'] ?? '') === ($eh_vr['kind'] ?? ''); })); ?>
    <p class="st" style="margin:0 0 6px"><a href="<?php echo esc_url(home_url('/mock-test/')); ?>" style="color:#fff">मॉक टेस्ट</a> › <a href="<?php echo esc_url($eh_vr['series'] === 'gs' ? home_url('/mock-test/') : add_query_arg(['x' => $eh_vr['series'], 's' => $eh_vr['slug']], home_url('/mock-test/'))); ?>" style="color:#fff"><?php echo esc_html($eh_tp['short']); ?></a></p>
-   <h1><?php echo esc_html($eh_tp['title']); ?> <em><?php echo esc_html($eh_vr['sub'] . (($eh_vr['kind'] ?? '') === 'full' ? (!empty($eh_vr['fno']) ? ' — Full Length Mock ' . $eh_vr['fno'] : '') : (($eh_vr['kind'] ?? '') === 'topic' ? ' · ' . $eh_vr['topic'] : ' · सेक्शनल'))); ?></em></h1>
+   <h1><?php echo esc_html($eh_tp['title']); ?> <em><?php echo esc_html($eh_vr['sub'] . (($eh_vr['kind'] ?? '') === 'full' ? (!empty($eh_vr['fno']) ? ' — Full Length Mock ' . $eh_vr['fno'] : '') : (($eh_vr['kind'] ?? '') === 'topic' ? ' · ' . $eh_vr['topic'] : ' · सेक्शनल' . (!empty($eh_vr['sno']) ? ' ' . $eh_vr['sno'] : (!empty($eh_vr['xno']) ? ' ' . $eh_vr['xno'] : ''))))); ?></em></h1>
    <p class="st"><?php echo esc_html($eh_tp['post'] . ' · ' . $eh_tp['adv'] . ' · विषयवार ऑनलाइन लाइव मॉक'); ?></p>
 <?php else: ?>
    <h1>UP Super TET <em>2026</em></h1>

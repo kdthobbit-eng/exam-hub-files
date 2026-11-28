@@ -67,6 +67,14 @@ function eh_tp_rounds_all() {
         $out[] = array_merge($r, ['id' => $r['id'] . 'f' . $n, 'kind' => 'full', 'paper' => $f, 'gs' => $f . '-gs', 'fno' => $n,
             'name' => strtoupper($r['series']) . ' ' . eh_tp_en($r['slug'], $r['sub_en']) . ' - FULL LENGTH MOCK ' . $n]);
     }
+    /* extra subject sectionals (data/tp/sec/{series}-{slug}-{n}.json → tg01s1…) and GS sectionals (data/tp/gsx/… → tg01x1…) */
+    foreach (eh_tp_rounds() as $r) {
+        $en = strtoupper($r['series']) . ' ' . eh_tp_en($r['slug'], $r['sub_en']);
+        for ($n = 1; $n <= 30; $n++) { $f = 'tp/sec/' . $r['series'] . '-' . $r['slug'] . '-' . $n; if (!is_file(EH_DIR . '/data/' . $f . '.json')) break;
+            $out[] = array_merge($r, ['id' => $r['id'] . 's' . $n, 'kind' => 'sec', 'sno' => $n, 'paper' => $f, 'gs' => '', 'secs' => 5400, 'nq' => 90, 'name' => $en . ' - SECTIONAL TEST ' . $n]); }
+        for ($n = 1; $n <= 30; $n++) { $f = 'tp/gsx/' . $r['series'] . '-' . $r['slug'] . '-' . $n; if (!is_file(EH_DIR . '/data/' . $f . '.json')) break;
+            $out[] = array_merge($r, ['id' => $r['id'] . 'x' . $n, 'kind' => 'gs', 'xno' => $n, 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'paper' => $f, 'gs' => '', 'secs' => 1800, 'nq' => 30, 'name' => strtoupper($r['series']) . ' GS - SECTIONAL TEST ' . $n]); }
+    }
     /* GS topic tests + GS sectional: same questions for every subject, but a separate round per subject (tg03g1…, tg03x),
        so attempts, results and "continue" stay with the subject the candidate is preparing */
     foreach (eh_tp_rounds() as $r) {
@@ -102,6 +110,8 @@ function eh_tp_gs_topics() {
     ];
 }
 /* full-length mocks of a subject round (tg03f1…); empty when it still uses the single old mock */
+/* numbered sets of a subject round by key: 'sno' (sectionals), 'xno' (GS sectionals), 'fno' (full-length) */
+function eh_tp_sets($r, $key, $p) { $o = []; foreach (eh_stm_rounds() as $x) if (!empty($x[$key]) && $x['id'] === $r['id'] . $p . $x[$key]) $o[] = $x; return $o; }
 function eh_tp_flts($r) { $o = []; foreach (eh_stm_rounds() as $x) if (($x['fno'] ?? 0) && strpos($x['id'], $r['id'] . 'f') === 0) $o[] = $x; return $o; }
 function eh_tp_topics() { static $t = null; if ($t === null) $t = json_decode((string) @file_get_contents(EH_DIR . '/data/tp/topics.json'), true) ?: []; return $t; }
 function eh_stm_secs($r) { return (int) ($r['secs'] ?? EH_STM_SECS); }
@@ -114,7 +124,7 @@ function eh_tp_ready($r) {
 /* ?r=tg01 / pg05 → that subject round */
 function eh_tp_req_round() {
     $id = sanitize_key($_GET['r'] ?? ($_REQUEST['eh_r'] ?? ''));
-    if (!preg_match('/^((tg|pg)\d\d(s|x|t\d\d?|f\d\d?|g\d\d?)?|gsx|gst\d\d?|p\d)$/', $id)) return null;
+    if (!preg_match('/^((tg|pg)\d\d(s\d{0,2}|x\d{0,2}|t\d\d?|f\d\d?|g\d\d?)?|gsx|gst\d\d?|p\d)$/', $id)) return null;
     foreach (eh_stm_rounds() as $r) if ($r['id'] === $id) return $r;
     return null;
 }
