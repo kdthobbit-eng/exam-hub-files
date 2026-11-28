@@ -4,6 +4,7 @@
 if (!defined('ABSPATH')) exit;
 nocache_headers();
 $x = sanitize_key($_GET['x'] ?? '');
+$stet = $x === 'stet';
 if (!in_array($x, ['tgt', 'pgt'], true)) $x = '';
 $sub = $x ? sanitize_key($_GET['s'] ?? '') : '';
 if ($sub && !isset(eh_tp_subjects()[$x][$sub])) $sub = '';
@@ -16,7 +17,26 @@ get_header();
 $hub = home_url('/mock-test/');
 ?>
 <main class="mx">
-<?php if (!$x): ?>
+<?php if ($stet):
+  $SR = array_values(array_filter(eh_stm_rounds(), function ($r) { return ($r['series'] ?? 'stet') === 'stet' && $r['id'][0] === 'm'; })); $my = eh_tp_my($uid);
+  $u = wp_get_current_user(); $nmU = $uid ? ($u->display_name ?: $u->user_login) : ''; $ini = $nmU ? mb_strtoupper(mb_substr(trim($nmU), 0, 1)) : '';
+  $done = count(array_filter($SR, function ($r) use ($my) { return !empty($my[$r['id']]['n']); })); ?>
+ <section class="mz-bar"><div class="mx-wrap">
+  <div class="mz-crumb"><a href="<?php echo esc_url($hub); ?>">← Live Mock</a></div>
+  <div class="zh">
+   <div class="zh-u"><?php if ($uid): ?><span class="zh-av"><?php echo esc_html($ini); ?></span><div><small>नमस्ते,</small><b><?php echo esc_html($nmU); ?></b></div><?php else: ?><span class="zh-av">👋</span><div><small>नमस्ते!</small><b><a href="<?php echo esc_url(eh_login_page_url(add_query_arg('x', 'stet', $hub))); ?>">लॉग-इन / साइन-अप करें</a></b></div><?php endif; ?></div>
+   <div class="zh-x"><span class="mx-kick"><i></i>सहायक अध्यापक भर्ती · प्राथमिक स्तर (कक्षा 1–5)</span><h1>UP Super <em>TET</em> 2026 <small>टेस्ट सीरीज़</small></h1></div>
+   <div class="zh-r"><span class="zh-chip">📘 UP Super TET</span><span class="zh-st"><b><?php echo $done; ?></b>/<?php echo count($SR); ?> टेस्ट दिए</span></div>
+  </div>
+  <nav class="rb" id="mz-tabs"><button class="on" data-t="full"><i>📄</i>लाइव मॉक<em><?php echo count($SR); ?></em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>जल्द</em></button></nav>
+ </div></section>
+ <section class="mx-body"><div class="mx-wrap">
+  <div class="mz-p on" data-p="full"><div class="tl-h"><b>Super TET लाइव मॉक टेस्ट</b><span>तय तारीख पर खुलने वाले लाइव मॉक — पूरा प्रश्न-पत्र, रैंक, परसेंटाइल और उत्तर-कुंजी</span></div>
+   <div class="tl"><?php $n = 0; foreach ($SR as $r) { $n++; echo eh_tp_test_row($r, $my, $n, 'Super TET मॉक टेस्ट ' . $n); } ?></div></div>
+  <div class="mz-p" data-p="pyq"><div class="mz-empty"><b>🗂️ पिछले वर्ष के प्रश्न-पत्र जल्द आ रहे हैं</b><p>UP Super TET के असली पिछले प्रश्न-पत्र, उत्तर-कुंजी और व्याख्या के साथ।</p></div></div>
+ </div></section>
+ <script>(function(){var B=[].slice.call(document.querySelectorAll('#mz-tabs button')),P=[].slice.call(document.querySelectorAll('.mz-p'));B.forEach(function(b){b.onclick=function(){B.forEach(function(x){x.classList.toggle('on',x===b)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.t)})}})})();</script>
+<?php elseif (!$x): ?>
  <section class="mx-hero"><div class="mx-wrap">
   <?php if ($uid): $uu = wp_get_current_user(); ?><div class="hi-u"><span class="zh-av"><?php echo esc_html(mb_strtoupper(mb_substr(trim($uu->display_name ?: $uu->user_login), 0, 1))); ?></span>नमस्ते, <b><?php echo esc_html($uu->display_name ?: $uu->user_login); ?></b> 👋</div><?php endif; ?>
   <span class="mx-kick"><i></i>Live Mock Test · UPSSSC ALERT</span>
