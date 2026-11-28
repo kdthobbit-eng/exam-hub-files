@@ -731,16 +731,16 @@ function renderRes(d){RS=d;close();
  const sk=C.nq-d.correct-d.wrong,att=d.correct+d.wrong,ac=att?Math.round(d.correct*100/att):0,per=perSec(d),tt=Math.max(1,per.reduce((a,p)=>a+p.t,0));
  const C2=2*Math.PI*72;
  let h=`<div class="rhero"><div class="in"><div class="av big">${PH}</div><div><h2>${esc(d.name)}</h2><p>रोल नं. <span class="num">${esc(d.roll)}</span> · ${esc(C.exl)} लाइव मॉक · लगा समय ${mins(d.used)}${d.tabs?' · टैब बदले '+d.tabs:''}</p>
- <div class="hstat"><span>अंक <b>${d.score}</b> / ${C.max}</span><span>परसेंटाइल <b id="hp">${d.percentile.toFixed(2)}</b></span><span>Rank <b id="hr">${d.rank}</b> / <i id="ht" style="font-style:normal">${d.total}</i></span><span>प्रयास <b>${d.att||1}</b></span></div></div></div></div>
+ <div class="hstat"><span>अंक <b>${d.score}</b> / ${C.max}</span><span>परसेंटाइल <b id="hp">${d.percentile.toFixed(2)}</b></span><span>Rank <b id="hr">${d.rank}</b>${C.isadm?` / <i id="ht" style="font-style:normal">${d.total}</i>`:''}</span><span>प्रयास <b>${d.att||1}</b></span></div></div></div></div>
  <div class="wrap"><div class="rtop"><div class="gauge"><svg viewBox="0 0 170 170"><circle class="bgc" cx="85" cy="85" r="72"/><circle class="fgc" id="gfg" cx="85" cy="85" r="72" stroke-dasharray="${C2.toFixed(1)}" stroke-dashoffset="${C2.toFixed(1)}"/></svg><div><b>${d.score}</b><span>कुल अंक / ${C.max}</span></div></div>
  <div class="kps"><div class="kp"><i class="i1">%</i><div><b id="gp">${d.percentile.toFixed(2)}</b><span>परसेंटाइल</span></div></div>
- <div class="kp"><i class="i2">#</i><div><b><span id="kr">${d.rank}</span><small style="font-size:13px;color:var(--mu)"> / <span id="kt">${d.total}</span></small></b><span>Rank</span></div></div>
+ <div class="kp"><i class="i2">#</i><div><b><span id="kr">${d.rank}</span>${C.isadm?`<small style="font-size:13px;color:var(--mu)"> / <span id="kt">${d.total}</span></small>`:''}</b><span>Rank</span></div></div>
  <div class="kp"><i style="background:#f0e9fb;color:var(--pu)">◎</i><div><b>${ac}%</b><span>सटीकता</span></div></div>
  <div class="kp"><i class="i3">✓</i><div><b>${d.correct}</b><span>सही (+${d.correct*3})</span></div></div>
  <div class="kp"><i class="i4">✗</i><div><b>${d.wrong}</b><span>गलत (−${d.wrong})</span></div></div>
  <div class="kp"><i style="background:#eef2f7;color:#5b6675">—</i><div><b>${sk}</b><span>छोड़े</span></div></div></div></div>
  <div class="note" id="rnote"></div>
- <div class="card" style="margin-top:16px"><h2>किस अंक पर कितने उम्मीदवार <span class="livebadge" id="lvb">LIVE</span></h2><div class="dist" id="dist"></div><p style="font-size:12.5px;color:var(--mu);margin:8px 0 0" id="dnote"></p></div>
+ <div class="card" style="margin-top:16px${C.isadm?'':';display:none'}"><h2>किस अंक पर कितने उम्मीदवार <span class="livebadge" id="lvb">LIVE</span></h2><div class="dist" id="dist"></div><p style="font-size:12.5px;color:var(--mu);margin:8px 0 0" id="dnote"></p></div>
  <div class="grid2" style="margin-top:16px"><div class="card cmp"><h2>तुलना</h2><div id="cmp"></div>
   <h2 style="margin-top:18px">समय का उपयोग</h2>${per.map(p=>`<div class="row" style="grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) 58px;font-size:12.5px"><span>${esc(p.n)}</span><div class="track"><i style="width:${p.t*100/tt}%;background:var(--nv2)"></i></div><span class="num" style="text-align:right">${Math.floor(p.t/60)}:${String(p.t%60).padStart(2,'0')}</span></div>`).join('')}
  </div><div class="card"><h2>टॉप 10</h2><ol class="lb" id="top"></ol></div></div>
@@ -761,8 +761,8 @@ function renderRes(d){RS=d;close();
  clearInterval(LT);LT=setInterval(()=>{if(!$('s-res').classList.contains('on'))return;api('live').then(x=>liveUpd(x,false)).catch(()=>{})},20000)}
 function liveUpd(x,first){const d=RS;Object.assign(d,x);
  const C2=2*Math.PI*72;setTimeout(()=>{const g=$('gfg');if(g)g.style.strokeDashoffset=C2*(1-Math.max(0,d.score)/C.max)},first?80:0);
- $('gp').textContent=d.percentile.toFixed(2);$('hp').textContent=d.percentile.toFixed(2);$('hr').textContent=d.rank;$('kr').textContent=d.rank;$('ht').textContent=d.total;$('kt').textContent=d.total;
- $('rnote').innerHTML=(d.practice?'🔁 <b>अभ्यास प्रयास</b> — मेरिट लिस्ट में केवल आपका पहला प्रयास गिना जाता है; यहाँ दिखी रैंक केवल अनुमान है। ':'')+(d.admin_test?'🛠️ <b>एडमिन टेस्ट</b> — यह प्रयास मेरिट लिस्ट, रैंक और परसेंटाइल में नहीं गिना जाता। ':'')+(d.final?'✅ परीक्षा समाप्त — यह अंतिम रैंक और परसेंटाइल है।':'⏳ परीक्षा अभी चल रही है ('+d.writing+' उम्मीदवार अभी पेपर दे रहे हैं)। रैंक और परसेंटाइल अभी तक सबमिट हुए <b>'+d.total+'</b> उम्मीदवारों के आधार पर है और हर 20 सेकंड में अपडेट होती है।');
+ $('gp').textContent=d.percentile.toFixed(2);$('hp').textContent=d.percentile.toFixed(2);$('hr').textContent=d.rank;$('kr').textContent=d.rank;if(C.isadm){$('ht').textContent=d.total;$('kt').textContent=d.total;}
+ $('rnote').innerHTML=(d.practice?'🔁 <b>अभ्यास प्रयास</b> — मेरिट लिस्ट में केवल आपका पहला प्रयास गिना जाता है; यहाँ दिखी रैंक केवल अनुमान है। ':'')+(d.admin_test?'🛠️ <b>एडमिन टेस्ट</b> — यह प्रयास मेरिट लिस्ट, रैंक और परसेंटाइल में नहीं गिना जाता। ':'')+(d.final?'✅ परीक्षा समाप्त — यह अंतिम रैंक और परसेंटाइल है।':(C.isadm?'⏳ परीक्षा अभी चल रही है ('+d.writing+' उम्मीदवार अभी पेपर दे रहे हैं)। रैंक और परसेंटाइल अभी तक सबमिट हुए <b>'+d.total+'</b> उम्मीदवारों के आधार पर है और हर 20 सेकंड में अपडेट होती है।':'⏳ परीक्षा अभी चल रही है। रैंक और परसेंटाइल हर 20 सेकंड में अपडेट होते हैं; परीक्षा समाप्त होने पर अंतिम रैंक दिखेगी।'));
  $('lvb').style.display=d.final?'none':'';
  const mx=Math.max(1,d.topper,d.score);$('cmp').innerHTML=[['आपका स्कोर',d.score,'var(--pr)'],['औसत स्कोर',d.avg,'#9aa8b8'],['टॉपर',d.topper,'var(--gd)']].map(x=>`<div class="row"><span>${x[0]}</span><div class="track"><i style="width:${Math.max(0,x[1])*100/mx}%;background:${x[2]}"></i></div><b class="num" style="text-align:right">${x[1]}</b></div>`).join('');
  $('top').innerHTML=(d.top||[]).map((x,i)=>`<li><i>${i+1}</i><span>${esc(x.n)}</span><b>${x.s}</b></li>`).join('')||'<li>अभी कोई नहीं</li>';
@@ -771,7 +771,7 @@ function liveUpd(x,first){const d=RS;Object.assign(d,x);
  const lo=Math.min(0,...keys),hi=Math.max(...keys),bm=Math.max(1,...Object.values(B));let bars='',lbl='';
  for(let b=lo;b<=hi;b+=step){const c=B[b]||0,me=b===mine;bars+=`<div class="bc${me?' me':''}" title="${b} से ${b+step-1} अंक: ${c}"><b>${c||''}</b><i style="height:${c?Math.max(4,c*150/bm):0}px"></i></div>`;lbl+=`<span class="${me?'me':''}">${b}</span>`}
  $('dist').innerHTML=`<div class="bars">${bars}</div><div class="lb2">${lbl}</div>`;
- $('dnote').innerHTML='हर बार 10 अंकों का समूह है (जैसे 120 = 120 से 129 अंक)। <b style="color:#a87612">सुनहरा बार</b> = आपका स्कोर। कुल '+d.total+' उम्मीदवार।';
+ $('dnote').innerHTML='हर बार 10 अंकों का समूह है (जैसे 120 = 120 से 129 अंक)। <b style="color:#a87612">सुनहरा बार</b> = आपका स्कोर। '+(C.isadm?'कुल '+d.total+' उम्मीदवार।':'');
  if(first){const me=$('dist').querySelector('.me');if(me)$('dist').scrollLeft=me.offsetLeft-$('dist').clientWidth/2}}
 let FL='all';
 function fl(f){FL=f;$('lsel2').value=LANG;const d=RS,sk=C.nq-d.correct-d.wrong;$('filt').innerHTML=[['all','सभी ('+C.nq+')'],['c','सही ('+d.correct+')'],['w','गलत ('+d.wrong+')'],['s','छोड़े ('+sk+')']].map(x=>`<button class="${x[0]===f?'on':''}" data-f="${x[0]}">${x[1]}</button>`).join('');sols(f);window.scrollTo(0,0)}
@@ -792,7 +792,7 @@ async function makePdf(d){const W=$('pdfwait'),M=$('pdfmsg');W.classList.add('on
   st.innerHTML=css;
   const head=`<div style="display:flex;align-items:center;gap:14px;border-bottom:3px solid #0f2a4d;padding-bottom:10px"><img src="${esc(C.logo.replace('.svg','.png'))}" style="width:62px;height:62px;border-radius:50%"><div style="flex:1"><h1>UPSSSC ALERT</h1><div style="font-size:13px;color:#5f6b7a">${esc(C.exl)} — लाइव मॉक टेस्ट · xlstudy.in</div></div><div style="text-align:right;font-size:13px;color:#0f2a4d;font-weight:700">XL Study<br><span style="font-weight:400;color:#5f6b7a">xlstudy.in</span></div></div>`;
   if(d.name!=null){const per=perSec(d),sk=120-d.correct-d.wrong;
-   mk(head+`<table style="margin-top:12px"><tr><th>उम्मीदवार का नाम</th><td>${esc(d.name)}</td><th>रोल नंबर</th><td>${esc(d.roll)}</td></tr><tr><th>ईमेल</th><td>${esc(d.email||'')}</td><th>परीक्षा तिथि</th><td>${d.started?ist(d.started,{day:'numeric',month:'long',year:'numeric'}):''}</td></tr><tr><th>कुल अंक</th><td><b>${d.score} / ${C.max}</b></td><th>परसेंटाइल</th><td><b>${d.percentile.toFixed(2)}</b></td></tr><tr><th>Rank</th><td>${d.rank} / ${d.total}</td><th>लगा समय</th><td>${mins(d.used)}</td></tr><tr><th>सही / गलत / छोड़े</th><td>${d.correct} / ${d.wrong} / ${sk}</td><th>टॉपर / औसत</th><td>${d.topper} / ${d.avg}</td></tr></table>
+   mk(head+`<table style="margin-top:12px"><tr><th>उम्मीदवार का नाम</th><td>${esc(d.name)}</td><th>रोल नंबर</th><td>${esc(d.roll)}</td></tr><tr><th>ईमेल</th><td>${esc(d.email||'')}</td><th>परीक्षा तिथि</th><td>${d.started?ist(d.started,{day:'numeric',month:'long',year:'numeric'}):''}</td></tr><tr><th>कुल अंक</th><td><b>${d.score} / ${C.max}</b></td><th>परसेंटाइल</th><td><b>${d.percentile.toFixed(2)}</b></td></tr><tr><th>Rank</th><td>${d.rank}${C.isadm?' / '+d.total:''}</td><th>लगा समय</th><td>${mins(d.used)}</td></tr><tr><th>सही / गलत / छोड़े</th><td>${d.correct} / ${d.wrong} / ${sk}</td><th>टॉपर / औसत</th><td>${d.topper} / ${d.avg}</td></tr></table>
    <table style="margin-top:10px"><tr><th>सेक्शन</th><th>प्रश्न</th><th>सही</th><th>गलत</th><th>अंक</th></tr>${per.map(p=>`<tr><td>${esc(p.n)}</td><td>${p.len}</td><td>${p.c}</td><td>${p.w}</td><td><b>${p.m}</b></td></tr>`).join('')}</table>`)}
   else mk(head+'<p style="font-size:14px;margin:10px 0 0">'+C.nq+' प्रश्न · '+C.max+' अंक · '+C.mins+' मिनट · सही +3 · गलत −1</p>');
   const ans=d.ans||{};

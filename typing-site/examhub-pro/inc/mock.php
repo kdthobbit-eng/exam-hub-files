@@ -202,10 +202,13 @@ function eh_stm_live($r, $score) {
     $d = $wpdb->get_results("SELECT score s, COUNT(*) c $base GROUP BY score", ARRAY_A);
     $top = $wpdb->get_results("SELECT name, score $base ORDER BY score DESC, (submitted - started) ASC LIMIT 10", ARRAY_A);
     $live = (int) $wpdb->get_var($wpdb->prepare("SELECT COUNT(DISTINCT uid) FROM $t WHERE round = %s AND started > 0 AND submitted = 0 AND last > %d", $r['id'], time() - 120));
-    return ['total' => $n, 'rank' => $above + 1, 'percentile' => $n ? round($le * 100 / $n, 2) : 100,
+    $out = ['total' => $n, 'rank' => $above + 1, 'percentile' => $n ? round($le * 100 / $n, 2) : 100,
         'topper' => (int) ($agg['mx'] ?? 0), 'avg' => round((float) ($agg['av'] ?? 0), 1), 'writing' => $live, 'final' => time() >= $r['end_ts'],
         'dist' => array_map(function ($x) { return [(int) $x['s'], (int) $x['c']]; }, $d),
         'top' => array_map(function ($x) { return ['n' => eh_stm_short($x['name']), 's' => (int) $x['score']]; }, $top)];
+    /* candidates see only rank + percentile; participant counts are for admins */
+    if (!current_user_can('manage_options')) { unset($out['total'], $out['writing']); $out['dist'] = []; }
+    return $out;
 }
 function eh_stm_short($n) { $p = preg_split('/\s+/', trim($n)); return $p[0] . (isset($p[1]) ? ' ' . mb_substr($p[1], 0, 1) . '.' : ''); }
 

@@ -95,7 +95,7 @@ function eh_dash_render($uid) {
   <?php foreach (array_reverse($M) as $x): $r = $x['r']; $url = function_exists('eh_tp_is') && eh_tp_is($r) ? eh_tp_url($r) : add_query_arg($r['id'] === eh_stm_round()['id'] ? [] : ['r' => $r['id']], home_url('/super-tet-mock/')); ?>
    <div class="dk-row"><div class="dk-rl"><b><?php echo esc_html($r['name']); ?></b><small><?php echo esc_html(wp_date('d M Y, h:i A', $x['when'])); ?> · Attempt <?php echo $x['att']; ?><?php echo $x['practice'] ? ' · अभ्यास' : ''; ?></small>
     <div class="dk-bar s"><i style="width:<?php echo $x['pct']; ?>%"></i></div></div>
-    <div class="dk-rs"><b><?php echo $x['score']; ?><small>/<?php echo $x['max']; ?></small></b><span>सही <?php echo $x['c']; ?> · गलत <?php echo $x['w']; ?><?php echo $x['rank'] ? ' · Rank ' . $x['rank'] . '/' . $x['tot'] : ''; ?></span></div>
+    <div class="dk-rs"><b><?php echo $x['score']; ?><small>/<?php echo $x['max']; ?></small></b><span>सही <?php echo $x['c']; ?> · गलत <?php echo $x['w']; ?><?php echo $x['rank'] ? ' · Rank ' . $x['rank'] . (current_user_can('manage_options') ? '/' . $x['tot'] : '') : ''; ?></span></div>
     <div class="dk-ra"><a class="dk-btn ghost" href="<?php echo esc_url($url); ?>">View Results</a><?php if (eh_stm_status($r) === 'live'): ?><a class="dk-btn" href="<?php echo esc_url(add_query_arg('re', 1, $url)); ?>">↻ Reattempt</a><?php endif; ?></div></div>
   <?php endforeach; ?></div></div>
  <?php endif; ?>
