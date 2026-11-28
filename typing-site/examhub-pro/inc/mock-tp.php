@@ -207,7 +207,7 @@ function eh_tp_test_card($r, $my, $title, $sub, $tag = '') {
         . '<h3>' . esc_html($title) . '</h3><p>' . esc_html($sub) . '</p>'
         . '<ul class="mt-meta"><li><b>' . eh_stm_nq($r) . '</b> प्रश्न</li><li><b>' . $max . '</b> अंक</li><li><b>' . (int) round(eh_stm_secs($r) / 60) . '</b> मिनट</li><li><b>+3 / −1</b></li></ul>';
     if (!$ok) return $h . '<span class="mt-btn dis">Coming Soon</span></div>';
-    if ($m && $m['run']) $h .= '<a class="mt-btn" href="' . esc_url($u) . '">▶ परीक्षा जारी रखें</a>';
+    if ($m && $m['run']) $h .= '<a class="mt-btn res" href="' . esc_url($u) . '"><i></i>Resume Test ›</a>';
     elseif ($m && $m['n']) $h .= '<div class="mt-two"><a class="mt-btn ghost" href="' . esc_url($u) . '">View Results</a><a class="mt-btn" href="' . esc_url(add_query_arg('re', 1, $u)) . '">↻ Reattempt</a></div>';
     else $h .= '<a class="mt-btn" href="' . esc_url($u) . '">मॉक शुरू करें →</a>';
     if ($m && $m['n']) { $pc = max(0, min(100, round($m['last'] * 100 / $max))); $h .= '<div class="mt-done"><div class="mt-bar"><i style="width:' . $pc . '%"></i></div><span>✓ Attempted · <b>' . $m['last'] . '</b> / ' . $max . ($m['n'] > 1 ? ' · ' . $m['n'] . ' Attempts · Best ' . $m['best'] : '') . '</span></div>'; }
@@ -272,7 +272,7 @@ function eh_tp_test_row($r, $my, $no, $title, $lang = 'हिंदी + English
     if ($over && $m && $m['n']) $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">📊 View Results</a>';
     elseif ($over) $h .= '<a class="tr-btn ghost" href="' . esc_url($u) . '">उत्तर-कुंजी देखें</a>';
     elseif (!$ok) $h .= '<span class="tr-btn dis">' . (eh_tp_is($r) ? 'Coming Soon' : 'आगामी') . '</span>';
-    elseif ($m && $m['run']) $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">▶ जारी रखें</a>';
+    elseif ($m && $m['run']) $h .= '<a class="tr-btn res" href="' . esc_url($go($u)) . '"><i></i>Resume Test ›</a>';
     elseif ($m && $m['n']) $h .= '<a class="tr-btn ghost" href="' . esc_url($go($u)) . '">📊 View Results</a><a class="tr-btn" href="' . esc_url(add_query_arg('re', 1, $u)) . '">↻ Reattempt</a>';
     else $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">Start Test →</a>';
     return $h . '</div></div>';

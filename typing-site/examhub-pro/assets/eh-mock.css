@@ -333,3 +333,9 @@
 .tu-h b{flex:none;font-size:12.5px;font-weight:800;letter-spacing:.3px;color:#fff;background:#1f2937;border-radius:8px;padding:4px 9px}
 .tu-h span{font-size:14.5px;font-weight:700;color:#333;line-height:1.35}
 @media(max-width:600px){.tsw button{font-size:14px;padding:10px 6px;gap:6px}.tu-h span{font-size:14px}}
+
+/* Resume Test button — green, with a live dot */
+.tr-btn.res,.mt-btn.res{background:linear-gradient(135deg,#0f7a4a,#16a34a);gap:9px;box-shadow:0 10px 20px -12px rgba(22,163,74,.9)}
+.tr-btn.res:hover,.mt-btn.res:hover{background:linear-gradient(135deg,#0b6a3f,#15803d)}
+.tr-btn.res i,.mt-btn.res i{width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 0 0 rgba(255,255,255,.7);animation:ehres 1.6s infinite;flex:none}
+@keyframes ehres{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}70%{box-shadow:0 0 0 8px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}

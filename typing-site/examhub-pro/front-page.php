@@ -268,8 +268,4 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
 
 </div>
 
-<aside class="uh-yt" id="uh-yt" data-list="<?php echo esc_attr(eh_opt('yt_uploads')); ?>" hidden>
-  <div class="uh-yt-h"><a href="<?php echo esc_url(eh_opt('youtube')); ?>" target="_blank" rel="noopener"><i></i>XL Study · YouTube</a><button type="button" class="uh-yt-min" aria-label="Minimise">–</button><button type="button" class="uh-yt-x" aria-label="Close">✕</button></div>
-  <div class="uh-yt-v"></div>
-</aside>
 <?php get_footer();
