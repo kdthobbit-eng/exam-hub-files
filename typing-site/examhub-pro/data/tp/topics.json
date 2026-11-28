@@ -1,10 +1,522 @@
 {
- "tgt": {
-  "maths": [["वाणिज्य गणित","Commercial Mathematics"],["सांख्यिकी","Statistics"],["बीजगणित","Algebra"],["प्रायिकता","Probability"],["समुच्चय सिद्धांत","Set Theory"],["वास्तविक विश्लेषण","Real Analysis"],["त्रिकोणमिति","Trigonometry"],["सम्मिश्र संख्याएँ","Complex Numbers"],["ज्यामिति","Geometry"],["निर्देशांक ज्यामिति","Coordinate Geometry"],["कलन","Calculus"],["सदिश विश्लेषण","Vector Analysis"],["स्थैतिकी","Statics"],["गतिकी","Dynamics"]],
-  "english": [["अपठित गद्यांश","Unseen Passage for Comprehension"],["शब्द-भेद","Parts of Speech"],["वर्तनी","Spellings"],["विराम चिह्न","Punctuations"],["शब्दावली","Vocabulary"],["काल","Tenses"],["कथन (प्रत्यक्ष-अप्रत्यक्ष)","Narration"],["पूर्वसर्ग","Prepositions"],["कर्ता-क्रिया सामंजस्य","Agreement"],["वाक्य रूपांतरण","Transformation of Sentences"],["साहित्य की विधाएँ","Forms of Literature"],["लेखक एवं उनका योगदान","Authors and Their Contributions"]],
-  "hindi": [["हिंदी साहित्य का इतिहास","History of Hindi Literature"],["हिंदी गद्य साहित्य का विकास","Development of Hindi Prose Literature"],["हिंदी के लेखक एवं उनकी रचनाएँ","Hindi Authors and Their Works"],["काव्य एवं काव्यशास्त्र (रस, छंद, अलंकार)","Poetry and Literary Devices"],["हिंदी भाषा एवं व्याकरण","Hindi Language and Grammar"],["संस्कृत साहित्य","Sanskrit Literature"],["संस्कृत व्याकरण एवं अनुवाद","Sanskrit Grammar and Translation"]]
- },
- "pgt": {
-  "civics": [["नागरिकशास्त्र: अर्थ, परिभाषा, प्रकृति एवं क्षेत्र","Civics: Meaning, Nature and Scope"],["नागरिकता","Citizenship"],["राज्य: तत्व, प्रकार एवं उत्पत्ति के सिद्धांत","State: Elements, Types and Theories of Origin"],["राज्य के कार्यों के सिद्धांत","Theories of the Functions of State"],["संप्रभुता, शक्ति, सत्ता एवं वैधता","Sovereignty, Power, Authority and Legitimacy"],["अधिकार, स्वतंत्रता, समानता, कानून एवं न्याय","Rights, Liberty, Equality, Law and Justice"],["संविधान एवं सरकार के प्रकार","Constitution and Forms of Government"],["सरकार के अंग: विधायिका, कार्यपालिका, न्यायपालिका","Organs of Government"],["लोकतंत्र: अर्थ, प्रकार एवं सिद्धांत","Democracy"],["दलीय व्यवस्था, दबाव समूह एवं लोकमत","Party System, Pressure Groups and Public Opinion"],["प्रतिनिधित्व, निर्वाचन एवं मताधिकार","Representation, Election and Franchise"],["भारतीय राजनीतिक व्यवस्था की चुनौतियाँ","Challenges to Indian Political System"],["राजनीति विज्ञान की नवीन प्रवृत्तियाँ","Recent Trends in Political Science"],["भारतीय राजनीतिक चिंतक","Indian Political Thinkers"],["राष्ट्रीय आंदोलन एवं संवैधानिक विकास","National Movement and Constitutional Development"],["संविधान सभा, प्रस्तावना एवं संविधान की विशेषताएँ","Constituent Assembly, Preamble and Salient Features"],["मौलिक अधिकार, मौलिक कर्तव्य एवं नीति निदेशक तत्व","Fundamental Rights, Duties and DPSP"],["संविधान संशोधन एवं केंद्र-राज्य संबंध","Constitutional Amendment and Centre–State Relations"],["संघीय कार्यपालिका","Union Executive"],["संघीय विधायिका (संसद)","Union Legislature"],["संघीय न्यायपालिका","Union Judiciary"],["राज्य सरकार (उत्तर प्रदेश के विशेष संदर्भ में)","State Government (with reference to UP)"],["जिला प्रशासन एवं स्थानीय स्वशासन","District Administration and Local Self-Government"],["लोक निगम एवं आयोग","Public Corporations and Commissions"],["भारत की विदेश नीति","Foreign Policy of India"],["भारत एवं क्षेत्रीय संगठन","India and Regional Organizations"],["संयुक्त राष्ट्र एवं भारत","United Nations and India"]]
- }
+"tgt": {
+"maths": [
+[
+"वाणिज्य गणित",
+"Commercial Mathematics"
+],
+[
+"सांख्यिकी",
+"Statistics"
+],
+[
+"बीजगणित",
+"Algebra"
+],
+[
+"प्रायिकता",
+"Probability"
+],
+[
+"समुच्चय सिद्धांत",
+"Set Theory"
+],
+[
+"वास्तविक विश्लेषण",
+"Real Analysis"
+],
+[
+"त्रिकोणमिति",
+"Trigonometry"
+],
+[
+"सम्मिश्र संख्याएँ",
+"Complex Numbers"
+],
+[
+"ज्यामिति",
+"Geometry"
+],
+[
+"निर्देशांक ज्यामिति",
+"Coordinate Geometry"
+],
+[
+"कलन",
+"Calculus"
+],
+[
+"सदिश विश्लेषण",
+"Vector Analysis"
+],
+[
+"स्थैतिकी",
+"Statics"
+],
+[
+"गतिकी",
+"Dynamics"
+]
+],
+"english": [
+[
+"अपठित गद्यांश",
+"Unseen Passage for Comprehension"
+],
+[
+"शब्द-भेद",
+"Parts of Speech"
+],
+[
+"वर्तनी",
+"Spellings"
+],
+[
+"विराम चिह्न",
+"Punctuations"
+],
+[
+"शब्दावली",
+"Vocabulary"
+],
+[
+"काल",
+"Tenses"
+],
+[
+"कथन (प्रत्यक्ष-अप्रत्यक्ष)",
+"Narration"
+],
+[
+"पूर्वसर्ग",
+"Prepositions"
+],
+[
+"कर्ता-क्रिया सामंजस्य",
+"Agreement"
+],
+[
+"वाक्य रूपांतरण",
+"Transformation of Sentences"
+],
+[
+"साहित्य की विधाएँ",
+"Forms of Literature"
+],
+[
+"लेखक एवं उनका योगदान",
+"Authors and Their Contributions"
+]
+],
+"hindi": [
+[
+"हिंदी साहित्य का इतिहास",
+"History of Hindi Literature"
+],
+[
+"हिंदी गद्य साहित्य का विकास",
+"Development of Hindi Prose Literature"
+],
+[
+"हिंदी के लेखक एवं उनकी रचनाएँ",
+"Hindi Authors and Their Works"
+],
+[
+"काव्य एवं काव्यशास्त्र (रस, छंद, अलंकार)",
+"Poetry and Literary Devices"
+],
+[
+"हिंदी भाषा एवं व्याकरण",
+"Hindi Language and Grammar"
+],
+[
+"संस्कृत साहित्य",
+"Sanskrit Literature"
+],
+[
+"संस्कृत व्याकरण एवं अनुवाद",
+"Sanskrit Grammar and Translation"
+]
+],
+"science": [
+[
+"मापन एवं विमाएँ",
+"Dimensions and Measurement"
+],
+[
+"यांत्रिकी",
+"Mechanics"
+],
+[
+"ऊष्मा",
+"Heat"
+],
+[
+"प्रकाशिकी",
+"Optics"
+],
+[
+"विद्युत एवं चुम्बकत्व",
+"Electricity & Magnetism"
+],
+[
+"आधुनिक भौतिकी",
+"Modern Physics"
+],
+[
+"द्रव्य",
+"Matter"
+],
+[
+"परमाणु संरचना",
+"Atomic Structure"
+],
+[
+"रासायनिक आबंधन",
+"Chemical Bonding"
+],
+[
+"रासायनिक अभिक्रियाएँ",
+"Chemical Reactions"
+],
+[
+"आवर्त सारणी",
+"Periodic Table"
+],
+[
+"कार्बनिक रसायन",
+"Organic Chemistry"
+],
+[
+"कोशिका विज्ञान",
+"Cell Biology"
+],
+[
+"मानव शरीर क्रिया विज्ञान",
+"Human Physiology"
+],
+[
+"पारिस्थितिकी",
+"Ecology"
+],
+[
+"पादप शरीर क्रिया विज्ञान",
+"Plant Physiology"
+],
+[
+"आनुवंशिकी",
+"Genetics"
+]
+],
+"sanskrit": [
+[
+"गद्य, पद्य एवं नाटक",
+"Prose, Poetry and Drama"
+],
+[
+"व्याकरण",
+"Grammar"
+],
+[
+"साहित्यिक ज्ञान",
+"Literary Knowledge"
+]
+]
+},
+"pgt": {
+"civics": [
+[
+"नागरिकशास्त्र: अर्थ, परिभाषा, प्रकृति एवं क्षेत्र",
+"Civics: Meaning, Nature and Scope"
+],
+[
+"नागरिकता",
+"Citizenship"
+],
+[
+"राज्य: तत्व, प्रकार एवं उत्पत्ति के सिद्धांत",
+"State: Elements, Types and Theories of Origin"
+],
+[
+"राज्य के कार्यों के सिद्धांत",
+"Theories of the Functions of State"
+],
+[
+"संप्रभुता, शक्ति, सत्ता एवं वैधता",
+"Sovereignty, Power, Authority and Legitimacy"
+],
+[
+"अधिकार, स्वतंत्रता, समानता, कानून एवं न्याय",
+"Rights, Liberty, Equality, Law and Justice"
+],
+[
+"संविधान एवं सरकार के प्रकार",
+"Constitution and Forms of Government"
+],
+[
+"सरकार के अंग: विधायिका, कार्यपालिका, न्यायपालिका",
+"Organs of Government"
+],
+[
+"लोकतंत्र: अर्थ, प्रकार एवं सिद्धांत",
+"Democracy"
+],
+[
+"दलीय व्यवस्था, दबाव समूह एवं लोकमत",
+"Party System, Pressure Groups and Public Opinion"
+],
+[
+"प्रतिनिधित्व, निर्वाचन एवं मताधिकार",
+"Representation, Election and Franchise"
+],
+[
+"भारतीय राजनीतिक व्यवस्था की चुनौतियाँ",
+"Challenges to Indian Political System"
+],
+[
+"राजनीति विज्ञान की नवीन प्रवृत्तियाँ",
+"Recent Trends in Political Science"
+],
+[
+"भारतीय राजनीतिक चिंतक",
+"Indian Political Thinkers"
+],
+[
+"राष्ट्रीय आंदोलन एवं संवैधानिक विकास",
+"National Movement and Constitutional Development"
+],
+[
+"संविधान सभा, प्रस्तावना एवं संविधान की विशेषताएँ",
+"Constituent Assembly, Preamble and Salient Features"
+],
+[
+"मौलिक अधिकार, मौलिक कर्तव्य एवं नीति निदेशक तत्व",
+"Fundamental Rights, Duties and DPSP"
+],
+[
+"संविधान संशोधन एवं केंद्र-राज्य संबंध",
+"Constitutional Amendment and Centre–State Relations"
+],
+[
+"संघीय कार्यपालिका",
+"Union Executive"
+],
+[
+"संघीय विधायिका (संसद)",
+"Union Legislature"
+],
+[
+"संघीय न्यायपालिका",
+"Union Judiciary"
+],
+[
+"राज्य सरकार (उत्तर प्रदेश के विशेष संदर्भ में)",
+"State Government (with reference to UP)"
+],
+[
+"जिला प्रशासन एवं स्थानीय स्वशासन",
+"District Administration and Local Self-Government"
+],
+[
+"लोक निगम एवं आयोग",
+"Public Corporations and Commissions"
+],
+[
+"भारत की विदेश नीति",
+"Foreign Policy of India"
+],
+[
+"भारत एवं क्षेत्रीय संगठन",
+"India and Regional Organizations"
+],
+[
+"संयुक्त राष्ट्र एवं भारत",
+"United Nations and India"
+]
+],
+"hindi": [
+[
+"हिन्दी साहित्य का इतिहास",
+""
+],
+[
+"आदिकाल",
+""
+],
+[
+"भक्तिकाल",
+""
+],
+[
+"रीतिकाल",
+""
+],
+[
+"आधुनिक काल",
+""
+],
+[
+"गद्य साहित्य का उद्भव एवं विकास",
+""
+],
+[
+"गद्य की नवीन विधाएँ",
+""
+],
+[
+"प्रमुख गद्यकार",
+""
+],
+[
+"पत्रकारिता",
+""
+],
+[
+"काव्यशास्त्र",
+""
+],
+[
+"भाषाविज्ञान",
+""
+],
+[
+"हिन्दी व्याकरण",
+""
+],
+[
+"संस्कृत साहित्य",
+""
+],
+[
+"संस्कृत व्याकरण",
+""
+]
+],
+"sanskrit": [
+[
+"वैदिक साहित्य (ऋग्वेद, यजुर्वेद, वैदिक साहित्य का इतिहास)",
+""
+],
+[
+"लौकिक साहित्य — परिचय, प्रमुख ग्रन्थ एवं विधाएँ",
+""
+],
+[
+"साहित्यशास्त्र (अलंकार, ध्वन्यालोक, दशरूपक, पारिभाषिक शब्दावली)",
+""
+],
+[
+"भारतीय दर्शन (सांख्यकारिका, वेदान्तसार, तर्कभाषा/तर्कसंग्रह)",
+""
+],
+[
+"भाषाविज्ञान एवं व्याकरण (लघुसिद्धान्तकौमुदी, सिद्धान्तकौमुदी, वाक्यपरिवर्तन)",
+""
+]
+],
+"history": [
+[
+"पुरा ऐतिहासिक संस्कृतियाँ",
+""
+],
+[
+"सिन्धु घाटी की सभ्यता",
+""
+],
+[
+"वैदिक काल",
+""
+],
+[
+"धार्मिक आन्दोलन",
+""
+],
+[
+"मौर्य साम्राज्य",
+""
+],
+[
+"गुप्त राजवंश",
+""
+],
+[
+"चोल वंश",
+""
+],
+[
+"तुर्क आक्रमण",
+""
+],
+[
+"खिलजी",
+""
+],
+[
+"तुगलक वंश",
+""
+],
+[
+"मुगल साम्राज्य का पतन – मराठा अभ्युदय",
+""
+],
+[
+"आधुनिक कालीन भारतीय इतिहास",
+""
+]
+],
+"economics": [
+[
+"आर्थिक सिद्धांत — अर्थशास्त्र की परिभाषा एवं प्रकृति, स्थैतिक एवं प्रावैगिक विश्लेषण",
+"Economic Theory — Definition and Nature"
+],
+[
+"व्यष्टि एवं समष्टि विश्लेषण, माँग का नियम एवं माँग की लोच",
+"Micro & Macro, Demand and Elasticity"
+],
+[
+"उपभोक्ता संतुलन — तटस्थता वक्र विश्लेषण",
+"Consumer Equilibrium — Indifference Curve"
+],
+[
+"उत्पत्ति के नियम",
+"Laws of Returns"
+],
+[
+"कीमत निर्धारण — पूर्ण प्रतियोगिता, एकाधिकार, एकाधिकारी प्रतियोगिता",
+"Pricing"
+],
+[
+"विनिमय दर, क्रय शक्ति समता एवं भुगतान संतुलन",
+"Exchange Rate and BoP"
+],
+[
+"अंतरराष्ट्रीय संस्थाएँ — IMF, IBRD, ADB, WTO",
+"International Institutions"
+],
+[
+"राजस्व — लोक वित्त, कराधान, लोक व्यय एवं लोक ऋण",
+"Public Finance"
+],
+[
+"आय एवं रोज़गार सिद्धांत — प्रतिष्ठित एवं कीन्स",
+"Income and Employment Theory"
+],
+[
+"आर्थिक प्रणालियाँ — पूँजीवाद, समाजवाद, मिश्रित अर्थव्यवस्था",
+"Economic Systems"
+],
+[
+"भारतीय अर्थव्यवस्था एवं आर्थिक विकास",
+"Indian Economy and Development"
+],
+[
+"मुद्रा एवं बैंकिंग — मुद्रा की माँग-पूर्ति, मुद्रास्फीति, साख सृजन, केंद्रीय बैंक",
+"Money and Banking"
+],
+[
+"अंतरराष्ट्रीय व्यापार — तुलनात्मक लागत, स्वतंत्र व्यापार एवं संरक्षण",
+"International Trade"
+]
+]
+}
 }
