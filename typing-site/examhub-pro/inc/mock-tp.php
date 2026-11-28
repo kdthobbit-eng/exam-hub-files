@@ -90,6 +90,10 @@ function eh_tp_rounds_all() {
     /* old common GS sectional — kept only so earlier attempts still open */
     $out[] = ['id' => 'gsx', 'series' => 'gs', 'slug' => 'gs', 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'name' => 'TGT/PGT GS - SECTIONAL TEST 1',
         'login' => EH_TP_LOGIN, 'start' => EH_TP_LOGIN, 'end' => EH_TP_END, 'paper' => 'tp/gs', 'gs' => '', 'kind' => 'gs', 'secs' => 1800, 'nq' => 30];
+    /* release plan: set 1 of every series is open now; set n opens on (n−1) December 2026, 00:00 IST */
+    foreach ($out as &$o) { $n = (int) ($o['fno'] ?? $o['sno'] ?? $o['xno'] ?? $o['tno'] ?? 0);
+        if ($n > 1) { $d = sprintf('2026-12-%02d 00:00', $n - 1); $o['login'] = $d; $o['start'] = $d; } }
+    unset($o);
     return $out;
 }
 /* English test names, same in every language: TGT MATH - MOCK TEST 1 */
@@ -209,6 +213,15 @@ function eh_tp_my($uid) {
     }
     return $out;
 }
+/* short links: xlstudy.in/tgt/maths → that subject's test zone */
+add_action('template_redirect', function () {
+    $p = trim((string) parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), '/');
+    if (preg_match('#^(tgt|pgt)(?:/([a-z-]+))?$#', $p, $m)) {
+        $L = eh_tp_subjects()[$m[1]]; $sub = $m[2] ?? '';
+        if ($sub === 'math') $sub = 'maths';
+        wp_redirect(add_query_arg($sub && isset($L[$sub]) ? ['x' => $m[1], 's' => $sub] : ['x' => $m[1]], home_url('/mock-test/')), 302); exit;
+    }
+}, 1);
 function eh_tp_find($id) { static $ix = null, $k = null; $v = eh_stm_rounds_ver(); if ($ix === null || $k !== $v) { $ix = array_column(eh_stm_rounds(), null, 'id'); $k = $v; } return $ix[$id] ?? null; }
 /* one test card: title, pattern, status, start / continue / retest, and a thin score bar once attempted */
 function eh_tp_test_card($r, $my, $title, $sub, $tag = '') {
@@ -271,7 +284,7 @@ function eh_tp_test_row($r, $my, $no, $title, $lang = 'हिंदी + English
     $tt = $title; $tp = ''; if (preg_match('/^(.*\bTOPIC TEST \d+) \((.+)\)$/u', $title, $mm)) { $tt = $mm[1]; $tp = $mm[2]; }
     $go = function ($url) use ($in) { $url = add_query_arg('go', 1, $url); return $in ? $url : eh_login_page_url($url); };
     $h = '<div class="tr' . ($ok || $over ? '' : ' soon') . ($m && $m['n'] ? ' done' : '') . '"><div class="tr-n">' . str_pad((string) $no, 2, '0', STR_PAD_LEFT) . '</div><div class="tr-b">'
-        . '<div class="tr-t"><b>' . esc_html($tt) . '</b>' . ($ok ? '<span class="tr-free">FREE</span><span class="tr-live"><i></i>LIVE</span>' : ($over ? '<span class="tr-soon">समाप्त</span>' : '<span class="tr-soon">' . (eh_tp_is($r) ? 'Coming Soon' : 'आगामी') . '</span>')) . '</div>'
+        . '<div class="tr-t"><b>' . esc_html($tt) . '</b>' . ($ok ? '<span class="tr-free">FREE</span><span class="tr-live"><i></i>LIVE</span>' : ($over ? '<span class="tr-soon">समाप्त</span>' : '<span class="tr-soon">' . (eh_tp_is($r) ? '📅 ' . wp_date('j', $r['start_ts']) . ' ' . $hm[(int) wp_date('n', $r['start_ts'])] . ' से' : 'आगामी') . '</span>')) . '</div>'
         . ($tp !== '' ? '<div class="tr-tp">' . esc_html($tp) . '</div>' : '') . '<div class="tr-m">' . $dt . '<span>📝 ' . eh_stm_nq($r) . ' प्रश्न</span><span>🎯 ' . $max . ' अंक</span><span>⏱ ' . (int) round(eh_stm_secs($r) / 60) . ' मिनट</span><span>🌐 भाषा: ' . esc_html($lang) . '</span></div>';
     if ($m && $m['n']) {
         global $wpdb; $rank = 1 + (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_stm_table() . ' WHERE round = %s AND submitted > 0 AND counted = 1 AND score > %d', $r['id'], (int) $m['last']));
@@ -281,7 +294,7 @@ function eh_tp_test_row($r, $my, $no, $title, $lang = 'हिंदी + English
     $h .= '</div><div class="tr-a">';
     if ($over && $m && $m['n']) $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">📊 View Results</a>';
     elseif ($over) $h .= '<a class="tr-btn ghost" href="' . esc_url($u) . '">उत्तर-कुंजी देखें</a>';
-    elseif (!$ok) $h .= '<span class="tr-btn dis">' . (eh_tp_is($r) ? 'Coming Soon' : 'आगामी') . '</span>';
+    elseif (!$ok) $h .= '<span class="tr-btn dis">' . (eh_tp_is($r) ? wp_date('j', $r['start_ts']) . ' ' . $hm[(int) wp_date('n', $r['start_ts'])] . ' को खुलेगा' : 'आगामी') . '</span>';
     elseif ($m && $m['run']) $h .= '<a class="tr-btn res" href="' . esc_url($go($u)) . '"><i></i>Resume Test ›</a>';
     elseif ($m && $m['n']) $h .= '<a class="tr-btn ghost" href="' . esc_url($go($u)) . '">📊 View Results</a><a class="tr-btn" href="' . esc_url(add_query_arg('re', 1, $u)) . '">↻ Reattempt</a>';
     else $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">Start Test →</a>';
