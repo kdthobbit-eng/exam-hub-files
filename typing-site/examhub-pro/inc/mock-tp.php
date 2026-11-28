@@ -41,7 +41,7 @@ function eh_tp_rounds() {
         foreach ($list as $slug => $nm) {
             $i++;
             $out[] = ['id' => ($s === 'tgt' ? 'tg' : 'pg') . str_pad((string) $i, 2, '0', STR_PAD_LEFT), 'series' => $s, 'slug' => $slug, 'sub' => $nm[0], 'sub_en' => $nm[1],
-                'name' => $inf['short'] . ' ' . $nm[0] . ' — मॉक 1', 'login' => EH_TP_LOGIN, 'start' => EH_TP_LOGIN, 'end' => EH_TP_END,
+                'name' => strtoupper($s) . ' ' . eh_tp_en($slug, $nm[1]) . ' - MOCK TEST 1', 'login' => EH_TP_LOGIN, 'start' => EH_TP_LOGIN, 'end' => EH_TP_END,
                 'paper' => 'tp/' . $s . '-' . $slug, 'gs' => 'tp/gs', 'kind' => 'full', 'secs' => 7200, 'nq' => 120];
         }
     }
@@ -51,19 +51,22 @@ function eh_tp_rounds() {
 function eh_tp_rounds_all() {
     $out = eh_tp_rounds();
     foreach (eh_tp_rounds() as $r) {
-        $out[] = array_merge($r, ['id' => $r['id'] . 's', 'kind' => 'sec', 'gs' => '', 'secs' => 5400, 'nq' => 90, 'name' => strtoupper($r['series']) . ' ' . $r['sub'] . ' — सेक्शनल (विषय)']);
+        $out[] = array_merge($r, ['id' => $r['id'] . 's', 'kind' => 'sec', 'gs' => '', 'secs' => 5400, 'nq' => 90, 'name' => strtoupper($r['series']) . ' ' . eh_tp_en($r['slug'], $r['sub_en']) . ' - SECTIONAL TEST 1']);
     }
     $T = eh_tp_topics();
     foreach (eh_tp_rounds() as $r) foreach (($T[$r['series']][$r['slug']] ?? []) as $i => $tn) {
         $f = 'tp/topic/' . $r['series'] . '-' . $r['slug'] . '-' . ($i + 1);
         if (!is_file(EH_DIR . '/data/' . $f . '.json')) continue;
         $out[] = array_merge($r, ['id' => $r['id'] . 't' . ($i + 1), 'kind' => 'topic', 'paper' => $f, 'gs' => '', 'secs' => 3000, 'nq' => 50, 'topic' => $tn[0], 'tno' => $i + 1,
-            'name' => strtoupper($r['series']) . ' ' . $r['sub'] . ' — टॉपिक टेस्ट: ' . $tn[0]]);
+            'name' => eh_tp_topic_title($r, $i + 1, $tn)]);
     }
-    $out[] = ['id' => 'gsx', 'series' => 'gs', 'slug' => 'gs', 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'name' => 'TGT/PGT सामान्य अध्ययन — सेक्शनल',
+    $out[] = ['id' => 'gsx', 'series' => 'gs', 'slug' => 'gs', 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'name' => 'TGT/PGT GS - SECTIONAL TEST 1',
         'login' => EH_TP_LOGIN, 'start' => EH_TP_LOGIN, 'end' => EH_TP_END, 'paper' => 'tp/gs', 'gs' => '', 'kind' => 'gs', 'secs' => 1800, 'nq' => 30];
     return $out;
 }
+/* English test names, same in every language: TGT MATH - MOCK TEST 1 */
+function eh_tp_en($slug, $en) { return $slug === 'maths' ? 'MATH' : strtoupper($en); }
+function eh_tp_topic_title($r, $n, $tn) { return strtoupper($r['series']) . ' ' . eh_tp_en($r['slug'], $r['sub_en']) . ' - TOPIC TEST ' . $n . (!empty($tn[1]) ? ' (' . $tn[1] . ')' : ''); }
 function eh_tp_topics() { static $t = null; if ($t === null) $t = json_decode((string) @file_get_contents(EH_DIR . '/data/tp/topics.json'), true) ?: []; return $t; }
 function eh_stm_secs($r) { return (int) ($r['secs'] ?? EH_STM_SECS); }
 function eh_stm_nq($r) { return (int) ($r['nq'] ?? 120); }
@@ -169,9 +172,9 @@ function eh_tp_test_card($r, $my, $title, $sub, $tag = '') {
         . '<ul class="mt-meta"><li><b>' . eh_stm_nq($r) . '</b> प्रश्न</li><li><b>' . $max . '</b> अंक</li><li><b>' . (int) round(eh_stm_secs($r) / 60) . '</b> मिनट</li><li><b>+3 / −1</b></li></ul>';
     if (!$ok) return $h . '<span class="mt-btn dis">Coming Soon</span></div>';
     if ($m && $m['run']) $h .= '<a class="mt-btn" href="' . esc_url($u) . '">▶ परीक्षा जारी रखें</a>';
-    elseif ($m && $m['n']) $h .= '<div class="mt-two"><a class="mt-btn ghost" href="' . esc_url($u) . '">परिणाम देखें</a><a class="mt-btn" href="' . esc_url(add_query_arg('re', 1, $u)) . '">↻ फिर से दें</a></div>';
+    elseif ($m && $m['n']) $h .= '<div class="mt-two"><a class="mt-btn ghost" href="' . esc_url($u) . '">View Results</a><a class="mt-btn" href="' . esc_url(add_query_arg('re', 1, $u)) . '">↻ Reattempt</a></div>';
     else $h .= '<a class="mt-btn" href="' . esc_url($u) . '">मॉक शुरू करें →</a>';
-    if ($m && $m['n']) { $pc = max(0, min(100, round($m['last'] * 100 / $max))); $h .= '<div class="mt-done"><div class="mt-bar"><i style="width:' . $pc . '%"></i></div><span>✓ दिया · <b>' . $m['last'] . '</b> / ' . $max . ($m['n'] > 1 ? ' · ' . $m['n'] . ' प्रयास · सर्वश्रेष्ठ ' . $m['best'] : '') . '</span></div>'; }
+    if ($m && $m['n']) { $pc = max(0, min(100, round($m['last'] * 100 / $max))); $h .= '<div class="mt-done"><div class="mt-bar"><i style="width:' . $pc . '%"></i></div><span>✓ Attempted · <b>' . $m['last'] . '</b> / ' . $max . ($m['n'] > 1 ? ' · ' . $m['n'] . ' Attempts · Best ' . $m['best'] : '') . '</span></div>'; }
     return $h . '</div>';
 }
 
@@ -226,14 +229,14 @@ function eh_tp_test_row($r, $my, $no, $title, $lang = 'हिंदी + English
     if ($m && $m['n']) {
         global $wpdb; $rank = 1 + (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_stm_table() . ' WHERE round = %s AND submitted > 0 AND counted = 1 AND score > %d', $r['id'], (int) $m['last']));
         $pc = max(0, min(100, round($m['last'] * 100 / $max)));
-        $h .= '<div class="tr-s"><div class="tr-bar"><i style="width:' . $pc . '%"></i></div><span>✓ दिया · <b>' . $m['last'] . '</b>/' . $max . ' · रैंक ~' . $rank . ($m['n'] > 1 ? ' · ' . $m['n'] . ' प्रयास' : '') . '</span></div>';
+        $h .= '<div class="tr-s"><div class="tr-bar"><i style="width:' . $pc . '%"></i></div><span>✓ Attempted · <b>' . $m['last'] . '</b>/' . $max . ' · Rank ~' . $rank . ($m['n'] > 1 ? ' · ' . $m['n'] . ' Attempts' : '') . '</span></div>';
     }
     $h .= '</div><div class="tr-a">';
-    if ($over && $m && $m['n']) $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">📊 परिणाम देखें</a>';
+    if ($over && $m && $m['n']) $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">📊 View Results</a>';
     elseif ($over) $h .= '<a class="tr-btn ghost" href="' . esc_url($u) . '">उत्तर-कुंजी देखें</a>';
     elseif (!$ok) $h .= '<span class="tr-btn dis">' . (eh_tp_is($r) ? 'Coming Soon' : 'आगामी') . '</span>';
     elseif ($m && $m['run']) $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">▶ जारी रखें</a>';
-    elseif ($m && $m['n']) $h .= '<a class="tr-btn ghost" href="' . esc_url($go($u)) . '">📊 विश्लेषण</a><a class="tr-btn" href="' . esc_url(add_query_arg('re', 1, $u)) . '">↻ दोबारा दें</a>';
+    elseif ($m && $m['n']) $h .= '<a class="tr-btn ghost" href="' . esc_url($go($u)) . '">📊 View Results</a><a class="tr-btn" href="' . esc_url(add_query_arg('re', 1, $u)) . '">↻ Reattempt</a>';
     else $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">Start Test →</a>';
     return $h . '</div></div>';
 }

@@ -13,10 +13,10 @@ function eh_stm_rounds() {
     $ts = function ($s) use ($tz) { return (new DateTime($s, $tz))->getTimestamp(); };
     $o = get_option('eh_stm_rounds');
     $list = is_array($o) && $o ? $o : [
-        ['id' => 't2', 'name' => 'Super TET Mock 2026 — ट्रायल', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 08:40', 'paper' => 'supertet-mock1'],
-        ['id' => 'm1', 'name' => 'Super TET Mock 2026 — लाइव', 'login' => '2026-11-22 08:40', 'start' => '2026-11-22 09:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
-        ['id' => 'm2', 'name' => 'Super TET Mock 2 — लाइव', 'login' => '2026-11-25 09:10', 'start' => '2026-11-25 09:30', 'end' => '2026-11-25 23:59', 'paper' => 'supertet-mock2'],
-        ['id' => 'p1', 'name' => 'Super TET फुल लेंथ मॉक (प्रैक्टिस) 1', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice1', 'kind' => 'practice'],
+        ['id' => 't2', 'name' => 'SUPER TET - TRIAL MOCK', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 08:40', 'paper' => 'supertet-mock1'],
+        ['id' => 'm1', 'name' => 'SUPER TET - LIVE MOCK 1', 'login' => '2026-11-22 08:40', 'start' => '2026-11-22 09:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
+        ['id' => 'm2', 'name' => 'SUPER TET - LIVE MOCK 2', 'login' => '2026-11-25 09:10', 'start' => '2026-11-25 09:30', 'end' => '2026-11-25 23:59', 'paper' => 'supertet-mock2'],
+        ['id' => 'p1', 'name' => 'SUPER TET - FULL LENGTH MOCK 1', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice1', 'kind' => 'practice'],
     ];
     $list = array_map(function ($r) { $r['series'] = $r['series'] ?? 'stet'; return $r; }, $list);
     if (function_exists('eh_tp_rounds_all')) $list = array_merge($list, eh_tp_rounds_all());
