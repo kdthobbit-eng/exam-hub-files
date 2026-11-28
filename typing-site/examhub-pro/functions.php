@@ -129,7 +129,7 @@ function eh_doc_title($t) {
         case 'typing': $e = $slug === 'demo' ? null : eh_exam($slug); return ($e ? $e['name'] . (stripos($e['name'], 'test') === false ? ' Test' : '') : 'Demo Typing Test') . ' — ' . $b;
         case 'live': return 'Daily Live Typing — ' . $b;
         case 'results': return 'Exam Based Result & Leaderboard — ' . $b;
-        case 'dashboard': return 'Typing History — ' . $b;
+        case 'dashboard': return 'My Dashboard — ' . $b;
         case 'result': return 'Performance Dashboard — ' . $b;
         case 'examhall': return 'Exam Hall Typing — ' . $b;
         case 'download': return 'Free Typing Passage PDF Download — ' . $b;
@@ -288,7 +288,7 @@ function eh_menu_icon($path) {
 /* default menu if none set */
 function eh_member_links() {
     return [
-        'mock' => ['/mock-test/', 'Live Mock'], 'live' => ['/live-typing/', 'Live Typing'], 'exams' => ['/exams/', 'All Exams Typing'], 'history' => ['/my-dashboard/', 'Typing History'],
+        'mock' => ['/mock-test/', 'Live Mock'], 'live' => ['/live-typing/', 'Live Typing'], 'exams' => ['/exams/', 'All Exams Typing'], 'history' => ['/my-dashboard/', 'My Dashboard'],
         'hall' => ['/exam-hall-typing/', 'Exam Hall Typing'], 'download' => ['/download-passages/', 'Download Passages'], 'insight' => ['/typing-insight/', 'Typing Insight'],
     ];
 }

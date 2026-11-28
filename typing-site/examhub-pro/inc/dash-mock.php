@@ -41,11 +41,39 @@ function eh_dash_render($uid) {
     $hub = home_url('/mock-test/');
     ob_start(); ?>
 <div class="dk">
- <div class="dk-hi"><div><span class="dk-k">मेरा डैशबोर्ड</span><h1>नमस्ते, <em><?php echo esc_html($u->display_name ?: $u->user_login); ?></em></h1><p>आपके सभी मॉक टेस्ट और टाइपिंग टेस्ट की प्रगति एक जगह।</p></div>
-  <div class="dk-subs"><?php foreach (['tgt' => 'TGT', 'pgt' => 'PGT'] as $sr => $lb): $pf = eh_tp_pref($uid, $sr); ?>
-   <a data-tp="<?php echo $sr; ?>" href="<?php echo esc_url($pf ? add_query_arg(['x' => $sr, 's' => $pf], $hub) : add_query_arg(['x' => $sr, 'all' => 1], $hub)); ?>"><span><?php echo $lb; ?> विषय</span><b><?php echo $pf ? esc_html(eh_tp_subjects()[$sr][$pf][0]) : 'अभी नहीं चुना'; ?></b><em><?php echo $pf ? 'टेस्ट देखें →' : 'चुनें →'; ?></em></a>
-  <?php endforeach; ?></div></div>
- <nav class="dk-tabs" id="dk-tabs"><button class="on" data-t="m">📝 मॉक टेस्ट <i><?php echo $n; ?></i></button><button data-t="t">⌨️ टाइपिंग <i><?php echo (int) $tyAgg['n']; ?></i></button></nav>
+ <?php $nm = $u->display_name ?: $u->user_login; $lc = (int) get_user_meta($uid, 'eh_name_changed', true); $wait = $lc ? max(0, 7 - (int) floor((time() - $lc) / DAY_IN_SECONDS)) : 0;
+   $tyN = (int) $tyAgg['n']; $tyB = (int) $tyAgg['b']; $tyA = $tyN ? round((float) $tyAgg['a']) : 0; ?>
+ <div class="dk-pro">
+  <div class="dk-pro-l">
+   <div class="dk-av"><?php echo esc_html(eh_initials($nm)); ?></div>
+   <div class="dk-who">
+    <span class="dk-k">My Dashboard</span>
+    <h1 id="dk-name"><?php echo esc_html($nm); ?></h1>
+    <div class="dk-meta"><span><?php echo esc_html($u->user_email); ?></span><span>Roll No. <b><?php echo esc_html(function_exists('eh_stm_roll') ? eh_stm_roll($uid) : $uid); ?></b></span><span>Member since <?php echo esc_html(date_i18n('M Y', strtotime($u->user_registered))); ?></span></div>
+    <button type="button" class="dk-edit" id="dk-edit" <?php echo $wait ? 'data-wait="' . $wait . '"' : ''; ?>>✎ नाम बदलें</button>
+   </div>
+  </div>
+  <div class="dk-pro-r"><?php foreach (['tgt' => 'TGT', 'pgt' => 'PGT'] as $sr => $lb): $pf = eh_tp_pref($uid, $sr); ?>
+   <a class="dk-sub" data-tp="<?php echo $sr; ?>" href="<?php echo esc_url($pf ? add_query_arg(['x' => $sr, 's' => $pf], $hub) : add_query_arg(['x' => $sr, 'all' => 1], $hub)); ?>"><span><?php echo $lb; ?> विषय</span><b><?php echo $pf ? esc_html(eh_tp_subjects()[$sr][$pf][0]) : 'अभी नहीं चुना'; ?></b><em><?php echo $pf ? 'टेस्ट देखें →' : 'चुनें →'; ?></em></a>
+  <?php endforeach; ?></div>
+ </div>
+ <div class="dk-sum">
+  <div><b><?php echo $n; ?></b><span>मॉक टेस्ट दिए</span></div>
+  <div><b><?php echo $avg; ?>%</b><span>औसत अंक</span></div>
+  <div><b><?php echo $best; ?>%</b><span>सर्वश्रेष्ठ अंक</span></div>
+  <div><b><?php echo $bestRank ? '#' . $bestRank : '—'; ?></b><span>Best Rank</span></div>
+  <div><b><?php echo $tyN; ?></b><span>टाइपिंग टेस्ट</span></div>
+  <div><b><?php echo $tyB; ?> <small>WPM</small></b><span>Best Net Speed</span></div>
+  <div><b><?php echo $tyA; ?>%</b><span>औसत Accuracy</span></div>
+ </div>
+ <div class="dk-modal" id="dk-modal" hidden><div class="dk-mbox"><h3>नाम बदलें</h3><p>यही नाम मॉक टेस्ट, रिज़ल्ट और रैंक सूची में दिखेगा। नाम 7 दिन में एक बार बदला जा सकता है।</p>
+  <input id="dk-nin" maxlength="40" value="<?php echo esc_attr($nm); ?>" autocomplete="name"><small id="dk-msg"></small>
+  <div class="dk-mb"><button type="button" class="btn ghost" id="dk-cancel">रद्द करें</button><button type="button" class="btn dark" id="dk-save">सेव करें</button></div></div></div>
+ <script>(function(){var e=document.getElementById('dk-edit'),m=document.getElementById('dk-modal'),i=document.getElementById('dk-nin'),g=document.getElementById('dk-msg'),s=document.getElementById('dk-save');if(!e)return;
+ e.onclick=function(){if(e.dataset.wait){alert('आप '+e.dataset.wait+' दिन बाद फिर से नाम बदल सकते हैं।');return}m.hidden=false;i.focus()};document.getElementById('dk-cancel').onclick=function(){m.hidden=true};
+ s.onclick=function(){var v=i.value.trim().replace(/\s+/g,' ');if(v.length<3||v.length>40){g.textContent='नाम 3 से 40 अक्षर का होना चाहिए।';return}s.disabled=true;g.textContent='सेव हो रहा है…';
+ fetch('<?php echo esc_url_raw(rest_url('eh/v1/me/name')); ?>',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-WP-Nonce':'<?php echo wp_create_nonce('wp_rest'); ?>'},body:JSON.stringify({name:v})}).then(function(r){return r.json()}).then(function(d){s.disabled=false;if(d&&d.ok){location.reload()}else{g.textContent=(d&&d.msg)||'कुछ गड़बड़ हुई, फिर कोशिश करें।'}}).catch(function(){s.disabled=false;g.textContent='नेटवर्क समस्या।'})}})();</script>
+ <nav class="dk-tabs" id="dk-tabs"><button class="on" data-t="m">Mock Test <i><?php echo $n; ?></i></button><button data-t="t">Typing <i><?php echo (int) $tyAgg['n']; ?></i></button></nav>
 
  <div class="dk-p on" data-p="m">
  <?php if (!$n): ?><div class="dk-empty"><b>अभी तक कोई मॉक टेस्ट नहीं दिया</b><p>Super TET, TGT या PGT का फ्री लाइव मॉक दें — यहाँ आपकी पूरी प्रगति दिखेगी।</p><a class="dk-btn" href="<?php echo esc_url($hub); ?>">मॉक टेस्ट दें →</a></div>
@@ -80,3 +108,19 @@ function go(t){B.forEach(function(x){x.classList.toggle('on',x.dataset.t===t)});
 B.forEach(function(b){b.onclick=function(){go(b.dataset.t)}});var s=/[?&](f|pg)=/.test(location.search)?'t':null;try{s=s||localStorage.getItem('eh_dk_tab')}catch(e){}go(s||'m')});</script>
 <?php return ob_get_clean() . (function_exists('eh_tp_picker') ? eh_tp_picker() : '');
 }
+
+/* name change (7-day cooldown) */
+add_action('rest_api_init', function () {
+    register_rest_route('eh/v1', '/me/name', ['methods' => 'POST', 'permission_callback' => function () { return is_user_logged_in(); }, 'callback' => function (WP_REST_Request $q) {
+        $uid = get_current_user_id(); $n = trim(preg_replace('/\s+/u', ' ', wp_strip_all_tags((string) $q->get_param('name'))));
+        $len = function_exists('mb_strlen') ? mb_strlen($n) : strlen($n);
+        if ($len < 3 || $len > 40 || !preg_match('/^[\p{L}\p{M} .]+$/u', $n)) return ['ok' => false, 'msg' => 'नाम में केवल अक्षर, स्पेस और बिंदु (.) हों, 3–40 अक्षर।'];
+        $lc = (int) get_user_meta($uid, 'eh_name_changed', true);
+        if ($lc && time() - $lc < 7 * DAY_IN_SECONDS) return ['ok' => false, 'msg' => 'नाम 7 दिन में केवल एक बार बदला जा सकता है।'];
+        $r = wp_update_user(['ID' => $uid, 'display_name' => $n, 'nickname' => $n, 'first_name' => $n, 'last_name' => '']);
+        if (is_wp_error($r)) return ['ok' => false, 'msg' => 'सेव नहीं हो सका।'];
+        update_user_meta($uid, 'eh_name_changed', time());
+        if (function_exists('eh_stm_table')) { global $wpdb; $wpdb->update(eh_stm_table(), ['name' => mb_substr($n, 0, 80)], ['uid' => $uid]); }
+        return ['ok' => true, 'name' => $n];
+    }]);
+});
