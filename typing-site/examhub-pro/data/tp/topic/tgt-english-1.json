@@ -1,0 +1,552 @@
+[
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 1: The village of Rampur had no library until a retired teacher, Mr. Sharma, turned the front room of his house into one. He began with forty books from his own shelf. Within a year, children were coming every evening, and parents who had never held a book began to borrow newspapers. Mr. Sharma did not charge any fee; he asked only that each reader return a book in the condition in which it was taken. Today the library has more than two thousand books, most of them donated by people who once sat in that small room as children. Mr. Sharma often says that a book lent is a seed sown, and that he has lived long enough to see a forest grow.\n\nQuestion: Who started the library in Rampur?",
+"o": [
+"The village council",
+"The district government",
+"A group of children",
+"A retired teacher, Mr. Sharma"
+],
+"a": "D",
+"e": "(Mr. Sharma)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 1: The village of Rampur had no library until a retired teacher, Mr. Sharma, turned the front room of his house into one. He began with forty books from his own shelf. Within a year, children were coming every evening, and parents who had never held a book began to borrow newspapers. Mr. Sharma did not charge any fee; he asked only that each reader return a book in the condition in which it was taken. Today the library has more than two thousand books, most of them donated by people who once sat in that small room as children. Mr. Sharma often says that a book lent is a seed sown, and that he has lived long enough to see a forest grow.\n\nQuestion: How many books did the library begin with?",
+"o": [
+"Two thousand",
+"Fourteen",
+"Four hundred",
+"Forty"
+],
+"a": "D",
+"e": "(Forty)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 1: The village of Rampur had no library until a retired teacher, Mr. Sharma, turned the front room of his house into one. He began with forty books from his own shelf. Within a year, children were coming every evening, and parents who had never held a book began to borrow newspapers. Mr. Sharma did not charge any fee; he asked only that each reader return a book in the condition in which it was taken. Today the library has more than two thousand books, most of them donated by people who once sat in that small room as children. Mr. Sharma often says that a book lent is a seed sown, and that he has lived long enough to see a forest grow.\n\nQuestion: What was the only condition for borrowing a book?",
+"o": [
+"It had to be returned in the same condition",
+"It had to be read in the library",
+"Only children could borrow",
+"A small fee had to be paid"
+],
+"a": "A",
+"e": "(Same condition)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 1: The village of Rampur had no library until a retired teacher, Mr. Sharma, turned the front room of his house into one. He began with forty books from his own shelf. Within a year, children were coming every evening, and parents who had never held a book began to borrow newspapers. Mr. Sharma did not charge any fee; he asked only that each reader return a book in the condition in which it was taken. Today the library has more than two thousand books, most of them donated by people who once sat in that small room as children. Mr. Sharma often says that a book lent is a seed sown, and that he has lived long enough to see a forest grow.\n\nQuestion: Where was the library first set up?",
+"o": [
+"In the panchayat office",
+"In the front room of Mr. Sharma's house",
+"Under a banyan tree",
+"In the village school"
+],
+"a": "B",
+"e": "(Front room)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 1: The village of Rampur had no library until a retired teacher, Mr. Sharma, turned the front room of his house into one. He began with forty books from his own shelf. Within a year, children were coming every evening, and parents who had never held a book began to borrow newspapers. Mr. Sharma did not charge any fee; he asked only that each reader return a book in the condition in which it was taken. Today the library has more than two thousand books, most of them donated by people who once sat in that small room as children. Mr. Sharma often says that a book lent is a seed sown, and that he has lived long enough to see a forest grow.\n\nQuestion: Most of the books in the library today were—",
+"o": [
+"donated by former young readers",
+"bought from the fees collected",
+"sent by a publisher",
+"bought by the government"
+],
+"a": "A",
+"e": "(Donated by former readers)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 1: The village of Rampur had no library until a retired teacher, Mr. Sharma, turned the front room of his house into one. He began with forty books from his own shelf. Within a year, children were coming every evening, and parents who had never held a book began to borrow newspapers. Mr. Sharma did not charge any fee; he asked only that each reader return a book in the condition in which it was taken. Today the library has more than two thousand books, most of them donated by people who once sat in that small room as children. Mr. Sharma often says that a book lent is a seed sown, and that he has lived long enough to see a forest grow.\n\nQuestion: 'A book lent is a seed sown' means that—",
+"o": [
+"sharing books helps knowledge grow over time",
+"books should be planted in the ground",
+"lending books is a loss",
+"only farmers should read"
+],
+"a": "A",
+"e": "(Knowledge grows)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 1: The village of Rampur had no library until a retired teacher, Mr. Sharma, turned the front room of his house into one. He began with forty books from his own shelf. Within a year, children were coming every evening, and parents who had never held a book began to borrow newspapers. Mr. Sharma did not charge any fee; he asked only that each reader return a book in the condition in which it was taken. Today the library has more than two thousand books, most of them donated by people who once sat in that small room as children. Mr. Sharma often says that a book lent is a seed sown, and that he has lived long enough to see a forest grow.\n\nQuestion: The word 'donated' in the passage is closest in meaning to—",
+"o": [
+"borrowed",
+"given freely",
+"sold",
+"stolen"
+],
+"a": "B",
+"e": "(given freely)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 1: The village of Rampur had no library until a retired teacher, Mr. Sharma, turned the front room of his house into one. He began with forty books from his own shelf. Within a year, children were coming every evening, and parents who had never held a book began to borrow newspapers. Mr. Sharma did not charge any fee; he asked only that each reader return a book in the condition in which it was taken. Today the library has more than two thousand books, most of them donated by people who once sat in that small room as children. Mr. Sharma often says that a book lent is a seed sown, and that he has lived long enough to see a forest grow.\n\nQuestion: The 'forest' in the last sentence refers to—",
+"o": [
+"the large, growing library and its readers",
+"a painting in the library",
+"a real forest near the village",
+"trees planted by Mr. Sharma"
+],
+"a": "A",
+"e": "(Library and readers)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 1: The village of Rampur had no library until a retired teacher, Mr. Sharma, turned the front room of his house into one. He began with forty books from his own shelf. Within a year, children were coming every evening, and parents who had never held a book began to borrow newspapers. Mr. Sharma did not charge any fee; he asked only that each reader return a book in the condition in which it was taken. Today the library has more than two thousand books, most of them donated by people who once sat in that small room as children. Mr. Sharma often says that a book lent is a seed sown, and that he has lived long enough to see a forest grow.\n\nQuestion: Which of the following is NOT true according to the passage?",
+"o": [
+"The library now has over 2,000 books",
+"Children came every evening",
+"Mr. Sharma charged a monthly fee",
+"Parents began to borrow newspapers"
+],
+"a": "C",
+"e": "(He charged no fee)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 1: The village of Rampur had no library until a retired teacher, Mr. Sharma, turned the front room of his house into one. He began with forty books from his own shelf. Within a year, children were coming every evening, and parents who had never held a book began to borrow newspapers. Mr. Sharma did not charge any fee; he asked only that each reader return a book in the condition in which it was taken. Today the library has more than two thousand books, most of them donated by people who once sat in that small room as children. Mr. Sharma often says that a book lent is a seed sown, and that he has lived long enough to see a forest grow.\n\nQuestion: The best title for the passage is—",
+"o": [
+"The Village Council",
+"A Teacher's Pension",
+"Farming in Rampur",
+"A Room Full of Seeds"
+],
+"a": "D",
+"e": "(A Room Full of Seeds)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 2: Water is often called the most precious resource on earth, yet it is also the most wasted. In many cities, nearly a third of the water supplied is lost through leaking pipes before it reaches a single home. At the same time, groundwater is being pumped out faster than rain can refill it. Experts believe the solution lies less in finding new sources and more in managing existing ones wisely. Simple measures such as repairing leaks, harvesting rainwater from rooftops and reusing treated water for gardens can save enormous quantities. The challenge, they argue, is not a shortage of water but a shortage of care.\n\nQuestion: According to the passage, how much of the water supplied in many cities is lost?",
+"o": [
+"About a tenth",
+"Nearly half",
+"Nearly a third",
+"Almost all"
+],
+"a": "C",
+"e": "(Nearly a third)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 2: Water is often called the most precious resource on earth, yet it is also the most wasted. In many cities, nearly a third of the water supplied is lost through leaking pipes before it reaches a single home. At the same time, groundwater is being pumped out faster than rain can refill it. Experts believe the solution lies less in finding new sources and more in managing existing ones wisely. Simple measures such as repairing leaks, harvesting rainwater from rooftops and reusing treated water for gardens can save enormous quantities. The challenge, they argue, is not a shortage of water but a shortage of care.\n\nQuestion: Where is this water lost?",
+"o": [
+"In factories",
+"Through leaking pipes",
+"Through evaporation from dams",
+"In rivers"
+],
+"a": "B",
+"e": "(Leaking pipes)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 2: Water is often called the most precious resource on earth, yet it is also the most wasted. In many cities, nearly a third of the water supplied is lost through leaking pipes before it reaches a single home. At the same time, groundwater is being pumped out faster than rain can refill it. Experts believe the solution lies less in finding new sources and more in managing existing ones wisely. Simple measures such as repairing leaks, harvesting rainwater from rooftops and reusing treated water for gardens can save enormous quantities. The challenge, they argue, is not a shortage of water but a shortage of care.\n\nQuestion: What is happening to groundwater?",
+"o": [
+"It is rising every year",
+"It is pumped out faster than rain can refill it",
+"It is no longer used",
+"It is being refilled quickly"
+],
+"a": "B",
+"e": "(Pumped out faster)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 2: Water is often called the most precious resource on earth, yet it is also the most wasted. In many cities, nearly a third of the water supplied is lost through leaking pipes before it reaches a single home. At the same time, groundwater is being pumped out faster than rain can refill it. Experts believe the solution lies less in finding new sources and more in managing existing ones wisely. Simple measures such as repairing leaks, harvesting rainwater from rooftops and reusing treated water for gardens can save enormous quantities. The challenge, they argue, is not a shortage of water but a shortage of care.\n\nQuestion: Experts believe the solution lies mainly in—",
+"o": [
+"finding new sources",
+"building bigger cities",
+"managing existing sources wisely",
+"importing water"
+],
+"a": "C",
+"e": "(Managing wisely)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 2: Water is often called the most precious resource on earth, yet it is also the most wasted. In many cities, nearly a third of the water supplied is lost through leaking pipes before it reaches a single home. At the same time, groundwater is being pumped out faster than rain can refill it. Experts believe the solution lies less in finding new sources and more in managing existing ones wisely. Simple measures such as repairing leaks, harvesting rainwater from rooftops and reusing treated water for gardens can save enormous quantities. The challenge, they argue, is not a shortage of water but a shortage of care.\n\nQuestion: Which of these is mentioned as a simple measure to save water?",
+"o": [
+"Building new rivers",
+"Harvesting rainwater from rooftops",
+"Stopping all farming",
+"Banning gardens"
+],
+"a": "B",
+"e": "(Rooftop harvesting)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 2: Water is often called the most precious resource on earth, yet it is also the most wasted. In many cities, nearly a third of the water supplied is lost through leaking pipes before it reaches a single home. At the same time, groundwater is being pumped out faster than rain can refill it. Experts believe the solution lies less in finding new sources and more in managing existing ones wisely. Simple measures such as repairing leaks, harvesting rainwater from rooftops and reusing treated water for gardens can save enormous quantities. The challenge, they argue, is not a shortage of water but a shortage of care.\n\nQuestion: Treated water can be reused for—",
+"o": [
+"cooking only",
+"gardens",
+"making medicines",
+"drinking directly"
+],
+"a": "B",
+"e": "(Gardens)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 2: Water is often called the most precious resource on earth, yet it is also the most wasted. In many cities, nearly a third of the water supplied is lost through leaking pipes before it reaches a single home. At the same time, groundwater is being pumped out faster than rain can refill it. Experts believe the solution lies less in finding new sources and more in managing existing ones wisely. Simple measures such as repairing leaks, harvesting rainwater from rooftops and reusing treated water for gardens can save enormous quantities. The challenge, they argue, is not a shortage of water but a shortage of care.\n\nQuestion: The word 'precious' means—",
+"o": [
+"very cheap",
+"very valuable",
+"very old",
+"very dirty"
+],
+"a": "B",
+"e": "(very valuable)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 2: Water is often called the most precious resource on earth, yet it is also the most wasted. In many cities, nearly a third of the water supplied is lost through leaking pipes before it reaches a single home. At the same time, groundwater is being pumped out faster than rain can refill it. Experts believe the solution lies less in finding new sources and more in managing existing ones wisely. Simple measures such as repairing leaks, harvesting rainwater from rooftops and reusing treated water for gardens can save enormous quantities. The challenge, they argue, is not a shortage of water but a shortage of care.\n\nQuestion: 'A shortage of care' suggests that the real problem is—",
+"o": [
+"too little rainfall",
+"too many rivers",
+"lack of pipes",
+"careless use and poor management"
+],
+"a": "D",
+"e": "(Careless use)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 2: Water is often called the most precious resource on earth, yet it is also the most wasted. In many cities, nearly a third of the water supplied is lost through leaking pipes before it reaches a single home. At the same time, groundwater is being pumped out faster than rain can refill it. Experts believe the solution lies less in finding new sources and more in managing existing ones wisely. Simple measures such as repairing leaks, harvesting rainwater from rooftops and reusing treated water for gardens can save enormous quantities. The challenge, they argue, is not a shortage of water but a shortage of care.\n\nQuestion: The tone of the passage is mainly—",
+"o": [
+"angry",
+"romantic",
+"humorous",
+"concerned and advisory"
+],
+"a": "D",
+"e": "(Concerned, advisory)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 2: Water is often called the most precious resource on earth, yet it is also the most wasted. In many cities, nearly a third of the water supplied is lost through leaking pipes before it reaches a single home. At the same time, groundwater is being pumped out faster than rain can refill it. Experts believe the solution lies less in finding new sources and more in managing existing ones wisely. Simple measures such as repairing leaks, harvesting rainwater from rooftops and reusing treated water for gardens can save enormous quantities. The challenge, they argue, is not a shortage of water but a shortage of care.\n\nQuestion: Which word from the passage means 'collecting and storing'?",
+"o": [
+"harvesting",
+"supplied",
+"repairing",
+"pumped"
+],
+"a": "A",
+"e": "(harvesting)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 3: When Kalpana first joined the hockey team, she could barely hold the stick properly. The coach noticed that she arrived before everyone else and stayed after practice to hit the ball against a wall, again and again. Some of her teammates laughed at her clumsy movements. Kalpana did not reply; she simply kept practising. By the end of the season she was selected for the district team, and two years later she captained the state side. Asked about her success, she said that talent decides where you begin, but discipline decides where you end.\n\nQuestion: When Kalpana joined the team, she—",
+"o": [
+"was made captain",
+"was already the best player",
+"refused to practise",
+"could barely hold the stick properly"
+],
+"a": "D",
+"e": "(Could barely hold the stick)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 3: When Kalpana first joined the hockey team, she could barely hold the stick properly. The coach noticed that she arrived before everyone else and stayed after practice to hit the ball against a wall, again and again. Some of her teammates laughed at her clumsy movements. Kalpana did not reply; she simply kept practising. By the end of the season she was selected for the district team, and two years later she captained the state side. Asked about her success, she said that talent decides where you begin, but discipline decides where you end.\n\nQuestion: What did the coach notice about Kalpana?",
+"o": [
+"She came early and stayed late to practise",
+"She played only matches",
+"She argued with teammates",
+"She often missed practice"
+],
+"a": "A",
+"e": "(Early and late practice)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 3: When Kalpana first joined the hockey team, she could barely hold the stick properly. The coach noticed that she arrived before everyone else and stayed after practice to hit the ball against a wall, again and again. Some of her teammates laughed at her clumsy movements. Kalpana did not reply; she simply kept practising. By the end of the season she was selected for the district team, and two years later she captained the state side. Asked about her success, she said that talent decides where you begin, but discipline decides where you end.\n\nQuestion: How did Kalpana react when teammates laughed at her?",
+"o": [
+"She complained to the coach",
+"She laughed back at them",
+"She did not reply and kept practising",
+"She left the team"
+],
+"a": "C",
+"e": "(Kept practising)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 3: When Kalpana first joined the hockey team, she could barely hold the stick properly. The coach noticed that she arrived before everyone else and stayed after practice to hit the ball against a wall, again and again. Some of her teammates laughed at her clumsy movements. Kalpana did not reply; she simply kept practising. By the end of the season she was selected for the district team, and two years later she captained the state side. Asked about her success, she said that talent decides where you begin, but discipline decides where you end.\n\nQuestion: By the end of the season, Kalpana was selected for—",
+"o": [
+"the state team as captain",
+"the national team",
+"the district team",
+"the school band"
+],
+"a": "C",
+"e": "(District team)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 3: When Kalpana first joined the hockey team, she could barely hold the stick properly. The coach noticed that she arrived before everyone else and stayed after practice to hit the ball against a wall, again and again. Some of her teammates laughed at her clumsy movements. Kalpana did not reply; she simply kept practising. By the end of the season she was selected for the district team, and two years later she captained the state side. Asked about her success, she said that talent decides where you begin, but discipline decides where you end.\n\nQuestion: Two years later she—",
+"o": [
+"left hockey",
+"became a coach",
+"joined the national team",
+"captained the state side"
+],
+"a": "D",
+"e": "(Captained the state side)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 3: When Kalpana first joined the hockey team, she could barely hold the stick properly. The coach noticed that she arrived before everyone else and stayed after practice to hit the ball against a wall, again and again. Some of her teammates laughed at her clumsy movements. Kalpana did not reply; she simply kept practising. By the end of the season she was selected for the district team, and two years later she captained the state side. Asked about her success, she said that talent decides where you begin, but discipline decides where you end.\n\nQuestion: According to Kalpana, discipline decides—",
+"o": [
+"how tall you are",
+"where you begin",
+"where you end",
+"who your coach is"
+],
+"a": "C",
+"e": "(Where you end)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 3: When Kalpana first joined the hockey team, she could barely hold the stick properly. The coach noticed that she arrived before everyone else and stayed after practice to hit the ball against a wall, again and again. Some of her teammates laughed at her clumsy movements. Kalpana did not reply; she simply kept practising. By the end of the season she was selected for the district team, and two years later she captained the state side. Asked about her success, she said that talent decides where you begin, but discipline decides where you end.\n\nQuestion: The word 'clumsy' means—",
+"o": [
+"awkward and careless in movement",
+"fast",
+"graceful",
+"strong"
+],
+"a": "A",
+"e": "(awkward)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 3: When Kalpana first joined the hockey team, she could barely hold the stick properly. The coach noticed that she arrived before everyone else and stayed after practice to hit the ball against a wall, again and again. Some of her teammates laughed at her clumsy movements. Kalpana did not reply; she simply kept practising. By the end of the season she was selected for the district team, and two years later she captained the state side. Asked about her success, she said that talent decides where you begin, but discipline decides where you end.\n\nQuestion: The main quality shown by Kalpana is—",
+"o": [
+"pride",
+"laziness",
+"perseverance",
+"jealousy"
+],
+"a": "C",
+"e": "(perseverance)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 3: When Kalpana first joined the hockey team, she could barely hold the stick properly. The coach noticed that she arrived before everyone else and stayed after practice to hit the ball against a wall, again and again. Some of her teammates laughed at her clumsy movements. Kalpana did not reply; she simply kept practising. By the end of the season she was selected for the district team, and two years later she captained the state side. Asked about her success, she said that talent decides where you begin, but discipline decides where you end.\n\nQuestion: The passage mainly teaches that—",
+"o": [
+"teammates are always right",
+"sports are a waste of time",
+"hard work and discipline matter more than early talent",
+"talent is everything"
+],
+"a": "C",
+"e": "(Discipline matters)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 3: When Kalpana first joined the hockey team, she could barely hold the stick properly. The coach noticed that she arrived before everyone else and stayed after practice to hit the ball against a wall, again and again. Some of her teammates laughed at her clumsy movements. Kalpana did not reply; she simply kept practising. By the end of the season she was selected for the district team, and two years later she captained the state side. Asked about her success, she said that talent decides where you begin, but discipline decides where you end.\n\nQuestion: 'Again and again' in the passage shows—",
+"o": [
+"repetition",
+"surprise",
+"anger",
+"doubt"
+],
+"a": "A",
+"e": "(repetition)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 4: Honeybees live in highly organised colonies. Each colony has a single queen, whose main task is to lay eggs. Thousands of worker bees, all female, gather nectar, build the honeycomb, clean the hive and care for the young. The male bees, called drones, have only one purpose: to mate with a queen. Bees communicate through a remarkable 'waggle dance', by which a worker tells others the direction and distance of a source of food. Scientists warn that the decline of bee populations, caused by pesticides and loss of flowering plants, could seriously harm food production, since bees pollinate a large share of the crops we eat.\n\nQuestion: How many queens does a honeybee colony have?",
+"o": [
+"Two",
+"Hundreds",
+"None",
+"One"
+],
+"a": "D",
+"e": "(One)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 4: Honeybees live in highly organised colonies. Each colony has a single queen, whose main task is to lay eggs. Thousands of worker bees, all female, gather nectar, build the honeycomb, clean the hive and care for the young. The male bees, called drones, have only one purpose: to mate with a queen. Bees communicate through a remarkable 'waggle dance', by which a worker tells others the direction and distance of a source of food. Scientists warn that the decline of bee populations, caused by pesticides and loss of flowering plants, could seriously harm food production, since bees pollinate a large share of the crops we eat.\n\nQuestion: What is the main task of the queen bee?",
+"o": [
+"Laying eggs",
+"Making wax only",
+"Guarding the hive",
+"Gathering nectar"
+],
+"a": "A",
+"e": "(Laying eggs)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 4: Honeybees live in highly organised colonies. Each colony has a single queen, whose main task is to lay eggs. Thousands of worker bees, all female, gather nectar, build the honeycomb, clean the hive and care for the young. The male bees, called drones, have only one purpose: to mate with a queen. Bees communicate through a remarkable 'waggle dance', by which a worker tells others the direction and distance of a source of food. Scientists warn that the decline of bee populations, caused by pesticides and loss of flowering plants, could seriously harm food production, since bees pollinate a large share of the crops we eat.\n\nQuestion: Worker bees are—",
+"o": [
+"both male and female",
+"neither",
+"all male",
+"all female"
+],
+"a": "D",
+"e": "(All female)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 4: Honeybees live in highly organised colonies. Each colony has a single queen, whose main task is to lay eggs. Thousands of worker bees, all female, gather nectar, build the honeycomb, clean the hive and care for the young. The male bees, called drones, have only one purpose: to mate with a queen. Bees communicate through a remarkable 'waggle dance', by which a worker tells others the direction and distance of a source of food. Scientists warn that the decline of bee populations, caused by pesticides and loss of flowering plants, could seriously harm food production, since bees pollinate a large share of the crops we eat.\n\nQuestion: Male bees are called—",
+"o": [
+"queens",
+"workers",
+"drones",
+"larvae"
+],
+"a": "C",
+"e": "(drones)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 4: Honeybees live in highly organised colonies. Each colony has a single queen, whose main task is to lay eggs. Thousands of worker bees, all female, gather nectar, build the honeycomb, clean the hive and care for the young. The male bees, called drones, have only one purpose: to mate with a queen. Bees communicate through a remarkable 'waggle dance', by which a worker tells others the direction and distance of a source of food. Scientists warn that the decline of bee populations, caused by pesticides and loss of flowering plants, could seriously harm food production, since bees pollinate a large share of the crops we eat.\n\nQuestion: The 'waggle dance' is used to—",
+"o": [
+"attract a queen",
+"tell other bees the direction and distance of food",
+"scare away enemies",
+"celebrate a new hive"
+],
+"a": "B",
+"e": "(Communicate food location)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 4: Honeybees live in highly organised colonies. Each colony has a single queen, whose main task is to lay eggs. Thousands of worker bees, all female, gather nectar, build the honeycomb, clean the hive and care for the young. The male bees, called drones, have only one purpose: to mate with a queen. Bees communicate through a remarkable 'waggle dance', by which a worker tells others the direction and distance of a source of food. Scientists warn that the decline of bee populations, caused by pesticides and loss of flowering plants, could seriously harm food production, since bees pollinate a large share of the crops we eat.\n\nQuestion: Which of these is NOT a job of worker bees?",
+"o": [
+"Mating with the queen",
+"Gathering nectar",
+"Cleaning the hive",
+"Caring for the young"
+],
+"a": "A",
+"e": "(Mating — done by drones)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 4: Honeybees live in highly organised colonies. Each colony has a single queen, whose main task is to lay eggs. Thousands of worker bees, all female, gather nectar, build the honeycomb, clean the hive and care for the young. The male bees, called drones, have only one purpose: to mate with a queen. Bees communicate through a remarkable 'waggle dance', by which a worker tells others the direction and distance of a source of food. Scientists warn that the decline of bee populations, caused by pesticides and loss of flowering plants, could seriously harm food production, since bees pollinate a large share of the crops we eat.\n\nQuestion: According to scientists, bee populations are declining because of—",
+"o": [
+"cold weather only",
+"pesticides and loss of flowering plants",
+"too much rain",
+"too many queens"
+],
+"a": "B",
+"e": "(Pesticides, loss of flowers)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 4: Honeybees live in highly organised colonies. Each colony has a single queen, whose main task is to lay eggs. Thousands of worker bees, all female, gather nectar, build the honeycomb, clean the hive and care for the young. The male bees, called drones, have only one purpose: to mate with a queen. Bees communicate through a remarkable 'waggle dance', by which a worker tells others the direction and distance of a source of food. Scientists warn that the decline of bee populations, caused by pesticides and loss of flowering plants, could seriously harm food production, since bees pollinate a large share of the crops we eat.\n\nQuestion: Why is the decline of bees dangerous?",
+"o": [
+"Bees control the weather",
+"Bees pollinate a large share of our food crops",
+"Bees make all our sugar",
+"Bees clean rivers"
+],
+"a": "B",
+"e": "(Pollination)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 4: Honeybees live in highly organised colonies. Each colony has a single queen, whose main task is to lay eggs. Thousands of worker bees, all female, gather nectar, build the honeycomb, clean the hive and care for the young. The male bees, called drones, have only one purpose: to mate with a queen. Bees communicate through a remarkable 'waggle dance', by which a worker tells others the direction and distance of a source of food. Scientists warn that the decline of bee populations, caused by pesticides and loss of flowering plants, could seriously harm food production, since bees pollinate a large share of the crops we eat.\n\nQuestion: The word 'colonies' in the passage means—",
+"o": [
+"countries ruled by others",
+"farms",
+"organised groups living together",
+"flowers"
+],
+"a": "C",
+"e": "(organised groups)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 4: Honeybees live in highly organised colonies. Each colony has a single queen, whose main task is to lay eggs. Thousands of worker bees, all female, gather nectar, build the honeycomb, clean the hive and care for the young. The male bees, called drones, have only one purpose: to mate with a queen. Bees communicate through a remarkable 'waggle dance', by which a worker tells others the direction and distance of a source of food. Scientists warn that the decline of bee populations, caused by pesticides and loss of flowering plants, could seriously harm food production, since bees pollinate a large share of the crops we eat.\n\nQuestion: The passage is mainly—",
+"o": [
+"poetic",
+"humorous",
+"informative",
+"fictional"
+],
+"a": "C",
+"e": "(informative)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 5: A good teacher does not merely give answers; she teaches students how to ask questions. In a classroom where questions are welcomed, mistakes are not treated as failures but as steps towards understanding. Such a teacher listens more than she speaks and observes each child closely, knowing that no two learners are alike. She may use a story, a game or a simple experiment to explain an idea that a textbook makes dull. Above all, she believes that every child can learn, and her belief often becomes the child's own.\n\nQuestion: According to the passage, a good teacher mainly teaches students—",
+"o": [
+"how to ask questions",
+"to memorise the textbook",
+"only the answers",
+"to fear mistakes"
+],
+"a": "A",
+"e": "(How to ask questions)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 5: A good teacher does not merely give answers; she teaches students how to ask questions. In a classroom where questions are welcomed, mistakes are not treated as failures but as steps towards understanding. Such a teacher listens more than she speaks and observes each child closely, knowing that no two learners are alike. She may use a story, a game or a simple experiment to explain an idea that a textbook makes dull. Above all, she believes that every child can learn, and her belief often becomes the child's own.\n\nQuestion: In such a classroom, mistakes are treated as—",
+"o": [
+"failures",
+"steps towards understanding",
+"unimportant",
+"reasons for punishment"
+],
+"a": "B",
+"e": "(Steps towards understanding)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 5: A good teacher does not merely give answers; she teaches students how to ask questions. In a classroom where questions are welcomed, mistakes are not treated as failures but as steps towards understanding. Such a teacher listens more than she speaks and observes each child closely, knowing that no two learners are alike. She may use a story, a game or a simple experiment to explain an idea that a textbook makes dull. Above all, she believes that every child can learn, and her belief often becomes the child's own.\n\nQuestion: A good teacher listens—",
+"o": [
+"never",
+"only to bright students",
+"only to parents",
+"more than she speaks"
+],
+"a": "D",
+"e": "(More than she speaks)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 5: A good teacher does not merely give answers; she teaches students how to ask questions. In a classroom where questions are welcomed, mistakes are not treated as failures but as steps towards understanding. Such a teacher listens more than she speaks and observes each child closely, knowing that no two learners are alike. She may use a story, a game or a simple experiment to explain an idea that a textbook makes dull. Above all, she believes that every child can learn, and her belief often becomes the child's own.\n\nQuestion: Why does the teacher observe each child closely?",
+"o": [
+"Because no two learners are alike",
+"To give more homework",
+"To report to the principal",
+"To find faults"
+],
+"a": "A",
+"e": "(No two learners alike)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 5: A good teacher does not merely give answers; she teaches students how to ask questions. In a classroom where questions are welcomed, mistakes are not treated as failures but as steps towards understanding. Such a teacher listens more than she speaks and observes each child closely, knowing that no two learners are alike. She may use a story, a game or a simple experiment to explain an idea that a textbook makes dull. Above all, she believes that every child can learn, and her belief often becomes the child's own.\n\nQuestion: Which method is NOT mentioned in the passage?",
+"o": [
+"A simple experiment",
+"Punishment",
+"A story",
+"A game"
+],
+"a": "B",
+"e": "(Punishment)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 5: A good teacher does not merely give answers; she teaches students how to ask questions. In a classroom where questions are welcomed, mistakes are not treated as failures but as steps towards understanding. Such a teacher listens more than she speaks and observes each child closely, knowing that no two learners are alike. She may use a story, a game or a simple experiment to explain an idea that a textbook makes dull. Above all, she believes that every child can learn, and her belief often becomes the child's own.\n\nQuestion: The passage suggests that a textbook can sometimes make an idea—",
+"o": [
+"exciting",
+"dull",
+"dangerous",
+"impossible"
+],
+"a": "B",
+"e": "(dull)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 5: A good teacher does not merely give answers; she teaches students how to ask questions. In a classroom where questions are welcomed, mistakes are not treated as failures but as steps towards understanding. Such a teacher listens more than she speaks and observes each child closely, knowing that no two learners are alike. She may use a story, a game or a simple experiment to explain an idea that a textbook makes dull. Above all, she believes that every child can learn, and her belief often becomes the child's own.\n\nQuestion: 'Her belief often becomes the child's own' means—",
+"o": [
+"the teacher stops believing",
+"the child forgets the lesson",
+"the child copies the teacher's religion",
+"the child starts believing in himself or herself"
+],
+"a": "D",
+"e": "(Child gains self-belief)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 5: A good teacher does not merely give answers; she teaches students how to ask questions. In a classroom where questions are welcomed, mistakes are not treated as failures but as steps towards understanding. Such a teacher listens more than she speaks and observes each child closely, knowing that no two learners are alike. She may use a story, a game or a simple experiment to explain an idea that a textbook makes dull. Above all, she believes that every child can learn, and her belief often becomes the child's own.\n\nQuestion: The word 'merely' is closest in meaning to—",
+"o": [
+"rarely",
+"never",
+"only",
+"always"
+],
+"a": "C",
+"e": "(only)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 5: A good teacher does not merely give answers; she teaches students how to ask questions. In a classroom where questions are welcomed, mistakes are not treated as failures but as steps towards understanding. Such a teacher listens more than she speaks and observes each child closely, knowing that no two learners are alike. She may use a story, a game or a simple experiment to explain an idea that a textbook makes dull. Above all, she believes that every child can learn, and her belief often becomes the child's own.\n\nQuestion: The passage is closest in spirit to which educational idea?",
+"o": [
+"Rote learning",
+"Corporal punishment",
+"Teacher-centred lecturing",
+"Child-centred learning"
+],
+"a": "D",
+"e": "(Child-centred)"
+},
+{
+"q": "Read the passage and answer the question.\n\nPASSAGE 5: A good teacher does not merely give answers; she teaches students how to ask questions. In a classroom where questions are welcomed, mistakes are not treated as failures but as steps towards understanding. Such a teacher listens more than she speaks and observes each child closely, knowing that no two learners are alike. She may use a story, a game or a simple experiment to explain an idea that a textbook makes dull. Above all, she believes that every child can learn, and her belief often becomes the child's own.\n\nQuestion: The best title for the passage is—",
+"o": [
+"The Teacher Who Asks",
+"Examination Tips",
+"Rules of the Classroom",
+"The Dull Textbook"
+],
+"a": "A",
+"e": "(The Teacher Who Asks)"
+}
+]
