@@ -127,13 +127,12 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
         </ul>
         <div class="uh-feat-foot">
           <p class="uh-fee"><small><?php echo eh_t('Book price', 'किताब की कीमत'); ?></small>₹429</p>
-          <a class="uh-btn dark" href="<?php echo esc_url($bk_tg); ?>" target="_blank" rel="noopener"><?php echo eh_t('Order on Telegram', 'टेलीग्राम पर ऑर्डर करें'); ?><?php echo $arrow; ?></a>
-          <a class="uh-btn line" href="<?php echo esc_url($bk_wa); ?>" target="_blank" rel="noopener">WhatsApp</a>
+          <span class="uh-oos">⛔ <?php echo eh_t('Out of Stock', 'आउट ऑफ़ स्टॉक'); ?></span>
         </div>
       </div>
       <div class="uh-feat-img uh-book-img"><?php if ($bk_img): ?><img src="<?php echo esc_url($bk_img); ?>" alt="UP SUPER TET Book by UPSSSC Alert" loading="lazy"><?php else: ?>
         <div class="uh-book-cover"><span>UPSSSC ALERT</span><b>UP SUPER TET</b><i>6000+ <?php echo eh_t('questions', 'प्रश्न'); ?> · <?php echo eh_t('theory', 'थ्योरी'); ?> · <?php echo eh_t('model papers', 'मॉडल पेपर'); ?></i></div><?php endif; ?>
-        <span class="uh-new"><?php echo eh_t('Our book', 'हमारी किताब'); ?></span></div>
+        <span class="uh-new"><?php echo eh_t('Our book', 'हमारी किताब'); ?></span><span class="uh-oos-tag">OUT OF STOCK</span></div>
     </article>
 
     <div class="uh-bgrid">

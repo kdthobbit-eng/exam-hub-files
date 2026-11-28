@@ -16,6 +16,7 @@ function eh_stm_rounds() {
         ['id' => 't2', 'name' => 'Super TET Mock 2026 — ट्रायल', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 08:40', 'paper' => 'supertet-mock1'],
         ['id' => 'm1', 'name' => 'Super TET Mock 2026 — लाइव', 'login' => '2026-11-22 08:40', 'start' => '2026-11-22 09:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
         ['id' => 'm2', 'name' => 'Super TET Mock 2 — लाइव', 'login' => '2026-11-25 09:10', 'start' => '2026-11-25 09:30', 'end' => '2026-11-25 23:59', 'paper' => 'supertet-mock2'],
+        ['id' => 'p1', 'name' => 'Super TET फुल लेंथ मॉक (प्रैक्टिस) 1', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice1', 'kind' => 'practice'],
     ];
     $list = array_map(function ($r) { $r['series'] = $r['series'] ?? 'stet'; return $r; }, $list);
     if (function_exists('eh_tp_rounds_all')) $list = array_merge($list, eh_tp_rounds_all());
@@ -32,7 +33,7 @@ function eh_stm_rounds() {
 function eh_stm_round($id = '') {
     $all = eh_stm_rounds(); $now = time();
     if ($id) { foreach ($all as $r) if ($r['id'] === $id) return $r; }
-    $all = array_values(array_filter($all, function ($r) { return $r['series'] === 'stet'; }));
+    $all = array_values(array_filter($all, function ($r) { return $r['series'] === 'stet' && ($r['kind'] ?? '') !== 'practice'; }));
     foreach ($all as $r) if ($now < $r['end_ts']) return $r;
     return end($all);
 }
@@ -348,6 +349,7 @@ function eh_stm_secmap($rd = null) {
     $rd = $rd ?: eh_stm_round();
     if (function_exists('eh_tp_is') && eh_tp_is($rd)) {
         if (($rd['kind'] ?? '') === 'sec') return [[$rd['sub'], $r(1, 90)]];
+        if (($rd['kind'] ?? '') === 'topic') return [[$rd['topic'], $r(1, 50)]];
         if (($rd['kind'] ?? '') === 'gs') return [['सामान्य अध्ययन', $r(1, 30)]];
         return [['सामान्य अध्ययन', $r(1, 30)], [$rd['sub'], $r(31, 120)]];
     }

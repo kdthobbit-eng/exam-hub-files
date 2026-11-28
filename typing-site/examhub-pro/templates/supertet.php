@@ -9,7 +9,7 @@ $eh_vr = eh_stm_view_round();
 $eh_tp = function_exists('eh_tp_is') && eh_tp_is($eh_vr) ? eh_tp_info($eh_vr['series']) : null;
 $eh_self = $eh_tp ? eh_tp_url($eh_vr) : home_url('/super-tet-mock/');
 $eh_nq = eh_stm_nq($eh_vr); $eh_max = $eh_nq * 3; $eh_min = (int) round(eh_stm_secs($eh_vr) / 60);
-$eh_exl = $eh_tp ? $eh_tp['title'] . ' · ' . $eh_vr['sub'] . (($eh_vr['kind'] ?? '') === 'full' ? '' : ' (सेक्शनल)') : 'UP Super TET 2026';
+$eh_exl = $eh_tp ? $eh_tp['title'] . ' · ' . $eh_vr['sub'] . (($eh_vr['kind'] ?? '') === 'full' ? '' : (($eh_vr['kind'] ?? '') === 'topic' ? ' — ' . $eh_vr['topic'] : ' (सेक्शनल)')) : 'UP Super TET 2026';
 $eh_cfg = [
     'rest' => esc_url_raw(rest_url('eh/v1/stm/')), 'nonce' => $eh_in ? wp_create_nonce('wp_rest') : '',
     'in' => $eh_in, 'admin' => $eh_admin, 'isadm' => $eh_in && current_user_can('manage_options'), 'now' => time(),
@@ -466,7 +466,7 @@ table.mt th{background:#eef3f9;font-weight:600}
   <div><span class="chip" id="h-chip"><span class="dot"></span><span id="h-chipt">लाइव मॉक टेस्ट</span></span>
 <?php if ($eh_tp): $eh_sib = array_values(array_filter(eh_stm_rounds(), function ($x) use ($eh_vr) { return ($x['series'] ?? '') === $eh_vr['series'] && ($x['kind'] ?? '') === ($eh_vr['kind'] ?? ''); })); ?>
    <p class="st" style="margin:0 0 6px"><a href="<?php echo esc_url(home_url('/mock-test/')); ?>" style="color:#fff">मॉक टेस्ट</a> › <a href="<?php echo esc_url($eh_vr['series'] === 'gs' ? home_url('/mock-test/') : add_query_arg(['x' => $eh_vr['series'], 's' => $eh_vr['slug']], home_url('/mock-test/'))); ?>" style="color:#fff"><?php echo esc_html($eh_tp['short']); ?></a></p>
-   <h1><?php echo esc_html($eh_tp['title']); ?> <em><?php echo esc_html($eh_vr['sub'] . (($eh_vr['kind'] ?? '') === 'full' ? '' : ' · सेक्शनल')); ?></em></h1>
+   <h1><?php echo esc_html($eh_tp['title']); ?> <em><?php echo esc_html($eh_vr['sub'] . (($eh_vr['kind'] ?? '') === 'full' ? '' : (($eh_vr['kind'] ?? '') === 'topic' ? ' · ' . $eh_vr['topic'] : ' · सेक्शनल'))); ?></em></h1>
    <p class="st"><?php echo esc_html($eh_tp['post'] . ' · ' . $eh_tp['adv'] . ' · विषयवार ऑनलाइन लाइव मॉक'); ?></p>
 <?php else: ?>
    <h1>UP Super TET <em>2026</em></h1>
@@ -490,7 +490,7 @@ table.mt th{background:#eef3f9;font-weight:600}
   </div>
   <div class="card" style="margin-bottom:16px"><h2>महत्वपूर्ण निर्देश</h2><ol class="rules">
    <li>परीक्षा देने के लिए xlstudy.in पर लॉग-इन ज़रूरी है। जितनी बार चाहें दोबारा दे सकते हैं, पर मेरिट लिस्ट और रैंक में केवल आपका <b>पहला प्रयास</b> गिना जाएगा; दोबारा दिए गए प्रयास केवल अभ्यास के लिए होंगे।</li>
-   <li><?php echo $eh_tp ? 'मॉक अभी खुला है — कभी भी शुरू करें, शुरू करने के बाद पूरे ' . $eh_min . ' मिनट मिलेंगे।' . (($eh_vr['kind'] ?? '') === 'full' ? ' पहले 30 प्रश्न सामान्य अध्ययन (सभी विषयों में एक जैसे) और बाकी 90 प्रश्न आपके विषय के हैं।' : ' यह सेक्शनल मॉक है।') : 'मॉक सुबह 10 बजे से रात 11:59 तक खुला है — इस बीच कभी भी शुरू करें, शुरू करने के बाद पूरे 120 मिनट मिलेंगे।'; ?> अंतिम रैंक रात 11:59 के बाद।</li>
+   <li><?php echo $eh_tp ? 'मॉक अभी खुला है — कभी भी शुरू करें, शुरू करने के बाद पूरे ' . $eh_min . ' मिनट मिलेंगे।' . (($eh_vr['kind'] ?? '') === 'full' ? ' पहले 30 प्रश्न सामान्य अध्ययन (सभी विषयों में एक जैसे) और बाकी 90 प्रश्न आपके विषय के हैं।' : (($eh_vr['kind'] ?? '') === 'topic' ? ' यह टॉपिक टेस्ट है — 50 प्रश्न।' : ' यह सेक्शनल मॉक है।')) : 'मॉक सुबह 10 बजे से रात 11:59 तक खुला है — इस बीच कभी भी शुरू करें, शुरू करने के बाद पूरे 120 मिनट मिलेंगे।'; ?> अंतिम रैंक रात 11:59 के बाद।</li>
    <li>हर उत्तर सर्वर पर सेव होता है। नेट जाने या फ़ोन बंद होने पर दोबारा खोलें — परीक्षा वहीं से चलेगी।</li>
    <li>समय पूरा होते ही परीक्षा अपने आप सबमिट हो जाएगी।</li>
    <li>सबमिट के बाद स्कोर, रैंक, परसेंटाइल, सेक्शन-वार विश्लेषण और हर प्रश्न की व्याख्या मिलेगी। प्रश्न-पत्र व उत्तर-कुंजी PDF में डाउनलोड कर सकेंगे।</li>
@@ -655,7 +655,7 @@ function cta(st){let h='',p='',b='';const a=A;
  else if(!a){h='लोड हो रहा है…'}
  else if(+a.submitted){h=ME.name+', आपका प्रयास '+(a.att||1)+' सबमिट हो चुका है';p='रिज़ल्ट देखें, या अभ्यास के लिए दोबारा दें — मेरिट में केवल पहला प्रयास गिना जाएगा।';b='<button class="b b-wh b-lg" id="c-re"'+(st==='live'?'':' disabled')+'>↻ दोबारा दें</button><button class="b b-gd b-lg" id="c-go">रिज़ल्ट देखें ›</button>'}
  else if(+a.started){h='आपकी परीक्षा जारी है';p='बचा समय '+fmt(a.paused?a.left:a.deadline-now())+' · घड़ी रुकी है, परीक्षा खोलने पर ही चलेगी।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा जारी रखें ›</button>'}
- else if(st==='soon'){h='नमस्ते, '+ME.name;p=C.tp?'इस विषय का पेपर तैयार हो रहा है, जल्द लाइव होगा। ऊपर से कोई दूसरा विषय चुन सकते हैं।':'लॉग-इन '+tStr(R.login)+' से खुलेगा। तब तक नीचे पैटर्न और निर्देश देख लें।';b='<button class="b b-wh b-lg" disabled>'+(C.tp?'जल्द लाइव होगा':tStr(R.login)+' से खुलेगा')+'</button>'}
+ else if(st==='soon'){h='नमस्ते, '+ME.name;p=C.tp?'यह टेस्ट Coming Soon है।':'लॉग-इन '+tStr(R.login)+' से खुलेगा। तब तक नीचे पैटर्न और निर्देश देख लें।';b='<button class="b b-wh b-lg" disabled>'+(C.tp?'Coming Soon':tStr(R.login)+' से खुलेगा')+'</button>'}
  else if(st==='over'){h='यह परीक्षा समाप्त हो चुकी है';p='प्रश्न-पत्र और उत्तर-कुंजी डाउनलोड करें।';b='<button class="b b-pr b-lg" id="c-paper">⬇ प्रश्न-पत्र + उत्तर-कुंजी</button>'}
  else {h='नमस्ते, '+ME.name;p=st==='live'?(R.end-now()>=C.mins*60?'मॉक खुला है। शुरू करने पर आपको पूरे '+C.mins+' मिनट मिलेंगे।':'मॉक बंद होने वाला है — अभी शुरू करने पर केवल '+fmt(R.end-now())+' मिलेंगे।'):'विवरण जाँचें और निर्देश पढ़ें। परीक्षा '+tStr(R.start)+' पर शुरू होगी।';b='<button class="b b-gd b-lg" id="c-go">परीक्षा में प्रवेश करें ›</button>'}
  if(C.isadm)b='<a class="b b-wh b-lg" href="?admin=1">🛠️ Admin Panel</a>'+b;

@@ -53,10 +53,18 @@ function eh_tp_rounds_all() {
     foreach (eh_tp_rounds() as $r) {
         $out[] = array_merge($r, ['id' => $r['id'] . 's', 'kind' => 'sec', 'gs' => '', 'secs' => 5400, 'nq' => 90, 'name' => strtoupper($r['series']) . ' ' . $r['sub'] . ' — सेक्शनल (विषय)']);
     }
+    $T = eh_tp_topics();
+    foreach (eh_tp_rounds() as $r) foreach (($T[$r['series']][$r['slug']] ?? []) as $i => $tn) {
+        $f = 'tp/topic/' . $r['series'] . '-' . $r['slug'] . '-' . ($i + 1);
+        if (!is_file(EH_DIR . '/data/' . $f . '.json')) continue;
+        $out[] = array_merge($r, ['id' => $r['id'] . 't' . ($i + 1), 'kind' => 'topic', 'paper' => $f, 'gs' => '', 'secs' => 3000, 'nq' => 50, 'topic' => $tn[0], 'tno' => $i + 1,
+            'name' => strtoupper($r['series']) . ' ' . $r['sub'] . ' — टॉपिक टेस्ट: ' . $tn[0]]);
+    }
     $out[] = ['id' => 'gsx', 'series' => 'gs', 'slug' => 'gs', 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'name' => 'TGT/PGT सामान्य अध्ययन — सेक्शनल',
         'login' => EH_TP_LOGIN, 'start' => EH_TP_LOGIN, 'end' => EH_TP_END, 'paper' => 'tp/gs', 'gs' => '', 'kind' => 'gs', 'secs' => 1800, 'nq' => 30];
     return $out;
 }
+function eh_tp_topics() { static $t = null; if ($t === null) $t = json_decode((string) @file_get_contents(EH_DIR . '/data/tp/topics.json'), true) ?: []; return $t; }
 function eh_stm_secs($r) { return (int) ($r['secs'] ?? EH_STM_SECS); }
 function eh_stm_nq($r) { return (int) ($r['nq'] ?? 120); }
 function eh_tp_is($r) { return in_array($r['series'] ?? '', ['tgt', 'pgt', 'gs'], true); }
@@ -67,7 +75,7 @@ function eh_tp_ready($r) {
 /* ?r=tg01 / pg05 → that subject round */
 function eh_tp_req_round() {
     $id = sanitize_key($_GET['r'] ?? ($_REQUEST['eh_r'] ?? ''));
-    if (!preg_match('/^((tg|pg)\d\ds?|gsx)$/', $id)) return null;
+    if (!preg_match('/^((tg|pg)\d\d(s|t\d\d?)?|gsx|p\d)$/', $id)) return null;
     foreach (eh_stm_rounds() as $r) if ($r['id'] === $id) return $r;
     return null;
 }
@@ -99,8 +107,8 @@ function eh_mock_cards() {
     };
     return '<div class="mx-cards">'
         . $c(add_query_arg('x', 'stet', home_url('/mock-test/')), 'प्राथमिक · कक्षा 1–5', 'UP Super <em>TET</em>', 'सहायक अध्यापक भर्ती परीक्षा 2026', ['<b>120</b> प्रश्न · <b>360</b> अंक · <b>2</b> घंटे', '10 सेक्शन, नए पैटर्न पर', 'पिछले मॉक के परिणाम व उत्तर-कुंजी'], $sl, $sl ? 'मॉक दें' : 'मॉक देखें', 'mx-c1')
-        . $c(add_query_arg('x', 'tgt', home_url('/mock-test/')), 'स्नातक श्रेणी · ' . count($T['tgt']) . ' विषय', 'UP <em>TGT</em>', 'सहायक अध्यापक · विज्ञापन 07/2026', ['<b>30</b> सामान्य अध्ययन + <b>90</b> विषय', 'हर विषय का अलग मॉक', '<b>' . $ready['tgt'] . '</b> विषय लाइव · बाकी जल्द'], $ready['tgt'] > 0, 'विषय चुनें', 'mx-c2')
-        . $c(add_query_arg('x', 'pgt', home_url('/mock-test/')), 'प्रवक्ता · ' . count($T['pgt']) . ' विषय', 'UP <em>PGT</em>', 'प्रवक्ता (स्नातकोत्तर) · विज्ञापन 06/2026', ['<b>30</b> सामान्य अध्ययन + <b>90</b> विषय', 'हर विषय का अलग मॉक', '<b>' . $ready['pgt'] . '</b> विषय लाइव · बाकी जल्द'], $ready['pgt'] > 0, 'विषय चुनें', 'mx-c3')
+        . $c(add_query_arg('x', 'tgt', home_url('/mock-test/')), 'स्नातक श्रेणी · ' . count($T['tgt']) . ' विषय', 'UP <em>TGT</em>', 'सहायक अध्यापक · विज्ञापन 07/2026', ['<b>30</b> सामान्य अध्ययन + <b>90</b> विषय', 'हर विषय का अलग मॉक', '<b>' . $ready['tgt'] . '</b> विषय लाइव · बाकी Coming Soon'], $ready['tgt'] > 0, 'विषय चुनें', 'mx-c2')
+        . $c(add_query_arg('x', 'pgt', home_url('/mock-test/')), 'प्रवक्ता · ' . count($T['pgt']) . ' विषय', 'UP <em>PGT</em>', 'प्रवक्ता (स्नातकोत्तर) · विज्ञापन 06/2026', ['<b>30</b> सामान्य अध्ययन + <b>90</b> विषय', 'हर विषय का अलग मॉक', '<b>' . $ready['pgt'] . '</b> विषय लाइव · बाकी Coming Soon'], $ready['pgt'] > 0, 'विषय चुनें', 'mx-c3')
         . '</div>' . eh_tp_picker();
 }
 
@@ -122,7 +130,7 @@ function eh_home_live_boxes() {
     };
     return '<div class="uh-lbs">'
         . $box(add_query_arg('x', 'tgt', home_url('/mock-test/')), $ready['tgt'] > 0, 'LIVE · फ्री विषयवार मॉक', 'UP TGT 2026', 'लाइव मॉक टेस्ट', ['📚 ' . count($T['tgt']) . ' विषय', '📝 30 GS + 90 विषय', '🎯 360 अंक · +3/−1', '🏆 रैंक + परसेंटाइल'], '<b>' . $ready['tgt'] . '</b> विषय लाइव · ' . esc_html($endt) . ' तक खुला', 'विषय चुनें →')
-        . $box(add_query_arg('x', 'pgt', home_url('/mock-test/')), $ready['pgt'] > 0, ($ready['pgt'] ? 'LIVE' : 'जल्द') . ' · फ्री विषयवार मॉक', 'UP PGT 2026', 'लाइव मॉक टेस्ट', ['📚 ' . count($T['pgt']) . ' विषय', '📝 30 GS + 90 विषय', '🎯 360 अंक · +3/−1', '🏆 रैंक + परसेंटाइल'], '<b>' . $ready['pgt'] . '</b> विषय लाइव · बाकी जल्द', 'विषय चुनें →')
+        . $box(add_query_arg('x', 'pgt', home_url('/mock-test/')), $ready['pgt'] > 0, ($ready['pgt'] ? 'LIVE' : 'Coming Soon') . ' · फ्री विषयवार मॉक', 'UP PGT 2026', 'लाइव मॉक टेस्ट', ['📚 ' . count($T['pgt']) . ' विषय', '📝 30 GS + 90 विषय', '🎯 360 अंक · +3/−1', '🏆 रैंक + परसेंटाइल'], '<b>' . $ready['pgt'] . '</b> विषय लाइव · बाकी Coming Soon', 'विषय चुनें →')
         . $box(home_url('/super-tet-mock/'), $sl, $sl ? 'LIVE · अभी चल रहा है' : 'मॉक 1 व मॉक 2 · परिणाम', 'UP Super TET 2026', 'लाइव मॉक टेस्ट', ['📝 120 प्रश्न · 360 अंक', '⏱ 2 घंटे', '📘 उत्तर-कुंजी + व्याख्या', '🌐 हिंदी + English'], $sl ? 'मॉक अभी खुला है' : 'रैंक, उत्तर-कुंजी और व्याख्या देखें', $sl ? 'अभी मॉक दें →' : 'परिणाम देखें →')
         . '</div>';
 }
@@ -156,10 +164,10 @@ function eh_tp_find($id) { foreach (eh_stm_rounds() as $r) if ($r['id'] === $id)
 /* one test card: title, pattern, status, start / continue / retest, and a thin score bar once attempted */
 function eh_tp_test_card($r, $my, $title, $sub, $tag = '') {
     $ok = eh_stm_status($r) === 'live'; $m = $my[$r['id']] ?? null; $max = eh_stm_nq($r) * 3; $u = eh_tp_url($r);
-    $h = '<div class="mt-c' . ($ok ? '' : ' soon') . '"><div class="mt-top"><span class="mt-tag">' . esc_html($tag) . '</span>' . ($ok ? '<span class="mt-live"><i></i>LIVE</span>' : '<span class="mt-soon">जल्द आ रहा है</span>') . '</div>'
+    $h = '<div class="mt-c' . ($ok ? '' : ' soon') . '"><div class="mt-top"><span class="mt-tag">' . esc_html($tag) . '</span>' . ($ok ? '<span class="mt-live"><i></i>LIVE</span>' : '<span class="mt-soon">Coming Soon</span>') . '</div>'
         . '<h3>' . esc_html($title) . '</h3><p>' . esc_html($sub) . '</p>'
         . '<ul class="mt-meta"><li><b>' . eh_stm_nq($r) . '</b> प्रश्न</li><li><b>' . $max . '</b> अंक</li><li><b>' . (int) round(eh_stm_secs($r) / 60) . '</b> मिनट</li><li><b>+3 / −1</b></li></ul>';
-    if (!$ok) return $h . '<span class="mt-btn dis">जल्द आ रहा है</span></div>';
+    if (!$ok) return $h . '<span class="mt-btn dis">Coming Soon</span></div>';
     if ($m && $m['run']) $h .= '<a class="mt-btn" href="' . esc_url($u) . '">▶ परीक्षा जारी रखें</a>';
     elseif ($m && $m['n']) $h .= '<div class="mt-two"><a class="mt-btn ghost" href="' . esc_url($u) . '">परिणाम देखें</a><a class="mt-btn" href="' . esc_url(add_query_arg('re', 1, $u)) . '">↻ फिर से दें</a></div>';
     else $h .= '<a class="mt-btn" href="' . esc_url($u) . '">मॉक शुरू करें →</a>';
@@ -188,7 +196,7 @@ function eh_tp_picker() {
 function zone(s,sub){return C.hub+'?x='+s+'&s='+sub}
 function local(s){try{return localStorage.getItem('eh_tps_'+s)||''}catch(e){return ''}}
 function draw(){var d=C.d[S],v=(Q.value||'').trim().toLowerCase(),cur=d.p||local(S);document.getElementById('tpk-k').textContent=d.t;
- G.innerHTML=d.l.filter(function(x){return !v||(x[1]+' '+x[2]).toLowerCase().indexOf(v)>-1}).map(function(x,i){return '<button type="button" class="tpk-o'+(x[0]===cur?' on':'')+(x[3]?'':' soon')+'" data-s="'+x[0]+'"><b>'+x[1]+'</b><small>'+x[2]+'</small><em>'+(x[0]===cur?'✓ आपका विषय':(x[3]?'● LIVE':'जल्द'))+'</em></button>'}).join('')||'<p class="tpk-e">कोई विषय नहीं मिला।</p>';
+ G.innerHTML=d.l.filter(function(x){return !v||(x[1]+' '+x[2]).toLowerCase().indexOf(v)>-1}).map(function(x,i){return '<button type="button" class="tpk-o'+(x[0]===cur?' on':'')+(x[3]?'':' soon')+'" data-s="'+x[0]+'"><b>'+x[1]+'</b><small>'+x[2]+'</small><em>'+(x[0]===cur?'✓ आपका विषय':(x[3]?'● LIVE':'Coming Soon'))+'</em></button>'}).join('')||'<p class="tpk-e">कोई विषय नहीं मिला।</p>';
  document.getElementById('tpk-ft').innerHTML=C.in?'':'💡 <a href="'+'<?php echo esc_js(eh_login_page_url($hub)); ?>'+'">लॉग-इन</a> करने पर आपका विषय अकाउंट में सेव रहेगा।'}
 function open(s){S=s;Q.value='';draw();M.hidden=false;document.documentElement.style.overflow='hidden';setTimeout(function(){try{Q.focus({preventScroll:true})}catch(e){}},50)}
 function close(){M.hidden=true;document.documentElement.style.overflow=''}
@@ -213,7 +221,7 @@ function eh_tp_test_row($r, $my, $no, $title, $lang = 'हिंदी + English
     $dt = eh_tp_is($r) ? '' : '<span>📅 ' . wp_date('j', $r['start_ts']) . ' ' . $hm[(int) wp_date('n', $r['start_ts'])] . ' ' . wp_date('Y', $r['start_ts']) . '</span>';
     $go = function ($url) use ($in) { $url = add_query_arg('go', 1, $url); return $in ? $url : eh_login_page_url($url); };
     $h = '<div class="tr' . ($ok || $over ? '' : ' soon') . ($m && $m['n'] ? ' done' : '') . '"><div class="tr-n">' . str_pad((string) $no, 2, '0', STR_PAD_LEFT) . '</div><div class="tr-b">'
-        . '<div class="tr-t"><b>' . esc_html($title) . '</b>' . ($ok ? '<span class="tr-free">FREE</span><span class="tr-live"><i></i>LIVE</span>' : ($over ? '<span class="tr-soon">समाप्त</span>' : '<span class="tr-soon">' . (eh_tp_is($r) ? 'जल्द आ रहा है' : 'आगामी') . '</span>')) . '</div>'
+        . '<div class="tr-t"><b>' . esc_html($title) . '</b>' . ($ok ? '<span class="tr-free">FREE</span><span class="tr-live"><i></i>LIVE</span>' : ($over ? '<span class="tr-soon">समाप्त</span>' : '<span class="tr-soon">' . (eh_tp_is($r) ? 'Coming Soon' : 'आगामी') . '</span>')) . '</div>'
         . '<div class="tr-m">' . $dt . '<span>📝 ' . eh_stm_nq($r) . ' प्रश्न</span><span>🎯 ' . $max . ' अंक</span><span>⏱ ' . (int) round(eh_stm_secs($r) / 60) . ' मिनट</span><span>🌐 भाषा: ' . esc_html($lang) . '</span></div>';
     if ($m && $m['n']) {
         global $wpdb; $rank = 1 + (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_stm_table() . ' WHERE round = %s AND submitted > 0 AND counted = 1 AND score > %d', $r['id'], (int) $m['last']));
@@ -223,7 +231,7 @@ function eh_tp_test_row($r, $my, $no, $title, $lang = 'हिंदी + English
     $h .= '</div><div class="tr-a">';
     if ($over && $m && $m['n']) $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">📊 परिणाम देखें</a>';
     elseif ($over) $h .= '<a class="tr-btn ghost" href="' . esc_url($u) . '">उत्तर-कुंजी देखें</a>';
-    elseif (!$ok) $h .= '<span class="tr-btn dis">' . (eh_tp_is($r) ? 'जल्द' : 'आगामी') . '</span>';
+    elseif (!$ok) $h .= '<span class="tr-btn dis">' . (eh_tp_is($r) ? 'Coming Soon' : 'आगामी') . '</span>';
     elseif ($m && $m['run']) $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">▶ जारी रखें</a>';
     elseif ($m && $m['n']) $h .= '<a class="tr-btn ghost" href="' . esc_url($go($u)) . '">📊 विश्लेषण</a><a class="tr-btn" href="' . esc_url(add_query_arg('re', 1, $u)) . '">↻ दोबारा दें</a>';
     else $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">Start Test →</a>';

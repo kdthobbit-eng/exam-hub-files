@@ -169,7 +169,7 @@ function draw(){var d=D,s=d.stats,now=d.now,live=now>=d.round.start&&now<d.round
 var first=function(sr){var l=d.rounds.filter(function(r){return (r.series||'stet')===sr});if(sr==='stet')return d.cur;var x=l.filter(function(r){return r.ready})[0]||l[0];return x?x.id:''};
 var h='<div class="sr">'+['stet','tgt','pgt'].map(function(sr){return '<button class="'+(sr===ser?'on':'')+'" data-s="'+sr+'">'+SN[sr]+'</button>'}).join('')+'</div>';
 if(ser==='stet')h+=d.rounds.filter(function(r){return (r.series||'stet')==='stet'}).map(function(r,i){var lv=now>=r.start&&now<r.end,past=now>=r.end;return '<button class="'+(r.id===d.round.id?'on':'')+'" data-r="'+r.id+'"><b>मॉक '+(i+1)+'</b> · '+dt(r.start)+'<small>'+(lv?'🟢 लाइव':past?'समाप्त':'आगामी')+'</small></button>'}).join('');
-else h+='<select id="rsel">'+d.rounds.filter(function(r){return r.series===ser}).map(function(r){return '<option value="'+r.id+'"'+(r.id===d.round.id?' selected':'')+'>'+esc(r.sub)+(r.kind==='sec'?' (सेक्शनल)':'')+(r.ready?' — लाइव':' — जल्द')+'</option>'}).join('')+'</select>';
+else h+='<select id="rsel">'+d.rounds.filter(function(r){return r.series===ser}).map(function(r){return '<option value="'+r.id+'"'+(r.id===d.round.id?' selected':'')+'>'+esc(r.sub)+(r.kind==='sec'?' (सेक्शनल)':'')+(r.ready?' — लाइव':' — Coming Soon')+'</option>'}).join('')+'</select>';
 $('rs').innerHTML=h;
 [].forEach.call($('rs').querySelectorAll('[data-r]'),function(b){b.onclick=function(){RID=b.dataset.r;TAB='merit';load()}});
 [].forEach.call($('rs').querySelectorAll('[data-s]'),function(b){b.onclick=function(){var x=first(b.dataset.s);if(x){RID=x;TAB='merit';load()}}});

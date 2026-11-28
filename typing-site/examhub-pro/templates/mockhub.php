@@ -18,7 +18,8 @@ $hub = home_url('/mock-test/');
 ?>
 <main class="mx">
 <?php if ($stet):
-  $SR = array_values(array_filter(eh_stm_rounds(), function ($r) { return ($r['series'] ?? 'stet') === 'stet' && $r['id'][0] === 'm'; })); $my = eh_tp_my($uid);
+  $SR = array_values(array_filter(eh_stm_rounds(), function ($r) { return ($r['series'] ?? 'stet') === 'stet' && $r['id'][0] === 'm'; }));
+  $SP = array_values(array_filter(eh_stm_rounds(), function ($r) { return ($r['kind'] ?? '') === 'practice'; })); $my = eh_tp_my($uid);
   $u = wp_get_current_user(); $nmU = $uid ? ($u->display_name ?: $u->user_login) : ''; $ini = $nmU ? mb_strtoupper(mb_substr(trim($nmU), 0, 1)) : '';
   $done = count(array_filter($SR, function ($r) use ($my) { return !empty($my[$r['id']]['n']); })); ?>
  <section class="mz-bar"><div class="mx-wrap">
@@ -28,12 +29,14 @@ $hub = home_url('/mock-test/');
    <div class="zh-x"><span class="mx-kick"><i></i>सहायक अध्यापक भर्ती · प्राथमिक स्तर (कक्षा 1–5)</span><h1>UP Super <em>TET</em> 2026 <small>टेस्ट सीरीज़</small></h1></div>
    <div class="zh-r"><span class="zh-chip">📘 UP Super TET</span><span class="zh-st"><b><?php echo $done; ?></b>/<?php echo count($SR); ?> टेस्ट दिए</span></div>
   </div>
-  <nav class="rb" id="mz-tabs"><button class="on" data-t="full"><i>📄</i>लाइव मॉक<em><?php echo count($SR); ?></em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>जल्द</em></button></nav>
+  <nav class="rb" id="mz-tabs"><button class="on" data-t="full"><i>📄</i>लाइव मॉक<em><?php echo count($SR); ?></em></button><button data-t="prac"><i>📝</i>फुल लेंथ मॉक<em><?php echo count($SP); ?></em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>Coming Soon</em></button></nav>
  </div></section>
  <section class="mx-body"><div class="mx-wrap">
   <div class="mz-p on" data-p="full"><div class="tl-h"><b>Super TET लाइव मॉक टेस्ट</b><span>तय तारीख पर खुलने वाले लाइव मॉक — पूरा प्रश्न-पत्र, रैंक, परसेंटाइल और उत्तर-कुंजी</span></div>
    <div class="tl"><?php $n = 0; foreach ($SR as $r) { $n++; echo eh_tp_test_row($r, $my, $n, 'Super TET मॉक टेस्ट ' . $n); } ?></div></div>
-  <div class="mz-p" data-p="pyq"><div class="mz-empty"><b>🗂️ पिछले वर्ष के प्रश्न-पत्र जल्द आ रहे हैं</b><p>UP Super TET के असली पिछले प्रश्न-पत्र, उत्तर-कुंजी और व्याख्या के साथ।</p></div></div>
+  <div class="mz-p" data-p="prac"><div class="tl-h"><b>फुल लेंथ मॉक (प्रैक्टिस)</b><span>हमेशा खुले — कभी भी दें; 120 प्रश्न, नए पैटर्न पर, पूरा हल और रैंक</span></div>
+   <div class="tl"><?php $n = 0; foreach ($SP as $r) { $n++; echo eh_tp_test_row($r, $my, $n, 'Super TET फुल लेंथ मॉक ' . $n); } ?></div></div>
+  <div class="mz-p" data-p="pyq"><div class="mz-empty"><b>🗂️ पिछले वर्ष के प्रश्न-पत्र — Coming Soon</b><p>UP Super TET के असली पिछले प्रश्न-पत्र, उत्तर-कुंजी और व्याख्या के साथ।</p></div></div>
  </div></section>
  <script>(function(){var B=[].slice.call(document.querySelectorAll('#mz-tabs button')),P=[].slice.call(document.querySelectorAll('.mz-p'));B.forEach(function(b){b.onclick=function(){B.forEach(function(x){x.classList.toggle('on',x===b)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.t)})}})})();</script>
 <?php elseif (!$x): ?>
@@ -53,9 +56,9 @@ $hub = home_url('/mock-test/');
    <label class="mx-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="mx-q" placeholder="विषय खोजें — जैसे गणित, English"></label></div>
  </div></section>
  <section class="mx-body"><div class="mx-wrap">
-  <div class="mx-subs-wrap"><div class="mx-tabs" id="mx-tabs"><button class="on" data-f="all">सभी विषय (<?php echo count($rounds); ?>)</button><button data-f="on">लाइव (<?php echo $ready; ?>)</button><button data-f="soon">जल्द आने वाले (<?php echo count($rounds) - $ready; ?>)</button></div>
+  <div class="mx-subs-wrap"><div class="mx-tabs" id="mx-tabs"><button class="on" data-f="all">सभी विषय (<?php echo count($rounds); ?>)</button><button data-f="on">लाइव (<?php echo $ready; ?>)</button><button data-f="soon">Coming Soon (<?php echo count($rounds) - $ready; ?>)</button></div>
   <div class="mx-subs" id="mx-subs"><?php $i = 0; $pf = eh_tp_pref($uid, $x); foreach ($rounds as $r): $i++; $ok = eh_tp_ready($r); ?>
-   <a class="mx-s<?php echo $ok ? '' : ' soon'; ?><?php echo $pf === $r['slug'] ? ' mine' : ''; ?>" data-sub="<?php echo esc_attr($r['slug']); ?>" data-tp-pick="<?php echo esc_attr($x); ?>" href="<?php echo esc_url(add_query_arg(['x' => $x, 's' => $r['slug']], $hub)); ?>" data-k="<?php echo esc_attr(mb_strtolower($r['sub'] . ' ' . $r['sub_en'])); ?>"><span class="ix"><?php echo str_pad((string) $i, 2, '0', STR_PAD_LEFT); ?></span><span class="tx"><b><?php echo esc_html($r['sub']); ?></b><small><?php echo esc_html($r['sub_en']); ?></small></span><span class="rt"><span class="mx-st <?php echo $ok ? 'on' : 'soon'; ?>"><?php echo $pf === $r['slug'] ? 'आपका विषय' : ($ok ? 'LIVE' : 'जल्द'); ?></span></span><span class="go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+   <a class="mx-s<?php echo $ok ? '' : ' soon'; ?><?php echo $pf === $r['slug'] ? ' mine' : ''; ?>" data-sub="<?php echo esc_attr($r['slug']); ?>" data-tp-pick="<?php echo esc_attr($x); ?>" href="<?php echo esc_url(add_query_arg(['x' => $x, 's' => $r['slug']], $hub)); ?>" data-k="<?php echo esc_attr(mb_strtolower($r['sub'] . ' ' . $r['sub_en'])); ?>"><span class="ix"><?php echo str_pad((string) $i, 2, '0', STR_PAD_LEFT); ?></span><span class="tx"><b><?php echo esc_html($r['sub']); ?></b><small><?php echo esc_html($r['sub_en']); ?></small></span><span class="rt"><span class="mx-st <?php echo $ok ? 'on' : 'soon'; ?>"><?php echo $pf === $r['slug'] ? 'आपका विषय' : ($ok ? 'LIVE' : 'Coming Soon'); ?></span></span><span class="go"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
   <?php endforeach; ?></div>
   <div class="mx-empty" id="mx-empty">कोई विषय नहीं मिला।</div></div>
  </div></section>
@@ -77,15 +80,20 @@ $hub = home_url('/mock-test/');
    <div class="zh-x"><span class="mx-kick"><i></i><?php echo esc_html($info['title'] . ' · ' . $info['adv']); ?></span><h1><?php echo esc_html($info['short']); ?> <em><?php echo esc_html($nm[0]); ?></em> <small>टेस्ट सीरीज़</small></h1></div>
    <div class="zh-r"><a class="zh-chip" data-tp="<?php echo esc_attr($x); ?>" data-tp-change href="<?php echo esc_url(add_query_arg(['x' => $x, 'all' => 1], $hub)); ?>">📘 <?php echo esc_html($info['short'] . ' · ' . $nm[0]); ?> <em>बदलें ✎</em></a><span class="zh-st"><b><?php echo $done; ?></b>/3 टेस्ट दिए</span></div>
   </div>
-  <nav class="rb" id="mz-tabs"><button class="on" data-t="full"><i>📄</i>फुल मॉक<em>1</em></button><button data-t="sec"><i>🧩</i>सेक्शनल<em>2</em></button><button data-t="topic"><i>🎯</i>टॉपिक-वाइज<em>जल्द</em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>जल्द</em></button></nav>
+  <nav class="rb" id="mz-tabs"><button class="on" data-t="full"><i>📄</i>फुल मॉक<em>1</em></button><button data-t="sec"><i>🧩</i>सेक्शनल<em>2</em></button><button data-t="topic"><i>🎯</i>टॉपिक-वाइज<em><?php echo count(eh_tp_topics()[$x][$sub] ?? []) ?: 'Coming Soon'; ?></em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>Coming Soon</em></button></nav>
  </div></section>
  <section class="mx-body"><div class="mx-wrap">
   <div class="mz-p on" data-p="full"><div class="tl-h"><b>फुल मॉक टेस्ट</b><span>असली परीक्षा जैसा पूरा प्रश्न-पत्र — 30 सामान्य अध्ययन + 90 <?php echo esc_html($nm[0]); ?></span></div>
    <div class="tl"><?php echo eh_tp_test_row($R, $my, 1, $info['short'] . ' ' . $nm[0] . ' — मॉक टेस्ट 1', $lang); ?></div></div>
   <div class="mz-p" data-p="sec"><div class="tl-h"><b>सेक्शनल मॉक टेस्ट</b><span>एक भाग का अलग अभ्यास, कम समय में</span></div>
    <div class="tl"><?php echo eh_tp_test_row($RS, $my, 1, $nm[0] . ' — सेक्शनल टेस्ट 1 (90 प्रश्न)', $lang) . eh_tp_test_row($GS, $my, 2, 'सामान्य अध्ययन — सेक्शनल टेस्ट 1 (30 प्रश्न)', 'हिंदी + English'); ?></div></div>
-  <div class="mz-p" data-p="topic"><div class="mz-empty"><b>🎯 टॉपिक-वाइज टेस्ट जल्द आ रहे हैं</b><p><?php echo esc_html($nm[0]); ?> के हर टॉपिक पर 50-50 प्रश्नों के सेट, विस्तृत हल के साथ।</p></div></div>
-  <div class="mz-p" data-p="pyq"><div class="mz-empty"><b>🗂️ पिछले वर्ष के प्रश्न-पत्र जल्द आ रहे हैं</b><p>UPESSC / UPSESSB के असली पिछले प्रश्न-पत्र, उत्तर-कुंजी और व्याख्या के साथ।</p></div></div>
+  <div class="mz-p" data-p="topic"><?php $TL = eh_tp_topics()[$x][$sub] ?? []; if ($TL): ?><div class="tl-h"><b>टॉपिक-वाइज टेस्ट</b><span>आधिकारिक पाठ्यक्रम के हर टॉपिक पर 50 प्रश्नों का सेट, विस्तृत हल के साथ</span></div><div class="tl">
+   <?php foreach ($TL as $i => $tn): $TR = eh_tp_find($R['id'] . 't' . ($i + 1));
+     if ($TR) echo eh_tp_test_row($TR, $my, $i + 1, $tn[0], $lang);
+     else echo '<div class="tr soon"><div class="tr-n">' . str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) . '</div><div class="tr-b"><div class="tr-t"><b>' . esc_html($tn[0]) . '</b><span class="tr-soon">Coming Soon</span></div><div class="tr-m"><span>' . esc_html($tn[1]) . '</span><span>📝 50 प्रश्न</span></div></div><div class="tr-a"><span class="tr-btn dis">Coming Soon</span></div></div>';
+   endforeach; ?></div>
+  <?php else: ?><div class="mz-empty"><b>🎯 टॉपिक-वाइज टेस्ट — Coming Soon</b><p><?php echo esc_html($nm[0]); ?> के हर टॉपिक पर 50-50 प्रश्नों के सेट, विस्तृत हल के साथ।</p></div><?php endif; ?></div>
+  <div class="mz-p" data-p="pyq"><div class="mz-empty"><b>🗂️ पिछले वर्ष के प्रश्न-पत्र — Coming Soon</b><p>UPESSC / UPSESSB के असली पिछले प्रश्न-पत्र, उत्तर-कुंजी और व्याख्या के साथ।</p></div></div>
  </div></section>
  <script>(function(){var B=[].slice.call(document.querySelectorAll('#mz-tabs button')),P=[].slice.call(document.querySelectorAll('.mz-p'));B.forEach(function(b){b.onclick=function(){B.forEach(function(x){x.classList.toggle('on',x===b)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.t)});try{b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})}catch(e){}}})})();</script>
 <?php endif; ?>
