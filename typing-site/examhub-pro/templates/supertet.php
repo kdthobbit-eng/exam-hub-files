@@ -42,6 +42,7 @@ $eh_ph = '<svg viewBox="0 0 40 40"><circle cx="20" cy="15" r="8"/><path d="M4 40
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Poppins:wght@600;700&display=swap">
 <style>
+.mfr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.2;margin:0 3px;font-size:.95em}.mfr>span{padding:0 3px;white-space:nowrap}.mfr>span+span{border-top:1.5px solid currentColor}sup .mfr,sub .mfr{font-size:.85em}.msq{border-top:1.5px solid currentColor;padding:0 2px}sup,sub{font-size:.72em;line-height:0}
 :root{--nv:#0f2a4d;--nv2:#1c4a80;--pr:#1d63c7;--pr2:#e8f0fb;--gd:#c9a24a;--bg:#f2f5f9;--ln:#dbe3ec;--tx:#17202b;--mu:#5f6b7a;--gr:#2f9e55;--rd:#de4434;--pu:#6c43be;--or:#f29a0e}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0}
@@ -618,9 +619,20 @@ const r=(a,b)=>Array.from({length:b-a+1},(_,i)=>a-1+i);
 const SECS=(C.secs&&C.secs.length?C.secs:[["सामान्य ज्ञान एवं समसामयिकी",r(1,25)],["तार्किक ज्ञान",r(26,30)],["हिंदी, संस्कृत एवं अंग्रेजी",r(31,60)],["विज्ञान",r(61,68)],["गणित",r(69,84)],["पर्यावरण एवं सामाजिक अध्ययन",r(85,92)],["शिक्षण कौशल",r(93,100)],["बाल मनोविज्ञान",r(101,108)],...(C.paper==="supertet-mock1"?[["सूचना तकनीक (ICT)",r(109,112).concat(r(117,120))],["जीवन कौशल / प्रबंधन",r(113,116)]]:[["सूचना तकनीक (ICT)",r(109,112)],["जीवन कौशल, प्रबंधन एवं अभिवृत्ति",r(113,120)]])]).map(x=>({n:x[0],q:x[1]}));
 const L=['A','B','C','D'],$=id=>document.getElementById(id);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const MF=(function(){const TK=/[A-Za-z0-9.√π∞θαβγδλμσφωΔ²³¹⁰⁴⁵⁶⁷⁸⁹′!]/,CL={'(':')','[':']','{':'}'};
+function P(s){const root=[],st=[root],op=[];for(const c of s){if(CL[c]){const g={o:c,c:CL[c],ch:[],k:0};st[st.length-1].push(g);st.push(g.ch);op.push(g)}else if(op.length&&op[op.length-1].c===c){op[op.length-1].k=1;st.pop();op.pop()}else st[st.length-1].push(c)}return root}
+const isG=x=>typeof x==='object',isT=x=>isG(x)||x==='^'||x==='_'||TK.test(x);
+const pl=a=>a.every(x=>!isG(x))?a.join(''):null;
+function ok(l,r){if(!l.length||!r.length)return false;const a=pl(l),b=pl(r);if(a!=null&&b!=null){if(/^[A-Za-z]+$/.test(a)&&/^[A-Za-z]+$/.test(b)&&(a.length>2||b.length>2))return false;if(/^[A-Za-z]{3,}$/.test(a)||/^[A-Za-z]{3,}$/.test(b))return false}return true}
+const strip=a=>a.length===1&&isG(a[0])&&a[0].k&&a[0].o!=='{'?a[0].ch:(a.length===1&&isG(a[0])&&a[0].o==='{'&&a[0].k?a[0].ch:a);
+function R(a){for(let i=0;i<a.length;i++){if(a[i]!=='/')continue;if(a[i-1]==='/'||a[i+1]==='/')continue;let j=i-1;while(j>=0&&a[j]===' ')j--;let ls=j;while(ls>=0&&isT(a[ls]))ls--;const L=a.slice(ls+1,j+1);let k=i+1;while(k<a.length&&a[k]===' ')k++;let re=k;while(re<a.length&&isT(a[re]))re++;while(re-1>k&&a[re-1]==='.')re--;const Rr=a.slice(k,re);if(a[ls]==='/'||a[re]==='/')continue;if(!ok(L,Rr))continue;return S(a.slice(0,ls+1))+'<span class="mfr"><span>'+R(strip(L))+'</span><span>'+R(strip(Rr))+'</span></span>'+R(a.slice(re))}return S(a)}
+function S(a){let h='';for(let i=0;i<a.length;i++){const x=a[i];if((x==='^'||x==='_')&&i+1<a.length&&(x==='^'||(i>0&&/[A-Za-z0-9)]/.test(typeof a[i-1]==='string'?a[i-1]:')')&&a[i+1]!=='_'))){const t=x==='^'?'sup':'sub';const n=a[i+1];if(isG(n)&&n.k){h+='<'+t+'>'+R(n.ch)+'</'+t+'>';i++;continue}let j=i+1,tk='';if(a[j]==='−'||a[j]==='-'){tk+=a[j];j++}while(j<a.length&&typeof a[j]==='string'&&TK.test(a[j])){tk+=a[j];j++}if(tk&&tk!=='−'&&tk!=='-'){h+='<'+t+'>'+tk+'</'+t+'>';i=j-1;continue}h+=x;continue}
+if(x==='√'&&isG(a[i+1])&&a[i+1].k){h+='√<span class="msq">'+R(a[i+1].ch)+'</span>';i++;continue}
+if(isG(x)){h+=x.o+R(x.ch)+(x.k?x.c:'');continue}h+=x}return h}
+return s=>{s=String(s);if(!/[\/^_√]/.test(s))return s;return R(P(s))}})(),mf=s=>MF(esc(s));
 let off=C.now*1000-Date.now(),R=C.round,A=null,Q=[],ME={name:'',roll:''},sel=null,T=null,BG=null,dirty=false,saving=false,qStart=Date.now(),subbing=false,RS=null,AR='',hidAt=0,LANG='hi';try{LANG=localStorage.getItem('eh_stm_lang')||'hi'}catch(e){}
 function qh(t){t=String(t||'');const ls=t.split('\n');let A1=null,A2=null;const pre=[],post=[];ls.forEach(l=>{const m2=l.match(/^(सूची-II|List-II)\s*:\s*(.*)$/),m1=l.match(/^(सूची-I|List-I)\s*:\s*(.*)$/);if(m2)A2=[m2[1],m2[2].split(/\s{2,}/)];else if(m1)A1=[m1[1],m1[2].split(/\s{2,}/)];else (A1?post:pre).push(l)});
- if(!A1||!A2)return esc(t);const n=Math.max(A1[1].length,A2[1].length);let tb='<table class="mt"><tr><th>'+esc(A1[0])+'</th><th>'+esc(A2[0])+'</th></tr>';for(let i=0;i<n;i++)tb+='<tr><td>'+esc(A1[1][i]||'')+'</td><td>'+esc(A2[1][i]||'')+'</td></tr>';return esc(pre.join('\n'))+tb+'</table>'+esc(post.join('\n'))}
+ if(!A1||!A2)return mf(t);const n=Math.max(A1[1].length,A2[1].length);let tb='<table class="mt"><tr><th>'+mf(A1[0])+'</th><th>'+mf(A2[0])+'</th></tr>';for(let i=0;i<n;i++)tb+='<tr><td>'+mf(A1[1][i]||'')+'</td><td>'+mf(A2[1][i]||'')+'</td></tr>';return mf(pre.join('\n'))+tb+'</table>'+mf(post.join('\n'))}
 const QT=q=>LANG==='en'&&q.qe?q.qe:q.q,QO=q=>LANG==='en'&&q.oe?q.oe:q.o;
 function setLang(v){LANG=v==='en'?'en':'hi';try{localStorage.setItem('eh_stm_lang',LANG)}catch(e){}['lsel','lsel0'].forEach(id=>{const e=document.getElementById(id);if(e)e.value=LANG})}
 const now=()=>Math.floor((Date.now()+off)/1000);
@@ -694,7 +706,7 @@ $('secs').onclick=e=>{const b=e.target.closest('[data-s]');if(b)show(SECS[+b.dat
 function show(i){if(A.cur!==i)acc();A.cur=i;qStart=Date.now();if(stOf(i)==='nv')A.st[i]='na';sel=A.ans[i]||null;const q=Q[i];
  $('qno').textContent='Question No. '+(i+1);
  let h='';if(q.p)h+='<div class="pass"><b>गद्यांश / Passage</b>'+esc(q.p.replace(/^(निर्देश|Direction)[^:]*:\s*/,''))+'</div>';
- h+='<div class="qt">'+qh(QT(q))+'</div>'+QO(q).map((o,k)=>`<label class="op${sel===L[k]?' sel':''}"><input type="radio" name="op" value="${L[k]}"${sel===L[k]?' checked':''}><span class="k">${k+1}</span><span>${esc(o)}</span></label>`).join('');
+ h+='<div class="qt">'+qh(QT(q))+'</div>'+QO(q).map((o,k)=>`<label class="op${sel===L[k]?' sel':''}"><input type="radio" name="op" value="${L[k]}"${sel===L[k]?' checked':''}><span class="k">${k+1}</span><span>${mf(o)}</span></label>`).join('');
  $('qa').innerHTML=h;$('qa').scrollTop=0;secs();pal();later()}
 $('qa').onchange=e=>{if(e.target.name==='op'){sel=e.target.value;document.querySelectorAll('.op').forEach(o=>o.classList.toggle('sel',o.querySelector('input').checked))}};
 function next(){const k=secOf(A.cur),s=SECS[k].q,p=s.indexOf(A.cur);if(p<s.length-1)show(s[p+1]);else if(k<SECS.length-1)show(SECS[k+1].q[0]);else{secs();pal();later()}}
@@ -710,7 +722,7 @@ $('palg').onclick=e=>{const b=e.target.closest('[data-q]');if(b){show(+b.dataset
 function side(o){$('side').classList.toggle('open',!!o);$('shade').classList.toggle('on',!!o)}
 $('popen').onclick=()=>side(1);$('pclose').onclick=()=>side(0);$('shade').onclick=()=>side(0);
 $('bins').onclick=()=>{side(0);modal('Instructions','<ul style="line-height:1.9;margin:0;padding-left:20px"><li>120 प्रश्न · 120 मिनट · 360 अंक</li><li>सही उत्तर +3, गलत उत्तर −1, छोड़ा 0</li><li>उत्तर सेव करने के लिए Save &amp; Next दबाएँ</li><li>किसी भी सेक्शन में कभी भी जा सकते हैं</li><li>समय समाप्त होने पर परीक्षा अपने आप सबमिट होगी</li></ul>')};
-$('bqp').onclick=()=>{side(0);modal('Question Paper',Q.map((q,i)=>`<p style="margin:0 0 10px;line-height:1.7"><b>${i+1}.</b> ${esc(QT(q))}</p>`).join(''))};
+$('bqp').onclick=()=>{side(0);modal('Question Paper',Q.map((q,i)=>`<p style="margin:0 0 10px;line-height:1.7"><b>${i+1}.</b> ${mf(QT(q))}</p>`).join(''))};
 $('lsel').onchange=e=>{setLang(e.target.value);show(A.cur)};$('lsel0').onchange=e=>setLang(e.target.value);setLang(LANG);
 $('bend').onclick=()=>$('bsub').click();
 $('bsub').onclick=()=>{side(0);const rows=SECS.map(s=>{const c=cnt(s.q);return `<tr><td>${esc(s.n)}</td><td>${s.q.length}</td><td>${c.an+c.am}</td><td>${c.na}</td><td>${c.mr+c.am}</td><td>${c.nv}</td></tr>`}).join('');
@@ -780,7 +792,7 @@ $('solback').onclick=()=>go('s-res');$('lsel2').onchange=e=>{setLang(e.target.va
 function solHTML(d,i,f){const ans=d.ans||{},q=d.q[i],a=ans[i],k=!a?'s':(a===d.key[i]?'c':'w');if(f&&f!=='all'&&f!==k)return '';
  const tg={s:'<span class="tg s">छोड़ा</span>',c:'<span class="tg c">सही +3</span>',w:'<span class="tg w">गलत −1</span>'}[k];
  const ki=L.indexOf(d.key[i]),ko=QO(q)[ki];
- return `<div class="sol ${k}"><div class="h"><span><i class="qn">${i+1}</i>${esc(SECS[secOf(i)].n)}</span>${tg}</div>${q.p?'<div style="color:var(--mu);font-size:13px">[गद्यांश आधारित]</div>':''}<div>${qh(QT(q))}</div>${QO(q).map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">${j+1}. ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ (आपका उत्तर)':'')}</div>`).join('')}<div class="ex"><div class="ex-a">✅ सही उत्तर: <b>(${ki+1}) ${esc(ko)}</b></div>${d.exp[i]?`<div class="ex-t"><span>💡 व्याख्या</span>${esc(d.exp[i])}</div>`:''}</div></div>`}
+ return `<div class="sol ${k}"><div class="h"><span><i class="qn">${i+1}</i>${esc(SECS[secOf(i)].n)}</span>${tg}</div>${q.p?'<div style="color:var(--mu);font-size:13px">[गद्यांश आधारित]</div>':''}<div>${qh(QT(q))}</div>${QO(q).map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">${j+1}. ${mf(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ (आपका उत्तर)':'')}</div>`).join('')}<div class="ex"><div class="ex-a">✅ सही उत्तर: <b>(${ki+1}) ${mf(ko)}</b></div>${d.exp[i]?`<div class="ex-t"><span>💡 व्याख्या</span>${mf(d.exp[i])}</div>`:''}</div></div>`}
 function sols(f){$('sols').innerHTML=RS.q.map((q,i)=>solHTML(RS,i,f)).join('')||'<p style="text-align:center;color:var(--mu);padding:30px">कोई प्रश्न नहीं</p>'}
 
 /* ---------- PDF (one click download, with details + watermark + join links) ---------- */
@@ -796,7 +808,7 @@ async function makePdf(d){const W=$('pdfwait'),M=$('pdfmsg');W.classList.add('on
    <table style="margin-top:10px"><tr><th>सेक्शन</th><th>प्रश्न</th><th>सही</th><th>गलत</th><th>अंक</th></tr>${per.map(p=>`<tr><td>${esc(p.n)}</td><td>${p.len}</td><td>${p.c}</td><td>${p.w}</td><td><b>${p.m}</b></td></tr>`).join('')}</table>`)}
   else mk(head+'<p style="font-size:14px;margin:10px 0 0">'+C.nq+' प्रश्न · '+C.max+' अंक · '+C.mins+' मिनट · सही +3 · गलत −1</p>');
   const ans=d.ans||{};
-  d.q.forEach((q,i)=>{const a=ans[i];mk(`<div class="qq"><b>प्रश्न ${i+1}.</b> ${q.p&&!(d.q[i-1]&&d.q[i-1].p===q.p)?'<div style="color:#5f6b7a;font-size:13px">'+esc(q.p)+'</div>':''}${qh(QT(q))}${QO(q).map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">(${j+1}) ${esc(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ आपका उत्तर':'')}</div>`).join('')}${d.name!=null&&!a?'<div style="font-size:12.5px;color:#5f6b7a">आपने यह प्रश्न छोड़ा</div>':''}${d.exp&&d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${esc(d.exp[i])}</div>`:''}</div>`)});
+  d.q.forEach((q,i)=>{const a=ans[i];mk(`<div class="qq"><b>प्रश्न ${i+1}.</b> ${q.p&&!(d.q[i-1]&&d.q[i-1].p===q.p)?'<div style="color:#5f6b7a;font-size:13px">'+esc(q.p)+'</div>':''}${qh(QT(q))}${QO(q).map((o,j)=>`<div class="o ${L[j]===d.key[i]?'ok':(L[j]===a?'bad':'')}">(${j+1}) ${mf(o)}${L[j]===d.key[i]?' ✓':(L[j]===a?' ✗ आपका उत्तर':'')}</div>`).join('')}${d.name!=null&&!a?'<div style="font-size:12.5px;color:#5f6b7a">आपने यह प्रश्न छोड़ा</div>':''}${d.exp&&d.exp[i]?`<div class="ex"><b>व्याख्या:</b> ${mf(d.exp[i])}</div>`:''}</div>`)});
   const jb=mk(`<div style="border:2px solid #0f2a4d;border-radius:16px;padding:16px;text-align:center"><div style="font-size:17px;font-weight:700;color:#0f2a4d;margin-bottom:10px">रोज़ाना क्विज, नोट्स और मॉक टेस्ट के लिए जुड़ें</div><span class="jb" id="pj1" style="background:#229ed9">टेलीग्राम चैनल ज्वाइन करें</span><span class="jb" id="pj2" style="background:#0f2a4d">टेलीग्राम ग्रुप ज्वाइन करें</span><div style="font-size:13px;color:#5f6b7a;margin-top:10px">आचार्य 2.0 Super TET बैच ₹199 · UP SUPER TET बुक ₹429 · xlstudy.in</div></div>`);
   await Promise.all([...st.querySelectorAll('img')].map(im=>im.complete?1:new Promise(r=>{im.onload=im.onerror=r})));
   const {jsPDF}=window.jspdf,pdf=new jsPDF({unit:'pt',format:'a4',compress:true}),PW=pdf.internal.pageSize.getWidth(),PH2=pdf.internal.pageSize.getHeight(),mg=22,sc=(PW-2*mg)/760,cap=(PH2-2*mg-14)/sc;
