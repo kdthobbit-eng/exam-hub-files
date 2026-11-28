@@ -284,7 +284,7 @@ function eh_tp_test_row($r, $my, $no, $title, $lang = 'हिंदी + English
     $tt = $title; $tp = ''; if (preg_match('/^(.*\bTOPIC TEST \d+) \((.+)\)$/u', $title, $mm)) { $tt = $mm[1]; $tp = $mm[2]; }
     $go = function ($url) use ($in) { $url = add_query_arg('go', 1, $url); return $in ? $url : eh_login_page_url($url); };
     $h = '<div class="tr' . ($ok || $over ? '' : ' soon') . ($m && $m['n'] ? ' done' : '') . '"><div class="tr-n">' . str_pad((string) $no, 2, '0', STR_PAD_LEFT) . '</div><div class="tr-b">'
-        . '<div class="tr-t"><b>' . esc_html($tt) . '</b>' . ($ok ? '<span class="tr-free">FREE</span><span class="tr-live"><i></i>LIVE</span>' : ($over ? '<span class="tr-soon">समाप्त</span>' : '<span class="tr-soon">' . (eh_tp_is($r) ? '📅 ' . wp_date('j', $r['start_ts']) . ' ' . $hm[(int) wp_date('n', $r['start_ts'])] . ' से' : 'आगामी') . '</span>')) . '</div>'
+        . '<div class="tr-t"><b>' . esc_html($tt) . '</b>' . ($ok ? '<span class="tr-free">FREE</span><span class="tr-live"><i></i>LIVE</span>' : ($over ? '<span class="tr-soon">समाप्त</span>' : '<span class="tr-soon">' . (eh_tp_is($r) ? 'Available on ' . wp_date('j M', $r['start_ts']) : 'आगामी') . '</span>')) . '</div>'
         . ($tp !== '' ? '<div class="tr-tp">' . esc_html($tp) . '</div>' : '') . '<div class="tr-m">' . $dt . '<span>📝 ' . eh_stm_nq($r) . ' प्रश्न</span><span>🎯 ' . $max . ' अंक</span><span>⏱ ' . (int) round(eh_stm_secs($r) / 60) . ' मिनट</span><span>🌐 भाषा: ' . esc_html($lang) . '</span></div>';
     if ($m && $m['n']) {
         global $wpdb; $rank = 1 + (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_stm_table() . ' WHERE round = %s AND submitted > 0 AND counted = 1 AND score > %d', $r['id'], (int) $m['last']));
@@ -294,7 +294,7 @@ function eh_tp_test_row($r, $my, $no, $title, $lang = 'हिंदी + English
     $h .= '</div><div class="tr-a">';
     if ($over && $m && $m['n']) $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">📊 View Results</a>';
     elseif ($over) $h .= '<a class="tr-btn ghost" href="' . esc_url($u) . '">उत्तर-कुंजी देखें</a>';
-    elseif (!$ok) $h .= '<span class="tr-btn dis">' . (eh_tp_is($r) ? wp_date('j', $r['start_ts']) . ' ' . $hm[(int) wp_date('n', $r['start_ts'])] . ' को खुलेगा' : 'आगामी') . '</span>';
+    elseif (!$ok) $h .= '<span class="tr-btn dis">' . (eh_tp_is($r) ? 'Available on ' . wp_date('j M', $r['start_ts']) : 'आगामी') . '</span>';
     elseif ($m && $m['run']) $h .= '<a class="tr-btn res" href="' . esc_url($go($u)) . '"><i></i>Resume Test ›</a>';
     elseif ($m && $m['n']) $h .= '<a class="tr-btn ghost" href="' . esc_url($go($u)) . '">📊 View Results</a><a class="tr-btn" href="' . esc_url(add_query_arg('re', 1, $u)) . '">↻ Reattempt</a>';
     else $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">Start Test →</a>';
