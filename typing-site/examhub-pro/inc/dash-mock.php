@@ -49,7 +49,7 @@ function eh_dash_render($uid) {
    <div class="dk-who">
     <span class="dk-k">My Dashboard</span>
     <h1 id="dk-name"><?php echo esc_html($nm); ?></h1>
-    <div class="dk-meta"><span><?php echo esc_html($u->user_email); ?></span><span>Roll No. <b><?php echo esc_html(function_exists('eh_stm_roll') ? eh_stm_roll($uid) : $uid); ?></b></span><span>Member since <?php echo esc_html(date_i18n('M Y', strtotime($u->user_registered))); ?></span></div>
+    <div class="dk-meta"><span>✉ <?php echo esc_html($u->user_email); ?></span><span>Roll No. <b><?php echo esc_html(function_exists('eh_stm_roll') ? eh_stm_roll($uid) : $uid); ?></b></span><span>Member since <?php echo esc_html(date_i18n('M Y', strtotime($u->user_registered))); ?></span></div>
     <button type="button" class="dk-edit" id="dk-edit" <?php echo $wait ? 'data-wait="' . $wait . '"' : ''; ?>>✎ नाम बदलें</button>
    </div>
   </div>
@@ -58,13 +58,16 @@ function eh_dash_render($uid) {
   <?php endforeach; ?></div>
  </div>
  <div class="dk-sum">
-  <div><b><?php echo $n; ?></b><span>मॉक टेस्ट दिए</span></div>
-  <div><b><?php echo $avg; ?>%</b><span>औसत अंक</span></div>
-  <div><b><?php echo $best; ?>%</b><span>सर्वश्रेष्ठ अंक</span></div>
-  <div><b><?php echo $bestRank ? '#' . $bestRank : '—'; ?></b><span>Best Rank</span></div>
-  <div><b><?php echo $tyN; ?></b><span>टाइपिंग टेस्ट</span></div>
-  <div><b><?php echo $tyB; ?> <small>WPM</small></b><span>Best Net Speed</span></div>
-  <div><b><?php echo $tyA; ?>%</b><span>औसत Accuracy</span></div>
+ <div class="dk-sum-h"><span>Mock Test</span></div>
+  <div class="c1"><i class="dk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M10 12h5M10 16h5"/></svg></i><b><?php echo $n; ?></b><span>मॉक टेस्ट दिए</span></div>
+  <div class="c2"><i class="dk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5h16"/><path d="m5 15 4.5-5 3.5 3 6-7"/></svg></i><b><?php echo $avg; ?>%</b><span>औसत अंक</span></div>
+  <div class="c3"><i class="dk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></i><b><?php echo $best; ?>%</b><span>सर्वश्रेष्ठ अंक</span></div>
+  <div class="c4"><i class="dk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/></svg></i><b><?php echo $bestRank ? '#' . $bestRank : '—'; ?></b><span>Best Rank</span></div>
+ <div class="dk-sum-h"><span>Typing</span></div>
+  <div class="c5"><i class="dk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M6.5 10h.01M10 10h.01M13.5 10h.01M17 10h.01M7.5 14h9"/></svg></i><b><?php echo $tyN; ?></b><span>टाइपिंग टेस्ट</span></div>
+  <div class="c6"><i class="dk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/></svg></i><b><?php echo $tyB; ?><small> WPM</small></b><span>Best Net Speed</span></div>
+  <div class="c7"><i class="dk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 9.8"/></svg></i><b><?php echo $tyA; ?>%</b><span>औसत Accuracy</span></div>
+  <div class="c8"><i class="dk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8"/></svg></i><b><?php echo $acc; ?>%</b><span>मॉक सटीकता</span></div>
  </div>
  <div class="dk-modal" id="dk-modal" hidden><div class="dk-mbox"><h3>नाम बदलें</h3><p>यही नाम मॉक टेस्ट, रिज़ल्ट और रैंक सूची में दिखेगा। नाम 7 दिन में एक बार बदला जा सकता है।</p>
   <input id="dk-nin" maxlength="40" value="<?php echo esc_attr($nm); ?>" autocomplete="name"><small id="dk-msg"></small>
