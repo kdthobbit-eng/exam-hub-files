@@ -1,0 +1,902 @@
+[
+{
+"q": "'Civics' शब्द की उत्पत्ति किस भाषा के शब्दों से हुई है?",
+"o": [
+"यूनानी (Polis)",
+"लैटिन (Civis, Civitas)",
+"संस्कृत",
+"फ़्रेंच"
+],
+"a": "B",
+"e": "(लैटिन): Civis = नागरिक, Civitas = नगर-राज्य।",
+"qe": "The word 'Civics' is derived from which language?",
+"oe": [
+"Greek (Polis)",
+"Latin (Civis, Civitas)",
+"Sanskrit",
+"French"
+]
+},
+{
+"q": "लैटिन शब्द 'Civis' का अर्थ है—",
+"o": [
+"राज्य",
+"सरकार",
+"नगर",
+"नागरिक"
+],
+"a": "D",
+"e": "",
+"qe": "The Latin word 'Civis' means",
+"oe": [
+"state",
+"government",
+"city",
+"citizen"
+]
+},
+{
+"q": "'Civitas' शब्द का अर्थ है—",
+"o": [
+"कानून",
+"नगर-राज्य (नागरिकों का समुदाय)",
+"न्याय",
+"नागरिक"
+],
+"a": "B",
+"e": "",
+"qe": "'Civitas' means",
+"oe": [
+"law",
+"city-state (community of citizens)",
+"justice",
+"citizen"
+]
+},
+{
+"q": "'नागरिकशास्त्र वह उपयोगी विज्ञान है जो नागरिकता से संबंधित प्रत्येक बात का अध्ययन करता है' — यह परिभाषा किसकी है?",
+"o": [
+"पैट्रिक गेडिस",
+"अरस्तू",
+"ई. एम. व्हाइट",
+"एफ़. जे. गोल्ड"
+],
+"a": "C",
+"e": "(ई. एम. व्हाइट)",
+"qe": "'Civics is that useful branch of human knowledge which studies everything relating to citizenship' — whose definition?",
+"oe": [
+"Patrick Geddes",
+"Aristotle",
+"E. M. White",
+"F. J. Gould"
+]
+},
+{
+"q": "नागरिकशास्त्र को 'नागरिकता का विज्ञान' कहने का मुख्य आधार है—",
+"o": [
+"यह केवल अर्थव्यवस्था का अध्ययन है",
+"यह केवल इतिहास है",
+"यह नागरिक के अधिकार, कर्तव्य और संस्थाओं से संबंध का अध्ययन करता है",
+"यह केवल सरकार का अध्ययन करता है"
+],
+"a": "C",
+"e": "",
+"qe": "Civics is called the 'science of citizenship' mainly because",
+"oe": [
+"it studies only the economy",
+"it is only history",
+"it studies the citizen's rights, duties and relations with institutions",
+"it studies only government"
+]
+},
+{
+"q": "नागरिकशास्त्र की प्रकृति के संबंध में सबसे उपयुक्त कथन है—",
+"o": [
+"यह एक प्राकृतिक विज्ञान है",
+"यह एक यथार्थ विज्ञान (exact science) है",
+"यह केवल कला है",
+"यह एक सामाजिक विज्ञान है"
+],
+"a": "D",
+"e": "",
+"qe": "The most appropriate statement about the nature of Civics is",
+"oe": [
+"it is a natural science",
+"it is an exact science",
+"it is only an art",
+"it is a social science"
+]
+},
+{
+"q": "नागरिकशास्त्र को 'यथार्थ विज्ञान' (exact science) न मानने का मुख्य कारण है—",
+"o": [
+"इसका कोई इतिहास नहीं",
+"मानव व्यवहार की परिवर्तनशीलता के कारण सटीक भविष्यवाणी संभव नहीं",
+"इसमें कोई नियम नहीं",
+"यह केवल कल्पना है"
+],
+"a": "B",
+"e": "",
+"qe": "The main reason Civics is not an exact science is",
+"oe": [
+"it has no history",
+"human behaviour varies, so exact prediction is not possible",
+"it has no rules",
+"it is only imagination"
+]
+},
+{
+"q": "नागरिकशास्त्र के अध्ययन क्षेत्र में शामिल नहीं है—",
+"o": [
+"राष्ट्रीय व अंतरराष्ट्रीय नागरिकता",
+"ग्रहों की गति",
+"नागरिक के अधिकार व कर्तव्य",
+"स्थानीय स्वशासन"
+],
+"a": "B",
+"e": "",
+"qe": "Which is NOT within the scope of Civics?",
+"oe": [
+"national and international citizenship",
+"motion of planets",
+"rights and duties of citizens",
+"local self-government"
+]
+},
+{
+"q": "नागरिकशास्त्र अतीत, वर्तमान और भविष्य तीनों का अध्ययन करता है — यह कथन उसके किस पक्ष को दर्शाता है?",
+"o": [
+"केवल व्यावहारिक दृष्टि",
+"केवल ऐतिहासिक दृष्टि",
+"सीमित क्षेत्र",
+"व्यापक अध्ययन क्षेत्र"
+],
+"a": "D",
+"e": "",
+"qe": "That Civics studies the past, present and future reflects its",
+"oe": [
+"only practical view",
+"only historical view",
+"narrow scope",
+"wide scope"
+]
+},
+{
+"q": "नागरिकशास्त्र और राजनीति विज्ञान में मुख्य अंतर है—",
+"o": [
+"दोनों बिल्कुल समान हैं",
+"नागरिकशास्त्र केवल अर्थशास्त्र है",
+"नागरिकशास्त्र का क्षेत्र नागरिक-केंद्रित व व्यापक, राजनीति विज्ञान राज्य-सरकार-केंद्रित",
+"राजनीति विज्ञान केवल इतिहास है"
+],
+"a": "C",
+"e": "",
+"qe": "The main difference between Civics and Political Science is",
+"oe": [
+"both are identical",
+"Civics is only economics",
+"Civics is citizen-centred and wider; Political Science is state/government-centred",
+"Political Science is only history"
+]
+},
+{
+"q": "'राजनीति' (Politics) शब्द किस यूनानी शब्द से बना है?",
+"o": [
+"डेमोस",
+"पोलिस (Polis)",
+"सिविस",
+"क्रेटोस"
+],
+"a": "B",
+"e": "(Polis = नगर-राज्य)",
+"qe": "The word 'Politics' comes from the Greek word",
+"oe": [
+"Demos",
+"Polis",
+"Civis",
+"Kratos"
+]
+},
+{
+"q": "'राजनीतिक सिद्धांत' (Political Theory) मुख्यतः किससे संबंधित है?",
+"o": [
+"केवल चुनाव परिणाम",
+"राज्य, शक्ति, न्याय आदि अवधारणाओं की व्याख्या",
+"केवल अंतरराष्ट्रीय व्यापार",
+"केवल संविधान की धाराएँ"
+],
+"a": "B",
+"e": "",
+"qe": "Political Theory mainly deals with",
+"oe": [
+"only election results",
+"explaining concepts like state, power, justice",
+"only international trade",
+"only constitutional articles"
+]
+},
+{
+"q": "'राजनीतिक दर्शन' (Political Philosophy) का मुख्य प्रश्न है—",
+"o": [
+"क्या होना चाहिए (आदर्श/मूल्य)",
+"क्या है (केवल तथ्य)",
+"किसने चुनाव जीता",
+"कितना कर लगेगा"
+],
+"a": "A",
+"e": "",
+"qe": "The central question of Political Philosophy is",
+"oe": [
+"what ought to be (ideals/values)",
+"what is (only facts)",
+"who won the election",
+"how much tax"
+]
+},
+{
+"q": "'इतिहास के बिना राजनीति विज्ञान का कोई फल नहीं और राजनीति विज्ञान के बिना इतिहास का कोई मूल नहीं' — किसका कथन है?",
+"o": [
+"लॉर्ड ब्राइस",
+"लास्की",
+"सीले",
+"गार्नर"
+],
+"a": "C",
+"e": "(सीले) — 'फल-मूल' वाला प्रसिद्ध कथन; इसी आशय का कथन बर्गेस से भी जोड़ा जाता है।",
+"qe": "'History without Political Science has no fruit; Political Science without History has no root' — who said?",
+"oe": [
+"Lord Bryce",
+"Laski",
+"Seeley",
+"Garner"
+]
+},
+{
+"q": "नागरिकशास्त्र और इतिहास का संबंध कैसा है?",
+"o": [
+"विरोधी",
+"केवल संयोगवश",
+"घनिष्ठ — इतिहास नागरिकशास्त्र को संस्थाओं के विकास की सामग्री देता है",
+"कोई संबंध नहीं"
+],
+"a": "C",
+"e": "",
+"qe": "The relationship between Civics and History is",
+"oe": [
+"opposite",
+"only incidental",
+"close — history supplies material on the growth of institutions",
+"none"
+]
+},
+{
+"q": "नागरिकशास्त्र और अर्थशास्त्र के संबंध का उदाहरण है—",
+"o": [
+"रासायनिक अभिक्रिया",
+"पौधों का विकास",
+"कर, बजट और आर्थिक नीतियों का नागरिक जीवन पर प्रभाव",
+"ग्रहों की गति"
+],
+"a": "C",
+"e": "",
+"qe": "An example of the link between Civics and Economics is",
+"oe": [
+"chemical reactions",
+"plant growth",
+"the effect of taxes, budget and economic policy on civic life",
+"motion of planets"
+]
+},
+{
+"q": "नागरिकशास्त्र और समाजशास्त्र में अंतर का आधार है—",
+"o": [
+"दोनों एक ही हैं",
+"नागरिकशास्त्र केवल परिवार का अध्ययन",
+"समाजशास्त्र केवल राज्य का अध्ययन",
+"समाजशास्त्र सम्पूर्ण सामाजिक जीवन, नागरिकशास्त्र नागरिक जीवन का अध्ययन"
+],
+"a": "D",
+"e": "",
+"qe": "The basis of difference between Civics and Sociology is",
+"oe": [
+"both are the same",
+"Civics studies only the family",
+"Sociology studies only the state",
+"Sociology studies the whole social life; Civics the civic life"
+]
+},
+{
+"q": "समाजशास्त्र का जनक किसे माना जाता है?",
+"o": [
+"अरस्तू",
+"ऑगस्त कॉम्ट (समाजशास्त्र के जनक)",
+"मैकियावेली",
+"मार्क्स"
+],
+"a": "B",
+"e": "(ऑगस्त कॉम्ट)",
+"qe": "Who is regarded as the father of Sociology?",
+"oe": [
+"Aristotle",
+"Auguste Comte",
+"Machiavelli",
+"Marx"
+]
+},
+{
+"q": "नागरिकशास्त्र और भूगोल का संबंध किस उदाहरण से स्पष्ट होता है?",
+"o": [
+"भौगोलिक परिस्थितियाँ लोगों के स्वभाव, आर्थिक जीवन और राजनीतिक संस्थाओं को प्रभावित करती हैं",
+"कोई संबंध नहीं",
+"भूगोल केवल तारों का अध्ययन है",
+"भूगोल केवल मानचित्र है"
+],
+"a": "A",
+"e": "",
+"qe": "The link between Civics and Geography is shown by",
+"oe": [
+"geography influences people's nature, economic life and political institutions",
+"no link",
+"geography is only astronomy",
+"geography is only maps"
+]
+},
+{
+"q": "'राज्य की प्रकृति पर जलवायु का प्रभाव' — यह विचार किस विचारक से विशेष रूप से जुड़ा है?",
+"o": [
+"मॉन्टेस्क्यू",
+"रूसो",
+"लॉक",
+"हॉब्स"
+],
+"a": "A",
+"e": "(मॉन्टेस्क्यू — 'द स्पिरिट ऑफ़ लॉज़')",
+"qe": "The influence of climate on the nature of the state is especially associated with",
+"oe": [
+"Montesquieu",
+"Rousseau",
+"Locke",
+"Hobbes"
+]
+},
+{
+"q": "नागरिकशास्त्र और मनोविज्ञान का संबंध किसमें दिखता है?",
+"o": [
+"खगोल में",
+"रसायन विज्ञान में",
+"लोकमत, नेतृत्व और नागरिक व्यवहार के अध्ययन में",
+"भूविज्ञान में"
+],
+"a": "C",
+"e": "",
+"qe": "The link between Civics and Psychology is seen in the study of",
+"oe": [
+"astronomy",
+"chemistry",
+"public opinion, leadership and civic behaviour",
+"geology"
+]
+},
+{
+"q": "'राजनीति विज्ञान मनोविज्ञान पर आधारित होना चाहिए' — यह मत किस विचारक का है?",
+"o": [
+"गार्नर",
+"सीले",
+"बर्गेस",
+"ग्राहम वालास"
+],
+"a": "D",
+"e": "(ग्राहम वालास — 'ह्यूमन नेचर इन पॉलिटिक्स')",
+"qe": "'Politics should be based on psychology' — whose view?",
+"oe": [
+"Garner",
+"Seeley",
+"Burgess",
+"Graham Wallas"
+]
+},
+{
+"q": "नागरिकशास्त्र और नीतिशास्त्र (Ethics) का संबंध बताता है कि—",
+"o": [
+"अच्छा नागरिक नैतिक मूल्यों पर आधारित आचरण करता है",
+"कानून और नैतिकता सदा विरोधी हैं",
+"नैतिकता केवल धर्म है",
+"नैतिकता का नागरिकता से कोई संबंध नहीं"
+],
+"a": "A",
+"e": "",
+"qe": "The link between Civics and Ethics shows that",
+"oe": [
+"a good citizen acts on moral values",
+"law and morality are always opposed",
+"ethics is only religion",
+"ethics has nothing to do with citizenship"
+]
+},
+{
+"q": "कानून और नैतिकता में मुख्य अंतर है—",
+"o": [
+"कानून केवल आंतरिक आचरण नियंत्रित करता है",
+"दोनों समान रूप से बाध्यकारी हैं",
+"नैतिकता का पालन न करने पर जेल होती है",
+"कानून के पीछे राज्य की बाध्यकारी शक्ति होती है, नैतिकता के पीछे अंतःकरण"
+],
+"a": "D",
+"e": "",
+"qe": "The main difference between law and morality is",
+"oe": [
+"law controls only inner conduct",
+"both are equally binding",
+"breaking morality means jail",
+"law is backed by state's coercive power; morality by conscience"
+]
+},
+{
+"q": "'मनुष्य स्वभाव से एक सामाजिक प्राणी है' — यह कथन किस विचारक से जुड़ा है?",
+"o": [
+"प्लेटो",
+"हॉब्स",
+"अरस्तू",
+"लॉक"
+],
+"a": "C",
+"e": "",
+"qe": "'Man is by nature a social (political) animal' is associated with",
+"oe": [
+"Plato",
+"Hobbes",
+"Aristotle",
+"Locke"
+]
+},
+{
+"q": "नागरिकशास्त्र को 'कला' मानने का आधार है—",
+"o": [
+"यह अच्छा नागरिक बनने की व्यावहारिक शिक्षा देता है",
+"इसमें कोई सिद्धांत नहीं",
+"इसमें चित्रकला होती है",
+"यह संगीत से जुड़ा है"
+],
+"a": "A",
+"e": "",
+"qe": "Civics is considered an 'art' because",
+"oe": [
+"it gives practical training in good citizenship",
+"it has no theory",
+"it involves painting",
+"it relates to music"
+]
+},
+{
+"q": "नागरिकशास्त्र के अध्ययन की 'तुलनात्मक पद्धति' का अर्थ है—",
+"o": [
+"विभिन्न देशों/कालों की संस्थाओं की तुलना कर निष्कर्ष निकालना",
+"केवल कल्पना",
+"केवल प्रयोगशाला प्रयोग",
+"केवल आँकड़े"
+],
+"a": "A",
+"e": "(अरस्तू ने 158 संविधानों की तुलना की थी)",
+"qe": "The comparative method in Civics means",
+"oe": [
+"drawing conclusions by comparing institutions of countries/periods",
+"only imagination",
+"only lab experiments",
+"only statistics"
+]
+},
+{
+"q": "अरस्तू ने लगभग कितने संविधानों का अध्ययन किया था?",
+"o": [
+"100",
+"200",
+"158",
+"58"
+],
+"a": "C",
+"e": "",
+"qe": "About how many constitutions did Aristotle study?",
+"oe": [
+"100",
+"200",
+"158",
+"58"
+]
+},
+{
+"q": "सामाजिक विज्ञानों में 'प्रयोगात्मक पद्धति' की सीमा का मुख्य कारण है—",
+"o": [
+"प्रयोग का कोई महत्व नहीं",
+"प्रयोग केवल भूगोल में",
+"मनुष्य पर प्रयोग सबसे आसान",
+"मनुष्य पर नियंत्रित प्रयोग कठिन/अनैतिक"
+],
+"a": "D",
+"e": "",
+"qe": "The experimental method is limited in social sciences mainly because",
+"oe": [
+"experiments have no value",
+"experiments occur only in geography",
+"experiments on humans are easiest",
+"controlled experiments on humans are hard/unethical"
+]
+},
+{
+"q": "'राजनीति विज्ञान का प्रारंभ और अंत राज्य के साथ होता है' — किसने कहा?",
+"o": [
+"सीले",
+"लास्की",
+"गिलक्राइस्ट",
+"गार्नर"
+],
+"a": "D",
+"e": "",
+"qe": "'Political Science begins and ends with the State' — who said?",
+"oe": [
+"Seeley",
+"Laski",
+"Gilchrist",
+"Garner"
+]
+},
+{
+"q": "नागरिकशास्त्र के अध्ययन का प्रमुख व्यावहारिक लाभ है—",
+"o": [
+"केवल परीक्षा पास करना",
+"केवल राजनीति करना",
+"केवल नौकरी पाना",
+"जागरूक, कर्तव्यनिष्ठ और जिम्मेदार नागरिक तैयार करना"
+],
+"a": "D",
+"e": "",
+"qe": "The main practical benefit of studying Civics is",
+"oe": [
+"only passing exams",
+"only doing politics",
+"only getting jobs",
+"creating aware, dutiful and responsible citizens"
+]
+},
+{
+"q": "नागरिकशास्त्र में 'स्थानीय, राष्ट्रीय और विश्व नागरिकता' का अध्ययन किस दृष्टिकोण को दर्शाता है?",
+"o": [
+"नागरिकता का व्यापक/बहुस्तरीय स्वरूप",
+"केवल आर्थिक दृष्टि",
+"केवल धार्मिक दृष्टि",
+"केवल स्थानीय दृष्टि"
+],
+"a": "A",
+"e": "",
+"qe": "Studying local, national and world citizenship in Civics reflects",
+"oe": [
+"the broad, multi-level nature of citizenship",
+"only an economic view",
+"only a religious view",
+"only a local view"
+]
+},
+{
+"q": "'विश्व नागरिकता' की अवधारणा का मूल भाव है—",
+"o": [
+"दोहरी नागरिकता अनिवार्य",
+"समस्त मानवता के प्रति उत्तरदायित्व",
+"राष्ट्रों का अंत",
+"केवल अपने देश के प्रति निष्ठा"
+],
+"a": "B",
+"e": "",
+"qe": "The core idea of 'world citizenship' is",
+"oe": [
+"compulsory dual citizenship",
+"responsibility towards all humanity",
+"end of nations",
+"loyalty only to one's own country"
+]
+},
+{
+"q": "भारतीय परंपरा में 'वसुधैव कुटुम्बकम्' का संदेश किस ग्रंथ से जुड़ा है?",
+"o": [
+"महोपनिषद्",
+"मनुस्मृति",
+"अर्थशास्त्र",
+"पंचतंत्र (केवल)"
+],
+"a": "A",
+"e": "(महोपनिषद्; हितोपदेश/पंचतंत्र में भी उद्धृत)",
+"qe": "The message 'Vasudhaiva Kutumbakam' is linked to the",
+"oe": [
+"Maha Upanishad",
+"Manusmriti",
+"Arthashastra",
+"Panchatantra (only)"
+]
+},
+{
+"q": "नागरिकशास्त्र का 'विज्ञान' होने के पक्ष में तर्क है—",
+"o": [
+"इसमें प्रयोगशाला होती है",
+"इसके नियम भौतिकी जैसे अटल हैं",
+"इसमें क्रमबद्ध ज्ञान और कार्य-कारण संबंधों का अध्ययन होता है",
+"इसमें गणितीय सूत्र होते हैं"
+],
+"a": "C",
+"e": "",
+"qe": "An argument for Civics being a 'science' is",
+"oe": [
+"it has laboratories",
+"its laws are as fixed as physics",
+"it has systematic knowledge and studies cause-effect relations",
+"it uses mathematical formulae"
+]
+},
+{
+"q": "'प्राचीन यूनान में नागरिक' किसे माना जाता था?",
+"o": [
+"नगर में रहने वाला प्रत्येक व्यक्ति",
+"जो नगर-राज्य के शासन में भाग लेता था (दास व स्त्रियाँ बाहर)",
+"केवल व्यापारी",
+"केवल सैनिक"
+],
+"a": "B",
+"e": "",
+"qe": "In ancient Greece, a 'citizen' was",
+"oe": [
+"everyone living in the city",
+"one who took part in governing the city-state (slaves, women excluded)",
+"only traders",
+"only soldiers"
+]
+},
+{
+"q": "आधुनिक अर्थ में 'नागरिक' कौन है?",
+"o": [
+"केवल मतदाता",
+"वह व्यक्ति जिसे राज्य की पूर्ण सदस्यता और राजनीतिक अधिकार प्राप्त हों",
+"केवल शहर में रहने वाला",
+"केवल करदाता"
+],
+"a": "B",
+"e": "",
+"qe": "In the modern sense, a 'citizen' is",
+"oe": [
+"only a voter",
+"one with full membership of the state and political rights",
+"only a city dweller",
+"only a taxpayer"
+]
+},
+{
+"q": "नागरिक और विदेशी में मुख्य अंतर है—",
+"o": [
+"विदेशी कानून से बाहर हैं",
+"दोनों को समान राजनीतिक अधिकार",
+"नागरिक कर नहीं देते",
+"नागरिक को राजनीतिक अधिकार (मताधिकार आदि) प्राप्त होते हैं, विदेशी को नहीं"
+],
+"a": "D",
+"e": "",
+"qe": "The main difference between a citizen and an alien is",
+"oe": [
+"aliens are above law",
+"both have equal political rights",
+"citizens pay no tax",
+"citizens have political rights (franchise etc.), aliens do not"
+]
+},
+{
+"q": "नागरिकशास्त्र में 'स्थानीय स्वशासन' का अध्ययन किसलिए आवश्यक है?",
+"o": [
+"यह केवल केंद्र सरकार का भाग है",
+"इसका नागरिक से संबंध नहीं",
+"यह केवल विदेशों में है",
+"यह नागरिकों की लोकतंत्र की प्राथमिक पाठशाला है"
+],
+"a": "D",
+"e": "(लॉर्ड ब्राइस: स्थानीय स्वशासन लोकतंत्र की सर्वोत्तम पाठशाला।)",
+"qe": "Studying local self-government in Civics matters because",
+"oe": [
+"it is only part of the central government",
+"it has no link with citizens",
+"it exists only abroad",
+"it is the primary school of democracy for citizens"
+]
+},
+{
+"q": "'स्थानीय संस्थाएँ लोकतंत्र की सर्वोत्तम पाठशाला हैं' — किसका कथन है?",
+"o": [
+"लास्की",
+"लॉर्ड ब्राइस",
+"जे. एस. मिल",
+"डी तॉकविल"
+],
+"a": "B",
+"e": "",
+"qe": "'Local institutions are the best school of democracy' — who said?",
+"oe": [
+"Laski",
+"Lord Bryce",
+"J. S. Mill",
+"de Tocqueville"
+]
+},
+{
+"q": "नागरिकशास्त्र एक 'आदर्शात्मक' (normative) विषय भी है, क्योंकि—",
+"o": [
+"यह बताता है कि नागरिक को कैसा होना चाहिए",
+"इसमें मूल्य नहीं",
+"यह केवल तथ्यों का संग्रह है",
+"यह केवल प्रयोग करता है"
+],
+"a": "A",
+"e": "",
+"qe": "Civics is also a normative subject because",
+"oe": [
+"it tells what a citizen ought to be",
+"it has no values",
+"it is only a collection of facts",
+"it only experiments"
+]
+},
+{
+"q": "नागरिकता के 'कर्तव्य' का उदाहरण है—",
+"o": [
+"कर देना और कानून का पालन करना",
+"स्वतंत्र रूप से बोलने का अधिकार",
+"धर्म की स्वतंत्रता",
+"समानता का अधिकार"
+],
+"a": "A",
+"e": "",
+"qe": "An example of a citizen's 'duty' is",
+"oe": [
+"paying taxes and obeying laws",
+"freedom of speech",
+"freedom of religion",
+"right to equality"
+]
+},
+{
+"q": "'अधिकार और कर्तव्य एक ही सिक्के के दो पहलू हैं' — इसका अर्थ है—",
+"o": [
+"दोनों परस्पर निर्भर हैं",
+"केवल अधिकार महत्वपूर्ण हैं",
+"दोनों विरोधी हैं",
+"केवल कर्तव्य महत्वपूर्ण हैं"
+],
+"a": "A",
+"e": "",
+"qe": "'Rights and duties are two sides of the same coin' means",
+"oe": [
+"they are interdependent",
+"only rights matter",
+"they are opposite",
+"only duties matter"
+]
+},
+{
+"q": "'प्रत्येक राज्य की पहचान उसके द्वारा दिए गए अधिकारों से होती है' — किसका कथन है?",
+"o": [
+"हेरोल्ड लास्की",
+"ऑस्टिन",
+"बोदाँ",
+"हॉब्स"
+],
+"a": "A",
+"e": "",
+"qe": "'Every state is known by the rights it maintains' — who said?",
+"oe": [
+"Harold Laski",
+"Austin",
+"Bodin",
+"Hobbes"
+]
+},
+{
+"q": "नागरिकशास्त्र के अध्ययन में 'ऐतिहासिक पद्धति' का महत्व है—",
+"o": [
+"प्रयोग करना",
+"भविष्य की सटीक भविष्यवाणी",
+"संस्थाओं के उद्भव और विकास को समझना",
+"केवल वर्तमान का अध्ययन"
+],
+"a": "C",
+"e": "",
+"qe": "The importance of the historical method in Civics is",
+"oe": [
+"doing experiments",
+"exact prediction of the future",
+"understanding the origin and growth of institutions",
+"studying only the present"
+]
+},
+{
+"q": "'व्यवहारवाद' (Behaviouralism) का संबंध राजनीति विज्ञान में किस पर बल से है?",
+"o": [
+"राजनीतिक व्यवहार के अनुभवजन्य (empirical) अध्ययन पर",
+"केवल दर्शन पर",
+"केवल कानून पर",
+"केवल इतिहास पर"
+],
+"a": "A",
+"e": "",
+"qe": "Behaviouralism in Political Science stresses",
+"oe": [
+"empirical study of political behaviour",
+"only philosophy",
+"only law",
+"only history"
+]
+},
+{
+"q": "व्यवहारवाद के प्रमुख प्रवर्तकों में किसका नाम लिया जाता है?",
+"o": [
+"मनु",
+"डेविड ईस्टन / चार्ल्स मेरियम",
+"कौटिल्य",
+"प्लेटो"
+],
+"a": "B",
+"e": "",
+"qe": "A leading figure of behaviouralism is",
+"oe": [
+"Manu",
+"David Easton / Charles Merriam",
+"Kautilya",
+"Plato"
+]
+},
+{
+"q": "'उत्तर-व्यवहारवाद' (Post-behaviouralism) का नारा था—",
+"o": [
+"शक्ति ही सब कुछ",
+"प्रासंगिकता और क्रिया (Relevance and Action)",
+"केवल तथ्य",
+"मूल्य-मुक्त विज्ञान"
+],
+"a": "B",
+"e": "(डेविड ईस्टन, 1969)",
+"qe": "The slogan of post-behaviouralism was",
+"oe": [
+"power is everything",
+"Relevance and Action",
+"only facts",
+"value-free science"
+]
+},
+{
+"q": "'नागरिकशास्त्र मानव ज्ञान की वह शाखा है जो नागरिक के अतीत, वर्तमान और भविष्य से संबंधित है' — यह विचार किससे जुड़ा है?",
+"o": [
+"ई. एम. व्हाइट",
+"गार्नर",
+"पैट्रिक गेडिस",
+"लास्की"
+],
+"a": "C",
+"e": "(पैट्रिक गेडिस)",
+"qe": "'Civics deals with the past, present and future of the citizen' is associated with",
+"oe": [
+"E. M. White",
+"Garner",
+"Patrick Geddes",
+"Laski"
+]
+},
+{
+"q": "'द रिपब्लिक' (आदर्श राज्य का विचार) के रचयिता हैं—",
+"o": [
+"ऑगस्टीन",
+"सिसरो",
+"अरस्तू",
+"प्लेटो"
+],
+"a": "D",
+"e": "(प्लेटो); अरस्तू की रचना 'पॉलिटिक्स'।",
+"qe": "'The Republic' (idea of an ideal state) was written by",
+"oe": [
+"Augustine",
+"Cicero",
+"Aristotle",
+"Plato"
+]
+}
+]
