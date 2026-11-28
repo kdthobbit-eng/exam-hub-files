@@ -355,5 +355,5 @@ body.home{animation:uhfade .6s ease both}
 .uh-book-img img{filter:grayscale(.35)}
 
 /* hero: full banner picture, never cropped */
-.uh-hero-bg.uh-hero-banner{height:auto;aspect-ratio:1672/941;object-fit:contain;object-position:center;background:#eaf3fb}
+.uh-hero-bg.uh-hero-banner{height:auto;aspect-ratio:1774/887;object-fit:contain;object-position:center;background:#eaf3fb}
 @media (max-width:900px){.uh-hero-bg.uh-hero-banner{height:auto;margin-top:26px}}

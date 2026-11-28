@@ -58,7 +58,7 @@ $arrow = '<svg class="uh-ar" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 
 
 <section class="uh-hero">
   <div class="wrap uh-hero-in">
-    <img class="uh-hero-bg uh-hero-banner" src="<?php echo esc_url(EH_URI . '/assets/hero-banner.jpg?v=1'); ?>" srcset="<?php echo esc_url(EH_URI . '/assets/hero-banner-960.jpg?v=1'); ?> 960w, <?php echo esc_url(EH_URI . '/assets/hero-banner.jpg?v=1'); ?> 1672w" sizes="(max-width: 900px) 100vw, 46vw" width="1672" height="941" alt="XLStudy.in — Your home before the job. UPPSC, UPESSC, UPSSSC, AHC: Mock, Typing" fetchpriority="high">
+    <img class="uh-hero-bg uh-hero-banner" src="<?php echo esc_url(EH_URI . '/assets/hero-banner.jpg?v=2'); ?>" srcset="<?php echo esc_url(EH_URI . '/assets/hero-banner-960.jpg?v=2'); ?> 960w, <?php echo esc_url(EH_URI . '/assets/hero-banner.jpg?v=2'); ?> 1774w" sizes="(max-width: 900px) 100vw, 46vw" width="1774" height="887" alt="XLStudy.in — Your home before the job. UPPSC, UPESSC, UPSSSC, AHC: Mock, Typing" fetchpriority="high">
     <div class="uh-lang" role="group" aria-label="Language"><button type="button" data-lang="hi">हिंदी</button><button type="button" data-lang="en">English</button></div>
     <p class="uh-eyebrow"><?php echo eh_t('UPSSSC and UP exams · Courses · Mock tests · Typing', 'UPSSSC और UP की भर्तियाँ · कोर्स · मॉक टेस्ट · टाइपिंग'); ?></p>
     <h1 class="uh-h1"><?php echo eh_t('<span>Your home</span> <span><em>before the job.</em></span>', '<span>नौकरी लगने से</span> <span>पहले का <em>घर।</em></span>'); ?></h1>
