@@ -222,10 +222,11 @@ function eh_tp_test_row($r, $my, $no, $title, $lang = 'हिंदी + English
     $st = eh_stm_status($r); $ok = $st === 'live'; $over = $st === 'over'; $m = $my[$r['id']] ?? null; $max = eh_stm_nq($r) * 3; $u = eh_mock_url($r); $in = is_user_logged_in();
     $hm = ['', 'जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'];
     $dt = eh_tp_is($r) ? '' : '<span>📅 ' . wp_date('j', $r['start_ts']) . ' ' . $hm[(int) wp_date('n', $r['start_ts'])] . ' ' . wp_date('Y', $r['start_ts']) . '</span>';
+    $tt = $title; $tp = ''; if (preg_match('/^(.*\bTOPIC TEST \d+) \((.+)\)$/u', $title, $mm)) { $tt = $mm[1]; $tp = $mm[2]; }
     $go = function ($url) use ($in) { $url = add_query_arg('go', 1, $url); return $in ? $url : eh_login_page_url($url); };
     $h = '<div class="tr' . ($ok || $over ? '' : ' soon') . ($m && $m['n'] ? ' done' : '') . '"><div class="tr-n">' . str_pad((string) $no, 2, '0', STR_PAD_LEFT) . '</div><div class="tr-b">'
-        . '<div class="tr-t"><b>' . esc_html($title) . '</b>' . ($ok ? '<span class="tr-free">FREE</span><span class="tr-live"><i></i>LIVE</span>' : ($over ? '<span class="tr-soon">समाप्त</span>' : '<span class="tr-soon">' . (eh_tp_is($r) ? 'Coming Soon' : 'आगामी') . '</span>')) . '</div>'
-        . '<div class="tr-m">' . $dt . '<span>📝 ' . eh_stm_nq($r) . ' प्रश्न</span><span>🎯 ' . $max . ' अंक</span><span>⏱ ' . (int) round(eh_stm_secs($r) / 60) . ' मिनट</span><span>🌐 भाषा: ' . esc_html($lang) . '</span></div>';
+        . '<div class="tr-t"><b>' . esc_html($tt) . '</b>' . ($ok ? '<span class="tr-free">FREE</span><span class="tr-live"><i></i>LIVE</span>' : ($over ? '<span class="tr-soon">समाप्त</span>' : '<span class="tr-soon">' . (eh_tp_is($r) ? 'Coming Soon' : 'आगामी') . '</span>')) . '</div>'
+        . ($tp !== '' ? '<div class="tr-tp">' . esc_html($tp) . '</div>' : '') . '<div class="tr-m">' . $dt . '<span>📝 ' . eh_stm_nq($r) . ' प्रश्न</span><span>🎯 ' . $max . ' अंक</span><span>⏱ ' . (int) round(eh_stm_secs($r) / 60) . ' मिनट</span><span>🌐 भाषा: ' . esc_html($lang) . '</span></div>';
     if ($m && $m['n']) {
         global $wpdb; $rank = 1 + (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_stm_table() . ' WHERE round = %s AND submitted > 0 AND counted = 1 AND score > %d', $r['id'], (int) $m['last']));
         $pc = max(0, min(100, round($m['last'] * 100 / $max)));
