@@ -13,7 +13,7 @@ $eh_exl = $eh_tp ? $eh_tp['title'] . ' · ' . $eh_vr['sub'] . (($eh_vr['kind'] ?
 $eh_cfg = [
     'rest' => esc_url_raw(rest_url('eh/v1/stm/')), 'nonce' => $eh_in ? wp_create_nonce('wp_rest') : '',
     'in' => $eh_in, 'admin' => $eh_admin, 'isadm' => $eh_in && current_user_can('manage_options'), 'now' => time(),
-    'round' => eh_stm_round_out(eh_stm_view_round()), 'paper' => eh_stm_view_round()['paper'], 'view' => $eh_vr['id'] !== eh_stm_round()['id'] ? $eh_vr['id'] : '', 'exl' => $eh_exl, 'nq' => $eh_nq, 'max' => $eh_max, 'mins' => $eh_min, 'kind' => $eh_vr['kind'] ?? 'full', 'tp' => $eh_tp ? 1 : 0,
+    'round' => eh_stm_round_out(eh_stm_view_round()), 'paper' => eh_stm_view_round()['paper'], 'view' => $eh_vr['id'] !== eh_stm_round()['id'] ? $eh_vr['id'] : '', 'exl' => $eh_exl, 'zb' => $eh_tp ? ($eh_vr['series'] === 'gs' ? home_url('/mock-test/') : add_query_arg(['x' => $eh_vr['series'], 's' => $eh_vr['slug']], home_url('/mock-test/'))) : add_query_arg('x', 'stet', home_url('/mock-test/')), 'nq' => $eh_nq, 'max' => $eh_max, 'mins' => $eh_min, 'kind' => $eh_vr['kind'] ?? 'full', 'tp' => $eh_tp ? 1 : 0,
     'secs' => array_map(function ($x) { return [$x[0], $x[1]]; }, eh_stm_secmap($eh_vr)),
     'mocks' => $eh_tp ? [] : array_values(array_map(function ($x) { return ['id' => $x['id'], 'name' => $x['name'], 'start' => $x['start_ts'], 'end' => $x['end_ts']]; }, array_filter(eh_stm_rounds(), function ($x) { return $x['id'][0] === 'm'; }))), 'cur' => eh_stm_round()['id'],
     'login' => eh_login_page_url($eh_self), 'signup' => add_query_arg('redirect_to', rawurlencode($eh_self), home_url('/signup/')),
@@ -40,7 +40,7 @@ $eh_ph = '<svg viewBox="0 0 40 40"><circle cx="20" cy="15" r="8"/><path d="M4 40
 <style>html.eh-go body{visibility:hidden;background:#fff}html.eh-go::after{content:"टेस्ट खुल रहा है…";visibility:visible;position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#fff;color:#0f2a4d;font:600 17px/1.4 'Noto Sans Devanagari',system-ui,sans-serif;z-index:99999}</style>
 <link rel="icon" href="<?php echo $eh_logo; ?>">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Poppins:wght@600;700&display=swap">
 <style>
 :root{--nv:#0f2a4d;--nv2:#1c4a80;--pr:#1d63c7;--pr2:#e8f0fb;--gd:#c9a24a;--bg:#f2f5f9;--ln:#dbe3ec;--tx:#17202b;--mu:#5f6b7a;--gr:#2f9e55;--rd:#de4434;--pu:#6c43be;--or:#f29a0e}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -606,8 +606,6 @@ table.mt th{background:#eef3f9;font-weight:600}
 <div id="printArea"></div>
 <div class="pdfwait" id="pdfwait"><div class="pc"></div><div id="pdfmsg">PDF बन रही है…</div></div>
 <div id="pdfStage"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 
 <script>
 {
@@ -786,7 +784,7 @@ function solHTML(d,i,f){const ans=d.ans||{},q=d.q[i],a=ans[i],k=!a?'s':(a===d.ke
 function sols(f){$('sols').innerHTML=RS.q.map((q,i)=>solHTML(RS,i,f)).join('')||'<p style="text-align:center;color:var(--mu);padding:30px">कोई प्रश्न नहीं</p>'}
 
 /* ---------- PDF (one click download, with details + watermark + join links) ---------- */
-function libs(){return new Promise((ok,no)=>{let n=0;const t=setInterval(()=>{if(window.html2canvas&&window.jspdf){clearInterval(t);ok()}else if(++n>150){clearInterval(t);no()}},100)})}
+function libs(){if(!window.__ehLibs){window.__ehLibs=1;['https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js','https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'].forEach(u=>{const t=document.createElement('script');t.src=u;t.async=true;document.head.appendChild(t)})}return new Promise((ok,no)=>{let n=0;const t=setInterval(()=>{if(window.html2canvas&&window.jspdf){clearInterval(t);ok()}else if(++n>150){clearInterval(t);no()}},100)})}
 async function makePdf(d){const W=$('pdfwait'),M=$('pdfmsg');W.classList.add('on');M.textContent='PDF बन रही है…';
  try{await libs();if(document.fonts&&document.fonts.ready)await document.fonts.ready;
   const st=$('pdfStage'),blocks=[],css=`<style>#pdfStage *{box-sizing:border-box}#pdfStage .pb{padding:10px 26px}#pdfStage h1{font-size:22px;margin:0;color:#0f2a4d}#pdfStage table{width:100%;border-collapse:collapse;font-size:14px}#pdfStage td,#pdfStage th{border:1px solid #dbe3ec;padding:6px 9px;text-align:left}#pdfStage th{background:#f2f5f9}#pdfStage .qq{white-space:pre-line;font-size:14.5px;line-height:1.65;border:1px solid #e3e9f0;border-radius:10px;padding:10px 12px}#pdfStage .o{padding:2px 8px;border-radius:6px}#pdfStage .ok{background:#e3f5e6;color:#14532d;font-weight:700}#pdfStage .bad{background:#fde6e2;color:#8a1c0c}#pdfStage .ex{background:#f4f8fc;border-left:3px solid #1d63c7;padding:5px 9px;margin-top:5px;font-size:13px}#pdfStage .jb{display:inline-block;padding:12px 18px;border-radius:12px;color:#fff;font-weight:700;font-size:15px;margin-right:10px}</style>`;
@@ -877,6 +875,9 @@ async function repPdf(o){const W=$('pdfwait'),M=$('pdfmsg');W.classList.add('on'
   st.innerHTML='';W.classList.remove('on')}catch(e){W.classList.remove('on');$('pdfStage').innerHTML='';modal('PDF नहीं बनी','<p style="margin:0">दोबारा कोशिश करें।</p>')}}
 
 /* ---------- boot ---------- */
+/* opened from the test list (Start / Result): "back" returns to that list instead of this landing page */
+const ZB=/[?&](go|re)=1/.test(location.search)||/\/mock-test\//.test(document.referrer)?C.zb:'';
+{const _go=go;go=function(id){if(id==='s-home'&&ZB){location.href=ZB;return}_go(id)}}
 home();waitTick();
 setInterval(()=>{if($('s-home').classList.contains('on'))home();if($('s-ins2').classList.contains('on'))waitTick()},1000);
 if(C.admin){go('s-adm');ME.name='Admin';adm();setInterval(adm,15000);

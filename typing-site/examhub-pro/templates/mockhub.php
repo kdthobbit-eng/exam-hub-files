@@ -90,5 +90,6 @@ $hub = home_url('/mock-test/');
  <script>(function(){var B=[].slice.call(document.querySelectorAll('#mz-tabs button')),P=[].slice.call(document.querySelectorAll('.mz-p'));B.forEach(function(b){b.onclick=function(){B.forEach(function(x){x.classList.toggle('on',x===b)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.t)});try{b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})}catch(e){}}})})();</script>
 <?php endif; ?>
 </main>
+<script>window.addEventListener('pageshow',function(e){if(e.persisted)location.reload()});</script>
 <?php echo eh_tp_picker(); if ($x && !$sub): ?><script>if(window.ehTpOpen)ehTpOpen(<?php echo wp_json_encode($x); ?>)</script><?php endif; ?>
 <?php get_footer();
