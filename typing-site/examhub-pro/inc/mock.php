@@ -8,7 +8,14 @@ define('EH_STM_SECS', 7200);
 function eh_stm_table() { global $wpdb; return $wpdb->prefix . 'eh_mock'; }
 
 /* Rounds: times are IST. 't1' = team trial, 'm1' = the real live mock on 22 Nov. */
+/* rounds list is built once per request (it has hundreds of TGT/PGT rounds); rebuilt only if the round options change */
+function eh_stm_rounds_ver() { return md5(serialize([get_option('eh_stm_rounds'), get_option('eh_stm_ctl')])); }
 function eh_stm_rounds() {
+    static $cache = null, $ver = null; $v = eh_stm_rounds_ver();
+    if ($cache !== null && $ver === $v) return $cache;
+    $ver = $v; return $cache = eh_stm_rounds_build();
+}
+function eh_stm_rounds_build() {
     $tz = new DateTimeZone('Asia/Kolkata');
     $ts = function ($s) use ($tz) { return (new DateTime($s, $tz))->getTimestamp(); };
     $o = get_option('eh_stm_rounds');

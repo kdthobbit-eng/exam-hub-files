@@ -67,13 +67,19 @@ function eh_tp_rounds_all() {
         $out[] = array_merge($r, ['id' => $r['id'] . 'f' . $n, 'kind' => 'full', 'paper' => $f, 'gs' => $f . '-gs', 'fno' => $n,
             'name' => strtoupper($r['series']) . ' ' . eh_tp_en($r['slug'], $r['sub_en']) . ' - FULL LENGTH MOCK ' . $n]);
     }
-    /* common GS topic tests — same for every TGT and PGT subject */
-    foreach (eh_tp_gs_topics() as $i => $tn) {
-        $f = 'tp/topic/gs-' . ($i + 1);
-        if (!is_file(EH_DIR . '/data/' . $f . '.json')) continue;
-        $out[] = ['id' => 'gst' . ($i + 1), 'series' => 'gs', 'slug' => 'gs', 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'kind' => 'topic', 'topic' => $tn[0], 'tno' => $i + 1,
-            'name' => 'TGT/PGT GS - TOPIC TEST ' . ($i + 1) . ' (' . $tn[1] . ')', 'login' => EH_TP_LOGIN, 'start' => EH_TP_LOGIN, 'end' => EH_TP_END, 'paper' => $f, 'gs' => '', 'secs' => 3000, 'nq' => 50];
+    /* GS topic tests + GS sectional: same questions for every subject, but a separate round per subject (tg03g1…, tg03x),
+       so attempts, results and "continue" stay with the subject the candidate is preparing */
+    foreach (eh_tp_rounds() as $r) {
+        $pre = strtoupper($r['series']) . ' GS - ';
+        foreach (eh_tp_gs_topics() as $i => $tn) {
+            $f = 'tp/topic/gs-' . ($i + 1);
+            if (!is_file(EH_DIR . '/data/' . $f . '.json')) continue;
+            $out[] = array_merge($r, ['id' => $r['id'] . 'g' . ($i + 1), 'kind' => 'topic', 'gst' => 1, 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'topic' => $tn[0], 'tno' => $i + 1,
+                'name' => $pre . 'TOPIC TEST ' . ($i + 1) . ' (' . $tn[1] . ')', 'paper' => $f, 'gs' => '', 'secs' => 3000, 'nq' => 50]);
+        }
+        $out[] = array_merge($r, ['id' => $r['id'] . 'x', 'kind' => 'gs', 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'name' => $pre . 'SECTIONAL TEST 1', 'paper' => 'tp/gs', 'gs' => '', 'secs' => 1800, 'nq' => 30]);
     }
+    /* old common GS sectional — kept only so earlier attempts still open */
     $out[] = ['id' => 'gsx', 'series' => 'gs', 'slug' => 'gs', 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'name' => 'TGT/PGT GS - SECTIONAL TEST 1',
         'login' => EH_TP_LOGIN, 'start' => EH_TP_LOGIN, 'end' => EH_TP_END, 'paper' => 'tp/gs', 'gs' => '', 'kind' => 'gs', 'secs' => 1800, 'nq' => 30];
     return $out;
@@ -108,7 +114,7 @@ function eh_tp_ready($r) {
 /* ?r=tg01 / pg05 → that subject round */
 function eh_tp_req_round() {
     $id = sanitize_key($_GET['r'] ?? ($_REQUEST['eh_r'] ?? ''));
-    if (!preg_match('/^((tg|pg)\d\d(s|t\d\d?|f\d\d?)?|gsx|gst\d\d?|p\d)$/', $id)) return null;
+    if (!preg_match('/^((tg|pg)\d\d(s|x|t\d\d?|f\d\d?|g\d\d?)?|gsx|gst\d\d?|p\d)$/', $id)) return null;
     foreach (eh_stm_rounds() as $r) if ($r['id'] === $id) return $r;
     return null;
 }
@@ -193,7 +199,7 @@ function eh_tp_my($uid) {
     }
     return $out;
 }
-function eh_tp_find($id) { foreach (eh_stm_rounds() as $r) if ($r['id'] === $id) return $r; return null; }
+function eh_tp_find($id) { static $ix = null, $k = null; $v = eh_stm_rounds_ver(); if ($ix === null || $k !== $v) { $ix = array_column(eh_stm_rounds(), null, 'id'); $k = $v; } return $ix[$id] ?? null; }
 /* one test card: title, pattern, status, start / continue / retest, and a thin score bar once attempted */
 function eh_tp_test_card($r, $my, $title, $sub, $tag = '') {
     $ok = eh_stm_status($r) === 'live'; $m = $my[$r['id']] ?? null; $max = eh_stm_nq($r) * 3; $u = eh_tp_url($r);

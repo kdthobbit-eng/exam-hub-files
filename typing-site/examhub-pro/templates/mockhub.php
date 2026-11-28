@@ -68,13 +68,13 @@ $hub = home_url('/mock-test/');
  [].forEach.call(document.querySelectorAll('#mx-tabs button'),function(b){b.onclick=function(){F=b.dataset.f;[].forEach.call(document.querySelectorAll('#mx-tabs button'),function(x){x.classList.toggle('on',x===b)});run()}})})();</script>
 <?php else:
   $R = eh_tp_find(($x === 'tgt' ? 'tg' : 'pg') . str_pad((string) (array_search($sub, array_keys(eh_tp_subjects()[$x])) + 1), 2, '0', STR_PAD_LEFT));
-  $RS = eh_tp_find($R['id'] . 's'); $GS = eh_tp_find('gsx'); $my = eh_tp_my($uid); $nm = eh_tp_subjects()[$x][$sub];
+  $RS = eh_tp_find($R['id'] . 's'); $GS = eh_tp_find($R['id'] . 'x'); $my = eh_tp_my($uid); $nm = eh_tp_subjects()[$x][$sub];
   $lang = in_array($sub, ['hindi', 'english', 'sanskrit', 'urdu'], true) ? $nm[0] : 'हिंदी + English';
   $FL = eh_tp_flts($R); $FULL = $FL ?: [$R];
   $TL = eh_tp_topics()[$x][$sub] ?? []; $GT = eh_tp_gs_topics();
-  $ids = array_merge(array_column($FULL, 'id'), [$RS['id'], 'gsx']);
+  $ids = array_merge(array_column($FULL, 'id'), [$RS['id'], $GS['id']]);
   foreach ($TL as $i => $tn) if (eh_tp_find($R['id'] . 't' . ($i + 1))) $ids[] = $R['id'] . 't' . ($i + 1);
-  foreach ($GT as $i => $tn) if (eh_tp_find('gst' . ($i + 1))) $ids[] = 'gst' . ($i + 1);
+  foreach ($GT as $i => $tn) if (eh_tp_find($R['id'] . 'g' . ($i + 1))) $ids[] = $R['id'] . 'g' . ($i + 1);
   $done = count(array_filter($ids, function ($id) use ($my) { return !empty($my[$id]['n']); })); $tot = count($ids);
   $u = wp_get_current_user(); $nmU = $uid ? ($u->display_name ?: $u->user_login) : '';
   $ini = $nmU ? mb_strtoupper(mb_substr(trim($nmU), 0, 1)) : ''; ?>
@@ -100,10 +100,10 @@ $hub = home_url('/mock-test/');
      else echo '<div class="tr soon"><div class="tr-n">' . str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) . '</div><div class="tr-b"><div class="tr-t"><b>' . esc_html(strtoupper($x) . ' ' . eh_tp_en($sub, $nm[1]) . ' - TOPIC TEST ' . ($i + 1)) . '</b><span class="tr-soon">Coming Soon</span></div>' . (!empty($tn[1]) ? '<div class="tr-tp">' . esc_html($tn[1]) . '</div>' : '') . '<div class="tr-m"><span>📝 50 प्रश्न</span></div></div><div class="tr-a"><span class="tr-btn dis">Coming Soon</span></div></div>';
    endforeach; ?></div>
    <?php else: ?><div class="mz-empty"><b>🎯 <?php echo esc_html($nm[0]); ?> टॉपिक-वाइज टेस्ट — Coming Soon</b><p><?php echo esc_html($nm[0]); ?> के हर टॉपिक पर 50-50 प्रश्नों के सेट जल्द आएँगे। तब तक सामान्य अध्ययन के टॉपिक टेस्ट दें।</p></div><?php endif; ?></div>
-   <div class="tsp<?php echo $TL ? '' : ' on'; ?>" data-s="gs"><div class="tsn">TGT व PGT के सभी विषयों के लिए एक जैसा · हर टेस्ट 50 प्रश्न · हिंदी + English</div>
+   <div class="tsp<?php echo $TL ? '' : ' on'; ?>" data-s="gs">
    <?php $UN = [[0, 0, 'इकाई 1', 'समसामयिक घटनाएँ'], [1, 6, 'इकाई 2', 'इतिहास, संविधान, शिक्षा विधि, अर्थव्यवस्था, भूगोल व उत्तर प्रदेश'], [7, 9, 'इकाई 3', 'विज्ञान, स्वास्थ्य एवं कंप्यूटर / ICT']];
    foreach ($UN as $u): ?><div class="tu-h"><b><?php echo esc_html($u[2]); ?></b><span><?php echo esc_html($u[3]); ?></span></div><div class="tl">
-   <?php for ($i = $u[0]; $i <= $u[1]; $i++): $TR = eh_tp_find('gst' . ($i + 1)); if ($TR) echo eh_tp_test_row($TR, $my, $i + 1, $TR['name'], 'हिंदी + English'); endfor; ?></div>
+   <?php for ($i = $u[0]; $i <= $u[1]; $i++): $TR = eh_tp_find($R['id'] . 'g' . ($i + 1)); if ($TR) echo eh_tp_test_row($TR, $my, $i + 1, $TR['name'], 'हिंदी + English'); endfor; ?></div>
    <?php endforeach; ?></div>
   </div>
   <div class="mz-p" data-p="pyq"><div class="mz-empty"><b>🗂️ पिछले वर्ष के प्रश्न-पत्र — Coming Soon</b><p>UPESSC / UPSESSB के असली पिछले प्रश्न-पत्र, उत्तर-कुंजी और व्याख्या के साथ।</p></div></div>
