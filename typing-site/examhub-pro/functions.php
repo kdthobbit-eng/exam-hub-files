@@ -268,6 +268,23 @@ function eh_tg_buttons($class = '') {
         . '<a class="btn tg alt" href="' . esc_url(eh_opt('tg_group')) . '" target="_blank" rel="noopener">💬 Telegram Group</a></div>';
 }
 
+/* thin line icons for the menu (same stroke style everywhere) */
+function eh_menu_icon($path) {
+    $d = [
+        '/' => '<path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v12h13V9"/><path d="M10 21v-6h4v6"/>',
+        '/live-typing/' => '<path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12z"/>',
+        '/exams/' => '<rect x="2.5" y="6" width="19" height="12" rx="2"/><path d="M6.5 10h.01M10 10h.01M13.5 10h.01M17 10h.01M7.5 14h9"/>',
+        '/my-dashboard/' => '<circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/>',
+        '/exam-hall-typing/' => '<path d="M3 21h18M5 21v-9M9.5 21v-9M14.5 21v-9M19 21v-9M2.5 9.5 12 4l9.5 5.5z"/>',
+        '/download-passages/' => '<path d="M12 3.5v11M7.5 10.5 12 15l4.5-4.5"/><path d="M4.5 20.5h15"/>',
+        '/typing-insight/' => '<path d="M3.5 3.5v17h17"/><path d="m7.5 15 4-4.5 3 3 5.5-6.5"/>',
+        '/demo-typing/' => '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/>',
+        '/exam-based-result/' => '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4"/>',
+        '/blog/' => '<path d="M9 18h6M10 21.5h4M12 2.5a6.5 6.5 0 0 0-3.5 12V16h7v-1.5A6.5 6.5 0 0 0 12 2.5z"/>',
+    ];
+    if ($path === '/mock-test/') return '<span class="eh-mi eh-mi-live" aria-hidden="true"><i></i></span>';
+    return '<span class="eh-mi" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' . ($d[$path] ?? '<circle cx="12" cy="12" r="3"/>') . '</svg></span>';
+}
 /* default menu if none set */
 function eh_member_links() {
     return [
@@ -296,9 +313,8 @@ function eh_default_menu() {
         ? array_merge([['/', 'Home']], array_values(eh_member_links()))
         : [['/', 'Home'], ['/mock-test/', 'Live Mock'], ['/exams/', 'Exams'], ['/demo-typing/', 'Demo Typing'], ['/live-typing/', 'Live Typing'], ['/exam-based-result/', 'Result'], ['/blog/', 'Typing Tips']];
     echo '<ul class="eh-menu">';
-    $ic = ['/' => '🏠', '/mock-test/' => '', '/live-typing/' => '⚡', '/exams/' => '⌨️', '/my-dashboard/' => '🕘', '/exam-hall-typing/' => '🏛️', '/download-passages/' => '📥', '/typing-insight/' => '📈', '/demo-typing/' => '🎯', '/exam-based-result/' => '🏆', '/blog/' => '💡'];
     $cur = rtrim((string) parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH), '/') . '/';
-    foreach ($items as $i) echo '<li' . ($cur === $i[0] ? ' class="current-menu-item"' : '') . '><a href="' . esc_url(home_url($i[0])) . '"><span class="eh-mi" aria-hidden="true">' . ($ic[$i[0]] ?? '•') . '</span><span class="eh-ml">' . esc_html($i[1]) . '</span></a></li>';
+    foreach ($items as $i) echo '<li' . ($cur === $i[0] ? ' class="current-menu-item"' : '') . '><a href="' . esc_url(home_url($i[0])) . '">' . eh_menu_icon($i[0]) . '<span class="eh-ml">' . esc_html($i[1]) . '</span></a></li>';
     echo '</ul>';
 }
 

@@ -42,8 +42,8 @@
     <div class="eh-drawer-card">
       <span class="eh-av-big"><?php echo esc_html(eh_initials($u->display_name)); ?></span>
       <p>Hello, <b><?php echo esc_html($u->display_name); ?></b></p>
-      <div class="eh-drawer-btns"><a class="btn ghost sm" href="<?php echo esc_url(admin_url('profile.php')); ?>">✎ Edit Profile</a><a class="btn sm eh-out" href="<?php echo esc_url(wp_logout_url(home_url('/'))); ?>">⎋ Logout</a></div>
-      <ul class="eh-drawer-links"><?php foreach (eh_member_links() as $l) echo '<li><a href="' . esc_url(home_url($l[0])) . '">' . esc_html($l[1]) . '</a></li>'; ?></ul>
+      <div class="eh-drawer-btns"><a class="btn ghost sm" href="<?php echo esc_url(admin_url('profile.php')); ?>">Edit Profile</a><a class="btn sm eh-out" href="<?php echo esc_url(wp_logout_url(home_url('/'))); ?>">Logout</a></div>
+      <ul class="eh-drawer-links"><?php foreach (eh_member_links() as $l) echo '<li><a href="' . esc_url(home_url($l[0])) . '">' . eh_menu_icon($l[0]) . '<span class="eh-ml">' . esc_html($l[1]) . '</span></a></li>'; ?></ul>
       <p class="muted small">Need help? Ask on Telegram</p>
       <?php echo eh_tg_buttons('inline'); ?>
     </div>
