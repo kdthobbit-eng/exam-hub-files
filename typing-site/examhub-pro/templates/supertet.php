@@ -466,7 +466,6 @@ table.mt th{background:#eef3f9;font-weight:600}
    <p class="st" style="margin:0 0 6px"><a href="<?php echo esc_url(home_url('/mock-test/')); ?>" style="color:#fff">मॉक टेस्ट</a> › <a href="<?php echo esc_url($eh_vr['series'] === 'gs' ? home_url('/mock-test/') : add_query_arg(['x' => $eh_vr['series'], 's' => $eh_vr['slug']], home_url('/mock-test/'))); ?>" style="color:#fff"><?php echo esc_html($eh_tp['short']); ?></a></p>
    <h1><?php echo esc_html($eh_tp['title']); ?> <em><?php echo esc_html($eh_vr['sub'] . (($eh_vr['kind'] ?? '') === 'full' ? '' : ' · सेक्शनल')); ?></em></h1>
    <p class="st"><?php echo esc_html($eh_tp['post'] . ' · ' . $eh_tp['adv'] . ' · विषयवार ऑनलाइन लाइव मॉक'); ?></p>
-   <label class="subsel">विषय / Subject: <select onchange="location.href=this.value"><?php foreach ($eh_sib as $x): ?><option value="<?php echo esc_url(eh_tp_url($x)); ?>"<?php selected($x['id'], $eh_vr['id']); ?>><?php echo esc_html($x['sub'] . ' (' . $x['sub_en'] . ')'); ?></option><?php endforeach; ?></select></label>
 <?php else: ?>
    <h1>UP Super TET <em>2026</em></h1>
    <p class="st">सहायक अध्यापक भर्ती परीक्षा · प्राथमिक स्तर (कक्षा 1–5) · ऑनलाइन लाइव मॉक</p>
@@ -883,7 +882,7 @@ if(C.admin){go('s-adm');ME.name='Admin';adm();setInterval(adm,15000);
  $('a-tabs').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;AT=b.dataset.t;$('a-tabs').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));admTab()};
  $('a-body').onclick=e=>{const b=e.target.closest('[data-rs]');if(b)modal('रीसेट करें?','<p style="margin:0">इस उम्मीदवार का यह प्रयास मिट जाएगा।</p>',[['नहीं','b-wh',close],['हाँ, रीसेट','b-pr',()=>{close();api('reset',{id:+b.dataset.rs}).then(adm)}]])};
  $('a-rep').onclick=repDialog;$('a-csv').onclick=()=>{if(RP)repCsv({mask:false,n:0})}}
-else if(C.in){api('state').then(j=>{off=j.now*1000-Date.now();R=j.round;A=j.attempt;ME={name:j.name,roll:j.roll};names();home();if(/[?&]re=1/.test(location.search)&&+A.submitted&&status()==='live')setTimeout(retry,50);
+else if(C.in){api('state').then(j=>{off=j.now*1000-Date.now();R=j.round;A=j.attempt;ME={name:j.name,roll:j.roll};names();home();if(/[?&]re=1/.test(location.search)&&+A.submitted&&status()==='live')setTimeout(retry,50);else if(/[?&]go=1/.test(location.search)&&(+A.submitted||+A.started||status()==='live')){try{history.replaceState(null,'',location.href.replace(/[?&]go=1/,''))}catch(e){}setTimeout(enter,30)}
  if(+A.started&&!+A.submitted){try{const b=JSON.parse(localStorage.getItem(LK())||'null');if(b&&b.t>(+A.last||0)+2){A.ans=b.ans||A.ans;A.st=b.st||A.st;A.tq=b.tq||A.tq;A.cur=b.cur;A.tabs=Math.max(+A.tabs||0,+b.tabs||0);dirty=true}}catch(e){}
   modal('परीक्षा अधूरी है — Resume Test','<p style="margin:0 0 8px;line-height:1.7">आपकी परीक्षा पहले से चल रही है। आपके सभी उत्तर सुरक्षित हैं।</p><p style="margin:0;line-height:1.7">बचा समय: <b class="num">'+fmt(A.paused?A.left:A.deadline-now())+'</b> · उत्तर दिए: <b>'+Object.keys(A.ans||{}).length+'</b> / '+C.nq+'</p><p style="margin:8px 0 0;font-size:13px;color:var(--mu)">⏸️ आपकी घड़ी रुकी हुई है — Resume Test दबाने पर ही समय चलेगा।</p>',[['बाद में','b-wh',close],['Resume Test ›','b-pr',()=>{close();start();if(dirty)push().catch(()=>{})}]])}}).catch(()=>{$('c-h').textContent='लोड नहीं हुआ';$('c-p').textContent='पेज दोबारा खोलें।'})}
 }

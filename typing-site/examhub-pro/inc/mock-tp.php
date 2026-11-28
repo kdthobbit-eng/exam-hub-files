@@ -201,3 +201,23 @@ document.addEventListener('click',function(e){var k=e.target.closest('[data-tp-p
 window.ehTpOpen=open;var m=location.search.match(/[?&]pick=(tgt|pgt)/);if(m)open(m[1])})();</script>
 <?php return ob_get_clean();
 }
+
+/* test list row (Mock No. 1, 2 …): Start goes straight into the test (or to login first); attempted rows show score, rank, analysis, re-attempt */
+function eh_tp_test_row($r, $my, $no, $title, $lang = 'हिंदी + English') {
+    $ok = eh_stm_status($r) === 'live'; $m = $my[$r['id']] ?? null; $max = eh_stm_nq($r) * 3; $u = eh_tp_url($r); $in = is_user_logged_in();
+    $go = function ($url) use ($in) { $url = add_query_arg('go', 1, $url); return $in ? $url : eh_login_page_url($url); };
+    $h = '<div class="tr' . ($ok ? '' : ' soon') . ($m && $m['n'] ? ' done' : '') . '"><div class="tr-n">' . str_pad((string) $no, 2, '0', STR_PAD_LEFT) . '</div><div class="tr-b">'
+        . '<div class="tr-t"><b>' . esc_html($title) . '</b>' . ($ok ? '<span class="tr-free">FREE</span><span class="tr-live"><i></i>LIVE</span>' : '<span class="tr-soon">जल्द आ रहा है</span>') . '</div>'
+        . '<div class="tr-m"><span>📝 ' . eh_stm_nq($r) . ' प्रश्न</span><span>🎯 ' . $max . ' अंक</span><span>⏱ ' . (int) round(eh_stm_secs($r) / 60) . ' मिनट</span><span>🌐 ' . esc_html($lang) . '</span></div>';
+    if ($m && $m['n']) {
+        global $wpdb; $rank = 1 + (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_stm_table() . ' WHERE round = %s AND submitted > 0 AND counted = 1 AND score > %d', $r['id'], (int) $m['last']));
+        $pc = max(0, min(100, round($m['last'] * 100 / $max)));
+        $h .= '<div class="tr-s"><div class="tr-bar"><i style="width:' . $pc . '%"></i></div><span>✓ दिया · <b>' . $m['last'] . '</b>/' . $max . ' · रैंक ~' . $rank . ($m['n'] > 1 ? ' · ' . $m['n'] . ' प्रयास' : '') . '</span></div>';
+    }
+    $h .= '</div><div class="tr-a">';
+    if (!$ok) $h .= '<span class="tr-btn dis">जल्द</span>';
+    elseif ($m && $m['run']) $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">▶ जारी रखें</a>';
+    elseif ($m && $m['n']) $h .= '<a class="tr-btn ghost" href="' . esc_url($go($u)) . '">📊 विश्लेषण</a><a class="tr-btn" href="' . esc_url(add_query_arg('re', 1, $u)) . '">↻ दोबारा दें</a>';
+    else $h .= '<a class="tr-btn" href="' . esc_url($go($u)) . '">Start Test →</a>';
+    return $h . '</div></div>';
+}

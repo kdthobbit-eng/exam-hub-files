@@ -18,6 +18,7 @@ $hub = home_url('/mock-test/');
 <main class="mx">
 <?php if (!$x): ?>
  <section class="mx-hero"><div class="mx-wrap">
+  <?php if ($uid): $uu = wp_get_current_user(); ?><div class="hi-u"><span class="zh-av"><?php echo esc_html(mb_strtoupper(mb_substr(trim($uu->display_name ?: $uu->user_login), 0, 1))); ?></span>नमस्ते, <b><?php echo esc_html($uu->display_name ?: $uu->user_login); ?></b> 👋</div><?php endif; ?>
   <span class="mx-kick"><i></i>Live Mock Test · UPSSSC ALERT</span>
   <h1>परीक्षा जैसा <em>लाइव मॉक टेस्ट</em></h1>
   <p>असली परीक्षा जैसी कंप्यूटर आधारित स्क्रीन, सर्वर पर चलने वाली घड़ी, सबमिट करते ही स्कोर, रैंक, परसेंटाइल और हर प्रश्न की व्याख्या। अपनी परीक्षा चुनें।</p>
@@ -44,22 +45,29 @@ $hub = home_url('/mock-test/');
  [].forEach.call(document.querySelectorAll('#mx-tabs button'),function(b){b.onclick=function(){F=b.dataset.f;[].forEach.call(document.querySelectorAll('#mx-tabs button'),function(x){x.classList.toggle('on',x===b)});run()}})})();</script>
 <?php else:
   $R = eh_tp_find(($x === 'tgt' ? 'tg' : 'pg') . str_pad((string) (array_search($sub, array_keys(eh_tp_subjects()[$x])) + 1), 2, '0', STR_PAD_LEFT));
-  $RS = eh_tp_find($R['id'] . 's'); $GS = eh_tp_find('gsx'); $my = eh_tp_my($uid); $nm = eh_tp_subjects()[$x][$sub]; ?>
+  $RS = eh_tp_find($R['id'] . 's'); $GS = eh_tp_find('gsx'); $my = eh_tp_my($uid); $nm = eh_tp_subjects()[$x][$sub];
+  $lang = in_array($sub, ['hindi', 'english', 'sanskrit', 'urdu'], true) ? $nm[0] . ' माध्यम' : 'हिंदी + English';
+  $done = count(array_filter([$R['id'], $RS['id'], 'gsx'], function ($id) use ($my) { return !empty($my[$id]['n']); }));
+  $u = wp_get_current_user(); $nmU = $uid ? ($u->display_name ?: $u->user_login) : '';
+  $ini = $nmU ? mb_strtoupper(mb_substr(trim($nmU), 0, 1)) : ''; ?>
  <section class="mz-bar"><div class="mx-wrap">
   <div class="mz-crumb"><a href="<?php echo esc_url($hub); ?>">← Live Mock</a></div>
-  <div class="mz-head"><div><span class="mx-kick"><i></i><?php echo esc_html($info['title'] . ' · ' . $info['adv']); ?></span><h1><?php echo esc_html($info['short']); ?> <em><?php echo esc_html($nm[0]); ?></em></h1>
-   <p><?php echo esc_html($info['post']); ?> · <?php echo esc_html($nm[1]); ?></p></div>
-   <a class="mz-chip" data-tp="<?php echo esc_attr($x); ?>" data-tp-change href="<?php echo esc_url(add_query_arg(['x' => $x, 'all' => 1], $hub)); ?>"><span>आपका विषय</span><b>📘 <?php echo esc_html($nm[0]); ?></b><em>बदलें ✎</em></a></div>
-  <nav class="mz-tabs" id="mz-tabs"><button class="on" data-t="full">फुल मॉक</button><button data-t="sec">सेक्शनल मॉक</button><button data-t="topic">टॉपिक-वाइज</button><button data-t="pyq">पिछले वर्ष के पेपर</button></nav>
+  <div class="zh">
+   <div class="zh-u"><?php if ($uid): ?><span class="zh-av"><?php echo esc_html($ini); ?></span><div><small>नमस्ते,</small><b><?php echo esc_html($nmU); ?></b></div><?php else: ?><span class="zh-av">👋</span><div><small>नमस्ते!</small><b><a href="<?php echo esc_url(eh_login_page_url(add_query_arg(['x' => $x, 's' => $sub], $hub))); ?>">लॉग-इन / साइन-अप करें</a></b></div><?php endif; ?></div>
+   <div class="zh-x"><span class="mx-kick"><i></i><?php echo esc_html($info['title'] . ' · ' . $info['adv']); ?></span><h1><?php echo esc_html($info['short']); ?> <em><?php echo esc_html($nm[0]); ?></em> <small>टेस्ट सीरीज़</small></h1></div>
+   <div class="zh-r"><a class="zh-chip" data-tp="<?php echo esc_attr($x); ?>" data-tp-change href="<?php echo esc_url(add_query_arg(['x' => $x, 'all' => 1], $hub)); ?>">📘 <?php echo esc_html($info['short'] . ' · ' . $nm[0]); ?> <em>बदलें ✎</em></a><span class="zh-st"><b><?php echo $done; ?></b>/3 टेस्ट दिए</span></div>
+  </div>
+  <nav class="rb" id="mz-tabs"><button class="on" data-t="full"><i>📄</i>फुल मॉक<em>1</em></button><button data-t="sec"><i>🧩</i>सेक्शनल<em>2</em></button><button data-t="topic"><i>🎯</i>टॉपिक-वाइज<em>जल्द</em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>जल्द</em></button></nav>
  </div></section>
  <section class="mx-body"><div class="mx-wrap">
-  <div class="mz-p on" data-p="full"><div class="mt-g"><?php echo eh_tp_test_card($R, $my, $info['short'] . ' ' . $nm[0] . ' — फुल मॉक 1', 'असली परीक्षा जैसा पूरा प्रश्न-पत्र: 30 सामान्य अध्ययन + 90 ' . $nm[0], 'फुल मॉक'); ?></div></div>
-  <div class="mz-p" data-p="sec"><div class="mt-g"><?php echo eh_tp_test_card($RS, $my, $nm[0] . ' — सेक्शनल मॉक', 'केवल ' . $nm[0] . ' के 90 प्रश्न', 'विषय सेक्शनल') . eh_tp_test_card($GS, $my, 'सामान्य अध्ययन — सेक्शनल मॉक', 'TGT व PGT दोनों का कॉमन GS भाग — 30 प्रश्न', 'GS सेक्शनल'); ?></div></div>
-  <div class="mz-p" data-p="topic"><div class="mz-empty"><b>📚 टॉपिक-वाइज सेट जल्द आ रहे हैं</b><p><?php echo esc_html($nm[0]); ?> के हर टॉपिक पर 50-50 प्रश्नों के सेट, विस्तृत हल के साथ।</p></div></div>
+  <div class="mz-p on" data-p="full"><div class="tl-h"><b>फुल मॉक टेस्ट</b><span>असली परीक्षा जैसा पूरा प्रश्न-पत्र — 30 सामान्य अध्ययन + 90 <?php echo esc_html($nm[0]); ?></span></div>
+   <div class="tl"><?php echo eh_tp_test_row($R, $my, 1, $info['short'] . ' ' . $nm[0] . ' — मॉक टेस्ट 1', $lang); ?></div></div>
+  <div class="mz-p" data-p="sec"><div class="tl-h"><b>सेक्शनल मॉक टेस्ट</b><span>एक भाग का अलग अभ्यास, कम समय में</span></div>
+   <div class="tl"><?php echo eh_tp_test_row($RS, $my, 1, $nm[0] . ' — सेक्शनल टेस्ट 1 (90 प्रश्न)', $lang) . eh_tp_test_row($GS, $my, 2, 'सामान्य अध्ययन — सेक्शनल टेस्ट 1 (30 प्रश्न)', 'हिंदी + English'); ?></div></div>
+  <div class="mz-p" data-p="topic"><div class="mz-empty"><b>🎯 टॉपिक-वाइज टेस्ट जल्द आ रहे हैं</b><p><?php echo esc_html($nm[0]); ?> के हर टॉपिक पर 50-50 प्रश्नों के सेट, विस्तृत हल के साथ।</p></div></div>
   <div class="mz-p" data-p="pyq"><div class="mz-empty"><b>🗂️ पिछले वर्ष के प्रश्न-पत्र जल्द आ रहे हैं</b><p>UPESSC / UPSESSB के असली पिछले प्रश्न-पत्र, उत्तर-कुंजी और व्याख्या के साथ।</p></div></div>
  </div></section>
- <script>(function(){
- var B=[].slice.call(document.querySelectorAll('#mz-tabs button')),P=[].slice.call(document.querySelectorAll('.mz-p'));B.forEach(function(b){b.onclick=function(){B.forEach(function(x){x.classList.toggle('on',x===b)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.t)})}})})();</script>
+ <script>(function(){var B=[].slice.call(document.querySelectorAll('#mz-tabs button')),P=[].slice.call(document.querySelectorAll('.mz-p'));B.forEach(function(b){b.onclick=function(){B.forEach(function(x){x.classList.toggle('on',x===b)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.t)});try{b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})}catch(e){}}})})();</script>
 <?php endif; ?>
 </main>
 <?php echo eh_tp_picker(); if ($x && !$sub): ?><script>if(window.ehTpOpen)ehTpOpen(<?php echo wp_json_encode($x); ?>)</script><?php endif; ?>
