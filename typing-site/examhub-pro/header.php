@@ -26,7 +26,7 @@
       <?php if (has_nav_menu('primary')) wp_nav_menu(['theme_location' => 'primary', 'container' => false, 'menu_class' => 'eh-menu']); else eh_default_menu(); ?>
       <div class="eh-auth">
         <?php if (is_user_logged_in()): $u = wp_get_current_user(); ?>
-          <button type="button" class="eh-avatar-btn" data-drawer="eh-user-drawer" aria-label="Profile menu"><?php echo esc_html(eh_initials($u->display_name)); ?></button>
+          <button type="button" class="eh-avatar-btn" data-drawer="eh-user-drawer" aria-label="Profile menu"><?php echo esc_html(eh_initials($u->display_name)); ?></button><button type="button" class="eh-acc-name" data-drawer="eh-user-drawer"><b><?php echo esc_html($u->display_name); ?></b><small>My Account ›</small></button>
         <?php else: ?>
           <a class="btn ghost sm" href="<?php echo esc_url(eh_login_page_url()); ?>">Login</a>
           <a class="btn dark sm" href="<?php echo esc_url(eh_signup_page_url()); ?>">New User</a>

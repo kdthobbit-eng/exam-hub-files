@@ -271,8 +271,8 @@ function eh_tg_buttons($class = '') {
 /* default menu if none set */
 function eh_member_links() {
     return [
-        'mock' => ['/mock-test/', 'Live Mock'], 'live' => ['/live-typing/', '⚡ Live Typing'], 'exams' => ['/exams/', 'All Exams Typing'], 'history' => ['/my-dashboard/', 'Typing History'],
-        'hall' => ['/exam-hall-typing/', 'Exam Hall Typing'], 'download' => ['/download-passages/', 'Download Passages'], 'insight' => ['/typing-insight/', '📈 Typing Insight'],
+        'mock' => ['/mock-test/', 'Live Mock'], 'live' => ['/live-typing/', 'Live Typing'], 'exams' => ['/exams/', 'All Exams Typing'], 'history' => ['/my-dashboard/', 'Typing History'],
+        'hall' => ['/exam-hall-typing/', 'Exam Hall Typing'], 'download' => ['/download-passages/', 'Download Passages'], 'insight' => ['/typing-insight/', 'Typing Insight'],
     ];
 }
 function eh_member_nav($active = '') {
@@ -293,10 +293,12 @@ add_filter('wp_nav_menu_items', function ($items, $args) {
 }, 10, 2);
 function eh_default_menu() {
     $items = is_user_logged_in()
-        ? array_merge([['/', '🏠 Home']], array_values(eh_member_links()))
+        ? array_merge([['/', 'Home']], array_values(eh_member_links()))
         : [['/', 'Home'], ['/mock-test/', 'Live Mock'], ['/exams/', 'Exams'], ['/demo-typing/', 'Demo Typing'], ['/live-typing/', 'Live Typing'], ['/exam-based-result/', 'Result'], ['/blog/', 'Typing Tips']];
     echo '<ul class="eh-menu">';
-    foreach ($items as $i) echo '<li><a href="' . esc_url(home_url($i[0])) . '">' . esc_html($i[1]) . '</a></li>';
+    $ic = ['/' => '🏠', '/mock-test/' => '', '/live-typing/' => '⚡', '/exams/' => '⌨️', '/my-dashboard/' => '🕘', '/exam-hall-typing/' => '🏛️', '/download-passages/' => '📥', '/typing-insight/' => '📈', '/demo-typing/' => '🎯', '/exam-based-result/' => '🏆', '/blog/' => '💡'];
+    $cur = rtrim((string) parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH), '/') . '/';
+    foreach ($items as $i) echo '<li' . ($cur === $i[0] ? ' class="current-menu-item"' : '') . '><a href="' . esc_url(home_url($i[0])) . '"><span class="eh-mi" aria-hidden="true">' . ($ic[$i[0]] ?? '•') . '</span><span class="eh-ml">' . esc_html($i[1]) . '</span></a></li>';
     echo '</ul>';
 }
 
