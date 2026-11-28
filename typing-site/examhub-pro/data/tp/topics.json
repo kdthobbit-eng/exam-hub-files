@@ -60,52 +60,68 @@
 ],
 "english": [
 [
-"अपठित गद्यांश",
-"Unseen Passage for Comprehension"
+"Unseen Passages & Reading Comprehension",
+"Unseen Passages & Reading Comprehension"
 ],
 [
-"शब्द-भेद",
-"Parts of Speech"
+"Parts of Speech & Articles",
+"Parts of Speech & Articles"
 ],
 [
-"वर्तनी",
-"Spellings"
+"Tenses, Sequence of Tenses & Agreement",
+"Tenses, Sequence of Tenses & Agreement"
 ],
 [
-"विराम चिह्न",
-"Punctuations"
+"Prepositions & Phrasal Verbs",
+"Prepositions & Phrasal Verbs"
 ],
 [
-"शब्दावली",
-"Vocabulary"
+"Narration (Direct & Indirect Speech)",
+"Narration (Direct & Indirect Speech)"
 ],
 [
-"काल",
-"Tenses"
-],
-[
-"कथन (प्रत्यक्ष-अप्रत्यक्ष)",
-"Narration"
-],
-[
-"पूर्वसर्ग",
-"Prepositions"
-],
-[
-"कर्ता-क्रिया सामंजस्य",
-"Agreement"
-],
-[
-"वाक्य रूपांतरण",
+"Transformation of Sentences",
 "Transformation of Sentences"
 ],
 [
-"साहित्य की विधाएँ",
+"Spellings & Punctuation",
+"Spellings & Punctuation"
+],
+[
+"Vocabulary, Idioms & Phrases",
+"Vocabulary, Idioms & Phrases"
+],
+[
+"Forms of Literature",
 "Forms of Literature"
 ],
 [
-"लेखक एवं उनका योगदान",
-"Authors and Their Contributions"
+"Literary Terms, Figures of Speech & Prosody",
+"Literary Terms, Figures of Speech & Prosody"
+],
+[
+"William Shakespeare",
+"William Shakespeare"
+],
+[
+"John Milton",
+"John Milton"
+],
+[
+"William Wordsworth",
+"William Wordsworth"
+],
+[
+"John Keats (2026 Revised Addition)",
+"John Keats (2026 Revised Addition)"
+],
+[
+"John Galsworthy",
+"John Galsworthy"
+],
+[
+"George Orwell (2026 Revised Addition)",
+"George Orwell (2026 Revised Addition)"
 ]
 ],
 "hindi": [
@@ -152,72 +168,68 @@
 ],
 "science": [
 [
-"मापन एवं विमाएँ",
-"Dimensions and Measurement"
+"Units, Dimensions, Vectors, Kinematics & Laws of Motion",
+"Units, Dimensions, Vectors, Kinematics & Laws of Motion"
 ],
 [
-"यांत्रिकी",
-"Mechanics"
+"Rotational Motion, Gravitation, Properties of Matter & Relativity",
+"Rotational Motion, Gravitation, Properties of Matter & Relativity"
 ],
 [
-"ऊष्मा",
-"Heat"
+"Heat, Kinetic Theory of Gases & Thermodynamics",
+"Heat, Kinetic Theory of Gases & Thermodynamics"
 ],
 [
-"प्रकाशिकी",
-"Optics"
+"Oscillations, Waves & Acoustics",
+"Oscillations, Waves & Acoustics"
 ],
 [
-"विद्युत एवं चुम्बकत्व",
-"Electricity & Magnetism"
+"Ray Optics & Wave Optics",
+"Ray Optics & Wave Optics"
 ],
 [
-"आधुनिक भौतिकी",
-"Modern Physics"
+"Electrostatics & Current Electricity",
+"Electrostatics & Current Electricity"
 ],
 [
-"द्रव्य",
-"Matter"
+"Magnetism, EMI, AC & Electromagnetic Waves",
+"Magnetism, EMI, AC & Electromagnetic Waves"
 ],
 [
-"परमाणु संरचना",
-"Atomic Structure"
+"Modern Physics, Nuclear Physics & Digital Electronics",
+"Modern Physics, Nuclear Physics & Digital Electronics"
 ],
 [
-"रासायनिक आबंधन",
-"Chemical Bonding"
+"Matter, Chemical Combination, Atomic Structure & Radioactivity",
+"Matter, Chemical Combination, Atomic Structure & Radioactivity"
 ],
 [
-"रासायनिक अभिक्रियाएँ",
-"Chemical Reactions"
+"Chemical Bonding & Molecular Structure",
+"Chemical Bonding & Molecular Structure"
 ],
 [
-"आवर्त सारणी",
-"Periodic Table"
+"Chemical Reactions, Equilibrium, Solutions & Kinetics",
+"Chemical Reactions, Equilibrium, Solutions & Kinetics"
 ],
 [
-"कार्बनिक रसायन",
-"Organic Chemistry"
+"Electrochemistry & Electrochemical Cells",
+"Electrochemistry & Electrochemical Cells"
 ],
 [
-"कोशिका विज्ञान",
-"Cell Biology"
+"Periodic Classification, s-Block & p-Block Elements",
+"Periodic Classification, s-Block & p-Block Elements"
 ],
 [
-"मानव शरीर क्रिया विज्ञान",
-"Human Physiology"
+"d-Block Elements, Metallurgy & Coordination Compounds",
+"d-Block Elements, Metallurgy & Coordination Compounds"
 ],
 [
-"पारिस्थितिकी",
-"Ecology"
+"General Organic Chemistry (GOC), Isomerism & Mechanisms",
+"General Organic Chemistry (GOC), Isomerism & Mechanisms"
 ],
 [
-"पादप शरीर क्रिया विज्ञान",
-"Plant Physiology"
-],
-[
-"आनुवंशिकी",
-"Genetics"
+"Organic Compounds, Benzene & Named Reactions",
+"Organic Compounds, Benzene & Named Reactions"
 ]
 ],
 "sanskrit": [
@@ -236,212 +248,68 @@
 ],
 "social-science": [
 [
-"भौतिक भूगोल",
-"Physical Geography"
+"Physical Geography Part 1 (भौतिक भूगोल – भाग 1)",
+"Physical Geography Part 1 (भौतिक भूगोल – भाग 1)"
 ],
 [
-"स्थलमंडल",
-"Lithosphere"
+"Physical Geography Part 2 (भौतिक भूगोल – भाग 2)",
+"Physical Geography Part 2 (भौतिक भूगोल – भाग 2)"
 ],
 [
-"वायुमंडल",
-"Atmosphere"
+"Human & Economic Geography (मानव एवं आर्थिक भूगोल)",
+"Human & Economic Geography (मानव एवं आर्थिक भूगोल)"
 ],
 [
-"जलमंडल",
-"Hydrosphere"
+"Geography of India (भारत का भूगोल)",
+"Geography of India (भारत का भूगोल)"
 ],
 [
-"जैवमंडल",
-"Biosphere"
+"Ancient India Part 1 (प्राचीन भारत – भाग 1)",
+"Ancient India Part 1 (प्राचीन भारत – भाग 1)"
 ],
 [
-"मानव भूगोल",
-"Human Geography"
+"Ancient India Part 2 (प्राचीन भारत – भाग 2)",
+"Ancient India Part 2 (प्राचीन भारत – भाग 2)"
 ],
 [
-"आर्थिक भूगोल",
-"Economic Geography"
+"Medieval India (मध्यकालीन भारत)",
+"Medieval India (मध्यकालीन भारत)"
 ],
 [
-"भारत का भूगोल",
-"Geography of India"
+"Modern India (आधुनिक भारत)",
+"Modern India (आधुनिक भारत)"
 ],
 [
-"प्रागैतिहासिक संस्कृतियाँ",
-"Pre-Historic Cultures"
+"Microeconomics Part 1 (व्यष्टि अर्थशास्त्र – भाग 1)",
+"Microeconomics Part 1 (व्यष्टि अर्थशास्त्र – भाग 1)"
 ],
 [
-"प्राचीन काल",
-"Ancient Era"
+"Microeconomics Part 2 (व्यष्टि अर्थशास्त्र – भाग 2)",
+"Microeconomics Part 2 (व्यष्टि अर्थशास्त्र – भाग 2)"
 ],
 [
-"धार्मिक आंदोलन",
-"Religious Movements"
+"Macroeconomics, Money & Trade (समष्टि, मुद्रा एवं व्यापार)",
+"Macroeconomics, Money & Trade (समष्टि, मुद्रा एवं व्यापार)"
 ],
 [
-"मौर्य साम्राज्य",
-"Mauryan Empire"
+"Indian Economy (भारतीय अर्थव्यवस्था)",
+"Indian Economy (भारतीय अर्थव्यवस्था)"
 ],
 [
-"मौर्योत्तर काल",
-"Post-Mauryan Period"
+"Political Theory & Concepts (राजनीतिक सिद्धांत)",
+"Political Theory & Concepts (राजनीतिक सिद्धांत)"
 ],
 [
-"गुप्त साम्राज्य",
-"Gupta Empire"
+"Political Thinkers (राजनीतिक विचारक)",
+"Political Thinkers (राजनीतिक विचारक)"
 ],
 [
-"गुप्तोत्तर काल",
-"Post-Gupta Period"
+"Comparative Politics & Constitution (संविधान – भाग 1)",
+"Comparative Politics & Constitution (संविधान – भाग 1)"
 ],
 [
-"भारत पर मुस्लिम आक्रमण, भारतीय प्रतिरोध एवं प्रभाव",
-"The Muslim invasion in India, Indian resistance, and the impact of Muslim invasion"
-],
-[
-"दिल्ली सल्तनत",
-"Delhi Sultanate"
-],
-[
-"अलाउद्दीन ख़िलजी",
-"Allauddin Khilji"
-],
-[
-"तुगलक वंश",
-"Tughlaq Dynasty"
-],
-[
-"मुगल वंश",
-"Mughal Dynasty"
-],
-[
-"राणा प्रताप एवं छत्रपति शिवाजी का जीवन व उपलब्धियाँ",
-"The life and achievements of Rana Pratap and Chatrapati Shivaji"
-],
-[
-"आधुनिक भारत (1858–1958 ई.)",
-"Modern India (1858–1958 AD)"
-],
-[
-"आर्थिक सिद्धांत",
-"Economic Theory"
-],
-[
-"कीमत निर्धारण के सिद्धांत",
-"Theories of Price Determination"
-],
-[
-"वितरण सिद्धांत",
-"Distribution Theory"
-],
-[
-"मुद्रा एवं अंतरराष्ट्रीय व्यापार",
-"Money and International Trade"
-],
-[
-"राजस्व (लोक वित्त)",
-"Public Finance"
-],
-[
-"रोज़गार का प्रतिष्ठित एवं कीन्सवादी सिद्धांत",
-"Classical and Keynesian Theory of Employment"
-],
-[
-"आर्थिक प्रणालियाँ",
-"Economic Systems"
-],
-[
-"भारतीय अर्थव्यवस्था एवं आर्थिक विकास",
-"Indian Economy and Economic Development"
-],
-[
-"औद्योगीकरण की समस्याएँ",
-"Problems of Industrialisation"
-],
-[
-"विदेशी व्यापार एवं आर्थिक विकास",
-"Foreign Trade and Economic Development"
-],
-[
-"नागरिकशास्त्र",
-"Civics"
-],
-[
-"राज्य",
-"State"
-],
-[
-"राजनीतिक अवधारणाएँ",
-"Political Concepts"
-],
-[
-"लोकतंत्र एवं तानाशाही",
-"Democracy and Dictatorship"
-],
-[
-"राजनीतिक विचारधाराएँ",
-"Political Ideologies"
-],
-[
-"राजनीतिक विचारक",
-"Political Philosophers"
-],
-[
-"सरकार",
-"Government"
-],
-[
-"सरकार के अंग",
-"Organs of Government"
-],
-[
-"निर्वाचन आयोग",
-"Election Commission"
-],
-[
-"भारतीय राष्ट्रीय आंदोलन में योगदान",
-"Contribution to the Indian National Movement"
-],
-[
-"भारतीय संविधान की प्रमुख विशेषताएँ",
-"Salient Features of Indian Constitution"
-],
-[
-"संघ सरकार",
-"Union Government"
-],
-[
-"भारतीय संसद",
-"Indian Parliament"
-],
-[
-"भारतीय न्यायपालिका",
-"Indian Judiciary"
-],
-[
-"राज्य सरकार",
-"State Government"
-],
-[
-"ज़िला प्रशासन",
-"District Administration"
-],
-[
-"लोकतांत्रिक विकेंद्रीकरण एवं पंचायती राज",
-"Democratic Decentralization and Panchayati Raj"
-],
-[
-"भारतीय लोकतंत्र की चुनौतियाँ",
-"Challenges of Indian Democracy"
-],
-[
-"राजनीतिक दल एवं दबाव समूह",
-"Political Party and Pressure Group"
-],
-[
-"भारतीय प्रशासन",
-"Indian Administration"
+"Indian Government & IR (भारतीय शासन एवं विदेश नीति)",
+"Indian Government & IR (भारतीय शासन एवं विदेश नीति)"
 ]
 ]
 },

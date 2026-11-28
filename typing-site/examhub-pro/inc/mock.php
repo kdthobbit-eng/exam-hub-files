@@ -378,7 +378,11 @@ function eh_stm_report_data($rid = '') {
         global $wpdb; $t = eh_stm_table();
         $r = eh_stm_round($rid); eh_stm_expire($r);
         $Q = eh_stm_paper($r); $S = eh_stm_secmap($r);
-        $all = $wpdb->get_results($wpdb->prepare("SELECT uid, att, counted, name, email, started, submitted, last, correct, wrong, score, tabs, dev, ans FROM $t WHERE round = %s", $r['id']), ARRAY_A);
+        $all = $wpdb->get_results($wpdb->prepare("SELECT uid, att, counted, name, email, started, submitted, last, correct, wrong, score, tabs, dev, ans, used, id FROM $t WHERE round = %s", $r['id']), ARRAY_A);
+        /* full re-check: every submitted attempt is scored again from its saved answers; any stored score that does not match is corrected */
+        $fix = 0; foreach ($all as &$x) { if (!$x['submitted']) continue; [$c0, $w0, $s0] = eh_stm_score($r, json_decode($x['ans'] ?: '{}', true) ?: []);
+            if ($s0 !== (int) $x['score'] || $c0 !== (int) $x['correct'] || $w0 !== (int) $x['wrong']) { $wpdb->update($t, ['correct' => $c0, 'wrong' => $w0, 'score' => $s0], ['id' => $x['id']]); $x['correct'] = $c0; $x['wrong'] = $w0; $x['score'] = $s0; $fix++; } }
+        unset($x);
         $att = []; foreach ($all as $x) if ($x['started']) $att[$x['uid']] = ($att[$x['uid']] ?? 0) + 1;
         $m = array_values(array_filter($all, function ($x) { return $x['submitted'] > 0 && $x['counted']; }));
         usort($m, function ($a, $b) { return $b['score'] <=> $a['score'] ?: (($a['submitted'] - $a['started']) <=> ($b['submitted'] - $b['started'])); });
@@ -392,11 +396,11 @@ function eh_stm_report_data($rid = '') {
             $rows[] = ['rank' => count(array_filter($sc, function ($v) use ($s) { return $v > $s; })) + 1,
                 'pct' => $n ? round(count(array_filter($sc, function ($v) use ($s) { return $v <= $s; })) * 100 / $n, 2) : 0,
                 'uid' => (int) $x['uid'], 'name' => $x['name'], 'email' => $x['email'], 'roll' => eh_stm_roll((int) $x['uid']), 'score' => $s, 'c' => (int) $x['correct'], 'w' => (int) $x['wrong'],
-                'min' => round(($x['submitted'] - $x['started']) / 60), 'att' => (int) ($att[$x['uid']] ?? 1), 'tabs' => (int) $x['tabs'], 'dev' => $x['dev'], 'secs' => $ps];
+                'min' => round(((int) $x['used'] ?: min(eh_stm_secs($r), $x['submitted'] - $x['started'])) / 60), 'wall' => round(($x['submitted'] - $x['started']) / 60), 'att' => (int) ($att[$x['uid']] ?? 1), 'tabs' => (int) $x['tabs'], 'dev' => $x['dev'], 'secs' => $ps];
         }
         $users = count(array_unique(array_column($all, 'uid')));
         return ['round' => eh_stm_round_out($r), 'rounds' => array_map('eh_stm_round_out', eh_stm_rounds()), 'now' => time(),
-            'stats' => ['users' => $users, 'started' => count($att), 'attempts' => array_sum($att), 'merit' => $n,
+            'stats' => ['users' => $users, 'fixed' => $fix, 'started' => count($att), 'attempts' => array_sum($att), 'merit' => $n,
                 'live' => count(array_filter($all, function ($x) { return $x['started'] && !$x['submitted'] && time() - $x['last'] < 120; })),
                 'avg' => $n ? round(array_sum($sc) / $n, 2) : 0, 'max' => $n ? max($sc) : 0, 'min' => $n ? min($sc) : 0,
                 'median' => $n ? ($n % 2 ? $sorted[intdiv($n, 2)] : ($sorted[$n / 2 - 1] + $sorted[$n / 2]) / 2) : 0,
