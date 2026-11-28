@@ -90,9 +90,15 @@ function eh_tp_rounds_all() {
     /* old common GS sectional — kept only so earlier attempts still open */
     $out[] = ['id' => 'gsx', 'series' => 'gs', 'slug' => 'gs', 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'name' => 'TGT/PGT GS - SECTIONAL TEST 1',
         'login' => EH_TP_LOGIN, 'start' => EH_TP_LOGIN, 'end' => EH_TP_END, 'paper' => 'tp/gs', 'gs' => '', 'kind' => 'gs', 'secs' => 1800, 'nq' => 30];
-    /* release plan: set 1 of every series is open now; set n opens on (n−1) December 2026, 00:00 IST */
-    foreach ($out as &$o) { $n = (int) ($o['fno'] ?? $o['sno'] ?? $o['xno'] ?? $o['tno'] ?? 0);
-        if ($n > 1) { $d = sprintf('2026-12-%02d 00:00', $n - 1); $o['login'] = $d; $o['start'] = $d; } }
+    /* release plan: all topic tests open now; first 2 full-length mocks and the first half of sectionals open now;
+       after that one more set opens each day from 1 December 2026, 00:00 IST */
+    $cnt = []; foreach ($out as $o) foreach (['sno' => 's', 'xno' => 'x'] as $k => $p) if (!empty($o[$k])) { $b = substr($o['id'], 0, strrpos($o['id'], $p)); $cnt[$b . $p] = max($cnt[$b . $p] ?? 0, $o[$k]); }
+    foreach ($out as &$o) {
+        $n = 0; $open = 0;
+        if (!empty($o['fno'])) { $n = $o['fno']; $open = 2; }
+        foreach (['sno' => 's', 'xno' => 'x'] as $k => $p) if (!empty($o[$k])) { $n = $o[$k]; $open = (int) ceil(($cnt[substr($o['id'], 0, strrpos($o['id'], $p)) . $p] ?? 1) / 2); }
+        if ($n > $open) { $d = sprintf('2026-12-%02d 00:00', $n - $open); $o['login'] = $d; $o['start'] = $d; }
+    }
     unset($o);
     return $out;
 }
