@@ -70,7 +70,12 @@ $hub = home_url('/mock-test/');
   $R = eh_tp_find(($x === 'tgt' ? 'tg' : 'pg') . str_pad((string) (array_search($sub, array_keys(eh_tp_subjects()[$x])) + 1), 2, '0', STR_PAD_LEFT));
   $RS = eh_tp_find($R['id'] . 's'); $GS = eh_tp_find('gsx'); $my = eh_tp_my($uid); $nm = eh_tp_subjects()[$x][$sub];
   $lang = in_array($sub, ['hindi', 'english', 'sanskrit', 'urdu'], true) ? $nm[0] : 'हिंदी + English';
-  $done = count(array_filter([$R['id'], $RS['id'], 'gsx'], function ($id) use ($my) { return !empty($my[$id]['n']); }));
+  $FL = eh_tp_flts($R); $FULL = $FL ?: [$R];
+  $TL = eh_tp_topics()[$x][$sub] ?? []; $GT = eh_tp_gs_topics();
+  $ids = array_merge(array_column($FULL, 'id'), [$RS['id'], 'gsx']);
+  foreach ($TL as $i => $tn) if (eh_tp_find($R['id'] . 't' . ($i + 1))) $ids[] = $R['id'] . 't' . ($i + 1);
+  foreach ($GT as $i => $tn) if (eh_tp_find('gst' . ($i + 1))) $ids[] = 'gst' . ($i + 1);
+  $done = count(array_filter($ids, function ($id) use ($my) { return !empty($my[$id]['n']); })); $tot = count($ids);
   $u = wp_get_current_user(); $nmU = $uid ? ($u->display_name ?: $u->user_login) : '';
   $ini = $nmU ? mb_strtoupper(mb_substr(trim($nmU), 0, 1)) : ''; ?>
  <section class="mz-bar"><div class="mx-wrap">
@@ -78,23 +83,32 @@ $hub = home_url('/mock-test/');
   <div class="zh">
    <div class="zh-u"><?php if ($uid): ?><span class="zh-av"><?php echo esc_html($ini); ?></span><div><small>नमस्ते,</small><b><?php echo esc_html($nmU); ?></b></div><?php else: ?><span class="zh-av">👋</span><div><small>नमस्ते!</small><b><a href="<?php echo esc_url(eh_login_page_url(add_query_arg(['x' => $x, 's' => $sub], $hub))); ?>">लॉग-इन / साइन-अप करें</a></b></div><?php endif; ?></div>
    <div class="zh-x"><span class="mx-kick"><i></i><?php echo esc_html($info['title'] . ' · ' . $info['adv']); ?></span><h1><?php echo esc_html($info['short']); ?> <em><?php echo esc_html($nm[0]); ?></em> <small>टेस्ट सीरीज़</small></h1></div>
-   <div class="zh-r"><a class="zh-chip" data-tp="<?php echo esc_attr($x); ?>" data-tp-change href="<?php echo esc_url(add_query_arg(['x' => $x, 'all' => 1], $hub)); ?>">📘 <?php echo esc_html($info['short'] . ' · ' . $nm[0]); ?> <em>बदलें ✎</em></a><span class="zh-st"><b><?php echo $done; ?></b>/3 टेस्ट दिए</span></div>
+   <div class="zh-r"><a class="zh-chip" data-tp="<?php echo esc_attr($x); ?>" data-tp-change href="<?php echo esc_url(add_query_arg(['x' => $x, 'all' => 1], $hub)); ?>">📘 <?php echo esc_html($info['short'] . ' · ' . $nm[0]); ?> <em>बदलें ✎</em></a><span class="zh-st"><b><?php echo $done; ?></b>/<?php echo $tot; ?> टेस्ट दिए</span></div>
   </div>
-  <nav class="rb" id="mz-tabs"><button class="on" data-t="full"><i>📄</i>फुल मॉक<em>1</em></button><button data-t="sec"><i>🧩</i>सेक्शनल<em>2</em></button><button data-t="topic"><i>🎯</i>टॉपिक-वाइज<em><?php echo count(eh_tp_topics()[$x][$sub] ?? []) ?: 'Coming Soon'; ?></em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>Coming Soon</em></button></nav>
+  <nav class="rb" id="mz-tabs"><button class="on" data-t="full"><i>📄</i>फुल मॉक<em><?php echo count($FULL); ?></em></button><button data-t="sec"><i>🧩</i>सेक्शनल<em>2</em></button><button data-t="topic"><i>🎯</i>टॉपिक-वाइज<em><?php echo count($TL) + count($GT); ?></em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>Coming Soon</em></button></nav>
  </div></section>
  <section class="mx-body"><div class="mx-wrap">
   <div class="mz-p on" data-p="full"><div class="tl-h"><b>फुल मॉक टेस्ट</b><span>असली परीक्षा जैसा पूरा प्रश्न-पत्र — 30 सामान्य अध्ययन + 90 <?php echo esc_html($nm[0]); ?></span></div>
-   <div class="tl"><?php echo eh_tp_test_row($R, $my, 1, $R['name'], $lang); ?></div></div>
+   <div class="tl"><?php foreach ($FULL as $i => $F) echo eh_tp_test_row($F, $my, $i + 1, $F['name'], $lang); ?></div></div>
   <div class="mz-p" data-p="sec"><div class="tl-h"><b>सेक्शनल मॉक टेस्ट</b><span>एक भाग का अलग अभ्यास, कम समय में</span></div>
    <div class="tl"><?php echo eh_tp_test_row($RS, $my, 1, $RS['name'], $lang) . eh_tp_test_row($GS, $my, 2, $GS['name'], 'हिंदी + English'); ?></div></div>
-  <div class="mz-p" data-p="topic"><?php $TL = eh_tp_topics()[$x][$sub] ?? []; if ($TL): ?><div class="tl-h"><b>टॉपिक-वाइज टेस्ट</b><span>आधिकारिक पाठ्यक्रम के हर टॉपिक पर 50 प्रश्नों का सेट, विस्तृत हल के साथ</span></div><div class="tl">
+  <div class="mz-p" data-p="topic"><div class="tl-h"><b>टॉपिक-वाइज टेस्ट</b><span>आधिकारिक पाठ्यक्रम के हर टॉपिक पर 50 प्रश्नों का सेट, विस्तृत हल के साथ</span></div>
+   <div class="tsw" id="tsw" role="tablist"><button<?php echo $TL ? ' class="on"' : ''; ?> data-s="sub" type="button"><span>📘 <?php echo esc_html($nm[0]); ?></span><em><?php echo count($TL) ?: '—'; ?></em></button><button<?php echo $TL ? '' : ' class="on"'; ?> data-s="gs" type="button"><span>🌐 सामान्य अध्ययन</span><em><?php echo count($GT); ?></em></button></div>
+   <div class="tsp<?php echo $TL ? ' on' : ''; ?>" data-s="sub"><?php if ($TL): ?><div class="tl">
    <?php foreach ($TL as $i => $tn): $TR = eh_tp_find($R['id'] . 't' . ($i + 1));
      if ($TR) echo eh_tp_test_row($TR, $my, $i + 1, $TR['name'], $lang);
-     else echo '<div class="tr soon"><div class="tr-n">' . str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) . '</div><div class="tr-b"><div class="tr-t"><b>' . esc_html(eh_tp_topic_title($R, $i + 1, $tn)) . '</b><span class="tr-soon">Coming Soon</span></div><div class="tr-m"><span>' . esc_html($tn[0]) . '</span><span>📝 50 प्रश्न</span></div></div><div class="tr-a"><span class="tr-btn dis">Coming Soon</span></div></div>';
+     else echo '<div class="tr soon"><div class="tr-n">' . str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT) . '</div><div class="tr-b"><div class="tr-t"><b>' . esc_html(strtoupper($x) . ' ' . eh_tp_en($sub, $nm[1]) . ' - TOPIC TEST ' . ($i + 1)) . '</b><span class="tr-soon">Coming Soon</span></div>' . (!empty($tn[1]) ? '<div class="tr-tp">' . esc_html($tn[1]) . '</div>' : '') . '<div class="tr-m"><span>📝 50 प्रश्न</span></div></div><div class="tr-a"><span class="tr-btn dis">Coming Soon</span></div></div>';
    endforeach; ?></div>
-  <?php else: ?><div class="mz-empty"><b>🎯 टॉपिक-वाइज टेस्ट — Coming Soon</b><p><?php echo esc_html($nm[0]); ?> के हर टॉपिक पर 50-50 प्रश्नों के सेट, विस्तृत हल के साथ।</p></div><?php endif; ?></div>
+   <?php else: ?><div class="mz-empty"><b>🎯 <?php echo esc_html($nm[0]); ?> टॉपिक-वाइज टेस्ट — Coming Soon</b><p><?php echo esc_html($nm[0]); ?> के हर टॉपिक पर 50-50 प्रश्नों के सेट जल्द आएँगे। तब तक सामान्य अध्ययन के टॉपिक टेस्ट दें।</p></div><?php endif; ?></div>
+   <div class="tsp<?php echo $TL ? '' : ' on'; ?>" data-s="gs"><div class="tsn">TGT व PGT के सभी विषयों के लिए एक जैसा · हर टेस्ट 50 प्रश्न · हिंदी + English</div>
+   <?php $UN = [[0, 0, 'इकाई 1', 'समसामयिक घटनाएँ'], [1, 6, 'इकाई 2', 'इतिहास, संविधान, शिक्षा विधि, अर्थव्यवस्था, भूगोल व उत्तर प्रदेश'], [7, 9, 'इकाई 3', 'विज्ञान, स्वास्थ्य एवं कंप्यूटर / ICT']];
+   foreach ($UN as $u): ?><div class="tu-h"><b><?php echo esc_html($u[2]); ?></b><span><?php echo esc_html($u[3]); ?></span></div><div class="tl">
+   <?php for ($i = $u[0]; $i <= $u[1]; $i++): $TR = eh_tp_find('gst' . ($i + 1)); if ($TR) echo eh_tp_test_row($TR, $my, $i + 1, $TR['name'], 'हिंदी + English'); endfor; ?></div>
+   <?php endforeach; ?></div>
+  </div>
   <div class="mz-p" data-p="pyq"><div class="mz-empty"><b>🗂️ पिछले वर्ष के प्रश्न-पत्र — Coming Soon</b><p>UPESSC / UPSESSB के असली पिछले प्रश्न-पत्र, उत्तर-कुंजी और व्याख्या के साथ।</p></div></div>
  </div></section>
+ <script>(function(){var W=[].slice.call(document.querySelectorAll('#tsw button')),SP=[].slice.call(document.querySelectorAll('.tsp'));W.forEach(function(b){b.onclick=function(){W.forEach(function(x){x.classList.toggle('on',x===b)});SP.forEach(function(p){p.classList.toggle('on',p.dataset.s===b.dataset.s)})}})})();</script>
  <script>(function(){var B=[].slice.call(document.querySelectorAll('#mz-tabs button')),P=[].slice.call(document.querySelectorAll('.mz-p'));B.forEach(function(b){b.onclick=function(){B.forEach(function(x){x.classList.toggle('on',x===b)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.t)});try{b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})}catch(e){}}})})();</script>
 <?php endif; ?>
 </main>

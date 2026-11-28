@@ -60,6 +60,20 @@ function eh_tp_rounds_all() {
         $out[] = array_merge($r, ['id' => $r['id'] . 't' . ($i + 1), 'kind' => 'topic', 'paper' => $f, 'gs' => '', 'secs' => 3000, 'nq' => 50, 'topic' => $tn[0], 'tno' => $i + 1,
             'name' => eh_tp_topic_title($r, $i + 1, $tn)]);
     }
+    /* full-length mocks with their own 30 GS + 90 subject questions (data/tp/fl/{series}-{slug}-{n}[-gs].json) — they replace the old single mock */
+    foreach (eh_tp_rounds() as $r) for ($n = 1; $n <= 20; $n++) {
+        $f = 'tp/fl/' . $r['series'] . '-' . $r['slug'] . '-' . $n;
+        if (!is_file(EH_DIR . '/data/' . $f . '.json')) break;
+        $out[] = array_merge($r, ['id' => $r['id'] . 'f' . $n, 'kind' => 'full', 'paper' => $f, 'gs' => $f . '-gs', 'fno' => $n,
+            'name' => strtoupper($r['series']) . ' ' . eh_tp_en($r['slug'], $r['sub_en']) . ' - FULL LENGTH MOCK ' . $n]);
+    }
+    /* common GS topic tests — same for every TGT and PGT subject */
+    foreach (eh_tp_gs_topics() as $i => $tn) {
+        $f = 'tp/topic/gs-' . ($i + 1);
+        if (!is_file(EH_DIR . '/data/' . $f . '.json')) continue;
+        $out[] = ['id' => 'gst' . ($i + 1), 'series' => 'gs', 'slug' => 'gs', 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'kind' => 'topic', 'topic' => $tn[0], 'tno' => $i + 1,
+            'name' => 'TGT/PGT GS - TOPIC TEST ' . ($i + 1) . ' (' . $tn[1] . ')', 'login' => EH_TP_LOGIN, 'start' => EH_TP_LOGIN, 'end' => EH_TP_END, 'paper' => $f, 'gs' => '', 'secs' => 3000, 'nq' => 50];
+    }
     $out[] = ['id' => 'gsx', 'series' => 'gs', 'slug' => 'gs', 'sub' => 'सामान्य अध्ययन', 'sub_en' => 'General Studies', 'name' => 'TGT/PGT GS - SECTIONAL TEST 1',
         'login' => EH_TP_LOGIN, 'start' => EH_TP_LOGIN, 'end' => EH_TP_END, 'paper' => 'tp/gs', 'gs' => '', 'kind' => 'gs', 'secs' => 1800, 'nq' => 30];
     return $out;
@@ -67,6 +81,22 @@ function eh_tp_rounds_all() {
 /* English test names, same in every language: TGT MATH - MOCK TEST 1 */
 function eh_tp_en($slug, $en) { return $slug === 'maths' ? 'MATH' : strtoupper($en); }
 function eh_tp_topic_title($r, $n, $tn) { return strtoupper($r['series']) . ' ' . eh_tp_en($r['slug'], $r['sub_en']) . ' - TOPIC TEST ' . $n . (!empty($tn[1]) ? ' (' . $tn[1] . ')' : ''); }
+function eh_tp_gs_topics() {
+    return [
+        ['समसामयिक घटनाएँ (राज्य, राष्ट्रीय, अंतर्राष्ट्रीय एवं खेल)', 'Current Affairs'],
+        ['भारतीय इतिहास एवं भारतीय राष्ट्रीय आंदोलन', 'Indian History & National Movement'],
+        ['भारतीय संविधान एवं राजव्यवस्था', 'Indian Constitution & Polity'],
+        ['शिक्षा व्यवस्था से जुड़े विधिक एवं संवैधानिक विकास', 'Legal & Constitutional Development in Education'],
+        ['भारतीय अर्थव्यवस्था', 'Indian Economy'],
+        ['भारत का सामान्य भूगोल एवं जनसंख्या', 'Indian Geography & Population'],
+        ['उत्तर प्रदेश विशेष सामान्य ज्ञान', 'Uttar Pradesh Special GK'],
+        ['सामान्य विज्ञान, प्रौद्योगिकी एवं पर्यावरण', 'General Science, Technology & Environment'],
+        ['मानव स्वास्थ्य एवं स्वच्छता', 'Human Health & Hygiene'],
+        ['कंप्यूटर, इंटरनेट, ICT एवं शैक्षिक प्रौद्योगिकी', 'Computer, Internet, ICT & EdTech'],
+    ];
+}
+/* full-length mocks of a subject round (tg03f1…); empty when it still uses the single old mock */
+function eh_tp_flts($r) { $o = []; foreach (eh_stm_rounds() as $x) if (($x['fno'] ?? 0) && strpos($x['id'], $r['id'] . 'f') === 0) $o[] = $x; return $o; }
 function eh_tp_topics() { static $t = null; if ($t === null) $t = json_decode((string) @file_get_contents(EH_DIR . '/data/tp/topics.json'), true) ?: []; return $t; }
 function eh_stm_secs($r) { return (int) ($r['secs'] ?? EH_STM_SECS); }
 function eh_stm_nq($r) { return (int) ($r['nq'] ?? 120); }
@@ -78,7 +108,7 @@ function eh_tp_ready($r) {
 /* ?r=tg01 / pg05 → that subject round */
 function eh_tp_req_round() {
     $id = sanitize_key($_GET['r'] ?? ($_REQUEST['eh_r'] ?? ''));
-    if (!preg_match('/^((tg|pg)\d\d(s|t\d\d?)?|gsx|p\d)$/', $id)) return null;
+    if (!preg_match('/^((tg|pg)\d\d(s|t\d\d?|f\d\d?)?|gsx|gst\d\d?|p\d)$/', $id)) return null;
     foreach (eh_stm_rounds() as $r) if ($r['id'] === $id) return $r;
     return null;
 }
@@ -86,7 +116,7 @@ function eh_tp_url($r) { return add_query_arg('r', $r['id'], home_url('/super-te
 /* on the login / signup form: subject dropdown, pre-selected from the mock the candidate came from; changing it changes where they land */
 function eh_tp_auth_select() {
     $to = rawurldecode((string) ($_REQUEST['redirect_to'] ?? ''));
-    if (!preg_match('/[?&]r=((tg|pg)\d\ds?)/', $to, $m)) return '';
+    if (!preg_match('/[?&]r=((tg|pg)\d\ds?)(?![a-z0-9])/', $to, $m)) return '';
     $cur = null; foreach (eh_stm_rounds() as $r) if ($r['id'] === $m[1]) $cur = $r;
     if (!$cur) return '';
     $inf = eh_tp_info($cur['series']);

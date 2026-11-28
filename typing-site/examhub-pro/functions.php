@@ -37,20 +37,31 @@ add_action('after_setup_theme', function () {
 });
 
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('eh-fonts', 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap', [], null);
+    /* one combined Google Fonts request per page (was 2–3 separate render-blocking requests) */
+    $mock = is_front_page() || in_array(get_query_var('eh_view'), ['mockhub', 'dashboard'], true);
+    $fam = ['Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700', 'Inter:wght@400;500;600;700;800', 'Noto+Sans+Devanagari:wght@400;500;600;700;800'];
+    $fam[] = $mock ? 'Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800' : 'Bricolage+Grotesque:opsz,wght@12..96,800';
+    $fam[] = is_front_page() ? 'Instrument+Serif:ital@0;1' : 'Instrument+Serif:ital@1';
+    if ($mock) $fam[] = 'Mukta:wght@400;500;600;700;800';
+    if (is_front_page()) $fam[] = 'Tiro+Devanagari+Hindi:ital@0;1';
+    wp_enqueue_style('eh-fonts', 'https://fonts.googleapis.com/css2?family=' . implode('&family=', $fam) . '&display=swap', [], null);
     wp_enqueue_style('eh-style', get_stylesheet_uri(), [], EH_VER);
     wp_enqueue_script('eh-site', EH_URI . '/assets/eh-site.js', [], EH_VER, true);
-    wp_enqueue_style('eh-brand-fonts', 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Serif:ital@1&display=swap', [], null);
-    if (is_front_page() || in_array(get_query_var('eh_view'), ['mockhub', 'dashboard'], true)) {
-        wp_enqueue_style('eh-mock', EH_URI . '/assets/eh-mock.css', ['eh-style'], EH_VER);
-        if (!is_front_page()) wp_enqueue_style('eh-mock-fonts', 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Mukta:wght@400;500;600;700;800&display=swap', [], null);
-    }
+    if ($mock) wp_enqueue_style('eh-mock', EH_URI . '/assets/eh-mock.css', ['eh-style'], EH_VER);
     if (is_front_page()) {
-        wp_enqueue_style('eh-home-fonts', 'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Mukta:wght@400;500;600;700;800&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap', [], null);
         wp_enqueue_style('eh-home', EH_URI . '/assets/eh-home.css', ['eh-style'], EH_VER);
         wp_enqueue_script('eh-home', EH_URI . '/assets/eh-home.js', [], EH_VER, true);
     }
 });
+/* connect to Google Fonts early */
+add_filter('wp_resource_hints', function ($urls, $rel) {
+    if ($rel === 'preconnect') { $urls[] = 'https://fonts.googleapis.com'; $urls[] = ['href' => 'https://fonts.gstatic.com', 'crossorigin']; }
+    return $urls;
+}, 10, 2);
+/* drop emoji script/styles WordPress adds on every page */
+remove_action('wp_head', 'print_emoji_detection_script', 7); remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action('admin_print_scripts', 'print_emoji_detection_script'); remove_action('admin_print_styles', 'print_emoji_styles');
+add_filter('emoji_svg_url', '__return_false');
 
 /* hide admin bar for normal users */
 add_filter('show_admin_bar', function ($show) { return current_user_can('edit_posts') ? $show : false; });

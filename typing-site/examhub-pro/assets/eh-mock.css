@@ -319,3 +319,17 @@
 .dk .dk-tabs{display:flex}.dk .dk-tabs button{flex:1;justify-content:center}
 .dk .dk-ra{display:grid;grid-template-columns:1fr 1fr;gap:8px}.dk .dk-ra .dk-btn:only-child{grid-column:1/-1}}
 .dk .dk-sum>div:not(.dk-sum-h){grid-column:auto!important}
+
+/* topic-wise: subject / GS switch */
+.tsw{display:flex;gap:6px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:5px;margin:2px 0 16px;box-shadow:0 8px 22px -20px rgba(0,0,0,.5)}
+.tsw button{flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;gap:8px;border:0;background:none;font:inherit;font-size:15px;font-weight:700;color:#555;padding:11px 10px;border-radius:12px;cursor:pointer;transition:background .2s,color .2s}
+.tsw button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tsw button em{font-style:normal;font-size:12px;font-weight:800;background:#f1ece4;color:#6b5d4a;border-radius:20px;padding:2px 8px;flex:none}
+.tsw button.on{background:linear-gradient(135deg,#e8590c,#f97316);color:#fff;box-shadow:0 10px 20px -12px rgba(232,89,12,.9)}
+.tsw button.on em{background:rgba(255,255,255,.25);color:#fff}
+.tsp{display:none}.tsp.on{display:block}
+.tsn{font-size:13.5px;color:var(--mute);background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:9px 12px;margin:0 0 6px}
+.tu-h{display:flex;align-items:center;gap:10px;margin:18px 0 10px}
+.tu-h b{flex:none;font-size:12.5px;font-weight:800;letter-spacing:.3px;color:#fff;background:#1f2937;border-radius:8px;padding:4px 9px}
+.tu-h span{font-size:14.5px;font-weight:700;color:#333;line-height:1.35}
+@media(max-width:600px){.tsw button{font-size:14px;padding:10px 6px;gap:6px}.tu-h span{font-size:14px}}
