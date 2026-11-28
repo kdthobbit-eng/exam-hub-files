@@ -20,6 +20,7 @@ function eh_stm_rounds() {
         ['id' => 'p2', 'name' => 'SUPER TET - FULL LENGTH MOCK 2', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice2', 'kind' => 'practice'],
         ['id' => 'p3', 'name' => 'SUPER TET - FULL LENGTH MOCK 3', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice3', 'kind' => 'practice'],
         ['id' => 'p4', 'name' => 'SUPER TET - FULL LENGTH MOCK 4', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice4', 'kind' => 'practice'],
+        ['id' => 'p5', 'name' => 'SUPER TET - FULL LENGTH MOCK 5', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice5', 'kind' => 'practice'],
     ];
     $list = array_map(function ($r) { $r['series'] = $r['series'] ?? 'stet'; return $r; }, $list);
     if (function_exists('eh_tp_rounds_all')) $list = array_merge($list, eh_tp_rounds_all());
