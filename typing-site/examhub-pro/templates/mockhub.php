@@ -29,13 +29,13 @@ $hub = home_url('/mock-test/');
    <div class="zh-x"><span class="mx-kick"><i></i>सहायक अध्यापक भर्ती · प्राथमिक स्तर (कक्षा 1–5)</span><h1>UP Super <em>TET</em> 2026 <small>टेस्ट सीरीज़</small></h1></div>
    <div class="zh-r"><span class="zh-chip">📘 UP Super TET</span><span class="zh-st"><b><?php echo $done; ?></b>/<?php echo count($SR); ?> टेस्ट दिए</span></div>
   </div>
-  <nav class="rb" id="mz-tabs"><button class="on" data-t="full"><i>📄</i>लाइव मॉक<em><?php echo count($SR); ?></em></button><button data-t="prac"><i>📝</i>फुल लेंथ मॉक<em><?php echo count($SP); ?></em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>Coming Soon</em></button></nav>
+  <nav class="rb" id="mz-tabs"><button class="on" data-t="prac"><i>📝</i>फुल लेंथ मॉक<em><?php echo count($SP); ?></em></button><button data-t="full"><i>📄</i>लाइव मॉक<em><?php echo count($SR); ?></em></button><button data-t="pyq"><i>🗂️</i>PYQ<em>Coming Soon</em></button></nav>
  </div></section>
  <section class="mx-body"><div class="mx-wrap">
-  <div class="mz-p on" data-p="full"><div class="tl-h"><b>Super TET लाइव मॉक टेस्ट</b><span>तय तारीख पर खुलने वाले लाइव मॉक — पूरा प्रश्न-पत्र, रैंक, परसेंटाइल और उत्तर-कुंजी</span></div>
-   <div class="tl"><?php $n = 0; foreach ($SR as $r) { $n++; echo eh_tp_test_row($r, $my, $n, 'SUPER TET - LIVE MOCK ' . $n); } ?></div></div>
-  <div class="mz-p" data-p="prac"><div class="tl-h"><b>फुल लेंथ मॉक (प्रैक्टिस)</b><span>हमेशा खुले — कभी भी दें; 120 प्रश्न, नए पैटर्न पर, पूरा हल और रैंक</span></div>
+  <div class="mz-p on" data-p="prac"><div class="tl-h"><b>फुल लेंथ मॉक (प्रैक्टिस)</b><span>हमेशा खुले — कभी भी दें; 120 प्रश्न, नए पैटर्न पर, पूरा हल और रैंक</span></div>
    <div class="tl"><?php $n = 0; foreach ($SP as $r) { $n++; echo eh_tp_test_row($r, $my, $n, $r['name']); } ?></div></div>
+  <div class="mz-p" data-p="full"><div class="tl-h"><b>Super TET लाइव मॉक टेस्ट</b><span>तय तारीख पर खुलने वाले लाइव मॉक — पूरा प्रश्न-पत्र, रैंक, परसेंटाइल और उत्तर-कुंजी</span></div>
+   <div class="tl"><?php $n = 0; foreach ($SR as $r) { $n++; echo eh_tp_test_row($r, $my, $n, 'SUPER TET - LIVE MOCK ' . $n); } ?></div></div>
   <div class="mz-p" data-p="pyq"><div class="mz-empty"><b>🗂️ पिछले वर्ष के प्रश्न-पत्र — Coming Soon</b><p>UP Super TET के असली पिछले प्रश्न-पत्र, उत्तर-कुंजी और व्याख्या के साथ।</p></div></div>
  </div></section>
  <script>(function(){var B=[].slice.call(document.querySelectorAll('#mz-tabs button')),P=[].slice.call(document.querySelectorAll('.mz-p'));B.forEach(function(b){b.onclick=function(){B.forEach(function(x){x.classList.toggle('on',x===b)});P.forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.t)})}})})();</script>
