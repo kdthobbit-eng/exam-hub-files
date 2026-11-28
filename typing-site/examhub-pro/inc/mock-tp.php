@@ -214,7 +214,7 @@ function eh_tp_test_row($r, $my, $no, $title, $lang = 'हिंदी + English
     $go = function ($url) use ($in) { $url = add_query_arg('go', 1, $url); return $in ? $url : eh_login_page_url($url); };
     $h = '<div class="tr' . ($ok || $over ? '' : ' soon') . ($m && $m['n'] ? ' done' : '') . '"><div class="tr-n">' . str_pad((string) $no, 2, '0', STR_PAD_LEFT) . '</div><div class="tr-b">'
         . '<div class="tr-t"><b>' . esc_html($title) . '</b>' . ($ok ? '<span class="tr-free">FREE</span><span class="tr-live"><i></i>LIVE</span>' : ($over ? '<span class="tr-soon">समाप्त</span>' : '<span class="tr-soon">' . (eh_tp_is($r) ? 'जल्द आ रहा है' : 'आगामी') . '</span>')) . '</div>'
-        . '<div class="tr-m">' . $dt . '<span>📝 ' . eh_stm_nq($r) . ' प्रश्न</span><span>🎯 ' . $max . ' अंक</span><span>⏱ ' . (int) round(eh_stm_secs($r) / 60) . ' मिनट</span><span>🌐 ' . esc_html($lang) . '</span></div>';
+        . '<div class="tr-m">' . $dt . '<span>📝 ' . eh_stm_nq($r) . ' प्रश्न</span><span>🎯 ' . $max . ' अंक</span><span>⏱ ' . (int) round(eh_stm_secs($r) / 60) . ' मिनट</span><span>🌐 भाषा: ' . esc_html($lang) . '</span></div>';
     if ($m && $m['n']) {
         global $wpdb; $rank = 1 + (int) $wpdb->get_var($wpdb->prepare('SELECT COUNT(*) FROM ' . eh_stm_table() . ' WHERE round = %s AND submitted > 0 AND counted = 1 AND score > %d', $r['id'], (int) $m['last']));
         $pc = max(0, min(100, round($m['last'] * 100 / $max)));

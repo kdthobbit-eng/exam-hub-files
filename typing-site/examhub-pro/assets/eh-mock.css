@@ -214,7 +214,7 @@
 .zh-chip em{font-style:normal;color:var(--saf);font-size:13px}
 .zh-st{font-size:13.5px;color:var(--mute)}.zh-st b{color:var(--ink);font-size:15px}
 /* ribbon */
-.rb{position:sticky;top:0;z-index:20;display:flex;gap:6px;padding:8px;margin:0 0 -1px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border:1px solid var(--line);border-bottom:0;border-radius:16px 16px 0 0;overflow-x:auto;scrollbar-width:none}
+.rb{position:sticky;top:0;z-index:20;display:flex;gap:6px;padding:8px;margin:0 0 16px;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 24px -20px rgba(0,0,0,.4);overflow-x:auto;scrollbar-width:none}
 .rb::-webkit-scrollbar{display:none}
 .rb button{flex:none;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;background:transparent;font:inherit;font-size:15.5px;font-weight:700;color:#444;padding:9px 16px;border-radius:12px;cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
 .rb button i{font-style:normal;font-size:17px}

@@ -66,7 +66,7 @@ $hub = home_url('/mock-test/');
 <?php else:
   $R = eh_tp_find(($x === 'tgt' ? 'tg' : 'pg') . str_pad((string) (array_search($sub, array_keys(eh_tp_subjects()[$x])) + 1), 2, '0', STR_PAD_LEFT));
   $RS = eh_tp_find($R['id'] . 's'); $GS = eh_tp_find('gsx'); $my = eh_tp_my($uid); $nm = eh_tp_subjects()[$x][$sub];
-  $lang = in_array($sub, ['hindi', 'english', 'sanskrit', 'urdu'], true) ? $nm[0] . ' माध्यम' : 'हिंदी + English';
+  $lang = in_array($sub, ['hindi', 'english', 'sanskrit', 'urdu'], true) ? $nm[0] : 'हिंदी + English';
   $done = count(array_filter([$R['id'], $RS['id'], 'gsx'], function ($id) use ($my) { return !empty($my[$id]['n']); }));
   $u = wp_get_current_user(); $nmU = $uid ? ($u->display_name ?: $u->user_login) : '';
   $ini = $nmU ? mb_strtoupper(mb_substr(trim($nmU), 0, 1)) : ''; ?>

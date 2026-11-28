@@ -36,6 +36,8 @@ $eh_ph = '<svg viewBox="0 0 40 40"><circle cx="20" cy="15" r="8"/><path d="M4 40
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0f2a4d">
 <title><?php echo esc_html($eh_exl); ?> — लाइव मॉक टेस्ट | UPSSSC ALERT × XL Study</title>
+<script>if(<?php echo is_user_logged_in() ? 'true' : 'false'; ?>&&/[?&](go|re)=1/.test(location.search)){document.documentElement.className+=' eh-go';setTimeout(function(){document.documentElement.classList.remove('eh-go')},8000)}</script>
+<style>html.eh-go body{visibility:hidden;background:#fff}html.eh-go::after{content:"टेस्ट खुल रहा है…";visibility:visible;position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#fff;color:#0f2a4d;font:600 17px/1.4 'Noto Sans Devanagari',system-ui,sans-serif;z-index:99999}</style>
 <link rel="icon" href="<?php echo $eh_logo; ?>">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap">
@@ -882,7 +884,7 @@ if(C.admin){go('s-adm');ME.name='Admin';adm();setInterval(adm,15000);
  $('a-tabs').onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;AT=b.dataset.t;$('a-tabs').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));admTab()};
  $('a-body').onclick=e=>{const b=e.target.closest('[data-rs]');if(b)modal('रीसेट करें?','<p style="margin:0">इस उम्मीदवार का यह प्रयास मिट जाएगा।</p>',[['नहीं','b-wh',close],['हाँ, रीसेट','b-pr',()=>{close();api('reset',{id:+b.dataset.rs}).then(adm)}]])};
  $('a-rep').onclick=repDialog;$('a-csv').onclick=()=>{if(RP)repCsv({mask:false,n:0})}}
-else if(C.in){api('state').then(j=>{off=j.now*1000-Date.now();R=j.round;A=j.attempt;ME={name:j.name,roll:j.roll};names();home();if(/[?&]re=1/.test(location.search)&&+A.submitted&&status()==='live')setTimeout(retry,50);else if(/[?&]go=1/.test(location.search)&&(+A.submitted||+A.started||status()==='live')){try{history.replaceState(null,'',location.href.replace(/[?&]go=1/,''))}catch(e){}setTimeout(enter,30)}
+else if(C.in){api('state').then(j=>{off=j.now*1000-Date.now();R=j.round;A=j.attempt;ME={name:j.name,roll:j.roll};names();home();if(/[?&]re=1/.test(location.search)&&+A.submitted&&status()==='live')setTimeout(retry,50);else if(/[?&]go=1/.test(location.search)&&(+A.submitted||+A.started||status()==='live')){try{history.replaceState(null,'',location.href.replace(/[?&]go=1/,''))}catch(e){}setTimeout(enter,30)}setTimeout(function(){document.documentElement.classList.remove('eh-go')},120);
  if(+A.started&&!+A.submitted){try{const b=JSON.parse(localStorage.getItem(LK())||'null');if(b&&b.t>(+A.last||0)+2){A.ans=b.ans||A.ans;A.st=b.st||A.st;A.tq=b.tq||A.tq;A.cur=b.cur;A.tabs=Math.max(+A.tabs||0,+b.tabs||0);dirty=true}}catch(e){}
   modal('परीक्षा अधूरी है — Resume Test','<p style="margin:0 0 8px;line-height:1.7">आपकी परीक्षा पहले से चल रही है। आपके सभी उत्तर सुरक्षित हैं।</p><p style="margin:0;line-height:1.7">बचा समय: <b class="num">'+fmt(A.paused?A.left:A.deadline-now())+'</b> · उत्तर दिए: <b>'+Object.keys(A.ans||{}).length+'</b> / '+C.nq+'</p><p style="margin:8px 0 0;font-size:13px;color:var(--mu)">⏸️ आपकी घड़ी रुकी हुई है — Resume Test दबाने पर ही समय चलेगा।</p>',[['बाद में','b-wh',close],['Resume Test ›','b-pr',()=>{close();start();if(dirty)push().catch(()=>{})}]])}}).catch(()=>{$('c-h').textContent='लोड नहीं हुआ';$('c-p').textContent='पेज दोबारा खोलें।'})}
 }
