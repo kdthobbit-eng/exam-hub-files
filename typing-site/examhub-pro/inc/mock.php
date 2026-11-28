@@ -16,12 +16,11 @@ function eh_stm_rounds() {
         ['id' => 't2', 'name' => 'SUPER TET - TRIAL MOCK', 'login' => '2026-11-21 21:00', 'start' => '2026-11-21 21:00', 'end' => '2026-11-22 08:40', 'paper' => 'supertet-mock1'],
         ['id' => 'm1', 'name' => 'SUPER TET - LIVE MOCK 1', 'login' => '2026-11-22 08:40', 'start' => '2026-11-22 09:00', 'end' => '2026-11-22 23:59', 'paper' => 'supertet-mock1'],
         ['id' => 'm2', 'name' => 'SUPER TET - LIVE MOCK 2', 'login' => '2026-11-25 09:10', 'start' => '2026-11-25 09:30', 'end' => '2026-11-25 23:59', 'paper' => 'supertet-mock2'],
-        ['id' => 'p1', 'name' => 'SUPER TET - FULL LENGTH MOCK 1', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice1', 'kind' => 'practice'],
-        ['id' => 'p2', 'name' => 'SUPER TET - FULL LENGTH MOCK 2', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice2', 'kind' => 'practice'],
-        ['id' => 'p3', 'name' => 'SUPER TET - FULL LENGTH MOCK 3', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice3', 'kind' => 'practice'],
-        ['id' => 'p4', 'name' => 'SUPER TET - FULL LENGTH MOCK 4', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice4', 'kind' => 'practice'],
-        ['id' => 'p5', 'name' => 'SUPER TET - FULL LENGTH MOCK 5', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice5', 'kind' => 'practice'],
-        ['id' => 'p6', 'name' => 'SUPER TET - FULL LENGTH MOCK 6', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice6', 'kind' => 'practice'],
+        ['id' => 'p2', 'name' => 'SUPER TET - FULL LENGTH MOCK 1', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice2', 'kind' => 'practice'],
+        ['id' => 'p3', 'name' => 'SUPER TET - FULL LENGTH MOCK 2', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice3', 'kind' => 'practice'],
+        ['id' => 'p4', 'name' => 'SUPER TET - FULL LENGTH MOCK 3', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice4', 'kind' => 'practice'],
+        ['id' => 'p5', 'name' => 'SUPER TET - FULL LENGTH MOCK 4', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice5', 'kind' => 'practice'],
+        ['id' => 'p6', 'name' => 'SUPER TET - FULL LENGTH MOCK 5', 'login' => '2026-11-28 00:00', 'start' => '2026-11-28 00:00', 'end' => '2027-03-31 23:59', 'paper' => 'supertet-practice6', 'kind' => 'practice'],
     ];
     $list = array_map(function ($r) { $r['series'] = $r['series'] ?? 'stet'; return $r; }, $list);
     if (function_exists('eh_tp_rounds_all')) $list = array_merge($list, eh_tp_rounds_all());
